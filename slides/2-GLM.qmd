@@ -1,5 +1,5 @@
 ---
-title: "Einführung in R"
+title: "Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: revealjs
@@ -7,7 +7,3 @@ format: revealjs
 
 
 ## Einführung
-
-
-Hier gleich Daten aufbereiten, die wir später auch nutzen können!
-
