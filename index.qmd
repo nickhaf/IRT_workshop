@@ -2,4 +2,34 @@
 title: "IRT Workshop"
 ---
 
-# Overview
+# Tagesprogramm
+## Tag 1
+
+### Vormittag (10:00 – 13:00)
+
+- Theoretische Einführung in die Modellierung latenter Variablen in Klassischer Testtheorie und Item Response Theory (IRT) (90 min.; SW)
+- Einführung in die R-Programmierumgebung. Datenaufbereitung für IRT-Analysen. (90 min.; NH)
+
+### Nachmittag (14:00 – 17:00)
+
+- Übung: einfacher IRT-Modelle in TAM. Theoretische Unterscheidung zwischen JML, CML and MML (SW). 
+- Theoretische Einführung und praktische Illustration: Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells (Generalized Linear Mixed Model, GLMM) mit fixierten Effekten auf der Item- und zufälligen Effekten auf der Personenseite (NH + SW). 
+- Reliabilität, Validität, lokale stochastische Unabhängigkeit (Diag-Folien!)
+
+## Tag 2: 
+### Vormittag (09:00 – 12:00)
+
+- Voraussetzungen: Verlinkte Items, lokale stochastische Unabhängigkeit, Messinvarianz (90 min.; NH)
+- Die Bedeutung von Testdesigns. Was kann schiefgehen, wenn Testdesigns ungeeignet sind? (SW)
+
+### Nachmittag (13:00 – 16:00)
+
+- Höher parametrisierte Modelle: 2pl, 3pl, partial credit (NH)
+- Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen (SW)
+
+## Tag 3: 
+### Vormittag (09:00 – 12:00)
+- Praktische Überlegungen: Welches Modell für welche Forschungsfrage? Wieviele Personen sind notwendig für welches Forschungsdesign? Theoretische Überlegungen und praktische Empfehlungen (90 min., SW + NH)
+
+### Nachmittag (13:00 – 16:00)
+- Das ganze Bild: Vollständige “Schritt für Schritt”-Analyse von Forschungsdaten: Datenaufbereitung, Kalibrierung, Plausibilitätsprüfungen, Messinvarianz, Beantworten von Forschungsfragen (180 Min., SW/NH)

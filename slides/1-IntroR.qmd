@@ -1,0 +1,9 @@
+---
+title: "Einführung in R"
+author: "Nicklas Hafiz"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: revealjs
+---
+
+
+## Einführung
