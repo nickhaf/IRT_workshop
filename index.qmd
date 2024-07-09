@@ -25,6 +25,7 @@ title: "IRT Workshop"
 ### Nachmittag (13:00 – 16:00)
 
 - Höher parametrisierte Modelle: 2pl, 3pl, partial credit (NH)
+  - Maybe use Grit-Scale or the [psychometrics data](https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-08-16) for illustration.
 - Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen (SW)
 
 ## Tag 3: 
