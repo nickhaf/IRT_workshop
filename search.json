@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "IRT Workshop",
+    "section": "",
+    "text": "Theoretische Einführung in die Modellierung latenter Variablen in Klassischer Testtheorie und Item Response Theory (IRT) (90 min.; SW)\nEinführung in die R-Programmierumgebung. Datenaufbereitung für IRT-Analysen. (90 min.; NH)\n\n\n\n\n\nÜbung: einfacher IRT-Modelle in TAM. Theoretische Unterscheidung zwischen JML, CML and MML (SW).\nTheoretische Einführung und praktische Illustration: Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells (Generalized Linear Mixed Model, GLMM) mit fixierten Effekten auf der Item- und zufälligen Effekten auf der Personenseite (NH + SW).\nReliabilität, Validität, lokale stochastische Unabhängigkeit (Diag-Folien!)\n\n\n\n\n\n\n\n\nVoraussetzungen: Verlinkte Items, lokale stochastische Unabhängigkeit, Messinvarianz (90 min.; NH)\nDie Bedeutung von Testdesigns. Was kann schiefgehen, wenn Testdesigns ungeeignet sind? (SW)\n\n\n\n\n\nHöher parametrisierte Modelle: 2pl, 3pl, partial credit (NH)\n\nMaybe use Grit-Scale or the psychometrics data for illustration.\n\nLängsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen (SW)\n\n\n\n\n\n\n\n\nPraktische Überlegungen: Welches Modell für welche Forschungsfrage? Wieviele Personen sind notwendig für welches Forschungsdesign? Theoretische Überlegungen und praktische Empfehlungen (90 min., SW + NH)\n\n\n\n\n\nDas ganze Bild: Vollständige “Schritt für Schritt”-Analyse von Forschungsdaten: Datenaufbereitung, Kalibrierung, Plausibilitätsprüfungen, Messinvarianz, Beantworten von Forschungsfragen (180 Min., SW/NH)"
+  },
+  {
+    "objectID": "index.html#tag-1",
+    "href": "index.html#tag-1",
+    "title": "IRT Workshop",
+    "section": "",
+    "text": "Theoretische Einführung in die Modellierung latenter Variablen in Klassischer Testtheorie und Item Response Theory (IRT) (90 min.; SW)\nEinführung in die R-Programmierumgebung. Datenaufbereitung für IRT-Analysen. (90 min.; NH)\n\n\n\n\n\nÜbung: einfacher IRT-Modelle in TAM. Theoretische Unterscheidung zwischen JML, CML and MML (SW).\nTheoretische Einführung und praktische Illustration: Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells (Generalized Linear Mixed Model, GLMM) mit fixierten Effekten auf der Item- und zufälligen Effekten auf der Personenseite (NH + SW).\nReliabilität, Validität, lokale stochastische Unabhängigkeit (Diag-Folien!)"
+  },
+  {
+    "objectID": "index.html#tag-2",
+    "href": "index.html#tag-2",
+    "title": "IRT Workshop",
+    "section": "",
+    "text": "Voraussetzungen: Verlinkte Items, lokale stochastische Unabhängigkeit, Messinvarianz (90 min.; NH)\nDie Bedeutung von Testdesigns. Was kann schiefgehen, wenn Testdesigns ungeeignet sind? (SW)\n\n\n\n\n\nHöher parametrisierte Modelle: 2pl, 3pl, partial credit (NH)\n\nMaybe use Grit-Scale or the psychometrics data for illustration.\n\nLängsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen (SW)"
+  },
+  {
+    "objectID": "index.html#tag-3",
+    "href": "index.html#tag-3",
+    "title": "IRT Workshop",
+    "section": "",
+    "text": "Praktische Überlegungen: Welches Modell für welche Forschungsfrage? Wieviele Personen sind notwendig für welches Forschungsdesign? Theoretische Überlegungen und praktische Empfehlungen (90 min., SW + NH)\n\n\n\n\n\nDas ganze Bild: Vollständige “Schritt für Schritt”-Analyse von Forschungsdaten: Datenaufbereitung, Kalibrierung, Plausibilitätsprüfungen, Messinvarianz, Beantworten von Forschungsfragen (180 Min., SW/NH)"
+  },
+  {
+    "objectID": "slides/2-GLM.html#einführung",
+    "href": "slides/2-GLM.html#einführung",
+    "title": "Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Einführung",
+    "text": "Einführung"
+  },
+  {
+    "objectID": "slides/1-IntroR.html#einführung",
+    "href": "slides/1-IntroR.html#einführung",
+    "title": "Einführung in R",
+    "section": "Einführung",
+    "text": "Einführung\nHier gleich Daten aufbereiten, die wir später auch nutzen können!"
+  }
+]
