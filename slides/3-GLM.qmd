@@ -1,0 +1,11 @@
+---
+title: "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+author: "Nicklas Hafiz"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: revealjs
+---
+
+
+## Einführung
+
+Possible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)
