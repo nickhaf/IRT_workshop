@@ -1,0 +1,103 @@
+---
+title: "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+author: "Nicklas Hafiz"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: revealjs
+---
+
+
+# Einführung
+
+## Überblick
+In dieser Session wollen wir uns mit dem Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) beschäftigen. Dafür werden zunächst eine kleine Einführung/Wiederholung zu gemischten Modellen machen und uns dabei spannende Daten anschauen. 
+
+Possible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)
+
+## GLM
+
+# Gemischte Modelle (Linear Mixed Models)
+
+Grafik mit level-Struktur
+
+## Einführungsbeispiel
+
+
+
+https://www.bristol.ac.uk/cmm/learning/support/datasets/
+
+- Intro example: Something with schools or countries
+- Simple Exercise: Simulate multilevel data (with some help, so it goes quicker)
+
+# Umgang mit genesteten Daten
+
+## Option 1: Ignorieren
+Generell eher keine gute Idee:
+
+Wir tuen so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:
+
+- Standardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant. 
+
+Außerdem kann die genestete Struktur von Interesse sein!
+
+## Option 2: Aggregieren auf Gruppenebene
+
+# Gleichungen
+## Level 1 Gleichung
+
+Für jede Gruppe j:
+$$
+y_{ij} = \beta_{0j} + \beta_{1j}x_{ij} + e_{ij}
+$$
+
+Abbildung
+
+## Level-2 Gleichung
+
+$$
+\beta_{0j} = \beta_{0}+\zeta_{0j}
+$$
+
+$$
+\beta_{1j} = \beta_1 + \zeta_{1j}
+$$
+
+Abbildung
+
+## Das gemischte Modell
+Jetzt müssen wir nur noch einsetzen:
+
+
+$$
+y_{ij} = \beta_{0j} + \beta_{1j}x_{ij} + e_{ij}
+$$
+$$
+\beta_{0j} = \beta_{0}+\zeta_{0j}
+$$
+
+$$
+\beta_{1j} = \beta_1 + \zeta_{1j}
+$$
+
+$$
+y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}
+$$
+
+
+## Simulation
+In der folgenden Übung wollen wir uns Daten mit einer genesteten Struktur simulieren. 
+
+https://ademos.people.uic.edu/Chapter16.html
+
+
+
+
+# Raschmodell als LMM
+Warum das Ganze? Es geht doch eigentlich um IRT?
+
+## Raschmodell als Spezialfall für LMM
+Wir können das Raschmodell als Spezialfall des LMMs betrachten:
+
+
+https://www.taylorfrancis.com/chapters/mono/10.4324/9781315146850-7/rasch-model-generalized-linear-mixed-model-iasonas-lamprianou
+
+## Datensimulation für Raschmodel
