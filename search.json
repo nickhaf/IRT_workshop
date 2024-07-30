@@ -28,17 +28,52 @@
     "text": "Praktische Überlegungen: Welches Modell für welche Forschungsfrage? Wieviele Personen sind notwendig für welches Forschungsdesign? Theoretische Überlegungen und praktische Empfehlungen (90 min., SW + NH)\n\n\n\n\n\nDas ganze Bild: Vollständige “Schritt für Schritt”-Analyse von Forschungsdaten: Datenaufbereitung, Kalibrierung, Plausibilitätsprüfungen, Messinvarianz, Beantworten von Forschungsfragen (180 Min., SW/NH)"
   },
   {
-    "objectID": "slides/2-GLM.html#einführung",
-    "href": "slides/2-GLM.html#einführung",
-    "title": "Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
-    "section": "Einführung",
-    "text": "Einführung"
-  },
-  {
     "objectID": "slides/1-IntroR.html#einführung",
     "href": "slides/1-IntroR.html#einführung",
     "title": "Einführung in R",
     "section": "Einführung",
     "text": "Einführung\nHier gleich Daten aufbereiten, die wir später auch nutzen können!"
+  },
+  {
+    "objectID": "slides/2-Vorraussetzungen.html#lokal-stochastische-unabhängigkeit",
+    "href": "slides/2-Vorraussetzungen.html#lokal-stochastische-unabhängigkeit",
+    "title": "2) IRT Vorraussetzungen",
+    "section": "Lokal stochastische Unabhängigkeit",
+    "text": "Lokal stochastische Unabhängigkeit\nNach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit),"
+  },
+  {
+    "objectID": "slides/2-Vorraussetzungen.html#verlinkte-items",
+    "href": "slides/2-Vorraussetzungen.html#verlinkte-items",
+    "title": "2) IRT Vorraussetzungen",
+    "section": "Verlinkte Items",
+    "text": "Verlinkte Items"
+  },
+  {
+    "objectID": "slides/2-Vorraussetzungen.html#messinvarianz",
+    "href": "slides/2-Vorraussetzungen.html#messinvarianz",
+    "title": "2) IRT Vorraussetzungen",
+    "section": "Messinvarianz",
+    "text": "Messinvarianz"
+  },
+  {
+    "objectID": "slides/2-Vorraussetzungen.html#beispiel-was-bei-nichtbeachtung-passiert",
+    "href": "slides/2-Vorraussetzungen.html#beispiel-was-bei-nichtbeachtung-passiert",
+    "title": "2) IRT Vorraussetzungen",
+    "section": "Beispiel was bei nichtbeachtung passiert",
+    "text": "Beispiel was bei nichtbeachtung passiert"
+  },
+  {
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Slides",
+    "section": "",
+    "text": "IRT Vorraussetzungen\n\n\n\n\n\n\n\nNicklas Hafiz\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\n\nDas Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\n\n\n\n\n\nNicklas Hafiz\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\nEinführung in R\n\n\n\n\n\n\nNicklas Hafiz\n\n\nInvalid Date\n\n\n\n\n\n\n:::\n\nNo matching items\n\n:::\n:::"
+  },
+  {
+    "objectID": "slides/3-GLM.html#einführung",
+    "href": "slides/3-GLM.html#einführung",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Einführung",
+    "text": "Einführung\nPossible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)"
   }
 ]
