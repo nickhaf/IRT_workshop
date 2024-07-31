@@ -19,6 +19,8 @@ website:
           - slides/1-IntroR.qmd
       - section: "Übungen"
         href: exercises/index.qmd
+        contents: 
+          - exercises/3-GLM.qmd
 
 format:
   html:
