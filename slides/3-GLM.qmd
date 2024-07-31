@@ -25,7 +25,7 @@ Grafik mit level-Struktur
 
 https://www.bristol.ac.uk/cmm/learning/support/datasets/
 
-- Intro example: Something with schools or countries
+- Intro example: Something with schools (fitting to rasch context)
 - Simple Exercise: Simulate multilevel data (with some help, so it goes quicker)
 
 # Umgang mit genesteten Daten
@@ -98,6 +98,29 @@ Warum das Ganze? Es geht doch eigentlich um IRT?
 Wir können das Raschmodell als Spezialfall des LMMs betrachten:
 
 
+
+::: aside
+De Boeck and Wilson (2004)
+:::
+
+
 https://www.taylorfrancis.com/chapters/mono/10.4324/9781315146850-7/rasch-model-generalized-linear-mixed-model-iasonas-lamprianou
 
 ## Datensimulation für Raschmodel
+
+
+
+
+## Step by Step
+
+
+## Was sind random, was fixed effects?
+
+- Entwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed
+- Entwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random
+
+
+## Exercise
+Fit a Rasch Model using TAM and compare!
+
+

@@ -1,5 +1,5 @@
 ---
-title: "Slides"
+title: "Übungen"
 listing: 
   contents: ./*.qmd
   type: table

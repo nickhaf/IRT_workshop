@@ -1,0 +1,16 @@
+---
+title: "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+author: "Nicklas Hafiz"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: html
+---
+
+
+1. Simuliere Daten für ein Raschmodel. 
+
+::: {.callout-caution collapse="true"}
+
+## Hint
+
+Use 
+:::
