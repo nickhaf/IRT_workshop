@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>IRT Workshop – IRT</title>
+<title>Übungen – IRT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,7 +68,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -78,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">IRT</span>
     </a>
   </div>
@@ -89,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -103,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">IRT Workshop</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/index.html">Übungen</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -125,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./slides/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../slides/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Folien</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -134,7 +194,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./slides/1-IntroR.html" class="sidebar-item-text sidebar-link">
+  <a href="../slides/1-IntroR.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Einführung in R</span></a>
   </div>
 </li>
@@ -149,38 +209,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#tagesprogramm" id="toc-tagesprogramm" class="nav-link active" data-scroll-target="#tagesprogramm">Tagesprogramm</a>
-  <ul class="collapse">
-  <li><a href="#tag-1" id="toc-tag-1" class="nav-link" data-scroll-target="#tag-1">Tag 1</a>
-  <ul class="collapse">
-  <li><a href="#vormittag-1000-1300" id="toc-vormittag-1000-1300" class="nav-link" data-scroll-target="#vormittag-1000-1300">Vormittag (10:00 – 13:00)</a></li>
-  <li><a href="#nachmittag-1400-1700" id="toc-nachmittag-1400-1700" class="nav-link" data-scroll-target="#nachmittag-1400-1700">Nachmittag (14:00 – 17:00)</a></li>
-  </ul></li>
-  <li><a href="#tag-2" id="toc-tag-2" class="nav-link" data-scroll-target="#tag-2">Tag 2:</a>
-  <ul class="collapse">
-  <li><a href="#vormittag-0900-1200" id="toc-vormittag-0900-1200" class="nav-link" data-scroll-target="#vormittag-0900-1200">Vormittag (09:00 – 12:00)</a></li>
-  <li><a href="#nachmittag-1300-1600" id="toc-nachmittag-1300-1600" class="nav-link" data-scroll-target="#nachmittag-1300-1600">Nachmittag (13:00 – 16:00)</a></li>
-  </ul></li>
-  <li><a href="#tag-3" id="toc-tag-3" class="nav-link" data-scroll-target="#tag-3">Tag 3:</a>
-  <ul class="collapse">
-  <li><a href="#vormittag-0900-1200-1" id="toc-vormittag-0900-1200-1" class="nav-link" data-scroll-target="#vormittag-0900-1200-1">Vormittag (09:00 – 12:00)</a></li>
-  <li><a href="#nachmittag-1300-1600-1" id="toc-nachmittag-1300-1600-1" class="nav-link" data-scroll-target="#nachmittag-1300-1600-1">Nachmittag (13:00 – 16:00)</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">IRT Workshop</h1>
+<h1 class="title">Übungen</h1>
 </div>
 
 
@@ -197,66 +234,68 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="tagesprogramm" class="level1">
-<h1>Tagesprogramm</h1>
-<section id="tag-1" class="level2">
-<h2 class="anchored" data-anchor-id="tag-1">Tag 1</h2>
-<section id="vormittag-1000-1300" class="level3">
-<h3 class="anchored" data-anchor-id="vormittag-1000-1300">Vormittag (10:00 – 13:00)</h3>
-<ul>
-<li>Theoretische Einführung in die Modellierung latenter Variablen in Klassischer Testtheorie und Item Response Theory (IRT) (90 min.; SW)</li>
-<li>Einführung in die R-Programmierumgebung. Datenaufbereitung für IRT-Analysen. (90 min.; NH)</li>
-</ul>
-</section>
-<section id="nachmittag-1400-1700" class="level3">
-<h3 class="anchored" data-anchor-id="nachmittag-1400-1700">Nachmittag (14:00 – 17:00)</h3>
-<ul>
-<li>Übung: einfacher IRT-Modelle in TAM. Theoretische Unterscheidung zwischen JML, CML and MML (SW).</li>
-<li>Theoretische Einführung und praktische Illustration: Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells (Generalized Linear Mixed Model, GLMM) mit fixierten Effekten auf der Item- und zufälligen Effekten auf der Personenseite (NH + SW).</li>
-<li>Reliabilität, Validität, lokale stochastische Unabhängigkeit (Diag-Folien!)</li>
-</ul>
-</section>
-</section>
-<section id="tag-2" class="level2">
-<h2 class="anchored" data-anchor-id="tag-2">Tag 2:</h2>
-<section id="vormittag-0900-1200" class="level3">
-<h3 class="anchored" data-anchor-id="vormittag-0900-1200">Vormittag (09:00 – 12:00)</h3>
-<ul>
-<li>Voraussetzungen: Verlinkte Items, lokale stochastische Unabhängigkeit, Messinvarianz (90 min.; NH)</li>
-<li>Die Bedeutung von Testdesigns. Was kann schiefgehen, wenn Testdesigns ungeeignet sind? (SW)</li>
-</ul>
-</section>
-<section id="nachmittag-1300-1600" class="level3">
-<h3 class="anchored" data-anchor-id="nachmittag-1300-1600">Nachmittag (13:00 – 16:00)</h3>
-<ul>
-<li>Höher parametrisierte Modelle: 2pl, 3pl, partial credit (NH)
-<ul>
-<li>Maybe use Grit-Scale or the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-08-16">psychometrics data</a> for illustration.</li>
-</ul></li>
-<li>Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen (SW)</li>
-</ul>
-</section>
-</section>
-<section id="tag-3" class="level2">
-<h2 class="anchored" data-anchor-id="tag-3">Tag 3:</h2>
-<section id="vormittag-0900-1200-1" class="level3">
-<h3 class="anchored" data-anchor-id="vormittag-0900-1200-1">Vormittag (09:00 – 12:00)</h3>
-<ul>
-<li>Praktische Überlegungen: Welches Modell für welche Forschungsfrage? Wieviele Personen sind notwendig für welches Forschungsdesign? Theoretische Überlegungen und praktische Empfehlungen (90 min., SW + NH)</li>
-</ul>
-</section>
-<section id="nachmittag-1300-1600-1" class="level3">
-<h3 class="anchored" data-anchor-id="nachmittag-1300-1600-1">Nachmittag (13:00 – 16:00)</h3>
-<ul>
-<li>Das ganze Bild: Vollständige “Schritt für Schritt”-Analyse von Forschungsdaten: Datenaufbereitung, Kalibrierung, Plausibilitätsprüfungen, Messinvarianz, Beantworten von Forschungsfragen (180 Min., SW/NH)</li>
-</ul>
 
 
-</section>
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+         <option value="listing-title-sort" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-author" data-direction="asc">
+          Author
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Author</a>
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-listing-date-sort="NaN" data-listing-file-modified-sort="1722453085500" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="10" data-listing-title-sort="3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells" data-listing-filename-sort="3-GLM.qmd">
+<td>
+<span class="listing-date">Invalid Date</span>
+</td>
+<td>
+<a href="../exercises/3-GLM.html" class="title listing-title">3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</a>
+</td>
+<td>
+<span class="listing-author">Nicklas Hafiz</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

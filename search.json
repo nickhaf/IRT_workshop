@@ -28,11 +28,27 @@
     "text": "Praktische Überlegungen: Welches Modell für welche Forschungsfrage? Wieviele Personen sind notwendig für welches Forschungsdesign? Theoretische Überlegungen und praktische Empfehlungen (90 min., SW + NH)\n\n\n\n\n\nDas ganze Bild: Vollständige “Schritt für Schritt”-Analyse von Forschungsdaten: Datenaufbereitung, Kalibrierung, Plausibilitätsprüfungen, Messinvarianz, Beantworten von Forschungsfragen (180 Min., SW/NH)"
   },
   {
+    "objectID": "exercises/index.html",
+    "href": "exercises/index.html",
+    "title": "Übungen",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\n3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "Übungen"
+    ]
+  },
+  {
     "objectID": "slides/1-IntroR.html#einführung",
     "href": "slides/1-IntroR.html#einführung",
     "title": "Einführung in R",
     "section": "Einführung",
-    "text": "Einführung\nHier gleich Daten aufbereiten, die wir später auch nutzen können!"
+    "text": "Einführung\nHier gleich Daten aufbereiten, die wir später auch nutzen können!",
+    "crumbs": [
+      "Home",
+      "Folien",
+      "Einführung in R"
+    ]
   },
   {
     "objectID": "slides/2-Vorraussetzungen.html#lokal-stochastische-unabhängigkeit",
@@ -67,7 +83,11 @@
     "href": "slides/index.html",
     "title": "Slides",
     "section": "",
-    "text": "IRT Vorraussetzungen\n\n\n\n\n\n\n\nNicklas Hafiz\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\n\nDas Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\n\n\n\n\n\nNicklas Hafiz\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\nEinführung in R\n\n\n\n\n\n\nNicklas Hafiz\n\n\nInvalid Date\n\n\n\n\n\n\n:::\n\nNo matching items\n\n:::\n:::"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\nEinführung in R\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\n2) IRT Vorraussetzungen\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\n3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home",
+      "Folien"
+    ]
   },
   {
     "objectID": "slides/3-GLM.html#überblick",
@@ -88,7 +108,7 @@
     "href": "slides/3-GLM.html#einführungsbeispiel",
     "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
     "section": "Einführungsbeispiel",
-    "text": "Einführungsbeispiel\nhttps://www.bristol.ac.uk/cmm/learning/support/datasets/\n\nIntro example: Something with schools or countries\nSimple Exercise: Simulate multilevel data (with some help, so it goes quicker)"
+    "text": "Einführungsbeispiel\nhttps://www.bristol.ac.uk/cmm/learning/support/datasets/\n\nIntro example: Something with schools (fitting to rasch context)\nSimple Exercise: Simulate multilevel data (with some help, so it goes quicker)"
   },
   {
     "objectID": "slides/3-GLM.html#option-1-ignorieren",
@@ -137,7 +157,7 @@
     "href": "slides/3-GLM.html#raschmodell-als-spezialfall-für-lmm",
     "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
     "section": "Raschmodell als Spezialfall für LMM",
-    "text": "Raschmodell als Spezialfall für LMM\nWir können das Raschmodell als Spezialfall des LMMs betrachten:\nhttps://www.taylorfrancis.com/chapters/mono/10.4324/9781315146850-7/rasch-model-generalized-linear-mixed-model-iasonas-lamprianou"
+    "text": "Raschmodell als Spezialfall für LMM\nWir können das Raschmodell als Spezialfall des LMMs betrachten:\n\nhttps://www.taylorfrancis.com/chapters/mono/10.4324/9781315146850-7/rasch-model-generalized-linear-mixed-model-iasonas-lamprianou\n\nDe Boeck and Wilson (2004)"
   },
   {
     "objectID": "slides/3-GLM.html#datensimulation-für-raschmodel",
@@ -145,5 +165,33 @@
     "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
     "section": "Datensimulation für Raschmodel",
     "text": "Datensimulation für Raschmodel"
+  },
+  {
+    "objectID": "slides/3-GLM.html#step-by-step",
+    "href": "slides/3-GLM.html#step-by-step",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Step by Step",
+    "text": "Step by Step"
+  },
+  {
+    "objectID": "slides/3-GLM.html#was-sind-random-was-fixed-effects",
+    "href": "slides/3-GLM.html#was-sind-random-was-fixed-effects",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Was sind random, was fixed effects?",
+    "text": "Was sind random, was fixed effects?\n\nEntwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed\nEntwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random"
+  },
+  {
+    "objectID": "slides/3-GLM.html#exercise",
+    "href": "slides/3-GLM.html#exercise",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Exercise",
+    "text": "Exercise\nFit a Rasch Model using TAM and compare!"
+  },
+  {
+    "objectID": "exercises/3-GLM.html",
+    "href": "exercises/3-GLM.html",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "",
+    "text": "Simuliere Daten für ein Raschmodel.\n\n\n\n\n\n\n\nHint\n\n\n\n\n\nUse"
   }
 ]
