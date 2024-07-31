@@ -338,16 +338,110 @@ Nicklas Hafiz
 
   <p class="date">Invalid Date</p>
 </section>
-<section id="einführung" class="slide level2">
-<h2>Einführung</h2>
+<section>
+<section id="einführung" class="title-slide slide level1 center">
+<h1>Einführung</h1>
+
+</section>
+<section id="überblick" class="slide level2">
+<h2>Überblick</h2>
+<p>In dieser Session wollen wir uns mit dem Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) beschäftigen. Dafür werden zunächst eine kleine Einführung/Wiederholung zu gemischten Modellen machen und uns dabei spannende Daten anschauen.</p>
 <p>Possible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)</p>
+</section>
+<section id="glm" class="slide level2">
+<h2>GLM</h2>
+</section></section>
+<section>
+<section id="gemischte-modelle-linear-mixed-models" class="title-slide slide level1 center">
+<h1>Gemischte Modelle (Linear Mixed Models)</h1>
+<p>Grafik mit level-Struktur</p>
+</section>
+<section id="einführungsbeispiel" class="slide level2">
+<h2>Einführungsbeispiel</h2>
+<p>https://www.bristol.ac.uk/cmm/learning/support/datasets/</p>
+<ul>
+<li>Intro example: Something with schools or countries</li>
+<li>Simple Exercise: Simulate multilevel data (with some help, so it goes quicker)</li>
+</ul>
+</section></section>
+<section>
+<section id="umgang-mit-genesteten-daten" class="title-slide slide level1 center">
+<h1>Umgang mit genesteten Daten</h1>
+
+</section>
+<section id="option-1-ignorieren" class="slide level2">
+<h2>Option 1: Ignorieren</h2>
+<p>Generell eher keine gute Idee:</p>
+<p>Wir tuen so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:</p>
+<ul>
+<li>Standardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant.</li>
+</ul>
+<p>Außerdem kann die genestete Struktur von Interesse sein!</p>
+</section>
+<section id="option-2-aggregieren-auf-gruppenebene" class="slide level2">
+<h2>Option 2: Aggregieren auf Gruppenebene</h2>
+</section></section>
+<section>
+<section id="gleichungen" class="title-slide slide level1 center">
+<h1>Gleichungen</h1>
+
+</section>
+<section id="level-1-gleichung" class="slide level2">
+<h2>Level 1 Gleichung</h2>
+<p>Für jede Gruppe j: <span class="math display">\[
+y_{ij} = \beta_{0j} + \beta_{1j}x_{ij} + e_{ij}
+\]</span></p>
+<p>Abbildung</p>
+</section>
+<section id="level-2-gleichung" class="slide level2">
+<h2>Level-2 Gleichung</h2>
+<p><span class="math display">\[
+\beta_{0j} = \beta_{0}+\zeta_{0j}
+\]</span></p>
+<p><span class="math display">\[
+\beta_{1j} = \beta_1 + \zeta_{1j}
+\]</span></p>
+<p>Abbildung</p>
+</section>
+<section id="das-gemischte-modell" class="slide level2">
+<h2>Das gemischte Modell</h2>
+<p>Jetzt müssen wir nur noch einsetzen:</p>
+<p><span class="math display">\[
+y_{ij} = \beta_{0j} + \beta_{1j}x_{ij} + e_{ij}
+\]</span> <span class="math display">\[
+\beta_{0j} = \beta_{0}+\zeta_{0j}
+\]</span></p>
+<p><span class="math display">\[
+\beta_{1j} = \beta_1 + \zeta_{1j}
+\]</span></p>
+<p><span class="math display">\[
+y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}
+\]</span></p>
+</section>
+<section id="simulation" class="slide level2">
+<h2>Simulation</h2>
+<p>In der folgenden Übung wollen wir uns Daten mit einer genesteten Struktur simulieren.</p>
+<p>https://ademos.people.uic.edu/Chapter16.html</p>
+</section></section>
+<section>
+<section id="raschmodell-als-lmm" class="title-slide slide level1 center">
+<h1>Raschmodell als LMM</h1>
+<p>Warum das Ganze? Es geht doch eigentlich um IRT?</p>
+</section>
+<section id="raschmodell-als-spezialfall-für-lmm" class="slide level2">
+<h2>Raschmodell als Spezialfall für LMM</h2>
+<p>Wir können das Raschmodell als Spezialfall des LMMs betrachten:</p>
+<p>https://www.taylorfrancis.com/chapters/mono/10.4324/9781315146850-7/rasch-model-generalized-linear-mixed-model-iasonas-lamprianou</p>
+</section>
+<section id="datensimulation-für-raschmodel" class="slide level2">
+<h2>Datensimulation für Raschmodel</h2>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

@@ -39,14 +39,14 @@
     "href": "slides/2-Vorraussetzungen.html#lokal-stochastische-unabhängigkeit",
     "title": "2) IRT Vorraussetzungen",
     "section": "Lokal stochastische Unabhängigkeit",
-    "text": "Lokal stochastische Unabhängigkeit\nNach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit),"
+    "text": "Lokal stochastische Unabhängigkeit\nNach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit),\n\nAbbildung\nEinordnung: Lokale Unabhängigkeit, weitere Begriffe?\nBeispiel"
   },
   {
-    "objectID": "slides/2-Vorraussetzungen.html#verlinkte-items",
-    "href": "slides/2-Vorraussetzungen.html#verlinkte-items",
+    "objectID": "slides/2-Vorraussetzungen.html#linking",
+    "href": "slides/2-Vorraussetzungen.html#linking",
     "title": "2) IRT Vorraussetzungen",
-    "section": "Verlinkte Items",
-    "text": "Verlinkte Items"
+    "section": "Linking",
+    "text": "Linking"
   },
   {
     "objectID": "slides/2-Vorraussetzungen.html#messinvarianz",
@@ -70,10 +70,80 @@
     "text": "IRT Vorraussetzungen\n\n\n\n\n\n\n\nNicklas Hafiz\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\n\nDas Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\n\n\n\n\n\nNicklas Hafiz\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\n\nEinführung in R\n\n\n\n\n\n\nNicklas Hafiz\n\n\nInvalid Date\n\n\n\n\n\n\n:::\n\nNo matching items\n\n:::\n:::"
   },
   {
-    "objectID": "slides/3-GLM.html#einführung",
-    "href": "slides/3-GLM.html#einführung",
+    "objectID": "slides/3-GLM.html#überblick",
+    "href": "slides/3-GLM.html#überblick",
     "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
-    "section": "Einführung",
-    "text": "Einführung\nPossible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)"
+    "section": "Überblick",
+    "text": "Überblick\nIn dieser Session wollen wir uns mit dem Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) beschäftigen. Dafür werden zunächst eine kleine Einführung/Wiederholung zu gemischten Modellen machen und uns dabei spannende Daten anschauen.\nPossible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)"
+  },
+  {
+    "objectID": "slides/3-GLM.html#glm",
+    "href": "slides/3-GLM.html#glm",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "GLM",
+    "text": "GLM"
+  },
+  {
+    "objectID": "slides/3-GLM.html#einführungsbeispiel",
+    "href": "slides/3-GLM.html#einführungsbeispiel",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Einführungsbeispiel",
+    "text": "Einführungsbeispiel\nhttps://www.bristol.ac.uk/cmm/learning/support/datasets/\n\nIntro example: Something with schools or countries\nSimple Exercise: Simulate multilevel data (with some help, so it goes quicker)"
+  },
+  {
+    "objectID": "slides/3-GLM.html#option-1-ignorieren",
+    "href": "slides/3-GLM.html#option-1-ignorieren",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Option 1: Ignorieren",
+    "text": "Option 1: Ignorieren\nGenerell eher keine gute Idee:\nWir tuen so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:\n\nStandardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant.\n\nAußerdem kann die genestete Struktur von Interesse sein!"
+  },
+  {
+    "objectID": "slides/3-GLM.html#option-2-aggregieren-auf-gruppenebene",
+    "href": "slides/3-GLM.html#option-2-aggregieren-auf-gruppenebene",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Option 2: Aggregieren auf Gruppenebene",
+    "text": "Option 2: Aggregieren auf Gruppenebene"
+  },
+  {
+    "objectID": "slides/3-GLM.html#level-1-gleichung",
+    "href": "slides/3-GLM.html#level-1-gleichung",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Level 1 Gleichung",
+    "text": "Level 1 Gleichung\nFür jede Gruppe j: \\[\ny_{ij} = \\beta_{0j} + \\beta_{1j}x_{ij} + e_{ij}\n\\]\nAbbildung"
+  },
+  {
+    "objectID": "slides/3-GLM.html#level-2-gleichung",
+    "href": "slides/3-GLM.html#level-2-gleichung",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Level-2 Gleichung",
+    "text": "Level-2 Gleichung\n\\[\n\\beta_{0j} = \\beta_{0}+\\zeta_{0j}\n\\]\n\\[\n\\beta_{1j} = \\beta_1 + \\zeta_{1j}\n\\]\nAbbildung"
+  },
+  {
+    "objectID": "slides/3-GLM.html#das-gemischte-modell",
+    "href": "slides/3-GLM.html#das-gemischte-modell",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Das gemischte Modell",
+    "text": "Das gemischte Modell\nJetzt müssen wir nur noch einsetzen:\n\\[\ny_{ij} = \\beta_{0j} + \\beta_{1j}x_{ij} + e_{ij}\n\\] \\[\n\\beta_{0j} = \\beta_{0}+\\zeta_{0j}\n\\]\n\\[\n\\beta_{1j} = \\beta_1 + \\zeta_{1j}\n\\]\n\\[\ny_{ij} = \\beta_{0}+\\beta_1x_{ij} + \\zeta_{0j} + \\zeta_{1j}x_{ij} + e_{ij}\n\\]"
+  },
+  {
+    "objectID": "slides/3-GLM.html#simulation",
+    "href": "slides/3-GLM.html#simulation",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Simulation",
+    "text": "Simulation\nIn der folgenden Übung wollen wir uns Daten mit einer genesteten Struktur simulieren.\nhttps://ademos.people.uic.edu/Chapter16.html"
+  },
+  {
+    "objectID": "slides/3-GLM.html#raschmodell-als-spezialfall-für-lmm",
+    "href": "slides/3-GLM.html#raschmodell-als-spezialfall-für-lmm",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Raschmodell als Spezialfall für LMM",
+    "text": "Raschmodell als Spezialfall für LMM\nWir können das Raschmodell als Spezialfall des LMMs betrachten:\nhttps://www.taylorfrancis.com/chapters/mono/10.4324/9781315146850-7/rasch-model-generalized-linear-mixed-model-iasonas-lamprianou"
+  },
+  {
+    "objectID": "slides/3-GLM.html#datensimulation-für-raschmodel",
+    "href": "slides/3-GLM.html#datensimulation-für-raschmodel",
+    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "section": "Datensimulation für Raschmodel",
+    "text": "Datensimulation für Raschmodel"
   }
 ]
