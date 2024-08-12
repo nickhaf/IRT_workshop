@@ -1,0 +1,15 @@
+{
+  "hash": "d1f60f519e5988d9b314aa4d504f240a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Slides\"\nlisting: \n  contents: ./*.qmd\n  type: table\n  sort: \"grid\"\n---\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

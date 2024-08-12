@@ -1,6 +1,9 @@
 ---
 title: "IRT Workshop"
 ---
+```{r setup, include=FALSE}
+library(rmarkdown)
+```
 
 # Tagesprogramm
 ## Tag 1
