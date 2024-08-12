@@ -1,0 +1,26 @@
+/*-- scss:defaults --*/
+
+$link-color: #2BBAA5;
+
+/*-- scss:rules --*/
+
+$theme-highlight: #F9A822;
+$theme-background: #FAECB6;
+
+.slide-background-content{
+    background-color: $theme-background;
+}    
+
+.highlight{
+    color: $theme-highlight;
+}
+
+.link{
+    color: $link-color;
+}
+
+.table-striped {
+    > tbody > tr:nth-of-type(odd) > * {
+      background-color: #f2f2f2;
+    }
+  }

@@ -1,19 +1,35 @@
 ---
-title: "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+title: Algemeines Linear Gemischtes Modell (ALGM)
+subtitle: "Das Raschmodell als eine Spezialfall des ALGM"
 author: "Nicklas Hafiz"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
-format: revealjs
+date: "`r format(Sys.time(), '%Y %B, %d')`"
+format: 
+  letterbox-revealjs:
+    embed-resources: true
 ---
-
-
-# Einführung
 
 ## Überblick
 In dieser Session wollen wir uns mit dem Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) beschäftigen.  Dafür werden zunächst eine kleine Einführung/Wiederholung zu gemischten Modellen machen und uns dabei spannende Daten anschauen. 
 
 Possible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)
 
+
+## Bild zum Einführungsbeispiel
+
+
 ## GLM
+
+```{r}
+library(tidyverse)
+## Simulierte Beispieldaten zur Illustration. Eventuell doch gleich mit IRT Beispiel?
+
+## https://raffaelevacca.github.io/Intro-multilevel-with-R/
+
+load(here::here("raw_data", "multilevel_data.rda"))
+str(stud_data)
+
+
+```
 
 # Gemischte Modelle (Linear Mixed Models)
 
@@ -21,23 +37,107 @@ Grafik mit level-Struktur
 
 ## Einführungsbeispiel
 
-https://www.bristol.ac.uk/cmm/learning/support/datasets/
+- Hundedaten nehmen. 
 
-- Intro example: Something with schools (fitting to rasch context)
-- Simple Exercise: Simulate multilevel data (with some help, so it goes quicker)
 
 # Umgang mit genesteten Daten
+
+Jeweils mit Darstellung, was da gemacht wird. 
 
 ## Option 1: Ignorieren
 Generell eher keine gute Idee:
 
-Wir tuen so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:
+Wir tun so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:
 
 - Standardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant. 
 
 Außerdem kann die genestete Struktur von Interesse sein!
 
-## Option 2: Aggregieren auf Gruppenebene
+Darstellung: Einfach eine Linie durch den Scatterplot. 
+
+## Option 1: Ignorieren
+
+```{r}
+
+# https://raffaelevacca.github.io/Intro-multilevel-with-R/
+
+illustration_dat <- stud_data %>% 
+filter(school %in% c("1224", "1288", "1296", "1308", "1317", "1358", "1374", "1433", "1436"))
+
+## ist SES hier schon zentriert?
+## nein.
+
+illustration_dat <- illustration_dat %>% 
+  mutate(ses_cent = ses - mean(ses))
+
+```
+
+```{r}
+ggplot(data = illustration_dat , aes(x = ses_cent, y = mathach)) +
+  geom_point(aes(colour = school)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Math Score by Socioeconomic Status",
+       x = "Socioeconomic Status",
+       y = "Math Score") +
+       theme_classic() +
+       ylim(c(-5, 25))
+```
+
+## Option 2: Aggregieren
+
+```{r}
+illustration_dat %>%
+  group_by(school) %>%
+  summarise(mean_mathach = mean(mathach),
+            mean_ses = mean(ses_cent)) %>%
+ggplot(aes(x = mean_ses, y = mean_mathach)) +
+  geom_point(aes(colour = school)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Math Score by Socioeconomic Status",
+       x = "Mean Socioeconomic Status",
+       y = "Mean Math Score") +
+       theme_classic() +
+       ylim(c(-5, 25))
+
+```
+
+## Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren
+Verstehe noch nicht so ganz, wie das grafisch aussehen würde. 
+https://www.cambridge.org/core/journals/political-science-research-and-methods/article/abs/should-i-use-fixed-or-random-effects/12DFCB222123587A37163F2226E85C67
+
+random effect models reduce bias, but can reduce the variance of estimates of coefficients of interest. some sort of regularization
+
+```{r}
+#| eval: false
+
+lm(mathach ~ ses_cent + school, data = illustration_dat) %>% 
+    summary()
+
+mod2 <- lmer(mathach ~ ses_cent + (1|school), data = illustration_dat) 
+ranef(mod2)
+
+```
+
+Wird schnell unübersichtlich, lm z.B. gibt uns viele Infos raus, die uns eigentlich gar nicht interssieren. 
+An sich müsste die Grafik ähnlich aussehen wie im nächsten Beispiel? Die Berechnungen sind aber ein bisscehn anders, v.a. wegen Partial pooling. 
+
+## Option 4: Multilevel-Modell
+
+```{r}
+ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Math Score by Socioeconomic Status",
+       x = "Socioeconomic Status",
+       y = "Math Score") +
+       theme_classic() +
+       ylim(c(-5, 25))
+```
+
+
+## Notizen 
+
+Rein Optisch betrachtet scheint es recht wichtig zu sein, auf welche Schule man geht. Die Abweichung von Mittelwert des GesamtSES hat auch einen Einfluss. 
 
 # Gleichungen
 ## Level 1 Gleichung
@@ -47,7 +147,7 @@ $$
 y_{ij} = \beta_{0j} + \beta_{1j}x_{ij} + e_{ij}
 $$
 
-Abbildung
+Abbildung 
 
 ## Level-2 Gleichung
 
@@ -124,6 +224,14 @@ Anders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Ther
 
 
 
+## MML Beispiel mit lme4
+- Beispiel von Oben wieder aufnehmen, und auch wieder Ploten was gemacht wurde. 
+
+- [Coffe](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-05-14/readme.md)
+- something 
+- Zur Not die Völkle-Daten aus der VL: https://raffaelevacca.github.io/Intro-multilevel-with-R/
+- Simulierte Daten, aber Drachen!: https://ourcodingclub.github.io/tutorials/mixed-models/
+
 
 
 # Raschmodell als LMM
@@ -146,14 +254,12 @@ Wir können das Raschmodell als Spezialfall des LMMs betrachten:
 - Entwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random
 
 
-## Beispiel
+## Exercise 
+- Direkt übertragen auf den IRT-KOntext? Also sagen: Nehmt die Daten aus dem letzten Beispiel und fittet ein LLM Modell. 
+- Dann Vergleich mit TAM.
 
-```{r}
-library(lme4)
 
-```
-
-## Exercise
-Fit a Rasch Model using TAM and compare!
+## Prädiktoren
+- Beispiel aufgreifen, zeigen, wass man mit diesen Modell noch machen kann. 
 
 

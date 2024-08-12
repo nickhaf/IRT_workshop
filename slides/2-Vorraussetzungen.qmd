@@ -19,6 +19,12 @@ Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitsw
 
 ## Linking
 
+https://hectornajera83.github.io/book/scale-equating-and-linking.html
+
+- Tolle Eigenschaft von IRT: Personen müssen nicht den exakt gleichen Test bearbeiten, um miteinander verglichen zu werden.   
+Ein Subset von Items ist ausreichend. 
+- Mit Hilfe dieser **Ankeritems** können wir die Schwierigkeiten der Items auf die gemeinsame logit Skala bringen. 
+
 
 ## Messinvarianz
 
