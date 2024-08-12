@@ -1,16 +1,16 @@
 [
   {
-    "listing": "/exercises/index.html",
-    "items": [
-      "/exercises/3-GLM.html"
-    ]
-  },
-  {
     "listing": "/slides/index.html",
     "items": [
       "/slides/1-IntroR.html",
       "/slides/2-Vorraussetzungen.html",
       "/slides/3-GLM.html"
+    ]
+  },
+  {
+    "listing": "/exercises/index.html",
+    "items": [
+      "/exercises/3-GLM.html"
     ]
   }
 ]

@@ -8,9 +8,10 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.55">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Nicklas Hafiz">
+  <meta name="dcterms.date" content="2024-08-12">
   <title>IRT – 3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -336,7 +337,7 @@ Nicklas Hafiz
 </div>
 </div>
 
-  <p class="date">Invalid Date</p>
+  <p class="date">2024-08-12</p>
 </section>
 <section>
 <section id="einführung" class="title-slide slide level1 center">
@@ -422,6 +423,29 @@ y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}
 <h2>Simulation</h2>
 <p>In der folgenden Übung wollen wir uns Daten mit einer genesteten Struktur simulieren.</p>
 <p>https://ademos.people.uic.edu/Chapter16.html</p>
+</section>
+<section id="was-sind-random-was-fixed-effects" class="slide level2">
+<h2>Was sind random, was fixed effects?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Random Effects</strong></p>
+<ul>
+<li><p>Wir nehmen einen zugrundeliegenden Gesamtmittelwert an, von dem die Gruppen <strong>random</strong> abweichen. Anders ausgedrückt: Wir nehmen an, dass die Gruppen aus einer Grundverteilung gezogen wurden. Wir hätten theoretisch aber auch andere Gruppen ziehen können: Wenn wir das Experiment wiederholen, die level auf diesem Faktor werden andere sein.</p></li>
+<li><p>Dann sollten wir partial pooling nutzen:</p></li>
+<li><p>Dadurch können wir Informationen aus den Anderen Gruppen ebenfalls nutzen.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Fixed Effects</strong></p>
+<ul>
+<li>Hier machen wir diese Annahme einfach nicht. Wir sind also an den tatsächlichen Gruppen interessiert, die wir untersuchen, und möchten nicht davon ausgehen, dass wir theoretisch auch andere Gruppen hätten ziehen können.</li>
+</ul>
+</div></div>
+</section>
+<section id="beispiel" class="slide level2">
+<h2>Beispiel</h2>
+<p>Wir untersuchen den Erfolg von Verhaltenstherapie und Psychoanalyse anhand der Rückfallquote nach einem Jahr.<br>
+Patient<em>innen müssen hier nach Therapeut</em>innen genested werden. Dabei können wir die Therapeut<em>innen als random effects betrachten, wir haben sie ja schließlich nur als Mittel zum Zweck aus der Population an Therapeut</em>innen gezogen. Die Behandlungsform (Verhaltenstherapie, Psychoanalyse) ist hingegen ein fixed effect, da wir nur diese beiden Behandlungsformen untersuchen wollen.</p>
+<p>Anders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Therapeut*innen interessieren würde. Dann könnten wir sie ebenfalls als fixed effect im Modell mit aufnehmen.</p>
 </section></section>
 <section>
 <section id="raschmodell-als-lmm" class="title-slide slide level1 center">
@@ -432,22 +456,21 @@ y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}
 <h2>Raschmodell als Spezialfall für LMM</h2>
 <p>Wir können das Raschmodell als Spezialfall des LMMs betrachten:</p>
 
-<p>https://www.taylorfrancis.com/chapters/mono/10.4324/9781315146850-7/rasch-model-generalized-linear-mixed-model-iasonas-lamprianou</p>
 <aside><div>
-<p>De Boeck and Wilson (2004)</p>
+<ul>
+<li>De Boeck and Wilson (2004)</li>
+<li>Doran et al.&nbsp;(2007)</li>
+</ul>
 </div></aside></section>
-<section id="datensimulation-für-raschmodel" class="slide level2">
-<h2>Datensimulation für Raschmodel</h2>
-</section>
-<section id="step-by-step" class="slide level2">
-<h2>Step by Step</h2>
-</section>
-<section id="was-sind-random-was-fixed-effects" class="slide level2">
-<h2>Was sind random, was fixed effects?</h2>
+<section id="fixed-und-random-effects" class="slide level2">
+<h2>Fixed und Random Effects</h2>
 <ul>
 <li>Entwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed</li>
 <li>Entwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random</li>
 </ul>
+</section>
+<section id="beispiel-1" class="slide level2">
+<h2>Beispiel</h2>
 </section>
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
@@ -669,6 +692,44 @@ y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
