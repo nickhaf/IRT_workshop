@@ -9,7 +9,7 @@ format: revealjs
 # Einführung
 
 ## Überblick
-In dieser Session wollen wir uns mit dem Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) beschäftigen. Dafür werden zunächst eine kleine Einführung/Wiederholung zu gemischten Modellen machen und uns dabei spannende Daten anschauen. 
+In dieser Session wollen wir uns mit dem Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) beschäftigen.  Dafür werden zunächst eine kleine Einführung/Wiederholung zu gemischten Modellen machen und uns dabei spannende Daten anschauen. 
 
 Possible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)
 
@@ -20,8 +20,6 @@ Possible example data: Academic motivation scale (https://bookdown.org/bean_jerr
 Grafik mit level-Struktur
 
 ## Einführungsbeispiel
-
-
 
 https://www.bristol.ac.uk/cmm/learning/support/datasets/
 
@@ -89,6 +87,43 @@ In der folgenden Übung wollen wir uns Daten mit einer genesteten Struktur simul
 https://ademos.people.uic.edu/Chapter16.html
 
 
+## Was sind random, was fixed effects?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Random Effects**
+
+- Wir nehmen einen zugrundeliegenden Gesamtmittelwert an, von dem die Gruppen **random** abweichen. Anders ausgedrückt: Wir nehmen an, dass die Gruppen aus einer Grundverteilung gezogen wurden. Wir hätten theoretisch aber auch andere Gruppen ziehen können: Wenn wir das Experiment wiederholen, die level auf diesem Faktor werden andere sein.
+- Dann sollten wir partial pooling nutzen:
+
+
+
+- Dadurch können wir Informationen aus den Anderen Gruppen ebenfalls nutzen. 
+
+
+:::
+
+
+::: {.column width="50%"}
+**Fixed Effects**
+
+- Hier machen wir diese Annahme einfach nicht. Wir sind also an den tatsächlichen Gruppen interessiert, die wir untersuchen, und möchten nicht davon ausgehen, dass wir theoretisch auch andere Gruppen hätten ziehen können.
+
+:::
+
+
+::::
+
+## Beispiel
+
+Wir untersuchen den Erfolg von Verhaltenstherapie und Psychoanalyse anhand der Rückfallquote nach einem Jahr.  
+Patient*innen müssen hier nach Therapeut*innen genested werden. Dabei können wir die Therapeut*innen als random effects betrachten, wir haben sie ja schließlich nur als Mittel zum Zweck aus der Population an Therapeut*innen gezogen. Die Behandlungsform (Verhaltenstherapie, Psychoanalyse) ist hingegen ein fixed effect, da wir nur diese beiden Behandlungsformen untersuchen wollen.
+
+Anders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Therapeut*innen interessieren würde. Dann könnten wir sie ebenfalls als fixed effect im Modell mit aufnehmen. 
+
+
+
 
 
 # Raschmodell als LMM
@@ -98,27 +133,25 @@ Warum das Ganze? Es geht doch eigentlich um IRT?
 Wir können das Raschmodell als Spezialfall des LMMs betrachten:
 
 
-
 ::: aside
-De Boeck and Wilson (2004)
+- De Boeck and Wilson (2004)
+- Doran et al. (2007)
 :::
 
 
-https://www.taylorfrancis.com/chapters/mono/10.4324/9781315146850-7/rasch-model-generalized-linear-mixed-model-iasonas-lamprianou
 
-## Datensimulation für Raschmodel
-
-
-
-
-## Step by Step
-
-
-## Was sind random, was fixed effects?
+## Fixed und Random Effects
 
 - Entwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed
 - Entwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random
 
+
+## Beispiel
+
+```{r}
+library(lme4)
+
+```
 
 ## Exercise
 Fit a Rasch Model using TAM and compare!
