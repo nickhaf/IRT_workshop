@@ -6,9 +6,6 @@ website:
   navbar:
     background: primary
     search: true
-    left:
-      - href: index.qmd
-        text: Home
   sidebar:
     style: "docked"
     search: true
@@ -17,10 +14,13 @@ website:
         href: slides/index.qmd
         contents:
           - slides/1-IntroR.qmd
+          - slides/2-Vorraussetzungen.qmd
+          - slides/3-GLM.qmd
       - section: "Übungen"
         href: exercises/index.qmd
-        contents: 
-          - exercises/3-GLM.qmd
+        contents:
+          - title: Übung 3
+            href: exercises/3-GLM.qmd
 
 format:
   html:
