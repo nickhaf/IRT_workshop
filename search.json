@@ -52,166 +52,232 @@
   {
     "objectID": "slides/3-GLM.html#überblick",
     "href": "slides/3-GLM.html#überblick",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Überblick",
     "text": "Überblick\nIn dieser Session wollen wir uns mit dem Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) beschäftigen. Dafür werden zunächst eine kleine Einführung/Wiederholung zu gemischten Modellen machen und uns dabei spannende Daten anschauen.\nPossible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
+    ]
+  },
+  {
+    "objectID": "slides/3-GLM.html#bild-zum-einführungsbeispiel",
+    "href": "slides/3-GLM.html#bild-zum-einführungsbeispiel",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Bild zum Einführungsbeispiel",
+    "text": "Bild zum Einführungsbeispiel",
+    "crumbs": [
+      "Folien",
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#glm",
     "href": "slides/3-GLM.html#glm",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "GLM",
-    "text": "GLM",
+    "text": "GLM\n\n\ntibble [7,185 × 5] (S3: tbl_df/tbl/data.frame)\n $ school  : chr [1:7185] \"1224\" \"1224\" \"1224\" \"1224\" ...\n $ minority: Factor w/ 2 levels \"No\",\"Yes\": 1 1 1 1 1 1 1 1 1 1 ...\n $ sex     : Factor w/ 2 levels \"Male\",\"Female\": 2 2 1 1 1 1 2 1 2 1 ...\n $ ses     : num [1:7185] -1.528 -0.588 -0.528 -0.668 -0.158 ...\n $ mathach : num [1:7185] 5.88 19.71 20.35 8.78 17.9 ...",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#einführungsbeispiel",
     "href": "slides/3-GLM.html#einführungsbeispiel",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Einführungsbeispiel",
-    "text": "Einführungsbeispiel\nhttps://www.bristol.ac.uk/cmm/learning/support/datasets/\n\nIntro example: Something with schools (fitting to rasch context)\nSimple Exercise: Simulate multilevel data (with some help, so it goes quicker)",
+    "text": "Einführungsbeispiel\n\nHundedaten nehmen.",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#option-1-ignorieren",
     "href": "slides/3-GLM.html#option-1-ignorieren",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Option 1: Ignorieren",
-    "text": "Option 1: Ignorieren\nGenerell eher keine gute Idee:\nWir tuen so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:\n\nStandardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant.\n\nAußerdem kann die genestete Struktur von Interesse sein!",
+    "text": "Option 1: Ignorieren\nGenerell eher keine gute Idee:\nWir tun so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:\n\nStandardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant.\n\nAußerdem kann die genestete Struktur von Interesse sein!\nDarstellung: Einfach eine Linie durch den Scatterplot.",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
-    "objectID": "slides/3-GLM.html#option-2-aggregieren-auf-gruppenebene",
-    "href": "slides/3-GLM.html#option-2-aggregieren-auf-gruppenebene",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
-    "section": "Option 2: Aggregieren auf Gruppenebene",
-    "text": "Option 2: Aggregieren auf Gruppenebene",
+    "objectID": "slides/3-GLM.html#option-1-ignorieren-1",
+    "href": "slides/3-GLM.html#option-1-ignorieren-1",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 1: Ignorieren",
+    "text": "Option 1: Ignorieren",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
+    ]
+  },
+  {
+    "objectID": "slides/3-GLM.html#option-2-aggregieren",
+    "href": "slides/3-GLM.html#option-2-aggregieren",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 2: Aggregieren",
+    "text": "Option 2: Aggregieren",
+    "crumbs": [
+      "Folien",
+      "Algemeines Linear Gemischtes Modell (ALGM)"
+    ]
+  },
+  {
+    "objectID": "slides/3-GLM.html#option-3-disaggregiert-analyse-mit-gruppen-als-prädiktoren",
+    "href": "slides/3-GLM.html#option-3-disaggregiert-analyse-mit-gruppen-als-prädiktoren",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren",
+    "text": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren\nVerstehe noch nicht so ganz, wie das grafisch aussehen würde.",
+    "crumbs": [
+      "Folien",
+      "Algemeines Linear Gemischtes Modell (ALGM)"
+    ]
+  },
+  {
+    "objectID": "slides/3-GLM.html#option-4-multilevel-modell",
+    "href": "slides/3-GLM.html#option-4-multilevel-modell",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 4: Multilevel-Modell",
+    "text": "Option 4: Multilevel-Modell",
+    "crumbs": [
+      "Folien",
+      "Algemeines Linear Gemischtes Modell (ALGM)"
+    ]
+  },
+  {
+    "objectID": "slides/3-GLM.html#notizen",
+    "href": "slides/3-GLM.html#notizen",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Notizen",
+    "text": "Notizen\nRein Optisch betrachtet scheint es recht wichtig zu sein, auf welche Schule man geht. Die Abweichung von Mittelwert des GesamtSES hat auch einen Einfluss.",
+    "crumbs": [
+      "Folien",
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#level-1-gleichung",
     "href": "slides/3-GLM.html#level-1-gleichung",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Level 1 Gleichung",
     "text": "Level 1 Gleichung\nFür jede Gruppe j: \\[\ny_{ij} = \\beta_{0j} + \\beta_{1j}x_{ij} + e_{ij}\n\\]\nAbbildung",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#level-2-gleichung",
     "href": "slides/3-GLM.html#level-2-gleichung",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Level-2 Gleichung",
     "text": "Level-2 Gleichung\n\\[\n\\beta_{0j} = \\beta_{0}+\\zeta_{0j}\n\\]\n\\[\n\\beta_{1j} = \\beta_1 + \\zeta_{1j}\n\\]\nAbbildung",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#das-gemischte-modell",
     "href": "slides/3-GLM.html#das-gemischte-modell",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Das gemischte Modell",
     "text": "Das gemischte Modell\nJetzt müssen wir nur noch einsetzen:\n\\[\ny_{ij} = \\beta_{0j} + \\beta_{1j}x_{ij} + e_{ij}\n\\] \\[\n\\beta_{0j} = \\beta_{0}+\\zeta_{0j}\n\\]\n\\[\n\\beta_{1j} = \\beta_1 + \\zeta_{1j}\n\\]\n\\[\ny_{ij} = \\beta_{0}+\\beta_1x_{ij} + \\zeta_{0j} + \\zeta_{1j}x_{ij} + e_{ij}\n\\]",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#simulation",
     "href": "slides/3-GLM.html#simulation",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Simulation",
     "text": "Simulation\nIn der folgenden Übung wollen wir uns Daten mit einer genesteten Struktur simulieren.\nhttps://ademos.people.uic.edu/Chapter16.html",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#was-sind-random-was-fixed-effects",
     "href": "slides/3-GLM.html#was-sind-random-was-fixed-effects",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Was sind random, was fixed effects?",
     "text": "Was sind random, was fixed effects?\n\n\nRandom Effects\n\nWir nehmen einen zugrundeliegenden Gesamtmittelwert an, von dem die Gruppen random abweichen. Anders ausgedrückt: Wir nehmen an, dass die Gruppen aus einer Grundverteilung gezogen wurden. Wir hätten theoretisch aber auch andere Gruppen ziehen können: Wenn wir das Experiment wiederholen, die level auf diesem Faktor werden andere sein.\nDann sollten wir partial pooling nutzen:\nDadurch können wir Informationen aus den Anderen Gruppen ebenfalls nutzen.\n\n\nFixed Effects\n\nHier machen wir diese Annahme einfach nicht. Wir sind also an den tatsächlichen Gruppen interessiert, die wir untersuchen, und möchten nicht davon ausgehen, dass wir theoretisch auch andere Gruppen hätten ziehen können.",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#beispiel",
     "href": "slides/3-GLM.html#beispiel",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Beispiel",
     "text": "Beispiel\nWir untersuchen den Erfolg von Verhaltenstherapie und Psychoanalyse anhand der Rückfallquote nach einem Jahr.\nPatientinnen müssen hier nach Therapeutinnen genested werden. Dabei können wir die Therapeutinnen als random effects betrachten, wir haben sie ja schließlich nur als Mittel zum Zweck aus der Population an Therapeutinnen gezogen. Die Behandlungsform (Verhaltenstherapie, Psychoanalyse) ist hingegen ein fixed effect, da wir nur diese beiden Behandlungsformen untersuchen wollen.\nAnders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Therapeut*innen interessieren würde. Dann könnten wir sie ebenfalls als fixed effect im Modell mit aufnehmen.",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
+    ]
+  },
+  {
+    "objectID": "slides/3-GLM.html#mml-beispiel-mit-lme4",
+    "href": "slides/3-GLM.html#mml-beispiel-mit-lme4",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "MML Beispiel mit lme4",
+    "text": "MML Beispiel mit lme4\n\nBeispiel von Oben wieder aufnehmen, und auch wieder Ploten was gemacht wurde.\nCoffe\nsomething\nZur Not die Völkle-Daten aus der VL: https://raffaelevacca.github.io/Intro-multilevel-with-R/\nSimulierte Daten, aber Drachen!: https://ourcodingclub.github.io/tutorials/mixed-models/",
+    "crumbs": [
+      "Folien",
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#raschmodell-als-spezialfall-für-lmm",
     "href": "slides/3-GLM.html#raschmodell-als-spezialfall-für-lmm",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Raschmodell als Spezialfall für LMM",
     "text": "Raschmodell als Spezialfall für LMM\nWir können das Raschmodell als Spezialfall des LMMs betrachten:\n\n\n\nDe Boeck and Wilson (2004)\nDoran et al. (2007)",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#fixed-und-random-effects",
     "href": "slides/3-GLM.html#fixed-und-random-effects",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Fixed und Random Effects",
     "text": "Fixed und Random Effects\n\nEntwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed\nEntwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#beispiel-1",
-    "href": "slides/3-GLM.html#beispiel-1",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
-    "section": "Beispiel",
-    "text": "Beispiel",
-    "crumbs": [
-      "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
     "objectID": "slides/3-GLM.html#exercise",
     "href": "slides/3-GLM.html#exercise",
-    "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Exercise",
-    "text": "Exercise\nFit a Rasch Model using TAM and compare!",
+    "text": "Exercise\n\nDirekt übertragen auf den IRT-KOntext? Also sagen: Nehmt die Daten aus dem letzten Beispiel und fittet ein LLM Modell.\nDann Vergleich mit TAM.",
     "crumbs": [
       "Folien",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+      "Algemeines Linear Gemischtes Modell (ALGM)"
+    ]
+  },
+  {
+    "objectID": "slides/3-GLM.html#prädiktoren",
+    "href": "slides/3-GLM.html#prädiktoren",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Prädiktoren",
+    "text": "Prädiktoren\n\nBeispiel aufgreifen, zeigen, wass man mit diesen Modell noch machen kann.",
+    "crumbs": [
+      "Folien",
+      "Algemeines Linear Gemischtes Modell (ALGM)"
     ]
   },
   {
@@ -241,7 +307,7 @@
     "href": "slides/2-Vorraussetzungen.html#linking",
     "title": "2) IRT Vorraussetzungen",
     "section": "Linking",
-    "text": "Linking",
+    "text": "Linking\nhttps://hectornajera83.github.io/book/scale-equating-and-linking.html\n\nTolle Eigenschaft von IRT: Personen müssen nicht den exakt gleichen Test bearbeiten, um miteinander verglichen zu werden.\nEin Subset von Items ist ausreichend.\nMit Hilfe dieser Ankeritems können wir die Schwierigkeiten der Items auf die gemeinsame logit Skala bringen.",
     "crumbs": [
       "Folien",
       "2) IRT Vorraussetzungen"
@@ -274,7 +340,7 @@
     "href": "slides/index.html",
     "title": "Slides",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\nEinführung in R\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\n2) IRT Vorraussetzungen\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\n3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items",
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\nEinführung in R\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\n2) IRT Vorraussetzungen\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\nAlgemeines Linear Gemischtes Modell (ALGM)\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Folien"
     ]
