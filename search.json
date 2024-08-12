@@ -131,7 +131,7 @@
     "href": "slides/3-GLM.html#option-3-disaggregiert-analyse-mit-gruppen-als-prädiktoren",
     "title": "Algemeines Linear Gemischtes Modell (ALGM)",
     "section": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren",
-    "text": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren\nVerstehe noch nicht so ganz, wie das grafisch aussehen würde.",
+    "text": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren\nVerstehe noch nicht so ganz, wie das grafisch aussehen würde. https://www.cambridge.org/core/journals/political-science-research-and-methods/article/abs/should-i-use-fixed-or-random-effects/12DFCB222123587A37163F2226E85C67\nrandom effect models reduce bias, but can reduce the variance of estimates of coefficients of interest. some sort of regularization\nWird schnell unübersichtlich, lm z.B. gibt uns viele Infos raus, die uns eigentlich gar nicht interssieren. An sich müsste die Grafik ähnlich aussehen wie im nächsten Beispiel? Die Berechnungen sind aber ein bisscehn anders, v.a. wegen Partial pooling.",
     "crumbs": [
       "Folien",
       "Algemeines Linear Gemischtes Modell (ALGM)"
