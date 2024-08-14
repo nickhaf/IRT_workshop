@@ -32,327 +32,244 @@
     "href": "exercises/3-GLM.html",
     "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
     "section": "",
-    "text": "Ziel dieser übung ist es, Daten für ein einfachs Raschmodell zu simulieren. Warum? Weil wir so die Datengenerierenden Prozesse besser verstehen können. Also, let’s get started.\n\n\n\n\n\n\n\n\nHint\n\n\n\n\n\nUse",
-    "crumbs": [
-      "Übungen",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
-    ]
+    "text": "Ziel dieser übung ist es, Daten für ein einfachs Raschmodell zu simulieren. Warum? Weil wir so die Datengenerierenden Prozesse besser verstehen können. Also, let’s get started.\n\n\n\n\n\n\n\n\nHint\n\n\n\n\n\nUse"
   },
   {
     "objectID": "exercises/3-GLM.html#simulation",
     "href": "exercises/3-GLM.html#simulation",
     "title": "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells",
     "section": "",
-    "text": "Ziel dieser übung ist es, Daten für ein einfachs Raschmodell zu simulieren. Warum? Weil wir so die Datengenerierenden Prozesse besser verstehen können. Also, let’s get started.\n\n\n\n\n\n\n\n\nHint\n\n\n\n\n\nUse",
-    "crumbs": [
-      "Übungen",
-      "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
-    ]
+    "text": "Ziel dieser übung ist es, Daten für ein einfachs Raschmodell zu simulieren. Warum? Weil wir so die Datengenerierenden Prozesse besser verstehen können. Also, let’s get started.\n\n\n\n\n\n\n\n\nHint\n\n\n\n\n\nUse"
   },
   {
-    "objectID": "slides/3-GLM.html#überblick",
-    "href": "slides/3-GLM.html#überblick",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Überblick",
-    "text": "Überblick\nIn dieser Session wollen wir uns mit dem Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) beschäftigen. Dafür werden zunächst eine kleine Einführung/Wiederholung zu gemischten Modellen machen und uns dabei spannende Daten anschauen.\nPossible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#bild-zum-einführungsbeispiel",
-    "href": "slides/3-GLM.html#bild-zum-einführungsbeispiel",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Bild zum Einführungsbeispiel",
-    "text": "Bild zum Einführungsbeispiel",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#glm",
-    "href": "slides/3-GLM.html#glm",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "GLM",
-    "text": "GLM\n\n\ntibble [7,185 × 5] (S3: tbl_df/tbl/data.frame)\n $ school  : chr [1:7185] \"1224\" \"1224\" \"1224\" \"1224\" ...\n $ minority: Factor w/ 2 levels \"No\",\"Yes\": 1 1 1 1 1 1 1 1 1 1 ...\n $ sex     : Factor w/ 2 levels \"Male\",\"Female\": 2 2 1 1 1 1 2 1 2 1 ...\n $ ses     : num [1:7185] -1.528 -0.588 -0.528 -0.668 -0.158 ...\n $ mathach : num [1:7185] 5.88 19.71 20.35 8.78 17.9 ...",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#einführungsbeispiel",
-    "href": "slides/3-GLM.html#einführungsbeispiel",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Einführungsbeispiel",
-    "text": "Einführungsbeispiel\n\nHundedaten nehmen.",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#option-1-ignorieren",
-    "href": "slides/3-GLM.html#option-1-ignorieren",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Option 1: Ignorieren",
-    "text": "Option 1: Ignorieren\nGenerell eher keine gute Idee:\nWir tun so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:\n\nStandardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant.\n\nAußerdem kann die genestete Struktur von Interesse sein!\nDarstellung: Einfach eine Linie durch den Scatterplot.",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#option-1-ignorieren-1",
-    "href": "slides/3-GLM.html#option-1-ignorieren-1",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Option 1: Ignorieren",
-    "text": "Option 1: Ignorieren",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#option-2-aggregieren",
-    "href": "slides/3-GLM.html#option-2-aggregieren",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Option 2: Aggregieren",
-    "text": "Option 2: Aggregieren",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#option-3-disaggregiert-analyse-mit-gruppen-als-prädiktoren",
-    "href": "slides/3-GLM.html#option-3-disaggregiert-analyse-mit-gruppen-als-prädiktoren",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren",
-    "text": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren\nVerstehe noch nicht so ganz, wie das grafisch aussehen würde. https://www.cambridge.org/core/journals/political-science-research-and-methods/article/abs/should-i-use-fixed-or-random-effects/12DFCB222123587A37163F2226E85C67\nrandom effect models reduce bias, but can reduce the variance of estimates of coefficients of interest. some sort of regularization\nWird schnell unübersichtlich, lm z.B. gibt uns viele Infos raus, die uns eigentlich gar nicht interssieren. An sich müsste die Grafik ähnlich aussehen wie im nächsten Beispiel? Die Berechnungen sind aber ein bisscehn anders, v.a. wegen Partial pooling.",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#option-4-multilevel-modell",
-    "href": "slides/3-GLM.html#option-4-multilevel-modell",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Option 4: Multilevel-Modell",
-    "text": "Option 4: Multilevel-Modell",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#notizen",
-    "href": "slides/3-GLM.html#notizen",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Notizen",
-    "text": "Notizen\nRein Optisch betrachtet scheint es recht wichtig zu sein, auf welche Schule man geht. Die Abweichung von Mittelwert des GesamtSES hat auch einen Einfluss.",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#level-1-gleichung",
-    "href": "slides/3-GLM.html#level-1-gleichung",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Level 1 Gleichung",
-    "text": "Level 1 Gleichung\nFür jede Gruppe j: \\[\ny_{ij} = \\beta_{0j} + \\beta_{1j}x_{ij} + e_{ij}\n\\]\nAbbildung",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#level-2-gleichung",
-    "href": "slides/3-GLM.html#level-2-gleichung",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Level-2 Gleichung",
-    "text": "Level-2 Gleichung\n\\[\n\\beta_{0j} = \\beta_{0}+\\zeta_{0j}\n\\]\n\\[\n\\beta_{1j} = \\beta_1 + \\zeta_{1j}\n\\]\nAbbildung",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#das-gemischte-modell",
-    "href": "slides/3-GLM.html#das-gemischte-modell",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Das gemischte Modell",
-    "text": "Das gemischte Modell\nJetzt müssen wir nur noch einsetzen:\n\\[\ny_{ij} = \\beta_{0j} + \\beta_{1j}x_{ij} + e_{ij}\n\\] \\[\n\\beta_{0j} = \\beta_{0}+\\zeta_{0j}\n\\]\n\\[\n\\beta_{1j} = \\beta_1 + \\zeta_{1j}\n\\]\n\\[\ny_{ij} = \\beta_{0}+\\beta_1x_{ij} + \\zeta_{0j} + \\zeta_{1j}x_{ij} + e_{ij}\n\\]",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#simulation",
-    "href": "slides/3-GLM.html#simulation",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Simulation",
-    "text": "Simulation\nIn der folgenden Übung wollen wir uns Daten mit einer genesteten Struktur simulieren.\nhttps://ademos.people.uic.edu/Chapter16.html",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#was-sind-random-was-fixed-effects",
-    "href": "slides/3-GLM.html#was-sind-random-was-fixed-effects",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Was sind random, was fixed effects?",
-    "text": "Was sind random, was fixed effects?\n\n\nRandom Effects\n\nWir nehmen einen zugrundeliegenden Gesamtmittelwert an, von dem die Gruppen random abweichen. Anders ausgedrückt: Wir nehmen an, dass die Gruppen aus einer Grundverteilung gezogen wurden. Wir hätten theoretisch aber auch andere Gruppen ziehen können: Wenn wir das Experiment wiederholen, die level auf diesem Faktor werden andere sein.\nDann sollten wir partial pooling nutzen:\nDadurch können wir Informationen aus den Anderen Gruppen ebenfalls nutzen.\n\n\nFixed Effects\n\nHier machen wir diese Annahme einfach nicht. Wir sind also an den tatsächlichen Gruppen interessiert, die wir untersuchen, und möchten nicht davon ausgehen, dass wir theoretisch auch andere Gruppen hätten ziehen können.",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#beispiel",
-    "href": "slides/3-GLM.html#beispiel",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Beispiel",
-    "text": "Beispiel\nWir untersuchen den Erfolg von Verhaltenstherapie und Psychoanalyse anhand der Rückfallquote nach einem Jahr.\nPatientinnen müssen hier nach Therapeutinnen genested werden. Dabei können wir die Therapeutinnen als random effects betrachten, wir haben sie ja schließlich nur als Mittel zum Zweck aus der Population an Therapeutinnen gezogen. Die Behandlungsform (Verhaltenstherapie, Psychoanalyse) ist hingegen ein fixed effect, da wir nur diese beiden Behandlungsformen untersuchen wollen.\nAnders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Therapeut*innen interessieren würde. Dann könnten wir sie ebenfalls als fixed effect im Modell mit aufnehmen.",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#mml-beispiel-mit-lme4",
-    "href": "slides/3-GLM.html#mml-beispiel-mit-lme4",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "MML Beispiel mit lme4",
-    "text": "MML Beispiel mit lme4\n\nBeispiel von Oben wieder aufnehmen, und auch wieder Ploten was gemacht wurde.\nCoffe\nsomething\nZur Not die Völkle-Daten aus der VL: https://raffaelevacca.github.io/Intro-multilevel-with-R/\nSimulierte Daten, aber Drachen!: https://ourcodingclub.github.io/tutorials/mixed-models/",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#raschmodell-als-spezialfall-für-lmm",
-    "href": "slides/3-GLM.html#raschmodell-als-spezialfall-für-lmm",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Raschmodell als Spezialfall für LMM",
-    "text": "Raschmodell als Spezialfall für LMM\nWir können das Raschmodell als Spezialfall des LMMs betrachten:\n\n\n\nDe Boeck and Wilson (2004)\nDoran et al. (2007)",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#fixed-und-random-effects",
-    "href": "slides/3-GLM.html#fixed-und-random-effects",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Fixed und Random Effects",
-    "text": "Fixed und Random Effects\n\nEntwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed\nEntwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#exercise",
-    "href": "slides/3-GLM.html#exercise",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Exercise",
-    "text": "Exercise\n\nDirekt übertragen auf den IRT-KOntext? Also sagen: Nehmt die Daten aus dem letzten Beispiel und fittet ein LLM Modell.\nDann Vergleich mit TAM.",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/3-GLM.html#prädiktoren",
-    "href": "slides/3-GLM.html#prädiktoren",
-    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
-    "section": "Prädiktoren",
-    "text": "Prädiktoren\n\nBeispiel aufgreifen, zeigen, wass man mit diesen Modell noch machen kann.",
-    "crumbs": [
-      "Folien",
-      "Algemeines Linear Gemischtes Modell (ALGM)"
-    ]
-  },
-  {
-    "objectID": "slides/1-IntroR.html#einführung",
-    "href": "slides/1-IntroR.html#einführung",
+    "objectID": "slides/IntroR/index.html#einführung",
+    "href": "slides/IntroR/index.html#einführung",
     "title": "Einführung in R",
     "section": "Einführung",
-    "text": "Einführung\nHier gleich Daten aufbereiten, die wir später auch nutzen können!",
-    "crumbs": [
-      "Folien",
-      "Einführung in R"
-    ]
+    "text": "Einführung\nHier gleich Daten aufbereiten, die wir später auch nutzen können!"
   },
   {
-    "objectID": "slides/2-Vorraussetzungen.html#lokal-stochastische-unabhängigkeit",
-    "href": "slides/2-Vorraussetzungen.html#lokal-stochastische-unabhängigkeit",
-    "title": "2) IRT Vorraussetzungen",
+    "objectID": "slides/Vorraussetzung/index.html#lokal-stochastische-unabhängigkeit",
+    "href": "slides/Vorraussetzung/index.html#lokal-stochastische-unabhängigkeit",
+    "title": "IRT Vorraussetzungen",
     "section": "Lokal stochastische Unabhängigkeit",
-    "text": "Lokal stochastische Unabhängigkeit\nNach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit),\n\nAbbildung\nEinordnung: Lokale Unabhängigkeit, weitere Begriffe?\nBeispiel",
-    "crumbs": [
-      "Folien",
-      "2) IRT Vorraussetzungen"
-    ]
+    "text": "Lokal stochastische Unabhängigkeit\nNach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit),\n\nAbbildung\nEinordnung: Lokale Unabhängigkeit, weitere Begriffe?\nBeispiel"
   },
   {
-    "objectID": "slides/2-Vorraussetzungen.html#linking",
-    "href": "slides/2-Vorraussetzungen.html#linking",
-    "title": "2) IRT Vorraussetzungen",
+    "objectID": "slides/Vorraussetzung/index.html#linking",
+    "href": "slides/Vorraussetzung/index.html#linking",
+    "title": "IRT Vorraussetzungen",
     "section": "Linking",
-    "text": "Linking\nhttps://hectornajera83.github.io/book/scale-equating-and-linking.html\n\nTolle Eigenschaft von IRT: Personen müssen nicht den exakt gleichen Test bearbeiten, um miteinander verglichen zu werden.\nEin Subset von Items ist ausreichend.\nMit Hilfe dieser Ankeritems können wir die Schwierigkeiten der Items auf die gemeinsame logit Skala bringen.",
-    "crumbs": [
-      "Folien",
-      "2) IRT Vorraussetzungen"
-    ]
+    "text": "Linking\nhttps://hectornajera83.github.io/book/scale-equating-and-linking.html\n\nTolle Eigenschaft von IRT: Personen müssen nicht den exakt gleichen Test bearbeiten, um miteinander verglichen zu werden.\nEin Subset von Items ist ausreichend.\nMit Hilfe dieser Ankeritems können wir die Schwierigkeiten der Items auf die gemeinsame logit Skala bringen."
   },
   {
-    "objectID": "slides/2-Vorraussetzungen.html#messinvarianz",
-    "href": "slides/2-Vorraussetzungen.html#messinvarianz",
-    "title": "2) IRT Vorraussetzungen",
+    "objectID": "slides/Vorraussetzung/index.html#messinvarianz",
+    "href": "slides/Vorraussetzung/index.html#messinvarianz",
+    "title": "IRT Vorraussetzungen",
     "section": "Messinvarianz",
-    "text": "Messinvarianz",
-    "crumbs": [
-      "Folien",
-      "2) IRT Vorraussetzungen"
-    ]
+    "text": "Messinvarianz"
   },
   {
-    "objectID": "slides/2-Vorraussetzungen.html#beispiel-was-bei-nichtbeachtung-passiert",
-    "href": "slides/2-Vorraussetzungen.html#beispiel-was-bei-nichtbeachtung-passiert",
-    "title": "2) IRT Vorraussetzungen",
+    "objectID": "slides/Vorraussetzung/index.html#beispiel-was-bei-nichtbeachtung-passiert",
+    "href": "slides/Vorraussetzung/index.html#beispiel-was-bei-nichtbeachtung-passiert",
+    "title": "IRT Vorraussetzungen",
     "section": "Beispiel was bei nichtbeachtung passiert",
-    "text": "Beispiel was bei nichtbeachtung passiert",
-    "crumbs": [
-      "Folien",
-      "2) IRT Vorraussetzungen"
-    ]
+    "text": "Beispiel was bei nichtbeachtung passiert"
+  },
+  {
+    "objectID": "slides/GLM/index.html#überblick",
+    "href": "slides/GLM/index.html#überblick",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Überblick",
+    "text": "Überblick\n\nGeneralized Linear Modell (GLM)\nLinear Mixed Model (LMM)\nÜbertragung auf IRT Kontext"
+  },
+  {
+    "objectID": "slides/GLM/index.html#generalized-linear-model",
+    "href": "slides/GLM/index.html#generalized-linear-model",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Generalized Linear Model",
+    "text": "Generalized Linear Model\n\\[\ny = Xb+e\n\\]\n\\[\nE(y) = \\mu = g^{-1}(Xb)\n\\]\n\nmit \\(g\\) als Link Funktion\n\nVarianzfunktion auch zeigen?"
+  },
+  {
+    "objectID": "slides/GLM/index.html#irt-modell-als-glm",
+    "href": "slides/GLM/index.html#irt-modell-als-glm",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "IRT Modell als GLM",
+    "text": "IRT Modell als GLM\n\\[\ng(\\mu) = ln(\\frac{\\mu}{1-\\mu}) = Xb\n\\]"
+  },
+  {
+    "objectID": "slides/GLM/index.html#irt-modell-als-glm-1",
+    "href": "slides/GLM/index.html#irt-modell-als-glm-1",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "IRT Modell als GLM",
+    "text": "IRT Modell als GLM\n\nLogistische Regression: Modellierung der Wahrscheinlichkeit einer korrekten Antwort.\nZusammenhang der Variablen linear. Muss dann noch auf die logit-scale gebracht werden (Link Funktion)."
+  },
+  {
+    "objectID": "slides/GLM/index.html#section",
+    "href": "slides/GLM/index.html#section",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "",
+    "text": "Linear Mixed Models\n\n\n\nFoto von Mauro Lima auf Unsplash."
+  },
+  {
+    "objectID": "slides/GLM/index.html#llm",
+    "href": "slides/GLM/index.html#llm",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "LLM",
+    "text": "LLM\n\nlibrary(tidyverse)\n\n## Daten laden\nload(here::here(\"raw_data\", \"multilevel_data.rda\"))\n\n## Überblick\nstr(stud_data)\n\ntibble [7,185 × 5] (S3: tbl_df/tbl/data.frame)\n $ school  : chr [1:7185] \"1224\" \"1224\" \"1224\" \"1224\" ...\n $ minority: Factor w/ 2 levels \"No\",\"Yes\": 1 1 1 1 1 1 1 1 1 1 ...\n $ sex     : Factor w/ 2 levels \"Male\",\"Female\": 2 2 1 1 1 1 2 1 2 1 ...\n $ ses     : num [1:7185] -1.528 -0.588 -0.528 -0.668 -0.158 ...\n $ mathach : num [1:7185] 5.88 19.71 20.35 8.78 17.9 ...\n\n\n\n\nDaten aus diesem Tutorial"
+  },
+  {
+    "objectID": "slides/GLM/index.html#option-1-ignorieren",
+    "href": "slides/GLM/index.html#option-1-ignorieren",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 1: Ignorieren",
+    "text": "Option 1: Ignorieren"
+  },
+  {
+    "objectID": "slides/GLM/index.html#option-1-ignorieren-1",
+    "href": "slides/GLM/index.html#option-1-ignorieren-1",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 1: Ignorieren",
+    "text": "Option 1: Ignorieren\nGenerell eher keine gute Idee:\n\nDie genestete Struktur kann von Interesse sein!\nWir tun so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:\n\nStandardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant."
+  },
+  {
+    "objectID": "slides/GLM/index.html#option-2-aggregieren",
+    "href": "slides/GLM/index.html#option-2-aggregieren",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 2: Aggregieren",
+    "text": "Option 2: Aggregieren"
+  },
+  {
+    "objectID": "slides/GLM/index.html#option-2-aggregieren-1",
+    "href": "slides/GLM/index.html#option-2-aggregieren-1",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 2: Aggregieren",
+    "text": "Option 2: Aggregieren"
+  },
+  {
+    "objectID": "slides/GLM/index.html#option-3-disaggregiert-analyse-mit-gruppen-als-prädiktoren",
+    "href": "slides/GLM/index.html#option-3-disaggregiert-analyse-mit-gruppen-als-prädiktoren",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren",
+    "text": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren\nVerstehe noch nicht so ganz, wie das grafisch aussehen würde. https://www.cambridge.org/core/journals/political-science-research-and-methods/article/abs/should-i-use-fixed-or-random-effects/12DFCB222123587A37163F2226E85C67\nrandom effect models reduce bias, but can reduce the variance of estimates of coefficients of interest. some sort of regularization\nWird schnell unübersichtlich, lm z.B. gibt uns viele Infos raus, die uns eigentlich gar nicht interssieren. An sich müsste die Grafik ähnlich aussehen wie im nächsten Beispiel? Die Berechnungen sind aber ein bisscehn anders, v.a. wegen Partial pooling."
+  },
+  {
+    "objectID": "slides/GLM/index.html#option-3-disaggregiert-analyse-mit-gruppen-als-prädiktoren-1",
+    "href": "slides/GLM/index.html#option-3-disaggregiert-analyse-mit-gruppen-als-prädiktoren-1",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren",
+    "text": "Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren"
+  },
+  {
+    "objectID": "slides/GLM/index.html#option-4-multilevel-modell",
+    "href": "slides/GLM/index.html#option-4-multilevel-modell",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Option 4: Multilevel-Modell",
+    "text": "Option 4: Multilevel-Modell"
+  },
+  {
+    "objectID": "slides/GLM/index.html#notizen",
+    "href": "slides/GLM/index.html#notizen",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Notizen",
+    "text": "Notizen\nRein Optisch betrachtet scheint es recht wichtig zu sein, auf welche Schule man geht. Die Abweichung von Mittelwert des GesamtSES hat auch einen Einfluss."
+  },
+  {
+    "objectID": "slides/GLM/index.html#level-1-gleichung",
+    "href": "slides/GLM/index.html#level-1-gleichung",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Level 1 Gleichung",
+    "text": "Level 1 Gleichung\nFür jede Gruppe j: \\[\ny_{ij} = \\beta_{0j} + \\beta_{1j}x_{ij} + e_{ij}\n\\]\nAbbildung"
+  },
+  {
+    "objectID": "slides/GLM/index.html#level-2-gleichung",
+    "href": "slides/GLM/index.html#level-2-gleichung",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Level-2 Gleichung",
+    "text": "Level-2 Gleichung\n\\[\n\\beta_{0j} = \\beta_{0}+\\zeta_{0j}\n\\]\n\\[\n\\beta_{1j} = \\beta_1 + \\zeta_{1j}\n\\]\nAbbildung"
+  },
+  {
+    "objectID": "slides/GLM/index.html#das-gemischte-modell",
+    "href": "slides/GLM/index.html#das-gemischte-modell",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Das gemischte Modell",
+    "text": "Das gemischte Modell\nJetzt müssen wir nur noch einsetzen:\n\\[\ny_{ij} = \\beta_{0j} + \\beta_{1j}x_{ij} + e_{ij}\n\\] \\[\n\\beta_{0j} = \\beta_{0}+\\zeta_{0j}\n\\]\n\\[\n\\beta_{1j} = \\beta_1 + \\zeta_{1j}\n\\]\n\\[\ny_{ij} = \\beta_{0}+\\beta_1x_{ij} + \\zeta_{0j} + \\zeta_{1j}x_{ij} + e_{ij}\n\\]"
+  },
+  {
+    "objectID": "slides/GLM/index.html#section-1",
+    "href": "slides/GLM/index.html#section-1",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "",
+    "text": "Random effects\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFixed effects"
+  },
+  {
+    "objectID": "slides/GLM/index.html#random-und-fixed-effects",
+    "href": "slides/GLM/index.html#random-und-fixed-effects",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Random und Fixed effects",
+    "text": "Random und Fixed effects\n\n\nRandom Effects\n\nAnnahme eines zugrundeliegenden Gesamtmittelwerts. Von diesem weichen die Gruppen random ab.\nBei Wiederholung würden wir andere Gruppen ziehen.\nPartial Pooling: Regularisierung der Extremen Werte in Richtung Gruppenmittelwert. \n\n\nFixed Effects\n\nHier machen wir diese Annahme einfach nicht.\nUns interessieren die tatsächlichen Gruppen, bei Wiederholung würden wird die gleichen ziehen."
+  },
+  {
+    "objectID": "slides/GLM/index.html#beispiel",
+    "href": "slides/GLM/index.html#beispiel",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Beispiel",
+    "text": "Beispiel\nWir untersuchen den Erfolg von Verhaltenstherapie und Psychoanalyse anhand der Rückfallquote nach einem Jahr.\nPatientinnen müssen hier nach Therapeutinnen genested werden. Dabei können wir die Therapeutinnen als random effects betrachten, wir haben sie ja schließlich nur als Mittel zum Zweck aus der Population an Therapeutinnen gezogen. Die Behandlungsform (Verhaltenstherapie, Psychoanalyse) ist hingegen ein fixed effect, da wir nur diese beiden Behandlungsformen untersuchen wollen.\nAnders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Therapeut*innen interessieren würde. Dann könnten wir sie ebenfalls als fixed effect im Modell mit aufnehmen."
+  },
+  {
+    "objectID": "slides/GLM/index.html#lme4",
+    "href": "slides/GLM/index.html#lme4",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "lme4",
+    "text": "lme4\n\nlibrary(lme4)\n\nmod1 &lt;- lmer(mathach ~ ses_cent + (1|school), data = illustration_dat) \nsummary(mod1)\n\nLinear mixed model fit by REML ['lmerMod']\nFormula: mathach ~ ses_cent + (1 | school)\n   Data: illustration_dat\n\nREML criterion at convergence: 2091\n\nScaled residuals: \n     Min       1Q   Median       3Q      Max \n-2.52568 -0.67053 -0.06796  0.74859  2.79564 \n\nRandom effects:\n Groups   Name        Variance Std.Dev.\n school   (Intercept)  8.778   2.963   \n Residual             34.699   5.891   \nNumber of obs: 325, groups:  school, 9\n\nFixed effects:\n            Estimate Std. Error t value\n(Intercept)  13.1169     1.0447  12.555\nses_cent      2.6255     0.5285   4.968\n\nCorrelation of Fixed Effects:\n         (Intr)\nses_cent -0.016"
+  },
+  {
+    "objectID": "slides/GLM/index.html#raschmodell-als-spezialfall-von-lmm",
+    "href": "slides/GLM/index.html#raschmodell-als-spezialfall-von-lmm",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Raschmodell als Spezialfall von LMM",
+    "text": "Raschmodell als Spezialfall von LMM\nDafür müssen wir zwei Dinge beachten: - Link Funktion.\n- Entscheidung über Annahme von fixed/random effects von Personen und Items.\n\n\n\nDe Boeck and Wilson (2004)\nDoran et al. (2007)"
+  },
+  {
+    "objectID": "slides/GLM/index.html#link-funktion",
+    "href": "slides/GLM/index.html#link-funktion",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Link Funktion",
+    "text": "Link Funktion"
+  },
+  {
+    "objectID": "slides/GLM/index.html#fixed-und-random-effects",
+    "href": "slides/GLM/index.html#fixed-und-random-effects",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Fixed und Random Effects",
+    "text": "Fixed und Random Effects\n\nEntwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed\nEntwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random"
+  },
+  {
+    "objectID": "slides/GLM/index.html#exercise",
+    "href": "slides/GLM/index.html#exercise",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Exercise",
+    "text": "Exercise\n\nDirekt übertragen auf den IRT-KOntext? Also sagen: Nehmt die Daten aus dem letzten Beispiel und fittet ein LLM Modell.\nDann Vergleich mit TAM."
+  },
+  {
+    "objectID": "slides/GLM/index.html#prädiktoren",
+    "href": "slides/GLM/index.html#prädiktoren",
+    "title": "Algemeines Linear Gemischtes Modell (ALGM)",
+    "section": "Prädiktoren",
+    "text": "Prädiktoren\n\nBeispiel aufgreifen, zeigen, wass man mit diesen Modell noch machen kann."
   },
   {
     "objectID": "slides/index.html",
     "href": "slides/index.html",
-    "title": "Slides",
+    "title": "Folien",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\nEinführung in R\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\n2) IRT Vorraussetzungen\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\nAlgemeines Linear Gemischtes Modell (ALGM)\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Folien"
-    ]
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\nEinführung in R\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\nIRT Vorraussetzungen\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\nAlgemeines Linear Gemischtes Modell (ALGM)\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "exercises/index.html",
     "href": "exercises/index.html",
     "title": "Übungen",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\n3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Übungen"
-    ]
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\n3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items"
   }
 ]

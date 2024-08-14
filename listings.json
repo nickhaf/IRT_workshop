@@ -2,9 +2,9 @@
   {
     "listing": "/slides/index.html",
     "items": [
-      "/slides/1-IntroR.html",
-      "/slides/2-Vorraussetzungen.html",
-      "/slides/3-GLM.html"
+      "/slides/IntroR/index.html",
+      "/slides/Vorraussetzung/index.html",
+      "/slides/GLM/index.html"
     ]
   },
   {
