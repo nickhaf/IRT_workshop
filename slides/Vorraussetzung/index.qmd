@@ -1,5 +1,5 @@
 ---
-title: "2) IRT Vorraussetzungen"
+title: "IRT Vorraussetzungen"
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: revealjs

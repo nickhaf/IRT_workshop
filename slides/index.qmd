@@ -1,7 +1,10 @@
 ---
-title: "Slides"
+title: "Folien"
 listing: 
-  contents: ./*.qmd
+  contents: 
+    - ./IntroR/index.qmd
+    - ./Vorraussetzung/index.qmd
+    - ./GLM/index.qmd
   type: table
   sort: "grid"
 ---

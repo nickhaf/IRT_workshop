@@ -6,22 +6,11 @@ website:
   navbar:
     background: primary
     search: true
-  sidebar:
-    style: "docked"
-    search: true
-    contents:
-      - section: "Folien"
+    left:
+      - text: "Folien"
         href: slides/index.qmd
-        contents:
-          - slides/1-IntroR.qmd
-          - slides/2-Vorraussetzungen.qmd
-          - slides/3-GLM.qmd
-      - section: "Übungen"
+      - text: "Übungen"
         href: exercises/index.qmd
-        contents:
-          - title: Übung 3
-            href: exercises/3-GLM.qmd
-
 format:
   html:
     theme: flatly
@@ -30,3 +19,4 @@ format:
 
 execute:
   freeze: auto
+  echo: false

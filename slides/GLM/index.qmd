@@ -9,68 +9,83 @@ format:
 ---
 
 ## Überblick
-In dieser Session wollen wir uns mit dem Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) beschäftigen.  Dafür werden zunächst eine kleine Einführung/Wiederholung zu gemischten Modellen machen und uns dabei spannende Daten anschauen. 
+- Generalized Linear Modell (GLM)
+- Linear Mixed Model (LMM) 
+- Übertragung auf IRT Kontext
 
-Possible example data: Academic motivation scale (https://bookdown.org/bean_jerry/using_r_for_social_work_research/item-response-theory.html)
+## Generalized Linear Model
+
+$$
+y = Xb+e
+$$
+
+$$
+E(y) = \mu = g^{-1}(Xb)
+$$
+
+- mit $g$ als Link Funktion
+
+Varianzfunktion auch zeigen?
+
+## IRT Modell als GLM
+$$
+g(\mu) = ln(\frac{\mu}{1-\mu}) = Xb
+$$
+
+## IRT Modell als GLM
+- Logistische Regression: Modellierung der Wahrscheinlichkeit einer korrekten Antwort. 
+- Zusammenhang der Variablen linear. Muss dann noch auf die logit-scale gebracht werden (Link Funktion).
+-  
 
 
-## Bild zum Einführungsbeispiel
+## {background-image="images/hogwarts.jpg" background-size="1250px"}
 
+::: {.absolute left="15%" top="5%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
 
-## GLM
+Linear Mixed Models
+
+:::
+
+::: aside
+Foto von [Mauro Lima](https://unsplash.com/de/@limamauro23?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) auf [Unsplash](https://unsplash.com/de/fotos/eine-burg-aus-felsen-mit-einem-bewolkten-himmel-im-hintergrund-k2TgEJZ65D0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
+
+:::
+
+## LLM
 
 ```{r}
+#| echo: true
+
 library(tidyverse)
-## Simulierte Beispieldaten zur Illustration. Eventuell doch gleich mit IRT Beispiel?
 
-## https://raffaelevacca.github.io/Intro-multilevel-with-R/
-
+## Daten laden
 load(here::here("raw_data", "multilevel_data.rda"))
+
+## Überblick
 str(stud_data)
-
-
 ```
 
-# Gemischte Modelle (Linear Mixed Models)
-
-Grafik mit level-Struktur
-
-## Einführungsbeispiel
-
-- Hundedaten nehmen. 
-
-
-# Umgang mit genesteten Daten
-
-Jeweils mit Darstellung, was da gemacht wird. 
-
-## Option 1: Ignorieren
-Generell eher keine gute Idee:
-
-Wir tun so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:
-
-- Standardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant. 
-
-Außerdem kann die genestete Struktur von Interesse sein!
-
-Darstellung: Einfach eine Linie durch den Scatterplot. 
-
-## Option 1: Ignorieren
 
 ```{r}
-
-# https://raffaelevacca.github.io/Intro-multilevel-with-R/
-
 illustration_dat <- stud_data %>% 
 filter(school %in% c("1224", "1288", "1296", "1308", "1317", "1358", "1374", "1433", "1436"))
 
-## ist SES hier schon zentriert?
-## nein.
-
+## Zentrieren
 illustration_dat <- illustration_dat %>% 
   mutate(ses_cent = ses - mean(ses))
 
 ```
+
+
+::: aside
+Daten aus diesem [Tutorial](https://raffaelevacca.github.io/Intro-multilevel-with-R/)
+:::
+
+
+
+# Umgang mit genesteten Daten
+
+## Option 1: Ignorieren
 
 ```{r}
 ggplot(data = illustration_dat , aes(x = ses_cent, y = mathach)) +
@@ -82,6 +97,18 @@ ggplot(data = illustration_dat , aes(x = ses_cent, y = mathach)) +
        theme_classic() +
        ylim(c(-5, 25))
 ```
+
+## Option 1: Ignorieren
+
+Generell eher keine gute Idee:
+
+- Die genestete Struktur kann von Interesse sein!
+- Wir tun so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:    
+
+
+Standardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant. 
+
+
 
 ## Option 2: Aggregieren
 
@@ -101,6 +128,9 @@ ggplot(aes(x = mean_ses, y = mean_mathach)) +
 
 ```
 
+## Option 2: Aggregieren
+
+
 ## Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren
 Verstehe noch nicht so ganz, wie das grafisch aussehen würde. 
 https://www.cambridge.org/core/journals/political-science-research-and-methods/article/abs/should-i-use-fixed-or-random-effects/12DFCB222123587A37163F2226E85C67
@@ -116,10 +146,13 @@ lm(mathach ~ ses_cent + school, data = illustration_dat) %>%
 mod2 <- lmer(mathach ~ ses_cent + (1|school), data = illustration_dat) 
 ranef(mod2)
 
-```
+``` 
 
 Wird schnell unübersichtlich, lm z.B. gibt uns viele Infos raus, die uns eigentlich gar nicht interssieren. 
 An sich müsste die Grafik ähnlich aussehen wie im nächsten Beispiel? Die Berechnungen sind aber ein bisscehn anders, v.a. wegen Partial pooling. 
+
+## Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren
+
 
 ## Option 4: Multilevel-Modell
 
@@ -181,26 +214,50 @@ y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}
 $$
 
 
-## Simulation
-In der folgenden Übung wollen wir uns Daten mit einer genesteten Struktur simulieren. 
+## 
 
-https://ademos.people.uic.edu/Chapter16.html
+:::: {.columns}
 
+::: {.column width="50%"}
 
-## Was sind random, was fixed effects?
+**Random** effects
+
+\
+\
+
+ ![](images/dice.jpg)
+
+:::
+
+::: {.column width="50%"}
+
+::: {layout-ncol=1}
+
+ ![](images/screws.jpg)
+ 
+ \
+ \
+
+ **Fixed** effects
+
+:::
+
+:::
+
+::::
+
+## Random und Fixed effects
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 **Random Effects**
 
-- Wir nehmen einen zugrundeliegenden Gesamtmittelwert an, von dem die Gruppen **random** abweichen. Anders ausgedrückt: Wir nehmen an, dass die Gruppen aus einer Grundverteilung gezogen wurden. Wir hätten theoretisch aber auch andere Gruppen ziehen können: Wenn wir das Experiment wiederholen, die level auf diesem Faktor werden andere sein.
-- Dann sollten wir partial pooling nutzen:
-
-
-
-- Dadurch können wir Informationen aus den Anderen Gruppen ebenfalls nutzen. 
-
+- Annahme eines zugrundeliegenden Gesamtmittelwerts. Von diesem weichen die Gruppen **random** ab. 
+- Bei Wiederholung würden wir andere Gruppen ziehen. 
+- Partial Pooling: Regularisierung der Extremen Werte in Richtung Gruppenmittelwert. 
+<!-- - Anders ausgedrückt: Wir nehmen an, dass die Gruppen aus einer Grundverteilung gezogen wurden. Wir hätten theoretisch aber auch andere Gruppen ziehen können: Wenn wir das Experiment wiederholen, die level auf diesem Faktor werden andere sein.
+- Dadurch können wir Informationen aus den Anderen Gruppen ebenfalls nutzen.  -->
 
 :::
 
@@ -208,7 +265,8 @@ https://ademos.people.uic.edu/Chapter16.html
 ::: {.column width="50%"}
 **Fixed Effects**
 
-- Hier machen wir diese Annahme einfach nicht. Wir sind also an den tatsächlichen Gruppen interessiert, die wir untersuchen, und möchten nicht davon ausgehen, dass wir theoretisch auch andere Gruppen hätten ziehen können.
+- Hier machen wir diese Annahme einfach nicht. 
+- Uns interessieren die tatsächlichen Gruppen, bei Wiederholung würden wird die gleichen ziehen.
 
 :::
 
@@ -224,27 +282,33 @@ Anders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Ther
 
 
 
-## MML Beispiel mit lme4
-- Beispiel von Oben wieder aufnehmen, und auch wieder Ploten was gemacht wurde. 
+## lme4
 
-- [Coffe](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-05-14/readme.md)
-- something 
-- Zur Not die Völkle-Daten aus der VL: https://raffaelevacca.github.io/Intro-multilevel-with-R/
-- Simulierte Daten, aber Drachen!: https://ourcodingclub.github.io/tutorials/mixed-models/
+```{r}
+#| echo: true
+library(lme4)
 
+mod1 <- lmer(mathach ~ ses_cent + (1|school), data = illustration_dat) 
+summary(mod1)
+```
 
 
 # Raschmodell als LMM
 Warum das Ganze? Es geht doch eigentlich um IRT?
 
-## Raschmodell als Spezialfall für LMM
-Wir können das Raschmodell als Spezialfall des LMMs betrachten:
+## Raschmodell als Spezialfall von LMM
 
+Dafür müssen wir zwei Dinge beachten:
+- Link Funktion.  
+- Entscheidung über Annahme von fixed/random effects von Personen und Items.
 
 ::: aside
 - De Boeck and Wilson (2004)
 - Doran et al. (2007)
 :::
+
+
+## Link Funktion
 
 
 
