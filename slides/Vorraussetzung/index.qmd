@@ -7,7 +7,9 @@ format: revealjs
 
 # Einführung
 Damit wir von den ganzen Vorteilen der Item Response Theory profitieren können, müssen einige Annahmen erfüllt sein. 
-Die Bedeutenste davon ist vermutlich die Annahme der lokalen stochastischen Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJ1224232.pdf). 
+
+- Eindimmensionalität
+- lokalen stochastischen Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJ1224232.pdf). 
 
 ## Lokal stochastische Unabhängigkeit
 Nach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. 
