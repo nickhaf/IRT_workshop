@@ -19,16 +19,72 @@ Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitsw
 - Einordnung: Lokale Unabhängigkeit, weitere Begriffe?
 - Beispiel
 
-## Linking
+## {background-image="images/link.jpg" background-size="1150px"}
 
-https://hectornajera83.github.io/book/scale-equating-and-linking.html
+::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
 
-- Tolle Eigenschaft von IRT: Personen müssen nicht den exakt gleichen Test bearbeiten, um miteinander verglichen zu werden.   
-Ein Subset von Items ist ausreichend. 
-- Mit Hilfe dieser **Ankeritems** können wir die Schwierigkeiten der Items auf die gemeinsame logit Skala bringen. 
+Linking/Equating
 
+:::
+
+::: aside
+Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) auf [Unsplash](https://unsplash.com/de/fotos/selektives-fokusfoto-von-grauen-metallketten-JZ8AHFr2aEg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash). 
+
+::: 
+
+<!-- https://hectornajera83.github.io/book/scale-equating-and-linking.html -->
+
+
+## Linking/Equating
+- Szenario: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen. 
+- Dafür haben wir zwei Möglichkeiten:
+    - Gemeinsame Items
+    - Gemeinsame Personen
+
+Abbildung z.B. mit Verteilung von theat scores, die nochmal zeigt was das Problem ist. 
+Dann kann man bestimmte Items markieren, und die Verteilungen entsprechend dieser markierten Items verschieben. 
+
+Embretson 2000, S. 253
+
+- Item Parameter werden in beiden Tests geschätzt, und dann anhand der Ankeritems durch eine geeignete Transformation auf eine gemeinsame Skala gebracht.
+- 
+
+## 
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+**Ankeritems**
+
+
+:::
+
+
+::: {.column width="50%"}
+
+![](images/anker.jpg)
+
+:::
+
+::::
+
+## Ankeritems
+- Kallibrierungen der Parameterschätzer aus zwei verschiedenen Testformen werden auf eine gemeinsame Skala gebracht.
+- Wir müssen also die theta ($\theta$) scores des einen Tests so transformieren, dass sie auf einer gemeinsamen Skala mit den Scores des anderen Tests liegen:
+
+$$
+\theta_Y = A \theta_X + B
+$$
+
+## Ankerpersonen
+- Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen. 
 
 ## Messinvarianz
 
 
+## DIF
+Raschtrees vorstellen?
+
 ## Beispiel was bei nichtbeachtung passiert
+
+
