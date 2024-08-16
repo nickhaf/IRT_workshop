@@ -56,11 +56,39 @@
     "text": "Lokal stochastische Unabhängigkeit\nNach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit),\n\nAbbildung\nEinordnung: Lokale Unabhängigkeit, weitere Begriffe?\nBeispiel"
   },
   {
-    "objectID": "slides/Vorraussetzung/index.html#linking",
-    "href": "slides/Vorraussetzung/index.html#linking",
+    "objectID": "slides/Vorraussetzung/index.html#section",
+    "href": "slides/Vorraussetzung/index.html#section",
     "title": "IRT Vorraussetzungen",
-    "section": "Linking",
-    "text": "Linking\nhttps://hectornajera83.github.io/book/scale-equating-and-linking.html\n\nTolle Eigenschaft von IRT: Personen müssen nicht den exakt gleichen Test bearbeiten, um miteinander verglichen zu werden.\nEin Subset von Items ist ausreichend.\nMit Hilfe dieser Ankeritems können wir die Schwierigkeiten der Items auf die gemeinsame logit Skala bringen."
+    "section": "",
+    "text": "Linking/Equating\n\n\n\n\nFoto von Bryson Hammer auf Unsplash."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#linkingequating",
+    "href": "slides/Vorraussetzung/index.html#linkingequating",
+    "title": "IRT Vorraussetzungen",
+    "section": "Linking/Equating",
+    "text": "Linking/Equating\n\nSzenario: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen.\nDafür haben wir zwei Möglichkeiten:\n\nGemeinsame Items\nGemeinsame Personen\n\n\nAbbildung z.B. mit Verteilung von theat scores, die nochmal zeigt was das Problem ist. Dann kann man bestimmte Items markieren, und die Verteilungen entsprechend dieser markierten Items verschieben.\nEmbretson 2000, S. 253\n\nItem Parameter werden in beiden Tests geschätzt, und dann anhand der Ankeritems durch eine geeignete Transformation auf eine gemeinsame Skala gebracht."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#section-1",
+    "href": "slides/Vorraussetzung/index.html#section-1",
+    "title": "IRT Vorraussetzungen",
+    "section": "",
+    "text": "Ankeritems"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#ankeritems",
+    "href": "slides/Vorraussetzung/index.html#ankeritems",
+    "title": "IRT Vorraussetzungen",
+    "section": "Ankeritems",
+    "text": "Ankeritems\n\nKallibrierungen der Parameterschätzer aus zwei verschiedenen Testformen werden auf eine gemeinsame Skala gebracht.\nWir müssen also die theta (\\(\\theta\\)) scores des einen Tests so transformieren, dass sie auf einer gemeinsamen Skala mit den Scores des anderen Tests liegen:\n\n\\[\n\\theta_Y = A \\theta_X + B\n\\]"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#ankerpersonen",
+    "href": "slides/Vorraussetzung/index.html#ankerpersonen",
+    "title": "IRT Vorraussetzungen",
+    "section": "Ankerpersonen",
+    "text": "Ankerpersonen\n\nPersonen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen."
   },
   {
     "objectID": "slides/Vorraussetzung/index.html#messinvarianz",
@@ -68,6 +96,13 @@
     "title": "IRT Vorraussetzungen",
     "section": "Messinvarianz",
     "text": "Messinvarianz"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#dif",
+    "href": "slides/Vorraussetzung/index.html#dif",
+    "title": "IRT Vorraussetzungen",
+    "section": "DIF",
+    "text": "DIF\nRaschtrees vorstellen?"
   },
   {
     "objectID": "slides/Vorraussetzung/index.html#beispiel-was-bei-nichtbeachtung-passiert",
