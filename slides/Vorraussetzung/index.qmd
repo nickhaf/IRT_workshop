@@ -35,6 +35,21 @@ Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=credi
 <!-- https://hectornajera83.github.io/book/scale-equating-and-linking.html -->
 
 
+## 
+
+- In jeder seperaten Item Kallibrierung, die Skala der Latenten Variable wird arbiträr festgelegt auf einen Mittelwert von 0 und eine SD von 1 (Wir könnten auch auf ganz andere Ranges standardisieren, aber so ist schön). 
+- Warum?: Weil unser Modell? sonst nicht Idenfiziert sind. 
+- Die item parameter sind dadurch nicht auf der selben Skala (Beispiel geben), und können nicht direkt verglichen werden. Sie hängen ja von den latenten VAriablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe). 
+
+
+:::
+
+
+
+## Identifizirbarkeit
+
+
+
 ## Linking/Equating
 - Szenario: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen. 
 - Dafür haben wir zwei Möglichkeiten:
@@ -47,15 +62,17 @@ Dann kann man bestimmte Items markieren, und die Verteilungen entsprechend diese
 Embretson 2000, S. 253
 
 - Item Parameter werden in beiden Tests geschätzt, und dann anhand der Ankeritems durch eine geeignete Transformation auf eine gemeinsame Skala gebracht.
-- 
 
-## 
+## Beispiel
+- Schulvergleichsstudien über die Jahre:
+- Itempools von Unternehmen, die Einstellungstests anbieten. 
+
+## Ankeritems
 
 :::: {.columns} 
 ::: {.column width="50%"}
 
-**Ankeritems**
-
+- Sollten keinen DIF haben.Genauer recherchieren: How to choose anchor items. 
 
 :::
 
@@ -79,11 +96,70 @@ $$
 ## Ankerpersonen
 - Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen. 
 
-## Messinvarianz
+
+## Linking 
+
+$$
+\theta* = x\theta+y
+$$
+
+...
+
+## Linking
+Ziel: "Linking constants" $x$ und $y$ findend, welche die Item parameter aus den beiden Gruppen auf der selben Skala plazieren. 
+Deutlich machen, für welche Art Modell nutzbar!
+Nochmal mit dem neueren Buch rübergehen, das geht noch mehr in die Tiefe. 
+
+- Zwei häufige Methoden:
+    - mean-sigma:
+        - Annahme: Gemeinsame Ankeritems, oder Zwei Gruppen haben den genau gleichen Test bearbeitet. 
+$$
+B_B^* = x\beta_b=y
+$$
+
+$$
+x = \frac{\sigma_A}{\sigma_B}
+$$
+
+$$
+y = \overline{\beta}_A - x(\overline{\beta}_B)
+$$
+
+Und dann einsetzen in 
+$$
+\theta* = x\theta+y
+$$ 
+
+etc. 
+
+mal ausprobieren!
+
+## mean-sigma
+
+
+Probleme: linking constants können stark von Outliern beeinflusst werden, und von den differential standards errors of the item difficutly estimates
+- Robust procedures exist. 
+
+Nur die  item difficulty parameters werden zur berechnung der Linking constants genutzt. 
+
+Alternative: Characteristic curve methods
+
+## Characteristic curve methods
+Versuch, die Linking constants so zu berechnen, dass die test charctersitic curves so ähnlich wie möglich sind. Nutzen daher alle item parameter um die Linking constants zu finden.  computationally more expensive. 
+Empirical research zeigt keine großen Unterschide zwischen beiden Methoden? Nochmal selber recherchiereen. 
+
+## Beispiel
+Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entweder als aufgabe oder demonstrieren. 
+-  Man könnte die Linking constants setzen, gukcen was das mit den schwierikeiten macht, und die Simulierten Werte wieder rekapitulieren. 
+
+
+
+# Messinvarianz
 
 
 ## DIF
 Raschtrees vorstellen?
+Ansonsten Embretson ab Linking auch gut. 
 
 ## Beispiel was bei nichtbeachtung passiert
 
