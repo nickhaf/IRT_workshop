@@ -366,6 +366,18 @@ Nicklas Hafiz
 <aside><div>
 <p>Foto von <a href="https://unsplash.com/de/@trhammerhead?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Bryson Hammer</a> auf <a href="https://unsplash.com/de/fotos/selektives-fokusfoto-von-grauen-metallketten-JZ8AHFr2aEg?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a>.</p>
 </div></aside></section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<ul>
+<li>In jeder seperaten Item Kallibrierung, die Skala der Latenten Variable wird arbiträr festgelegt auf einen Mittelwert von 0 und eine SD von 1 (Wir könnten auch auf ganz andere Ranges standardisieren, aber so ist schön).</li>
+<li>Warum?: Weil unser Modell? sonst nicht Idenfiziert sind.</li>
+<li>Die item parameter sind dadurch nicht auf der selben Skala (Beispiel geben), und können nicht direkt verglichen werden. Sie hängen ja von den latenten VAriablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe).</li>
+</ul>
+<p>:::</p>
+</section>
+<section id="identifizirbarkeit" class="slide level2">
+<h2>Identifizirbarkeit</h2>
+</section>
 <section id="linkingequating" class="slide level2">
 <h2>Linking/Equating</h2>
 <ul>
@@ -380,19 +392,27 @@ Nicklas Hafiz
 <p>Embretson 2000, S. 253</p>
 <ul>
 <li>Item Parameter werden in beiden Tests geschätzt, und dann anhand der Ankeritems durch eine geeignete Transformation auf eine gemeinsame Skala gebracht.</li>
-<li></li>
 </ul>
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
+<section id="beispiel" class="slide level2">
+<h2>Beispiel</h2>
+<ul>
+<li>Schulvergleichsstudien über die Jahre:</li>
+<li>Itempools von Unternehmen, die Einstellungstests anbieten.</li>
+</ul>
+</section>
+<section id="ankeritems" class="slide level2">
+<h2>Ankeritems</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Ankeritems</strong></p>
+<ul>
+<li>Sollten keinen DIF haben.Genauer recherchieren: How to choose anchor items.</li>
+</ul>
 </div><div class="column" style="width:50%;">
 <p><img data-src="images/anker.jpg"></p>
 </div></div>
 </section>
-<section id="ankeritems" class="slide level2">
+<section id="ankeritems-1" class="slide level2">
 <h2>Ankeritems</h2>
 <ul>
 <li>Kallibrierungen der Parameterschätzer aus zwei verschiedenen Testformen werden auf eine gemeinsame Skala gebracht.</li>
@@ -408,12 +428,61 @@ Nicklas Hafiz
 <li>Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen.</li>
 </ul>
 </section>
-<section id="messinvarianz" class="slide level2">
-<h2>Messinvarianz</h2>
+<section id="linking" class="slide level2">
+<h2>Linking</h2>
+<p><span class="math display">\[
+\theta* = x\theta+y
+\]</span></p>
+<p>…</p>
+</section>
+<section id="linking-1" class="slide level2">
+<h2>Linking</h2>
+<p>Ziel: “Linking constants” <span class="math inline">\(x\)</span> und <span class="math inline">\(y\)</span> findend, welche die Item parameter aus den beiden Gruppen auf der selben Skala plazieren. Deutlich machen, für welche Art Modell nutzbar! Nochmal mit dem neueren Buch rübergehen, das geht noch mehr in die Tiefe.</p>
+<ul>
+<li>Zwei häufige Methoden:
+<ul>
+<li>mean-sigma:
+<ul>
+<li>Annahme: Gemeinsame Ankeritems, oder Zwei Gruppen haben den genau gleichen Test bearbeitet. <span class="math display">\[
+B_B^* = x\beta_b=y
+\]</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+x = \frac{\sigma_A}{\sigma_B}
+\]</span></p>
+<p><span class="math display">\[
+y = \overline{\beta}_A - x(\overline{\beta}_B)
+\]</span></p>
+<p>Und dann einsetzen in <span class="math display">\[
+\theta* = x\theta+y
+\]</span></p>
+<p>etc.</p>
+<p>mal ausprobieren!</p>
+</section>
+<section id="mean-sigma" class="slide level2">
+<h2>mean-sigma</h2>
+<p>Probleme: linking constants können stark von Outliern beeinflusst werden, und von den differential standards errors of the item difficutly estimates - Robust procedures exist.</p>
+<p>Nur die item difficulty parameters werden zur berechnung der Linking constants genutzt.</p>
+<p>Alternative: Characteristic curve methods</p>
+</section>
+<section id="characteristic-curve-methods" class="slide level2">
+<h2>Characteristic curve methods</h2>
+<p>Versuch, die Linking constants so zu berechnen, dass die test charctersitic curves so ähnlich wie möglich sind. Nutzen daher alle item parameter um die Linking constants zu finden. computationally more expensive. Empirical research zeigt keine großen Unterschide zwischen beiden Methoden? Nochmal selber recherchiereen.</p>
+</section>
+<section id="beispiel-1" class="slide level2">
+<h2>Beispiel</h2>
+<p>Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entweder als aufgabe oder demonstrieren. - Man könnte die Linking constants setzen, gukcen was das mit den schwierikeiten macht, und die Simulierten Werte wieder rekapitulieren.</p>
+</section></section>
+<section>
+<section id="messinvarianz" class="title-slide slide level1 center">
+<h1>Messinvarianz</h1>
+
 </section>
 <section id="dif" class="slide level2">
 <h2>DIF</h2>
-<p>Raschtrees vorstellen?</p>
+<p>Raschtrees vorstellen? Ansonsten Embretson ab Linking auch gut.</p>
 </section>
 <section id="beispiel-was-bei-nichtbeachtung-passiert" class="slide level2">
 <h2>Beispiel was bei nichtbeachtung passiert</h2>
