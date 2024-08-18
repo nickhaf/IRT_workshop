@@ -1,15 +1,25 @@
 ---
-title: "IRT Vorraussetzungen"
+title: "IRT Voraussetzungen"
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-format: revealjs
+format: 
+  letterbox-revealjs:
+    embed-resources: true
+    logo: "../../images/iqb.svg"
+    footer: "IRT"
 ---
 
-# Einführung
-Damit wir von den ganzen Vorteilen der Item Response Theory profitieren können, müssen einige Annahmen erfüllt sein. 
+# Überblick 
+
+## Voraussetzungen der Item Response Theory
 
 - Eindimmensionalität
-- lokalen stochastischen Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJ1224232.pdf). 
+- Lokal Stochastische Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJ1224232.pdf). 
+
+## Eindimmensionalität
+- Wenn nicht gegeben:
+    - SEM
+    - Dependency Matrix
 
 ## Lokal stochastische Unabhängigkeit
 Nach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. 
@@ -18,6 +28,29 @@ Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitsw
 - Abbildung
 - Einordnung: Lokale Unabhängigkeit, weitere Begriffe?
 - Beispiel
+
+## Wiederholung: Kalibrierung
+- Kalibrierung: schätzen von Itemparametern und Personenfähigkeiten
+- Erst einmal nur für **diese bestimmte Kombintation aus Items und Personen**
+
+WARUM?
+
+
+## Wiederholung: Kalibrierung
+- Skala der Latenten Variable wird arbiträr festgelegt auf einen Mittelwert von 0 und eine SD von 1  
+- Modell? sonst nicht Idenfiziert sind. 
+- Itemparameter dadurch **nicht** auf der selben Skala
+- **Sie können also nicht direkt miteinander verglichen werden.**
+
+## Beispiel 
+Sie hängen ja von den latenten VAriablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe). 
+
+
+## Schlusfolgerung
+- Wir brauchen also einen Referenzrahmen um unsere Testergebnisse interpretieren zu können. 
+- Das bedeutet auch, dass wir die Werte aus verschiedenen Kalibrierungen nicht direkt miteinander vergleichen können.
+- Lösung: **Linking**
+
 
 ## {background-image="images/link.jpg" background-size="1150px"}
 
@@ -35,19 +68,10 @@ Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=credi
 <!-- https://hectornajera83.github.io/book/scale-equating-and-linking.html -->
 
 
-## 
-
-- In jeder seperaten Item Kallibrierung, die Skala der Latenten Variable wird arbiträr festgelegt auf einen Mittelwert von 0 und eine SD von 1 (Wir könnten auch auf ganz andere Ranges standardisieren, aber so ist schön). 
-- Warum?: Weil unser Modell? sonst nicht Idenfiziert sind. 
-- Die item parameter sind dadurch nicht auf der selben Skala (Beispiel geben), und können nicht direkt verglichen werden. Sie hängen ja von den latenten VAriablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe). 
-
-
-:::
-
-
-
 ## Identifizirbarkeit
 
+
+## Beispiel
 
 
 ## Linking/Equating
@@ -56,7 +80,7 @@ Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=credi
     - Gemeinsame Items
     - Gemeinsame Personen
 
-Abbildung z.B. mit Verteilung von theat scores, die nochmal zeigt was das Problem ist. 
+Abbildung z.B. mit Verteilung von theta scores, die nochmal zeigt was das Problem ist. 
 Dann kann man bestimmte Items markieren, und die Verteilungen entsprechend dieser markierten Items verschieben. 
 
 Embretson 2000, S. 253
@@ -72,6 +96,7 @@ Embretson 2000, S. 253
 :::: {.columns} 
 ::: {.column width="50%"}
 
+- Gemeinsame Items, die in beiden Testformen vorhanden sind. 
 - Sollten keinen DIF haben.Genauer recherchieren: How to choose anchor items. 
 
 :::
@@ -79,7 +104,7 @@ Embretson 2000, S. 253
 
 ::: {.column width="50%"}
 
-![](images/anker.jpg)
+![](images/anker.jpg){.image-right}
 
 :::
 
@@ -94,7 +119,7 @@ $$
 $$
 
 ## Ankerpersonen
-- Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen. 
+Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen. 
 
 
 ## Linking 
@@ -156,13 +181,27 @@ Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entwed
 
 
 
-# Messinvarianz
+# Messinvarianz/DIF
+
+## Das Problem
+- Funktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit ...) auf dieselbe Art und Weise?
+- Gibt es also echte Mittelwertsunterschiede zwischen beiden Gruppen, oder sind die Unterschiede auf Besondere Interaktionen zwischen Items und Gruppen zurückzuführen?
 
 
 ## DIF
+- Wenn wir das auf bestimmte Items anwenden, sprechen wir von Differential Item Functioning. 
+
 Raschtrees vorstellen?
 Ansonsten Embretson ab Linking auch gut. 
 
+
+## Was wird Überprüft? 
+
+
+
+
 ## Beispiel was bei nichtbeachtung passiert
+
+
 
 
