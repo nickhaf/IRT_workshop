@@ -1,5 +1,215 @@
 [
   {
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Folien",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\nEinführung in R\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\nIRT Voraussetzungen\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\nAlgemeines Linear Gemischtes Modell (ALGM)\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#voraussetzungen-der-item-response-theory",
+    "href": "slides/Vorraussetzung/index.html#voraussetzungen-der-item-response-theory",
+    "title": "IRT Voraussetzungen",
+    "section": "Voraussetzungen der Item Response Theory",
+    "text": "Voraussetzungen der Item Response Theory\n\nEindimmensionalität\nLokal Stochastische Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJ1224232.pdf)."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#eindimmensionalität",
+    "href": "slides/Vorraussetzung/index.html#eindimmensionalität",
+    "title": "IRT Voraussetzungen",
+    "section": "Eindimmensionalität",
+    "text": "Eindimmensionalität\n\nWenn nicht gegeben:\n\nSEM\nDependency Matrix"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#lokal-stochastische-unabhängigkeit",
+    "href": "slides/Vorraussetzung/index.html#lokal-stochastische-unabhängigkeit",
+    "title": "IRT Voraussetzungen",
+    "section": "Lokal stochastische Unabhängigkeit",
+    "text": "Lokal stochastische Unabhängigkeit\nNach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit),\n\nAbbildung\nEinordnung: Lokale Unabhängigkeit, weitere Begriffe?\nBeispiel"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#problem",
+    "href": "slides/Vorraussetzung/index.html#problem",
+    "title": "IRT Voraussetzungen",
+    "section": "Problem",
+    "text": "Problem\nWir haben die Invarianz-Eigenschaft von IRT bereits kennen gelernt: Itemparameter sind gleich über verschiedene Gruppen. Die Wahrscheinlichkeit für eine korrekte Antwort auf ein Item hängt nur von \\(\\theta\\) ab. Nicht von anderen Personen in der Stichprobe.\nWie schaffen wir das aber, wenn wir anhand von verschiedenen Gruppen kalibrieren? Wir müssen die Werte, die wir aus diesen Kalibrierungen bekommen, irgendwie in einen Zusammenhang setzen."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#wiederholung-kalibrierung",
+    "href": "slides/Vorraussetzung/index.html#wiederholung-kalibrierung",
+    "title": "IRT Voraussetzungen",
+    "section": "Wiederholung: Kalibrierung",
+    "text": "Wiederholung: Kalibrierung\n\nKalibrierung: schätzen von Itemparametern und Personenfähigkeiten\nErst einmal nur für diese bestimmte Kombintation aus Items und Personen\n\nWARUM?"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#wiederholung-kalibrierung-1",
+    "href": "slides/Vorraussetzung/index.html#wiederholung-kalibrierung-1",
+    "title": "IRT Voraussetzungen",
+    "section": "Wiederholung: Kalibrierung",
+    "text": "Wiederholung: Kalibrierung\n\nSkala der Latenten Variable wird arbiträr festgelegt auf einen Mittelwert von 0 und eine SD von 1\n\nModell? sonst nicht idenfiziert.\nItemparameter dadurch nicht auf der selben Skala\nSie können also nicht direkt miteinander verglichen werden."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#beispiel",
+    "href": "slides/Vorraussetzung/index.html#beispiel",
+    "title": "IRT Voraussetzungen",
+    "section": "Beispiel",
+    "text": "Beispiel\nSie hängen ja von den latenten VAriablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe)."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#beispiel-1",
+    "href": "slides/Vorraussetzung/index.html#beispiel-1",
+    "title": "IRT Voraussetzungen",
+    "section": "Beispiel",
+    "text": "Beispiel\nGroup 1: \\(\\theta \\sim N(0,1)\\) Group 2: \\(\\theta \\sim N(1, 1.4)\\)\nFür die Kalibrierung legen wir jetzt aber fest, dass gilt: Group 1: \\(\\theta \\sim N(0,1)\\) Group 2: \\(\\theta \\sim N(0,1)\\)"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#beispiel-2",
+    "href": "slides/Vorraussetzung/index.html#beispiel-2",
+    "title": "IRT Voraussetzungen",
+    "section": "Beispiel",
+    "text": "Beispiel"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#simulate-data",
+    "href": "slides/Vorraussetzung/index.html#simulate-data",
+    "title": "IRT Voraussetzungen",
+    "section": "Simulate data",
+    "text": "Simulate data"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#schlusfolgerung",
+    "href": "slides/Vorraussetzung/index.html#schlusfolgerung",
+    "title": "IRT Voraussetzungen",
+    "section": "Schlusfolgerung",
+    "text": "Schlusfolgerung\n\nWir brauchen also einen Referenzrahmen um unsere Testergebnisse interpretieren zu können.\nDas bedeutet auch, dass wir die Werte aus verschiedenen Kalibrierungen nicht direkt miteinander vergleichen können.\nLösung: Linking"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#section",
+    "href": "slides/Vorraussetzung/index.html#section",
+    "title": "IRT Voraussetzungen",
+    "section": "",
+    "text": "Linking/Equating\n\n\n\n\nFoto von Bryson Hammer auf Unsplash."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#identifizirbarkeit",
+    "href": "slides/Vorraussetzung/index.html#identifizirbarkeit",
+    "title": "IRT Voraussetzungen",
+    "section": "Identifizirbarkeit",
+    "text": "Identifizirbarkeit"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#beispiel-3",
+    "href": "slides/Vorraussetzung/index.html#beispiel-3",
+    "title": "IRT Voraussetzungen",
+    "section": "Beispiel",
+    "text": "Beispiel"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#linkingequating",
+    "href": "slides/Vorraussetzung/index.html#linkingequating",
+    "title": "IRT Voraussetzungen",
+    "section": "Linking/Equating",
+    "text": "Linking/Equating\n\nSzenario: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen.\nDafür haben wir zwei Möglichkeiten:\n\nGemeinsame Items\nGemeinsame Personen\n\n\nAbbildung z.B. mit Verteilung von theta scores, die nochmal zeigt was das Problem ist. Dann kann man bestimmte Items markieren, und die Verteilungen entsprechend dieser markierten Items verschieben.\nEmbretson 2000, S. 253\n\nItem Parameter werden in beiden Tests geschätzt, und dann anhand der Ankeritems durch eine geeignete Transformation auf eine gemeinsame Skala gebracht."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#beispiel-4",
+    "href": "slides/Vorraussetzung/index.html#beispiel-4",
+    "title": "IRT Voraussetzungen",
+    "section": "Beispiel",
+    "text": "Beispiel\n\nSchulvergleichsstudien über die Jahre:\nItempools von Unternehmen, die Einstellungstests anbieten."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#ankeritems",
+    "href": "slides/Vorraussetzung/index.html#ankeritems",
+    "title": "IRT Voraussetzungen",
+    "section": "Ankeritems",
+    "text": "Ankeritems\n\n\n\nGemeinsame Items, die in beiden Testformen vorhanden sind.\nSollten keinen DIF haben.Genauer recherchieren: How to choose anchor items."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#ankeritems-1",
+    "href": "slides/Vorraussetzung/index.html#ankeritems-1",
+    "title": "IRT Voraussetzungen",
+    "section": "Ankeritems",
+    "text": "Ankeritems\n\nKallibrierungen der Parameterschätzer aus zwei verschiedenen Testformen werden auf eine gemeinsame Skala gebracht.\nWir müssen also die theta (\\(\\theta\\)) scores des einen Tests so transformieren, dass sie auf einer gemeinsamen Skala mit den Scores des anderen Tests liegen:\n\n\\[\n\\theta_Y = A \\theta_X + B\n\\]"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#ankerpersonen",
+    "href": "slides/Vorraussetzung/index.html#ankerpersonen",
+    "title": "IRT Voraussetzungen",
+    "section": "Ankerpersonen",
+    "text": "Ankerpersonen\nPersonen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#linking-1",
+    "href": "slides/Vorraussetzung/index.html#linking-1",
+    "title": "IRT Voraussetzungen",
+    "section": "Linking",
+    "text": "Linking\n\\[\n\\theta* = x\\theta+y\n\\]\n…"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#linking-2",
+    "href": "slides/Vorraussetzung/index.html#linking-2",
+    "title": "IRT Voraussetzungen",
+    "section": "Linking",
+    "text": "Linking\nZiel: “Linking constants” \\(x\\) und \\(y\\) findend, welche die Item parameter aus den beiden Gruppen auf der selben Skala plazieren. Deutlich machen, für welche Art Modell nutzbar! Nochmal mit dem neueren Buch rübergehen, das geht noch mehr in die Tiefe.\n\nZwei häufige Methoden:\n\nmean-sigma:\n\nAnnahme: Gemeinsame Ankeritems, oder Zwei Gruppen haben den genau gleichen Test bearbeitet. \\[\nB_B^* = x\\beta_b=y\n\\]\n\n\n\n\\[\nx = \\frac{\\sigma_A}{\\sigma_B}\n\\]\n\\[\ny = \\overline{\\beta}_A - x(\\overline{\\beta}_B)\n\\]\nUnd dann einsetzen in \\[\n\\theta* = x\\theta+y\n\\]\netc.\nmal ausprobieren!"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#mean-sigma",
+    "href": "slides/Vorraussetzung/index.html#mean-sigma",
+    "title": "IRT Voraussetzungen",
+    "section": "mean-sigma",
+    "text": "mean-sigma\nProbleme: linking constants können stark von Outliern beeinflusst werden, und von den differential standards errors of the item difficutly estimates - Robust procedures exist.\nNur die item difficulty parameters werden zur berechnung der Linking constants genutzt.\nAlternative: Characteristic curve methods"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#characteristic-curve-methods",
+    "href": "slides/Vorraussetzung/index.html#characteristic-curve-methods",
+    "title": "IRT Voraussetzungen",
+    "section": "Characteristic curve methods",
+    "text": "Characteristic curve methods\nVersuch, die Linking constants so zu berechnen, dass die test charctersitic curves so ähnlich wie möglich sind. Nutzen daher alle item parameter um die Linking constants zu finden. computationally more expensive. Empirical research zeigt keine großen Unterschide zwischen beiden Methoden? Nochmal selber recherchiereen."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#gibt-es-neuere-methoden-z.b.-multi-group-irt-cfa-framework",
+    "href": "slides/Vorraussetzung/index.html#gibt-es-neuere-methoden-z.b.-multi-group-irt-cfa-framework",
+    "title": "IRT Voraussetzungen",
+    "section": "Gibt es neuere methoden? Z.B. Multi-group IRT, CFA framework …?",
+    "text": "Gibt es neuere methoden? Z.B. Multi-group IRT, CFA framework …?"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#beispiel-5",
+    "href": "slides/Vorraussetzung/index.html#beispiel-5",
+    "title": "IRT Voraussetzungen",
+    "section": "Beispiel",
+    "text": "Beispiel\nIm Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entweder als aufgabe oder demonstrieren. - Man könnte die Linking constants setzen, gukcen was das mit den schwierikeiten macht, und die Simulierten Werte wieder rekapitulieren."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#das-problem",
+    "href": "slides/Vorraussetzung/index.html#das-problem",
+    "title": "IRT Voraussetzungen",
+    "section": "Das Problem",
+    "text": "Das Problem\n\nFunktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit …) auf dieselbe Art und Weise?\nGibt es also echte Mittelwertsunterschiede zwischen beiden Gruppen, oder sind die Unterschiede auf Besondere Interaktionen zwischen Items und Gruppen zurückzuführen?"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#dif",
+    "href": "slides/Vorraussetzung/index.html#dif",
+    "title": "IRT Voraussetzungen",
+    "section": "DIF",
+    "text": "DIF\n\nWenn wir das auf bestimmte Items anwenden, sprechen wir von Differential Item Functioning.\n\nRaschtrees vorstellen? Ansonsten Embretson ab Linking auch gut."
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#was-wird-überprüft",
+    "href": "slides/Vorraussetzung/index.html#was-wird-überprüft",
+    "title": "IRT Voraussetzungen",
+    "section": "Was wird Überprüft?",
+    "text": "Was wird Überprüft?"
+  },
+  {
+    "objectID": "slides/Vorraussetzung/index.html#beispiel-was-bei-nichtbeachtung-passiert",
+    "href": "slides/Vorraussetzung/index.html#beispiel-was-bei-nichtbeachtung-passiert",
+    "title": "IRT Voraussetzungen",
+    "section": "Beispiel was bei nichtbeachtung passiert",
+    "text": "Beispiel was bei nichtbeachtung passiert\n\n\n\n  \n\n   \n      \n   \n\n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                           \n\n\n    \n  \n  \n  \n\n\nIRT"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "IRT Workshop",
@@ -42,186 +252,11 @@
     "text": "Ziel dieser übung ist es, Daten für ein einfachs Raschmodell zu simulieren. Warum? Weil wir so die Datengenerierenden Prozesse besser verstehen können. Also, let’s get started.\n\n\n\n\n\n\n\n\nHint\n\n\n\n\n\nUse"
   },
   {
-    "objectID": "slides/IntroR/index.html#einführung",
-    "href": "slides/IntroR/index.html#einführung",
-    "title": "Einführung in R",
-    "section": "Einführung",
-    "text": "Einführung\nHier gleich Daten aufbereiten, die wir später auch nutzen können!"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#voraussetzungen-der-item-response-theory",
-    "href": "slides/Vorraussetzung/index.html#voraussetzungen-der-item-response-theory",
-    "title": "IRT Voraussetzungen",
-    "section": "Voraussetzungen der Item Response Theory",
-    "text": "Voraussetzungen der Item Response Theory\n\nEindimmensionalität\nLokal Stochastische Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJ1224232.pdf)."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#eindimmensionalität",
-    "href": "slides/Vorraussetzung/index.html#eindimmensionalität",
-    "title": "IRT Voraussetzungen",
-    "section": "Eindimmensionalität",
-    "text": "Eindimmensionalität\n\nWenn nicht gegeben:\n\nSEM\nDependency Matrix"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#lokal-stochastische-unabhängigkeit",
-    "href": "slides/Vorraussetzung/index.html#lokal-stochastische-unabhängigkeit",
-    "title": "IRT Voraussetzungen",
-    "section": "Lokal stochastische Unabhängigkeit",
-    "text": "Lokal stochastische Unabhängigkeit\nNach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit),\n\nAbbildung\nEinordnung: Lokale Unabhängigkeit, weitere Begriffe?\nBeispiel"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#wiederholung-kalibrierung",
-    "href": "slides/Vorraussetzung/index.html#wiederholung-kalibrierung",
-    "title": "IRT Voraussetzungen",
-    "section": "Wiederholung: Kalibrierung",
-    "text": "Wiederholung: Kalibrierung\n\nKalibrierung: schätzen von Itemparametern und Personenfähigkeiten\nErst einmal nur für diese bestimmte Kombintation aus Items und Personen\n\nWARUM?"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#wiederholung-kalibrierung-1",
-    "href": "slides/Vorraussetzung/index.html#wiederholung-kalibrierung-1",
-    "title": "IRT Voraussetzungen",
-    "section": "Wiederholung: Kalibrierung",
-    "text": "Wiederholung: Kalibrierung\n\nSkala der Latenten Variable wird arbiträr festgelegt auf einen Mittelwert von 0 und eine SD von 1\n\nModell? sonst nicht Idenfiziert sind.\nItemparameter dadurch nicht auf der selben Skala\nSie können also nicht direkt miteinander verglichen werden."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#beispiel",
-    "href": "slides/Vorraussetzung/index.html#beispiel",
-    "title": "IRT Voraussetzungen",
-    "section": "Beispiel",
-    "text": "Beispiel\nSie hängen ja von den latenten VAriablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe)."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#schlusfolgerung",
-    "href": "slides/Vorraussetzung/index.html#schlusfolgerung",
-    "title": "IRT Voraussetzungen",
-    "section": "Schlusfolgerung",
-    "text": "Schlusfolgerung\n\nWir brauchen also einen Referenzrahmen um unsere Testergebnisse interpretieren zu können.\nDas bedeutet auch, dass wir die Werte aus verschiedenen Kalibrierungen nicht direkt miteinander vergleichen können.\nLösung: Linking"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#section",
-    "href": "slides/Vorraussetzung/index.html#section",
-    "title": "IRT Voraussetzungen",
+    "objectID": "exercises/index.html",
+    "href": "exercises/index.html",
+    "title": "Übungen",
     "section": "",
-    "text": "Linking/Equating\n\n\n\n\nFoto von Bryson Hammer auf Unsplash."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#identifizirbarkeit",
-    "href": "slides/Vorraussetzung/index.html#identifizirbarkeit",
-    "title": "IRT Voraussetzungen",
-    "section": "Identifizirbarkeit",
-    "text": "Identifizirbarkeit"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#beispiel-1",
-    "href": "slides/Vorraussetzung/index.html#beispiel-1",
-    "title": "IRT Voraussetzungen",
-    "section": "Beispiel",
-    "text": "Beispiel"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#linkingequating",
-    "href": "slides/Vorraussetzung/index.html#linkingequating",
-    "title": "IRT Voraussetzungen",
-    "section": "Linking/Equating",
-    "text": "Linking/Equating\n\nSzenario: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen.\nDafür haben wir zwei Möglichkeiten:\n\nGemeinsame Items\nGemeinsame Personen\n\n\nAbbildung z.B. mit Verteilung von theta scores, die nochmal zeigt was das Problem ist. Dann kann man bestimmte Items markieren, und die Verteilungen entsprechend dieser markierten Items verschieben.\nEmbretson 2000, S. 253\n\nItem Parameter werden in beiden Tests geschätzt, und dann anhand der Ankeritems durch eine geeignete Transformation auf eine gemeinsame Skala gebracht."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#beispiel-2",
-    "href": "slides/Vorraussetzung/index.html#beispiel-2",
-    "title": "IRT Voraussetzungen",
-    "section": "Beispiel",
-    "text": "Beispiel\n\nSchulvergleichsstudien über die Jahre:\nItempools von Unternehmen, die Einstellungstests anbieten."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#ankeritems",
-    "href": "slides/Vorraussetzung/index.html#ankeritems",
-    "title": "IRT Voraussetzungen",
-    "section": "Ankeritems",
-    "text": "Ankeritems\n\n\n\nGemeinsame Items, die in beiden Testformen vorhanden sind.\nSollten keinen DIF haben.Genauer recherchieren: How to choose anchor items."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#ankeritems-1",
-    "href": "slides/Vorraussetzung/index.html#ankeritems-1",
-    "title": "IRT Voraussetzungen",
-    "section": "Ankeritems",
-    "text": "Ankeritems\n\nKallibrierungen der Parameterschätzer aus zwei verschiedenen Testformen werden auf eine gemeinsame Skala gebracht.\nWir müssen also die theta (\\(\\theta\\)) scores des einen Tests so transformieren, dass sie auf einer gemeinsamen Skala mit den Scores des anderen Tests liegen:\n\n\\[\n\\theta_Y = A \\theta_X + B\n\\]"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#ankerpersonen",
-    "href": "slides/Vorraussetzung/index.html#ankerpersonen",
-    "title": "IRT Voraussetzungen",
-    "section": "Ankerpersonen",
-    "text": "Ankerpersonen\nPersonen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#linking",
-    "href": "slides/Vorraussetzung/index.html#linking",
-    "title": "IRT Voraussetzungen",
-    "section": "Linking",
-    "text": "Linking\n\\[\n\\theta* = x\\theta+y\n\\]\n…"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#linking-1",
-    "href": "slides/Vorraussetzung/index.html#linking-1",
-    "title": "IRT Voraussetzungen",
-    "section": "Linking",
-    "text": "Linking\nZiel: “Linking constants” \\(x\\) und \\(y\\) findend, welche die Item parameter aus den beiden Gruppen auf der selben Skala plazieren. Deutlich machen, für welche Art Modell nutzbar! Nochmal mit dem neueren Buch rübergehen, das geht noch mehr in die Tiefe.\n\nZwei häufige Methoden:\n\nmean-sigma:\n\nAnnahme: Gemeinsame Ankeritems, oder Zwei Gruppen haben den genau gleichen Test bearbeitet. \\[\nB_B^* = x\\beta_b=y\n\\]\n\n\n\n\\[\nx = \\frac{\\sigma_A}{\\sigma_B}\n\\]\n\\[\ny = \\overline{\\beta}_A - x(\\overline{\\beta}_B)\n\\]\nUnd dann einsetzen in \\[\n\\theta* = x\\theta+y\n\\]\netc.\nmal ausprobieren!"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#mean-sigma",
-    "href": "slides/Vorraussetzung/index.html#mean-sigma",
-    "title": "IRT Voraussetzungen",
-    "section": "mean-sigma",
-    "text": "mean-sigma\nProbleme: linking constants können stark von Outliern beeinflusst werden, und von den differential standards errors of the item difficutly estimates - Robust procedures exist.\nNur die item difficulty parameters werden zur berechnung der Linking constants genutzt.\nAlternative: Characteristic curve methods"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#characteristic-curve-methods",
-    "href": "slides/Vorraussetzung/index.html#characteristic-curve-methods",
-    "title": "IRT Voraussetzungen",
-    "section": "Characteristic curve methods",
-    "text": "Characteristic curve methods\nVersuch, die Linking constants so zu berechnen, dass die test charctersitic curves so ähnlich wie möglich sind. Nutzen daher alle item parameter um die Linking constants zu finden. computationally more expensive. Empirical research zeigt keine großen Unterschide zwischen beiden Methoden? Nochmal selber recherchiereen."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#gibt-es-neuere-methoden-z.b.-multi-group-irt-cfa-framework",
-    "href": "slides/Vorraussetzung/index.html#gibt-es-neuere-methoden-z.b.-multi-group-irt-cfa-framework",
-    "title": "IRT Voraussetzungen",
-    "section": "Gibt es neuere methoden? Z.B. Multi-group IRT, CFA framework …?",
-    "text": "Gibt es neuere methoden? Z.B. Multi-group IRT, CFA framework …?"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#beispiel-3",
-    "href": "slides/Vorraussetzung/index.html#beispiel-3",
-    "title": "IRT Voraussetzungen",
-    "section": "Beispiel",
-    "text": "Beispiel\nIm Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entweder als aufgabe oder demonstrieren. - Man könnte die Linking constants setzen, gukcen was das mit den schwierikeiten macht, und die Simulierten Werte wieder rekapitulieren."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#das-problem",
-    "href": "slides/Vorraussetzung/index.html#das-problem",
-    "title": "IRT Voraussetzungen",
-    "section": "Das Problem",
-    "text": "Das Problem\n\nFunktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit …) auf dieselbe Art und Weise?\nGibt es also echte Mittelwertsunterschiede zwischen beiden Gruppen, oder sind die Unterschiede auf Besondere Interaktionen zwischen Items und Gruppen zurückzuführen?"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#dif",
-    "href": "slides/Vorraussetzung/index.html#dif",
-    "title": "IRT Voraussetzungen",
-    "section": "DIF",
-    "text": "DIF\n\nWenn wir das auf bestimmte Items anwenden, sprechen wir von Differential Item Functioning.\n\nRaschtrees vorstellen? Ansonsten Embretson ab Linking auch gut."
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#was-wird-überprüft",
-    "href": "slides/Vorraussetzung/index.html#was-wird-überprüft",
-    "title": "IRT Voraussetzungen",
-    "section": "Was wird Überprüft?",
-    "text": "Was wird Überprüft?"
-  },
-  {
-    "objectID": "slides/Vorraussetzung/index.html#beispiel-was-bei-nichtbeachtung-passiert",
-    "href": "slides/Vorraussetzung/index.html#beispiel-was-bei-nichtbeachtung-passiert",
-    "title": "IRT Voraussetzungen",
-    "section": "Beispiel was bei nichtbeachtung passiert",
-    "text": "Beispiel was bei nichtbeachtung passiert\n\n\n\n  \n\n   \n      \n   \n\n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                                                                                                    \n                           \n\n\n    \n  \n  \n  \n\n\nIRT"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\n3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "slides/GLM/index.html#überblick",
@@ -406,17 +441,10 @@
     "text": "Prädiktoren\n\nBeispiel aufgreifen, zeigen, wass man mit diesen Modell noch machen kann."
   },
   {
-    "objectID": "slides/index.html",
-    "href": "slides/index.html",
-    "title": "Folien",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\nEinführung in R\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\nIRT Voraussetzungen\n\n\nNicklas Hafiz\n\n\n\n\nInvalid Date\n\n\nAlgemeines Linear Gemischtes Modell (ALGM)\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "exercises/index.html",
-    "href": "exercises/index.html",
-    "title": "Übungen",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\n3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells\n\n\nNicklas Hafiz\n\n\n\n\n\nNo matching items"
+    "objectID": "slides/IntroR/index.html#einführung",
+    "href": "slides/IntroR/index.html#einführung",
+    "title": "Einführung in R",
+    "section": "Einführung",
+    "text": "Einführung\nHier gleich Daten aufbereiten, die wir später auch nutzen können!"
   }
 ]
