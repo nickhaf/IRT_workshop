@@ -6,7 +6,7 @@ format:
   letterbox-revealjs:
     embed-resources: true
     logo: "../../images/iqb.svg"
-    footer: "IRT"
+    footer: <https://nickhaf.github.io/IRT_workshop/slides/>
 ---
 
 ```{r}
