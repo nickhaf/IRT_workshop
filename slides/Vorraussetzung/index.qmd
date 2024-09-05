@@ -9,6 +9,10 @@ format:
     footer: "IRT"
 ---
 
+```{r}
+library(tidyverse)
+```
+
 # Überblick 
 
 ## Voraussetzungen der Item Response Theory
@@ -29,6 +33,16 @@ Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitsw
 - Einordnung: Lokale Unabhängigkeit, weitere Begriffe?
 - Beispiel
 
+# Linking
+
+## Problem
+Wir haben die Invarianz-Eigenschaft von IRT bereits kennen gelernt: 
+**Itemparameter sind gleich über verschiedene Gruppen.**
+Die Wahrscheinlichkeit für eine korrekte Antwort auf ein Item hängt nur von $\theta$ ab. Nicht von anderen Personen in der Stichprobe. 
+
+Wie schaffen wir das aber, wenn wir anhand von verschiedenen Gruppen kalibrieren?
+Wir müssen die Werte, die wir aus diesen Kalibrierungen bekommen, irgendwie in einen Zusammenhang setzen. 
+
 ## Wiederholung: Kalibrierung
 - Kalibrierung: schätzen von Itemparametern und Personenfähigkeiten
 - Erst einmal nur für **diese bestimmte Kombintation aus Items und Personen**
@@ -38,13 +52,119 @@ WARUM?
 
 ## Wiederholung: Kalibrierung
 - Skala der Latenten Variable wird arbiträr festgelegt auf einen Mittelwert von 0 und eine SD von 1  
-- Modell? sonst nicht Idenfiziert sind. 
+- Modell? sonst nicht idenfiziert. 
 - Itemparameter dadurch **nicht** auf der selben Skala
 - **Sie können also nicht direkt miteinander verglichen werden.**
 
 ## Beispiel 
 Sie hängen ja von den latenten VAriablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe). 
 
+
+## Beispiel
+Group 1: $\theta \sim N(0,1)$
+Group 2: $\theta \sim N(1, 1.4)$
+
+Für die Kalibrierung legen wir jetzt aber fest, dass gilt:
+Group 1: $\theta \sim N(0,1)$
+Group 2: $\theta \sim N(0,1)$
+
+## Beispiel 
+```{r}
+data_lines <- data.frame(
+    x = c(-4:4, -4:4),
+    y = c(rep(2, 9), rep(1, 9)), 
+    group = c(rep("1", 9), rep("2", 9)), 
+    label = c(-4:4, -3:5)
+)
+
+ggplot(data_lines, aes(x, y, group=group)) +
+  geom_line() +
+  geom_point() +
+        ggthemes::theme_tufte() +
+        theme(
+            axis.title = element_blank(), 
+            axis.text = element_blank(), 
+        axis.line = element_blank(),
+        axis.ticks = element_blank()) +
+        ylim(0,3) +
+        geom_text(aes(label = label), vjust = 1.5)  # Add labels to the points
+
+
+
+
+
+```
+
+## Simulate data
+
+```{r}
+#| eval: FALSE
+
+calc_2pl <- function(a, theta, xi){
+  psi <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
+  return(psi) 
+}
+
+
+theta_data <- data.frame(
+    person = 1:2000000,
+    theta = c(rnorm(1000000, 0, 1), rnorm(1000000, 1, 2)),
+    group = c(rep("1", 1000000), rep("2", 1000000))
+)
+
+items <- data.frame(
+    id = 1:13, 
+    b = seq(-3, 3, by = 0.5), 
+    a = seq(0.5, 3.5, by = 0.25), 
+    c = rep(0, 13)
+)
+
+sim_dat <- merge(theta_data, items) %>%
+    mutate(prop = calc_2pl(a, theta, b)) %>%
+    mutate(Answer = rbinom(n = nrow(.), size = 1, prob = prop))
+
+## could also try sim_irt
+
+## With sim_irt
+library(catIrt)
+
+simirt_dat <- simIrt(theta =rnorm(1000000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
+
+```
+
+
+```{r}
+#| eval: FALSE
+
+## Analyze with a package to see if everything worked. 
+library(mirt)
+library(TAM)
+
+## Into wide format
+sim_dat_wide <- sim_dat %>%
+    filter(group == "1") %>%
+    select(id, Answer, theta, person) %>%
+    pivot_wider(names_from = id, values_from = Answer, id_cols = person)
+
+fit2PL <- tam.mml.2pl(sim_dat_wide %>% select(-person), irtmodel = "2PL")
+# saveRDS(fit2PL, file = "./slides/Vorraussetzung/dat/fit2PL.RDS")
+
+fit2PL$item_irt
+# Actually worked! 
+
+
+fit2PL_2 <- tam.mml.2pl(as.data.frame(simirt_dat$resp), irtmodel = "2PL")
+# saveRDS(fit2PL_2, file = "./slides/Vorraussetzung/dat/fit2PL_simfun.RDS")
+
+fit2PL_2$item_irt
+# This worked fairly well
+
+fit2PL <- mirt(data = sim_dat_wide %>% select(-person), 
+               itemtype = "2PL", 
+               verbose = FALSE)
+
+params2PL <- coef(fit2PL, IRTpars = TRUE, simplify = TRUE)
+```
 
 ## Schlusfolgerung
 - Wir brauchen also einen Referenzrahmen um unsere Testergebnisse interpretieren zu können. 
