@@ -69,8 +69,8 @@ item <- itemFromRes(results)
 plotICC(resultsObj=results, defineModelObj = def, pdfFolder = file.path(tempdir(), "iccs.pdf"))
 
 
-# 3. Raschmodll (1pl) vs. Birnbaum-Modell (2pl)
-###############################################
+# 3. Raschmodell (1pl) vs. Birnbaum-Modell (2pl)
+################################################
 
 # 2pl Modell definieren und schaetzen
 def2pl <- defineModel(dat = dat, id = "person", items = 2:41, software="tam", irtmodel = "2PL")
@@ -91,56 +91,91 @@ write.csv2(q3[[1]], file.path(tempdir(), "q3.csv"), na="", row.names=FALSE)
 # 5. Eigene Uebung fuer Teilnehmer:innen
 ########################################
 
-data(data.fims.Aus.Jpn.scored)
+# empirischen Uebungsdatensatz aufbereiten
+data(trends)
+
+# personendatensatz im wideformat
+dat_wide <- reshape2::dcast(subset(trends, year == 2010), idstud+sex+ses+country~item, value.var = "value")
+
+# iteminformationen
+item_info <- unique(subset(trends, year == 2010)[,c("item", "domain", "format")])
 
 ###########
 # Loesung #
 ###########
 
-jpn <- data.frame ( person = 1:nrow(data.fims.Aus.Jpn.scored),data.fims.Aus.Jpn.scored)
-def1pl <- defineModel(dat = jpn, id = "person", items = grep("^M1", colnames(jpn), value=TRUE), software="tam")
+def1pl <- defineModel(dat = dat_wide, id = "idstud", items = grep("^T", colnames(dat_wide), value=TRUE), software="tam")
 run1pl <- runModel(def1pl)
 res1pl <- getResults(run1pl)
 item1pl<- itemFromRes(res1pl)
 
-plotICC(resultsObj=res1pl, defineModelObj = def1pl, pdfFolder = file.path(tempdir(), "iccsJapan.pdf"))
+plotICC(resultsObj=res1pl, defineModelObj = def1pl, pdfFolder = file.path(tempdir(), "iccsLanguage.pdf"))
 
-def2pl <- defineModel(dat = jpn, id = "person", items = grep("^M1", colnames(jpn), value=TRUE), software="tam", irtmodel="2PL")
+def2pl <- defineModel(dat = dat_wide, id = "idstud", items = grep("^T", colnames(dat_wide), value=TRUE), software="tam", irtmodel="2PL")
 run2pl <- runModel(def2pl)
 anova(run1pl, run2pl)
 
 q3.jpn  <- q3FromRes(res1pl, out = "wide", triangular = TRUE)
-write.csv2(q3.jpn[[1]], file.path(tempdir(), "q3_japan.csv"), na="", row.names=FALSE)
+write.csv2(q3.jpn[[1]], file.path(tempdir(), "q3_Language.csv"), na="", row.names=FALSE)
+
 
 ####################
 # Ende der Loesung #
 ####################
 
 
-# 6. Differential Item Functioning
+# 6. Konfirmatorische Pruefung der Eindimensionalitaet
+######################################################
+
+# analog zur 1pl vs. 2pl Logik: ein- vs. zweidimensionales Modell
+# Voraussetzung: theoretische Annahme, welche Itemeigenschaften Mehrdimensionalitaet bedingen koennten
+
+# Annahme: reading und listening sind zwei Facetten englischen Sprachverstehens
+
+# 'item_info' enthaelt zuordnung der Items zu Dimensionen
+qmat <- data.frame(item_info, model.matrix(~domain-1, data = item_info))
+
+# zweidimensionales raschmodell
+def2dim <- defineModel(dat = dat_wide, id = "idstud", items = grep("^T", colnames(dat_wide), value=TRUE), software="tam", qMatrix = qmat[,c("item","domainlistening","domainreading")])
+run2dim <- runModel(def2dim)
+plotDevianceTAM(run2dim)
+
+# ergebnisse einlesen
+results2dim <- getResults(run2dim)
+
+# korrelation der beiden Facetten
+correlationFromRes(results2dim, digits = 3)
+
+# gegen eindimensionales 1pl modell vergleichen
+anova(run1pl, run2dim)
+
+
+# 7. Differential Item Functioning
 ##################################
 
-table(jpn[,"SEX"])
-jpn[,"SEX"] <- jpn[,"SEX"] - 1
+# reading und listening sind zwei domaenen; wir betrachten hier deshalb nur reading
 
-defDif <- defineModel(dat = jpn, id = "person", items = grep("^M1", colnames(jpn), value=TRUE), software="tam", DIF.var = "SEX", progress=TRUE)
+table(dat_wide[,"sex"])
+dat_wide[,"sexnum"] <- car::recode(dat_wide[,"sex"], "'male'=0; 'female'=1", as.factor=FALSE)
+
+defDif <- defineModel(dat = dat_wide, id = "idstud", items = subset(qmat, domainreading == 1)[,"item"], software="tam", DIF.var = "sexnum", progress=TRUE)
 runDif <- runModel(defDif)
 
 # Konvergenzprobleme
-plotDevianceTAM(run1pl, omitUntil = 15)
+plotDevianceTAM(run1pl)
 
 # empfehlungen fuer convergence trouble
 ?tam.mml
 
 # zweiter Versuch
-defDif2 <- defineModel(dat = jpn, id = "person", items = grep("^M1", colnames(jpn), value=TRUE), software="tam", DIF.var = "SEX", increment.factor=1.03, fac.oldxsi=.4, progress=TRUE)
+defDif2 <- defineModel(dat = dat_wide, id = "idstud", items = subset(qmat, domainreading == 1)[,"item"], software="tam", DIF.var = "sexnum", increment.factor=1.03, fac.oldxsi=.4, progress=TRUE)
 runDif2 <- runModel(defDif2)
 
-# sieht gut aus!
+# sieht etwas besser aus
 plotDevianceTAM(runDif2)
 
 # manchmal hilft aber auch das nicht. Alternative: auf software conquest ausweichen
-defDif3 <- defineModel(dat = jpn, id = "person", items = grep("^M1", colnames(jpn), value=TRUE), software="conquest", DIF.var = "SEX", dir = tempdir(), analysis.name = "DIF")
+defDif3 <- defineModel(dat = dat_wide, id = "idstud", items = subset(qmat, domainreading == 1)[,"item"], software="conquest", DIF.var = "sexnum", dir = tempdir(), analysis.name = "DIF")
 runDif3 <- runModel(defDif3)
 plotDevianceConquest(file.path(tempdir(), "DIF.log"))
 
@@ -151,4 +186,5 @@ itemsDif2   <- itemFromRes(resultsDif2)
 # vergleich
 resultsDif3 <- getResults(runDif3)
 itemsDif3   <- itemFromRes(resultsDif3)
+
 
