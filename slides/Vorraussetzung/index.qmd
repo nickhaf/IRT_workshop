@@ -1,5 +1,6 @@
 ---
 title: "IRT Voraussetzungen"
+lang: de
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
@@ -90,81 +91,23 @@ ggplot(data_lines, aes(x, y, group=group)) +
         geom_text(aes(label = label), vjust = 1.5)  # Add labels to the points
 
 
-
-
-
 ```
 
-## Simulate data
+## Simulieren von Rasch Daten
 
-```{r}
-#| eval: FALSE
+Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: Daten**simulation**. 
 
-calc_2pl <- function(a, theta, xi){
-  psi <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
-  return(psi) 
-}
+- Einerseits hilft es hoffentlich, die Konzepte hinter IRT und Linking noch besser zu verstehen.
+- Andererseits ist es auch im tatsächlichen Anwendungsfall super hilfreich, z.B. um Poweranalysen zu machen (wie viele Personen muss ich testen, um einen bestimmten Effekt zu entdecken). 
 
 
-theta_data <- data.frame(
-    person = 1:2000000,
-    theta = c(rnorm(1000000, 0, 1), rnorm(1000000, 1, 2)),
-    group = c(rep("1", 1000000), rep("2", 1000000))
-)
+## Let's take a step back! 
 
-items <- data.frame(
-    id = 1:13, 
-    b = seq(-3, 3, by = 0.5), 
-    a = seq(0.5, 3.5, by = 0.25), 
-    c = rep(0, 13)
-)
-
-sim_dat <- merge(theta_data, items) %>%
-    mutate(prop = calc_2pl(a, theta, b)) %>%
-    mutate(Answer = rbinom(n = nrow(.), size = 1, prob = prop))
-
-## could also try sim_irt
-
-## With sim_irt
-library(catIrt)
-
-simirt_dat <- simIrt(theta =rnorm(1000000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
-
-```
+Geht zu den [Übungen]() und probiert euch aus! 
 
 
-```{r}
-#| eval: FALSE
-
-## Analyze with a package to see if everything worked. 
-library(mirt)
-library(TAM)
-
-## Into wide format
-sim_dat_wide <- sim_dat %>%
-    filter(group == "1") %>%
-    select(id, Answer, theta, person) %>%
-    pivot_wider(names_from = id, values_from = Answer, id_cols = person)
-
-fit2PL <- tam.mml.2pl(sim_dat_wide %>% select(-person), irtmodel = "2PL")
-# saveRDS(fit2PL, file = "./slides/Vorraussetzung/dat/fit2PL.RDS")
-
-fit2PL$item_irt
-# Actually worked! 
-
-
-fit2PL_2 <- tam.mml.2pl(as.data.frame(simirt_dat$resp), irtmodel = "2PL")
-# saveRDS(fit2PL_2, file = "./slides/Vorraussetzung/dat/fit2PL_simfun.RDS")
-
-fit2PL_2$item_irt
-# This worked fairly well
-
-fit2PL <- mirt(data = sim_dat_wide %>% select(-person), 
-               itemtype = "2PL", 
-               verbose = FALSE)
-
-params2PL <- coef(fit2PL, IRTpars = TRUE, simplify = TRUE)
-```
+## Plots zeigen
+Eventuell nich alles simulieren lassen, sondern nur das 2PL Modell. 
 
 ## Schlusfolgerung
 - Wir brauchen also einen Referenzrahmen um unsere Testergebnisse interpretieren zu können. 

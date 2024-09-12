@@ -1,0 +1,297 @@
+---
+title: "IRT Voraussetzungen"
+author: "Nicklas Hafiz"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: 
+  html:
+    code-link: true
+---
+
+# Übung 1
+
+Wir schauen uns eine ganz simple Version an. Wer interessiert ist, und z.B. Daten für eine Poweranalyse simulieren möchte, findet [hier]() Unterstützung.
+Installieren und/oder lade folgende Pakete für diese Übung:
+
+```{r}
+#| message: false
+#| warning: false
+
+
+## Wenn noch nicht installiert:
+# install.packages("tidyverse")
+# install.packages("TAM")
+
+library(tidyverse)
+library(TAM)
+```
+
+
+
+## Formel
+Zuerst müssen wir festlegen, was wir eigentlich simulieren wollen. Wir starten mit einem 2PL Modell. Wie sah die Formel dafür noch einmal aus?
+
+
+$$
+P(X_{is} = 1|\theta_s,\beta_i,\alpha_i) = \frac{\exp(\alpha_i(\theta_s-\beta_i))}{1 + \exp(a_i (\theta_s - \beta_i))}
+$$ {#eq-2PL}
+
+1. Versuche noch einmal, alle Elemente von @eq-2PL für dich selbst zu erklären.
+
+:::{.callout-caution collapse=true}
+## Lösung
+
+Wir versuchen zu schätzen wie hoch die Wahrscheinlichkeit ist, dass eine Person $s$ ein Item $i$ richtig ($X_{is} = 1$) beantwortet. Dazu nutzen wir den Diskriminationsparameter $\alpha_i$ und den Schwierigkeitsparameter $\beta_i$ von Item $i$ und die Personenfähigkeit $\theta_s$ von Person $s$.
+:::
+
+
+## 2PL Funktion
+2. Jetzt beginnt der fun part: Schreibe eine [Funktion]() genannt `calc_2pl` die genau diese Formel in R Code umsetzt. 
+
+:::{.callout-tip collapse=true}
+Der Aufbau der Funktion könnte so aussehen:
+
+```{r}
+#| eval: FALSE
+
+calc_2pl <- function(alpha, theta, beta){
+}
+```
+
+Befülle sie nun mit der Formel. `alpha`, `theta` und `beta` sind hier also die Funktionsargumente (weil sie innerhalb der Klammern von `function()` stehen), und müssen beim späteren Aufruf der Funktion von der nutzenden Person mit Werten befüllt werden. Diese Werte können dann im Funktionskörper (zwischen `{}`) genutzt werden, um @eq-2PL in R Code zu übersetzen.
+
+:::
+
+
+:::{.callout-caution collapse=true}
+## Lösung
+```{r}
+calc_2pl <- function(a, theta, xi){
+  p <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
+  return(p) 
+}
+```
+
+
+`alpha`, `theta` und `beta` sind hier also die Funktionsargumente (weil sie innerhalb der Klammern von `function()` stehen), und müssen beim späteren Aufruf der Funktion von der nutzenden Person mit Werten befüllt werden. Im Funktionskörper (zwischen `{}`) werden sie genutzt, um $p$ anhand von @eq-2PL zu berechnen.
+
+
+:::
+
+
+## Simulieren von Daten
+Jetzt geht's los! Wir wollen nun eigene Daten simulieren. Das tolle ist: wir können so alle Aspekte selber festlegen, und daran untersuchen, wie sich das Variieren von bestimmten Parametern auf das Ergebnis auswirkt. 
+
+
+### Items
+1. Zuerst die Items. Baue einen `data.frame` mit dem Namen `items`. Er soll 13 Zeilen und 4 Spalten haben und folgendes enthalten:
+
+- `item_id`: Die ID des Items, von 1 bis 13. 
+- `alpha`: Die Diskriminationsparameter, liegen zwischen 0.5 und 1.5 in 13 gleich langen Schritten.
+- `beta`: Die Schwierigkeitsparameter, liegen zwischen -3 und 3 jeweils im Abstand von 0.5. 
+
+:::{.callout-tip collapse=true}
+## Tip
+
+Die Funktion `seq()` ist dein Freund. Mehr brauchst du nicht, um die Zahlenreihen zu erzeugen. Schaue dir die Dokumentation an. 
+
+:::
+
+:::{.callout-caution collapse=true}
+## Lösung
+```{r}
+items <- data.frame(
+    item_id = 1:13, 
+    b = seq(-3, 3, by = 0.5), 
+    a = seq(0.5, 1.5, length.out = 13), 
+    c = rep(0, 13)
+)
+
+```
+
+Das sind also die Itemparameter, die wir in unsere Simulation packen. 
+:::
+
+
+2. Jetzt können wir die Personen simulieren. Unser Ziel ist also ein `data.frame`, der $\theta$ Werte für die untersuchten Personen enthält. Wir simulieren 100000 Personen, der `data.frame` sollte also 100000 Zeilen haben. Außerdem benötigen wir zwei Spalten:
+
+- `ID`: Die ID der Person, von 1 bis 100000.
+- `theta`: Die Fähigkeit der Person, die wir simulieren. Wir nehmen an, dass die Fähigkeit normalverteilt ist, mit einem Mittelwert von 0 und einer Standardabweichung von 1.
+
+:::{.callout-tip collapse=true}
+## Tip
+Wir können zufällige Daten aus einer Normalverteilung mit Hilfe der Funktion `rnorm()` ziehen. 
+:::
+
+:::{.callout-caution collapse=true}
+## Lösung
+
+```{r}
+set.seed(666) 
+## Ich setzte hier einen Seed, damit meine zufällig erzeugten Werte replizierbar bleiben.
+## Wenn du den Seed in deinem Skript auf die gleiche Zahl setzt, bekommst du genau die gleichen Zufallswerte und kannst besser vergleichen. 
+
+
+subjects <- data.frame(
+    sub_id = 1:100000,
+    theta = c(rnorm(100000, 0, 1))
+)
+```
+
+:::
+
+Perfekt! Jetzt können wir die Itemantworten simulieren. Dazu sind noch ein paar kleine Schritte nötig:
+
+3. Merge die beiden `data.frames` `subjects` und `items` zu einem neuen `data.frame` `sim_dat` zusammen. Und zwar so, dass wir $1000 * 13$ Zeilen bekommen, also jede Person jedes der 13 Items zugeordnet wird (bisher noch ohne Antwort der Person, nur mit den Itemkennwerten. Das erleichtert uns im nächsten Schritt, die Antworten der Personen zu simulieren). 
+
+:::{.callout-tip collapse=true}
+## Tip
+
+Nutze die Funktion `merge()` ohne irgendwelche weiteren Argumente. 
+
+:::
+
+:::{.callout-caution collapse=true}
+## Lösung
+
+```{r}
+sim_dat <- merge(subjects, items)
+
+## Wir schauen mal, ob das hinkommt:
+
+str(sim_dat)
+
+```
+
+Unser finaler `data.frame` hat 1300000 Zeilen, wie verlangt. Lasst uns auch noch einmal schauen, ob eine zufällige Person alle Items beantwortet hat:
+
+```{r}
+sim_dat %>%
+  filter(sub_id == 420) %>%
+  pull(item_id)
+```
+
+Das sieht gut aus! 
+
+
+:::
+
+4. Jetzt simulieren wir aus diesem Vorbereiteten `data.frame` die Antworten der Personen, abhängig von ihren Fähigkeiten $\theta$ (jede Person hat hier einen zufälligen Wert aus einer Normalverteilung mit $\mu = 1$ und $\sigma = 1$ bekommen) und den Itemparametern $\alpha$ und $\beta$ (die hatten wir einfach als Sequenz festgelegt). Lege eine neue Spalte `p` in `sim_dat` an, die für jede Person die Wahrscheinlichkeit enthält, dass sie das jeweilige Item richtig beantwortet. Dafür brauchen wir jetzt unsere Funktion `calc_2pl`, die wir am Anfang definiert haben! Diese nimmt aus jeder Zeile den `theta`, `alpha` und `beta` Wert als input, und berechnet daraus die Wahrscheinlichkeit, dass die Person das Item richtig beantwortet.
+
+:::{.callout-tip collapse=true}
+## Tip
+Supereinfach geht das ganze mit der `mutate()` Funktion aus dem `tidyverse`. 
+:::
+
+:::{.callout-caution collapse=true}
+## Lösung
+```{r}
+sim_dat <- sim_dat %>%
+  mutate(p = calc_2pl(a, theta, b))
+
+## Mal nachschauen:
+head(sim_dat)
+```
+
+Auf den ersten Blick sieht das schonmal gut aus. Personen mit niedrigerem $\theta$ Wert haben auch eine geringere Wahrscheinlichkeit, das Item richtig zu beantworten (vgl. z.B. Zeile 2 und 3).
+:::
+
+5. Jetzt sind wir auch schon fast am Ende. Wir müssen lediglich aus den Wahrscheinlichkeiten die tatsächlichen Antworten der Personen simulieren. Nutze die Berechneten Antwortwahrscheinlichkeiten `p`, um für jede Person und jedes Item einen Wert aus einer [Bernoulliverteilung](https://de.wikipedia.org/wiki/Bernoulli-Verteilung) zu ziehen. 
+
+:::{.callout-tip collapse=true}
+## Tip
+
+Eine Bernoulliverteilung ist eine Binomialverteilung mit nur einem Versuch. Wir können daher die Funktion `rbinom()` nutzen, und das `size`-Argument auf 1 setzen.
+
+:::
+
+:::{.callout-caution collapse=true}
+## Lösung
+```{r}
+sim_dat <- sim_dat %>%
+  mutate(answer = rbinom(n = nrow(.), size = 1, prob = p))
+
+head(sim_dat)
+```
+
+Auch das sieht erst einmal plausibel aus! Toll!
+
+:::
+
+### Check mit `TAM`
+
+Jetzt wollen wir natürlich noch schauen, ob das Ganze so funktioniert hat, wie wir uns das vorgestellt haben. Wir wollen das `TAM` Paket, um ein 2PL Modell auf die Itemantworten zu fitten. Wenn alles geklappt hat, sollten wir in etwa unsere Itemparameter wiedererkennen. 
+
+1. Zuerst müssen wir unsere Daten dafür noch ein bisschen aufbereiten, sprich ins Wide-Format bringen. Probiere das also mal aus!
+
+
+:::{.callout-tip collapse=true}
+## Tip
+Ich nutze dafür immer deutlich lieber die `tidyverse` Funktion `pivot_wider()` als die base-R Funtkion `reshape()`. 
+:::
+
+:::{.callout-caution collapse=true}
+
+```{r}
+sim_dat_wide <- sim_dat %>%
+    select(item_id, sub_id, answer) %>%
+    pivot_wider(names_from = item_id, values_from = answer, id_cols = sub_id)
+
+head(sim_dat_wide)
+```
+
+Die Spaltennamen sind jetzt unsere Item-Nummern. Pro Zeile finden sich die Antworten der Personen, entweder hat sie das entsprechende Item richtig (`1`) oder falsch (`0`) beantwortet. 
+
+:::
+
+2. Jetzt können wir das Modell fitten. Nutze dafür wie angekündigt das `TAM` Paket, und entferne noch die Spalte `sub_id`, wir geben nur die Itemantworten in die Funktion. Speichere den Funktionsoutput in dem Object `sim_dat_2PL`.
+
+:::{.callout-tip collapse=true}
+Wir brauchen die Funktion `tam.mml.2pl()`. 
+:::
+
+:::{.callout-caution collapse=true}
+```{r}
+sim_dat_2PL <- tam.mml.2pl(sim_dat_wide %>% select(-sub_id), irtmodel = "2PL")
+```
+
+:::
+
+3. Schau dir die Itemparameter an, die das Modell geschätzt hat. Sie finden sich unter `sim_dat_2PL$item_irt[, c("alpha", "beta")]`. Vergleiche mit den ursprünglichen Itemparametern, die wir in `items` festgelegt haben. Was fällt dir auf?
+
+:::{.callout-caution collapse=true}
+
+```{r}
+items_2pl <- apply(sim_dat_2PL$item_irt[, c("alpha", "beta")], 2, round, 2)
+item_comparison <- cbind(items_2pl, items[, c("a", "b")])
+
+item_comparison
+
+```
+
+```{r}
+library(latex2exp) # Erlaubt es, Latex Syntax in ggplot zu nutzen
+
+ggplot(data=item_comparison, 
+       aes(x = b, y = beta)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1, colour = "grey") +
+  theme_bw() + ## Ein anderes Theme festlegen
+  xlab(TeX("\\beta")) + ## Latex Syntax für die Achsenbeschriftung nutzen
+  ylab(TeX("\\hat{\\beta}"))
+
+```
+
+```{r}
+ggplot(data=item_comparison, 
+       aes(x = a, y = alpha)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1, colour = "grey") +
+  theme_bw() +
+  xlab(TeX("\\alpha")) +
+  ylab(TeX("\\hat{\\alpha}"))
+
+```
+
+Das sieht super aus, die Werte stimmen gut überein. Dadurch, dass wir so viele Personen simuliert haben, sehen wir also, dass unsere Simulation gut funktioniert. Wir können das Gerüst dieses Simplen Modells jetzt nutzen, um uns noch spannendere Fragestellungen anzuschauen. 
+
+:::
