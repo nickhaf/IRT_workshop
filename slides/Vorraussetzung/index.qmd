@@ -31,7 +31,22 @@ Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitsw
 - Einordnung: Lokale Unabhängigkeit, weitere Begriffe?
 - Beispiel
 
-# Linking
+## {background-image="images/link.jpg"}
+
+<!-- background-size="1150px" -->
+
+::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
+
+Linking
+
+:::
+
+::: aside
+Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) auf [Unsplash](https://unsplash.com/de/fotos/selektives-fokusfoto-von-grauen-metallketten-JZ8AHFr2aEg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash). 
+
+::: 
+
+<!-- https://hectornajera83.github.io/book/scale-equating-and-linking.html -->
 
 ## Problem
 Wir haben die Invarianz-Eigenschaft von IRT bereits kennen gelernt: 
@@ -283,20 +298,6 @@ plot_group_pars(parameters, beta, beta_2) +
 - Lösung: **Linking**
 
 
-## {background-image="images/link.jpg" background-size="1150px"}
-
-::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
-
-Linking/Equating
-
-:::
-
-::: aside
-Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) auf [Unsplash](https://unsplash.com/de/fotos/selektives-fokusfoto-von-grauen-metallketten-JZ8AHFr2aEg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash). 
-
-::: 
-
-<!-- https://hectornajera83.github.io/book/scale-equating-and-linking.html -->
 
 
 ## Identifizirbarkeit

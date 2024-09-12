@@ -5,4 +5,5 @@
 
 /.quarto/
 *.html
+!theme.html
 /_site/
