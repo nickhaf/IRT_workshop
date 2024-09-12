@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -193,6 +227,14 @@ window.Quarto = {
 <section id="übung-1" class="level1">
 <h1>Übung 1</h1>
 <p>Wir schauen uns eine ganz simple Version an. Wer interessiert ist, und z.B. Daten für eine Poweranalyse simulieren möchte, findet <a href="">hier</a> Unterstützung. Installieren und/oder lade folgende Pakete für diese Übung:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wenn noch nicht installiert:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse")</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("TAM")</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TAM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="formel" class="level2">
 <h2 class="anchored" data-anchor-id="formel">Formel</h2>
 <p>Zuerst müssen wir festlegen, was wir eigentlich simulieren wollen. Wir starten mit einem 2PL Modell. Wie sah die Formel dafür noch einmal aus?</p>
@@ -237,6 +279,10 @@ Tip
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Der Aufbau der Funktion könnte so aussehen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>calc_2pl <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha, theta, beta){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Befülle sie nun mit der Formel. <code>alpha</code>, <code>theta</code> und <code>beta</code> sind hier also die Funktionsargumente (weil sie innerhalb der Klammern von <code>function()</code> stehen), und müssen beim späteren Aufruf der Funktion von der nutzenden Person mit Werten befüllt werden. Diese Werte können dann im Funktionskörper (zwischen <code>{}</code>) genutzt werden, um <a href="#eq-2PL" class="quarto-xref">Equation&nbsp;1</a> in R Code zu übersetzen.</p>
 </div>
 </div>
@@ -253,6 +299,12 @@ Lösung
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>calc_2pl <span class="ot">&lt;-</span> <span class="cf">function</span>(a, theta, xi){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> (<span class="fu">exp</span>(a<span class="sc">*</span>(theta <span class="sc">-</span> xi)))<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(a<span class="sc">*</span>(theta <span class="sc">-</span> xi))) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p) </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><code>alpha</code>, <code>theta</code> und <code>beta</code> sind hier also die Funktionsargumente (weil sie innerhalb der Klammern von <code>function()</code> stehen), und müssen beim späteren Aufruf der Funktion von der nutzenden Person mit Werten befüllt werden. Im Funktionskörper (zwischen <code>{}</code>) werden sie genutzt, um <span class="math inline">\(p\)</span> anhand von <a href="#eq-2PL" class="quarto-xref">Equation&nbsp;1</a> zu berechnen.</p>
 </div>
 </div>
@@ -299,6 +351,14 @@ Lösung
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>items <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">item_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">13</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">b =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.5</span>), </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">a =</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="at">length.out =</span> <span class="dv">13</span>), </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">c =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">13</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Das sind also die Itemparameter, die wir in unsere Simulation packen.</p>
 </div>
 </div>
@@ -338,7 +398,17 @@ Lösung
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">666</span>) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Ich setzte hier einen Seed, damit meine zufällig erzeugten Werte replizierbar bleiben.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Wenn du den Seed in deinem Skript auf die gleiche Zahl setzt, bekommst du genau die gleichen Zufallswerte und kannst besser vergleichen. </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>subjects <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sub_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">theta =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">100000</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -375,6 +445,11 @@ Lösung
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> <span class="fu">merge</span>(subjects, items)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Wir schauen mal, ob das hinkommt:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sim_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   1300000 obs. of  6 variables:
  $ sub_id : int  1 2 3 4 5 6 7 8 9 10 ...
@@ -387,6 +462,9 @@ Lösung
 </div>
 <p>Unser finaler <code>data.frame</code> hat 1300000 Zeilen, wie verlangt. Lasst uns auch noch einmal schauen, ob eine zufällige Person alle Items beantwortet hat:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sub_id <span class="sc">==</span> <span class="dv">420</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(item_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13</code></pre>
 </div>
@@ -427,6 +505,11 @@ Lösung
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> sim_dat <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">calc_2pl</span>(a, theta, b))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Mal nachschauen:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sim_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sub_id      theta item_id  b   a c         p
 1      1  0.7533110       1 -3 0.5 0 0.8672265
@@ -473,6 +556,10 @@ Lösung
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> sim_dat <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">answer =</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="fu">nrow</span>(.), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> p))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sim_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sub_id      theta item_id  b   a c         p answer
 1      1  0.7533110       1 -3 0.5 0 0.8672265      1
@@ -516,13 +603,18 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sim_dat_wide <span class="ot">&lt;-</span> sim_dat <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(item_id, sub_id, answer) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> item_id, <span class="at">values_from =</span> answer, <span class="at">id_cols =</span> sub_id)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sim_dat_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 14
   sub_id   `1`   `2`   `3`   `4`   `5`   `6`   `7`   `8`   `9`  `10`  `11`  `12`
@@ -565,22 +657,23 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sim_dat_2PL <span class="ot">&lt;-</span> <span class="fu">tam.mml.2pl</span>(sim_dat_wide <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>sub_id), <span class="at">irtmodel =</span> <span class="st">"2PL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>....................................................
-Processing Data      2024-09-12 12:15:29.283852 
+Processing Data      2024-09-12 12:28:30.122252 
     * Response Data: 100000 Persons and  13 Items 
     * Numerical integration with 21 nodes
-    * Created Design Matrices   ( 2024-09-12 12:15:29.470203 )
-    * Calculated Sufficient Statistics   ( 2024-09-12 12:15:29.740807 )
+    * Created Design Matrices   ( 2024-09-12 12:28:30.309203 )
+    * Calculated Sufficient Statistics   ( 2024-09-12 12:28:30.567925 )
 ....................................................
-Iteration 1     2024-09-12 12:15:29.780299
+Iteration 1     2024-09-12 12:28:30.604437
 E Step
 M Step Intercepts   |----
 M Step Slopes       |---
@@ -590,7 +683,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 2     2024-09-12 12:15:30.018352
+Iteration 2     2024-09-12 12:28:30.841924
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -600,7 +693,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 3     2024-09-12 12:15:30.260122
+Iteration 3     2024-09-12 12:28:31.083095
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -610,7 +703,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 4     2024-09-12 12:15:30.497242
+Iteration 4     2024-09-12 12:28:31.319277
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -620,7 +713,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 5     2024-09-12 12:15:30.596248
+Iteration 5     2024-09-12 12:28:31.420533
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -630,7 +723,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 6     2024-09-12 12:15:30.712828
+Iteration 6     2024-09-12 12:28:31.539088
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -640,7 +733,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 7     2024-09-12 12:15:30.843726
+Iteration 7     2024-09-12 12:28:31.673795
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -650,7 +743,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 8     2024-09-12 12:15:30.937109
+Iteration 8     2024-09-12 12:28:31.778588
 E Step
 M Step Intercepts   |---
 M Step Slopes       |--
@@ -660,7 +753,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 9     2024-09-12 12:15:31.064296
+Iteration 9     2024-09-12 12:28:31.906231
 E Step
 M Step Intercepts   |---
 M Step Slopes       |--
@@ -670,7 +763,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 10     2024-09-12 12:15:31.26776
+Iteration 10     2024-09-12 12:28:32.118205
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -680,7 +773,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 11     2024-09-12 12:15:31.360464
+Iteration 11     2024-09-12 12:28:32.217987
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -690,7 +783,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 12     2024-09-12 12:15:31.470088
+Iteration 12     2024-09-12 12:28:32.331384
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -700,7 +793,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 13     2024-09-12 12:15:31.59833
+Iteration 13     2024-09-12 12:28:32.463334
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -710,7 +803,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 14     2024-09-12 12:15:31.69221
+Iteration 14     2024-09-12 12:28:32.558107
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -720,7 +813,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 15     2024-09-12 12:15:31.802465
+Iteration 15     2024-09-12 12:28:32.671297
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -730,7 +823,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 16     2024-09-12 12:15:31.914731
+Iteration 16     2024-09-12 12:28:32.784907
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -740,7 +833,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 17     2024-09-12 12:15:32.02468
+Iteration 17     2024-09-12 12:28:32.927354
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -750,7 +843,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 18     2024-09-12 12:15:32.250642
+Iteration 18     2024-09-12 12:28:33.146731
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -760,7 +853,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 19     2024-09-12 12:15:32.34501
+Iteration 19     2024-09-12 12:28:33.242201
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -770,7 +863,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 20     2024-09-12 12:15:32.458948
+Iteration 20     2024-09-12 12:28:33.36006
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -780,7 +873,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 21     2024-09-12 12:15:32.590743
+Iteration 21     2024-09-12 12:28:33.592467
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -790,7 +883,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 22     2024-09-12 12:15:32.683631
+Iteration 22     2024-09-12 12:28:33.68715
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -800,7 +893,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 23     2024-09-12 12:15:32.815773
+Iteration 23     2024-09-12 12:28:33.805211
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -810,7 +903,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 24     2024-09-12 12:15:33.018806
+Iteration 24     2024-09-12 12:28:33.935394
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -820,7 +913,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 25     2024-09-12 12:15:33.114255
+Iteration 25     2024-09-12 12:28:34.032947
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -830,7 +923,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 26     2024-09-12 12:15:33.226953
+Iteration 26     2024-09-12 12:28:34.164219
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -840,7 +933,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 27     2024-09-12 12:15:33.359446
+Iteration 27     2024-09-12 12:28:34.374923
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -850,7 +943,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 28     2024-09-12 12:15:33.456541
+Iteration 28     2024-09-12 12:28:34.480204
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -860,7 +953,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 29     2024-09-12 12:15:33.570999
+Iteration 29     2024-09-12 12:28:34.592826
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -870,7 +963,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 30     2024-09-12 12:15:33.684048
+Iteration 30     2024-09-12 12:28:34.725417
 E Step
 M Step Intercepts   |--
 M Step Slopes       |-
@@ -880,7 +973,7 @@ M Step Slopes       |-
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 31     2024-09-12 12:15:33.812687
+Iteration 31     2024-09-12 12:28:34.819459
 E Step
 M Step Intercepts   |--
 M Step Slopes       |-
@@ -890,7 +983,7 @@ M Step Slopes       |-
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 32     2024-09-12 12:15:34.019296
+Iteration 32     2024-09-12 12:28:34.931119
 E Step
 M Step Intercepts   |-
 M Step Slopes       |-
@@ -929,9 +1022,9 @@ EAP Reliability:
 [1] 0.626
 
 -----------------------------
-Start:  2024-09-12 12:15:29.280609
-End:  2024-09-12 12:15:34.356055 
-Time difference of 5.075446 secs</code></pre>
+Start:  2024-09-12 12:28:30.118993
+End:  2024-09-12 12:28:35.378434 
+Time difference of 5.259441 secs</code></pre>
 </div>
 </div>
 </div>
@@ -946,13 +1039,17 @@ Time difference of 5.075446 secs</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>items_2pl <span class="ot">&lt;-</span> <span class="fu">apply</span>(sim_dat_2PL<span class="sc">$</span>item_irt[, <span class="fu">c</span>(<span class="st">"alpha"</span>, <span class="st">"beta"</span>)], <span class="dv">2</span>, round, <span class="dv">2</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>item_comparison <span class="ot">&lt;-</span> <span class="fu">cbind</span>(items_2pl, items[, <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>)])</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>item_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   alpha  beta         a    b
 1   0.52 -2.92 0.5000000 -3.0
@@ -971,6 +1068,15 @@ Caution
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp) <span class="co"># Erlaubt es, Latex Syntax in ggplot zu nutzen</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>item_comparison, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> b, <span class="at">y =</span> beta)) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"grey"</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="do">## Ein anderes Theme festlegen</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">TeX</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">beta"</span>)) <span class="sc">+</span> <span class="do">## Latex Syntax für die Achsenbeschriftung nutzen</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">TeX</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">hat{</span><span class="sc">\\</span><span class="st">beta}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -980,6 +1086,13 @@ Caution
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>item_comparison, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> a, <span class="at">y =</span> alpha)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"grey"</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">TeX</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">alpha"</span>)) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">TeX</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">hat{</span><span class="sc">\\</span><span class="st">alpha}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
