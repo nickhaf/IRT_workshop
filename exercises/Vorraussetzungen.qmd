@@ -1,5 +1,6 @@
 ---
 title: "IRT Voraussetzungen"
+lang: de
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
@@ -29,8 +30,8 @@ library(TAM)
 
 
 
-## Formel
-Zuerst müssen wir festlegen, was wir eigentlich simulieren wollen. Wir starten mit einem 2PL Modell. Wie sah die Formel dafür noch einmal aus?
+## Gleichung
+Zuerst müssen wir festlegen, was wir eigentlich simulieren wollen. Wir starten mit einem 2PL Modell. Wie sah die Gleichung dafür noch einmal aus?
 
 
 $$
@@ -47,7 +48,7 @@ Wir versuchen zu schätzen wie hoch die Wahrscheinlichkeit ist, dass eine Person
 
 
 ## 2PL Funktion
-2. Jetzt beginnt der fun part: Schreibe eine [Funktion]() genannt `calc_2pl` die genau diese Formel in R Code umsetzt. 
+2. Jetzt beginnt der fun part: Schreibe eine [Funktion]() genannt `calc_2pl` die @eq-2PL in R Code umsetzt. 
 
 :::{.callout-tip collapse=true}
 Der Aufbau der Funktion könnte so aussehen:
@@ -59,7 +60,7 @@ calc_2pl <- function(alpha, theta, beta){
 }
 ```
 
-Befülle sie nun mit der Formel. `alpha`, `theta` und `beta` sind hier also die Funktionsargumente (weil sie innerhalb der Klammern von `function()` stehen), und müssen beim späteren Aufruf der Funktion von der nutzenden Person mit Werten befüllt werden. Diese Werte können dann im Funktionskörper (zwischen `{}`) genutzt werden, um @eq-2PL in R Code zu übersetzen.
+Befülle sie nun mit  @eq-2PL. `alpha`, `theta` und `beta` sind hier also die Funktionsargumente (weil sie innerhalb der Klammern von `function()` stehen), und müssen beim späteren Aufruf der Funktion von der nutzenden Person mit Werten befüllt werden. Diese Werte können dann im Funktionskörper (zwischen `{}`) genutzt werden, um @eq-2PL in R Code zu übersetzen.
 
 :::
 
