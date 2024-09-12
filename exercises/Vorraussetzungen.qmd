@@ -5,6 +5,8 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
   html:
     code-link: true
+execute:
+  echo: true
 ---
 
 # Übung 1
@@ -230,7 +232,7 @@ Ich nutze dafür immer deutlich lieber die `tidyverse` Funktion `pivot_wider()` 
 :::
 
 :::{.callout-caution collapse=true}
-
+## Lösung
 ```{r}
 sim_dat_wide <- sim_dat %>%
     select(item_id, sub_id, answer) %>%
@@ -250,6 +252,7 @@ Wir brauchen die Funktion `tam.mml.2pl()`.
 :::
 
 :::{.callout-caution collapse=true}
+## Tip
 ```{r}
 sim_dat_2PL <- tam.mml.2pl(sim_dat_wide %>% select(-sub_id), irtmodel = "2PL")
 ```
@@ -260,6 +263,7 @@ sim_dat_2PL <- tam.mml.2pl(sim_dat_wide %>% select(-sub_id), irtmodel = "2PL")
 
 :::{.callout-caution collapse=true}
 
+## Lösung
 ```{r}
 items_2pl <- apply(sim_dat_2PL$item_irt[, c("alpha", "beta")], 2, round, 2)
 item_comparison <- cbind(items_2pl, items[, c("a", "b")])
