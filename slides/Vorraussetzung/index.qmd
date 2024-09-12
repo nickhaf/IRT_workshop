@@ -11,12 +11,10 @@ execute:
   echo: true
 ---
 
-# Überblick 
-
 ## Voraussetzungen der Item Response Theory
 
 - Eindimmensionalität
-- Lokal Stochastische Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJ1224232.pdf). 
+- Lokal Stochastische Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJf1224232.pdf). 
 
 ## Eindimmensionalität
 - Wenn nicht gegeben:
@@ -47,28 +45,41 @@ Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=credi
 <!-- https://hectornajera83.github.io/book/scale-equating-and-linking.html -->
 
 ## Problem
-Wir haben die Invarianz-Eigenschaft von IRT bereits kennen gelernt: 
-**Itemparameter sind gleich über verschiedene Gruppen.**
-Die Wahrscheinlichkeit für eine korrekte Antwort auf ein Item hängt nur von $\theta$ ab. Nicht von anderen Personen in der Stichprobe. 
 
+:::: {.columns} 
+::: {.column width="50%"}
+
+**Das Problem**
+
+Invarianz-Eigenschaft von IRT: **Itemparameter sind gleich über verschiedene Gruppen.**
+Die Wahrscheinlichkeit für eine korrekte Antwort auf ein Item hängt also nur von $\theta$ ab. Nicht von anderen Personen in der Stichprobe. 
 Wie schaffen wir das aber, wenn wir anhand von verschiedenen Gruppen kalibrieren?
+
+:::
+
+::: {.column width="50%"}
+
+**Die Lösung**
+
 Wir müssen die Werte, die wir aus diesen Kalibrierungen bekommen, irgendwie in einen Zusammenhang setzen. 
 
-## Wiederholung: Kalibrierung
-- Kalibrierung: schätzen von Itemparametern und Personenfähigkeiten
-- Erst einmal nur für **diese bestimmte Kombintation aus Items und Personen**
-
-WARUM?
-
+::: 
+::::
 
 ## Wiederholung: Kalibrierung
-- Skala der Latenten Variable wird arbiträr festgelegt auf einen Mittelwert von 0 und eine SD von 1  
+Die kalibrierten Itemparameter und Personenfähigkeiten gelten erst einmal nur für **diese bestimmte Kombintation aus Items und Personen**. 
+
+**WARUM?**
+
+
+## Wiederholung: Kalibrierung
+- Skala der Latenten Variable wird arbiträr festgelegt (meist auf einen Mittelwert von 0 und eine SD von 1)
 - Modell? sonst nicht idenfiziert. 
-- Itemparameter dadurch **nicht** auf der selben Skala
+- Itemparameter dadurch **nicht** auf der selben Skala. 
 - **Sie können also nicht direkt miteinander verglichen werden.**
 
 ## Beispiel 
-Sie hängen ja von den latenten VAriablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe). 
+Sie hängen ja von den latenten Variablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe). 
 
 
 ## Beispiel
@@ -107,13 +118,26 @@ ggplot(data_lines, aes(x, y, group=group)) +
 
 ```
 
-## Simulieren von Rasch Daten
+## Simulieren von IRT Daten
+
+::::{.columns}
+:::{.column width="30%"}
 
 Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: Daten**simulation**. 
 
 - Einerseits hilft es hoffentlich, die Konzepte hinter IRT und Linking noch besser zu verstehen.
-- Andererseits ist es auch im tatsächlichen Anwendungsfall super hilfreich, z.B. um Poweranalysen zu machen (wie viele Personen muss ich testen, um einen bestimmten Effekt zu entdecken). 
+- Hilfreich, z.B. für Poweranalysen 
 
+:::
+
+::: {.column width="70%"}
+
+![](images/simulation.jpg)
+
+Erstellt mit [Bing Bild-Ersteller](ttps://www.bing.com/images/create/a-simulation-that-we-are-all-living-in-a-simulatio/1-66e33509faf2483e82f8b47ed577a221?id=9qHmBvQeaNYbK1HW5T0qLQ%3D%3D&view=detailv2&idpp=genimg&idpclose=1&thid=OIG1.o1KL86Aq8PP9cXCbZnHc&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&form=SYDBIC).
+
+:::
+::::
 
 ## Let's take a step back! 
 
@@ -137,6 +161,8 @@ Das Vorgehen bleibt genauso wie in der [Übung](../../exercises/Vorraussetzungen
 
 library(TAM)
 library(latex2exp) # Erlaubt es, Latex Syntax in ggplot zu nutzen
+
+set.seed(123)
 
 ## 2PL Funktion
 calc_2pl <- function(a, theta, xi){
