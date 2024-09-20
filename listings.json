@@ -1,17 +1,17 @@
 [
   {
+    "listing": "/exercises/index.html",
+    "items": [
+      "/exercises/3-GLM.html",
+      "/exercises/Vorraussetzungen.html"
+    ]
+  },
+  {
     "listing": "/slides/index.html",
     "items": [
       "/slides/IntroR/index.html",
       "/slides/Vorraussetzung/index.html",
       "/slides/GLM/index.html"
-    ]
-  },
-  {
-    "listing": "/exercises/index.html",
-    "items": [
-      "/exercises/3-GLM.html",
-      "/exercises/Vorraussetzungen.html"
     ]
   }
 ]
