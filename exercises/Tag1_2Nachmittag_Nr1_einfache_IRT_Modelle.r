@@ -124,33 +124,7 @@ write.csv2(q3.jpn[[1]], file.path(tempdir(), "q3_Language.csv"), na="", row.name
 ####################
 
 
-# 6. Konfirmatorische Pruefung der Eindimensionalitaet
-######################################################
-
-# analog zur 1pl vs. 2pl Logik: ein- vs. zweidimensionales Modell
-# Voraussetzung: theoretische Annahme, welche Itemeigenschaften Mehrdimensionalitaet bedingen koennten
-
-# Annahme: reading und listening sind zwei Facetten englischen Sprachverstehens
-
-# 'item_info' enthaelt zuordnung der Items zu Dimensionen
-qmat <- data.frame(item_info, model.matrix(~domain-1, data = item_info))
-
-# zweidimensionales raschmodell
-def2dim <- defineModel(dat = dat_wide, id = "idstud", items = grep("^T", colnames(dat_wide), value=TRUE), software="tam", qMatrix = qmat[,c("item","domainlistening","domainreading")])
-run2dim <- runModel(def2dim)
-plotDevianceTAM(run2dim)
-
-# ergebnisse einlesen
-results2dim <- getResults(run2dim)
-
-# korrelation der beiden Facetten
-correlationFromRes(results2dim, digits = 3)
-
-# gegen eindimensionales 1pl modell vergleichen
-anova(run1pl, run2dim)
-
-
-# 7. Differential Item Functioning
+# 6. Differential Item Functioning
 ##################################
 
 # reading und listening sind zwei domaenen; wir betrachten hier deshalb nur reading
@@ -188,3 +162,27 @@ resultsDif3 <- getResults(runDif3)
 itemsDif3   <- itemFromRes(resultsDif3)
 
 
+# 7. Konfirmatorische Pruefung der Eindimensionalitaet
+######################################################
+
+# analog zur 1pl vs. 2pl Logik: ein- vs. zweidimensionales Modell
+# Voraussetzung: theoretische Annahme, welche Itemeigenschaften Mehrdimensionalitaet bedingen koennten
+
+# Annahme: reading und listening sind zwei Facetten englischen Sprachverstehens
+
+# 'item_info' enthaelt zuordnung der Items zu Dimensionen
+qmat <- data.frame(item_info, model.matrix(~domain-1, data = item_info))
+
+# zweidimensionales raschmodell
+def2dim <- defineModel(dat = dat_wide, id = "idstud", items = grep("^T", colnames(dat_wide), value=TRUE), software="tam", qMatrix = qmat[,c("item","domainlistening","domainreading")])
+run2dim <- runModel(def2dim)
+plotDevianceTAM(run2dim)
+
+# ergebnisse einlesen
+results2dim <- getResults(run2dim)
+
+# korrelation der beiden Facetten
+correlationFromRes(results2dim, digits = 3)
+
+# gegen eindimensionales 1pl modell vergleichen
+anova(run1pl, run2dim)

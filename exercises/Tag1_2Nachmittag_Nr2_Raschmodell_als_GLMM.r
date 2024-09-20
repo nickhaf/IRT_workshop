@@ -66,4 +66,53 @@ str(random)
 round(mean(random$person[,1]), digits = 4)
 round(sd(random$person[,1]), digits = 4)
 
+# personen- UND itemeffekte als zufaellig modelliert
+mod3 <- glmer(value ~ (1|variable) + (1|person), data = datLong, family = binomial(link="logit"))
+
+
+# 2. Modellieren und Pruefen statistischer Hypothesen
+#####################################################
+
+### Fragestellung: haengt die reading competence im Jahr 2010 vom sozio-oekonomischen Status und vom geschlecht ab?
+
+# empirischen Uebungsdatensatz aufbereiten
+data(trends)
+
+# personendatensatz im wideformat
+dat_wide <- reshape2::dcast(subset(trends, year == 2010 & domain == "reading"), idstud+sex+ses+country~item, value.var = "value")
+
+# Geschlecht als kategorielle Variable mit zwei Faktorstufen
+# SES als quasi-metrische Variable
+descr(dat_wide[,"ses"])
+
+# ses z-standardisieren
+dat_wide[,"ses_std"] <- weights::stdz(dat_wide[,"ses"])
+descr(dat_wide[,"ses_std"])
+
+# Raschmodell mit Hintergrundmodell (conditioning model)
+defHGM <- defineModel(dat = dat_wide, id = "idstud", items = grep("^T", colnames(dat_wide), value=TRUE), software="tam", HG.var = c("sex", "ses_std"))
+runHGM <- runModel(defHGM)
+resHGM <- getResults(runHGM)
+
+# koeffizienten der latenten Regression
+regcoefFromRes(resHGM, digits = 3)
+
+# dasselbe Modell in lme4
+# Datensatz bleibt im Langformat, standardisierte geschlechtsvariable wieder dranmergen
+datL   <- subset(trends, year == 2010 & domain == "reading")
+datL   <- merge(datL, dat_wide[,c("idstud", "ses_std")], by = "idstud")
+modHGM <- glmer(value ~ sex + ses_std + (1|item) + (1|idstud), data = datL, family = binomial(link="logit"))
+summary(modHGM)
+          save.lmer.effects(lmerObj= modHGM, fileName="z:/test", standardized = FALSE, quick=TRUE)
+
+# zusaetzliche Praediktoren aus der Itemseite: Itemformat
+table(datL[,"format"])
+modHGM1<- glmer(value ~ sex + ses_std + format + (1|item) + (1|idstud), data = datL, family = binomial(link="logit"))
+summary(modHGM1)
+          save.lmer.effects(lmerObj= modHGM1, fileName="z:/test1", standardized = FALSE, quick=TRUE)
+
+# mit interaktion
+modHGM2<- glmer(value ~ ses_std + sex * format + (1|item) + (1|idstud), data = datL, family = binomial(link="logit"))
+summary(modHGM2)
+          save.lmer.effects(lmerObj= modHGM2, fileName="z:/test2", standardized = FALSE, quick=TRUE)
 
