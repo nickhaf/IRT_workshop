@@ -2,12 +2,164 @@
 title: "Einführung in R"
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-format: revealjs
+format: 
+  letterbox-revealjs:
+    embed-resources: true
+code-link: true
+execute:
+  echo: true
 ---
 
 
-## Einführung
+## RStudio Interface
+
+Beim ersten Öffnen wird RStudio in etwa so aussehen:
+
+![](./images/RStudio_window.PNG)
+
+## RStudio Interface
+Das Fenster hat 4 Bereiche:
+
+![](./images/window_commented.PNG)
+
+## 1) Script Pane
+
+- Editieren von Skripten (Datein, in denen Code gespeichert wird)
+- Ausführen einer Code-Zeile (oder von markiertem Code) durch `ctrl + enter` (Windows), oder `command + return` (macOS). 
+
+```{r}
+# Our first line of code:
+print("Hello World!")
+```
+
+:::{.callout-tip}
+Übrigens: Codezeilen, die mit einem `#` beginnen, sind auskommentiert und werden nicht ausgewertet. 
+:::
+
+## 2) Console
+
+- Hier erscheint der Output.
+- Wir können auch direkt in der Konsole arbeiten und Befehle mit Enter ausführen:
+
+```{r}
+# Sum two values
+10 + 5
+```
+
+:::{.callout-warning}
+Achte nur darauf, dass der Code, den du hier schreibst, nicht gespeichert wird. Die Konsole wird also eher genutzt, um Dinge auszuprobieren oder für Code, den du nicht in einem Skript speichern musst.
+:::
+
+## 3) Workspace
+
+Im `Umgebungs-Tab` erhältst du einen Überblick über die Objekte, die derzeit in deiner R-Sitzung geladen sind. Du kannst auch deinen Befehlsverlauf einsehen und einige weitere Dinge, die wir jetzt nicht benötigen.
+
+## 4) Plots, Datein, Hilfe ...
+
+Die Plots, die du in deiner R-Sitzung erstellst, werden im Plot-Tab ausgegeben. Wenn du die Hilfefunktion aufrufst, öffnet sich die Dokumentation im Hilfe-Tab. Der Dateien-Tab ermöglicht es dir, die Dateien in deinem Arbeitsverzeichnis zu verwalten.
 
 
-Hier gleich Daten aufbereiten, die wir später auch nutzen können!
+# Los Geht's!
+Hintergrundbild von R Code. 
+
+# Basic Setup
+
+## RStudio Projekte
+- Hilft ungemein beim Organisieren von Dateien und Code.
+- `File - New Project`
+
+:::{.callout-warning}
+## Übung
+Erstelle einen neuen Ordner (falls noch nicht getan) für diesen Workshop, und lege darin ein RStudio Projekt an.
+:::
+
+## Skripte
+Hier kommt der Code rein!
+
+`File - New File - R Script`
+
+:::{.callout-warning}
+## Übung
+Erstelle einen neuen Sub-Ordner und lege darin ein R-Skript and. In diesen kommen dann die Übungsaufgaben und Notizen aus der jetzigen Sitzung. 
+:::
+
+# Daten
+
+## Einlesen von Daten
+```{css}
+#| echo: false
+
+.reveal table {
+  font-size: 30px;
+}
+
+```
+
+| Data type             | Import                    | Export                    |
+|-----------------------|---------------------------|---------------------------|
+| R objects (.Rdata, .rda) | `load()`                  | `save()`                  |
+| single R object (.rds) | `readRDS()`               | `saveRDS()`               |
+| text-files (.txt)     | `read.table()`            | `write.table()`           |
+| .csv-files (.csv)     | `read.csv()`              | `write.csv()`             |
+| Excel-files (.xlsx)   | `readxl::read_excel()`    | `writexl::write_xlsx()`   |
+| SPSS-files (.sav)     | `haven::read_sav()`       | `haven::write_sav()`      |
+| SAS-files (.sas)      | `haven::read_sas()`       | `haven::write_sas()`      |
+| Stata-files (.stata)  | `haven::read_dta()`       | `haven::write_dta()`      |
+
+
+## Exkurs: `here`-Paket
+
+
+
+
+## Übung
+
+Erstelle einen neuen Ordner `data` in deinem Arbeitsverzeichnis. Gehe dann zu [](), downloade die beiden Datensätze `psych_stats.csv` und `characters.rds`, und speichere sie in deinem neu erstellen `data` Ordner ab. 
+
+:::{.callout-hint}
+Downloaden von Github geht so: 
+:::
+
+## Übung
+Auf eigene Übungsseite packen!
+
+Lese beide Datensätze in deinem R-Skript ein. 
+
+::: {.callout-tip collapse="true"}
+## Tipp 1
+Es handelt sich um eine `.rds`-Datei und eine `.csv`-Datei.
+:::
+
+::: {.callout-tip collapse="true"}
+## Tipp 2
+Öffne die `.csv`-Datei und schaue nach, durch welches Zeichen die Werte getrennt sind. Nutze das `sep` Argument in `read.csv`!
+:::
+
+::: {.callout-caution collapse="true"}
+## Lösung
+
+```{r}
+characters <- readRDS(file = here::here("raw_data", "characters.rds"))
+psych_stats <- read.csv(
+  file = here::here("raw_data", "psych_stats.csv"),
+  sep = ";"
+)
+```
+:::
+
+
+## Pakete
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+:::
+
+::: {.column width="50%"}
+
+![](./images/pakete.jpg){.image-right}
+::: 
+:::: 
+Foto von <a href="https://unsplash.com/de/@elnazasadi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">elnaz asadi</a> auf <a href="https://unsplash.com/de/fotos/ein-mehrfarbiges-muster-aus-sechseckigen-formen-Ej50vyvxJ94?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
 
