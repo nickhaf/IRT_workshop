@@ -56,7 +56,7 @@ itemsGlm <- fixef(mod2)
 itemsGlm <- data.frame(item = gsub("variable", "", names(itemsGlm)), estGlmm =itemsGlm)
 
 # vergleich
-vgl <- merge(items[,c("item", "est")], itemsGlm, by="item", all=TRUE)
+vgl <- merge(items[,c("item", "itemP", "est")], itemsGlm, by="item", all=TRUE)
 vgl[,"estGlmm"] <- (-1) * vgl[,"estGlmm"]
 vgl[,"estGlmm"] <- vgl[,"estGlmm"] + vgl[1,"estGlmm"]
 
@@ -116,3 +116,14 @@ modHGM2<- glmer(value ~ ses_std + sex * format + (1|item) + (1|idstud), data = d
 summary(modHGM2)
           save.lmer.effects(lmerObj= modHGM2, fileName="z:/test2", standardized = FALSE, quick=TRUE)
 
+
+# 3. Reliabilitaet
+##################
+
+# koennen aus dem "results"-Objekt (dem Objekt, das die getResults()-Funktion zurueckgibt, extrahiert werden)
+def <- defineModel(dat = dat, id = "person", items = 2:41, software="tam")
+run <- runModel(def)
+results <- getResults(run)
+
+eapRelFromRes(results)
+wleRelFromRes(results)
