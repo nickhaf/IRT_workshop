@@ -108,7 +108,15 @@ Erstelle einen neuen Sub-Ordner und lege darin ein R-Skript and. In diesen komme
 
 
 ## Exkurs: `here`-Paket
+- Paket zum Erstellen von Dateipfaden.
+- Vermeidet Probleme mit relativen Pfaden. 
 
+".\raw_data\athletes.rds" wird zu `here::here("raw_data", "athletes.rds")`
+
+Also:
+```{r}
+athletes <- readRDS(here::here("raw_data", "athletes.rds"))
+```
 
 
 
@@ -152,6 +160,23 @@ psych_stats <- read.csv(
 
 :::: {.columns} 
 ::: {.column width="50%"}
+- Erweiterungen zum `base R`
+- Ein bisschen wie Apps im Playstore:
+- ![](./images/playstore.png){width="19"} Einmalig installieren: 
+
+```{r}  
+#| eval: false
+install.packages("packagename")
+```
+
+- ![](./images/app.png){width="19"} Bei jeder Nutzung in die R-Session laden:
+
+```{r}  
+#| eval: false
+library(packagename)
+```
+
+Icons from [icons8.de](https://icons8.de).
 
 :::
 
@@ -162,4 +187,253 @@ psych_stats <- read.csv(
 :::: 
 Foto von <a href="https://unsplash.com/de/@elnazasadi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">elnaz asadi</a> auf <a href="https://unsplash.com/de/fotos/ein-mehrfarbiges-muster-aus-sechseckigen-formen-Ej50vyvxJ94?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   
+  
+## `tidyverse`
+- Sehr beliebter Paketsammlung in R. 
+- Folgen einer grundlegenden Philosophie, ich persönlich arbeiter lieber damit (aber Präferenzfrage).
+- Deswegen zeige ich oft beides, der meiste Code wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
 
+## `tidyverse`: Pipe Operator
+
+```{r}
+sum(seq(from = 1, to = mean(c(45:100), na.rm = TRUE), by = 0.1))
+```
+
+wird zu:
+
+```{r}
+library(tidyverse)
+
+c(45:100) %>%
+  mean(na.rm = TRUE) %>%
+  seq(from = 1, to = ., by = 0.1) %>%
+  sum
+```
+
+
+# Datenmanipulation und Transformation
+
+# Einen Überblick bekommen: `View()`
+https://unsplash.com/de/fotos/mann-steht-auf-grossem-schachbrett-mit-brustfiguren-im-park-UDfmSK4AS3E
+- Datensatz in neuem Fenster:
+```{r}
+View(athletes)
+```
+
+## Einen Überblick bekommen: `str()`
+- Struktur der Daten:
+```{r}
+str(athletes)
+```
+
+## Einen Überblick bekommen: `head()`
+- Erste Zeilen:
+
+```{r}
+head(athletes)
+```
+
+
+# Subsetting
+
+"zeilen zuerst, spalten später"
+
+[Zeile, Spalte]
+
+## Subsetting
+
+```{r}
+# Extract the columns by name:
+athletes[c(1,4), c("Year", "Sport")]
+```
+
+## Konditionales Subsetting
+
+```{r}
+athletes[athletes$Team == "Germany", ]
+```
+
+- Alle Zeilen, in denen `Team` gleich `Germany` ist.
+- Was passiert hier genau?
+- Wir erzeugen einen Boolean Vektor (besteht aus TRUE und FALSE), der anzeigt, welche Zeilen ausgewählt werden sollen:
+
+```{r}
+athletes$Team == "Germany"
+```
+
+## Konditionales Subsettting
+
+```{r}
+athletes_3 <- athletes[(athletes$Sport == "Judo") & (athletes$Weight > 100 | athletes$Weight < 50), ]
+head(athletes_3)
+```
+
+## Subsetting: Tidyverse
+```{r, output.lines=4}
+library(tidyverse)
+
+athletes %>%
+  filter(Sport == "Judo", (Weight > 100 | Weight < 50)) %>%
+  head
+```
+
+```{r, output.lines=4}
+athletes %>%
+  select(Year, Sport) %>%
+  head
+```
+
+
+## Übung
+- Link zur Übungsseite mit den Übungen die ich schon vorbereitet habe
+
+
+# Fehlende Werte
+- `NA
+
+```{r}
+is.na(athletes$Weight)
+```
+
+
+```{r}
+athletes[(athletes$Sport == "Judo") & (athletes$Weight > 100 | athletes$Weight < 50) & !is.na(athletes$Weight), ]
+```
+
+```{r}
+athletes_na <- athletes[!is.na(athletes$Weight), ]
+head(athletes_na)
+```
+
+```{r}
+library(tidyverse)
+
+athletes_na <- athletes %>%
+  drop_na(Weight)
+head(athletes_na)
+```
+
+
+# Reshaping
+
+
+## Wide- und Long-Format
+```{r}
+inhabitants_wide <- data.frame(
+  country = c("China", "India", "USA"),
+  inhabitants_2021 = c(1425893465 , 1407563842, NA),
+  inhabitants_2022 = c(1425857720, 1420939232, 338903174)
+)
+
+head(inhabitants_wide)
+```
+
+```{r}
+#| echo: false
+
+inhabitants_long <- inhabitants_wide %>%
+  mutate(inhabitants_2021 = c(9597000, 3287000, 9834000)) %>%
+  rename(area = inhabitants_2021) %>%
+  pivot_longer(!country, names_to = "variable", values_to = "value") %>%
+  data.frame()
+
+head(inhabitants_long)
+```
+
+
+## Von Wide zu Long
+
+```{r}
+inhabitants_long_2 <- inhabitants_wide %>%
+  pivot_longer(
+    ## Spalten die gereshaped werden sollen
+    cols = c("inhabitants_2022", "inhabitants_2021"),
+    ## Neue Spalte, in der die bisherigen Spaltennamen gespeichert werden
+    names_to = "year",
+    ## Neue Spalte, in der die bisherigen Werte gespeichert werden
+    values_to = "inhabitants"
+  )
+
+head(inhabitants_long)
+```
+
+## Von Long zu Wide
+
+```{r}
+inhabitants_wide_2 <- inhabitants_long %>%
+  pivot_wider(
+    id_cols = "country",
+    names_from = "variable",
+    values_from = "value"
+  )
+
+head(inhabitants_wide_2)
+```
+
+# Merging
+
+## 
+```{r}
+world_coordinates <- readRDS(file = here::here("raw_data", "world_coordinates.rds"))
+```
+
+```{r}
+medal_counts <- athletes %>%
+  filter(Medal == "Gold") %>%
+  group_by(Region) %>%
+  count(Medal) 
+
+medal_counts
+```
+
+
+```{r}
+medal_countries <- merge(
+  x = medal_counts,
+  y = world_coordinates,
+  by.x = "Region",
+  by.y = "region",
+  all.x = FALSE,
+  all.y = TRUE
+)
+
+head(medal_countries)
+```
+
+
+```{r}
+medal_countries <- world_coordinates %>%
+  left_join(medal_counts, join_by(region == Region))
+head(medal_countries)
+```
+
+# Funktionen
+
+## Basics
+
+function_name <- function(argument_1, argument_2, ...){
+  do some operations
+  
+  return(result)
+}
+
+
+## Motivation
+- Alles was etwas in R **tut** ist eine Funktion. 
+- Superhilfreich, sich eigene Funktionen zu schreiben, weil das eine Menge Code-Duplikationen vermeidet (und die sind schlecht). 
+
+## Beispiel
+```{r}
+sum_num <- function(x, y, z = 0){
+  result <- x + y + z
+  return(result)
+}
+
+sum_num(x = 1, y = 1, z = 2)
+```
+
+
+# Aufs folgende evtl. zurückkommen, falls es relevant wird. 
+# Loops
+
+# Plots
