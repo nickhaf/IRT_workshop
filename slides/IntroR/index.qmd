@@ -217,6 +217,7 @@ c(45:100) %>%
 https://unsplash.com/de/fotos/mann-steht-auf-grossem-schachbrett-mit-brustfiguren-im-park-UDfmSK4AS3E
 - Datensatz in neuem Fenster:
 ```{r}
+#| eval: false
 View(athletes)
 ```
 
