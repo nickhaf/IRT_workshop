@@ -3516,6 +3516,19 @@
       ],
       "Hash": "16aa934a49658677d8041df9017329b9"
     },
+    "weights": {
+      "Package": "weights",
+      "Version": "1.0.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "Hmisc",
+        "gdata",
+        "lme4",
+        "mice"
+      ],
+      "Hash": "d174704180ec2634a0b4a573ca554fec"
+    },
     "whisker": {
       "Package": "whisker",
       "Version": "0.4.1",
