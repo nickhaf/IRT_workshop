@@ -1,10 +1,15 @@
 ---
 title: "Folien"
-listing: 
-  contents: 
-    - ./IntroR/index.qmd
-    - ./Vorraussetzung/index.qmd
-    - ./GLM/index.qmd
-  type: table
-  sort: "grid"
 ---
+
+# Einführung Item Response Theorie
+{{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}}
+
+# Einführung in R
+{{< revealjs "./IntroR/index.html" >}}
+
+# GLM
+{{< revealjs "./GLM/index.html" >}}
+
+# Linking
+{{< revealjs "./Vorraussetzung/index.html" >}}
