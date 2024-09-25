@@ -1,0 +1,97 @@
+---
+title: "Linking"
+lang: de
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: 
+  letterbox-revealjs:
+    embed-resources: true
+    logo: "../../images/iqb.svg"
+execute: 
+  echo: true
+---
+
+
+# Höher parametrisierte IRT Modelle
+
+## Wiederholung 
+
+### 1PL Modell
+
+$$
+logit(P(X_{pi}=1)) = \theta_p - \beta_i
+$$
+- Logit: Transformation unseres linearen Terms, damit die Werte zwischen 0 und 1 liegen. 
+- Inverse der logit ist die Logistic function. 
+
+$$
+P(X_{pi}=1) = logistic(\theta_p - \beta_i)
+$$
+
+## 1PL exponentielle Form des logistischen Modells
+
+https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/The-Logit-Function/index.html
+$$
+P(X_{pi}=1) = \frac{exp(\theta_p - \beta_i)}{1 + exp(\theta_p - \beta_i)}
+$$
+$$
+P(X_{pi}=1) = \frac{e^{\theta_p - \beta_i}}{1 + e^{\theta_p - \beta_i}}
+$$
+
+$$
+P(X_{pi}=1) = \frac{1}{1 + e^{-\theta_p + \beta_i}}
+$$
+
+## 3PL
+Wäre eigentlich schöner in der logit-variante. Was passiert dort aber mit gamma?
+
+$$
+P(X_{pi}=1) = \gamma_i + (1-\gamma_i)\frac{exp(\alpha_i(\theta_p - \beta_i)))}{1 + exp(\alpha_i(\theta_p - \beta_i))}
+$$
+- $\beta_i$: easiness
+- $\alpha_i$: discrimination/factor loading/slope
+- $\gamma_i$ : guessing probability
+ - Kann entweder geschätzt oder gesetzt werden (z.B. bei 4 Antwortmöglichkeiten: $\gamma_i = 1/4 = 0.25$)
+
+- Dann werden nacheinander einige der Parameter auf 0 oder 1 gesetzt, sodass ihr Einfluss weggeht. 
+- Bürkner Paper
+
+
+## Shiny App for demonstration?
+Auf alle Fälle zeigen, wie es aussieht!
+
+## 2PL
+
+$\gamma_i = 0$
+
+$$
+P(X_{pi}=1) = \color{red}{0} + (1-\color{red}{0})\frac{exp(\alpha_i(\theta_p - \beta_i)))}{1 + exp(\alpha_i(\theta_p - \beta_i))}
+$$
+
+## 1PL
+$\alpha_i = 1$
+
+$$
+P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{red}{1}(\theta_p - \beta_i)))}{1 + exp(\color{red}{1}(\theta_p - \beta_i))}
+$$
+
+## Partial Credit
+- https://statmath.wu.ac.at/~hatz/psychometrics/11w/GPCM_GRM_GRASOM.pdf
+- Ordinale Daten (geordnete Antwortkategorien, z.b. Likert Skala)
+- Erweiterung des 1PL Modells
+- Wahrscheinlichkeit für die Antwort in einer bestimmten Kategorie wird als exponential geteilt durch die summe aller Exponentiale geschrieben. 
+- Stepsize parameter shows, where on the latent-trait scale the response of one category becomes realtively more likely than the previous category
+- https://statmath.wu.ac.at/~hatz/psychometrics/11w/GPCM_GRM_GRASOM.pdf
+  - PCM is rasch (because model-wide discrimination paramter). GRM is non-rasch, as well as G-PCM
+
+
+## Generalized Partial Credit Model?
+
+## Rating Scale Model?
+
+## Beispiele
+
+## Evtl: Wann welches Modell
+
+## Viel Übung
+- Eigene Simulation vielleicht hier hin packen. Als Beispiel für Entscheidungsfindung, welches Modell sinn machen könnte!
+ 
