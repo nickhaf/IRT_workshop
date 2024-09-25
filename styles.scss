@@ -1,11 +1,13 @@
 /*-- scss:defaults --*/
 
-$link-color: #2BBAA5;
+$link-color: #F4BA02;
+$body-bg: #01364C;
+$body-color: #E1E8EB;
 
 /*-- scss:rules --*/
 
-$theme-highlight: #F9A822;
-$theme-background: #FAECB6;
+$theme-highlight: #561a26;
+$theme-background: #E1E8EB;
 
 .slide-background-content{
     background-color: $theme-background;
@@ -24,3 +26,8 @@ $theme-background: #FAECB6;
       background-color: #f2f2f2;
     }
   }
+
+.cell-output {
+  background-color: body-color;
+  border-radius: 4px;
+}
