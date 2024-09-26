@@ -4,14 +4,22 @@ $theme-darkblue: #01364C;
 $theme-blue: #99D9DD;
 $theme-white: #E1E8EB;
 $theme-yellow: #F4BA02;
+$theme-red: #8a241e;
+
+
+$theme-barley: #FFF5D0;
+$theme-rhino: #1B475D;
+$theme-naples: #FAD564;
+$theme-olive: #B4BD62;
+$theme-neptune: #8EBD9D;
 
 $link-color: $theme-blue;
 $body-bg: $theme-white;
 $body-color: $theme_darkblue;
 
-$theme-highlight: $theme_yellow;
+$theme-highlight: $theme_red;
 $theme-background: $theme_white;
-$theme-codeblock: $theme_white;
+$theme-codeblock: $theme_darkblue;
 
 $code-block-border-color: lighten($body-bg, 70%);
 $code-block-bg: $theme-codeblock;
@@ -36,7 +44,7 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
 }
 
 .highlight{
-    color: $theme-yellow;
+    color: $theme-highlight;
 }
 
 

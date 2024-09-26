@@ -5,9 +5,13 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
   letterbox-revealjs:
     embed-resources: true
-    logo: "../../images/iqb.svg"
-execute: 
+    theme: ../../styles.scss
+code-link: true
+code-line-numbers: false
+execute:
   echo: true
+highlight-style: ../../dark.theme
+callout-appearance: simple
 ---
 
 
@@ -21,7 +25,8 @@ $$
 logit(P(X_{pi}=1)) = \theta_p - \beta_i
 $$
 - Logit: Transformation unseres linearen Terms, damit die Werte zwischen 0 und 1 liegen. 
-- Inverse der logit ist die Logistic function. 
+- Inverse der logit ist die Logistic function.
+- [This is my highlight.]{.highlight}
 
 $$
 P(X_{pi}=1) = logistic(\theta_p - \beta_i)
@@ -51,6 +56,7 @@ $$
 - $\alpha_i$: discrimination/factor loading/slope
 - $\gamma_i$ : guessing probability
  - Kann entweder geschätzt oder gesetzt werden (z.B. bei 4 Antwortmöglichkeiten: $\gamma_i = 1/4 = 0.25$)
+- Wenn die Lösungswahrscheinlichkeit auf der rehcten Seite sehr gering ist, ist sie immer noch mind. $\gamma_i$
 
 - Dann werden nacheinander einige der Parameter auf 0 oder 1 gesetzt, sodass ihr Einfluss weggeht. 
 - Bürkner Paper
@@ -82,6 +88,11 @@ $$
 - Stepsize parameter shows, where on the latent-trait scale the response of one category becomes realtively more likely than the previous category
 - https://statmath.wu.ac.at/~hatz/psychometrics/11w/GPCM_GRM_GRASOM.pdf
   - PCM is rasch (because model-wide discrimination paramter). GRM is non-rasch, as well as G-PCM
+
+## Formel
+
+
+
 
 ```{r}
 # theta: Personenfähigkeit, wie bereits bekannt
@@ -271,7 +282,7 @@ ggplot(results, aes(x = theta, y = E_score)) +
   labs(title = "Erwarteter Score (E_score) als Funktion von Theta",
        x = "Theta", 
        y = "Erwarteter Score (E_score)") +
-  theme_minimal()
+   theme_minimal()
 
 ```
 
