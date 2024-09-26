@@ -182,6 +182,99 @@ ggplot(results, aes(x = theta, y = prob, color = factor(x))) +
 
 ```
 
+## Raw score curve
+Das summiert dann über alle Items auf. Vielleicht später noch zeigen. 
+```{r}
+calc_pcm <- function(theta, delta){
+  
+  m <- length(delta)  # Anzahl der Kategorien (m + 1 Kategorien)
+  probs <- numeric(m + 1)  # Speicher für die Wahrscheinlichkeiten
+  
+  # Berechnung des Nenners (dieser ist für alle x gleich)
+  nenner <- sum(sapply(0:m, function(r){
+    exp(sum(sapply(0:r, function(j){
+      if(j == 0){
+        diff_td <- 0
+      }else{
+        diff_td <- theta - delta[j]
+      }
+      return(diff_td)
+    })))
+  }))
+  
+  # Berechne die Wahrscheinlichkeiten für alle Kategorien x = 0 bis m
+  for (x in 0:m) {
+    zaehler <- exp(sum(
+      sapply(0:x, function(j){
+        if(j == 0){
+          diff_td <- 0
+        }else{
+          diff_td <- theta - delta[j]
+        }
+        return(diff_td)
+      })
+    ))
+    probs[x + 1] <- zaehler / nenner  # Wahrscheinlichkeit für Kategorie x
+  }
+  
+  # Erwartungswert E(X) berechnen
+  E_X <- sum(0:m * probs)
+  
+  return(list(probs = probs, E_X = E_X))
+}
+
+# Beispielrechnung mit theta = 0 und delta = c(-0.29, 0.95)
+## Item 1
+result_1 <- calc_pcm(theta = 0, delta = c(-0.29, 0.95))
+
+## Item 2
+result_2 <- calc_pcm(theta = 0, delta = c(-0.5, 0.78))
+
+E_score <- result_1$E_X + result_2$E_X
+
+
+```
+
+```{r}
+if(!require('ggplot2')) {install.packages('ggplot2'); library(ggplot2)}
+
+# Funktion zur Berechnung des erwarteten Scores (E_score) für verschiedene Theta-Werte
+compute_E_score <- function(theta_vals, delta_1, delta_2) {
+  results <- data.frame(theta = theta_vals, E_score = numeric(length(theta_vals)))
+  
+  for (i in 1:length(theta_vals)) {
+    theta <- theta_vals[i]
+    result_1 <- calc_pcm(theta = theta, delta = delta_1)
+    result_2 <- calc_pcm(theta = theta, delta = delta_2)
+    
+    # Berechne den erwarteten Score E_score für dieses theta
+    E_score <- result_1$E_X + result_2$E_X
+    results$E_score[i] <- E_score
+  }
+  
+  return(results)
+}
+
+# Theta-Werte Bereich definieren
+theta_vals <- seq(-3, 3, length.out = 100)
+
+# Schwellenwerte für beide Items
+delta_1 <- c(-0.29, 0.95)  # Schwellen für Item 1
+delta_2 <- c(-0.5, 0.78)   # Schwellen für Item 2
+
+# Berechne E_score für verschiedene Theta-Werte
+results <- compute_E_score(theta_vals, delta_1, delta_2)
+
+# Plotten mit ggplot2
+ggplot(results, aes(x = theta, y = E_score)) +
+  geom_line(color = "blue", size = 1) +
+  labs(title = "Erwarteter Score (E_score) als Funktion von Theta",
+       x = "Theta", 
+       y = "Erwarteter Score (E_score)") +
+  theme_minimal()
+
+```
+
 Reversal vs. non-reversal. 
 
 ## Generalized Partial Credit Model?
