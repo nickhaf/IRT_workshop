@@ -83,6 +83,106 @@ $$
 - https://statmath.wu.ac.at/~hatz/psychometrics/11w/GPCM_GRM_GRASOM.pdf
   - PCM is rasch (because model-wide discrimination paramter). GRM is non-rasch, as well as G-PCM
 
+```{r}
+# theta: Personenfähigkeit, wie bereits bekannt
+# delta: Schwellenschwierigkeit. Also quasi eine Levelspezifische Schwiergikeit
+# m: Anzahl an steps. Müsste eigentlich der länge vom delta-vector entsprechen. Kann also weg
+
+theta=2
+## wenn j = 0 kommt in der Summe 0 raus. Also delta immer mit 0 anfangen lassen
+delta=c(0.5, 0.2)
+
+# x ist  die Kategorie, an der wir interessiert sind. Wenn also jemand Kategorie 0 angekreuzt hat, wird x = 1 gesetzt. 
+
+calc_pcm <- function(theta, x, delta){
+  
+  m <- length(delta)
+  
+  zaehler <- exp(sum(
+    
+    sapply(0:x, function(j){
+    
+    if(j == 0){
+      diff_td <- 0
+    }else{
+    diff_td <- theta-delta[j]
+    }
+    return(diff_td)
+    }
+    )
+    
+    ))
+  
+  nenner <- sum(sapply(0:m, function(r){
+    exp(sum(sapply(0:r, function(j){
+   if(j == 0){
+      diff_td <- 0
+    }else{
+    diff_td <- theta-delta[j]
+    }
+      return(diff_td)
+      })))
+  }))
+  
+  return(zaehler/nenner)
+  
+}
+
+calc_pcm(theta = 0, x = 0, delta = c(-0.29, 0.95))
+## Wohooo, funktioniert!
+## Wie kann ich die jetzt plotten?
+
+```
+
+```{r}
+if(!require('ggplot2')) {install.packages('ggplot2'); library(ggplot2)}
+if(!require('dplyr')) {install.packages('dplyr'); library(dplyr)}
+
+# Schwellenparameter (delta)
+delta <- c(-0.29, 0.95)  # Die Schwellen
+theta_vals <- seq(-3, 3, length.out = 100)  # Werte für theta
+x_max <- length(delta)  # Maximale Kategorie, hier nur 2 Schwellen -> 3 Kategorien
+
+# Leere Liste, um die Wahrscheinlichkeiten zu speichern
+results <- data.frame()
+
+# Berechne die Wahrscheinlichkeiten für jedes theta und jede Kategorie x
+for (theta in theta_vals) {
+  for (x in 0:x_max) {
+    prob <- calc_pcm(theta, x, delta)
+    results <- rbind(results, data.frame(theta = theta, x = x, prob = prob))
+  }
+}
+
+# Finde den minimalen Wert der y-Achse (für das Enden der Linien)
+min_prob <- min(results$prob)
+
+# Nächste theta-Werte finden, die den delta-Werten am nächsten sind
+delta_theta1 <- theta_vals[which.min(abs(theta_vals - delta[1]))]
+delta_theta2 <- theta_vals[which.min(abs(theta_vals - delta[2]))]
+
+# Plotte die Wahrscheinlichkeiten für jede Kategorie x
+ggplot(results, aes(x = theta, y = prob, color = factor(x))) +
+  geom_line(size = 1) +
+  
+  # Dezente Linien nur bis zum Kreuzungspunkt (max Wahrscheinlichkeiten bei den Näherungen von delta)
+  annotate("segment", x = delta[1], xend = delta[1], 
+           y = min_prob, yend = max(results$prob[results$theta == delta_theta1]), 
+           color = "grey60", linetype = "dashed", size = 0.5) +
+  annotate("segment", x = delta[2], xend = delta[2], 
+           y = min_prob, yend = max(results$prob[results$theta == delta_theta2]), 
+           color = "grey60", linetype = "dashed", size = 0.5) +
+  labs(title = "Wahrscheinlichkeitskurven für das Partial Credit Model",
+       x = "Theta", 
+       y = "Wahrscheinlichkeit",
+       color = "Kategorie") +
+  theme_minimal()
+
+## Gut zu sehen ist, dass an unseren delta-Werten eine andere Kurve Wahrscheinlicher wird!
+
+```
+
+Reversal vs. non-reversal. 
 
 ## Generalized Partial Credit Model?
 
