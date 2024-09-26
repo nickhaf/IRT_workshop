@@ -15,5 +15,5 @@ website:
 format:
   html:
     theme: flatly
-    css: styles.css
+    scss: styles.scss
     toc: true

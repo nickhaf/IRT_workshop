@@ -1,33 +1,39 @@
 ---
 title: "Einführung in R"
+title-slide-attributes:
+  data-background-image: ./images/r_icon.png
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
   letterbox-revealjs:
     embed-resources: true
+    theme: ../../styles.scss
 code-link: true
+code-line-numbers: false
 execute:
   echo: true
+highlight-style: ../../light.theme
+callout-appearance: simple
 ---
 
+## R und RStudio
 
 ## RStudio Interface
 
 Beim ersten Öffnen wird RStudio in etwa so aussehen:
 
-![](./images/RStudio_window.PNG)
+![](./images/RStudio_window.PNG){fig-align="center"}
 
 ## RStudio Interface
 Das Fenster hat 4 Bereiche:
 
-![](./images/window_commented.PNG)
+![](./images/window_commented.PNG){fig-align="center"}
 
 ## 1) Script Pane
-
-- Editieren von Skripten (Datein, in denen Code gespeichert wird)
-- Ausführen einer Code-Zeile (oder von markiertem Code) durch `ctrl + enter` (Windows), oder `command + return` (macOS). 
+Editieren von Skripten (Datein, in denen Code gespeichert wird) und ausführen von Code (`crtl + enter` (Windows) oder `command + return` (macOS).
 
 ```{r}
+#| code-link: true
 # Our first line of code:
 print("Hello World!")
 ```
@@ -38,52 +44,133 @@ print("Hello World!")
 
 ## 2) Console
 
-- Hier erscheint der Output.
-- Wir können auch direkt in der Konsole arbeiten und Befehle mit Enter ausführen:
+Hier erscheint der Output aus unseren Skripten. Wir können auch direkt in der Konsole arbeiten und Befehle mit Enter ausführen:
 
 ```{r}
-# Sum two values
 10 + 5
 ```
 
 :::{.callout-warning}
-Achte nur darauf, dass der Code, den du hier schreibst, nicht gespeichert wird. Die Konsole wird also eher genutzt, um Dinge auszuprobieren oder für Code, den du nicht in einem Skript speichern musst.
+Hier geschriebener Code wird nicht gespeichert. Nutze die Konsole also, um Dinge auszuprobieren, schreibe aber alles Wichtige in Skripte. 
 :::
 
-## 3) Workspace
-
-Im `Umgebungs-Tab` erhältst du einen Überblick über die Objekte, die derzeit in deiner R-Sitzung geladen sind. Du kannst auch deinen Befehlsverlauf einsehen und einige weitere Dinge, die wir jetzt nicht benötigen.
+## 3) Workspace 
+Im [Environment]{.highlight}-Tab erhalten wir einen Überblick über die Objekte, die derzeit in unserer R-Sitzung geladen sind.    
+\
+Wir können auch den Befehlsverlauf einsehen und einige weitere Dinge, die wir jetzt nicht benötigen.
 
 ## 4) Plots, Datein, Hilfe ...
 
-Die Plots, die du in deiner R-Sitzung erstellst, werden im Plot-Tab ausgegeben. Wenn du die Hilfefunktion aufrufst, öffnet sich die Dokumentation im Hilfe-Tab. Der Dateien-Tab ermöglicht es dir, die Dateien in deinem Arbeitsverzeichnis zu verwalten.
+Plots, die wir in einer R-Sitzung erstellen, werden im [Plot]{.highlight}-Tab ausgegeben.  
+\
+Beim Aufrufen der Hilfefunktion öffnet sich die Dokumentation im [Hilfe]{.highlight}-Tab.  
+
+\
+
+Der [Dateien]{.highlight}-Tab ermöglicht es uns, die Dateien in unserem Arbeitsverzeichnis zu verwalten.
 
 
-# Los Geht's!
-Hintergrundbild von R Code. 
+## {background-image="images/coder.jpg" background-size="1150px"}
 
-# Basic Setup
+::: {.absolute left="5%" bottom="5%"}
+
+Los Geht's!
+:::
+
+
+
+## {background-image="images/setup.jpg" background-size="1150px"}
+
+::: {.absolute left="5%" top="5%" }
+
+Basic Setup
+:::
 
 ## RStudio Projekte
-- Hilft ungemein beim Organisieren von Dateien und Code.
-- `File - New Project`
+Hilft ungemein beim Organisieren von Dateien und Code!
 
 :::{.callout-warning}
 ## Übung
-Erstelle einen neuen Ordner (falls noch nicht getan) für diesen Workshop, und lege darin ein RStudio Projekt an.
+Erstelle einen neuen Ordner (falls noch nicht getan) für diesen Workshop, und lege darin ein RStudio Projekt an (`File - New Project`).
 :::
 
 ## Skripte
 Hier kommt der Code rein!
 
-`File - New File - R Script`
-
 :::{.callout-warning}
 ## Übung
-Erstelle einen neuen Sub-Ordner und lege darin ein R-Skript and. In diesen kommen dann die Übungsaufgaben und Notizen aus der jetzigen Sitzung. 
+Erstelle einen neuen Unterordner und lege darin ein R-Skript and (`File - New File - R Script`). In diesen kommen dann die Übungsaufgaben und Notizen aus dem Workshop. Leg am besten für jedes Thema ein eigenes Skript an, damit sie übersichtlich bleiben.
 :::
 
-# Daten
+
+## Pakete
+
+:::: {.columns} 
+::: {.column width="50%"}
+Pakete sind Erweiterungen zum `base R` und funktionieren ein bisschen wie Apps im Playstore:
+
+- ![](./images/playstore.png){width="19"} Einmalig installieren: 
+
+```{r}  
+#| eval: false
+install.packages("packagename")
+```
+
+- ![](./images/app.png){width="19"} Bei jeder Nutzung in die R-Session laden:
+
+```{r}  
+#| eval: false
+library(packagename)
+```
+
+
+:::
+
+::: {.column width="50%"}
+
+![](./images/pakete.jpg){.image-right}
+::: 
+:::: 
+
+## `tidyverse` {style="text-align: right;"}
+:::: {.columns} 
+
+::: {.column width="50%"}
+![](./images/tidyverse_logo.png){.image-left}
+:::
+::: {.column width="50%"}
+- Das [`tidyverse`](https://www.tidyverse.org/) ist eine verbreitete Paketsammlung in R. 
+- Folgen einer grundlegenden Philosophie, ich persönlich arbeiter lieber damit (aber Präferenzfrage).
+- Deswegen zeige ich oft beides, der meiste Code wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
+:::
+::::
+## `tidyverse`: Pipe Operator
+
+%>%
+
+```{r}
+sum(seq(from = 1, to = mean(c(45:100), na.rm = TRUE), by = 0.1))
+```
+
+wird zu:
+
+```{r}
+library(tidyverse)
+
+c(45:100) %>%
+  mean(na.rm = TRUE) %>%
+  seq(from = 1, to = ., by = 0.1) %>%
+  sum
+```
+
+
+
+## {background-image="images/data.jpg" background-size="1200px"}
+
+::: {.absolute right="5%" top="5%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255 .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255 .5); border-radius: 5px;"}
+
+Daten und Pfade
+:::
 
 ## Einlesen von Daten
 ```{css}
@@ -106,8 +193,15 @@ Erstelle einen neuen Sub-Ordner und lege darin ein R-Skript and. In diesen komme
 | SAS-files (.sas)      | `haven::read_sas()`       | `haven::write_sas()`      |
 | Stata-files (.stata)  | `haven::read_dta()`       | `haven::write_dta()`      |
 
+: {.striped}
+
+## {background-color="#FFFFFF"}
+![](./images/here.png){fig-align="center"}
+
 
 ## Exkurs: `here`-Paket
+
+
 - Paket zum Erstellen von Dateipfaden.
 - Vermeidet Probleme mit relativen Pfaden. 
 
@@ -115,10 +209,9 @@ Erstelle einen neuen Sub-Ordner und lege darin ein R-Skript and. In diesen komme
 
 Also:
 ```{r}
+# install.packages("here")
 athletes <- readRDS(here::here("raw_data", "athletes.rds"))
 ```
-
-
 
 ## Übung
 
@@ -155,60 +248,6 @@ psych_stats <- read.csv(
 ```
 :::
 
-
-## Pakete
-
-:::: {.columns} 
-::: {.column width="50%"}
-- Erweiterungen zum `base R`
-- Ein bisschen wie Apps im Playstore:
-- ![](./images/playstore.png){width="19"} Einmalig installieren: 
-
-```{r}  
-#| eval: false
-install.packages("packagename")
-```
-
-- ![](./images/app.png){width="19"} Bei jeder Nutzung in die R-Session laden:
-
-```{r}  
-#| eval: false
-library(packagename)
-```
-
-Icons from [icons8.de](https://icons8.de).
-
-:::
-
-::: {.column width="50%"}
-
-![](./images/pakete.jpg){.image-right}
-::: 
-:::: 
-Foto von <a href="https://unsplash.com/de/@elnazasadi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">elnaz asadi</a> auf <a href="https://unsplash.com/de/fotos/ein-mehrfarbiges-muster-aus-sechseckigen-formen-Ej50vyvxJ94?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-  
-  
-## `tidyverse`
-- Sehr beliebter Paketsammlung in R. 
-- Folgen einer grundlegenden Philosophie, ich persönlich arbeiter lieber damit (aber Präferenzfrage).
-- Deswegen zeige ich oft beides, der meiste Code wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
-
-## `tidyverse`: Pipe Operator
-
-```{r}
-sum(seq(from = 1, to = mean(c(45:100), na.rm = TRUE), by = 0.1))
-```
-
-wird zu:
-
-```{r}
-library(tidyverse)
-
-c(45:100) %>%
-  mean(na.rm = TRUE) %>%
-  seq(from = 1, to = ., by = 0.1) %>%
-  sum
-```
 
 
 # Datenmanipulation und Transformation
@@ -438,3 +477,13 @@ sum_num(x = 1, y = 1, z = 2)
 # Loops
 
 # Plots
+
+# Image links
+- https://unsplash.com/de/fotos/schwarzer-flachbildschirm-gA396xahf-Q
+- Foto von <a href="https://unsplash.com/de/@adigold1?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Adi Goldstein</a> auf <a href="https://unsplash.com/de/fotos/graustufenfotografie-eines-mannes-im-gestreiften-hemd-rgkKFn5Ysb0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Icons from [icons8.de](https://icons8.de).
+- Foto von <a href="https://unsplash.com/de/@elnazasadi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">elnaz asadi</a> auf <a href="https://unsplash.com/de/fotos/ein-mehrfarbiges-muster-aus-sechseckigen-formen-Ej50vyvxJ94?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@kommumikation?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Mika Baumeister</a> auf <a href="https://unsplash.com/de/fotos/weisses-druckpapier-mit-zahlen-Wpnoqo2plFA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- https://upload.wikimedia.org/wikipedia/commons/f/ff/Tidyverse_hex_logo.png
+- https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/here.png
+  
