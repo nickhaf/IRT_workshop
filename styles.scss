@@ -1,21 +1,45 @@
 /*-- scss:defaults --*/
 
-$link-color: #F4BA02;
-$body-bg: #01364C;
-$body-color: #E1E8EB;
+$theme-darkblue: #01364C;
+$theme-blue: #99D9DD;
+$theme-white: #E1E8EB;
+$theme-yellow: #F4BA02;
+
+$link-color: $theme-blue;
+$body-bg: $theme-darkblue;
+$body-color: $theme_white;
+
+$theme-highlight: $theme_yellow;
+$theme-background: $theme_white;
+$theme-codeblock: $theme_white;
+
+$code-block-border-color: lighten($body-bg, 70%);
+$code-block-bg: $theme-codeblock;
+$code-color: $theme-highlight;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+$font-family-sans-serif: 'Roboto', sans-serif;
+$presentation-heading-font: 'Roboto Condensed', san-serif;
 
 /*-- scss:rules --*/
 
-$theme-highlight: #561a26;
-$theme-background: #E1E8EB;
-
-.slide-background-content{
-    background-color: $theme-background;
+.absolute {
+    font-family: 'Roboto Condensed', san-serif;
+    font-size:2em;
+    padding: 0.5em 0.5em;
+    background-color: rgba(255, 255, 255, .0);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5);
+    border-radius: 5px;
 }
 
 .highlight{
-    color: $theme-highlight;
+    color: $theme-yellow;
 }
+
+
 
 .link{
     color: $link-color;
@@ -23,11 +47,18 @@ $theme-background: #E1E8EB;
 
 .table-striped {
     > tbody > tr:nth-of-type(odd) > * {
-      background-color: #f2f2f2;
+      background-color: $theme_white;
     }
   }
 
-.cell-output {
-  background-color: body-color;
-  border-radius: 4px;
+
+.reveal pre code {
+  background-color: $theme-white;
+  color: $theme-darkblue;
+}
+
+.reveal div.sourceCode {
+  border: none;
+  border-radius: 0px;
+  margin-bottom: 10px !important;
 }

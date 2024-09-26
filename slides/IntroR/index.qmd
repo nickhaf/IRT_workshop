@@ -9,22 +9,12 @@ format:
     embed-resources: true
     theme: ../../styles.scss
 code-link: true
+code-line-numbers: false
 execute:
   echo: true
+highlight-style: ../../light.theme
+callout-appearance: simple
 ---
-
-```{r}
-#| eval: false
-
-# https://www.pinterest.de/pin/842384305333412119/
-
-library(aRtsy)
-
-set.seed(43)
-canvas_collatz(colors = c("#3d528f", "#DEE1E1", "#561a26", "#cfbbab", "#A4B5D0"))
-
-```
-
 
 ## R und RStudio
 
@@ -43,6 +33,7 @@ Das Fenster hat 4 Bereiche:
 Editieren von Skripten (Datein, in denen Code gespeichert wird) und ausführen von Code (`crtl + enter` (Windows) oder `command + return` (macOS).
 
 ```{r}
+#| code-link: true
 # Our first line of code:
 print("Hello World!")
 ```
@@ -63,8 +54,7 @@ Hier erscheint der Output aus unseren Skripten. Wir können auch direkt in der K
 Hier geschriebener Code wird nicht gespeichert. Nutze die Konsole also, um Dinge auszuprobieren, schreibe aber alles Wichtige in Skripte. 
 :::
 
-## 3) Workspace {background-image="images/artwork.png" background-size="400px"}
-
+## 3) Workspace 
 Im [Environment]{.highlight}-Tab erhalten wir einen Überblick über die Objekte, die derzeit in unserer R-Sitzung geladen sind.    
 \
 Wir können auch den Befehlsverlauf einsehen und einige weitere Dinge, die wir jetzt nicht benötigen.
@@ -82,7 +72,7 @@ Der [Dateien]{.highlight}-Tab ermöglicht es uns, die Dateien in unserem Arbeits
 
 ## {background-image="images/coder.jpg" background-size="1150px"}
 
-::: {.absolute left="5%" bottom="5%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255 .5); border-radius: 5px;"}
+::: {.absolute left="5%" bottom="5%"}
 
 Los Geht's!
 :::
@@ -91,7 +81,7 @@ Los Geht's!
 
 ## {background-image="images/setup.jpg" background-size="1150px"}
 
-::: {.absolute right="5%" top="5%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
+::: {.absolute left="5%" top="5%" }
 
 Basic Setup
 :::
@@ -205,7 +195,7 @@ Daten und Pfade
 
 : {.striped}
 
-##  
+## {background-color="#FFFFFF"}
 ![](./images/here.png){fig-align="center"}
 
 
