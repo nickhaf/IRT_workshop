@@ -19,12 +19,12 @@ format:
 
   letterbox-revealjs:
     embed-resources: true
-    theme: ../../styles.scss
+    theme: styles.scss
 
 code-link: true
 code-line-numbers: false
 execute:
   echo: true
-highlight-style: ../../dark.theme
+highlight-style: dark.theme
 callout-appearance: simple
 lang: de
