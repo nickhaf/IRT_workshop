@@ -192,7 +192,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">26. September 2024</p>
+      <p class="date">27. September 2024</p>
     </div>
   </div>
   
@@ -219,7 +219,7 @@ P(X_{is} = 1|\theta_s,\beta_i,\alpha_i) = \frac{\exp(\alpha_i(\theta_s-\beta_i))
 <ol type="1">
 <li>Versuche noch einmal, alle Elemente von <a href="#eq-2PL" class="quarto-xref">Gleichung&nbsp;1</a> für dich selbst zu erklären.</li>
 </ol>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-simple callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -239,18 +239,12 @@ Lösung
 <ol start="2" type="1">
 <li>Jetzt beginnt der fun part: Schreibe eine <a href="">Funktion</a> genannt <code>calc_2pl</code> die <a href="#eq-2PL" class="quarto-xref">Gleichung&nbsp;1</a> in R Code umsetzt.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Tipp
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<div class="callout-body-container">
 <p>Der Aufbau der Funktion könnte so aussehen:</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">calc_2pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">theta</span>, <span class="va">beta</span><span class="op">)</span><span class="op">{</span></span>
@@ -260,8 +254,8 @@ Tipp
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -270,7 +264,7 @@ Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">calc_2pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">theta</span>, <span class="va">xi</span><span class="op">)</span><span class="op">{</span></span>
@@ -296,8 +290,8 @@ Lösung
 <li>
 <code>beta</code>: Die Schwierigkeitsparameter, liegen zwischen -3 und 3 jeweils im Abstand von 0.5.</li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -306,14 +300,14 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Die Funktion <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> ist dein Freund. Mehr brauchst du nicht, um die Zahlenreihen zu erzeugen. Schaue dir die Dokumentation an.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -322,7 +316,7 @@ Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">items</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
@@ -345,8 +339,8 @@ Lösung
 <li>
 <code>theta</code>: Die Fähigkeit der Person, die wir simulieren. Wir nehmen an, dass die Fähigkeit normalverteilt ist, mit einem Mittelwert von 0 und einer Standardabweichung von 1.</li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -355,14 +349,14 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Wir können zufällige Daten aus einer Normalverteilung mit Hilfe der Funktion <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> ziehen.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -371,7 +365,7 @@ Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">666</span><span class="op">)</span> </span>
@@ -391,8 +385,8 @@ Lösung
 <ol start="3" type="1">
 <li>Merge die beiden <code>data.frames</code> <code>subjects</code> und <code>items</code> zu einem neuen <code>data.frame</code> <code>sim_dat</code> zusammen. Und zwar so, dass wir <span class="math inline">\(1000 * 13\)</span> Zeilen bekommen, also jede Person jedes der 13 Items zugeordnet wird (bisher noch ohne Antwort der Person, nur mit den Itemkennwerten. Das erleichtert uns im nächsten Schritt, die Antworten der Personen zu simulieren).</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -401,14 +395,14 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Nutze die Funktion <code><a href="https://rdrr.io/r/base/merge.html">merge()</a></code> ohne irgendwelche weiteren Argumente.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -417,7 +411,7 @@ Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">subjects</span>, <span class="va">items</span><span class="op">)</span></span>
@@ -451,8 +445,8 @@ Lösung
 <ol start="4" type="1">
 <li>Jetzt simulieren wir aus diesem Vorbereiteten <code>data.frame</code> die Antworten der Personen, abhängig von ihren Fähigkeiten <span class="math inline">\(\theta\)</span> (jede Person hat hier einen zufälligen Wert aus einer Normalverteilung mit <span class="math inline">\(\mu = 1\)</span> und <span class="math inline">\(\sigma = 1\)</span> bekommen) und den Itemparametern <span class="math inline">\(\alpha\)</span> und <span class="math inline">\(\beta\)</span> (die hatten wir einfach als Sequenz festgelegt). Lege eine neue Spalte <code>p</code> in <code>sim_dat</code> an, die für jede Person die Wahrscheinlichkeit enthält, dass sie das jeweilige Item richtig beantwortet. Dafür brauchen wir jetzt unsere Funktion <code>calc_2pl</code>, die wir am Anfang definiert haben! Diese nimmt aus jeder Zeile den <code>theta</code>, <code>alpha</code> und <code>beta</code> Wert als input, und berechnet daraus die Wahrscheinlichkeit, dass die Person das Item richtig beantwortet.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -461,14 +455,14 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Supereinfach geht das ganze mit der <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> Funktion aus dem <code>tidyverse</code>.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -477,7 +471,7 @@ Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat</span> <span class="op">&lt;-</span> <span class="va">sim_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -502,8 +496,8 @@ Lösung
 <ol start="5" type="1">
 <li>Jetzt sind wir auch schon fast am Ende. Wir müssen lediglich aus den Wahrscheinlichkeiten die tatsächlichen Antworten der Personen simulieren. Nutze die Berechneten Antwortwahrscheinlichkeiten <code>p</code>, um für jede Person und jedes Item einen Wert aus einer <a href="https://de.wikipedia.org/wiki/Bernoulli-Verteilung">Bernoulliverteilung</a> zu ziehen.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -512,14 +506,14 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Eine Bernoulliverteilung ist eine Binomialverteilung mit nur einem Versuch. Wir können daher die Funktion <code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code> nutzen, und das <code>size</code>-Argument auf 1 setzen.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -528,7 +522,7 @@ Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat</span> <span class="op">&lt;-</span> <span class="va">sim_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -555,8 +549,8 @@ Lösung
 <ol type="1">
 <li>Zuerst müssen wir unsere Daten dafür noch ein bisschen aufbereiten, sprich ins Wide-Format bringen. Probiere das also mal aus!</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -565,14 +559,14 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ich nutze dafür immer deutlich lieber die <code>tidyverse</code> Funktion <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> als die base-R Funtkion <code><a href="https://rdrr.io/r/stats/reshape.html">reshape()</a></code>.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -581,7 +575,7 @@ Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat_wide</span> <span class="op">&lt;-</span> <span class="va">sim_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -609,24 +603,18 @@ Lösung
 <ol start="2" type="1">
 <li>Jetzt können wir das Modell fitten. Nutze dafür wie angekündigt das <code>TAM</code> Paket, und entferne noch die Spalte <code>sub_id</code>, wir geben nur die Itemantworten in die Funktion. Speichere den Funktionsoutput in dem Object <code>sim_dat_2PL</code>.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Tipp
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<div class="callout-body-container">
 <p>Wir brauchen die Funktion <code><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam.mml.2pl()</a></code>.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -635,19 +623,19 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat_2PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam.mml.2pl</a></span><span class="op">(</span><span class="va">sim_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sub_id</span><span class="op">)</span>, irtmodel <span class="op">=</span> <span class="st">"2PL"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>....................................................
-Processing Data      2024-09-26 17:27:22.245423 
+Processing Data      2024-09-27 20:39:42.259757 
     * Response Data: 100000 Persons and  13 Items 
     * Numerical integration with 21 nodes
-    * Created Design Matrices   ( 2024-09-26 17:27:22.303219 )
-    * Calculated Sufficient Statistics   ( 2024-09-26 17:27:22.420616 )
+    * Created Design Matrices   ( 2024-09-27 20:39:42.588882 )
+    * Calculated Sufficient Statistics   ( 2024-09-27 20:39:42.668108 )
 ....................................................
-Iteration 1     2024-09-26 17:27:22.457206
+Iteration 1     2024-09-27 20:39:42.687154
 E Step
 M Step Intercepts   |----
 M Step Slopes       |---
@@ -657,7 +645,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 2     2024-09-26 17:27:22.678568
+Iteration 2     2024-09-27 20:39:42.929731
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -667,7 +655,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 3     2024-09-26 17:27:22.900145
+Iteration 3     2024-09-27 20:39:43.172112
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -677,7 +665,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 4     2024-09-26 17:27:23.096964
+Iteration 4     2024-09-27 20:39:43.310585
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -687,7 +675,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 5     2024-09-26 17:27:23.215152
+Iteration 5     2024-09-27 20:39:43.511714
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -697,7 +685,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 6     2024-09-26 17:27:23.345924
+Iteration 6     2024-09-27 20:39:43.655431
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -707,7 +695,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 7     2024-09-26 17:27:23.578722
+Iteration 7     2024-09-27 20:39:43.876289
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -717,7 +705,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 8     2024-09-26 17:27:23.67701
+Iteration 8     2024-09-27 20:39:43.981579
 E Step
 M Step Intercepts   |---
 M Step Slopes       |--
@@ -727,7 +715,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 9     2024-09-26 17:27:23.794976
+Iteration 9     2024-09-27 20:39:44.099835
 E Step
 M Step Intercepts   |---
 M Step Slopes       |--
@@ -737,7 +725,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 10     2024-09-26 17:27:23.928647
+Iteration 10     2024-09-27 20:39:44.237742
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -747,7 +735,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 11     2024-09-26 17:27:24.022799
+Iteration 11     2024-09-27 20:39:44.334556
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -757,7 +745,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 12     2024-09-26 17:27:24.217294
+Iteration 12     2024-09-27 20:39:44.449333
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -767,7 +755,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 13     2024-09-26 17:27:24.338443
+Iteration 13     2024-09-27 20:39:44.68049
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -777,7 +765,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 14     2024-09-26 17:27:24.434962
+Iteration 14     2024-09-27 20:39:44.775468
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -787,7 +775,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 15     2024-09-26 17:27:24.549313
+Iteration 15     2024-09-27 20:39:44.891357
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -797,7 +785,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 16     2024-09-26 17:27:24.663198
+Iteration 16     2024-09-27 20:39:45.024664
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -807,7 +795,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 17     2024-09-26 17:27:24.775463
+Iteration 17     2024-09-27 20:39:45.119154
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -817,7 +805,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 18     2024-09-26 17:27:24.887768
+Iteration 18     2024-09-27 20:39:45.235898
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -827,7 +815,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 19     2024-09-26 17:27:25.000098
+Iteration 19     2024-09-27 20:39:45.367316
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -837,7 +825,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 20     2024-09-26 17:27:25.112198
+Iteration 20     2024-09-27 20:39:45.577966
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -847,7 +835,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 21     2024-09-26 17:27:25.242849
+Iteration 21     2024-09-27 20:39:45.679429
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -857,7 +845,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 22     2024-09-26 17:27:25.455543
+Iteration 22     2024-09-27 20:39:45.793868
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -867,7 +855,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 23     2024-09-26 17:27:25.549353
+Iteration 23     2024-09-27 20:39:45.929293
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -877,7 +865,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 24     2024-09-26 17:27:25.66152
+Iteration 24     2024-09-27 20:39:46.030771
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -887,7 +875,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 25     2024-09-26 17:27:25.79274
+Iteration 25     2024-09-27 20:39:46.148349
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -897,7 +885,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 26     2024-09-26 17:27:25.888506
+Iteration 26     2024-09-27 20:39:46.261943
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -907,7 +895,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 27     2024-09-26 17:27:26.000735
+Iteration 27     2024-09-27 20:39:46.394186
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -917,7 +905,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 28     2024-09-26 17:27:26.193271
+Iteration 28     2024-09-27 20:39:46.607905
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -927,7 +915,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 29     2024-09-26 17:27:26.314258
+Iteration 29     2024-09-27 20:39:46.709126
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -937,7 +925,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 30     2024-09-26 17:27:26.408859
+Iteration 30     2024-09-27 20:39:46.834404
 E Step
 M Step Intercepts   |--
 M Step Slopes       |-
@@ -947,7 +935,7 @@ M Step Slopes       |-
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 31     2024-09-26 17:27:26.522569
+Iteration 31     2024-09-27 20:39:47.061276
 E Step
 M Step Intercepts   |--
 M Step Slopes       |-
@@ -957,7 +945,7 @@ M Step Slopes       |-
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 32     2024-09-26 17:27:26.635624
+Iteration 32     2024-09-27 20:39:47.155434
 E Step
 M Step Intercepts   |-
 M Step Slopes       |-
@@ -996,9 +984,9 @@ EAP Reliability:
 [1] 0.626
 
 -----------------------------
-Start:  2024-09-26 17:27:22.242162
-End:  2024-09-26 17:27:26.996438 
-Time difference of 4.754275 secs</code></pre>
+Start:  2024-09-27 20:39:42.248908
+End:  2024-09-27 20:39:47.528305 
+Time difference of 5.279397 secs</code></pre>
 </div>
 </div>
 </div>
@@ -1007,8 +995,8 @@ Time difference of 4.754275 secs</code></pre>
 <ol start="3" type="1">
 <li>Schau dir die Itemparameter an, die das Modell geschätzt hat. Sie finden sich unter <code>sim_dat_2PL$item_irt[, c("alpha", "beta")]</code>. Vergleiche mit den ursprünglichen Itemparametern, die wir in <code>items</code> festgelegt haben. Was fällt dir auf?</li>
 </ol>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1017,7 +1005,7 @@ Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">items_2pl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">sim_dat_2PL</span><span class="op">$</span><span class="va">item_irt</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span><span class="op">)</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">round</span>, <span class="fl">2</span><span class="op">)</span></span>
