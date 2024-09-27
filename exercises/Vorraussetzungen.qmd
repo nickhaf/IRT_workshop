@@ -3,11 +3,7 @@ title: "IRT Voraussetzungen"
 lang: de
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-format: 
-  html:
-    code-link: true
-execute:
-  echo: true
+format: html
 ---
 
 # Übung 1
