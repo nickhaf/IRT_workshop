@@ -1,14 +1,7 @@
 ---
 title: "Linking"
-lang: de
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-format: 
-  letterbox-revealjs:
-    embed-resources: true
-    logo: "../../images/iqb.svg"
-    footer: <https://nickhaf.github.io/IRT_workshop/slides/>
-execute: 
-  echo: true
+format: letterbox-revealjs
 ---
 
 ## Voraussetzungen der Item Response Theory

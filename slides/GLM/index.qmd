@@ -3,9 +3,7 @@ title: Algemeines Linear Gemischtes Modell (ALGM)
 subtitle: "Das Raschmodell als eine Spezialfall des ALGM"
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%Y %B, %d')`"
-format: 
-  letterbox-revealjs:
-    embed-resources: true
+format: letterbox-revealjs
 ---
 
 ## Überblick

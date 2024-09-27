@@ -66,3 +66,18 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
   border-radius: 0px;
   margin-bottom: 10px !important;
 }
+
+.title {
+  font-size: 120px !important;
+  color: $body-bg !important;
+}
+
+.quarto-title-author-name {
+  font-size: 100px;
+  color: $body-bg !important;
+}
+
+.date {
+  font-size: 80px;
+  color: $body-bg !important;
+}
