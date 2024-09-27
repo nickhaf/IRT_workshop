@@ -378,3 +378,7 @@ for(item.number in 1:ncol(stresid)){
 
 ## Evtl: Wann welches Modell
 
+
+## Bildquellen
+- Foto von <a href="https://unsplash.com/de/@pawel_czerwinski?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Pawel Czerwinski</a> auf <a href="https://unsplash.com/de/fotos/ein-schwarzer-und-gruner-abstrakter-hintergrund-mit-wellenformigen-linien-ELaFzBeZ6i0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  

@@ -328,3 +328,7 @@ Dafür müssen wir zwei Dinge beachten:
 - Beispiel aufgreifen, zeigen, wass man mit diesen Modell noch machen kann. 
 
 
+## Bildquellen
+- Foto von <a href="https://unsplash.com/de/@brenomachado?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Breno Machado</a> auf <a href="https://unsplash.com/de/fotos/fotografie-eines-gewitters-in9-n0JwgZ0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
+
