@@ -15,5 +15,16 @@ website:
 format:
   html:
     theme: flatly
-    scss: styles.scss
     toc: true
+
+  letterbox-revealjs:
+    embed-resources: true
+    theme: styles.scss
+
+code-link: true
+code-line-numbers: false
+execute:
+  echo: true
+highlight-style: dark.theme
+callout-appearance: simple
+lang: de

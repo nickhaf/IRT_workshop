@@ -1,17 +1,20 @@
 ---
-title: "Linking"
-lang: de
+title: "Höher parametrisierte IRT Modelle"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-format: 
-  letterbox-revealjs:
-    embed-resources: true
-    logo: "../../images/iqb.svg"
-execute: 
-  echo: true
+format: letterbox-revealjs
+title-slide-attributes:
+  data-background-image: ./images/green_waves.jpg
+  data-background-size: cover
 ---
 
+```{r}
+library(tidyverse)
+source(here::here("R", "plot_functions.R"))
+source(here::here("R", "irt_formulas.R"))
 
-# Höher parametrisierte IRT Modelle
+```
+
+
 
 ## Wiederholung 
 
@@ -21,7 +24,8 @@ $$
 logit(P(X_{pi}=1)) = \theta_p - \beta_i
 $$
 - Logit: Transformation unseres linearen Terms, damit die Werte zwischen 0 und 1 liegen. 
-- Inverse der logit ist die Logistic function. 
+- Inverse der logit ist die Logistic function.
+
 
 $$
 P(X_{pi}=1) = logistic(\theta_p - \beta_i)
@@ -33,34 +37,59 @@ https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regressio
 $$
 P(X_{pi}=1) = \frac{exp(\theta_p - \beta_i)}{1 + exp(\theta_p - \beta_i)}
 $$
+
+## Umschreiben zu
 $$
 P(X_{pi}=1) = \frac{e^{\theta_p - \beta_i}}{1 + e^{\theta_p - \beta_i}}
 $$
 
+## Vereinfachen
 $$
-P(X_{pi}=1) = \frac{1}{1 + e^{-\theta_p + \beta_i}}
+P(X_{pi}=1) = \frac{1}{1 + e^{\color{red}{-}\theta_p \color{red}{+} \beta_i}}
+$$
+## Beispiel
+
+$$
+\frac{exp(1 - 0.8)}{1 + exp(1 - 0.8)} = 0.55
+$$
+- $\theta_p = 1$
+- $\beta_i = 0.8$
+
+
+## Beispiel
+
+$$
+\frac{exp(0.8 - 1)}{1 + exp(0.8 - 1)} = 0.45 
 $$
 
+- $\theta_p = 0.8$
+- $\beta_i = 1$
+
+
+# Höher parametrisierte IRT Modelle
+
+Wir können Parameter zu diesem Modell hinzufügen, wodurch wir flexibler in der Modellierung werden:
+
+- Schwierigkeit $\beta_i$ (Intercept)
+- Steigung $\alpha$ (Faktorladung, [Diskriminationsparameter]{.highlight})
+- Ratewahrscheinlichkeit $\gamma_i$ ([Guessing probability]{.highlight})
+
 ## 3PL
-Wäre eigentlich schöner in der logit-variante. Was passiert dort aber mit gamma?
 
 $$
 P(X_{pi}=1) = \gamma_i + (1-\gamma_i)\frac{exp(\alpha_i(\theta_p - \beta_i)))}{1 + exp(\alpha_i(\theta_p - \beta_i))}
 $$
-- $\beta_i$: easiness
+- $\beta_i$: Schwierigkeit
 - $\alpha_i$: discrimination/factor loading/slope
 - $\gamma_i$ : guessing probability
  - Kann entweder geschätzt oder gesetzt werden (z.B. bei 4 Antwortmöglichkeiten: $\gamma_i = 1/4 = 0.25$)
-
-- Dann werden nacheinander einige der Parameter auf 0 oder 1 gesetzt, sodass ihr Einfluss weggeht. 
-- Bürkner Paper
+ - Wenn die Lösungswahrscheinlichkeit auf der rehcten Seite sehr gering ist, ist sie immer noch mind. $\gamma_i$
 
 
 ## Shiny App for demonstration?
 Auf alle Fälle zeigen, wie es aussieht!
 
 ## 2PL
-
 $\gamma_i = 0$
 
 $$
@@ -74,115 +103,272 @@ $$
 P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{red}{1}(\theta_p - \beta_i)))}{1 + exp(\color{red}{1}(\theta_p - \beta_i))}
 $$
 
-## Partial Credit
-- https://statmath.wu.ac.at/~hatz/psychometrics/11w/GPCM_GRM_GRASOM.pdf
-- Ordinale Daten (geordnete Antwortkategorien, z.b. Likert Skala)
-- Erweiterung des 1PL Modells
-- Wahrscheinlichkeit für die Antwort in einer bestimmten Kategorie wird als exponential geteilt durch die summe aller Exponentiale geschrieben. 
-- Stepsize parameter shows, where on the latent-trait scale the response of one category becomes realtively more likely than the previous category
-- https://statmath.wu.ac.at/~hatz/psychometrics/11w/GPCM_GRM_GRASOM.pdf
-  - PCM is rasch (because model-wide discrimination paramter). GRM is non-rasch, as well as G-PCM
+# Übung
+
+## Übung: Simulation von 2PL Daten
+Gehe zur [Übungsseite] und löse die Aufgaben.
+Hier wird am Ende auch nochmal ein 2PL Modell gefittet, ich hoffe das reicht dann? 
+
+# Was tun bei polytomen Items?
+
+## Beispielaufgabe
+nie -- manchmal -- häufig
+
+# 
+<section style="text-align: center;">
+
+[Wie?]{.r-fit-text .highlight}
+
+</section>
+
+# Partial Credit
+
+## 
+
+Grundidee: Den einzelnen Antwortkategorien wird eine [eigene Schwierigkeit]{.highlight} zugeordnet. Dadurch können wir die [Antwortwahrscheinlichkeit]{.highlight} in einer bestimmten [Kategorie]{.highlight} berechnen. 
+
+
+## Anwendungsbereich
+Ordinale Daten (geordnete Antwortkategorien), z.B.:
+  - Likert-Skalen
+  - Items, die auch mit Teilpunkten bewertet werden können (z.B. Mathe)
+
+
+## Darstellung
 
 ```{r}
-# theta: Personenfähigkeit, wie bereits bekannt
-# delta: Schwellenschwierigkeit. Also quasi eine Levelspezifische Schwiergikeit
-# m: Anzahl an steps. Müsste eigentlich der länge vom delta-vector entsprechen. Kann also weg
+#| echo: false
 
-theta=2
-## wenn j = 0 kommt in der Summe 0 raus. Also delta immer mit 0 anfangen lassen
-delta=c(0.5, 0.2)
-
-# x ist  die Kategorie, an der wir interessiert sind. Wenn also jemand Kategorie 0 angekreuzt hat, wird x = 1 gesetzt. 
-
-calc_pcm <- function(theta, x, delta){
-  
-  m <- length(delta)
-  
-  zaehler <- exp(sum(
-    
-    sapply(0:x, function(j){
-    
-    if(j == 0){
-      diff_td <- 0
-    }else{
-    diff_td <- theta-delta[j]
-    }
-    return(diff_td)
-    }
-    )
-    
-    ))
-  
-  nenner <- sum(sapply(0:m, function(r){
-    exp(sum(sapply(0:r, function(j){
-   if(j == 0){
-      diff_td <- 0
-    }else{
-    diff_td <- theta-delta[j]
-    }
-      return(diff_td)
-      })))
-  }))
-  
-  return(zaehler/nenner)
-  
-}
-
-calc_pcm(theta = 0, x = 0, delta = c(-0.29, 0.95))
-## Wohooo, funktioniert!
-## Wie kann ich die jetzt plotten?
-
+plot_pcm(delta = c(-0.29, 0.95))
 ```
 
+
+
+## Formel
+
+$$
+\pi_{pix}= P(X_{pi}=x|\theta_p, \beta_{ik})= \frac{exp[\sum^x_{j=0}(\theta_p-\beta_{ij})]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
+$$
+::: aside
+- Person $p$
+- Item $i$
+- Personenscore $x$
+:::
+
+
+## Partial Credit Model
+$$
+\pi_{pix}= \color{red}{P(X_{pi}=x|\theta_p, \beta_{ik})}= \frac{exp[\sum^x_{j=0}(\theta_p-\beta_{ij})]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
+$$
+
+
+## Partial Credit Model
+
+$$
+\pi_{pix}= P(X_{pi}=x|\theta_p, \beta_{ik})= \frac{exp[\sum^x_{j=0}\color{red}{(\theta_p-\beta_{ij})}]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
+$$
+
+
+Wichtig:$/beta_{i\color{red}{j}}$ ist jetzt der [Schwellenparameter]{.highlight} der Kategorie $j$ des Items $i$.
+
+
+## Raw score curve
+
 ```{r}
-if(!require('ggplot2')) {install.packages('ggplot2'); library(ggplot2)}
-if(!require('dplyr')) {install.packages('dplyr'); library(dplyr)}
+# Theta-Werte Bereich definieren
+theta_vals <- seq(-3, 3, length.out = 100)
 
-# Schwellenparameter (delta)
-delta <- c(-0.29, 0.95)  # Die Schwellen
-theta_vals <- seq(-3, 3, length.out = 100)  # Werte für theta
-x_max <- length(delta)  # Maximale Kategorie, hier nur 2 Schwellen -> 3 Kategorien
+# Schwellenwerte für beide Items
+delta_1 <- c(-0.29, 0.95)  # Schwellen für Item 1
+delta_2 <- c(-0.5, 0.78)   # Schwellen für Item 2
 
-# Leere Liste, um die Wahrscheinlichkeiten zu speichern
-results <- data.frame()
+# Berechne E_score für verschiedene Theta-Werte
+results <- compute_E_score(theta_vals, delta_1, delta_2)
 
-# Berechne die Wahrscheinlichkeiten für jedes theta und jede Kategorie x
-for (theta in theta_vals) {
-  for (x in 0:x_max) {
-    prob <- calc_pcm(theta, x, delta)
-    results <- rbind(results, data.frame(theta = theta, x = x, prob = prob))
-  }
-}
-
-# Finde den minimalen Wert der y-Achse (für das Enden der Linien)
-min_prob <- min(results$prob)
-
-# Nächste theta-Werte finden, die den delta-Werten am nächsten sind
-delta_theta1 <- theta_vals[which.min(abs(theta_vals - delta[1]))]
-delta_theta2 <- theta_vals[which.min(abs(theta_vals - delta[2]))]
-
-# Plotte die Wahrscheinlichkeiten für jede Kategorie x
-ggplot(results, aes(x = theta, y = prob, color = factor(x))) +
-  geom_line(size = 1) +
-  
-  # Dezente Linien nur bis zum Kreuzungspunkt (max Wahrscheinlichkeiten bei den Näherungen von delta)
-  annotate("segment", x = delta[1], xend = delta[1], 
-           y = min_prob, yend = max(results$prob[results$theta == delta_theta1]), 
-           color = "grey60", linetype = "dashed", size = 0.5) +
-  annotate("segment", x = delta[2], xend = delta[2], 
-           y = min_prob, yend = max(results$prob[results$theta == delta_theta2]), 
-           color = "grey60", linetype = "dashed", size = 0.5) +
-  labs(title = "Wahrscheinlichkeitskurven für das Partial Credit Model",
+# Plotten mit ggplot2
+ggplot(results, aes(x = theta, y = E_score)) +
+  geom_line(color = "blue", size = 1) +
+  labs(title = "Erwarteter Score (E_score) als Funktion von Theta",
        x = "Theta", 
-       y = "Wahrscheinlichkeit",
-       color = "Kategorie") +
-  theme_minimal()
-
-## Gut zu sehen ist, dass an unseren delta-Werten eine andere Kurve Wahrscheinlicher wird!
+       y = "Erwarteter Score (E_score)") +
+   theme_bg()
 
 ```
 
-Reversal vs. non-reversal. 
+## Übung
+Partial Credit Modell fitten. 
+
+- Grit scale
+- Oder Psychometrics data und so tun, als ob die das selber ausgefüllt hätten. Und dann auf 5 Stufen kondensieren oder so. Aber was ist hier mit Eindimensionalität? -> Könnte aber einfach ein subset nehmen, die vermutlich eindimensional sind? Achso, und sollte eigentlich ok sein. Die sollten ja nur aufgrund des Konstruktes korrelieren.  Aber: Was ist mit missings, haben alle alles bearbeitet? 
+
+
+[This](https://rpubs.com/deondb/partial_credit_model) is actuallyu quite a comprehensive tutorial. 
+
+Hier auch nochmal schauen: https://www.edmeasurementsurveys.com/TAM/Tutorials/5PartialCredit.htm
+
+```{r}
+library(TAM)
+library(psych)
+```
+
+
+```{r}
+psych_dat <- read.csv(here::here("raw_data", "psych_stats.csv"), sep = ";") %>%
+  pivot_longer(cols = -char_id, names_to = "item", values_to = "score") %>%
+  mutate(likert = case_when(score <= 20 ~ 1,
+                            score <= 40 ~ 2, 
+                            score <= 60 ~ 3,
+                            score <= 80 ~ 4,
+                            TRUE ~ 5)) %>%
+  select(item, likert, char_id) %>%
+  pivot_wider(names_from = item, values_from = likert) %>%
+  select(char_id, messy_neat, disorganized_self.disciplined, diligent_lazy, on.time_tardy, scheduled_spontaneous, ADHD_OCD, chaotic_orderly, overachiever_underachiever)
+
+## ERstmal: Eine Art Gewissenhaftigkeit wird gemessen.
+## Items:
+# messy_neat, disorganized_self.disciplined, diligent_lazy, on.time_tardy, scheduled_spontaneous, ADHD_OCD, chaotic_orderly, overachiever_underachiever
+
+## Umkodieren! 
+# - diligent_lazy, on.time_tardy, scheduled_spontaneous, overachiever_underachiever
+
+psych_dat <- psych_dat %>%
+  mutate(lazy_diligent = 6 - diligent_lazy,
+         tardy_on.time = 6 - on.time_tardy,
+         spontaneous_scheduled = 6 - scheduled_spontaneous,
+         underachiever_overachiever = 6 - overachiever_underachiever) %>%
+  select(-char_id, -diligent_lazy, -on.time_tardy, -scheduled_spontaneous, -overachiever_underachiever) 
+
+
+
+#### Hier dann loslegen mit der Übung. Umkodieren evtl. im R-Teil? 
+
+## Sind die Daten im richtigen Format? 
+## eventuell nicht eindimensional?
+
+cor(psych_dat)
+
+## Ich glaube es muss bei 0 anfangen, hat mir aber keiner gesagt!
+psych_dat <- psych_dat -1
+## Hohe correlationen zwischen den Items. Aber eignelich niucht weiter schlimm oder?
+
+any(is.na(psych_dat))
+
+alpha(psych_dat)$response.freq
+
+
+## Eigentlich sind die response kategorien ganz gut ausgelastet, teilweise die Ränder etwas weniger. 
+
+pcm_psych <- tam.mml(psych_dat[, -1], irtmodel = "PCM")
+
+summary(pcm_psych)
+
+pcm_psych$xsi
+
+## Identify items with disordered category thresholds
+g <- pcm_psych$item_irt
+gg <- g[g$tau.Cat1 > g$tau.Cat2 | g$tau.Cat2 > g$tau.Cat3 | g$tau.Cat3 > g$tau.Cat4, ]
+rownames(gg)
+
+## Jetzt geordnet!
+deltas <- pcm_psych$xsi
+## HMM, sieht immernoch comisch aus oder? 
+## Aber Delta Schnittpunkte stimmen mit dem Plot überein
+
+## Plot the option characteristic curves
+plot(pcm_psych, 
+     type = "items", 
+     export = FALSE, 
+     package = "graphics", 
+     observed = TRUE, 
+     low = -6, 
+     high = 6)
+
+## Gestrichelt sind die Observed Linien. Aber actually not that weird oder? 
+
+# Was genau sagen die verschiednen Kurven typen?
+
+## Plot the empirical and theoretical expected scores curves
+
+plot(pcm_psych, 
+     type = "expected", 
+     ngroups = 6, 
+     low  = -6, 
+     high = 6,
+     package = "lattice", overlay = FALSE)
+
+## Infit/Outfit anschauen
+
+fit <- msq.itemfit(pcm_psych)$itemfit
+(fit <- data.frame(fit[1], round(fit[3:8], 2)))
+
+## Infit und Outfit sollten zwischen 0.5 und 1.5 liegen (hatte noch andere Grenzen im Kopf, quelle ruassuchen. Auch was genau das nochmal heißt). 
+## underachiever_overachiever passt nicht so rein, ist auch thematisch weiter weg (nette Illustration, sieht man das noch an irgendwelchen Kurven oder andern Werten?)
+
+
+## Q3 Statistic
+q3 <- tam.modelfit(pcm_psych)$stat.itempair
+q3 <- data.frame(q3[1:2], round(q3[5:6], 2), round(q3[7:8], 4))
+## Actually quite interesting! underachiever_overachiever fällt auch hier auf. 
+
+
+## Gut oder schlecht? zuyymindest sehr ähnlich im example. 
+(MADaQ3 <- tam.modelfit(pcm_psych)$stat.MADaQ3)
+
+## Values > 0.6 might reflect unacceptable fit
+(item.RMSD <- IRT.itemfit(pcm_psych)$RMSD_bc)
+
+## Tardy_on.time ebenfalls auffällig (auch ein komischer Gegensatz wenn man drüber nachdenkt, evtl. mehrdimensional)
+
+## Hiernach kommt noch einiges, aber wahrscheinlich genug to get started! 
+```
+
+```{r eRm}
+library(eRm)
+
+erm_pcm <- PCM(psych_dat)
+summary(erm_pcm)
+
+plotPImap(erm_pcm)
+plotICC(erm_pcm, ask = FALSE)
+
+## Scheint anders auszusehen als bei Tam. Nochmal genauer schauen später, aber underachiever_overachiever scheint sich hier erst bei vier die letzte Linie zu kreuzen. 
+
+thresholds(erm_pcm)
+
+person.location.estimate <- person.parameter(erm_pcm)
+
+item_fit_pcm <- itemfit(person.location.estimate)
+
+
+## Maybe plot standardiyed residuals?
+stresid <- item_fit_pcm$st.res
+
+# before constructing the plots, find the max & min residuals:
+max.resid <- ceiling(max(stresid))
+min.resid <- ceiling(min(stresid))
+
+for(item.number in 1:ncol(stresid)){
+  plot(stresid[, item.number], ylim = c(min.resid, max.resid),
+       main = paste("Standardized Residuals for Item ", item.number, sep = ""),
+       ylab = "Standardized Residual", xlab = "Person Index")
+  abline(h = 0, col = "blue")
+  abline(h=2, lty = 2, col = "red")
+  abline(h=-2, lty = 2, col = "red")
+  legend("topright", c("Std. Residual", "Observed = Expected", "+/- 2 SD"), pch = c(1, NA, NA), 
+         lty = c(NA, 1, 2),
+         col = c("black", "blue", "red"), cex = .8)
+}
+
+## Looks okay I gues? For Item 8 am schlechtesten, passt auch wieder!
+```
+
+
+## Personenspezifische Kurve zeichnen? 
+
+
+
+
+## Reversal vs. non-reversal. 
 
 ## Generalized Partial Credit Model?
 
@@ -192,6 +378,7 @@ Reversal vs. non-reversal.
 
 ## Evtl: Wann welches Modell
 
-## Viel Übung
-- Eigene Simulation vielleicht hier hin packen. Als Beispiel für Entscheidungsfindung, welches Modell sinn machen könnte!
- 
+
+## Bildquellen
+- Foto von <a href="https://unsplash.com/de/@pawel_czerwinski?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Pawel Czerwinski</a> auf <a href="https://unsplash.com/de/fotos/ein-schwarzer-und-gruner-abstrakter-hintergrund-mit-wellenformigen-linien-ELaFzBeZ6i0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  

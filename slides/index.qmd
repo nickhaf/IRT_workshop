@@ -1,5 +1,6 @@
 ---
 title: "Folien"
+format: html
 ---
 
 # Einführung Item Response Theorie
@@ -13,3 +14,6 @@ title: "Folien"
 
 # Linking
 {{< revealjs "./Vorraussetzung/index.html" >}}
+
+# Höher Parametrisierte Modelle
+{{< revealjs "./xPL/index.html" >}}

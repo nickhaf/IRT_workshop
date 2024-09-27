@@ -5,13 +5,17 @@ $theme-blue: #99D9DD;
 $theme-white: #E1E8EB;
 $theme-yellow: #F4BA02;
 
+$theme-red: #9B1B34;
+
+$theme-timberwolf: #F8F8F8;
+
 $link-color: $theme-blue;
-$body-bg: $theme-white;
+$body-bg: $theme-timberwolf;
 $body-color: $theme_darkblue;
 
-$theme-highlight: $theme_yellow;
-$theme-background: $theme_white;
-$theme-codeblock: $theme_white;
+$theme-highlight: $theme_red;
+$theme-background: $theme_timberwolf;
+$theme-codeblock: $theme_darkblue;
 
 $code-block-border-color: lighten($body-bg, 70%);
 $code-block-bg: $theme-codeblock;
@@ -36,7 +40,7 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
 }
 
 .highlight{
-    color: $theme-yellow;
+    color: $theme-highlight;
 }
 
 
@@ -61,4 +65,19 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
   border: none;
   border-radius: 0px;
   margin-bottom: 10px !important;
+}
+
+.title {
+  font-size: 120px !important;
+  color: $body-bg !important;
+}
+
+.quarto-title-author-name {
+  font-size: 100px;
+  color: $body-bg !important;
+}
+
+.date {
+  font-size: 80px;
+  color: $body-bg !important;
 }

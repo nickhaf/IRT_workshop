@@ -1,5 +1,6 @@
 ---
 title: "IRT Workshop"
+format: html
 ---
 ```{r setup, include=FALSE}
 library(rmarkdown)

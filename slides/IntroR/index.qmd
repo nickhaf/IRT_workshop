@@ -1,20 +1,13 @@
 ---
 title: "Einführung in R"
-title-slide-attributes:
-  data-background-image: ./images/r_icon.png
 author: "Nicklas Hafiz"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-format: 
-  letterbox-revealjs:
-    embed-resources: true
-    theme: ../../styles.scss
-code-link: true
-code-line-numbers: false
-execute:
-  echo: true
-highlight-style: ../../light.theme
-callout-appearance: simple
+title-slide-attributes:
+  data-background-image: ./images/r_desktop.jpg
+  data-background-size: cover
+format: letterbox-revealjs
 ---
+
 
 ## R und RStudio
 

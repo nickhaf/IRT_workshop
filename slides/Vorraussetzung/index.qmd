@@ -1,14 +1,10 @@
 ---
 title: "Linking"
-lang: de
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-format: 
-  letterbox-revealjs:
-    embed-resources: true
-    logo: "../../images/iqb.svg"
-    footer: <https://nickhaf.github.io/IRT_workshop/slides/>
-execute: 
-  echo: true
+format: letterbox-revealjs
+title-slide-attributes:
+  data-background-image: ./images/dark_flower.jpg
+  data-background-size: cover
 ---
 
 ## Voraussetzungen der Item Response Theory
@@ -458,6 +454,10 @@ Ansonsten Embretson ab Linking auch gut.
 
 ## Beispiel was bei nichtbeachtung passiert
 
+
+## Bildquellen
+- Foto von <a href="https://unsplash.com/de/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a> auf <a href="https://unsplash.com/de/fotos/rosa-blattrige-blume-nahaufnahme-fotografie-r9eIL7jtenc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
 
 
 
