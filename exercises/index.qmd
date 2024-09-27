@@ -1,5 +1,6 @@
 ---
 title: "Übungen"
+format: html
 listing: 
   contents: ./*.qmd
   type: table
