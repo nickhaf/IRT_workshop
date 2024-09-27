@@ -216,7 +216,6 @@ Hier auch nochmal schauen: https://www.edmeasurementsurveys.com/TAM/Tutorials/5P
 ```{r}
 library(TAM)
 library(psych)
-raschdata <- read.csv("stressdata.csv")
 ```
 
 
