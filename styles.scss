@@ -4,21 +4,17 @@ $theme-darkblue: #01364C;
 $theme-blue: #99D9DD;
 $theme-white: #E1E8EB;
 $theme-yellow: #F4BA02;
-$theme-red: #8a241e;
 
+$theme-red: #9B1B34;
 
-$theme-barley: #FFF5D0;
-$theme-rhino: #1B475D;
-$theme-naples: #FAD564;
-$theme-olive: #B4BD62;
-$theme-neptune: #8EBD9D;
+$theme-timberwolf: #F8F8F8;
 
 $link-color: $theme-blue;
-$body-bg: $theme-white;
+$body-bg: $theme-timberwolf;
 $body-color: $theme_darkblue;
 
 $theme-highlight: $theme_red;
-$theme-background: $theme_white;
+$theme-background: $theme_timberwolf;
 $theme-codeblock: $theme_darkblue;
 
 $code-block-border-color: lighten($body-bg, 70%);

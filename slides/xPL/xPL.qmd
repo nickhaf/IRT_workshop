@@ -14,6 +14,13 @@ highlight-style: ../../dark.theme
 callout-appearance: simple
 ---
 
+```{r}
+library(tidyverse)
+source(here::here("R", "plot_functions.R"))
+source(here::here("R", "irt_formulas.R"))
+
+```
+
 
 # Höher parametrisierte IRT Modelle
 
@@ -80,118 +87,72 @@ $$
 P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{red}{1}(\theta_p - \beta_i)))}{1 + exp(\color{red}{1}(\theta_p - \beta_i))}
 $$
 
-## Partial Credit
-- https://statmath.wu.ac.at/~hatz/psychometrics/11w/GPCM_GRM_GRASOM.pdf
-- Ordinale Daten (geordnete Antwortkategorien, z.b. Likert Skala)
-- Erweiterung des 1PL Modells
-- Wahrscheinlichkeit für die Antwort in einer bestimmten Kategorie wird als exponential geteilt durch die summe aller Exponentiale geschrieben. 
-- Stepsize parameter shows, where on the latent-trait scale the response of one category becomes realtively more likely than the previous category
-- https://statmath.wu.ac.at/~hatz/psychometrics/11w/GPCM_GRM_GRASOM.pdf
-  - PCM is rasch (because model-wide discrimination paramter). GRM is non-rasch, as well as G-PCM
+
+## Beispielaufgabe
+nie -- manchmal -- häufig
+
+
+# 
+<section style="text-align: center;">
+
+[Wie?]{.r-fit-text .highlight}
+
+</section>
+
+# Partial Credit
+
+## 
+
+Grundidee: Den einzelnen Antwortkategorien wird eine [eigene Schwierigkeit]{.highlight} zugeordnet. Dadurch können wir die [Antwortwahrscheinlichkeit]{.highlight} in einer bestimmten [Kategorie]{.highlight} berechnen. 
+
+
+## Anwendungsbereich
+Ordinale Daten (geordnete Antwortkategorien), z.B.:
+  - Likert-Skalen
+  - Items, die auch mit Teilpunkten bewertet werden können (z.B. Mathe)
+
+
+## Darstellung
+
+```{r}
+#| echo: false
+
+plot_pcm(delta = c(-0.29, 0.95))
+```
+
+
 
 ## Formel
 
+$$
+\pi_{pix}= P(X_{pi}=x|\theta_p, \beta_{ik})= \frac{exp[\sum^x_{j=0}(\theta_p-\beta_{ij})]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
+$$
+::: aside
+- Person $p$
+- Item $i$
+- Personenscore $x$
+:::
+
+
+## Partial Credit Model
+$$
+\pi_{pix}= \color{red}{P(X_{pi}=x|\theta_p, \beta_{ik})}= \frac{exp[\sum^x_{j=0}(\theta_p-\beta_{ij})]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
+$$
+
+
+## Partial Credit Model
+
+$$
+\pi_{pix}= P(X_{pi}=x|\theta_p, \beta_{ik})= \frac{exp[\sum^x_{j=0}\color{red}{(\theta_p-\beta_{ij})}]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
+$$
+
+
+Wichtig:$/beta_{i\color{red}{j}}$ ist jetzt der [Schwellenparameter]{.highlight} der Kategorie $j$ des Items $i$.
 
 
 
-```{r}
-# theta: Personenfähigkeit, wie bereits bekannt
-# delta: Schwellenschwierigkeit. Also quasi eine Levelspezifische Schwiergikeit
-# m: Anzahl an steps. Müsste eigentlich der länge vom delta-vector entsprechen. Kann also weg
 
-theta=2
-## wenn j = 0 kommt in der Summe 0 raus. Also delta immer mit 0 anfangen lassen
-delta=c(0.5, 0.2)
 
-# x ist  die Kategorie, an der wir interessiert sind. Wenn also jemand Kategorie 0 angekreuzt hat, wird x = 1 gesetzt. 
-
-calc_pcm <- function(theta, x, delta){
-  
-  m <- length(delta)
-  
-  zaehler <- exp(sum(
-    
-    sapply(0:x, function(j){
-    
-    if(j == 0){
-      diff_td <- 0
-    }else{
-    diff_td <- theta-delta[j]
-    }
-    return(diff_td)
-    }
-    )
-    
-    ))
-  
-  nenner <- sum(sapply(0:m, function(r){
-    exp(sum(sapply(0:r, function(j){
-   if(j == 0){
-      diff_td <- 0
-    }else{
-    diff_td <- theta-delta[j]
-    }
-      return(diff_td)
-      })))
-  }))
-  
-  return(zaehler/nenner)
-  
-}
-
-calc_pcm(theta = 0, x = 0, delta = c(-0.29, 0.95))
-## Wohooo, funktioniert!
-## Wie kann ich die jetzt plotten?
-
-```
-
-```{r}
-if(!require('ggplot2')) {install.packages('ggplot2'); library(ggplot2)}
-if(!require('dplyr')) {install.packages('dplyr'); library(dplyr)}
-
-# Schwellenparameter (delta)
-delta <- c(-0.29, 0.95)  # Die Schwellen
-theta_vals <- seq(-3, 3, length.out = 100)  # Werte für theta
-x_max <- length(delta)  # Maximale Kategorie, hier nur 2 Schwellen -> 3 Kategorien
-
-# Leere Liste, um die Wahrscheinlichkeiten zu speichern
-results <- data.frame()
-
-# Berechne die Wahrscheinlichkeiten für jedes theta und jede Kategorie x
-for (theta in theta_vals) {
-  for (x in 0:x_max) {
-    prob <- calc_pcm(theta, x, delta)
-    results <- rbind(results, data.frame(theta = theta, x = x, prob = prob))
-  }
-}
-
-# Finde den minimalen Wert der y-Achse (für das Enden der Linien)
-min_prob <- min(results$prob)
-
-# Nächste theta-Werte finden, die den delta-Werten am nächsten sind
-delta_theta1 <- theta_vals[which.min(abs(theta_vals - delta[1]))]
-delta_theta2 <- theta_vals[which.min(abs(theta_vals - delta[2]))]
-
-# Plotte die Wahrscheinlichkeiten für jede Kategorie x
-ggplot(results, aes(x = theta, y = prob, color = factor(x))) +
-  geom_line(size = 1) +
-  
-  # Dezente Linien nur bis zum Kreuzungspunkt (max Wahrscheinlichkeiten bei den Näherungen von delta)
-  annotate("segment", x = delta[1], xend = delta[1], 
-           y = min_prob, yend = max(results$prob[results$theta == delta_theta1]), 
-           color = "grey60", linetype = "dashed", size = 0.5) +
-  annotate("segment", x = delta[2], xend = delta[2], 
-           y = min_prob, yend = max(results$prob[results$theta == delta_theta2]), 
-           color = "grey60", linetype = "dashed", size = 0.5) +
-  labs(title = "Wahrscheinlichkeitskurven für das Partial Credit Model",
-       x = "Theta", 
-       y = "Wahrscheinlichkeit",
-       color = "Kategorie") +
-  theme_minimal()
-
-## Gut zu sehen ist, dass an unseren delta-Werten eine andere Kurve Wahrscheinlicher wird!
-
-```
 
 ## Raw score curve
 Das summiert dann über alle Items auf. Vielleicht später noch zeigen. 
