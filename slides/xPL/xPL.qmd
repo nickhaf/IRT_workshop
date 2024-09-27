@@ -113,7 +113,8 @@ $$
 # Übung
 
 ## Übung: Simulation von 2PL Daten
-Gehe zur [Übungsseite] und löse die Aufgaben. 
+Gehe zur [Übungsseite] und löse die Aufgaben.
+Hier wird am Ende auch nochmal ein 2PL Modell gefittet, ich hoffe das reicht dann? 
 
 # Was tun bei polytomen Items?
 
