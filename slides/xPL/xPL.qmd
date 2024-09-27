@@ -2,6 +2,9 @@
 title: "Höher parametrisierte IRT Modelle"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: letterbox-revealjs
+title-slide-attributes:
+  data-background-image: ./images/green_waves.jpg
+  data-background-size: cover
 ---
 
 ```{r}
