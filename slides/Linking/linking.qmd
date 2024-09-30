@@ -1,0 +1,463 @@
+---
+title: "Linking"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: letterbox-revealjs
+title-slide-attributes:
+  data-background-image: ./images/dark_flower.jpg
+  data-background-size: cover
+---
+
+## Voraussetzungen der Item Response Theory
+
+- Eindimmensionalität
+- Lokal Stochastische Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJf1224232.pdf). 
+
+## Eindimmensionalität
+- Wenn nicht gegeben:
+    - SEM
+    - Dependency Matrix
+
+## Lokal stochastische Unabhängigkeit
+Nach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. 
+Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit), 
+
+- Abbildung
+- Einordnung: Lokale Unabhängigkeit, weitere Begriffe?
+- Beispiel
+
+## {background-image="images/link.jpg" background-size="1150px"}
+
+::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
+
+Linking
+
+:::
+
+::: aside
+Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) auf [Unsplash](https://unsplash.com/de/fotos/selektives-fokusfoto-von-grauen-metallketten-JZ8AHFr2aEg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash). 
+
+::: 
+
+<!-- https://hectornajera83.github.io/book/scale-equating-and-linking.html -->
+
+## Problem
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+**Das Problem**
+
+Invarianz-Eigenschaft von IRT: **Itemparameter sind gleich über verschiedene Gruppen.**
+Die Wahrscheinlichkeit für eine korrekte Antwort auf ein Item hängt also nur von $\theta$ ab. Nicht von anderen Personen in der Stichprobe. 
+Wie schaffen wir das aber, wenn wir anhand von verschiedenen Gruppen kalibrieren?
+
+:::
+
+::: {.column width="50%"}
+
+**Die Lösung**
+
+Wir müssen die Werte, die wir aus diesen Kalibrierungen bekommen, irgendwie in einen Zusammenhang setzen. 
+
+::: 
+::::
+
+## Wiederholung: Kalibrierung
+Die kalibrierten Itemparameter und Personenfähigkeiten gelten erst einmal nur für **diese bestimmte Kombintation aus Items und Personen**. 
+
+**WARUM?**
+
+
+## Wiederholung: Kalibrierung
+- Skala der Latenten Variable wird arbiträr festgelegt (meist auf einen Mittelwert von 0 und eine SD von 1)
+- Modell? sonst nicht idenfiziert. 
+- Itemparameter dadurch **nicht** auf der selben Skala. 
+- **Sie können also nicht direkt miteinander verglichen werden.**
+
+## Beispiel 
+Sie hängen ja von den latenten Variablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe). 
+
+
+## Beispiel
+Group 1: $\theta \sim N(0,1)$
+Group 2: $\theta \sim N(1, 1.4)$
+
+Für die Kalibrierung legen wir jetzt aber fest, dass gilt:
+Group 1: $\theta \sim N(0,1)$
+Group 2: $\theta \sim N(0,1)$
+
+## Beispiel 
+```{r}
+#| echo: false
+
+library(tidyverse)
+
+data_lines <- data.frame(
+    x = c(-4:4, -4:4),
+    y = c(rep(2, 9), rep(1, 9)), 
+    group = c(rep("1", 9), rep("2", 9)), 
+    label = c(-4:4, -3:5)
+)
+
+ggplot(data_lines, aes(x, y, group=group)) +
+  geom_line() +
+  geom_point() +
+        ggthemes::theme_tufte() +
+        theme(
+            axis.title = element_blank(), 
+            axis.text = element_blank(), 
+        axis.line = element_blank(),
+        axis.ticks = element_blank()) +
+        ylim(0,3) +
+        geom_text(aes(label = label), vjust = 1.5)  # Add labels to the points
+
+
+```
+
+## Simulieren von IRT Daten
+
+::::{.columns}
+:::{.column width="30%"}
+
+Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: Daten**simulation**. 
+
+- Einerseits hilft es hoffentlich, die Konzepte hinter IRT und Linking noch besser zu verstehen.
+- Hilfreich, z.B. für Poweranalysen 
+
+:::
+
+::: {.column width="70%"}
+
+![](images/simulation.jpg)
+
+Erstellt mit [Bing Bild-Ersteller](ttps://www.bing.com/images/create/a-simulation-that-we-are-all-living-in-a-simulatio/1-66e33509faf2483e82f8b47ed577a221?id=9qHmBvQeaNYbK1HW5T0qLQ%3D%3D&view=detailv2&idpp=genimg&idpclose=1&thid=OIG1.o1KL86Aq8PP9cXCbZnHc&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&form=SYDBIC).
+
+:::
+::::
+
+## Let's take a step back! 
+
+Geht zur [Übung](../../exercises/Linking.qmd) und probiert euch aus! 
+
+## Warum das Ganze?
+An diesem Grundgerüst können wir jetzt verschiedene Anpassungen vornehmen, um ein paar Eigenschaften von Linking zu untersuchen.     
+Wir erinnern uns zurück: die Fähigkeitsverteilung wird bei der Kalibrierung auf eine Standardnormalverteilung gesetzt ($\theta \sim N(0, 1)$).   
+So hatten wir das auch in der Übung bereits simuliert. Wir können eine zweite Gruppe mit der selben Fähigkeitsverteilung simulieren, und uns anschauen, wie die Itemparameter $\alpha$ und $\beta$ geschätzt werden.
+
+
+## Zwei Gruppen
+
+Das Vorgehen bleibt genauso wie in der [Übung](../../exercises/Linking.qmd). Der einzige Unterschied ist: Wir simulieren noch eine neue Gruppe hinzu, und setzten dort die $\theta$ Verteilung auf $\theta \sim N(1, 1). 
+
+
+```{r}
+#| output: false
+#| code-fold: true
+#| code-summary: "Code zeigen"
+
+library(TAM)
+library(latex2exp) # Erlaubt es, Latex Syntax in ggplot zu nutzen
+
+set.seed(123)
+
+## 2PL Funktion
+calc_2pl <- function(a, theta, xi){
+  p <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
+  return(p) 
+}
+
+items <- data.frame(
+    item_id = 1:13, 
+    b = seq(-3, 3, by = 0.5), 
+    a = seq(0.5, 1.5, length.out = 13), 
+    c = rep(0, 13)
+)
+
+n_subj <- 100000 ## Als Objekt speichern, da so leichter Änderbar
+
+## Diesmal nehmen wir einfach 2 Gruppen
+subjects_1 <- data.frame(
+    sub_id = 1:n_subj,
+    theta = c(rnorm(n_subj, 0, 1)), 
+    group = rep("1", n_subj)
+)
+
+subjects_2 <- data.frame(
+    sub_id = n_subj+1:n_subj*2, ## Andere Personen, deshalb andere ID
+    theta = c(rnorm(n_subj, 1, 1)), 
+    group = rep("2", n_subj)
+)
+
+subjects <- rbind(subjects_1, subjects_2)
+
+sim_dat <- merge(subjects, items) %>%
+    mutate(p = calc_2pl(a, theta, b)) %>%
+    mutate(answer = rbinom(n = nrow(.), size = 1, prob = p))
+
+sim_dat_2 <- sim_dat %>%
+    select(item_id, sub_id, answer, group) %>%
+    pivot_wider(names_from = item_id, values_from = answer, id_cols = c("group", "sub_id"))
+
+## Jetzt kalibrieren wir sie getrennt, als ob wir zwei verschiedene Sample hätten. 
+
+## Zuerst vorbereiten der Daten, d.h. die nicht benötigten Spalten entfernen und einen Datensatz pro Gruppe erzeugen. 
+group_1_prep <- sim_dat_2 %>% 
+  filter(group == "1") %>% 
+  select(-group, -sub_id)
+
+group_2_prep <- sim_dat_2 %>%
+  filter(group == "2") %>% 
+  select(-group, -sub_id)
+
+## Kalibrieren der beiden Gruppen getrennt
+group_1_2PL <- tam.mml.2pl(group_1_prep, irtmodel = "2PL")
+group_2_2PL <- tam.mml.2pl(group_2_prep, irtmodel = "2PL")
+
+# ## Extrahieren der Itemparameter
+itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+colnames(itempars_2) <- c("alpha_2", "beta_2")
+
+
+```
+
+## Plotten
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code zeigen"
+
+## Plotten
+parameters <- cbind(itempars_1, itempars_2)
+
+## Und weil ich das gleich noch ein paar mal brauche bastel ich mir mal eine Funktion draus:
+plot_group_pars <- function(dat, x, y){
+  ylab_char <- gsub("_2", "", deparse(substitute(y))) ## Automatically produce ylabel
+  
+  ggplot(data = dat, aes(x = {{x}}, y = {{y}})) +
+    geom_point() +
+    geom_abline(intercept = 0, slope = 1) +
+    xlim(-4, 4) +
+    ylim(-4, 4) +
+    theme_bw() +
+    xlab(TeX(paste0("\\hat{\\", deparse(substitute(x)), "}_1"))) + 
+    ylab(TeX(paste0("\\hat{\\", ylab_char, "}_2")))
+}
+
+plot_group_pars(parameters, beta, beta_2) +
+  labs(title = "Itemschwierigkeiten für zwei Gruppen", 
+       caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(1, 1)"))
+
+```
+
+## Warum??
+
+## Diskriminationsparameter
+```{r}
+#| code-fold: true
+#| code-summary: "Code zeigen"
+
+plot_group_pars(parameters, alpha, alpha_2) +
+  labs(title = "Diskriminationsparameter für zwei Gruppen", 
+       caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(1, 1)"))
+```
+
+## SimIRT
+Übringes: es gibt natürlich auch schon R Pakete, die die Simulationsarbeit für uns übernehmen. Aus didaktischen Gründen haben wir das bisher selber gemacht, aber können uns jetzt ein bisschen Arbeit ersparen, und das ganze von dem Paket `catIrt` übernehmen lassen. Hier nochmal die gleiche Simulation, aber mit 
+
+```{r}
+#| output: false
+
+library(catIrt)
+
+group_1 <- simIrt(theta =rnorm(100000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
+group_2 <- simIrt(theta =rnorm(100000, 0, 1.5), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
+
+## Kalibrieren der beiden Gruppen getrennt
+group_1_2PL <- tam.mml.2pl(group_1$resp, irtmodel = "2PL")
+group_2_2PL <- tam.mml.2pl(group_2$resp, irtmodel = "2PL")
+
+## Extrahieren der Itemparameter
+itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+colnames(itempars_2) <- c("alpha_2", "beta_2")
+
+```
+
+
+## Plots zeigen
+```{r}
+#| code-fold: true
+#| code-summary: "Code zeigen"
+
+parameters <- cbind(itempars_1, itempars_2)
+
+plot_group_pars(parameters, alpha, alpha_2) +
+  labs(title = "Diskriminationsparameter für zwei Gruppen", 
+       caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(0, 1.5)"))
+
+```
+
+
+## Schwierigkeit
+```{r}
+#| code-fold: true
+#| code-summary: "Code zeigen"
+
+plot_group_pars(parameters, beta, beta_2) +
+  labs(title = "Itemschwierigkeiten für zwei Gruppen", 
+       caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(0, 1.5)"))
+
+```
+
+
+
+## Schlusfolgerung
+- Wir brauchen also einen Referenzrahmen um unsere Testergebnisse interpretieren zu können. 
+- Das bedeutet auch, dass wir die Werte aus verschiedenen Kalibrierungen nicht direkt miteinander vergleichen können.
+- Lösung: **Linking**
+
+
+
+
+## Identifizirbarkeit
+
+
+## Beispiel
+
+
+## Linking/Equating
+- Szenario: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen. 
+- Dafür haben wir zwei Möglichkeiten:
+    - Gemeinsame Items
+    - Gemeinsame Personen
+
+Abbildung z.B. mit Verteilung von theta scores, die nochmal zeigt was das Problem ist. 
+Dann kann man bestimmte Items markieren, und die Verteilungen entsprechend dieser markierten Items verschieben. 
+
+Embretson 2000, S. 253
+
+- Item Parameter werden in beiden Tests geschätzt, und dann anhand der Ankeritems durch eine geeignete Transformation auf eine gemeinsame Skala gebracht.
+
+## Beispiel
+- Schulvergleichsstudien über die Jahre:
+- Itempools von Unternehmen, die Einstellungstests anbieten. 
+
+## Ankeritems
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+- Gemeinsame Items, die in beiden Testformen vorhanden sind. 
+- Sollten keinen DIF haben.Genauer recherchieren: How to choose anchor items. 
+
+:::
+
+
+::: {.column width="50%"}
+
+![](images/anker.jpg){.image-right}
+
+:::
+
+::::
+
+## Ankeritems
+- Kallibrierungen der Parameterschätzer aus zwei verschiedenen Testformen werden auf eine gemeinsame Skala gebracht.
+- Wir müssen also die theta ($\theta$) scores des einen Tests so transformieren, dass sie auf einer gemeinsamen Skala mit den Scores des anderen Tests liegen:
+
+$$
+\theta_Y = A \theta_X + B
+$$
+
+## Ankerpersonen
+Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen. 
+
+
+## Linking 
+
+$$
+\theta* = x\theta+y
+$$
+
+...
+
+## Linking
+Ziel: "Linking constants" $x$ und $y$ findend, welche die Item parameter aus den beiden Gruppen auf der selben Skala plazieren. 
+Deutlich machen, für welche Art Modell nutzbar!
+Nochmal mit dem neueren Buch rübergehen, das geht noch mehr in die Tiefe. 
+
+- Zwei häufige Methoden:
+    - mean-sigma:
+        - Annahme: Gemeinsame Ankeritems, oder Zwei Gruppen haben den genau gleichen Test bearbeitet. 
+$$
+B_B^* = x\beta_b=y
+$$
+
+$$
+x = \frac{\sigma_A}{\sigma_B}
+$$
+
+$$
+y = \overline{\beta}_A - x(\overline{\beta}_B)
+$$
+
+Und dann einsetzen in 
+$$
+\theta* = x\theta+y
+$$ 
+
+etc. 
+
+mal ausprobieren!
+
+## mean-sigma
+
+
+Probleme: linking constants können stark von Outliern beeinflusst werden, und von den differential standards errors of the item difficutly estimates
+- Robust procedures exist. 
+
+Nur die  item difficulty parameters werden zur berechnung der Linking constants genutzt. 
+
+Alternative: Characteristic curve methods
+
+## Characteristic curve methods
+Versuch, die Linking constants so zu berechnen, dass die test charctersitic curves so ähnlich wie möglich sind. Nutzen daher alle item parameter um die Linking constants zu finden.  computationally more expensive. 
+Empirical research zeigt keine großen Unterschide zwischen beiden Methoden? Nochmal selber recherchiereen. 
+
+## Gibt es neuere methoden? Z.B. Multi-group IRT, CFA framework ...?
+
+## Beispiel
+Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entweder als aufgabe oder demonstrieren. 
+-  Man könnte die Linking constants setzen, gukcen was das mit den schwierikeiten macht, und die Simulierten Werte wieder rekapitulieren. 
+
+
+
+# Messinvarianz/DIF
+
+## Das Problem
+- Funktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit ...) auf dieselbe Art und Weise?
+- Gibt es also echte Mittelwertsunterschiede zwischen beiden Gruppen, oder sind die Unterschiede auf Besondere Interaktionen zwischen Items und Gruppen zurückzuführen?
+
+
+## DIF
+- Wenn wir das auf bestimmte Items anwenden, sprechen wir von Differential Item Functioning. 
+
+Raschtrees vorstellen?
+Ansonsten Embretson ab Linking auch gut. 
+
+
+## Was wird Überprüft? 
+
+
+
+
+## Beispiel was bei nichtbeachtung passiert
+
+
+## Bildquellen
+- Foto von <a href="https://unsplash.com/de/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a> auf <a href="https://unsplash.com/de/fotos/rosa-blattrige-blume-nahaufnahme-fotografie-r9eIL7jtenc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
+
+
+

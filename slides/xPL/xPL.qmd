@@ -14,8 +14,6 @@ source(here::here("R", "irt_formulas.R"))
 
 ```
 
-
-
 ## Wiederholung 
 
 ### 1PL Modell
@@ -364,7 +362,6 @@ for(item.number in 1:ncol(stresid)){
 
 
 ## Personenspezifische Kurve zeichnen? 
-
 
 
 

@@ -7,13 +7,13 @@ format: html
 {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}}
 
 # Einführung in R
-{{< revealjs "./IntroR/index.html" >}}
+{{< revealjs "./IntroR/introR.html" >}}
 
 # GLM
-{{< revealjs "./GLM/index.html" >}}
+{{< revealjs "./GLM/glm.html" >}}
 
 # Linking
-{{< revealjs "./Vorraussetzung/index.html" >}}
+{{< revealjs "./Linking/linking.html" >}}
 
 # Höher Parametrisierte Modelle
-{{< revealjs "./xPL/index.html" >}}
+{{< revealjs "./xPL/xPl.html" >}}
