@@ -4,7 +4,9 @@ $theme-darkblue: #01364C;
 $theme-blue: #99D9DD;
 $theme-white: #E1E8EB;
 $theme-yellow: #F4BA02;
+
 $theme-red: #9B1B34;
+
 $theme-timberwolf: #F8F8F8;
 
 $link-color: $theme-blue;
@@ -18,6 +20,8 @@ $theme-codeblock: $theme_darkblue;
 $code-block-border-color: lighten($body-bg, 70%);
 $code-block-bg: $theme-codeblock;
 $code-color: $theme-highlight;
+
+$navbar-bg: $theme-darkblue;
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
@@ -41,8 +45,6 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
     color: $theme-highlight;
 }
 
-
-
 .link{
     color: $link-color;
 }
@@ -65,17 +67,3 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
   margin-bottom: 10px !important;
 }
 
-.title {
-  font-size: 120px !important;
-  color: $body-bg !important;
-}
-
-.quarto-title-author-name {
-  font-size: 100px;
-  color: $body-bg !important;
-}
-
-.date {
-  font-size: 80px;
-  color: $body-bg !important;
-}

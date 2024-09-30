@@ -46,16 +46,16 @@ sim_dat_wide <- sim_dat %>%
   pivot_wider(names_from = id, values_from = Answer, id_cols = person)
 
 fit2PL <- tam.mml.2pl(sim_dat_wide %>% select(-person), irtmodel = "2PL")
-# saveRDS(fit2PL, file = "./slides/Vorraussetzung/dat/fit2PL.RDS")
-fit2PL <- readRDS(file = "./slides/Vorraussetzung/dat/fit2PL.RDS")
+# saveRDS(fit2PL, file = "./slides/Linking/dat/fit2PL.RDS")
+fit2PL <- readRDS(file = "./slides/Linking/dat/fit2PL.RDS")
 
 apply(fit2PL$item_irt[, c("alpha", "beta")], 2, round, 2)
 # Actually worked!
 
 
 fit2PL_2 <- tam.mml.2pl(as.data.frame(simirt_dat$resp), irtmodel = "2PL")
-# saveRDS(fit2PL_2, file = "./slides/Vorraussetzung/dat/fit2PL_simfun.RDS")
-fit2PL_2 <- readRDS(file = "./slides/Vorraussetzung/dat/fit2PL_simfun.RDS")
+# saveRDS(fit2PL_2, file = "./slides/Linking/dat/fit2PL_simfun.RDS")
+fit2PL_2 <- readRDS(file = "./slides/Linking/dat/fit2PL_simfun.RDS")
 
 apply(fit2PL_2$item_irt[, c("alpha", "beta")], 2, round, 2)
 # This worked fairly well
