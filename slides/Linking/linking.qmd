@@ -130,7 +130,6 @@ Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen:
 
 ![](images/simulation.jpg)
 
-Erstellt mit [Bing Bild-Ersteller](ttps://www.bing.com/images/create/a-simulation-that-we-are-all-living-in-a-simulatio/1-66e33509faf2483e82f8b47ed577a221?id=9qHmBvQeaNYbK1HW5T0qLQ%3D%3D&view=detailv2&idpp=genimg&idpclose=1&thid=OIG1.o1KL86Aq8PP9cXCbZnHc&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&form=SYDBIC).
 
 :::
 ::::
@@ -349,7 +348,7 @@ Embretson 2000, S. 253
 ::: {.column width="50%"}
 
 - Gemeinsame Items, die in beiden Testformen vorhanden sind. 
-- Sollten keinen DIF haben.Genauer recherchieren: How to choose anchor items. 
+- Sollten keinen DIF haben (Major Problem!). Genauer recherchieren: How to choose anchor items. 
 
 :::
 
@@ -439,23 +438,34 @@ Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entwed
 - Funktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit ...) auf dieselbe Art und Weise?
 - Gibt es also echte Mittelwertsunterschiede zwischen beiden Gruppen, oder sind die Unterschiede auf Besondere Interaktionen zwischen Items und Gruppen zurückzuführen?
 
+## Beispiel
 
 ## DIF
 - Wenn wir das auf bestimmte Items anwenden, sprechen wir von Differential Item Functioning. 
+- DIF ist, wenn die ICRs unterschiedlich in verschiedenen Gruppen aussehen, also mind. einer der Paramter sich unterscheidet. 
+- Naive Lösung: Einfach kalibrieren in den versch. Gruppen und dann die ICRs anschauen. 
 
-Raschtrees vorstellen?
-Ansonsten Embretson ab Linking auch gut. 
+Warum funktioniert das nicht?
+- Skalen sind arbiträr festgelegt. Wir haben am Anfang dieser Präsi gesehen, dass man die Werte aus versch. Kalibrierungen nich ohne weiteres vergleichen kann. 
+- Wir müssen also vorher linken!
+
+## DIF berechnen
+- Wenn wir das getan haben können wir basically die IRCs vergleichen. Es gibt einige Methoden dafür. Eine Grundidee ist basically, dass man die Itemparameter für beide Gruppen auf den gleichen Wert fixiert und dann mit einem Modell vergleicht, wo diese Parameter frei geschätzt wurden. 
 
 
-## Was wird Überprüft? 
-
-
-
+## Multigroup IRT
+(TAM)?
 
 ## Beispiel was bei nichtbeachtung passiert
+- Irgendein Plot?
+
+## Machine Learning Verfahren
+- Raschtrees
+- Regularisierung
 
 
 ## Bildquellen
+- Erstellt mit [Bing Bild-Ersteller](ttps://www.bing.com/images/create/a-simulation-that-we-are-all-living-in-a-simulatio/1-66e33509faf2483e82f8b47ed577a221?id=9qHmBvQeaNYbK1HW5T0qLQ%3D%3D&view=detailv2&idpp=genimg&idpclose=1&thid=OIG1.o1KL86Aq8PP9cXCbZnHc&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&form=SYDBIC).
 - Foto von <a href="https://unsplash.com/de/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a> auf <a href="https://unsplash.com/de/fotos/rosa-blattrige-blume-nahaufnahme-fotografie-r9eIL7jtenc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   
 

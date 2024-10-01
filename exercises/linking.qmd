@@ -6,3 +6,78 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: html
 ---
 
+```{r}
+library(eatModel)
+library(TAM)
+library(tidyverse)
+
+## Ankeritems auf alle Fälle vorgeben!
+
+
+data(trends)
+
+
+
+```
+
+# Übung 1
+Forme den `trends` Datensatz so um, wie er von `TAM` benötigt wird. Das bedeutet, dass jedes Item (Spalte `item`) eine eigene Spalte bekommt, in der die Lösungen der Personen stehen (Spalte `value`). Wähle vorher die Spalten `item`, `value`, `year` und `idstud` aus, sodass der Datensatz der umgeformt wird möglichst schlank ist.
+
+:::{.callout-tip collapse="true"}
+Reshaping haben wir [hier]() behandelt. Wir wollen den Datensatz ins Wide-Format bringen. 
+:::
+
+:::{.callout-caution icon = "false" collapse="true"}
+```{r}
+
+items <- unique(trends$item)
+
+trends_wide <- trends %>% 
+  select(item, value, year, idstud) %>%
+  pivot_wider(names_from = item, values_from = value)
+
+## Ankeritems können arbiträr festgelegt werden
+## Kalibrieren von 2 Gruppen
+
+## Year 2015
+trends_wide_2015 <- trends_wide %>% 
+  filter(year == 2015) %>% 
+  select(-year)
+
+trends_wide_2015_na <- TAM::tam_remove_missings(trends_wide_2015, items=items)
+mod_2pl_2015 <- TAM::tam.mml.2pl(resp = trends_wide_2015_na$resp, pid = trends_wide_2015_na$dat$idstud)
+summary(mod_2pl_2015)
+
+
+
+## Year 2020
+trends_wide_2020 <- trends_wide %>% 
+  filter(year == 2020) %>% 
+  select(-year)
+
+trends_wide_2020_na <- TAM::tam_remove_missings(trends_wide_2020, items=items)
+mod_2pl_2020 <- TAM::tam.mml.2pl(resp = trends_wide_2020_na$resp, pid = trends_wide_2020_na$dat$idstud)
+summary(mod_2pl_2020)
+
+## Gibt es die Möglichkeit, die Itemtexte anzuschauen? Damit alles etwas weniger abstrakt wird. 
+tamobj_2015_2020 <- list(mod_2pl_2015, mod_2pl_2020)
+
+## Arbiträre Ankeritems festlegen
+trends_wide_2015_na$items %in% trends_wide_2020_na$items
+## Hmm, alle Items gleich. Schlimm?
+
+## Nimmt TAM dann automatisch alle Items als Ankeritems?
+anchor_items <- trends_wide_2015_na$items[1:30]
+
+l_2015_2020 <- TAM::tam.linking(tamobj_2015_2020, type="Hae")
+summary(l_2015_2020)
+l_2015_2020$parameters_list
+
+## In den beispielen werden hiernach noch WLEs berechnet, brauchen wir das?
+
+```
+:::
+
+## Übung 2
+
+
