@@ -88,9 +88,11 @@ Erstelle einen neuen Ordner (falls noch nicht getan) für diesen Workshop, und l
 :::
 
 ## Skripte
+
 Hier kommt der Code rein!
 
-:::{.callout-warning}
+## Übung
+:::{.callout-note}
 ## Übung
 Erstelle einen neuen Unterordner und lege darin ein R-Skript and (`File - New File - R Script`). In diesen kommen dann die Übungsaufgaben und Notizen aus dem Workshop. Leg am besten für jedes Thema ein eigenes Skript an, damit sie übersichtlich bleiben.
 :::
@@ -206,42 +208,12 @@ Also:
 athletes <- readRDS(here::here("raw_data", "athletes.rds"))
 ```
 
+## 
+
+:::{.callout-note}
 ## Übung
-
-Erstelle einen neuen Ordner `data` in deinem Arbeitsverzeichnis. Gehe dann zu [](), downloade die beiden Datensätze `psych_stats.csv` und `characters.rds`, und speichere sie in deinem neu erstellen `data` Ordner ab. 
-
-:::{.callout-hint}
-Downloaden von Github geht so: 
+Bitte bearbeite die [Übung zum Einlesen von Daten].
 :::
-
-## Übung
-Auf eigene Übungsseite packen!
-
-Lese beide Datensätze in deinem R-Skript ein. 
-
-::: {.callout-tip collapse="true"}
-## Tipp 1
-Es handelt sich um eine `.rds`-Datei und eine `.csv`-Datei.
-:::
-
-::: {.callout-tip collapse="true"}
-## Tipp 2
-Öffne die `.csv`-Datei und schaue nach, durch welches Zeichen die Werte getrennt sind. Nutze das `sep` Argument in `read.csv`!
-:::
-
-::: {.callout-caution collapse="true"}
-## Lösung
-
-```{r}
-characters <- readRDS(file = here::here("raw_data", "characters.rds"))
-psych_stats <- read.csv(
-  file = here::here("raw_data", "psych_stats.csv"),
-  sep = ";"
-)
-```
-:::
-
-
 
 # Datenmanipulation und Transformation
 
@@ -266,6 +238,18 @@ str(athletes)
 head(athletes)
 ```
 
+## 
+
+:::{.callout-note}
+## Übung
+Wie viele Zeilen und Spalten hat der in der letzten Übung eingelesene Datensatz `characters`? 
+:::
+
+
+:::{.callout-note}
+## Übung
+Aus welcher Show stammen die ersten Charactere im Datensatz? 
+:::
 
 # Subsetting
 
@@ -318,8 +302,10 @@ athletes %>%
 
 
 ## Übung
-- Link zur Übungsseite mit den Übungen die ich schon vorbereitet habe
-
+:::{.callout-note}
+## Übung
+Bitte bearbeite die [Übung zum Subsetting].
+:::
 
 # Fehlende Werte
 - `NA
@@ -403,6 +389,13 @@ inhabitants_wide_2 <- inhabitants_long %>%
 head(inhabitants_wide_2)
 ```
 
+## Übung
+:::{.callout-note}
+## Übung
+Bitte bearbeite die [Übung zum Resahping].
+:::
+
+
 # Merging
 
 ## 
@@ -439,6 +432,13 @@ medal_countries <- world_coordinates %>%
   left_join(medal_counts, join_by(region == Region))
 head(medal_countries)
 ```
+
+## Übung
+:::{.callout-note}
+## Übung
+Bitte bearbeite die [Übung zum Merging].
+:::
+
 
 # Funktionen
 
