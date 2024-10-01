@@ -438,7 +438,12 @@ Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entwed
 - Funktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit ...) auf dieselbe Art und Weise?
 - Gibt es also echte Mittelwertsunterschiede zwischen beiden Gruppen, oder sind die Unterschiede auf Besondere Interaktionen zwischen Items und Gruppen zurückzuführen?
 
-## Beispiel
+## Beispielbild
+
+```{r}
+
+```
+
 
 ## DIF
 - Wenn wir das auf bestimmte Items anwenden, sprechen wir von Differential Item Functioning. 
@@ -452,6 +457,8 @@ Warum funktioniert das nicht?
 ## DIF berechnen
 - Wenn wir das getan haben können wir basically die IRCs vergleichen. Es gibt einige Methoden dafür. Eine Grundidee ist basically, dass man die Itemparameter für beide Gruppen auf den gleichen Wert fixiert und dann mit einem Modell vergleicht, wo diese Parameter frei geschätzt wurden. 
 
+## Praxis
+- Wald-Test etc. 
 
 ## Multigroup IRT
 (TAM)?

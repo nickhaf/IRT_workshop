@@ -79,5 +79,12 @@ l_2015_2020$parameters_list
 :::
 
 ## Übung 2
+```{r}
+## Dif Analyse mit  TAM: https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm
+## Nutzt 1pl. 2pl vermutlich direkt komplizierter oder? 
+## Mit eRm: https://bookdown.org/chua/new_rasch_demo2/DIF.html
+
+
+```
 
 
