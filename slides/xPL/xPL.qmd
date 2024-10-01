@@ -134,8 +134,6 @@ colour_highlight <- "#9B1B34"
 # #013D5A, 
 
 library(latex2exp)
-library(gganimate)
-
 
 sppnames <- c( "afarensis","africanus","habilis","boisei", "rudolfensis","ergaster","sapiens")
 brainvolcc <- c( 438 , 452 , 612, 521, 752, 871, 1350 ) 
