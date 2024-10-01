@@ -7,19 +7,25 @@ title-slide-attributes:
   data-background-size: cover
 ---
 
-## Voraussetzungen der Item Response Theory
+## Voraussetzungen für IRT
 
 - Eindimmensionalität
-- Lokal Stochastische Unabhänigkeit (https://files.eric.ed.gov/fulltext/EJf1224232.pdf). 
+- Lokal Stochastische Unabhänigkeit
 
 ## Eindimmensionalität
-- Wenn nicht gegeben:
-    - SEM
-    - Dependency Matrix
+Die Lösungswahrscheinlichkeit wird lediglich durch $\theta_p$ beeinflusst (und die Itemschwierigkeiten). 
+
+
 
 ## Lokal stochastische Unabhängigkeit
 Nach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. 
 Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit), 
+
+
+In our experience, there is substantial confusion surrounding the issues of dimensionality and local independence. Many researchers assume IRT models must be unidimensional to satisfy the local independence requirement (sie können also mehrdimensional aber trotzdem local indiependent sein). This is not the case. Local independence is a more fundamental concept. In fact, unidimensionality can be derived from local independence. If the minimal dimensionality of θ necessary for the test to possess local independence is one, then the test is unidimensional. A natural corollary is that a correctly specified multidimensional model could result in local independence at the item level.
+(aus https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5624819/)
+
+Ein Modell mit lokal dependence hat wichtige Kovarianz zwischen den Items nicht entdeckt.
 
 - Abbildung
 - Einordnung: Lokale Unabhängigkeit, weitere Begriffe?
