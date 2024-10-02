@@ -83,3 +83,29 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
 .small {
   font-size: 20px;
 }
+
+input[type="range"] {
+  background: $body-bg; // Set your desired background color:
+
+  &::-webkit-slider-runnable-track {
+    background: $link-color; // Change this to your desired color
+  }
+
+  &::-webkit-slider-thumb {
+    background: $theme-highlight; // Change this to your desired color
+    width: 5px; // Set your desired width
+    height: 5px; // Set your desired height
+  }
+
+  &::-moz-range-track {
+    background: $link-color; // Change this to your desired color
+  }
+
+  &::-moz-range-thumb {
+    background: $theme-highlight; // Change this to your desired color
+    width: 5px; // Set your desired width
+    height: 5px; // Set your desired height
+  }
+}
+
+

@@ -7,29 +7,25 @@ title-slide-attributes:
   data-background-size: cover
 ---
 
-## Voraussetzungen für IRT
+## Wiederholung: Voraussetzungen für IRT
 
 - Eindimmensionalität
 - Lokal Stochastische Unabhänigkeit
 
 ## Eindimmensionalität
-Die Lösungswahrscheinlichkeit wird lediglich durch $\theta_p$ beeinflusst (und die Itemschwierigkeiten). 
-
-
+Die Lösungswahrscheinlichkeit eines Items wird lediglich durch $\theta_p$ beeinflusst (und die Itemparameter), wobei die Dimension von $\theta_p$ gleich eins ist. Das Item misst also nur ein Konstrukt.  
 
 ## Lokal stochastische Unabhängigkeit
 Nach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. 
-Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit), 
+Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit).  
 
-
-In our experience, there is substantial confusion surrounding the issues of dimensionality and local independence. Many researchers assume IRT models must be unidimensional to satisfy the local independence requirement (sie können also mehrdimensional aber trotzdem local indiependent sein). This is not the case. Local independence is a more fundamental concept. In fact, unidimensionality can be derived from local independence. If the minimal dimensionality of θ necessary for the test to possess local independence is one, then the test is unidimensional. A natural corollary is that a correctly specified multidimensional model could result in local independence at the item level.
-(aus https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5624819/)
+:::{.callout-note}
+Items können übrigens mehrdimensional aber trotzdem lokal unabhängig sein, wenn alle Items die gleichen Dimensionen messen. Andersherum sind Items immer lokal unabängig, wenn sie unidimensional sind.
+:::
 
 Ein Modell mit lokal dependence hat wichtige Kovarianz zwischen den Items nicht entdeckt.
 
-- Abbildung
-- Einordnung: Lokale Unabhängigkeit, weitere Begriffe?
-- Beispiel
+## Abbildung
 
 ## {background-image="images/link.jpg" background-size="1150px"}
 
@@ -39,12 +35,6 @@ Linking
 
 :::
 
-::: aside
-Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) auf [Unsplash](https://unsplash.com/de/fotos/selektives-fokusfoto-von-grauen-metallketten-JZ8AHFr2aEg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash). 
-
-::: 
-
-<!-- https://hectornajera83.github.io/book/scale-equating-and-linking.html -->
 
 ## Problem
 
@@ -298,16 +288,9 @@ plot_group_pars(parameters, beta, beta_2) +
 - Das bedeutet auch, dass wir die Werte aus verschiedenen Kalibrierungen nicht direkt miteinander vergleichen können.
 - Lösung: **Linking**
 
-
-
-
 ## Identifizierbarkeit
 
-
-## Beispiel
-
-
-## Linking/Equating
+## Linking/Equating {#sec-linking}
 - Szenario: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen. 
 - Dafür haben wir zwei Möglichkeiten:
     - Gemeinsame Items
@@ -329,8 +312,7 @@ Embretson 2000, S. 253
 :::: {.columns} 
 ::: {.column width="50%"}
 
-- Gemeinsame Items, die in beiden Testformen vorhanden sind. 
-- Sollten keinen DIF haben (Major Problem!). Genauer recherchieren: How to choose anchor items. 
+Ankeritems sind [gemeinsame Items]{.highlight}, die in beiden Testformen vorhanden sind. Hauptproblem bei der Auswahl: Sie sollten in beiden Gruppen nicht unterschiedlich funktionieren, es sollte also kein Differential Item Functioning (DIF) geben, siehe @sec-dif.
 
 :::
 
@@ -414,7 +396,7 @@ Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entwed
 
 
 
-# Messinvarianz/DIF
+# Messinvarianz/DIF {#sec-dif}
 
 ## Das Problem
 - Funktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit ...) auf dieselbe Art und Weise?
@@ -477,8 +459,11 @@ Mindestens einer der Paramter im IRT Modell unterscheidet sich also zwischen den
 
 Grund: Item ist nicht eindimensional. 
 
+\
 
-## Testen 
+[DIF-Untersuchung ist damit auch eine Untersuchung der Testvalidität!]{.highlight}
+
+## Wie? 
 Reference vs. focal group
 \
 Naive Lösung: Einfach die verschiedenen Subgruppen einzeln kalibrieren und dann die ICRs anschauen. 
@@ -486,16 +471,18 @@ Naive Lösung: Einfach die verschiedenen Subgruppen einzeln kalibrieren und dann
 Warum funktioniert das nicht?
 
 ## Warum funktioniert das nicht?
-Wir haben am Anfang dieser Präsi gesehen, dass man die Werte aus versch. Kalibrierungen nich ohne weiteres vergleichen kann, da die Skalen arbiträr festgelegt werden. [Wir müssen also vorher linken!]{.highlight}
+Wir haben am Anfang dieser Präsi gesehen, dass man die Werte aus versch. Kalibrierungen nich ohne weiteres vergleichen kann, da die Skalen arbiträr festgelegt werden. [Wir müssen also vorher linken, siehe @sec-linking !]{.highlight}
 
 ## DIF finden
 Es gibt viele verschiedene Verfahren, mit denen man Items auf DIF tests kann:
 
 - Wald-Test etc.
-- Regressionsansätze
+- Logistische Regression
+- Area Measuures
 - CFA-Ansätze
 - (fixieren von Parametern in beiden Subgruppen und Vergleich mit Modell, wo diese Parameter frei geschätzt werden). 
 - Multigruppen-IRT
+- MIMIC model
 - Raschtrees
 - Regularisierung
 
@@ -503,16 +490,20 @@ Es gibt viele verschiedene Verfahren, mit denen man Items auf DIF tests kann:
 See Berrio 2020 for a review. 
 :::
 
-## Wald-Test
+## Iteratives Vorgehen
+:::{.callout-note}
+
+Oft werden die Methoden iterativ angewandt, da beim anfänglichen Matchen der Gruppen ja auch eventuell DIF-Items für die Berechnung der Scores verwendet werden. 
+:::
 
 
-## Beispiel was bei nichtbeachtung passiert
-- Irgendein Plot?
+## Eins/Zwei Methoden kurz genauer vorstellen und in der Übung bearbeiten. 
 
 
 ## Bildquellen
-- Erstellt mit [Bing Bild-Ersteller](ttps://www.bing.com/images/create/a-simulation-that-we-are-all-living-in-a-simulatio/1-66e33509faf2483e82f8b47ed577a221?id=9qHmBvQeaNYbK1HW5T0qLQ%3D%3D&view=detailv2&idpp=genimg&idpclose=1&thid=OIG1.o1KL86Aq8PP9cXCbZnHc&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&form=SYDBIC).
 - Foto von <a href="https://unsplash.com/de/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a> auf <a href="https://unsplash.com/de/fotos/rosa-blattrige-blume-nahaufnahme-fotografie-r9eIL7jtenc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) auf [Unsplash](https://unsplash.com/de/fotos/selektives-fokusfoto-von-grauen-metallketten-JZ8AHFr2aEg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
+- Erstellt mit [Bing Bild-Ersteller](ttps://www.bing.com/images/create/a-simulation-that-we-are-all-living-in-a-simulatio/1-66e33509faf2483e82f8b47ed577a221?id=9qHmBvQeaNYbK1HW5T0qLQ%3D%3D&view=detailv2&idpp=genimg&idpclose=1&thid=OIG1.o1KL86Aq8PP9cXCbZnHc&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&form=SYDBIC).
 - Foto von <a href="https://unsplash.com/de/@quinoal?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Quino Al</a> auf <a href="https://unsplash.com/de/fotos/graustufenfoto-einer-frau-die-fussball-spielt-hCfZwxu6auo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@jhc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">James Coleman</a> auf <a href="https://unsplash.com/de/fotos/graustufenfoto-eines-nfl-spielers-der-den-ball-fangt-CTEvFbFpVC8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/1920px-Flag_of_Germany.svg.png

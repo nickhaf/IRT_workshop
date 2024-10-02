@@ -5,6 +5,8 @@ format: letterbox-revealjs
 title-slide-attributes:
   data-background-image: ./images/green_waves.jpg
   data-background-size: cover
+execute:
+  echo: false
 ---
 
 ```{r}
@@ -84,15 +86,68 @@ $$
  - Wenn die Lösungswahrscheinlichkeit auf der rehcten Seite sehr gering ist, ist sie immer noch mind. $\gamma_i$
 
 
-## Shiny App for demonstration?
-Auf alle Fälle zeigen, wie es aussieht!
-
 ## 2PL
 $\gamma_i = 0$
 
 $$
 P(X_{pi}=1) = \color{red}{0} + (1-\color{red}{0})\frac{exp(\alpha_i(\theta_p - \beta_i)))}{1 + exp(\alpha_i(\theta_p - \beta_i))}
 $$
+
+## Darstellung
+
+:::{.columns}
+:::{.column width="30%"}
+
+
+```{ojs}
+viewof alpha1 = Inputs.range(
+  [-1, 1], 
+  {value: 1, step: .1, label: tex`\alpha_1`}
+)
+viewof beta1 = Inputs.range(
+  [-3, 3], 
+  {value: 0, step: .1, label: tex`\beta_1`}
+)
+viewof alpha2 = Inputs.range(
+  [-1, 1], 
+  {value: 1, step: .1, label: tex`\alpha_2`}
+)
+viewof beta2 = Inputs.range(
+  [-3, 3], 
+  {value: 0, step: .1, label: tex`\beta_2`}
+)
+
+
+```
+:::
+
+:::{.column width="70%"}
+```{ojs}
+
+line_function = function(alpha, beta, theta) {
+    return Math.exp(alpha * (theta - beta)) / (1 + Math.exp(alpha * (theta - beta)));
+}
+
+// X-Variable
+data = d3.range(-3, 3, 0.1).map((theta) => ({
+  x: theta,
+  y1: line_function(alpha1, beta1, theta),
+  y2: line_function(alpha2, beta2, theta)
+}));
+
+Plot.plot(
+  {
+    x: {grid: false, domain: [-3, 3]}, 
+    y: {grid: false, domain: [0, 1]},
+    marks: [
+      Plot.line(data, {x: "x", y: "y1", stroke: "#9B1B34"}),
+      Plot.line(data, {x: "x", y: "y2", stroke: "#99D9DD"}),
+    ]
+  }
+)
+```
+:::
+:::
 
 ## 1PL
 $\alpha_i = 1$
