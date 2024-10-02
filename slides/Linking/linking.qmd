@@ -325,7 +325,7 @@ plot_group_pars(parameters, beta, beta_2) +
 
 
 
-## Identifizirbarkeit
+## Identifizierbarkeit
 
 
 ## Beispiel
@@ -444,6 +444,47 @@ Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entwed
 - Funktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit ...) auf dieselbe Art und Weise?
 - Gibt es also echte Mittelwertsunterschiede zwischen beiden Gruppen, oder sind die Unterschiede auf Besondere Interaktionen zwischen Items und Gruppen zurückzuführen?
 
+## {background-image="images/rugby_female.jpg" background-size="1150px"}
+
+::: {.absolute left=10% right="10%" top="7.5%" style="font-size:0.5em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(0px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 10px;"}
+
+Der Legende nach soll Rugby während eines Fußballspiels in der gleichnamigen Stadt entstanden sein. Als der Mannschaft von William Webb Ellis 1823 eine Niederlage bevorstand, packte dieser den Ball mit den Händen und legte ihn ins Tor des Gegners. Obwohl berechtigte Zweifel am Wahrheitsgehalt der Geschichte bestehen – der Ball wurde bereits zuvor in den meisten Spielvarianten mit der Hand getragen –, ist der Pokal der Rugby-Union-Weltmeisterschaft nach William Webb Ellis benannt (der Webb Ellis Cup).
+
+1863 wurde der englische Fußballverband Football Association (FA) mit dem Ziel gegründet, die noch vielfältigen Fußballregeln zu vereinheitlichen. Aufgrund von Streitigkeiten über Regeländerungen zogen sich einige Vereine aus dem Verband zurück und gründeten am 26. Januar 1871 mit der Rugby Football Union (RFU) einen konkurrierenden Verband, der in der Folgezeit nach und nach die Regeln der Rugby School standardisierte. Bereits am 27. März desselben Jahres fand in Edinburgh zwischen Schottland und England das erste Länderspiel statt. 
+
+1895 erfolgte aufgrund eines Streits über den Amateurgedanken eine weitere Trennung, diesmal innerhalb der RFU. 21 Vereine, vor allem aus Arbeitervierteln Nordenglands, spalteten sich als Northern Rugby Union (heute Rugby Football League) ab, legten ihre eigenen Regeln fest und erlaubten die Professionalisierung des Sports. Aus den veränderten Regeln entwickelte sich die Variante Rugby League. Bis heute existieren beide Varianten des Rugbys nebeneinander. Internationale Begegnungen von Nationalmannschaften werden sowohl nach den Regeln der Rugby Union wie auch nach denen der Rugby League abgehalten. Seit 1995 sind im Rugby Union ebenfalls Profisportler zugelassen. 
+
+:::{.aside}
+[Wikipedia](https://de.wikipedia.org/wiki/Rugby#Geschichte)
+:::
+:::
+
+
+## Beispiel
+
+:::{.columns}
+:::{.column width="50%"}
+Welche Unterarten von Rugby gibt es laut Text?
+
+\
+
+:::{.columns}
+:::{.column width="50%"}
+![](images/nz.png) 
+:::
+:::{.column width="50%"}
+
+![](images/de.png) 
+:::
+:::
+
+:::
+:::{.column width="50%"}
+
+![](images/rugbymale.jpg){.image-right}
+:::
+:::
+
 ## Beispielbild
 
 ```{r}
@@ -452,11 +493,23 @@ Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entwed
 
 
 ## DIF
-- Wenn wir das auf bestimmte Items anwenden, sprechen wir von Differential Item Functioning. 
-- DIF ist, wenn die ICRs unterschiedlich in verschiedenen Gruppen aussehen, also mind. einer der Paramter sich unterscheidet. 
-- Naive Lösung: Einfach kalibrieren in den versch. Gruppen und dann die ICRs anschauen. 
+
+DIF: Item Characteristic Curves unterscheiden sich in verschiedenen Subgruppen.  
+Mindestens einer der Paramter im IRT Modell unterscheidet sich also zwischen den Gruppen.  
+
+\
+
+Grund: Item ist nicht eindimensional. 
+
+
+## Testen 
+Reference vs. focal group
+\
+Naive Lösung: Einfach die verschiedenen Subgruppen einzeln kalibrieren und dann die ICRs anschauen. 
 
 Warum funktioniert das nicht?
+
+## Warum funktioniert das nicht?
 - Skalen sind arbiträr festgelegt. Wir haben am Anfang dieser Präsi gesehen, dass man die Werte aus versch. Kalibrierungen nich ohne weiteres vergleichen kann. 
 - Wir müssen also vorher linken!
 
@@ -465,6 +518,7 @@ Warum funktioniert das nicht?
 
 ## Praxis
 - Wald-Test etc. 
+- Regressionsansätze
 
 ## Multigroup IRT
 (TAM)?
@@ -480,7 +534,10 @@ Warum funktioniert das nicht?
 ## Bildquellen
 - Erstellt mit [Bing Bild-Ersteller](ttps://www.bing.com/images/create/a-simulation-that-we-are-all-living-in-a-simulatio/1-66e33509faf2483e82f8b47ed577a221?id=9qHmBvQeaNYbK1HW5T0qLQ%3D%3D&view=detailv2&idpp=genimg&idpclose=1&thid=OIG1.o1KL86Aq8PP9cXCbZnHc&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&form=SYDBIC).
 - Foto von <a href="https://unsplash.com/de/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a> auf <a href="https://unsplash.com/de/fotos/rosa-blattrige-blume-nahaufnahme-fotografie-r9eIL7jtenc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-  
+- Foto von <a href="https://unsplash.com/de/@quinoal?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Quino Al</a> auf <a href="https://unsplash.com/de/fotos/graustufenfoto-einer-frau-die-fussball-spielt-hCfZwxu6auo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@jhc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">James Coleman</a> auf <a href="https://unsplash.com/de/fotos/graustufenfoto-eines-nfl-spielers-der-den-ball-fangt-CTEvFbFpVC8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/1920px-Flag_of_Germany.svg.png
+- https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_New_Zealand.svg/800px-Flag_of_New_Zealand.svg.png
 
 
 
