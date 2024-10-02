@@ -67,3 +67,8 @@ allModels <- splitModels(qMatrix = qmat[,c("item", "domainlistening", "domainrea
 defAll    <- defineModel(dat = dat_wide_all, id = "idstud", software="tam", splittedModels = allModels)
 
 
+### 2. Repraesentation des Designs im Datensatz
+###############################################
+
+datL <- readRDS("c:/Users/weirichs/Repositories/IRT_workshop/slides/Tag2_1Vormittag_Nr2_Testdesigns/longitudinal.rds")
+datWideMzp1 <- reshape2::dcast(subset(datL, mzp == 1), TH+person~item, value.var = "value")
