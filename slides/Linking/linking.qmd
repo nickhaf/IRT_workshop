@@ -120,30 +120,6 @@ ggplot(data_lines, aes(x, y, group=group)) +
 
 ```
 
-## Simulieren von IRT Daten
-
-::::{.columns}
-:::{.column width="30%"}
-
-Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: Daten**simulation**. 
-
-- Einerseits hilft es hoffentlich, die Konzepte hinter IRT und Linking noch besser zu verstehen.
-- Hilfreich, z.B. für Poweranalysen 
-
-:::
-
-::: {.column width="70%"}
-
-![](images/simulation.jpg)
-
-
-:::
-::::
-
-## Let's take a step back! 
-
-Geht zur [Übung](../../exercises/Linking.qmd) und probiert euch aus! 
-
 ## Warum das Ganze?
 An diesem Grundgerüst können wir jetzt verschiedene Anpassungen vornehmen, um ein paar Eigenschaften von Linking zu untersuchen.     
 Wir erinnern uns zurück: die Fähigkeitsverteilung wird bei der Kalibrierung auf eine Standardnormalverteilung gesetzt ($\theta \sim N(0, 1)$).   
@@ -510,25 +486,28 @@ Naive Lösung: Einfach die verschiedenen Subgruppen einzeln kalibrieren und dann
 Warum funktioniert das nicht?
 
 ## Warum funktioniert das nicht?
-- Skalen sind arbiträr festgelegt. Wir haben am Anfang dieser Präsi gesehen, dass man die Werte aus versch. Kalibrierungen nich ohne weiteres vergleichen kann. 
-- Wir müssen also vorher linken!
+Wir haben am Anfang dieser Präsi gesehen, dass man die Werte aus versch. Kalibrierungen nich ohne weiteres vergleichen kann, da die Skalen arbiträr festgelegt werden. [Wir müssen also vorher linken!]{.highlight}
 
-## DIF berechnen
-- Wenn wir das getan haben können wir basically die IRCs vergleichen. Es gibt einige Methoden dafür. Eine Grundidee ist basically, dass man die Itemparameter für beide Gruppen auf den gleichen Wert fixiert und dann mit einem Modell vergleicht, wo diese Parameter frei geschätzt wurden. 
+## DIF finden
+Es gibt viele verschiedene Verfahren, mit denen man Items auf DIF tests kann:
 
-## Praxis
-- Wald-Test etc. 
+- Wald-Test etc.
 - Regressionsansätze
+- CFA-Ansätze
+- (fixieren von Parametern in beiden Subgruppen und Vergleich mit Modell, wo diese Parameter frei geschätzt werden). 
+- Multigruppen-IRT
+- Raschtrees
+- Regularisierung
 
-## Multigroup IRT
-(TAM)?
+:::{.aside}
+See Berrio 2020 for a review. 
+:::
+
+## Wald-Test
+
 
 ## Beispiel was bei nichtbeachtung passiert
 - Irgendein Plot?
-
-## Machine Learning Verfahren
-- Raschtrees
-- Regularisierung
 
 
 ## Bildquellen

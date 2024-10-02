@@ -101,10 +101,31 @@ $$
 P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{red}{1}(\theta_p - \beta_i)))}{1 + exp(\color{red}{1}(\theta_p - \beta_i))}
 $$
 
-# Übung
 
-## Übung: Simulation von 2PL Daten
-Gehe zur [Übung] und löse die Aufgaben.
+## Simulieren von IRT Daten
+
+::::{.columns}
+:::{.column width="30%"}
+
+Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: Daten**simulation**. 
+
+- Einerseits hilft es hoffentlich, die Konzepte hinter IRT und Linking noch besser zu verstehen.
+- Hilfreich, z.B. für Poweranalysen 
+
+:::
+
+::: {.column width="70%"}
+
+![](images/simulation.jpg)
+
+
+:::
+::::
+
+## Let's take a step back! 
+
+Geht zur [Übung](../../exercises/Linking.qmd) und probiert euch aus! 
+
 
 # Welches Modell?
 
