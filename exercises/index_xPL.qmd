@@ -1,0 +1,10 @@
+---
+title: "Höher parametrisierte Modelle"
+subtitle: "Übungen"
+listing: 
+  type: table
+  contents: ./xPL
+  sort: "title"
+format: html
+---
+

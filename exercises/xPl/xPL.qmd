@@ -3,7 +3,7 @@ title: "Höher parametrisierte IRT Modelle"
 subititle: "Übung"
 lang: de
 author: "Nicklas Hafiz"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+
 format: html
 ---
 

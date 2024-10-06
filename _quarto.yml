@@ -12,6 +12,35 @@ website:
         href: slides/index.qmd
       - text: "Übungen"
         href: exercises/index.qmd
+  sidebar:
+    - title: "Übungen"
+      style: "floating"
+      search: true
+      collapse-level: 1
+      contents:
+        - section: "Übungen"
+          href: exercises/index.qmd
+          contents:
+          - section: "Einführung in R"
+            href: ./exercises/index_intro_r.qmd
+            contents:
+              - ./exercises/intro_r/introR.qmd
+              - ./exercises/intro_r/subsetting_ex.qmd
+              - ./exercises/intro_r/missings_ex.qmd
+              - ./exercises/intro_r/reshaping_ex.qmd
+          - section: "Linking"
+            href: ./exercises/index_linking.qmd
+            contents:
+              - ./exercises/linking/linking.qmd
+          - section: "Höher parametrisierte Modelle"
+            href: ./exercises/index_xpl.qmd
+            contents:
+              - ./exercises/xPL/xPL.qmd
+          - section: "Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+            href: ./exercises/index_glm.qmd
+            contents:
+              - ./exercises/glm/glm.qmd
+
 format:
   html:
     theme: styles_html.scss

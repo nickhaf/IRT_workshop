@@ -1,7 +1,7 @@
 ---
 title: "Einführung in R"
 author: "Nicklas Hafiz"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+
 title-slide-attributes:
   data-background-image: ./images/r_desktop.jpg
   data-background-size: cover
@@ -157,16 +157,17 @@ library(packagename)
 ## [tidyverse](https://www.tidyverse.org/) {style="text-align: right;"}
 :::: {.columns} 
 
-::: {.column width="60%"}
-![](./images/tidyverse_logo.png){.absolute left = "1.5%" top = "1.5%" width="50%"}
-:::
 ::: {.column width="40%"}
+![](./images/tidyverse_logo.png)
+:::
+::: {.column width="60%"}
 Verbreitete Paketsammlung in R für so ziemlich jede Stufe in der Datenauswertung. Der meiste Code wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
 :::
 ::::
 ## `tidyverse`: Pipe Operator
 
-%>%
+`%>%`
+
 
 ```{r}
 sum(seq(from = 1, to = mean(c(45:100), na.rm = TRUE), by = 0.1))
@@ -221,11 +222,9 @@ Daten und Pfade
 
 ## Exkurs: `here`-Paket
 
+[`here`](https://here.r-lib.org/) ist ein Paket zum Erstellen von Dateipfaden. Dadurch können Probleme mit relativen und absoluten Pfaden vermieden werden. 
 
-- Paket zum Erstellen von Dateipfaden.
-- Vermeidet Probleme mit relativen Pfaden. 
-
-".\raw_data\athletes.rds" wird zu `here::here("raw_data", "athletes.rds")`
+"C:\Users\hafiznij\Documents\GitHub\IRT_workshop\raw_data\athletes.rds" wird zu `here::here("raw_data", "athletes.rds")`. 
 
 Also:
 ```{r}
