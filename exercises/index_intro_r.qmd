@@ -1,0 +1,10 @@
+---
+title: "Einführung in R"
+subtitle: "Übungen"
+listing: 
+  type: table
+  contents: ./intro_r
+  sort: "title"
+format: html
+---
+

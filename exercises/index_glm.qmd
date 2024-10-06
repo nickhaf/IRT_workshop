@@ -1,0 +1,10 @@
+---
+title: "Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+subtitle: "Übungen"
+listing: 
+  type: table
+  contents: ./glm
+  sort: "title"
+format: html
+---
+

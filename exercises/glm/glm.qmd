@@ -1,7 +1,6 @@
 ---
-title: "3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
+title: "Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
 author: "Nicklas Hafiz"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: html
 ---
 
