@@ -5,11 +5,31 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 title-slide-attributes:
   data-background-image: ./images/r_desktop.jpg
   data-background-size: cover
+  data-background-opacity: "0"
 format: letterbox-revealjs
 ---
 
 
-## R und RStudio
+## Überblick
+
+1. Arbeiten mit R und RStudio
+2. Grundlegende Operationen in R: Daten laden, Pakete installieren ...
+3. Datenmanipulation und Transformation in R
+
+:::{.callout-note}
+## Ziel
+Am Ende der Session solltet ihr mit den Grundlagen in R vertraut sein, sodass ihr den Rest des Workshops in R bestreiten könnt.   
+:::
+
+
+## {background-image="images/keyboard.jpg" background-size="1150px"}
+
+::: {.absolute left="2.5%" top="2.5%" style="padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, 0); backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
+
+Arbeiten mit R \
+und RStudio
+
+:::
 
 ## RStudio Interface
 
@@ -37,13 +57,13 @@ print("Hello World!")
 
 ## 2) Console
 
-Hier erscheint der Output aus unseren Skripten. Wir können auch direkt in der Konsole arbeiten und Befehle mit Enter ausführen:
+Hier erscheint der Output aus unseren Skripten. Wir können auch direkt in der Konsole arbeiten und Befehle mit `enter` ausführen:
 
 ```{r}
 10 + 5
 ```
 
-:::{.callout-warning}
+:::{.callout-important}
 Hier geschriebener Code wird nicht gespeichert. Nutze die Konsole also, um Dinge auszuprobieren, schreibe aber alles Wichtige in Skripte. 
 :::
 
@@ -54,18 +74,26 @@ Wir können auch den Befehlsverlauf einsehen und einige weitere Dinge, die wir j
 
 ## 4) Plots, Datein, Hilfe ...
 
-Plots, die wir in einer R-Sitzung erstellen, werden im [Plot]{.highlight}-Tab ausgegeben.  
-\
+Plots, die wir in einer R-Sitzung erstellen, werden im [Plot]{.highlight}-Tab ausgegeben.   
+
 Beim Aufrufen der Hilfefunktion öffnet sich die Dokumentation im [Hilfe]{.highlight}-Tab.  
 
-\
+:::{.callout-important}
+
+## Hilfe in R
+Die Dokumentation kann mit `?funktionsname` aufgerufen werden. Das ist eines der wichtigsten Werkzeuge bei der Arbeit in R. 
+
+:::
 
 Der [Dateien]{.highlight}-Tab ermöglicht es uns, die Dateien in unserem Arbeitsverzeichnis zu verwalten.
 
 
+
+
+
 ## {background-image="images/coder.jpg" background-size="1150px"}
 
-::: {.absolute left="5%" bottom="5%"}
+::: {.absolute left="5%" bottom="5%" style="color:#F8F8F8;"}
 
 Los Geht's!
 :::
@@ -74,7 +102,7 @@ Los Geht's!
 
 ## {background-image="images/setup.jpg" background-size="1150px"}
 
-::: {.absolute left="5%" top="5%" }
+::: {.absolute left="5%" top="5%" style="color:#F8F8F8;"}
 
 Basic Setup
 :::
@@ -91,8 +119,7 @@ Erstelle einen neuen Ordner (falls noch nicht getan) für diesen Workshop, und l
 
 Hier kommt der Code rein!
 
-## Übung
-:::{.callout-note}
+:::{.callout-warning}
 ## Übung
 Erstelle einen neuen Unterordner und lege darin ein R-Skript and (`File - New File - R Script`). In diesen kommen dann die Übungsaufgaben und Notizen aus dem Workshop. Leg am besten für jedes Thema ein eigenes Skript an, damit sie übersichtlich bleiben.
 :::
@@ -127,16 +154,14 @@ library(packagename)
 ::: 
 :::: 
 
-## `tidyverse` {style="text-align: right;"}
+## [tidyverse](https://www.tidyverse.org/) {style="text-align: right;"}
 :::: {.columns} 
 
-::: {.column width="50%"}
-![](./images/tidyverse_logo.png){.image-left}
+::: {.column width="60%"}
+![](./images/tidyverse_logo.png){.absolute left = "1.5%" top = "1.5%" width="50%"}
 :::
-::: {.column width="50%"}
-- Das [`tidyverse`](https://www.tidyverse.org/) ist eine verbreitete Paketsammlung in R. 
-- Folgen einer grundlegenden Philosophie, ich persönlich arbeiter lieber damit (aber Präferenzfrage).
-- Deswegen zeige ich oft beides, der meiste Code wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
+::: {.column width="40%"}
+Verbreitete Paketsammlung in R für so ziemlich jede Stufe in der Datenauswertung. Der meiste Code wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
 :::
 ::::
 ## `tidyverse`: Pipe Operator
