@@ -3,7 +3,9 @@
     "listing": "/exercises/index.html",
     "items": [
       "/exercises/3-GLM.html",
-      "/exercises/linking.html"
+      "/exercises/introR.html",
+      "/exercises/linking.html",
+      "/exercises/xPL.html"
     ]
   }
 ]
