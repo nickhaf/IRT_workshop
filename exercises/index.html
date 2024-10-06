@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../exercises/index_intro_r.html" rel="next">
 <script src="../site_libs/quarto-listing/list.min.js"></script>
 <script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -78,9 +79,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-subtitle','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author"],
+      searchColumns: ["listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -130,7 +131,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -161,10 +162,129 @@ window.Quarto = {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/index.html">Übungen</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Übungen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index_intro_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einführung in R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/intro_r/introR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einlesen von Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/intro_r/subsetting_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Subsetting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/intro_r/missings_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Missings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/intro_r/reshaping_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reshaping</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index_linking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linking</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/linking/linking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linking</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href=".././exercises/index_xpl.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Höher parametrisierte Modelle</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+ <span class="menu-text">./exercises/xPL/xPL.qmd</span>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index_glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/glm/glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
@@ -195,19 +315,29 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="thumbnail">
+<p><a href="../exercises/index_glm.html" class="no-external"></a></p><a href="../exercises/index_glm.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../exercises/index_glm.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../exercises/index_glm.html" class="no-external">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../exercises/index_glm.html" class="no-external">Übungen</a>
+</div>
+<div class="listing-description">
+<a href="../exercises/index_glm.html" class="no-external">
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
      <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
      <select id="listing-listing-sort" class="form-select" aria-label="Sortieren nach" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
        <option value="" disabled="" selected="" hidden="">Sortieren nach</option>
        <option value="index" data-direction="asc">Voreinstellung</option>
-         <option value="listing-date-sort" data-direction="asc">
-          Datum - Datum (aufsteigend)
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Datum - Neueste
-        </option>
          <option value="listing-title-sort" data-direction="asc">
           Titel
         </option>
@@ -225,63 +355,147 @@ window.Quarto = {
 <thead>
 <tr>
 <th>
-<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Datum</a>
-</th>
+T…</th><th></th></tr></thead><tbody class="list"><tr data-index="0" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="1" data-listing-word-count-sort="39" data-listing-title-sort="Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells" data-listing-filename-sort="glm.qmd"><td></td><td><span class="listing-author"></span></td></tr></tbody></table><div class="listing-no-matching d-none"></div></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../exercises/index_glm.html" class="no-external"></a></p><a href="../exercises/index_glm.html" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="thumbnail">
+<p><a href="../exercises/index_intro_r.html" class="no-external"></a></p><a href="../exercises/index_intro_r.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../exercises/index_intro_r.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../exercises/index_intro_r.html" class="no-external">Einführung in R</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../exercises/index_intro_r.html" class="no-external">Übungen</a>
+</div>
+<div class="listing-description">
+<a href="../exercises/index_intro_r.html" class="no-external">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Sortieren nach" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Sortieren nach</option>
+       <option value="index" data-direction="asc">Voreinstellung</option>
+         <option value="listing-title-sort" data-direction="asc">
+          Titel
+        </option>
+         <option value="listing-author" data-direction="asc">
+          Autor:in
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
 <th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Titel</a>
-</th>
+T…</th><th></th></tr></thead><tbody class="list"><tr data-index="0" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="1" data-listing-word-count-sort="135" data-listing-title-sort="Einlesen von Daten" data-listing-filename-sort="introR.qmd"><td></td><td><span class="listing-author"></span></td></tr><tr data-index="1" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="2" data-listing-word-count-sort="221" data-listing-title-sort="Merging" data-listing-filename-sort="merging.qmd"><td></td><td><span class="listing-author"></span></td></tr><tr data-index="2" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="2" data-listing-word-count-sort="201" data-listing-title-sort="Missings" data-listing-filename-sort="missings_ex.qmd"><td></td><td><span class="listing-author"></span></td></tr><tr data-index="3" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="2" data-listing-word-count-sort="269" data-listing-title-sort="Reshaping" data-listing-filename-sort="reshaping_ex.qmd"><td></td><td><span class="listing-author"></span></td></tr><tr data-index="4" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="3" data-listing-word-count-sort="424" data-listing-title-sort="Subsetting" data-listing-filename-sort="subsetting_ex.qmd"><td></td><td><span class="listing-author"></span></td></tr></tbody></table><div class="listing-no-matching d-none"></div></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../exercises/index_intro_r.html" class="no-external"></a></p><a href="../exercises/index_intro_r.html" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="thumbnail">
+<p><a href="../exercises/index_linking.html" class="no-external"></a></p><a href="../exercises/index_linking.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../exercises/index_linking.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../exercises/index_linking.html" class="no-external">Linking</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../exercises/index_linking.html" class="no-external">Übungen</a>
+</div>
+<div class="listing-description">
+<a href="../exercises/index_linking.html" class="no-external">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Sortieren nach" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Sortieren nach</option>
+       <option value="index" data-direction="asc">Voreinstellung</option>
+         <option value="listing-title-sort" data-direction="asc">
+          Titel
+        </option>
+         <option value="listing-author" data-direction="asc">
+          Autor:in
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
 <th>
-<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Autor:in</a>
-</th>
+T…</th><th></th></tr></thead><tbody class="list"><tr data-index="0" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="2" data-listing-word-count-sort="216" data-listing-title-sort="Linking" data-listing-filename-sort="linking.qmd"><td></td><td><span class="listing-author"></span></td></tr></tbody></table><div class="listing-no-matching d-none"></div></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../exercises/index_linking.html" class="no-external"></a></p><a href="../exercises/index_linking.html" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1728235405857" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="thumbnail">
+<p><a href="../exercises/index_xPL.html" class="no-external"></a></p><a href="../exercises/index_xPL.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../exercises/index_xPL.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../exercises/index_xPL.html" class="no-external">Höher parametrisierte Modelle</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../exercises/index_xPL.html" class="no-external">Übungen</a>
+</div>
+<div class="listing-description">
+<a href="../exercises/index_xPL.html" class="no-external">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-date-sort="NaN" data-listing-file-modified-sort="1728220885138" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="39" data-listing-title-sort="3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells" data-listing-filename-sort="3-GLM.qmd">
-<td>
-<span class="listing-date">Invalid Date</span>
-</td>
-<td>
-<a href="../exercises/3-GLM.html" class="title listing-title">3) Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</a>
-</td>
-<td>
-<span class="listing-author">Nicklas Hafiz</span>
-</td>
-</tr>
-<tr data-index="1" data-listing-date-sort="NaN" data-listing-file-modified-sort="1728220885138" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1252" data-listing-title-sort="Einführung in R" data-listing-filename-sort="introR.qmd">
-<td>
-<span class="listing-date">Invalid Date</span>
-</td>
-<td>
-<a href="../exercises/introR.html" class="title listing-title">Einführung in R</a>
-</td>
-<td>
-<span class="listing-author">Nicklas Hafiz</span>
-</td>
-</tr>
-<tr data-index="2" data-listing-date-sort="NaN" data-listing-file-modified-sort="1728220885138" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="216" data-listing-title-sort="Linking" data-listing-filename-sort="linking.qmd">
-<td>
-<span class="listing-date">Invalid Date</span>
-</td>
-<td>
-<a href="../exercises/linking.html" class="title listing-title">Linking</a>
-</td>
-<td>
-<span class="listing-author">Nicklas Hafiz</span>
-</td>
-</tr>
-<tr data-index="3" data-listing-date-sort="NaN" data-listing-file-modified-sort="1728220885138" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1349" data-listing-title-sort="Höher parametrisierte IRT Modelle" data-listing-filename-sort="xPL.qmd">
-<td>
-<span class="listing-date">Invalid Date</span>
-</td>
-<td>
-<a href="../exercises/xPL.html" class="title listing-title">Höher parametrisierte IRT Modelle</a>
-</td>
-<td>
-<span class="listing-author">Nicklas Hafiz</span>
-</td>
-</tr>
 </tbody>
 </table>
+<div class="listing-no-matching d-none">
+Keine Treffer
+</div>
+</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="../exercises/index_xPL.html" class="no-external"></a></p><a href="../exercises/index_xPL.html" class="no-external">
+</a>
+</div>
+</div>
+</div>
 <div class="listing-no-matching d-none">
 Keine Treffer
 </div>
@@ -706,6 +920,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../exercises/index_intro_r.html" class="pagination-link" aria-label="Einführung in R">
+        <span class="nav-page-text">Einführung in R</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

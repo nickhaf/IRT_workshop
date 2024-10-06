@@ -1,11 +1,37 @@
 [
   {
+    "listing": "/exercises/index_glm.html",
+    "items": [
+      "/exercises/glm/glm.html"
+    ]
+  },
+  {
     "listing": "/exercises/index.html",
     "items": [
-      "/exercises/3-GLM.html",
-      "/exercises/introR.html",
-      "/exercises/linking.html",
-      "/exercises/xPL.html"
+      "/exercises/index_glm.html",
+      "/exercises/index_intro_r.html",
+      "/exercises/index_linking.html",
+      "/exercises/index_xPL.html"
+    ]
+  },
+  {
+    "listing": "/exercises/index_intro_r.html",
+    "items": [
+      "/exercises/intro_r/introR.html",
+      "/exercises/intro_r/merging.html",
+      "/exercises/intro_r/missings_ex.html",
+      "/exercises/intro_r/reshaping_ex.html",
+      "/exercises/intro_r/subsetting_ex.html"
+    ]
+  },
+  {
+    "listing": "/exercises/index_xPL.html",
+    "items": []
+  },
+  {
+    "listing": "/exercises/index_linking.html",
+    "items": [
+      "/exercises/linking/linking.html"
     ]
   }
 ]
