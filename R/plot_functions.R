@@ -47,3 +47,7 @@ plot_pcm <- function(delta){
     theme_bg()
 
 }
+
+set_colour_scheme <- function(color_scheme = c("#01364C", "#F4BA02", "#9B1B34")){
+  scale_colour_manual(values = color_scheme)
+}
