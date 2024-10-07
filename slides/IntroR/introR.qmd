@@ -47,7 +47,7 @@ Das Fenster hat 4 Bereiche:
 
 ![](./images/window_commented.PNG){fig-align="center"}
 
-### 1) Script Pane
+## 1) Script Pane
 Editieren von Skripten (Datein, in denen Code gespeichert wird) und ausführen von Code (`crtl + enter` (Windows) oder `command + return` (macOS).
 
 ```{r}
@@ -60,7 +60,7 @@ print("Hello World!")
 Übrigens: Codezeilen, die mit einem `#` beginnen, sind auskommentiert und werden nicht ausgewertet. 
 :::
 
-### 2) Console
+## 2) Console
 
 Hier erscheint der Output aus unseren Skripten. Wir können auch direkt in der Konsole arbeiten und Befehle mit `enter` ausführen:
 
@@ -72,12 +72,12 @@ Hier erscheint der Output aus unseren Skripten. Wir können auch direkt in der K
 Hier geschriebener Code wird nicht gespeichert. Nutze die Konsole also, um Dinge auszuprobieren, schreibe aber alles Wichtige in Skripte. 
 :::
 
-### 3) Workspace 
+## 3) Workspace 
 Im [Environment]{.highlight}-Tab erhalten wir einen Überblick über die Objekte, die derzeit in unserer R-Sitzung geladen sind.    
 \
 Wir können auch den Befehlsverlauf einsehen und einige weitere Dinge, die wir jetzt nicht benötigen.
 
-### 4) Plots, Datein, Hilfe ...
+## 4) Plots, Datein, Hilfe ...
 
 Plots, die wir in einer R-Sitzung erstellen, werden im [Plot]{.highlight}-Tab ausgegeben.   
 
@@ -93,7 +93,7 @@ Die Dokumentation kann mit `?funktionsname` aufgerufen werden. Das ist eines der
 Der [Dateien]{.highlight}-Tab ermöglicht es uns, die Dateien in unserem Arbeitsverzeichnis zu verwalten.
 
 
-## {background-image="images/coder.jpg" background-size="1225px"}
+# {background-image="images/coder.jpg" background-size="1225px"}
 
 ::: {.absolute left="5%" bottom="5%" style="color:#F8F8F8;"}
 
@@ -130,15 +130,15 @@ Tabelle aus [Advanced R](http://adv-r.had.co.nz/Data-structures.html).
 Basic Setup
 :::
 
-### RStudio Projekte
+## RStudio Projekte
 Hilft ungemein beim Organisieren von Dateien und Code!
 
 :::{.callout-warning}
-### Übung
+## Übung
 Erstelle einen neuen Ordner (falls noch nicht getan) für diesen Workshop, und lege darin ein RStudio Projekt an (`File - New Project`).
 :::
 
-### Skripte
+## Skripte
 
 Hier kommt der Code rein!
 
@@ -148,7 +148,7 @@ Erstelle einen neuen Unterordner und lege darin ein R-Skript and (`File - New Fi
 :::
 
 
-### Pakete
+## Pakete
 
 :::: {.columns} 
 ::: {.column width="50%"}
@@ -177,7 +177,7 @@ library(packagename)
 ::: 
 :::: 
 
-#### [tidyverse](https://www.tidyverse.org/) {style="text-align: right;"}
+### [tidyverse](https://www.tidyverse.org/) {style="text-align: right;"}
 :::: {.columns} 
 
 ::: {.column width="40%"}
@@ -188,7 +188,7 @@ Verbreitete Paketsammlung in R für so ziemlich jede Stufe der Datenauswertung. 
 :::
 ::::
 
-#### [tidyverse](https://www.tidyverse.org/): Pipe Operator
+### [tidyverse](https://www.tidyverse.org/): Pipe Operator
 
 `%>%`
 
@@ -264,7 +264,7 @@ athletes <- readRDS(here::here("raw_data", "athletes.rds"))
 Bitte bearbeite die [Übung zum Einlesen von Daten](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/introR.html).
 :::
 
-##  {background-image="images/butterfly.jpg" background-size="1225px"}
+#  {background-image="images/butterfly.jpg" background-size="1225px"}
 
 ::: {.absolute left="5%" bottom="5%" style="color:#01364C;"}
 
