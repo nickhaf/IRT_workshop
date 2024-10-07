@@ -190,12 +190,16 @@ Gruppe 2: $\hat{\theta} \sim N(0,1)$ \
 
 ## Beispiel 
 
-Nochmal zusammenbringen: Wierum verschoben? Was Ist auf der x-Achse zu sehen? 
+Nochmal zusammenbringen: Wirum verschoben? Was Ist auf der x-Achse zu sehen? 
 Personenfähigkeit oder Itemschwierigkeit?
 
 
 Gruppe 1: $\theta \sim N(0,1)$ \
-Gruppe 2: $\theta \sim N(1, 1)$ \
+Gruppe 2: $\theta \sim N(1, 1)$ \ 
+
+Die Bedeutung des Skalenursprungs (0) unterscheidet sich, dadurch unterscheiden sich auch die Itemparameter. \
+
+Wir nehmen an, dass eine Person in Gruppe 1 und in Gruppe 2 getestet wird:
 
 ```{r}
 #| echo: false
@@ -206,8 +210,50 @@ data_lines <- data.frame(
   x = c(-4:4, -4:4),
   y = c(rep(2, 9), rep(1, 9)),
   group = c(rep("Gruppe 1", 9), rep("Gruppe 2", 9)),
-  label = c(-4:4, -3:5),
-  point = c(rep(2, 9), rep(1, 9))
+  label = c(-4:4, -5:3),
+  point = c(rep(0, 9), rep(0, 9))
+)
+
+ggplot(data_lines, aes(x, y, group = group, colour = group)) +
+  geom_line() +
+  geom_point(aes(x = point), show.legend = FALSE) +
+  theme_bg() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(), 
+    legend.title = element_blank()
+  ) +
+  ylim(0, 3) +
+  xlab("Personenfähigkeit") +
+  geom_text(aes(label = label), vjust = 1.5, show.legend = FALSE) +
+  set_colour_scheme()
+  
+```
+
+Mit der gleichen Fähigkeit würde sie in Gruppe 2 einen niedrigeren Fähigkeitswert zugewiesen bekommen, da diese Gruppe einfach besser ist als Gruppe 1.
+
+:::{.aside}
+Grafik nach [diesem Workshop](https://www.youtube.com/watch?v=AEBcf2zcN9U&t=748s).
+
+:::
+
+## 
+
+Das gleiche gilt für Items:
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+
+data_lines <- data.frame(
+  x = c(-4:4, -4:4),
+  y = c(rep(2, 9), rep(1, 9)),
+  group = c(rep("Gruppe 1", 9), rep("Gruppe 2", 9)),
+  label = c(-4:4, -5:3),
+  point = c(rep(2, 9), rep(2, 9))
 )
 
 ggplot(data_lines, aes(x, y, group = group, colour = group)) +
@@ -225,13 +271,11 @@ ggplot(data_lines, aes(x, y, group = group, colour = group)) +
   xlab("Itemschwierigkeit") +
   geom_text(aes(label = label), vjust = 1.5, show.legend = FALSE) +
   set_colour_scheme() +
-  geom_text(aes(x = point, label = "Item 1"), vjust = -1.5, show.legend = FALSE)
+  geom_text(aes(x = point, label = "Item 1"), vjust = -1.5, show.legend = FALSE) 
+
 ```
 
-:::{.aside}
-Grafik nach [diesem Workshop](https://www.youtube.com/watch?v=AEBcf2zcN9U&t=748s).
-
-:::
+Das Item wird in Gruppe 2 als leichter geschätzt als in Gruppe 1, einfach weil die Lösungswahrscheinlichkeit in Gruppe 2 höher ist. 
 
 ## Warum das Ganze?
 An diesem Grundgerüst können wir jetzt verschiedene Anpassungen vornehmen, um ein paar Eigenschaften von Linking zu untersuchen.     
@@ -246,8 +290,7 @@ Das Vorgehen bleibt genauso wie in der [Übung](../../exercises/Linking.qmd). De
 
 ```{r}
 #| output: false
-#| code-fold: true
-#| code-summary: "Code zeigen"
+#| echo: false
 
 library(TAM)
 library(latex2exp) # Erlaubt es, Latex Syntax in ggplot zu nutzen
