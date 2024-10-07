@@ -27,7 +27,7 @@ Ein Modell mit lokal dependence hat wichtige Kovarianz zwischen den Items nicht 
 
 ## Abbildung
 
-## {background-image="images/link.jpg" background-size="1150px"}
+## {background-image="images/link.jpg" background-size="1225px"}
 
 ::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
 
@@ -402,7 +402,7 @@ Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entwed
 - Funktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit ...) auf dieselbe Art und Weise?
 - Gibt es also echte Mittelwertsunterschiede zwischen beiden Gruppen, oder sind die Unterschiede auf Besondere Interaktionen zwischen Items und Gruppen zurückzuführen?
 
-## {background-image="images/rugby_female.jpg" background-size="1150px"}
+## {background-image="images/rugby_female.jpg" background-size="1225px"}
 
 ::: {.absolute left=10% right="10%" top="7.5%" style="font-size:0.5em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(0px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 10px;"}
 

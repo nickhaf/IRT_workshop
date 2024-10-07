@@ -22,7 +22,7 @@ Am Ende der Session solltet ihr mit den Grundlagen in R vertraut sein, sodass ih
 :::
 
 
-## {background-image="images/keyboard.jpg" background-size="1150px"}
+## {background-image="images/keyboard.jpg" background-size="1225px"}
 
 ::: {.absolute left="2.5%" top="2.5%" style="padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, 0); backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
 
@@ -91,7 +91,7 @@ Der [Dateien]{.highlight}-Tab ermöglicht es uns, die Dateien in unserem Arbeits
 
 
 
-## {background-image="images/coder.jpg" background-size="1150px"}
+## {background-image="images/coder.jpg" background-size="1225px"}
 
 ::: {.absolute left="5%" bottom="5%" style="color:#F8F8F8;"}
 
@@ -100,7 +100,7 @@ Los Geht's!
 
 
 
-## {background-image="images/setup.jpg" background-size="1150px"}
+## {background-image="images/setup.jpg" background-size="1225px"}
 
 ::: {.absolute left="5%" top="5%" style="color:#F8F8F8;"}
 
@@ -161,10 +161,10 @@ library(packagename)
 ![](./images/tidyverse_logo.png)
 :::
 ::: {.column width="60%"}
-Verbreitete Paketsammlung in R für so ziemlich jede Stufe in der Datenauswertung. Der meiste Code wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
+Verbreitete Paketsammlung in R für so ziemlich jede Stufe der Datenauswertung. Der meiste Code den wird schreiben wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
 :::
 ::::
-## `tidyverse`: Pipe Operator
+## [tidyverse](https://www.tidyverse.org/): Pipe Operator
 
 `%>%`
 
