@@ -47,3 +47,23 @@ plot_pcm <- function(delta){
     theme_bg()
 
 }
+
+set_colour_scheme <- function(color_scheme = c("#01364C", "#F4BA02", "#9B1B34")){
+  scale_colour_manual(values = color_scheme)
+}
+
+
+## Und weil ich das gleich noch ein paar mal brauche bastel ich mir mal eine Funktion draus:
+plot_group_pars <- function(dat, x, y) {
+  ylab_char <- gsub("_2", "", deparse(substitute(y))) ## Automatically produce ylabel
+
+  ggplot(data = dat, aes(x = {{ x }}, y = {{ y }})) +
+    geom_point(colour =  "#9B1B34") +
+    geom_abline(intercept = 0, slope = 1, colour = "#01364C") +
+    xlim(-4, 4) +
+    ylim(-4, 4) +
+    theme_bg() +
+    set_colour_scheme() +
+    xlab(TeX(paste0("\\hat{\\", deparse(substitute(x)), "}_1"))) +
+    ylab(TeX(paste0("\\hat{\\", ylab_char, "}_2")))
+}

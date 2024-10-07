@@ -1,35 +1,143 @@
 ---
 title: "Linking"
-
 format: letterbox-revealjs
 title-slide-attributes:
   data-background-image: ./images/dark_flower.jpg
   data-background-size: cover
 ---
 
+```{r}
+#| echo: false
+library(TAM)
+library(latex2exp) # Erlaubt es, Latex Syntax in ggplot zu nutzen
+
+source(here::here("R", "plot_functions.R"))
+source(here::here("R", "irt_formulas.R"))
+
+```
+
+
 ## Wiederholung: Voraussetzungen für IRT
 
-- Eindimmensionalität
-- Lokal Stochastische Unabhänigkeit
+:::{.columns}
 
-## Eindimmensionalität
-Die Lösungswahrscheinlichkeit eines Items wird lediglich durch $\theta_p$ beeinflusst (und die Itemparameter), wobei die Dimension von $\theta_p$ gleich eins ist. Das Item misst also nur ein Konstrukt.  
+:::{.column width="50%"}
 
-## Lokal stochastische Unabhängigkeit
-Nach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird. 
-Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit).  
-
-:::{.callout-note}
-Items können übrigens mehrdimensional aber trotzdem lokal unabhängig sein, wenn alle Items die gleichen Dimensionen messen. Andersherum sind Items immer lokal unabängig, wenn sie unidimensional sind.
+::: {.fragment .fade-in}
+::: small
+[Eindimmensionalität:]{.highlight}
+Die Lösungswahrscheinlichkeit eines Items wird lediglich durch $\theta_p$ beeinflusst (und die Itemparameter), wobei die Dimension von $\theta_p$ gleich eins ist. Das Item [misst also nur ein Konstrukt]{.highlight}.  
+:::
+:::
 :::
 
-Ein Modell mit lokal dependence hat wichtige Kovarianz zwischen den Items nicht entdeckt.
+:::{.column width="50%"}
+::: {.fragment .fade-in}
+::: small
+[Lokal stochastische Unabhängigkeit:]{.highlight}
+Nach Kontrolle für die Personenfähigkeit korrelieren die Items nicht mehr. [Der einzige Grund dafür, dass die Items zusammenhängen, ist also, dass die Antwort von diesem Konstrukt beeinflusst wird.]{.highlight} 
+Durch die Kontrolle für die Personenfähigkeit halten wir also den Fähigkeitswert konstant (alle Personen haben die gleiche Fähigkeit).  
+Ein Modell mit lokaler Abhängigkeit hat wichtige Kovarianz zwischen den Items nicht entdeckt.
+:::
+:::
+:::
+
+:::
+
+::: {.fragment .fade-in}
+:::{.callout-note}
+
+## Übrigens
+[Items können mehrdimensional aber trotzdem lokal unabhängig sein]{.highlight}, wenn alle Items die gleichen Dimensionen messen. Andersherum sind Items immer lokal unabängig, wenn sie eindimensional sind.
+:::
+:::
+
+## {background-image="images/penguins_two.jpg" background-size="1225px"}
+
+::: {.absolute right=1.5% top="0.5%" style="font-size: 1.5em; color: #F8F8F8;"}
+
+Differential Item  
+Functioning (DIF) 
+
+:::
+
+## Das Problem
+Funktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit ...) auf dieselbe Art und Weise?
+Gibt es also [echte Mittelwertsunterschiede]{.highlight} zwischen beiden Gruppen, oder sind die Unterschiede auf besondere Interaktionen zwischen Items und Gruppen zurückzuführen?
+
+## {background-image="images/rugby_female.jpg" background-size="1225px"}
+
+::: {.absolute left=10% right="10%" top="7.5%" style="font-size:0.5em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(0px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 10px;"}
+
+Der Legende nach soll Rugby während eines Fußballspiels in der gleichnamigen Stadt entstanden sein. Als der Mannschaft von William Webb Ellis 1823 eine Niederlage bevorstand, packte dieser den Ball mit den Händen und legte ihn ins Tor des Gegners. Obwohl berechtigte Zweifel am Wahrheitsgehalt der Geschichte bestehen – der Ball wurde bereits zuvor in den meisten Spielvarianten mit der Hand getragen –, ist der Pokal der Rugby-Union-Weltmeisterschaft nach William Webb Ellis benannt (der Webb Ellis Cup).
+
+1863 wurde der englische Fußballverband Football Association (FA) mit dem Ziel gegründet, die noch vielfältigen Fußballregeln zu vereinheitlichen. Aufgrund von Streitigkeiten über Regeländerungen zogen sich einige Vereine aus dem Verband zurück und gründeten am 26. Januar 1871 mit der Rugby Football Union (RFU) einen konkurrierenden Verband, der in der Folgezeit nach und nach die Regeln der Rugby School standardisierte. Bereits am 27. März desselben Jahres fand in Edinburgh zwischen Schottland und England das erste Länderspiel statt. 
+
+1895 erfolgte aufgrund eines Streits über den Amateurgedanken eine weitere Trennung, diesmal innerhalb der RFU. 21 Vereine, vor allem aus Arbeitervierteln Nordenglands, spalteten sich als Northern Rugby Union (heute Rugby Football League) ab, legten ihre eigenen Regeln fest und erlaubten die Professionalisierung des Sports. Aus den veränderten Regeln entwickelte sich die Variante Rugby League. Bis heute existieren beide Varianten des Rugbys nebeneinander. Internationale Begegnungen von Nationalmannschaften werden sowohl nach den Regeln der Rugby Union wie auch nach denen der Rugby League abgehalten. Seit 1995 sind im Rugby Union ebenfalls Profisportler zugelassen. 
+
+:::{.aside}
+[Wikipedia](https://de.wikipedia.org/wiki/Rugby#Geschichte)
+:::
+:::
+
+
+## Beispiel
+
+:::{.columns}
+:::{.column width="50%"}
+Welche Unterarten von Rugby gibt es laut Text?
+
+\
+
+:::{.columns}
+:::{.column width="50%"}
+![](images/nz.png) 
+:::
+:::{.column width="50%"}
+
+![](images/de.png) 
+:::
+:::
+
+:::
+:::{.column width="50%"}
+
+![](images/rugbymale.jpg){.image-right}
+:::
+:::
+
+
+## Differential Item Functioning
+
+- DIF: Item Characteristic Curves (also mind. einer der Paramter im IRT Modell) unterscheiden sich in verschiedenen Subgruppen.   
+- Grund: [Item ist nicht eindimensional]{.highlight}.  
+- DIF-Untersuchung ist damit auch eine Untersuchung der Testvalidität!
+
+:::{.callout-important}
+Mögliche Fähigkeitsunterschiede zwischen den Gruppen auf dem gemessenen Konstrukt interessieren uns hier nicht. Die rechnen wir gleich in @sec-linking raus.
+:::
 
 ## Abbildung
 
+Abbildung mit 2 ICR Curves?
+
+## Wie? 
+Reference vs. focal group
+\
+Naive Lösung: Einfach die verschiedenen Subgruppen einzeln kalibrieren und dann die ICRs anschauen.
+\
+[Warum funktioniert das nicht?]{.highlight}
+
+## Warum funktioniert das nicht?
+Werte aus versch. Kalibrierungen können nicht ohne weiteres vergleichen werden, da die [Skalen arbiträr festgelegt]{.highlight} werden.  
+\ 
+
+[Wir müssen also vorher linken!]{.highlight}
+
+
 ## {background-image="images/link.jpg" background-size="1225px"}
 
-::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
+::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, 0); backdrop-filter: blur(5px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0); border-radius: 5px;"}
 
 Linking
 
@@ -43,141 +151,189 @@ Linking
 
 **Das Problem**
 
-Invarianz-Eigenschaft von IRT: **Itemparameter sind gleich über verschiedene Gruppen.**
+Invarianz-Eigenschaft von IRT: [Itemparameter sind gleich über verschiedene Gruppen.]{.highlight}
 Die Wahrscheinlichkeit für eine korrekte Antwort auf ein Item hängt also nur von $\theta$ ab. Nicht von anderen Personen in der Stichprobe. 
-Wie schaffen wir das aber, wenn wir anhand von verschiedenen Gruppen kalibrieren?
 
 :::
 
 ::: {.column width="50%"}
 
+:::{.fragment .fade-in}
 **Die Lösung**
 
 Wir müssen die Werte, die wir aus diesen Kalibrierungen bekommen, irgendwie in einen Zusammenhang setzen. 
-
+:::
 ::: 
 ::::
 
 ## Wiederholung: Kalibrierung
 Die kalibrierten Itemparameter und Personenfähigkeiten gelten erst einmal nur für **diese bestimmte Kombintation aus Items und Personen**. 
 
-**WARUM?**
-
+::: r-fit-text
+[WARUM?]{.highlight}
+:::
 
 ## Wiederholung: Kalibrierung
 - Skala der Latenten Variable wird arbiträr festgelegt (meist auf einen Mittelwert von 0 und eine SD von 1)
-- Modell? sonst nicht idenfiziert. 
-- Itemparameter dadurch **nicht** auf der selben Skala. 
-- **Sie können also nicht direkt miteinander verglichen werden.**
+- Modell sonst nicht idenfiziert. 
+- Itemparameter aus versch. Kalibrierungen dadurch [nicht]{.highlight} auf der selben Skala. 
+- [Sie können also nicht direkt miteinander verglichen werden.]{.highlight}
 
 ## Beispiel 
-Sie hängen ja von den latenten Variablen in der Stichprobe ab. Wenn wir eine sehr gute Stichprobe haben, und eine sehr schwache, dann werden trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative. (Beispiel nochmal genauer ausführen, evtl. mit Grafik, Ich hatte dazu etwas im ersten Buch, dass ich gelesen habe). 
+Wenn wir eine sehr leistungsstarke Stichprobe haben, und eine sehr leistungsschwache, dann wird nach der Kalibrierung trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative.
 
 
 ## Beispiel
-Group 1: $\theta \sim N(0,1)$
-Group 2: $\theta \sim N(1, 1.4)$
+Group 1: $\theta \sim N(0,1)$ \
+Group 2: $\theta \sim N(1, 1.4)$ \
+
+\ 
 
 Für die Kalibrierung legen wir jetzt aber fest, dass gilt:
-Group 1: $\theta \sim N(0,1)$
-Group 2: $\theta \sim N(0,1)$
+Gruppe 1: $\hat{\theta} \sim N(0,1)$ \
+Gruppe 2: $\hat{\theta} \sim N(0,1)$ \
 
 ## Beispiel 
+Gruppe 1: $\theta \sim N(0,1)$ \
+Gruppe 2: $\theta \sim N(1, 1)$ \ 
+
+Die Bedeutung des Skalenursprungs (0) unterscheidet sich, dadurch unterscheiden sich auch die Itemparameter. \
+
+## Illustration
+
+Wir nehmen an, dass die gleiche Person in Gruppe 1 und in Gruppe 2 getestet wird:
+
 ```{r}
 #| echo: false
 
 library(tidyverse)
 
 data_lines <- data.frame(
-    x = c(-4:4, -4:4),
-    y = c(rep(2, 9), rep(1, 9)), 
-    group = c(rep("1", 9), rep("2", 9)), 
-    label = c(-4:4, -3:5)
+  x = c(-4:4, -4:4),
+  y = c(rep(2, 9), rep(1, 9)),
+  group = c(rep("Gruppe 1", 9), rep("Gruppe 2", 9)),
+  label = c(-4:4, -5:3),
+  point = c(rep(0, 9), rep(0, 9))
 )
 
-ggplot(data_lines, aes(x, y, group=group)) +
+ggplot(data_lines, aes(x, y, group = group, colour = group)) +
   geom_line() +
-  geom_point() +
-        ggthemes::theme_tufte() +
-        theme(
-            axis.title = element_blank(), 
-            axis.text = element_blank(), 
-        axis.line = element_blank(),
-        axis.ticks = element_blank()) +
-        ylim(0,3) +
-        geom_text(aes(label = label), vjust = 1.5)  # Add labels to the points
+  geom_point(aes(x = point), show.legend = FALSE) +
+  theme_bg() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(), 
+    legend.title = element_blank()
+  ) +
+  ylim(0, 3) +
+  xlab("Personenfähigkeit") +
+  geom_text(aes(label = label), vjust = 1.5, show.legend = FALSE) +
+  set_colour_scheme()
+  
+```
 
+Mit der gleichen Fähigkeit würde sie in Gruppe 2 einen niedrigeren Fähigkeitswert zugewiesen bekommen, da diese Gruppe einfach besser ist als Gruppe 1.
+
+:::{.aside}
+Grafik nach [diesem Workshop](https://www.youtube.com/watch?v=AEBcf2zcN9U&t=748s).
+
+:::
+
+## Illustration 2
+
+Das gleiche gilt für Items:
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+
+data_lines <- data.frame(
+  x = c(-4:4, -4:4),
+  y = c(rep(2, 9), rep(1, 9)),
+  group = c(rep("Gruppe 1", 9), rep("Gruppe 2", 9)),
+  label = c(-4:4, -5:3),
+  point = c(rep(2, 9), rep(2, 9))
+)
+
+ggplot(data_lines, aes(x, y, group = group, colour = group)) +
+  geom_line() +
+  geom_point(aes(x = point), show.legend = FALSE) +
+  theme_bg() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(), 
+    legend.title = element_blank()
+  ) +
+  ylim(0, 3) +
+  xlab("Itemschwierigkeit") +
+  geom_text(aes(label = label), vjust = 1.5, show.legend = FALSE) +
+  set_colour_scheme() +
+  geom_text(aes(x = point, label = "Item 1"), vjust = -1.5, show.legend = FALSE) 
 
 ```
 
-## Warum das Ganze?
-An diesem Grundgerüst können wir jetzt verschiedene Anpassungen vornehmen, um ein paar Eigenschaften von Linking zu untersuchen.     
-Wir erinnern uns zurück: die Fähigkeitsverteilung wird bei der Kalibrierung auf eine Standardnormalverteilung gesetzt ($\theta \sim N(0, 1)$).   
-So hatten wir das auch in der Übung bereits simuliert. Wir können eine zweite Gruppe mit der selben Fähigkeitsverteilung simulieren, und uns anschauen, wie die Itemparameter $\alpha$ und $\beta$ geschätzt werden.
+Das Item wird in Gruppe 2 als leichter geschätzt als in Gruppe 1, einfach weil die Lösungswahrscheinlichkeit in Gruppe 2 höher ist. 
 
 
-## Zwei Gruppen
-
-Das Vorgehen bleibt genauso wie in der [Übung](../../exercises/Linking.qmd). Der einzige Unterschied ist: Wir simulieren noch eine neue Gruppe hinzu, und setzten dort die $\theta$ Verteilung auf $\theta \sim N(1, 1). 
-
-
-```{r}
-#| output: false
-#| code-fold: true
-#| code-summary: "Code zeigen"
-
-library(TAM)
-library(latex2exp) # Erlaubt es, Latex Syntax in ggplot zu nutzen
-
-set.seed(123)
-
-## 2PL Funktion
-calc_2pl <- function(a, theta, xi){
-  p <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
-  return(p) 
-}
+```{r define_itemparameters}
+#| echo: false
+set.seed(420)
 
 items <- data.frame(
-    item_id = 1:13, 
-    b = seq(-3, 3, by = 0.5), 
-    a = seq(0.5, 1.5, length.out = 13), 
-    c = rep(0, 13)
+  item_id = 1:13,
+  b = sample(seq(-3, 3, by = 0.001), size = 13),
+  a = sample(seq(0, 1, by = 0.001), size = 13),
+  c = rep(0, 13)
 )
+```
+
+
+```{r simulation_nonequivalent}
+#| output: false
+#| echo: false
+#| eval: false
+
+set.seed(123)
 
 n_subj <- 100000 ## Als Objekt speichern, da so leichter Änderbar
 
 ## Diesmal nehmen wir einfach 2 Gruppen
 subjects_1 <- data.frame(
-    sub_id = 1:n_subj,
-    theta = c(rnorm(n_subj, 0, 1)), 
-    group = rep("1", n_subj)
+  sub_id = 1:n_subj,
+  theta = c(rnorm(n_subj, 0, 1)),
+  group = rep("1", n_subj)
 )
 
 subjects_2 <- data.frame(
-    sub_id = n_subj+1:n_subj*2, ## Andere Personen, deshalb andere ID
-    theta = c(rnorm(n_subj, 1, 1)), 
-    group = rep("2", n_subj)
+  sub_id = n_subj + 1:n_subj * 2, ## Andere Personen, deshalb andere ID
+  theta = c(rnorm(n_subj, 1, 1)),
+  group = rep("2", n_subj)
 )
 
 subjects <- rbind(subjects_1, subjects_2)
 
 sim_dat <- merge(subjects, items) %>%
-    mutate(p = calc_2pl(a, theta, b)) %>%
-    mutate(answer = rbinom(n = nrow(.), size = 1, prob = p))
+  mutate(p = calc_2pl(a, theta, b)) %>%
+  mutate(answer = rbinom(n = nrow(.), size = 1, prob = p))
 
 sim_dat_2 <- sim_dat %>%
-    select(item_id, sub_id, answer, group) %>%
-    pivot_wider(names_from = item_id, values_from = answer, id_cols = c("group", "sub_id"))
+  select(item_id, sub_id, answer, group) %>%
+  pivot_wider(names_from = item_id, values_from = answer, id_cols = c("group", "sub_id"))
 
-## Jetzt kalibrieren wir sie getrennt, als ob wir zwei verschiedene Sample hätten. 
+## Jetzt kalibrieren wir sie getrennt, als ob wir zwei verschiedene Sample hätten.
 
-## Zuerst vorbereiten der Daten, d.h. die nicht benötigten Spalten entfernen und einen Datensatz pro Gruppe erzeugen. 
-group_1_prep <- sim_dat_2 %>% 
-  filter(group == "1") %>% 
+## Zuerst vorbereiten der Daten, d.h. die nicht benötigten Spalten entfernen und einen Datensatz pro Gruppe erzeugen.
+group_1_prep <- sim_dat_2 %>%
+  filter(group == "1") %>%
   select(-group, -sub_id)
 
 group_2_prep <- sim_dat_2 %>%
-  filter(group == "2") %>% 
+  filter(group == "2") %>%
   select(-group, -sub_id)
 
 ## Kalibrieren der beiden Gruppen getrennt
@@ -190,47 +346,98 @@ itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2,
 colnames(itempars_2) <- c("alpha_2", "beta_2")
 
 
+parameters_b <- cbind(itempars_1, itempars_2)
+saveRDS(parameters_b, here::here("sim_data", "parameters_b.rds"))
+
+
+# ----------------------------- Diskriminationsparameter Simulation
+
+## Diesmal nehmen wir einfach 2 Gruppen
+subjects_1 <- data.frame(
+  sub_id = 1:n_subj,
+  theta = c(rnorm(n_subj, 0, 1)),
+  group = rep("1", n_subj)
+)
+
+subjects_2 <- data.frame(
+  sub_id = n_subj + 1:n_subj * 2, ## Andere Personen, deshalb andere ID
+  theta = c(rnorm(n_subj, 0, 1.4)),
+  group = rep("2", n_subj)
+)
+
+subjects <- rbind(subjects_1, subjects_2)
+
+sim_dat <- merge(subjects, items) %>%
+  mutate(p = calc_2pl(a, theta, b)) %>%
+  mutate(answer = rbinom(n = nrow(.), size = 1, prob = p))
+
+sim_dat_2 <- sim_dat %>%
+  select(item_id, sub_id, answer, group) %>%
+  pivot_wider(names_from = item_id, values_from = answer, id_cols = c("group", "sub_id"))
+
+## Jetzt kalibrieren wir sie getrennt, als ob wir zwei verschiedene Sample hätten.
+
+## Zuerst vorbereiten der Daten, d.h. die nicht benötigten Spalten entfernen und einen Datensatz pro Gruppe erzeugen.
+group_1_prep <- sim_dat_2 %>%
+  filter(group == "1") %>%
+  select(-group, -sub_id)
+
+group_2_prep <- sim_dat_2 %>%
+  filter(group == "2") %>%
+  select(-group, -sub_id)
+
+## Kalibrieren der beiden Gruppen getrennt
+group_1_2PL <- tam.mml.2pl(group_1_prep, irtmodel = "2PL")
+group_2_2PL <- tam.mml.2pl(group_2_prep, irtmodel = "2PL")
+
+# ## Extrahieren der Itemparameter
+itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+colnames(itempars_2) <- c("alpha_2", "beta_2")
+
+parameters_a <- cbind(itempars_1, itempars_2)
+saveRDS(parameters_a, here::here("sim_data", "parameters_a.rds"))
+
 ```
 
-## Plotten
 
-```{r}
-#| code-fold: true
-#| code-summary: "Code zeigen"
+## Itemschwierigkeiten in zwei nicht-äquivalenten Gruppen
+Gruppe 1: $\theta \sim N(0,1)$ \
+Gruppe 2: $\theta \sim N(1, 1)$ \ 
 
-## Plotten
-parameters <- cbind(itempars_1, itempars_2)
 
-## Und weil ich das gleich noch ein paar mal brauche bastel ich mir mal eine Funktion draus:
-plot_group_pars <- function(dat, x, y){
-  ylab_char <- gsub("_2", "", deparse(substitute(y))) ## Automatically produce ylabel
-  
-  ggplot(data = dat, aes(x = {{x}}, y = {{y}})) +
-    geom_point() +
-    geom_abline(intercept = 0, slope = 1) +
-    xlim(-4, 4) +
-    ylim(-4, 4) +
-    theme_bw() +
-    xlab(TeX(paste0("\\hat{\\", deparse(substitute(x)), "}_1"))) + 
-    ylab(TeX(paste0("\\hat{\\", ylab_char, "}_2")))
-}
+```{r plot_sim_b}
+#| echo: false
+#| warning: false
 
-plot_group_pars(parameters, beta, beta_2) +
-  labs(title = "Itemschwierigkeiten für zwei Gruppen", 
-       caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(1, 1)"))
-
+parameters_b <- readRDS(here::here("sim_data", "parameters_b.rds")) 
+plot_group_pars(parameters_b, beta, beta_2) +
+  labs(
+    title = "Itemschwierigkeiten für zwei Gruppen",
+    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(1, 1)")
+  )
 ```
-
-## Warum??
 
 ## Diskriminationsparameter
-```{r}
-#| code-fold: true
-#| code-summary: "Code zeigen"
+Gruppe 1: $\theta \sim N(0,1)$ \
+Gruppe 2: $\theta \sim N(0, 1.4)$ \ 
 
-plot_group_pars(parameters, alpha, alpha_2) +
-  labs(title = "Diskriminationsparameter für zwei Gruppen", 
-       caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(1, 1)"))
+
+```{r plot_sim_a}
+#| echo: false
+#| warning: false
+
+parameters_a <- readRDS(here::here("sim_data", "parameters_a.rds")) 
+
+plot_group_pars(parameters_a, alpha, alpha_2) +
+  labs(
+    title = "Diskriminationsparameter für zwei Gruppen",
+    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(1, 1)")
+  ) +
+  scale_x_continuous(limits = c(0, 2)) +
+  scale_y_continuous(limits = c(0, 2)) +
+  geom_point(colour = "#F4BA02")
+
 ```
 
 ## SimIRT
@@ -241,8 +448,8 @@ plot_group_pars(parameters, alpha, alpha_2) +
 
 library(catIrt)
 
-group_1 <- simIrt(theta =rnorm(100000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
-group_2 <- simIrt(theta =rnorm(100000, 0, 1.5), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
+group_1 <- simIrt(theta = rnorm(100000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
+group_2 <- simIrt(theta = rnorm(100000, 0, 1.5), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
 
 ## Kalibrieren der beiden Gruppen getrennt
 group_1_2PL <- tam.mml.2pl(group_1$resp, irtmodel = "2PL")
@@ -252,7 +459,6 @@ group_2_2PL <- tam.mml.2pl(group_2$resp, irtmodel = "2PL")
 itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
 itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
 colnames(itempars_2) <- c("alpha_2", "beta_2")
-
 ```
 
 
@@ -264,9 +470,10 @@ colnames(itempars_2) <- c("alpha_2", "beta_2")
 parameters <- cbind(itempars_1, itempars_2)
 
 plot_group_pars(parameters, alpha, alpha_2) +
-  labs(title = "Diskriminationsparameter für zwei Gruppen", 
-       caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(0, 1.5)"))
-
+  labs(
+    title = "Diskriminationsparameter für zwei Gruppen",
+    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(0, 1.5)")
+  )
 ```
 
 
@@ -276,9 +483,10 @@ plot_group_pars(parameters, alpha, alpha_2) +
 #| code-summary: "Code zeigen"
 
 plot_group_pars(parameters, beta, beta_2) +
-  labs(title = "Itemschwierigkeiten für zwei Gruppen", 
-       caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(0, 1.5)"))
-
+  labs(
+    title = "Itemschwierigkeiten für zwei Gruppen",
+    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(0, 1.5)")
+  )
 ```
 
 
@@ -312,7 +520,7 @@ Embretson 2000, S. 253
 :::: {.columns} 
 ::: {.column width="50%"}
 
-Ankeritems sind [gemeinsame Items]{.highlight}, die in beiden Testformen vorhanden sind. Hauptproblem bei der Auswahl: Sie sollten in beiden Gruppen nicht unterschiedlich funktionieren, es sollte also kein Differential Item Functioning (DIF) geben, siehe @sec-dif.
+Ankeritems sind [gemeinsame Items]{.highlight}, die in beiden Testformen vorhanden sind. Hauptproblem bei der Auswahl: Sie sollten in beiden Gruppen nicht unterschiedlich funktionieren, es sollte also kein Differential Item Functioning (DIF) geben.
 
 :::
 
@@ -395,84 +603,6 @@ Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entwed
 -  Man könnte die Linking constants setzen, gukcen was das mit den schwierikeiten macht, und die Simulierten Werte wieder rekapitulieren. 
 
 
-
-# Messinvarianz/DIF {#sec-dif}
-
-## Das Problem
-- Funktionieren die Items in verschiedenen Gruppen (z.B. Geschlecht, Kultur, Fähigkeit ...) auf dieselbe Art und Weise?
-- Gibt es also echte Mittelwertsunterschiede zwischen beiden Gruppen, oder sind die Unterschiede auf Besondere Interaktionen zwischen Items und Gruppen zurückzuführen?
-
-## {background-image="images/rugby_female.jpg" background-size="1225px"}
-
-::: {.absolute left=10% right="10%" top="7.5%" style="font-size:0.5em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(0px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 10px;"}
-
-Der Legende nach soll Rugby während eines Fußballspiels in der gleichnamigen Stadt entstanden sein. Als der Mannschaft von William Webb Ellis 1823 eine Niederlage bevorstand, packte dieser den Ball mit den Händen und legte ihn ins Tor des Gegners. Obwohl berechtigte Zweifel am Wahrheitsgehalt der Geschichte bestehen – der Ball wurde bereits zuvor in den meisten Spielvarianten mit der Hand getragen –, ist der Pokal der Rugby-Union-Weltmeisterschaft nach William Webb Ellis benannt (der Webb Ellis Cup).
-
-1863 wurde der englische Fußballverband Football Association (FA) mit dem Ziel gegründet, die noch vielfältigen Fußballregeln zu vereinheitlichen. Aufgrund von Streitigkeiten über Regeländerungen zogen sich einige Vereine aus dem Verband zurück und gründeten am 26. Januar 1871 mit der Rugby Football Union (RFU) einen konkurrierenden Verband, der in der Folgezeit nach und nach die Regeln der Rugby School standardisierte. Bereits am 27. März desselben Jahres fand in Edinburgh zwischen Schottland und England das erste Länderspiel statt. 
-
-1895 erfolgte aufgrund eines Streits über den Amateurgedanken eine weitere Trennung, diesmal innerhalb der RFU. 21 Vereine, vor allem aus Arbeitervierteln Nordenglands, spalteten sich als Northern Rugby Union (heute Rugby Football League) ab, legten ihre eigenen Regeln fest und erlaubten die Professionalisierung des Sports. Aus den veränderten Regeln entwickelte sich die Variante Rugby League. Bis heute existieren beide Varianten des Rugbys nebeneinander. Internationale Begegnungen von Nationalmannschaften werden sowohl nach den Regeln der Rugby Union wie auch nach denen der Rugby League abgehalten. Seit 1995 sind im Rugby Union ebenfalls Profisportler zugelassen. 
-
-:::{.aside}
-[Wikipedia](https://de.wikipedia.org/wiki/Rugby#Geschichte)
-:::
-:::
-
-
-## Beispiel
-
-:::{.columns}
-:::{.column width="50%"}
-Welche Unterarten von Rugby gibt es laut Text?
-
-\
-
-:::{.columns}
-:::{.column width="50%"}
-![](images/nz.png) 
-:::
-:::{.column width="50%"}
-
-![](images/de.png) 
-:::
-:::
-
-:::
-:::{.column width="50%"}
-
-![](images/rugbymale.jpg){.image-right}
-:::
-:::
-
-## Beispielbild
-
-```{r}
-
-```
-
-
-## DIF
-
-DIF: Item Characteristic Curves unterscheiden sich in verschiedenen Subgruppen.  
-Mindestens einer der Paramter im IRT Modell unterscheidet sich also zwischen den Gruppen.  
-
-\
-
-Grund: Item ist nicht eindimensional. 
-
-\
-
-[DIF-Untersuchung ist damit auch eine Untersuchung der Testvalidität!]{.highlight}
-
-## Wie? 
-Reference vs. focal group
-\
-Naive Lösung: Einfach die verschiedenen Subgruppen einzeln kalibrieren und dann die ICRs anschauen. 
-
-Warum funktioniert das nicht?
-
-## Warum funktioniert das nicht?
-Wir haben am Anfang dieser Präsi gesehen, dass man die Werte aus versch. Kalibrierungen nich ohne weiteres vergleichen kann, da die Skalen arbiträr festgelegt werden. [Wir müssen also vorher linken, siehe @sec-linking !]{.highlight}
-
 ## DIF finden
 Es gibt viele verschiedene Verfahren, mit denen man Items auf DIF tests kann:
 
@@ -500,14 +630,21 @@ Oft werden die Methoden iterativ angewandt, da beim anfänglichen Matchen der Gr
 ## Eins/Zwei Methoden kurz genauer vorstellen und in der Übung bearbeiten. 
 
 
+## {background-image="images/penguins.jpg" background-size="1225px"}
+::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
+Pause
+:::
+
+
 ## Bildquellen
 - Foto von <a href="https://unsplash.com/de/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a> auf <a href="https://unsplash.com/de/fotos/rosa-blattrige-blume-nahaufnahme-fotografie-r9eIL7jtenc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@ncx1701d?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Martin Wettstein</a> auf <a href="https://unsplash.com/de/fotos/weisser-und-schwarzer-pinguin-auf-grauem-felsen-o4snRPEZRRs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@ncx1701d?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Martin Wettstein</a> auf <a href="https://unsplash.com/de/fotos/menschen-auf-grunem-rasen-tagsuber-GJQUr0SgKi0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) auf [Unsplash](https://unsplash.com/de/fotos/selektives-fokusfoto-von-grauen-metallketten-JZ8AHFr2aEg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
 - Erstellt mit [Bing Bild-Ersteller](ttps://www.bing.com/images/create/a-simulation-that-we-are-all-living-in-a-simulatio/1-66e33509faf2483e82f8b47ed577a221?id=9qHmBvQeaNYbK1HW5T0qLQ%3D%3D&view=detailv2&idpp=genimg&idpclose=1&thid=OIG1.o1KL86Aq8PP9cXCbZnHc&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&form=SYDBIC).
 - Foto von <a href="https://unsplash.com/de/@quinoal?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Quino Al</a> auf <a href="https://unsplash.com/de/fotos/graustufenfoto-einer-frau-die-fussball-spielt-hCfZwxu6auo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@jhc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">James Coleman</a> auf <a href="https://unsplash.com/de/fotos/graustufenfoto-eines-nfl-spielers-der-den-ball-fangt-CTEvFbFpVC8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/1920px-Flag_of_Germany.svg.png
 - https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_New_Zealand.svg/800px-Flag_of_New_Zealand.svg.png
-
-
-
+- Foto von <a href="https://unsplash.com/de/@westbeach013?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Casey Allen</a> auf <a href="https://unsplash.com/de/fotos/afrikanische-pinguine-am-meeresufer-neben-felsbrocken-UjpEGHu8uNU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
