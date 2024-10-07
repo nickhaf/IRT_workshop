@@ -27,7 +27,7 @@ Am Ende der Session solltet ihr mit den Grundlagen in R vertraut sein, sodass ih
 :::
 
 
-# {background-image="images/keyboard.jpg" background-size="1225px"}
+## {background-image="images/keyboard.jpg" background-size="1225px"}
 
 ::: {.absolute left="2.5%" top="2.5%" style="padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, 0); backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
 
@@ -93,7 +93,7 @@ Die Dokumentation kann mit `?funktionsname` aufgerufen werden. Das ist eines der
 Der [Dateien]{.highlight}-Tab ermöglicht es uns, die Dateien in unserem Arbeitsverzeichnis zu verwalten.
 
 
-# {background-image="images/coder.jpg" background-size="1225px"}
+## {background-image="images/coder.jpg" background-size="1225px"}
 
 ::: {.absolute left="5%" bottom="5%" style="color:#F8F8F8;"}
 
@@ -177,7 +177,7 @@ library(packagename)
 ::: 
 :::: 
 
-### [tidyverse](https://www.tidyverse.org/) {style="text-align: right;"}
+## [tidyverse](https://www.tidyverse.org/) {style="text-align: right;"}
 :::: {.columns} 
 
 ::: {.column width="40%"}
@@ -188,7 +188,7 @@ Verbreitete Paketsammlung in R für so ziemlich jede Stufe der Datenauswertung. 
 :::
 ::::
 
-### [tidyverse](https://www.tidyverse.org/): Pipe Operator
+## [tidyverse](https://www.tidyverse.org/): Pipe Operator
 
 `%>%`
 
@@ -210,7 +210,7 @@ c(45:100) %>%
 
 
 
-# {background-image="images/data.jpg" background-size="1225px"}
+## {background-image="images/data.jpg" background-size="1225px"}
 
 ::: {.absolute right="5%" top="5%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255 .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255 .5); border-radius: 5px;"}
 
@@ -264,7 +264,7 @@ athletes <- readRDS(here::here("raw_data", "athletes.rds"))
 Bitte bearbeite die [Übung zum Einlesen von Daten](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/introR.html).
 :::
 
-#  {background-image="images/butterfly.jpg" background-size="1225px"}
+## {background-image="images/butterfly.jpg" background-size="1225px"}
 
 ::: {.absolute left="5%" bottom="5%" style="color:#01364C;"}
 
@@ -273,7 +273,7 @@ Transformation
 
 :::
 
-# Einen Überblick bekommen
+## Einen Überblick bekommen
 
 ## Einen Überblick bekommen: `View()`
 
@@ -320,7 +320,7 @@ Wie viele Zeilen und Spalten hat der in der letzten Übung eingelesene Datensatz
 Aus welcher Show stammen die ersten Charactere im Datensatz? 
 :::
 
-# Subsetting
+## Subsetting
 "Zeilen [z]{.highlight}uerst, Spalten [s]{.highlight}päter"
 `[Zeile, Spalte]`
 
@@ -399,7 +399,7 @@ athletes %>%
 Bitte bearbeite die [Übungen zum Subsetting](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/subsetting_ex.html).
 :::
 
-# Fehlende Werte {#sec-missings}
+## Fehlende Werte {#sec-missings}
 
 `NA`{.center}
 
@@ -434,7 +434,7 @@ head(athletes_na)
 ```
 
 
-# {background-image="images/shadow.jpg" background-size="1225px"}
+## {background-image="images/shadow.jpg" background-size="1225px"}
 
 ::: {.absolute right="5%" top="5%" style="color:#01364C;"}
 Reshaping
@@ -502,7 +502,7 @@ Bitte bearbeite die [Übung zum Resahping].
 :::
 
 
-# Merging
+## Merging
 
 ##
 ```{r}
@@ -547,7 +547,7 @@ Bitte bearbeite die [Übung zum Merging].
 :::
 
 
-# Funktionen
+## Funktionen
 
 ## Basics
 
@@ -574,7 +574,7 @@ sum_num(x = 1, y = 1, z = 2)
 
 
 
-# Bildquellen
+## Bildquellen
 - https://unsplash.com/de/fotos/schwarzer-flachbildschirm-gA396xahf-Q
 - Foto von <a href="https://unsplash.com/de/@adigold1?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Adi Goldstein</a> auf <a href="https://unsplash.com/de/fotos/graustufenfotografie-eines-mannes-im-gestreiften-hemd-rgkKFn5Ysb0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Icons from [icons8.de](https://icons8.de).
