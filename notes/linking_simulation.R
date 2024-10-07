@@ -180,12 +180,8 @@ fit2PL_2 <- tam.mml.2pl(sim_data_2 %>% select(-person), irtmodel = "2PL")
 
 
 
-```
 
 
-## Plot
-```{r}
-#| eval: FALSE
 par_1 <- as.data.frame(apply(fit2PL_1$item_irt[, c("alpha", "beta")], 2, round, 2))
 par_2 <- as.data.frame(apply(fit2PL_2$item_irt[, c("alpha", "beta")], 2, round, 2))
 colnames(par_2) <- c("alpha_2", "beta_2")
