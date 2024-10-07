@@ -1,6 +1,5 @@
 ---
 title: "Linking"
-
 format: letterbox-revealjs
 title-slide-attributes:
   data-background-image: ./images/dark_flower.jpg
