@@ -3,7 +3,6 @@ title: "Einlesen von Daten"
 subtitle: "Übung"
 lang: de
 author: "Nicklas Hafiz"
-
 format: html
 ---
 
@@ -18,7 +17,7 @@ Zum Downloaden von GitHub, klicke auf die Datei. Es öffnet sich eine neue Seite
 :::
 
 ## 2. Einlesen
-Lese beide Datensätze in deinem R-Skript ein. Schaue dir vor allem den `psych_stats` Datensatz danach genauer an. Hat alles geklappt? Wenn nicht, woran könnte es liegen?
+Lies beide Datensätze in deinem R-Skript ein. Schaue dir vor allem den `psych_stats` Datensatz danach genauer an. Hat alles geklappt? Wenn nicht, woran könnte es liegen?
 
 ::: {.callout-tip collapse="true"}
 ## Tipp 1
