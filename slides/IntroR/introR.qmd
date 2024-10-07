@@ -104,8 +104,10 @@ Los Geht's!
 ## Grundlegende Operationen
 
 - `c()`: Vektor erstellen
+- `seq()` oder `:`: Sequenzen erstellen
 - `&`, `|`, `!`: Logische Operatoren (und, oder, nicht)
-- Datenstrukturen: 
+
+## Datenstrukturen: 
 
 ```{r, echo = FALSE, results = 'asis'}
 dat_structs <- data.frame(" " = c("1d", "2d", "nd"),
