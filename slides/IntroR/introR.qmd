@@ -266,21 +266,31 @@ Bitte bearbeite die [Übung zum Einlesen von Daten](https://nickhaf.github.io/IR
 
 ## {background-image="images/butterfly.jpg" background-size="1225px"}
 
-::: {.absolute left="5%" bottom="5%" style="color:#01364C;"}
+::: {.absolute left="2.5%" bottom="0.5%" style="color:#01364C; font-size:1.5em;"}
 
-Datenmanipulation und  
-Transformation
+Datenmanipulation und Transformation
 
 :::
 
-## Einen Überblick bekommen
+##
 
-## Einen Überblick bekommen: `View()`
+:::{.columns}
+:::{.column width="50%"}
+:::r-fit-text
+Einen Überblick bekommen
+:::
+:::
+:::{.column width="50%"}
+![](./images/chess.jpg){.image-right}
+:::
+:::
+
+## `View()`
 
 :::{.columns}
 :::{.column width="50%"}
 
-- Datensatz in neuem Fenster:
+Öffnet den Datensatz in einem neuem Fenster:
 ```{r}
 #| eval: false
 View(athletes)
@@ -294,20 +304,20 @@ View(athletes)
 :::
 
 
-## Einen Überblick bekommen: `str()`
+## `str()`
 - Struktur der Daten:
 ```{r}
 str(athletes)
 ```
 
-## Einen Überblick bekommen: `head()`
+## `head()`
 - Erste Zeilen:
 
 ```{r}
 head(athletes)
 ```
 
-## Einen Überblick bekommen
+## Einen Überblick bekommen: Übung
 
 :::{.callout-note}
 ## Übung 1
@@ -320,7 +330,7 @@ Wie viele Zeilen und Spalten hat der in der letzten Übung eingelesene Datensatz
 Aus welcher Show stammen die ersten Charactere im Datensatz? 
 :::
 
-## Subsetting
+# Subsetting
 "Zeilen [z]{.highlight}uerst, Spalten [s]{.highlight}päter"
 `[Zeile, Spalte]`
 
@@ -328,7 +338,8 @@ Aus welcher Show stammen die ersten Charactere im Datensatz?
 
 
 ## Einfaches Subsetting
-
+\
+\
 ```{r}
 # Auswahl der Spalten
 athletes[c(1,4), c("Year", "Sport")]
@@ -349,7 +360,7 @@ Alle Zeilen, in denen `Team` gleich `Germany` ist.
 
 Wir erzeugen einen Boolean Vektor (besteht aus TRUE und FALSE), der anzeigt, welche Zeilen ausgewählt werden sollen:
 
-```{r}
+```{r, output.lines = 1}
 athletes$Team == "Germany"
 ```
 
@@ -360,7 +371,7 @@ Dieser indiziert dann die Zeilen, die ausgewählt werden sollen.
 
 Diese Prinzip können wir uns zu Nutze machen, um mehrere Bedingungen zu verknüpfen:
 
-```{r, output.lines = 7}
+```{r, output.lines = 6}
 athletes_3 <- athletes[(athletes$Sport == "Judo") & (athletes$Weight > 100 | athletes$Weight < 50), ]
 head(athletes_3)
 ```
@@ -370,7 +381,7 @@ head(athletes_3)
 Viele der Zeilen enthalten nur `NA` Werte. Das schauen wir uns gleich im Kapitel @sec-missings genauer an.
 :::
 
-## Subsetting Zeilen: [Tidyverse]{https://www.tidyverse.org/}
+## Subsetting Zeilen: [Tidyverse](https://www.tidyverse.org/)
 
 ```{r, output.lines=4}
 library(tidyverse)
@@ -385,7 +396,7 @@ athletes %>%
 Hier werden `NA` Werte automatisch ignoriert.
 :::
 
-## Subsetting Spalten: [Tidyverse]{https://www.tidyverse.org/}
+## Subsetting Spalten: [Tidyverse](https://www.tidyverse.org/)
 ```{r}
 athletes %>%
   select(Year, Sport) %>%
@@ -401,8 +412,9 @@ Bitte bearbeite die [Übungen zum Subsetting](https://nickhaf.github.io/IRT_work
 
 ## Fehlende Werte {#sec-missings}
 
-`NA`{.center}
-
+::: r-fit-text
+`NA`
+:::
 
 ## Arbeit mit fehlenden Werten
 
@@ -418,31 +430,31 @@ athletes[(athletes$Sport == "Judo") & (athletes$Weight > 100 | athletes$Weight <
 
 ## Fehlende Werte entfernen
 
-- Alle Zeilen entfernen, die in der Spalte `Weight` ein `NA` haben.  
 ```{r, output.lines=3}
 athletes_na <- athletes[!is.na(athletes$Weight), ]
 head(athletes_na)
 ```
 
-- ... und mit [tidyverse]{https://www.tidyverse.org/}:
 ```{r, output.lines=3}
-library(tidyverse)
-
+## tidyverse:
 athletes_na <- athletes %>%
   drop_na(Weight)
 head(athletes_na)
 ```
 
+Beides entfernt alle Zeilen, die in der Spalte `Weight` ein `NA` haben.  
+
 
 ## {background-image="images/shadow.jpg" background-size="1225px"}
 
-::: {.absolute right="5%" top="5%" style="color:#01364C;"}
+::: {.absolute right="5%" top="5%" style="padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, 0); backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0); font-size:2.5em;"}
+
 Reshaping
+
 :::
 
 
-
-## Wide- und Long-Format
+## Wide-Format
 ```{r}
 inhabitants_wide <- data.frame(
   country = c("China", "India", "USA"),
@@ -453,6 +465,7 @@ inhabitants_wide <- data.frame(
 head(inhabitants_wide)
 ```
 
+## Long-Format
 ```{r}
 #| echo: false
 
@@ -498,18 +511,29 @@ head(inhabitants_wide_2)
 ## Übung
 :::{.callout-note}
 ## Übung
-Bitte bearbeite die [Übung zum Resahping].
+Bitte bearbeite die [Übung zum Reshaping](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/reshaping_ex.html).
 :::
 
 
-## Merging
+## 
 
-##
-```{r}
+:::{.columns}
+:::{.column width="50%"}
+Merging
+:::
+:::{.column width="50%"}
+![](./images/rivers.jpg){.image-right}
+:::
+:::
+
+
+## Vorbereitung
+Zuerst müssen wir die Daten laden und für das Beispiel vorbereiten. 
+
+```{r, output.lines = 3}
 world_coordinates <- readRDS(file = here::here("raw_data", "world_coordinates.rds"))
-```
 
-```{r}
+## Count the number of gold medla winners in each country
 medal_counts <- athletes %>%
   filter(Medal == "Gold") %>%
   group_by(Region) %>%
@@ -518,6 +542,9 @@ medal_counts <- athletes %>%
 medal_counts
 ```
 
+## Merging
+
+Schaue dir die Dokumentation von `merge` an für Infos zu den Argumenten.
 
 ```{r}
 medal_countries <- merge(
@@ -533,17 +560,20 @@ head(medal_countries)
 ```
 
 
+## Merging im [tidyverse](https://www.tidyverse.org/)
+
 ```{r}
 medal_countries <- world_coordinates %>%
   left_join(medal_counts, join_by(region == Region))
 head(medal_countries)
 ```
 
+
 ## Übung
 
 :::{.callout-note}
 ## Übung
-Bitte bearbeite die [Übung zum Merging].
+Bitte bearbeite die [Übung zum Merging](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/merging_ex.html).
 :::
 
 
@@ -585,6 +615,8 @@ sum_num(x = 1, y = 1, z = 2)
 - Foto von <a href="https://unsplash.com/de/@scw1217?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Suzanne D. Williams</a> auf <a href="https://unsplash.com/de/fotos/drei-puppen-VMKBFR6r_jg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@zoeholling?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Zoe Holling</a> auf <a href="https://unsplash.com/de/fotos/mann-steht-auf-grossem-schachbrett-mit-brustfiguren-im-park-UDfmSK4AS3E?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@steinart?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Steinar Engeland</a> auf <a href="https://unsplash.com/de/fotos/grauer-und-weisser-blumenvorhang-BfMbxUu0EGE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@muhil?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Muhil Mohan</a> auf <a href="https://unsplash.com/de/fotos/ein-fluss-der-durch-einen-uppigen-grunen-hugel-fliesst-n1evnqIt9BQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
   
   
   
