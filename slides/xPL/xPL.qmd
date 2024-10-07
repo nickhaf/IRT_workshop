@@ -191,7 +191,7 @@ Geht zur [Übung](../../exercises/Linking.qmd) und probiert euch aus!
 - [Ziel]{.highlight}
 
 
-## {background-image="images/sapiens.jpg" background-size="1150px"}
+## {background-image="images/sapiens.jpg" background-size="1225px"}
 
 ::: {.absolute right="2.5%" top="5%" style="backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, .0); border-radius: 0px;"}
 Exkurs: \ 

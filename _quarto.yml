@@ -24,10 +24,12 @@ website:
           - section: "Einführung in R"
             href: ./exercises/index_intro_r.qmd
             contents:
-              - ./exercises/intro_r/introR.qmd
+              - ./exercises/intro_r/load_data_ex.qmd
               - ./exercises/intro_r/subsetting_ex.qmd
               - ./exercises/intro_r/missings_ex.qmd
               - ./exercises/intro_r/reshaping_ex.qmd
+              - ./exercises/intro_r/merging_ex.qmd
+
           - section: "Linking"
             href: ./exercises/index_linking.qmd
             contents:

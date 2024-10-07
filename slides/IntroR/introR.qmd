@@ -9,6 +9,11 @@ title-slide-attributes:
 format: letterbox-revealjs
 ---
 
+```{r}
+#| echo: false
+source(here::here("output_hook.R"))
+```
+
 
 ## Überblick
 
@@ -22,22 +27,22 @@ Am Ende der Session solltet ihr mit den Grundlagen in R vertraut sein, sodass ih
 :::
 
 
-## {background-image="images/keyboard.jpg" background-size="1150px"}
+## {background-image="images/keyboard.jpg" background-size="1225px"}
 
 ::: {.absolute left="2.5%" top="2.5%" style="padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, 0); backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
 
-Arbeiten mit R \
-und RStudio
+RStudio Interface
 
 :::
 
-## RStudio Interface
+
+## 
 
 Beim ersten Öffnen wird RStudio in etwa so aussehen:
 
 ![](./images/RStudio_window.PNG){fig-align="center"}
 
-## RStudio Interface
+## 
 Das Fenster hat 4 Bereiche:
 
 ![](./images/window_commented.PNG){fig-align="center"}
@@ -88,10 +93,7 @@ Die Dokumentation kann mit `?funktionsname` aufgerufen werden. Das ist eines der
 Der [Dateien]{.highlight}-Tab ermöglicht es uns, die Dateien in unserem Arbeitsverzeichnis zu verwalten.
 
 
-
-
-
-## {background-image="images/coder.jpg" background-size="1150px"}
+## {background-image="images/coder.jpg" background-size="1225px"}
 
 ::: {.absolute left="5%" bottom="5%" style="color:#F8F8F8;"}
 
@@ -99,8 +101,29 @@ Los Geht's!
 :::
 
 
+## Grundlegende Operationen
 
-## {background-image="images/setup.jpg" background-size="1150px"}
+- `c()`: Vektor erstellen
+- `&`, `|`, `!`: Logische Operatoren (und, oder, nicht)
+- Datenstrukturen: 
+
+```{r, echo = FALSE, results = 'asis'}
+dat_structs <- data.frame(" " = c("1d", "2d", "nd"),
+                          Homogen = c("atomic vector", "matrix", "array"), 
+                          Heterogen = c("list", "data.frame", "")
+)
+
+knitr::kable(dat_structs, "pipe",
+             col.names = c("", "Homogeneous", "Heterogeneous")
+             ) 
+
+```
+
+:::{.aside}
+Tabelle aus [Advanced R](http://adv-r.had.co.nz/Data-structures.html).
+:::
+
+## {background-image="images/setup.jpg" background-size="1225px"}
 
 ::: {.absolute left="5%" top="5%" style="color:#F8F8F8;"}
 
@@ -161,10 +184,11 @@ library(packagename)
 ![](./images/tidyverse_logo.png)
 :::
 ::: {.column width="60%"}
-Verbreitete Paketsammlung in R für so ziemlich jede Stufe in der Datenauswertung. Der meiste Code wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
+Verbreitete Paketsammlung in R für so ziemlich jede Stufe der Datenauswertung. Der meiste Code den wird schreiben wird wahrscheinlich aus einer Mischung aus `base R` und `tidyverse` bestehen. 
 :::
 ::::
-## `tidyverse`: Pipe Operator
+
+## [tidyverse](https://www.tidyverse.org/): Pipe Operator
 
 `%>%`
 
@@ -186,7 +210,7 @@ c(45:100) %>%
 
 
 
-## {background-image="images/data.jpg" background-size="1200px"}
+## {background-image="images/data.jpg" background-size="1225px"}
 
 ::: {.absolute right="5%" top="5%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255 .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255 .5); border-radius: 5px;"}
 
@@ -220,11 +244,12 @@ Daten und Pfade
 ![](./images/here.png){fig-align="center"}
 
 
-## Exkurs: `here`-Paket
+## Exkurs: [here](https://here.r-lib.org/)-Paket
 
-[`here`](https://here.r-lib.org/) ist ein Paket zum Erstellen von Dateipfaden. Dadurch können Probleme mit relativen und absoluten Pfaden vermieden werden. 
+[here](https://here.r-lib.org/) ist ein Paket zum Erstellen von Dateipfaden. Dadurch können Probleme mit relativen und absoluten Pfaden vermieden werden. 
 
-"C:\Users\hafiznij\Documents\GitHub\IRT_workshop\raw_data\athletes.rds" wird zu `here::here("raw_data", "athletes.rds")`. 
+`C:\Users\hafiznij\Documents\GitHub\IRT_workshop\raw_data\athletes.rds` wird zu:  
+`here::here("raw_data", "athletes.rds")`. 
 
 Also:
 ```{r}
@@ -232,84 +257,132 @@ Also:
 athletes <- readRDS(here::here("raw_data", "athletes.rds"))
 ```
 
-## 
+## Einlesen von Daten
 
 :::{.callout-note}
 ## Übung
-Bitte bearbeite die [Übung zum Einlesen von Daten].
+Bitte bearbeite die [Übung zum Einlesen von Daten](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/introR.html).
 :::
 
-# Datenmanipulation und Transformation
+## {background-image="images/butterfly.jpg" background-size="1225px"}
 
-# Einen Überblick bekommen: `View()`
-https://unsplash.com/de/fotos/mann-steht-auf-grossem-schachbrett-mit-brustfiguren-im-park-UDfmSK4AS3E
-- Datensatz in neuem Fenster:
+::: {.absolute left="2.5%" bottom="0.5%" style="color:#01364C; font-size:1.5em;"}
+
+Datenmanipulation und Transformation
+
+:::
+
+##
+
+:::{.columns}
+:::{.column width="50%"}
+:::r-fit-text
+Einen Überblick bekommen
+:::
+:::
+:::{.column width="50%"}
+![](./images/chess.jpg){.image-right}
+:::
+:::
+
+## `View()`
+
+:::{.columns}
+:::{.column width="50%"}
+
+Öffnet den Datensatz in einem neuem Fenster:
 ```{r}
 #| eval: false
 View(athletes)
 ```
 
-## Einen Überblick bekommen: `str()`
+:::
+
+:::{.column width="50%"}
+![](./images/chess.jpg){.image-right}
+:::
+:::
+
+
+## `str()`
 - Struktur der Daten:
 ```{r}
 str(athletes)
 ```
 
-## Einen Überblick bekommen: `head()`
+## `head()`
 - Erste Zeilen:
 
 ```{r}
 head(athletes)
 ```
 
-## 
+## Einen Überblick bekommen: Übung
 
 :::{.callout-note}
-## Übung
+## Übung 1
 Wie viele Zeilen und Spalten hat der in der letzten Übung eingelesene Datensatz `characters`? 
 :::
 
 
 :::{.callout-note}
-## Übung
+## Übung 2
 Aus welcher Show stammen die ersten Charactere im Datensatz? 
 :::
 
 # Subsetting
+"Zeilen [z]{.highlight}uerst, Spalten [s]{.highlight}päter"
+`[Zeile, Spalte]`
 
-"zeilen zuerst, spalten später"
 
-[Zeile, Spalte]
 
-## Subsetting
 
+## Einfaches Subsetting
+\
+\
 ```{r}
-# Extract the columns by name:
+# Auswahl der Spalten
 athletes[c(1,4), c("Year", "Sport")]
 ```
 
 ## Konditionales Subsetting
 
-```{r}
-athletes[athletes$Team == "Germany", ]
+```{r, output.lines = 3}
+athletes_de <- athletes[athletes$Team == "Germany", ]
+head(athletes_de)
 ```
 
-- Alle Zeilen, in denen `Team` gleich `Germany` ist.
-- Was passiert hier genau?
-- Wir erzeugen einen Boolean Vektor (besteht aus TRUE und FALSE), der anzeigt, welche Zeilen ausgewählt werden sollen:
+Alle Zeilen, in denen `Team` gleich `Germany` ist.
 
-```{r}
+:::{.callout-tip}
+
+## Was passiert hier genau?
+
+Wir erzeugen einen Boolean Vektor (besteht aus TRUE und FALSE), der anzeigt, welche Zeilen ausgewählt werden sollen:
+
+```{r, output.lines = 1}
 athletes$Team == "Germany"
 ```
 
-## Konditionales Subsettting
+Dieser indiziert dann die Zeilen, die ausgewählt werden sollen.
+:::
 
-```{r}
+## Komplexes konditionales Subsetting
+
+Diese Prinzip können wir uns zu Nutze machen, um mehrere Bedingungen zu verknüpfen:
+
+```{r, output.lines = 6}
 athletes_3 <- athletes[(athletes$Sport == "Judo") & (athletes$Weight > 100 | athletes$Weight < 50), ]
 head(athletes_3)
 ```
 
-## Subsetting: Tidyverse
+:::{.callout-important}
+## `NA`
+Viele der Zeilen enthalten nur `NA` Werte. Das schauen wir uns gleich im Kapitel @sec-missings genauer an.
+:::
+
+## Subsetting Zeilen: [Tidyverse](https://www.tidyverse.org/)
+
 ```{r, output.lines=4}
 library(tidyverse)
 
@@ -318,7 +391,13 @@ athletes %>%
   head
 ```
 
-```{r, output.lines=4}
+:::{.callout-tip}
+## `NA`
+Hier werden `NA` Werte automatisch ignoriert.
+:::
+
+## Subsetting Spalten: [Tidyverse](https://www.tidyverse.org/)
+```{r}
 athletes %>%
   select(Year, Sport) %>%
   head
@@ -328,39 +407,54 @@ athletes %>%
 ## Übung
 :::{.callout-note}
 ## Übung
-Bitte bearbeite die [Übung zum Subsetting].
+Bitte bearbeite die [Übungen zum Subsetting](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/subsetting_ex.html).
 :::
 
-# Fehlende Werte
-- `NA
+## Fehlende Werte {#sec-missings}
 
-```{r}
+::: r-fit-text
+`NA`
+:::
+
+## Arbeit mit fehlenden Werten
+
+- `NAs` in der Spalte `Weight` auswählen:
+```{r, output.lines=1}
 is.na(athletes$Weight)
 ```
 
-
-```{r}
+- `NAs` in der Spalte `Weight` beim Subsetting nicht beachten:
+```{r, output.lines=3}
 athletes[(athletes$Sport == "Judo") & (athletes$Weight > 100 | athletes$Weight < 50) & !is.na(athletes$Weight), ]
 ```
 
-```{r}
+## Fehlende Werte entfernen
+
+```{r, output.lines=3}
 athletes_na <- athletes[!is.na(athletes$Weight), ]
 head(athletes_na)
 ```
 
-```{r}
-library(tidyverse)
-
+```{r, output.lines=3}
+## tidyverse:
 athletes_na <- athletes %>%
   drop_na(Weight)
 head(athletes_na)
 ```
 
+Beides entfernt alle Zeilen, die in der Spalte `Weight` ein `NA` haben.  
 
-# Reshaping
+
+## {background-image="images/shadow.jpg" background-size="1225px"}
+
+::: {.absolute right="5%" top="5%" style="padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, 0); backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0); font-size:2.5em;"}
+
+Reshaping
+
+:::
 
 
-## Wide- und Long-Format
+## Wide-Format
 ```{r}
 inhabitants_wide <- data.frame(
   country = c("China", "India", "USA"),
@@ -371,6 +465,7 @@ inhabitants_wide <- data.frame(
 head(inhabitants_wide)
 ```
 
+## Long-Format
 ```{r}
 #| echo: false
 
@@ -416,18 +511,29 @@ head(inhabitants_wide_2)
 ## Übung
 :::{.callout-note}
 ## Übung
-Bitte bearbeite die [Übung zum Resahping].
+Bitte bearbeite die [Übung zum Reshaping](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/reshaping_ex.html).
 :::
 
 
-# Merging
-
 ## 
-```{r}
-world_coordinates <- readRDS(file = here::here("raw_data", "world_coordinates.rds"))
-```
 
-```{r}
+:::{.columns}
+:::{.column width="50%"}
+Merging
+:::
+:::{.column width="50%"}
+![](./images/rivers.jpg){.image-right}
+:::
+:::
+
+
+## Vorbereitung
+Zuerst müssen wir die Daten laden und für das Beispiel vorbereiten. 
+
+```{r, output.lines = 3}
+world_coordinates <- readRDS(file = here::here("raw_data", "world_coordinates.rds"))
+
+## Count the number of gold medla winners in each country
 medal_counts <- athletes %>%
   filter(Medal == "Gold") %>%
   group_by(Region) %>%
@@ -436,6 +542,9 @@ medal_counts <- athletes %>%
 medal_counts
 ```
 
+## Merging
+
+Schaue dir die Dokumentation von `merge` an für Infos zu den Argumenten.
 
 ```{r}
 medal_countries <- merge(
@@ -451,31 +560,36 @@ head(medal_countries)
 ```
 
 
+## Merging im [tidyverse](https://www.tidyverse.org/)
+
 ```{r}
 medal_countries <- world_coordinates %>%
   left_join(medal_counts, join_by(region == Region))
 head(medal_countries)
 ```
 
+
 ## Übung
+
 :::{.callout-note}
 ## Übung
-Bitte bearbeite die [Übung zum Merging].
+Bitte bearbeite die [Übung zum Merging](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/merging_ex.html).
 :::
 
 
-# Funktionen
+## Funktionen
 
 ## Basics
 
+```{r}
+#| eval: false
 function_name <- function(argument_1, argument_2, ...){
-  do some operations
-  
+  result <- argument_1 + argument_2
   return(result)
 }
+```
 
-
-## Motivation
+### Motivation
 - Alles was etwas in R **tut** ist eine Funktion. 
 - Superhilfreich, sich eigene Funktionen zu schreiben, weil das eine Menge Code-Duplikationen vermeidet (und die sind schlecht). 
 
@@ -487,20 +601,29 @@ sum_num <- function(x, y, z = 0){
 }
 
 sum_num(x = 1, y = 1, z = 2)
+sum_num(x = 1, y = 1)
+
 ```
 
 
-# Aufs folgende evtl. zurückkommen, falls es relevant wird. 
-# Loops
 
-# Plots
-
-# Image links
-- https://unsplash.com/de/fotos/schwarzer-flachbildschirm-gA396xahf-Q
+## Bildquellen
+- Foto von <a href="https://unsplash.com/de/@afgprogrammer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Mohammad Rahmani</a> auf <a href="https://unsplash.com/de/fotos/schwarzer-flachbildschirm-gA396xahf-Q?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@adigold1?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Adi Goldstein</a> auf <a href="https://unsplash.com/de/fotos/graustufenfotografie-eines-mannes-im-gestreiften-hemd-rgkKFn5Ysb0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Icons from [icons8.de](https://icons8.de).
+
+## Bildquellen
 - Foto von <a href="https://unsplash.com/de/@elnazasadi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">elnaz asadi</a> auf <a href="https://unsplash.com/de/fotos/ein-mehrfarbiges-muster-aus-sechseckigen-formen-Ej50vyvxJ94?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@kommumikation?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Mika Baumeister</a> auf <a href="https://unsplash.com/de/fotos/weisses-druckpapier-mit-zahlen-Wpnoqo2plFA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - https://upload.wikimedia.org/wikipedia/commons/f/ff/Tidyverse_hex_logo.png
 - https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/here.png
+- Foto von <a href="https://unsplash.com/de/@scw1217?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Suzanne D. Williams</a> auf <a href="https://unsplash.com/de/fotos/drei-puppen-VMKBFR6r_jg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
+## Bildquellen
+- Foto von <a href="https://unsplash.com/de/@zoeholling?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Zoe Holling</a> auf <a href="https://unsplash.com/de/fotos/mann-steht-auf-grossem-schachbrett-mit-brustfiguren-im-park-UDfmSK4AS3E?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@steinart?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Steinar Engeland</a> auf <a href="https://unsplash.com/de/fotos/grauer-und-weisser-blumenvorhang-BfMbxUu0EGE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@muhil?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Muhil Mohan</a> auf <a href="https://unsplash.com/de/fotos/ein-fluss-der-durch-einen-uppigen-grunen-hugel-fliesst-n1evnqIt9BQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
+  
+  
   

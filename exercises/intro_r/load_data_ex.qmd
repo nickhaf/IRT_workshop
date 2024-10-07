@@ -1,0 +1,42 @@
+---
+title: "Einlesen von Daten"
+subtitle: "Übung"
+lang: de
+author: "Nicklas Hafiz"
+format: html
+---
+
+# Einlesen von Daten
+
+## 1. Download
+
+Erstelle einen neuen Ordner `data` in deinem Arbeitsverzeichnis. Gehe dann auf [GitHub](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data), downloade die beiden Datensätze `psych_stats.csv` und `characters.rds`, und speichere sie in deinem neu erstellen `data` Ordner ab. 
+
+:::{.callout-hint}
+Zum Downloaden von GitHub, klicke auf die Datei. Es öffnet sich eine neue Seite, auf der du oben rechts den Button "Download" findest. 
+:::
+
+## 2. Einlesen
+Lies beide Datensätze in deinem R-Skript ein. Schaue dir vor allem den `psych_stats` Datensatz danach genauer an. Hat alles geklappt? Wenn nicht, woran könnte es liegen?
+
+::: {.callout-tip collapse="true"}
+## Tipp 1
+Es handelt sich um eine `.rds`-Datei und eine `.csv`-Datei.
+:::
+
+::: {.callout-tip collapse="true"}
+## Tipp 2
+Öffne die `.csv`-Datei und schaue nach, durch welches Zeichen die Werte getrennt sind. Nutze das `sep` Argument in `read.csv`!
+:::
+
+::: {.callout-caution collapse="true"}
+## Lösung
+
+```{r}
+characters <- readRDS(file = here::here("raw_data", "characters.rds"))
+psych_stats <- read.csv(
+  file = here::here("raw_data", "psych_stats.csv"),
+  sep = ";"
+)
+```
+:::
