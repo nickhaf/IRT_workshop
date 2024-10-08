@@ -5,7 +5,10 @@ author: "Nicklas Hafiz"
 format: html
 ---
 
-## 1. Daten laden
+# 1. Vorbereitung
+
+## 1.1 Daten laden
+
 Lade die Datei `q_a.rds` von [GitHub](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.
 
 :::{.callout-caution}
@@ -18,12 +21,22 @@ qa_dat <- readRDS(here::here("raw_data", "q_a.rds"))
 
 :::
 
+## 1.2 Überblick
+Verschaffe dir einen [Überblick]() über die Daten. Wieviele Personen haben an der Studie teilgenommen? Was könnten die verschiedenen Spalten bedeuten? Wieviele Items wurden erhoben? 
 
-## 2. Waldtest
+# 2. Waldtest
 Wir werden zuerst einen [Waldtest]() durchführen. 
-Es gibt diverse Pakete, mit denen dies möglich ist. Für diese Übung werden wir mit [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.   
-Für [TAM](https://www.edmeasurementsurveys.com/TAM/Tutorials/) gibt's ebenfalls ein (schon etwas älteres) https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm). 
+Es gibt diverse Pakete, mit denen dies möglich ist. Für diese Übung werden wir mit [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
 
+:::{.callout-note}
+## Alternativen
+- [TAM](https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm)  
+- [eRm](https://bookdown.org/chua/new_rasch_demo2/DIF.html) 
+:::
+
+## 2.1 Kalibrierung
+Zuerst müssen wir die Daten kalibrieren (andere Pakete ermöglichen es auch, beides direkt in einer Funktion zu kombinieren).  
+Dafür nutzen wir diesmal [mirt](https://cran.r-project.org/web/packages/mirt/index.html). Wir können unseren Datensatz
 
 
 
