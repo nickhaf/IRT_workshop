@@ -1,12 +1,9 @@
 ---
 title: "Einlesen von Daten"
 subtitle: "Übung"
-lang: de
 author: "Nicklas Hafiz"
 format: html
 ---
-
-# Einlesen von Daten
 
 ## 1. Download
 
