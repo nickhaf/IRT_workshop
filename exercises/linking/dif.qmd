@@ -9,20 +9,97 @@ format: html
 
 ## 1.1 Daten laden
 
-Lade die Datei `q_a.rds` von [GitHub](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.
+Lade die Datei `q_a_wirt.rds` von [GitHub](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.
 
-:::{.callout-caution}
+:::{.callout-note}
+Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/research_data/ZA6268?doi=10.4232/1.13780) von 2009 und beinhaltet Fragen zu Allgemeinwissen in den Themengebieten Politik, Geschichte, Wirtschaft, Kultur und Naturwissenschaften. Insgesamt haben fast 700.000 Personen den Test bearbeitet. Wir haben die Daten bereits etwas aufbereitet und nur ein Subset an Fragen (Thema Wirtschaft) für diese Übung ausgewählt. 
+:::
+
+:::{.callout-caution collapse="true"}
 ## Lösung
 
 ```{r}
-qa_dat <- readRDS(here::here("raw_data", "q_a.rds"))
+qa_dat <- readRDS(here::here("raw_data", "q_a_wirt.rds"))
 ```
 
 
 :::
 
 ## 1.2 Überblick
-Verschaffe dir einen [Überblick]() über die Daten. Wieviele Personen haben an der Studie teilgenommen? Was könnten die verschiedenen Spalten bedeuten? Wieviele Items wurden erhoben? 
+Verschaffe dir einen [Überblick]() über die Daten. In welchem Formt liegen sie vor? Was könnten die verschiedenen Spalten bedeuten? 
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+
+Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im [long-Format](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/long-format) vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins [wide-Format umformen](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide). 
+
+```{r}
+str(qa_dat)
+```
+
+Außerdem scheint der Datensatz folgende Variablen zu beinhalten:
+
+- `T1`: Personen-ID (aber komisch benannt)
+- `gender`: Geschlecht
+- `answer`: Antwort auf die Frage
+- `question_code`: Fragen-ID
+- `varLabel`: Frage (aber komisch benannt)
+
+:::
+
+## 1.3 Spalten umbenennen 
+Hmm, die Spaltennamen sind teilweise noch nicht ganz eindeutig. Benenne `T1` in `ID` und `varLabel` in `question` um. Klare Benennung hilft uns (und anderen) den Überblick zu behalten. 
+
+:::{.callout-tip collapse="true"}
+
+## Tipp
+Ich nutze jetzt einfach mal `tidyverse` Funktionen dafür, aber es gibt immer mehrere Wege zum Ziel. Im `tidyverse` gibt es beispielsweise die Funktion `rename()`. 
+
+:::
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+
+```{r}
+library(tidyverse)
+qa_dat_renamed <- qa_dat %>%
+  rename(ID = T1, question = varLabel)
+```
+
+:::
+
+## 1.4 Umformen
+Forme jetzt die Daten ins [wide-Format um](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide).
+
+:::{.callout-caution collapse="true"}
+## Tipp
+Das Ganze ist einfacher, wenn du vorher die Spalte `question` entfernst. Außerdem müssen `ID` und `gender` in `pivot_wider` als `id_cols` definiert werden: `..., id_cols = c(ID, gender), ...`.
+
+:::
+
+:::{.callout-caution collapse="true"}
+## Lösung
+```{r}
+qa_dat_wide <- qa_dat_renamed %>%
+  pivot_wider(id_cols = c(ID, gender), 
+              names_from = question_code, 
+              values_from = answer
+              )
+```
+
+Jetzt können wir mal testweise schauen ob das geklappt hat:
+
+```{r}
+head(qa_dat_wide)
+```
+
+
+Yaay, sieht gut aus. 
+:::
+
+
 
 # 2. Waldtest
 Wir werden zuerst einen [Waldtest]() durchführen. 
@@ -36,7 +113,35 @@ Es gibt diverse Pakete, mit denen dies möglich ist. Für diese Übung werden wi
 
 ## 2.1 Kalibrierung
 Zuerst müssen wir die Daten kalibrieren (andere Pakete ermöglichen es auch, beides direkt in einer Funktion zu kombinieren).  
-Dafür nutzen wir diesmal [mirt](https://cran.r-project.org/web/packages/mirt/index.html). Wir können unseren Datensatz
+Dafür nutzen wir diesmal [mirt](https://cran.r-project.org/web/packages/mirt/index.html). Wir können unseren Datensatz in die Gruppen (uns interessiert übrigens geschlecht) aufteilen, die wir vergleichen wollen und dann auf jeden Subdatensatz unser IRT-Modell fitten (wie gesagt, andere Pakete ermöglichen das auch in einem Schritt).
+
+### 2.1.1 Subgruppen herstellen
+Erstelle 2 Dataframes, einen nur mit Frauen (1) und einen nur mit Männern (2). Weitere Kategorien gibt es in diesem Datensatz nicht:
+
+```{r}
+unique(qa_dat_wide$gender)
+```
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+```{r}
+qa_dat_f <- qa_dat_wide %>%
+  filter(gender == 1)
+
+qa_dat_m <- qa_dat_wide %>%
+  filter(gender == 2)
+```
+:::
+
+### 2.1.2 Kalibrieren
+Kalibriere jetzt die beiden Subgruppen mit `mirt`. 
+
+```{r}
+library(mirt)
+
+
+```
 
 
 
@@ -56,11 +161,7 @@ Dafür nutzen wir diesmal [mirt](https://cran.r-project.org/web/packages/mirt/in
 ## Außerdem: Nur eine Subgruppe nehmen, und da dann alle? 
 
 
-library(tidyverse)
-qa <- readRDS(here::here("raw_data", "q_a.rds"))
 
-qa_answers <- qa %>%
-  filter(str_starts(question_code, "3") ) %>%
   ## 2 ganz interessant, weil kein DIF so wirklich. Item 3 ist hiuer noch mit am auffälligsten, und war auch im Paper von 
   ## STrobl auffällig (aber in Interaktion mit age, und sie hatten nur studierende aus bayern genommen). 
   ## 5 zeigt ein bisschen was Richtung Bestimmung von Vögeln, wie z.B. im anderen Paper. 
