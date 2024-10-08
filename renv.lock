@@ -1180,6 +1180,19 @@
       ],
       "Hash": "bb0eec2fe32e88d9e2836c2f73ea2077"
     },
+    "equateIRT": {
+      "Package": "equateIRT",
+      "Version": "2.5.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "mirt",
+        "statmod",
+        "stats",
+        "utils"
+      ],
+      "Hash": "7a878deb0e8397a142ffb5b283be8231"
+    },
     "estimatr": {
       "Package": "estimatr",
       "Version": "1.0.4",
@@ -3269,6 +3282,18 @@
         "R"
       ],
       "Hash": "5f5a7629f956619d519205ec475fe647"
+    },
+    "statmod": {
+      "Package": "statmod",
+      "Version": "1.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "graphics",
+        "stats"
+      ],
+      "Hash": "26e158d12052c279bdd4ba858b80fb1f"
     },
     "stringi": {
       "Package": "stringi",
