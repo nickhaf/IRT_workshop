@@ -1,6 +1,5 @@
 ---
 title: "Höher parametrisierte IRT Modelle"
-
 format: letterbox-revealjs
 title-slide-attributes:
   data-background-image: ./images/green_waves.jpg
