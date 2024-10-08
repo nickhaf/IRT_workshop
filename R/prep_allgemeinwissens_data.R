@@ -72,6 +72,15 @@ q_a_4 <- answers_4 %>%
 
 
 
+# Subset auswählen --------------------------------------------------------
+qa_dat <- readRDS(here::here("raw_data", "q_a.rds"))
+
+qa_dat_3 <- qa_dat %>%
+  filter(str_starts(question_code, "3")) %>%
+  select(-C8)
+
+saveRDS(qa_dat_3, here::here("raw_data", "q_a_wirt.rds"))
+
 
 # With haven for quick check -------------------------------------
 # dataset <- read_sav("/home/nick/Downloads/ZA6268_v1-0-0.sav")
