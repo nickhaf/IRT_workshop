@@ -274,13 +274,13 @@ Datenmanipulation und Transformation
 
 :::
 
-##
+## Überblick bekommen
 
 :::{.columns}
 :::{.column width="50%"}
-:::r-fit-text
-Einen Überblick bekommen
-:::
+- `View()`
+- `str()`
+- `head()`
 :::
 :::{.column width="50%"}
 ![](./images/chess.jpg){.image-right}
