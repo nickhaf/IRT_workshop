@@ -631,6 +631,8 @@ Oft werden die Methoden iterativ angewandt, da beim anfänglichen Matchen der Gr
 
 
 ### eRm Waldtest
+Auch in [TAM möglich](https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm). 
+
 ```{r}
 
 ## Annehmen, dass eine Thematische Dimension unidimensional ist!
@@ -672,6 +674,9 @@ gender_difs <- LRtest(m1_na, splitcr = qa_answers_na$gender)
 plotDIF(gender_difs)
 
 gender_diffs <- Waldtest(m1, splitcr = qa_answers$gender)
+
+## Sooooo, wurde denn vorher gelinkt? Hat das Programm das under the hood direkt gemacht? 
+## Oder wie genau funktioniert das? Weil ich da ja so ein großes aufheben drum mache.
 
 ## Very Big, make a lesson about sample sizes and p values out of it. 
 
@@ -788,6 +793,19 @@ text(1, 40, "Easier to Endorse for Group 2", cex = .8)
 
 legend("bottomright", c("Diff >= .5 logits", "Diff < .5 logits"),
        pch = 15, col = c("dark blue", "light green"), cex = .7 )
+
+
+
+
+## Wir könnten jetzt das stärkste DIF Item entfernen und die Analyse nochmal durchführen. Lassen wir aber, let's take a quick look at rasch trees!
+```
+
+
+## equateIRT
+
+```{r}
+# https://rdrr.io/cran/equateIRT/man/dif.test.html
+## DAs wäre ganz cool, weil es klar macht, dass equated wird, und weil das paper auch recht fresh ist dazu. 
 ```
 
 
