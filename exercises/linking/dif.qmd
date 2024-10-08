@@ -28,6 +28,7 @@ Für [TAM](https://www.edmeasurementsurveys.com/TAM/Tutorials/) gibt's ebenfalls
 
 
 ```{r}
+#| eval: false
 
 ### eRm Waldtest
 # Auch in [TAM möglich](https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm). 
