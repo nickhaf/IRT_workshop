@@ -16,4 +16,4 @@ format: html
 {{< revealjs "./Linking/linking.html" >}}
 
 # Höher Parametrisierte Modelle
-{{< revealjs "./xPL/xPl.html" >}}
+{{< revealjs "./xPL/index.html" >}}
