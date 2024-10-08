@@ -109,6 +109,7 @@ Es gibt diverse Pakete, mit denen dies möglich ist. Für diese Übung werden wi
 ## Alternativen
 - [TAM](https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm)  
 - [eRm](https://bookdown.org/chua/new_rasch_demo2/DIF.html) 
+- [mirt](https://philchalmers.github.io/mirt/html/DIF.html)
 :::
 
 ## 2.1 Kalibrierung
@@ -128,22 +129,52 @@ unique(qa_dat_wide$gender)
 ```{r}
 qa_dat_f <- qa_dat_wide %>%
   filter(gender == 1)
+qa_dat_f <- qa_dat_f[1:500, ]
+
 
 qa_dat_m <- qa_dat_wide %>%
   filter(gender == 2)
+qa_dat_m <- qa_dat_m[1:500, ]
 ```
 :::
 
 ### 2.1.2 Kalibrieren
-Kalibriere jetzt die beiden Subgruppen mit `mirt`. 
+Fitte jetzt mit `mirt` ein Raschmodell auf beide Subgruppen. Der Datensatz darf nur die Itemspalten enthalten. 
 
 ```{r}
 library(mirt)
 
+m_f <- qa_dat_f %>%
+  select(-ID, -gender) %>%
+  mirt(itemtype = "Rasch", SE = TRUE) ## Durch die Pipe wird der Datensatz automatisch übergeben. Wir müssen ihn also nicht nochmal in die mirt-Funktion schreiben
 
+m_m <- qa_dat_m %>%
+  select(-ID, -gender) %>%
+  mirt(itemtype = "Rasch", SE = TRUE)
+
+## SE = TRUE setzen?
 ```
 
 
+
+### 2.1.3 Modellfit
+Eigentlich sollten wir uns noch anschauen, wie das Modell fittet. Aus Zeitgründen verzichten wir jetzt erstmal darauf. 
+
+## 2.2 Waldtest
+Nutze jetzt die Funktion `dif.test()` aus dem Paket `equateIRT` um den Waldtest durchzuführen. Nutze Haebara Linking. Welche Items zeigen laut Waldtest DIF?
+
+```{r}
+library(equateIRT)
+
+dif_test <- dif.test(est.mods = list(m_f, m_m), method = "Haebara", purification = TRUE)
+```
+
+Mit purification wird iterativ gefittet. 
+
+## Evaluation 
+- Plot? (https://www.researchgate.net/publication/347337364_Manual_ability_in_hand_surgery_patients_Validation_of_the_ABILHAND_scale_in_four_diagnostic_groups/figures?lo=1)
+- Stärke des DIFs beurteilen
+- Praktische Tipps
 
 ```{r}
 #| eval: false
