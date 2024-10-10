@@ -100,6 +100,46 @@ head(qa_dat_wide)
 Yaay, sieht gut aus. 
 :::
 
+## Mantel-Haenszel DIF statistic
+```{r}
+#| eval: false
+library(difR)
+mantelHaenszel(qa_dat_wide[, 2:ncol(qa_dat_wide)], member = qa_dat_wide %>% mutate(gender = case_match(qa_dat_wide$gender, 2 ~ 1, 1 ~ 0)) %>% pull(gender))
+```
+
+
+## TAM
+```{r}
+library(TAM)
+FIMSdata <- read.csv("C:/Users/hafiznij/Downloads/FIMS_AUS_TestA.csv")
+raw_resp <- FIMSdata[, 2:15]
+key <- c(1, 3, 1, 4, 1, 3, 3, 1, 5, 1, 1, 4, 1, 1)
+scored <- sapply(seq(1, length(key)), FUN = function(ii) {
+  1 * (raw_resp[, ii] == key[ii])
+})
+
+#         Line 14 runs an IRT analysis with MML estimation.
+mod1 <- tam(scored)
+
+# Results of the IRT analysis can be show using R command "summary(mod1)".
+
+# Line 17 extracts values of the gender variable into a variable called "gender".
+gender <- FIMSdata[, 1]
+
+# Line 20 computes the test score for each student by calculating the row sum of each student's scored responses.
+raw_score <- rowSums(scored)
+
+formulaA <- ~ item + gender + item * gender
+facets <- as.data.frame(gender)
+mod2 <- tam.mml.mfr(resp = scored, facets = facets, formulaA = formulaA)
+
+summary(mod2)
+
+# 
+#  A quick significance test can be conducted by dividing the interatcion estimate by its standard error. For example, for item 5, calculate -0.332/0.030= -11. Compare this with a z-statistic (within -2 and 2?)
+# 
+# The second way is to consider the effect size of DIF. For item 5, the difference in item difficulty between the two gender groups is 2x0.332 = 0.66. How siginificant in real terms is this magnitude? 
+```
 
 
 # 2. Waldtest
@@ -153,6 +193,7 @@ m_m <- qa_dat_m %>%
   select(-ID, -gender) %>%
   mirt(itemtype = "Rasch", SE = TRUE)
 
+summary(m_m)
 ## SE = TRUE setzen?
 ```
 
@@ -174,7 +215,7 @@ Mit purification wird iterativ gefittet.
 
 ## Evaluation 
 - Plot? (https://www.researchgate.net/publication/347337364_Manual_ability_in_hand_surgery_patients_Validation_of_the_ABILHAND_scale_in_four_diagnostic_groups/figures?lo=1)
-- Stärke des DIFs beurteilen
+- Stärke des DIFs beurteilen. Das finde ich hier nen bisschen doof, so eine richtige Effektstärke kommt hier nicht raus? 
 - Praktische Tipps
 
 
@@ -186,6 +227,8 @@ Wenn ich ein Paper dazu habe, vielleicht auch i.o. so. Könnte man dann odds rat
 
 ```{r}
 #| eval: false
+
+## Diese Plots sind super, die nehem ich jetzt einfach!
 
 ### eRm Waldtest
 # Auch in [TAM möglich](https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm).
@@ -207,28 +250,27 @@ Wenn ich ein Paper dazu habe, vielleicht auch i.o. so. Könnte man dann odds rat
 ## 3 hat glaube ich die Frage mit dem Autochef, ansonsten grünes Biosiegel.
 ## 4 hat wieder nichts
 
-select(T1, gender, answer, question_code) %>%
-  pivot_wider(id_cols = c(T1, gender), names_from = question_code, values_from = answer) %>%
-  select(-T1)
-
-qa_answers_na <- qa_answers %>%
+qa_answers_na <- qa_dat_wide %>%
   drop_na(gender)
 
 library(eRm)
 
-m1 <- RM(select(qa_answers, -gender))
-m1_na <- RM(select(qa_answers_na, -gender))
+m1 <- RM(select(qa_answers_na, -gender))
+m1_na <- RM(select(qa_answers_na, -gender, -ID))
 
-summary(m1)
+summary(m1_na)
+
 
 ## Andersen's LR test
 gender_difs <- LRtest(m1_na, splitcr = qa_answers_na$gender)
 plotDIF(gender_difs)
 
-gender_diffs <- Waldtest(m1, splitcr = qa_answers$gender)
+gender_diffs <- Waldtest(m1_na, splitcr = qa_answers_na$gender)
 
 ## Sooooo, wurde denn vorher gelinkt? Hat das Programm das under the hood direkt gemacht?
 ## Oder wie genau funktioniert das? Weil ich da ja so ein großes aufheben drum mache.
+## Jaa, steht irgendwo, die Funktion übernimmt das. 
+
 
 ## Very Big, make a lesson about sample sizes and p values out of it.
 
@@ -238,6 +280,10 @@ gender_2_diffs <- gender_diffs$betapar2
 comparisons <- as.data.frame(gender_diffs$coef.table)
 
 
+m1_f <- RM(select(qa_dat_f, -gender, -ID))
+m1_m <- RM(select(qa_dat_m, -gender, -ID))
+
+## Okay, irgendwie würde ich erwarten, dass die Itemparameter sich in etwa so unterscheiden, wie in dem Plot weiter unten. Dem ist aber überhaupt nicht so.  
 
 graphics.off()
 min.y <- ifelse(ceiling(min(comparisons$`z-statistic`)) > -3, -3,
