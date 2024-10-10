@@ -612,8 +612,11 @@ Es gibt viele verschieden Verfahren, die das auf verschiedene Art und Weise vers
 
 ## Grundlegendes Vorgehen
 
-Grundlegende Idee kann sein, verschiedene Modelle zu fitten, in denen die Parameter eines Items auf den gleichen Wert fixiert sind, und diese mit einem Modell zu vergleichen, wo diese Parameter frei geschätzt werden (z.B.).   
+Hier nochmal rüber gehen und verifizieren:
+
+Grundlegende Idee kann sein, verschiedene Modelle zu fitten, in denen die Parameter eines Items auf den gleichen Wert fixiert sind, und diese mit einem Modell zu vergleichen, wo diese Parameter frei geschätzt werden (z.B. [Likelihood Ratio Test]()).   
 Eine andere Idee ist, eine [logistische Regression]() zu rechnen, und zu schauen, ob es eine Interaktion zwischen Gruppenzugehörigkeit und Itemschwierigkeit/Personenfähigkeit gibt.  
+Ein Ansatz, der sich im IRT framework bewegt wäre der Vergleich von Itemschwierigkeiten zwischen den Gruppen zu vergleichen [Lord's Chi Quadrat Test, auch genannt Wald Test](). 
 Dann gibt es noch Ansätze, die Maschinelles lernen nutzen, um 
 
 
@@ -664,9 +667,10 @@ Oft werden die Methoden iterativ angewandt, da beim anfänglichen Matchen der Gr
 - psychotrees
 
 
-## Eins/Zwei Methoden kurz genauer vorstellen und in der Übung bearbeiten. 
+## Welche denn jetzt?
 
-## Ein paar Methoden mit dem fertigen Datensatz kurz zeigen?
+Das ist (natürlich) abhängig vom Modell, der Fragestellung in den Daten. Für kleine Datensätze mag es sinnvoller sein, Verfahren zu wählen die auf beobachtete Scores zurückgreifen (nicht auf geschätzte Trait-Variablen). Hat man hingegen große Datensätze mit vielen Kovariaten (und damit auch vielen verschiedenen Gruppen und Gruppen-Interaktionen) mag es sinnvoller sein, in Verfahren mit maschinellem Lernen zu schauen, z.B. Rasch-Trees. Generell kann es auch eine gute Idee sein, Daten zu simulieren und daran verschiedene Verfahren auszuprobieren um zu schauen, welche zu ähnlichen Ergebnissen führen.   
+Generell ist es auch keine gute Idee, einfach nach p-Werten zu gehen, um Items dann blind auszuschließen. Stattdessen sollten die Itemschwierigkeitsunterschiede zwischen den Gruppen beurteilt, und auch das Item selber untersucht werden.
 
 https://cran.r-project.org/web/packages/difR/difR.pdf
 
