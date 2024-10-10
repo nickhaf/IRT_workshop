@@ -24,7 +24,9 @@ Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/
 ## Lösung
 
 ```{r}
-qa_dat <- readRDS(here::here("raw_data", "q_a_wirt.rds"))
+qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_bb.rds")) %>%
+  filter(bundeslandStudium == 3)
+
 ```
 
 
@@ -80,7 +82,7 @@ Forme jetzt die Daten ins [wide-Format um](https://nickhaf.github.io/IRT_worksho
 
 :::{.callout-caution collapse="true"}
 ## Tipp
-Das Ganze ist einfacher, wenn du vorher die Spalte `question` entfernst. Außerdem müssen `ID` und `gender` in `pivot_wider` als `id_cols` definiert werden: `..., id_cols = c(ID, gender), ...`.
+Alle Spalten, die nicht ins wide-Format übertragen werden sollen, müssen in `pivot_wider()` als `id_cols` definiert werden: `..., id_cols = c(ID, gender, bundeslandStudium, spiegelReadingfreq, age), ...`.
 
 :::
 
@@ -89,7 +91,7 @@ Das Ganze ist einfacher, wenn du vorher die Spalte `question` entfernst. Außerd
 ```{r}
 qa_dat_wide <- qa_dat_renamed %>%
   pivot_wider(
-    id_cols = c(ID, gender),
+    id_cols = c(ID, gender, bundeslandStudium, spiegelReadingfreq, age),
     names_from = question_code,
     values_from = answer
   )
@@ -174,12 +176,12 @@ unique(qa_dat_wide$gender)
 ```{r}
 qa_dat_f <- qa_dat_wide %>%
   filter(gender == 1)
-qa_dat_f <- qa_dat_f[1:500, ]
+qa_dat_f <- qa_dat_f
 
 
 qa_dat_m <- qa_dat_wide %>%
   filter(gender == 2)
-qa_dat_m <- qa_dat_m[1:500, ]
+qa_dat_m <- qa_dat_m
 ```
 :::
 
@@ -190,14 +192,15 @@ Fitte jetzt mit `mirt` ein Raschmodell auf beide Subgruppen. Der Datensatz darf 
 library(mirt)
 
 m_f <- qa_dat_f %>%
-  select(-ID, -gender) %>%
-  mirt(itemtype = "Rasch", SE = TRUE) ## Durch die Pipe wird der Datensatz automatisch übergeben. Wir müssen ihn also nicht nochmal in die mirt-Funktion schreiben
+  drop_na(gender) %>%
+  select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
+  mirt( itemtype = "Rasch",SE = TRUE) ## Durch die Pipe wird der Datensatz automatisch übergeben. Wir müssen ihn also nicht nochmal in die mirt-Funktion schreiben
 
 m_m <- qa_dat_m %>%
-  select(-ID, -gender) %>%
-  mirt(itemtype = "Rasch", SE = TRUE)
+  drop_na(gender) %>%
+  select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
+  mirt( itemtype = "Rasch", SE = TRUE)
 
-summary(m_m)
 ## SE = TRUE setzen?
 ```
 
@@ -213,7 +216,27 @@ Nutze jetzt die Funktion `dif.test()` aus dem Paket `equateIRT` um den Waldtest 
 library(equateIRT)
 
 dif_test <- dif.test(est.mods = list(m_f, m_m), method = "Haebara", purification = TRUE)
+
+## Für Bayern gings irgendwie nicht, vielleicht waren die Gruppen zu unterschiedlich groß?
+
 ```
+
+```{r}
+library(eRm)
+
+qa_answers_na <- qa_dat_wide %>%
+  drop_na(gender)
+
+m1_na <- qa_answers_na %>%
+    select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
+  RM
+
+
+gender_diffs <- Waldtest(m1_na, splitcr = qa_answers_na$gender)
+
+```
+
+
 
 Mit purification wird iterativ gefittet. 
 
@@ -249,9 +272,10 @@ Gerade bei vielen Items kann es hilfreich sein, die Ergebnisse zu plotten, auch 
 #### Manueller Vergleich
 
 ```{r}
+library(TAM)
 ## Item Parameter berechnen
-tam_f <- tam(qa_dat_f[, 3:ncol(qa_dat_f)])
-tam_m <- tam(qa_dat_m[, 3:ncol(qa_dat_m)])
+tam_f <- tam(qa_dat_f[, 6:ncol(qa_dat_f)])
+tam_m <- tam(qa_dat_m[, 6:ncol(qa_dat_m)])
 
 tam_f_difficulty <- tam_f$xsi$xsi
 tam_m_difficulty <- tam_m$xsi$xsi
@@ -268,12 +292,12 @@ difficulty_m <- dat_link$parameters_list[[2]]$xsi
 
 group_dif <- difficulty_f - difficulty_m
 
-dif_dat <- data.frame(item = colnames(qa_dat_f[,3:ncol(qa_dat_f)]), 
+dif_dat <- data.frame(item = colnames(qa_dat_f[,6:ncol(qa_dat_f)]), 
                       group_diff = group_dif, 
                       group_favour = ifelse(group_dif > 0, "m", "f")
                       )
 
-set_colour_scheme <- function(color_scheme = c("#01364C", "#F4BA02", "#9B1B34")){
+set_colour_scheme <- function(color_scheme = c("#01364C", "#9B1B34", "#F4BA02")){
   scale_colour_manual(values = color_scheme)
 }
 
@@ -295,8 +319,8 @@ ggplot(data = dif_dat, aes(x = group_diff, y = item, colour = group_favour)) +
   labs(x = "Group Difference in Item Difficulty", y = "Item")
 
 
-
 plot(difficulty_f, difficulty_m)
+
 ## Sieht sehr ähnlich aus zum Barplot!
 ## Wald test signifikanzen könnten noch mit rein wenn man will. 
 
@@ -304,6 +328,11 @@ plot(difficulty_f, difficulty_m)
 
 ## Den Plot auch nohcmal auf die Folien packen!
 ## Nochmal verlgeich mit dem psychotree papern. Sind das wirklich die selbern Fragen?
+```
+
+
+```{r}
+## Plot mit TAM approach vergleichen. Kriege ich ähnlihce Effektstärke raus?
 ```
 
 
