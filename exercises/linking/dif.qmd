@@ -294,6 +294,9 @@ ggplot(data = dif_dat, aes(x = group_diff, y = item, colour = group_favour)) +
   set_colour_scheme() +
   labs(x = "Group Difference in Item Difficulty", y = "Item")
 
+
+
+plot(difficulty_f, difficulty_m)
 ## Sieht sehr ähnlich aus zum Barplot!
 ## Wald test signifikanzen könnten noch mit rein wenn man will. 
 
