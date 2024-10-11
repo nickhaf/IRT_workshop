@@ -24,7 +24,7 @@ Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/
 ## Lösung
 
 ```{r}
-qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_bb.rds"))
+qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_b.rds"))
 
 ```
 
@@ -158,12 +158,10 @@ Fitte jetzt mit `mirt` ein Raschmodell auf beide Subgruppen. Der Datensatz darf 
 library(mirt)
 
 m_f <- qa_dat_f %>%
-  drop_na(gender) %>%
   select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
   mirt( itemtype = "Rasch",SE = TRUE) ## Durch die Pipe wird der Datensatz automatisch übergeben. Wir müssen ihn also nicht nochmal in die mirt-Funktion schreiben
 
 m_m <- qa_dat_m %>%
-  drop_na(gender) %>%
   select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
   mirt( itemtype = "Rasch", SE = TRUE)
 
@@ -190,6 +188,8 @@ dif_test$coef_trasf
 ```
 
 ```{r}
+
+# Bisschen mehr Blackbox. Ergebnisse sind dadurch auch nicht so ähnlich zu meinem gelinkten. 
 library(eRm)
 
 qa_answers_na <- qa_dat_wide %>%
