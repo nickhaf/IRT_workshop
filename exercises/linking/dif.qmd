@@ -24,7 +24,7 @@ Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/
 ## Lösung
 
 ```{r}
-qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_b.rds"))
+qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_bb.rds"))
 
 ```
 
@@ -128,7 +128,7 @@ Dafür nutzen wir diesmal [mirt](https://cran.r-project.org/web/packages/mirt/in
 Erstelle 2 Dataframes, einen nur mit Frauen (1) und einen nur mit Männern (2). Weitere Kategorien gibt es in diesem Datensatz nicht:
 
 ```{r}
-unique(qa_dat_wide$gender)
+table(qa_dat_wide$bundeslandStudium)
 ```
 
 :::{.callout-caution collapse="true"}
