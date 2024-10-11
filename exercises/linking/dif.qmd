@@ -9,6 +9,7 @@ format: html
 source(here::here("R", "plot_functions.R"))
 ```
 
+Ziel dieser Übung ist es, die grundlegendes Linking in R auszuprobieren, und eine erste Differential Item Functioning (DIF) Analyse durchzuführen. 
 
 # 1. Vorbereitung
 
@@ -106,7 +107,9 @@ Yaay, sieht gut aus.
 :::
 
 # 2. Linking
-Zuerst wollen wir die Skalen manuell verlinken
+Wir haben gleich vor, DIF auf der Geschlecht-Variable zu untersuchen. 
+
+## 2.1 GruppenAls erstes 
 
 
 
@@ -148,10 +151,6 @@ qa_dat_m <- qa_dat_m
 
 ### 2.1.2 Kalibrieren
 
-
-
-
-
 Fitte jetzt mit `mirt` ein Raschmodell auf beide Subgruppen. Der Datensatz darf nur die Itemspalten enthalten. 
 
 ```{r}
@@ -180,33 +179,13 @@ Nutze jetzt die Funktion `dif.test()` aus dem Paket `equateIRT` um den Waldtest 
 library(equateIRT)
 
 dif_test <- dif.test(est.mods = list(m_f, m_m), method = "Stocking-Lord", purification = FALSE)
-
 dif_test$coef_trasf
 
 ## Für Bayern gings irgendwie nicht, vielleicht waren die Gruppen zu unterschiedlich groß?
 
 ```
 
-```{r}
 
-# Bisschen mehr Blackbox. Ergebnisse sind dadurch auch nicht so ähnlich zu meinem gelinkten. 
-library(eRm)
-
-qa_answers_na <- qa_dat_wide %>%
-  drop_na(gender)
-
-m1_na <- qa_answers_na %>%
-    select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
-  RM
-
-
-gender_diffs <- Waldtest(m1_na, splitcr = qa_answers_na$gender)
-gender_1_diffs <- gender_diffs$betapar1
-gender_2_diffs <- gender_diffs$betapar2
-
-
-
-```
 
 
 
