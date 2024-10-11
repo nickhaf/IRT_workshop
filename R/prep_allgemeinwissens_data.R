@@ -34,7 +34,7 @@ library(tidyverse)
 ##    filter(C8 == 4)
  #saveRDS(gads, "/home/nick/Downloads/student_pisa_4.rds")
 
-sp4 <- readRDS("/home/nick/Downloads/student_pisa_4.rds")
+gads <- readRDS("/home/nick/Downloads/student_pisa_4.rds")
 
 ## This are the Item Sets used in this questionaire (https://doi.org/10.1007/978-3-531-92543-1_4)
 ## P-Set 1, G-Set2, W-Set-4, K-Set1, NSet4
@@ -56,9 +56,9 @@ questions <- gads$labels %>%
 
 answers_4 <- sp4$dat %>%
   select(C8, T1, C32, all_of(answer_cols), C38, C18, N33 ) %>% # C38 Bundesland Studium, C18 Spiegel Lesefrequenz, N33 Alter
-  filter(C38 %in% c(2, 3)) %>%
-  rename("spiegelReadingfreq" = C18, 
-         "age" = N33, 
+  filter(C38 == 3) %>%
+  rename("spiegelReadingfreq" = C18,
+         "age" = N33,
          "bundeslandStudium" = C38) %>%
   #select(C8, T1, C32, all_of(answer_cols)) %>%
   rename("gender" = C32) %>%
@@ -80,11 +80,39 @@ q_a_4 <- answers_4 %>%
 # Subset auswählen --------------------------------------------------------
 # qa_dat <- readRDS(here::here("raw_data", "q_a.rds"))
 
+
+qa_dat_1 <- q_a_4 %>%
+  filter(str_starts(question_code, "1")) %>%
+  select(-C8)
+
+saveRDS(qa_dat_1, here::here("raw_data", "q_a_pol_b.rds"))
+
+qa_dat_2 <- q_a_4 %>%
+  filter(str_starts(question_code, "2")) %>%
+  select(-C8)
+
+saveRDS(qa_dat_2, here::here("raw_data", "q_a_gesch_b.rds"))
+
 qa_dat_3 <- q_a_4 %>%
   filter(str_starts(question_code, "3")) %>%
   select(-C8)
 
-saveRDS(qa_dat_3, here::here("raw_data", "q_a_wirt_bb.rds"))
+saveRDS(qa_dat_3, here::here("raw_data", "q_a_wirt_b.rds"))
+
+
+qa_dat_4 <- q_a_4 %>%
+  filter(str_starts(question_code, "4")) %>%
+  select(-C8)
+
+saveRDS(qa_dat_4, here::here("raw_data", "q_a_kult_b.rds"))
+
+
+
+qa_dat_5 <- q_a_4 %>%
+  filter(str_starts(question_code, "5")) %>%
+  select(-C8)
+
+saveRDS(qa_dat_3, here::here("raw_data", "q_a_wiss_b.rds"))
 
 
 # With haven for quick check -------------------------------------
