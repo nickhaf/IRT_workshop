@@ -24,11 +24,9 @@ Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/
 ## Lösung
 
 ```{r}
-qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_bb.rds")) %>%
-  filter(bundeslandStudium == 3)
+qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_b.rds"))
 
 ```
-
 
 :::
 
@@ -107,50 +105,13 @@ head(qa_dat_wide)
 Yaay, sieht gut aus. 
 :::
 
-## Mantel-Haenszel DIF statistic
-```{r}
-#| eval: false
-library(difR)
-mantelHaenszel(qa_dat_wide[, 2:ncol(qa_dat_wide)], member = qa_dat_wide %>% mutate(gender = case_match(qa_dat_wide$gender, 2 ~ 1, 1 ~ 0)) %>% pull(gender))
-```
+# 2. Linking
+Zuerst wollen wir die Skalen manuell verlinken
 
-
-## TAM
-```{r}
-library(TAM)
-FIMSdata <- read.csv("C:/Users/hafiznij/Downloads/FIMS_AUS_TestA.csv")
-raw_resp <- FIMSdata[, 2:15]
-key <- c(1, 3, 1, 4, 1, 3, 3, 1, 5, 1, 1, 4, 1, 1)
-scored <- sapply(seq(1, length(key)), FUN = function(ii) {
-  1 * (raw_resp[, ii] == key[ii])
-})
-
-#         Line 14 runs an IRT analysis with MML estimation.
-mod1 <- tam(scored)
-
-# Results of the IRT analysis can be show using R command "summary(mod1)".
-
-# Line 17 extracts values of the gender variable into a variable called "gender".
-gender <- FIMSdata[, 1]
-
-# Line 20 computes the test score for each student by calculating the row sum of each student's scored responses.
-raw_score <- rowSums(scored)
-
-formulaA <- ~ item + gender + item * gender
-facets <- as.data.frame(gender)
-mod2 <- tam.mml.mfr(resp = scored, facets = facets, formulaA = formulaA)
-
-summary(mod2)
-
-# 
-#  A quick significance test can be conducted by dividing the interatcion estimate by its standard error. For example, for item 5, calculate -0.332/0.030= -11. Compare this with a z-statistic (within -2 and 2?)
-# 
-# The second way is to consider the effect size of DIF. For item 5, the difference in item difficulty between the two gender groups is 2x0.332 = 0.66. How siginificant in real terms is this magnitude? 
-```
 
 
 # 2. Waldtest
-Wir werden einen [Waldtest]() durchführen, einfach weil man hier dran die Grundidee nochmal ganz gut siet. Wie im [Theorieteil]() besprochen gibt es aber viele verschiedene Optionen, implementiert in diversen Paketen. Für diese Übung werden wir mit [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
+Wir werden einen [Waldtest]() durchführen, einfach weil man hier dran die Grundidee nochmal ganz gut sieht. Wie im [Theorieteil]() besprochen gibt es aber viele verschiedene Optionen, implementiert in diversen Paketen. Für diese Übung werden wir mit [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
 
 :::{.callout-note}
 ## Alternativen
@@ -186,6 +147,11 @@ qa_dat_m <- qa_dat_m
 :::
 
 ### 2.1.2 Kalibrieren
+
+
+
+
+
 Fitte jetzt mit `mirt` ein Raschmodell auf beide Subgruppen. Der Datensatz darf nur die Itemspalten enthalten. 
 
 ```{r}
@@ -215,7 +181,9 @@ Nutze jetzt die Funktion `dif.test()` aus dem Paket `equateIRT` um den Waldtest 
 ```{r}
 library(equateIRT)
 
-dif_test <- dif.test(est.mods = list(m_f, m_m), method = "Haebara", purification = TRUE)
+dif_test <- dif.test(est.mods = list(m_f, m_m), method = "Stocking-Lord", purification = FALSE)
+
+dif_test$coef_trasf
 
 ## Für Bayern gings irgendwie nicht, vielleicht waren die Gruppen zu unterschiedlich groß?
 
@@ -233,6 +201,10 @@ m1_na <- qa_answers_na %>%
 
 
 gender_diffs <- Waldtest(m1_na, splitcr = qa_answers_na$gender)
+gender_1_diffs <- gender_diffs$betapar1
+gender_2_diffs <- gender_diffs$betapar2
+
+
 
 ```
 
@@ -283,7 +255,7 @@ tam_m_difficulty <- tam_m$xsi$xsi
 
 ## Haebera Linking machen, so wie in dif.test
 
-dat_link <- TAM::tam.linking(list(tam_f, tam_m), type="Hae")
+dat_link <- TAM::tam.linking(list(tam_f, tam_m), type="SL", method="chain")
 str(dat_link$parameters_list)
 
 difficulty_f <- dat_link$parameters_list[[1]]$xsi
@@ -292,30 +264,38 @@ difficulty_m <- dat_link$parameters_list[[2]]$xsi
 
 group_dif <- difficulty_f - difficulty_m
 
+questions <- qa_dat %>%
+  select(question_code, varLabel) %>%
+  unique %>%
+  mutate(varLabel =  stringr::str_wrap(varLabel, 20))
+
 dif_dat <- data.frame(item = colnames(qa_dat_f[,6:ncol(qa_dat_f)]), 
                       group_diff = group_dif, 
                       group_favour = ifelse(group_dif > 0, "m", "f")
-                      )
+                      ) %>%
+  mutate(label_x = ifelse(group_dif >= 0, .$group_diff + 0.25 , group_diff - 0.25)) %>%
+  left_join(questions, join_by("item" == "question_code"))
 
 set_colour_scheme <- function(color_scheme = c("#01364C", "#9B1B34", "#F4BA02")){
   scale_colour_manual(values = color_scheme)
 }
 
 library(ggplot2)
-ggplot(data = dif_dat, aes(x = group_diff, y = item, colour = group_favour)) +
+ggplot(data = dif_dat, aes(x = group_diff, y = item)) +
   # Add vertical line at x = 0
-  geom_vline(xintercept = 0, linetype = "dashed", color = "gray") +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "darkgray") +
   
   # Add lines from 0 to the points
   geom_segment(aes(x = 0, xend = group_diff, y = item, yend = item), 
-               linewidth = 1) +
+               linewidth = 0.75, colour = "grey") +
   
   # Add the points
-  geom_point( size = 3) +
-  
+  geom_point(aes( colour = group_favour),  size = 3) +
+  geom_label(aes(x = label_x, label = varLabel), size = 2) +
   # Optional: Customize the theme
   theme_bg() +
   set_colour_scheme() +
+  xlim(-1.75, 1.75) +
   labs(x = "Group Difference in Item Difficulty", y = "Item")
 
 
@@ -347,7 +327,36 @@ Wenn ich ein Paper dazu habe, vielleicht auch i.o. so. Könnte man dann odds rat
 
 
 
+## TAM
 ```{r}
-#| eval: false
+library(TAM)
+FIMSdata <- read.csv("C:/Users/hafiznij/Downloads/FIMS_AUS_TestA.csv")
+raw_resp <- FIMSdata[, 2:15]
+key <- c(1, 3, 1, 4, 1, 3, 3, 1, 5, 1, 1, 4, 1, 1)
+scored <- sapply(seq(1, length(key)), FUN = function(ii) {
+  1 * (raw_resp[, ii] == key[ii])
+})
 
+#         Line 14 runs an IRT analysis with MML estimation.
+mod1 <- tam(scored)
+
+# Results of the IRT analysis can be show using R command "summary(mod1)".
+
+# Line 17 extracts values of the gender variable into a variable called "gender".
+gender <- FIMSdata[, 1]
+
+# Line 20 computes the test score for each student by calculating the row sum of each student's scored responses.
+raw_score <- rowSums(scored)
+
+formulaA <- ~ item + gender + item * gender
+facets <- as.data.frame(gender)
+mod2 <- tam.mml.mfr(resp = scored, facets = facets, formulaA = formulaA)
+
+summary(mod2)
+
+# 
+#  A quick significance test can be conducted by dividing the interatcion estimate by its standard error. For example, for item 5, calculate -0.332/0.030= -11. Compare this with a z-statistic (within -2 and 2?)
+# 
+# The second way is to consider the effect size of DIF. For item 5, the difference in item difficulty between the two gender groups is 2x0.332 = 0.66. How siginificant in real terms is this magnitude? 
 ```
+
