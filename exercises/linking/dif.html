@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Nicklas Hafiz">
-<title>Differential Item Functioning – IRT</title>
+<title>3. Differential Item Functioning – IRT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_linking.html">Linking</a></li><li class="breadcrumb-item"><a href="../../exercises/linking/dif.html">Differential Item Functioning</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_linking.html">Linking</a></li><li class="breadcrumb-item"><a href="../../exercises/linking/dif.html">3. Differential Item Functioning</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -208,14 +208,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../exercises/linking/data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Die Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../exercises/linking/linking.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linking</span></a>
+ <span class="menu-text">2. Linking</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../exercises/linking/dif.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Differential Item Functioning</span></a>
+ <span class="menu-text">3. Differential Item Functioning</span></a>
   </div>
 </li>
       </ul>
@@ -262,35 +268,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li>
-<a href="#vorbereitung" id="toc-vorbereitung" class="nav-link active" data-scroll-target="#vorbereitung">1. Vorbereitung</a>
+<a href="#waldtest" id="toc-waldtest" class="nav-link active" data-scroll-target="#waldtest"><span class="header-section-number">1</span> Waldtest</a>
   <ul class="collapse">
-<li><a href="#daten-laden" id="toc-daten-laden" class="nav-link" data-scroll-target="#daten-laden">1.1 Daten laden</a></li>
-  <li><a href="#%C3%BCberblick" id="toc-überblick" class="nav-link" data-scroll-target="#%C3%BCberblick">1.2 Überblick</a></li>
-  <li><a href="#spalten-umbenennen" id="toc-spalten-umbenennen" class="nav-link" data-scroll-target="#spalten-umbenennen">1.3 Spalten umbenennen</a></li>
-  <li><a href="#umformen" id="toc-umformen" class="nav-link" data-scroll-target="#umformen">1.4 Umformen</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#waldtest" id="toc-waldtest" class="nav-link" data-scroll-target="#waldtest">2. Waldtest</a>
-  <ul class="collapse">
-<li>
-<a href="#kalibrierung" id="toc-kalibrierung" class="nav-link" data-scroll-target="#kalibrierung">2.1 Kalibrierung</a>
-  <ul class="collapse">
-<li><a href="#subgruppen-herstellen" id="toc-subgruppen-herstellen" class="nav-link" data-scroll-target="#subgruppen-herstellen">2.1.1 Subgruppen herstellen</a></li>
-  <li><a href="#kalibrieren" id="toc-kalibrieren" class="nav-link" data-scroll-target="#kalibrieren">2.1.2 Kalibrieren</a></li>
-  <li><a href="#modellfit" id="toc-modellfit" class="nav-link" data-scroll-target="#modellfit">2.1.3 Modellfit</a></li>
-  </ul>
-</li>
-  <li><a href="#waldtest-1" id="toc-waldtest-1" class="nav-link" data-scroll-target="#waldtest-1">2.2 Waldtest</a></li>
-  <li><a href="#evaluation" id="toc-evaluation" class="nav-link" data-scroll-target="#evaluation">Evaluation</a></li>
-  <li><a href="#equateirt" id="toc-equateirt" class="nav-link" data-scroll-target="#equateirt">equateIRT</a></li>
+<li><a href="#kalibrierung" id="toc-kalibrierung" class="nav-link" data-scroll-target="#kalibrierung"><span class="header-section-number">1.1</span> Kalibrierung</a></li>
+  <li><a href="#waldtest-1" id="toc-waldtest-1" class="nav-link" data-scroll-target="#waldtest-1"><span class="header-section-number">1.2</span> Waldtest</a></li>
+  <li><a href="#vergleich-mit-manuellem-linking" id="toc-vergleich-mit-manuellem-linking" class="nav-link" data-scroll-target="#vergleich-mit-manuellem-linking"><span class="header-section-number">1.3</span> Vergleich mit manuellem Linking</a></li>
+  <li><a href="#beurteilung" id="toc-beurteilung" class="nav-link" data-scroll-target="#beurteilung"><span class="header-section-number">1.4</span> Beurteilung</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_linking.html">Linking</a></li><li class="breadcrumb-item"><a href="../../exercises/linking/dif.html">Differential Item Functioning</a></li></ol></nav><div class="quarto-title">
-<h1 class="title">Differential Item Functioning</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_linking.html">Linking</a></li><li class="breadcrumb-item"><a href="../../exercises/linking/dif.html">3. Differential Item Functioning</a></li></ol></nav><div class="quarto-title">
+<h1 class="title">3. Differential Item Functioning</h1>
 <p class="subtitle lead">Übung</p>
 </div>
 
@@ -311,111 +301,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><section id="vorbereitung" class="level1"><h1>1. Vorbereitung</h1>
-<section id="daten-laden" class="level2"><h2 class="anchored" data-anchor-id="daten-laden">1.1 Daten laden</h2>
-<p>Lade die Datei <code>q_a_wirt.rds</code> von <a href="https://github.com/nickhaf/IRT_workshop/tree/main/raw_data">GitHub</a> herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+</header><div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"plot_functions.R"</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-body-container">
-<p>Die Daten stammen aus dem <a href="https://search.gesis.org/research_data/ZA6268?doi=10.4232/1.13780">SPIEGEL-Studentenpisa-Test</a> von 2009 und beinhaltet Fragen zu Allgemeinwissen in den Themengebieten Politik, Geschichte, Wirtschaft, Kultur und Naturwissenschaften. Insgesamt haben fast 700.000 Personen den Test bearbeitet. Wir haben die Daten bereits etwas aufbereitet und nur ein Subset an Fragen (Thema Wirtschaft) für diese Übung ausgewählt.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Lösung
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">qa_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"raw_data"</span>, <span class="st">"q_a_wirt.rds"</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">qa_dat_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"raw_data"</span>, <span class="st">"qa_dat_wide.rds"</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-</div>
-</section><section id="überblick" class="level2"><h2 class="anchored" data-anchor-id="überblick">1.2 Überblick</h2>
-<p>Verschaffe dir einen <a href="">Überblick</a> über die Daten. In welchem Formt liegen sie vor? Was könnten die verschiedenen Spalten bedeuten?</p>
-<div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Lösung
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/long-format">long-Format</a> vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide">wide-Format umformen</a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">qa_dat</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Classes 'tbl_df', 'tbl' and 'data.frame':   262206 obs. of  5 variables:
- $ T1           : chr  "1238509969243877" "1238509969243877" "1238509969243877" "1238509969243877" ...
- $ gender       : num  2 2 2 2 2 2 2 2 2 1 ...
- $ answer       : num  0 0 0 0 0 1 0 1 0 0 ...
- $ question_code: chr  "3401" "3402" "3403" "3404" ...
- $ varLabel     : chr  "Wer ist das? Bitte tragen Sie den Nachnamen ein (FB-Nr. 100)" "Wie hoch ist der volle Hartz-IV-Regelsatz für Erwachsene? (FB-Nr. 101)" "Wie hoch war 2007 das durchschnittliche Bruttoinlandsprodukt pro Kopf in Deutschland? (FB-Nr. 102)" "Was ist ein CEO? (FB-Nr. 103)" ...</code></pre>
-</div>
-</div>
-<p>Außerdem scheint der Datensatz folgende Variablen zu beinhalten:</p>
-<ul>
-<li>
-<code>T1</code>: Personen-ID (aber komisch benannt)</li>
-<li>
-<code>gender</code>: Geschlecht</li>
-<li>
-<code>answer</code>: Antwort auf die Frage</li>
-<li>
-<code>question_code</code>: Fragen-ID</li>
-<li>
-<code>varLabel</code>: Frage (aber komisch benannt)</li>
-</ul>
-</div>
-</div>
-</div>
-</section><section id="spalten-umbenennen" class="level2"><h2 class="anchored" data-anchor-id="spalten-umbenennen">1.3 Spalten umbenennen</h2>
-<p>Hmm, die Spaltennamen sind teilweise noch nicht ganz eindeutig. Benenne <code>T1</code> in <code>ID</code> und <code>varLabel</code> in <code>question</code> um. Klare Benennung hilft uns (und anderen) den Überblick zu behalten.</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tipp
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Ich nutze jetzt einfach mal <code>tidyverse</code> Funktionen dafür, aber es gibt immer mehrere Wege zum Ziel. Im <code>tidyverse</code> gibt es beispielsweise die Funktion <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Lösung
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -426,79 +318,45 @@ Lösung
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+Loading required package: CDM
+
+Loading required package: mvtnorm
+
+**********************************
+** CDM 8.2-6 (2022-08-25 15:43:23)       
+** Cognitive Diagnostic Models  **
+**********************************
+
+
+* TAM 4.2-21 (2024-02-19 18:52:08)</code></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">qa_dat_renamed</span> <span class="op">&lt;-</span> <span class="va">qa_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="va">T1</span>, question <span class="op">=</span> <span class="va">varLabel</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section><section id="umformen" class="level2"><h2 class="anchored" data-anchor-id="umformen">1.4 Umformen</h2>
-<p>Forme jetzt die Daten ins <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide">wide-Format um</a>.</p>
-<div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tipp
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Das Ganze ist einfacher, wenn du vorher die Spalte <code>question</code> entfernst. Außerdem müssen <code>ID</code> und <code>gender</code> in <code>pivot_wider</code> als <code>id_cols</code> definiert werden: <code>..., id_cols = c(ID, gender), ...</code>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Lösung
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">qa_dat_wide</span> <span class="op">&lt;-</span> <span class="va">qa_dat_renamed</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ID</span>, <span class="va">gender</span><span class="op">)</span>, </span>
-<span>              names_from <span class="op">=</span> <span class="va">question_code</span>, </span>
-<span>              values_from <span class="op">=</span> <span class="va">answer</span></span>
-<span>              <span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Jetzt können wir mal testweise schauen ob das geklappt hat:</p>
-<div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">qa_dat_wide</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 11
-  ID       gender `3401` `3402` `3403` `3404` `3405` `3406` `3407` `3408` `3409`
-  &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 1238509…      2      0      0      0      0      0      1      0      1      0
-2 1238241…      1      0      0      1      0      1      0      1      1      1
-3 1238926…     NA      0      0      1      1      0      1      0      1      1
-4 1238669…      2      1      0      1      1      0      1      0      1      1
-5 1237994…      1      0      0      0      1      0      1      0      1      1
-6 1239732…      1      1      1      1      1      0      1      1      1      1</code></pre>
+<pre><code>N = 2, M = 5 machine precision = 2.22045e-16
+This problem is unconstrained.
+
+iterations 8
+function evaluations 9
+segments explored during Cauchy searches 1
+BFGS updates skipped 0
+active bounds at final generalized Cauchy point 0
+norm of the final projected gradient 1.05021e-08
+final function value 0.00200998
+
+final  value 0.002010 
+converged</code></pre>
 </div>
 </div>
-<p>Yaay, sieht gut aus.</p>
-</div>
-</div>
-</div>
-</section></section><section id="waldtest" class="level1"><h1>2. Waldtest</h1>
-<p>Wir werden zuerst einen <a href="">Waldtest</a> durchführen. Es gibt diverse Pakete, mit denen dies möglich ist. Für diese Übung werden wir mit <a href="https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html">equateIRT</a> arbeiten.</p>
+<section id="waldtest" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> Waldtest</h1>
+<p>Wir werden einen <a href="">Waldtest</a> durchführen, einfach weil man hier das Grundlegende Vorgehen ganz gut sehen kann. Wie im <a href="">Theorieteil</a> besprochen gibt es aber viele verschiedene Optionen, implementiert in diversen Paketen. Für diese Übung werden wir mit <a href="https://cran.r-project.org/web/packages/mirt/index.html">mirt</a> und <a href="https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html">equateIRT</a> arbeiten.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Alternativen
+Alternativen für DIF Analysen
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -509,343 +367,302 @@ Alternativen
 <li><a href="https://bookdown.org/chua/new_rasch_demo2/DIF.html">eRm</a></li>
 <li><a href="https://philchalmers.github.io/mirt/html/DIF.html">mirt</a></li>
 </ul>
+<p>Und viele mehr.</p>
 </div>
 </div>
-<section id="kalibrierung" class="level2"><h2 class="anchored" data-anchor-id="kalibrierung">2.1 Kalibrierung</h2>
-<p>Zuerst müssen wir die Daten kalibrieren (andere Pakete ermöglichen es auch, beides direkt in einer Funktion zu kombinieren).<br>
-Dafür nutzen wir diesmal <a href="https://cran.r-project.org/web/packages/mirt/index.html">mirt</a>. Wir können unseren Datensatz in die Gruppen (uns interessiert übrigens geschlecht) aufteilen, die wir vergleichen wollen und dann auf jeden Subdatensatz unser IRT-Modell fitten (wie gesagt, andere Pakete ermöglichen das auch in einem Schritt).</p>
-<section id="subgruppen-herstellen" class="level3"><h3 class="anchored" data-anchor-id="subgruppen-herstellen">2.1.1 Subgruppen herstellen</h3>
-<p>Erstelle 2 Dataframes, einen nur mit Frauen (1) und einen nur mit Männern (2). Weitere Kategorien gibt es in diesem Datensatz nicht:</p>
+<section id="kalibrierung" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="kalibrierung">
+<span class="header-section-number">1.1</span> Kalibrierung</h2>
+<p>Zuerst müssen wir die Daten noch einmal kalibrieren (andere Pakete ermöglichen es auch, beides direkt in einer Funktion zu kombinieren).<br>
+Dafür nutzen wir diesmal aber <a href="https://cran.r-project.org/web/packages/mirt/index.html">mirt</a>, weil <code>equateIRT</code> den Output daraus verarbeiten kann.</p>
+<p>Fitte jetzt mit <code>mirt</code> ein Raschmodell auf beide Subgruppen seperat (männlich und weiblich). Der Datensatz darf nur die Itemspalten enthalten. Setze <code>SE = TRUE</code> um die Modell-Informationsmatrix zu berechnen, das ist gleich für den Waldtest nötig.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">qa_dat_wide</span><span class="op">$</span><span class="va">gender</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  2  1 NA</code></pre>
-</div>
-</div>
-<div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Lösung
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">qa_dat_f</span> <span class="op">&lt;-</span> <span class="va">qa_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">qa_dat_f</span> <span class="op">&lt;-</span> <span class="va">qa_dat_f</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span>, <span class="op">]</span></span>
-<span></span>
-<span></span>
-<span><span class="va">qa_dat_m</span> <span class="op">&lt;-</span> <span class="va">qa_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">qa_dat_m</span> <span class="op">&lt;-</span> <span class="va">qa_dat_m</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span>, <span class="op">]</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section><section id="kalibrieren" class="level3"><h3 class="anchored" data-anchor-id="kalibrieren">2.1.2 Kalibrieren</h3>
-<p>Fitte jetzt mit <code>mirt</code> ein Raschmodell auf beide Subgruppen. Der Datensatz darf nur die Itemspalten enthalten.</p>
-<div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/philchalmers/mirt">mirt</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/philchalmers/mirt">mirt</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: stats4</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: lattice</code></pre>
 </div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m_f</span> <span class="op">&lt;-</span> <span class="va">qa_dat_f</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">ID</span>, <span class="op">-</span><span class="va">gender</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html">mirt</a></span><span class="op">(</span>itemtype <span class="op">=</span> <span class="st">"Rasch"</span>, SE <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co">## Durch die Pipe wird der Datensatz automatisch übergeben. Wir müssen ihn also nicht nochmal in die mirt-Funktion schreiben</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Iteration: 1, Log-Lik: -2760.339, Max-Change: 0.22363
-Iteration: 2, Log-Lik: -2747.601, Max-Change: 0.12488
-Iteration: 3, Log-Lik: -2741.246, Max-Change: 0.07902
-Iteration: 4, Log-Lik: -2737.679, Max-Change: 0.05420
-Iteration: 5, Log-Lik: -2735.522, Max-Change: 0.03928
-Iteration: 6, Log-Lik: -2734.144, Max-Change: 0.02966
-Iteration: 7, Log-Lik: -2733.234, Max-Change: 0.02374
-Iteration: 8, Log-Lik: -2732.579, Max-Change: 0.01824
-Iteration: 9, Log-Lik: -2732.140, Max-Change: 0.01481
-Iteration: 10, Log-Lik: -2731.836, Max-Change: 0.01371
-Iteration: 11, Log-Lik: -2731.586, Max-Change: 0.01011
-Iteration: 12, Log-Lik: -2731.417, Max-Change: 0.00853
-Iteration: 13, Log-Lik: -2731.298, Max-Change: 0.01121
-Iteration: 14, Log-Lik: -2731.190, Max-Change: 0.00617
-Iteration: 15, Log-Lik: -2731.118, Max-Change: 0.00531
-Iteration: 16, Log-Lik: -2731.066, Max-Change: 0.00826
-Iteration: 17, Log-Lik: -2731.017, Max-Change: 0.00399
-Iteration: 18, Log-Lik: -2730.983, Max-Change: 0.00349
-Iteration: 19, Log-Lik: -2730.959, Max-Change: 0.00526
-Iteration: 20, Log-Lik: -2730.936, Max-Change: 0.00268
-Iteration: 21, Log-Lik: -2730.920, Max-Change: 0.00236
-Iteration: 22, Log-Lik: -2730.908, Max-Change: 0.00353
-Iteration: 23, Log-Lik: -2730.897, Max-Change: 0.00184
-Iteration: 24, Log-Lik: -2730.889, Max-Change: 0.00163
-Iteration: 25, Log-Lik: -2730.883, Max-Change: 0.00215
-Iteration: 26, Log-Lik: -2730.877, Max-Change: 0.00129
-Iteration: 27, Log-Lik: -2730.873, Max-Change: 0.00115
-Iteration: 28, Log-Lik: -2730.870, Max-Change: 0.00174
-Iteration: 29, Log-Lik: -2730.867, Max-Change: 0.00091
-Iteration: 30, Log-Lik: -2730.865, Max-Change: 0.00081
-Iteration: 31, Log-Lik: -2730.864, Max-Change: 0.00107
-Iteration: 32, Log-Lik: -2730.862, Max-Change: 0.00065
-Iteration: 33, Log-Lik: -2730.861, Max-Change: 0.00058
-Iteration: 34, Log-Lik: -2730.861, Max-Change: 0.00076
-Iteration: 35, Log-Lik: -2730.860, Max-Change: 0.00047
-Iteration: 36, Log-Lik: -2730.859, Max-Change: 0.00042
-Iteration: 37, Log-Lik: -2730.859, Max-Change: 0.00046
-Iteration: 38, Log-Lik: -2730.858, Max-Change: 0.00034
-Iteration: 39, Log-Lik: -2730.858, Max-Change: 0.00030
-Iteration: 40, Log-Lik: -2730.858, Max-Change: 0.00041
-Iteration: 41, Log-Lik: -2730.858, Max-Change: 0.00024
-Iteration: 42, Log-Lik: -2730.858, Max-Change: 0.00022
-Iteration: 43, Log-Lik: -2730.857, Max-Change: 0.00027
-Iteration: 44, Log-Lik: -2730.857, Max-Change: 0.00017
-Iteration: 45, Log-Lik: -2730.857, Max-Change: 0.00016
-Iteration: 46, Log-Lik: -2730.857, Max-Change: 0.00018
-Iteration: 47, Log-Lik: -2730.857, Max-Change: 0.00013
-Iteration: 48, Log-Lik: -2730.857, Max-Change: 0.00011
-Iteration: 49, Log-Lik: -2730.857, Max-Change: 0.00011
-Iteration: 50, Log-Lik: -2730.857, Max-Change: 0.00009
-
-Calculating information matrix...</code></pre>
-</div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m_m</span> <span class="op">&lt;-</span> <span class="va">qa_dat_m</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">ID</span>, <span class="op">-</span><span class="va">gender</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">m_f</span> <span class="op">&lt;-</span> <span class="va">qa_f</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">ID</span>, <span class="op">-</span><span class="va">gender</span>, <span class="op">-</span><span class="va">bundeslandStudium</span>, <span class="op">-</span><span class="va">spiegelReadingfreq</span>, <span class="op">-</span><span class="va">age</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html">mirt</a></span><span class="op">(</span>itemtype <span class="op">=</span> <span class="st">"Rasch"</span>, SE <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Iteration: 1, Log-Lik: -2773.569, Max-Change: 0.16355
-Iteration: 2, Log-Lik: -2766.990, Max-Change: 0.09810
-Iteration: 3, Log-Lik: -2763.700, Max-Change: 0.06411
-Iteration: 4, Log-Lik: -2761.880, Max-Change: 0.04565
-Iteration: 5, Log-Lik: -2760.838, Max-Change: 0.03211
-Iteration: 6, Log-Lik: -2760.225, Max-Change: 0.02398
-Iteration: 7, Log-Lik: -2759.847, Max-Change: 0.01905
-Iteration: 8, Log-Lik: -2759.596, Max-Change: 0.01415
-Iteration: 9, Log-Lik: -2759.444, Max-Change: 0.01114
-Iteration: 10, Log-Lik: -2759.346, Max-Change: 0.00925
-Iteration: 11, Log-Lik: -2759.276, Max-Change: 0.00707
-Iteration: 12, Log-Lik: -2759.233, Max-Change: 0.00573
-Iteration: 13, Log-Lik: -2759.205, Max-Change: 0.00486
-Iteration: 14, Log-Lik: -2759.183, Max-Change: 0.00376
-Iteration: 15, Log-Lik: -2759.170, Max-Change: 0.00308
-Iteration: 16, Log-Lik: -2759.162, Max-Change: 0.00265
-Iteration: 17, Log-Lik: -2759.155, Max-Change: 0.00207
-Iteration: 18, Log-Lik: -2759.151, Max-Change: 0.00171
-Iteration: 19, Log-Lik: -2759.148, Max-Change: 0.00149
-Iteration: 20, Log-Lik: -2759.146, Max-Change: 0.00117
-Iteration: 21, Log-Lik: -2759.144, Max-Change: 0.00096
-Iteration: 22, Log-Lik: -2759.144, Max-Change: 0.00084
-Iteration: 23, Log-Lik: -2759.143, Max-Change: 0.00065
-Iteration: 24, Log-Lik: -2759.142, Max-Change: 0.00054
-Iteration: 25, Log-Lik: -2759.142, Max-Change: 0.00048
-Iteration: 26, Log-Lik: -2759.142, Max-Change: 0.00038
-Iteration: 27, Log-Lik: -2759.142, Max-Change: 0.00031
-Iteration: 28, Log-Lik: -2759.142, Max-Change: 0.00028
-Iteration: 29, Log-Lik: -2759.142, Max-Change: 0.00022
-Iteration: 30, Log-Lik: -2759.142, Max-Change: 0.00018
-Iteration: 31, Log-Lik: -2759.142, Max-Change: 0.00015
-Iteration: 32, Log-Lik: -2759.142, Max-Change: 0.00012
-Iteration: 33, Log-Lik: -2759.142, Max-Change: 0.00010
-Iteration: 34, Log-Lik: -2759.142, Max-Change: 0.00009
+Iteration: 1, Log-Lik: -1197.615, Max-Change: 0.23858
+Iteration: 2, Log-Lik: -1191.066, Max-Change: 0.13198
+Iteration: 3, Log-Lik: -1187.736, Max-Change: 0.08322
+Iteration: 4, Log-Lik: -1185.813, Max-Change: 0.05803
+Iteration: 5, Log-Lik: -1184.627, Max-Change: 0.04123
+Iteration: 6, Log-Lik: -1183.858, Max-Change: 0.03128
+Iteration: 7, Log-Lik: -1183.337, Max-Change: 0.02526
+Iteration: 8, Log-Lik: -1182.948, Max-Change: 0.01953
+Iteration: 9, Log-Lik: -1182.679, Max-Change: 0.01600
+Iteration: 10, Log-Lik: -1182.487, Max-Change: 0.01649
+Iteration: 11, Log-Lik: -1182.323, Max-Change: 0.01116
+Iteration: 12, Log-Lik: -1182.209, Max-Change: 0.00953
+Iteration: 13, Log-Lik: -1182.126, Max-Change: 0.01525
+Iteration: 14, Log-Lik: -1182.046, Max-Change: 0.00708
+Iteration: 15, Log-Lik: -1181.991, Max-Change: 0.00619
+Iteration: 16, Log-Lik: -1181.949, Max-Change: 0.01027
+Iteration: 17, Log-Lik: -1181.909, Max-Change: 0.00480
+Iteration: 18, Log-Lik: -1181.880, Max-Change: 0.00426
+Iteration: 19, Log-Lik: -1181.858, Max-Change: 0.00698
+Iteration: 20, Log-Lik: -1181.837, Max-Change: 0.00339
+Iteration: 21, Log-Lik: -1181.821, Max-Change: 0.00305
+Iteration: 22, Log-Lik: -1181.809, Max-Change: 0.00495
+Iteration: 23, Log-Lik: -1181.797, Max-Change: 0.00248
+Iteration: 24, Log-Lik: -1181.788, Max-Change: 0.00224
+Iteration: 25, Log-Lik: -1181.781, Max-Change: 0.00338
+Iteration: 26, Log-Lik: -1181.774, Max-Change: 0.00185
+Iteration: 27, Log-Lik: -1181.768, Max-Change: 0.00168
+Iteration: 28, Log-Lik: -1181.764, Max-Change: 0.00263
+Iteration: 29, Log-Lik: -1181.760, Max-Change: 0.00140
+Iteration: 30, Log-Lik: -1181.757, Max-Change: 0.00128
+Iteration: 31, Log-Lik: -1181.755, Max-Change: 0.00205
+Iteration: 32, Log-Lik: -1181.752, Max-Change: 0.00107
+Iteration: 33, Log-Lik: -1181.750, Max-Change: 0.00098
+Iteration: 34, Log-Lik: -1181.749, Max-Change: 0.00218
+Iteration: 35, Log-Lik: -1181.747, Max-Change: 0.00083
+Iteration: 36, Log-Lik: -1181.746, Max-Change: 0.00076
+Iteration: 37, Log-Lik: -1181.745, Max-Change: 0.00072
+Iteration: 38, Log-Lik: -1181.744, Max-Change: 0.00065
+Iteration: 39, Log-Lik: -1181.743, Max-Change: 0.00060
+Iteration: 40, Log-Lik: -1181.743, Max-Change: 0.00106
+Iteration: 41, Log-Lik: -1181.742, Max-Change: 0.00051
+Iteration: 42, Log-Lik: -1181.742, Max-Change: 0.00047
+Iteration: 43, Log-Lik: -1181.741, Max-Change: 0.00079
+Iteration: 44, Log-Lik: -1181.741, Max-Change: 0.00040
+Iteration: 45, Log-Lik: -1181.741, Max-Change: 0.00037
+Iteration: 46, Log-Lik: -1181.741, Max-Change: 0.00060
+Iteration: 47, Log-Lik: -1181.740, Max-Change: 0.00032
+Iteration: 48, Log-Lik: -1181.740, Max-Change: 0.00029
+Iteration: 49, Log-Lik: -1181.740, Max-Change: 0.00027
+Iteration: 50, Log-Lik: -1181.740, Max-Change: 0.00025
+Iteration: 51, Log-Lik: -1181.740, Max-Change: 0.00023
+Iteration: 52, Log-Lik: -1181.740, Max-Change: 0.00021
+Iteration: 53, Log-Lik: -1181.740, Max-Change: 0.00020
+Iteration: 54, Log-Lik: -1181.739, Max-Change: 0.00018
+Iteration: 55, Log-Lik: -1181.739, Max-Change: 0.00018
+Iteration: 56, Log-Lik: -1181.739, Max-Change: 0.00016
+Iteration: 57, Log-Lik: -1181.739, Max-Change: 0.00015
+Iteration: 58, Log-Lik: -1181.739, Max-Change: 0.00018
+Iteration: 59, Log-Lik: -1181.739, Max-Change: 0.00012
+Iteration: 60, Log-Lik: -1181.739, Max-Change: 0.00012
+Iteration: 61, Log-Lik: -1181.739, Max-Change: 0.00017
+Iteration: 62, Log-Lik: -1181.739, Max-Change: 0.00010
 
 Calculating information matrix...</code></pre>
 </div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## SE = TRUE setzen?</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m_m</span> <span class="op">&lt;-</span> <span class="va">qa_m</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">ID</span>, <span class="op">-</span><span class="va">gender</span>, <span class="op">-</span><span class="va">bundeslandStudium</span>, <span class="op">-</span><span class="va">spiegelReadingfreq</span>, <span class="op">-</span><span class="va">age</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mirt/man/mirt.html">mirt</a></span><span class="op">(</span>itemtype <span class="op">=</span> <span class="st">"Rasch"</span>, SE <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration: 1, Log-Lik: -1532.244, Max-Change: 0.15028
+Iteration: 2, Log-Lik: -1528.882, Max-Change: 0.09393
+Iteration: 3, Log-Lik: -1527.070, Max-Change: 0.06393
+Iteration: 4, Log-Lik: -1525.988, Max-Change: 0.04807
+Iteration: 5, Log-Lik: -1525.320, Max-Change: 0.03397
+Iteration: 6, Log-Lik: -1524.916, Max-Change: 0.02597
+Iteration: 7, Log-Lik: -1524.657, Max-Change: 0.02166
+Iteration: 8, Log-Lik: -1524.464, Max-Change: 0.01603
+Iteration: 9, Log-Lik: -1524.347, Max-Change: 0.01287
+Iteration: 10, Log-Lik: -1524.271, Max-Change: 0.01116
+Iteration: 11, Log-Lik: -1524.208, Max-Change: 0.00853
+Iteration: 12, Log-Lik: -1524.170, Max-Change: 0.00704
+Iteration: 13, Log-Lik: -1524.145, Max-Change: 0.00629
+Iteration: 14, Log-Lik: -1524.122, Max-Change: 0.00486
+Iteration: 15, Log-Lik: -1524.109, Max-Change: 0.00407
+Iteration: 16, Log-Lik: -1524.100, Max-Change: 0.00366
+Iteration: 17, Log-Lik: -1524.092, Max-Change: 0.00288
+Iteration: 18, Log-Lik: -1524.087, Max-Change: 0.00243
+Iteration: 19, Log-Lik: -1524.083, Max-Change: 0.00221
+Iteration: 20, Log-Lik: -1524.080, Max-Change: 0.00174
+Iteration: 21, Log-Lik: -1524.078, Max-Change: 0.00148
+Iteration: 22, Log-Lik: -1524.077, Max-Change: 0.00135
+Iteration: 23, Log-Lik: -1524.076, Max-Change: 0.00107
+Iteration: 24, Log-Lik: -1524.075, Max-Change: 0.00091
+Iteration: 25, Log-Lik: -1524.075, Max-Change: 0.00083
+Iteration: 26, Log-Lik: -1524.074, Max-Change: 0.00066
+Iteration: 27, Log-Lik: -1524.074, Max-Change: 0.00056
+Iteration: 28, Log-Lik: -1524.074, Max-Change: 0.00051
+Iteration: 29, Log-Lik: -1524.074, Max-Change: 0.00042
+Iteration: 30, Log-Lik: -1524.074, Max-Change: 0.00035
+Iteration: 31, Log-Lik: -1524.073, Max-Change: 0.00032
+Iteration: 32, Log-Lik: -1524.073, Max-Change: 0.00026
+Iteration: 33, Log-Lik: -1524.073, Max-Change: 0.00022
+Iteration: 34, Log-Lik: -1524.073, Max-Change: 0.00020
+Iteration: 35, Log-Lik: -1524.073, Max-Change: 0.00016
+Iteration: 36, Log-Lik: -1524.073, Max-Change: 0.00014
+Iteration: 37, Log-Lik: -1524.073, Max-Change: 0.00014
+Iteration: 38, Log-Lik: -1524.073, Max-Change: 0.00010
+Iteration: 39, Log-Lik: -1524.073, Max-Change: 0.00008
+
+Calculating information matrix...</code></pre>
 </div>
-</section><section id="modellfit" class="level3"><h3 class="anchored" data-anchor-id="modellfit">2.1.3 Modellfit</h3>
-<p>Eigentlich sollten wir uns noch anschauen, wie das Modell fittet. Aus Zeitgründen verzichten wir jetzt erstmal darauf.</p>
-</section></section><section id="waldtest-1" class="level2"><h2 class="anchored" data-anchor-id="waldtest-1">2.2 Waldtest</h2>
-<p>Nutze jetzt die Funktion <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> aus dem Paket <code>equateIRT</code> um den Waldtest durchzuführen. Nutze Haebara Linking. Welche Items zeigen laut Waldtest DIF?</p>
+</div>
+</section><section id="waldtest-1" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="waldtest-1">
+<span class="header-section-number">1.2</span> Waldtest</h2>
+<p>Nutze jetzt die Funktion <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> aus dem Paket <code>equateIRT</code> um den Waldtest durchzuführen. Nutze, wie in der vorherigen Übung, die Stocking-Lord Methode zum linken. Welche Items zeigen laut Waldtest DIF?</p>
+<div class="callout callout-style-simple callout-caution">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">equateIRT</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">equateIRT</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">dif_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test</a></span><span class="op">(</span>est.mods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">m_f</span>, <span class="va">m_m</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"Haebara"</span>, purification <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">dif_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test</a></span><span class="op">(</span>est.mods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">m_f</span>, <span class="va">m_m</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"Stocking-Lord"</span>, purification <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dif_test</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  Test for Differential Item Functioning
+
+Item parameters tested for DIF: intercept
+Equating method used: Stocking-Lord 
+Reference group: T1  Focal group: T2 
+Item purification not applied
+
+     statistic  p.value      
+3401    12.140 0.000493 ***  
+3402     4.127 0.042210 *    
+3403     5.460 0.019459 *    
+3404     1.671 0.196099      
+3405    42.451 7.25e-11 ***  
+3406     0.901 0.342624      
+3407     5.004 0.025285 *    
+3408    14.929 0.000112 ***  
+3409     0.857 0.354487      
+---
+Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<p>Mit purification wird iterativ gefittet.</p>
-</section><section id="evaluation" class="level2"><h2 class="anchored" data-anchor-id="evaluation">Evaluation</h2>
-<ul>
-<li>Plot? (https://www.researchgate.net/publication/347337364_Manual_ability_in_hand_surgery_patients_Validation_of_the_ABILHAND_scale_in_four_diagnostic_groups/figures?lo=1)</li>
-<li>Stärke des DIFs beurteilen</li>
-<li>Praktische Tipps</li>
-</ul>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Mit <code>purification = TRUE</code> würde ein iteratives Vorgehen verwendet werden, bei dem nacheinander DIF Items entfernt werden, um die Personenfähigkeit ohne die komprimierenden Items zu schätzen. Weil wir aber gleich die Ergebnisse mit unserem Manuellen Vorgehen vergleichen wollen, verzichten wir darauf.</p>
+</div>
+</div>
+</div>
+<p>Zuerst einmal zeigen laut Waldtest viele der Items bei einem Signifikanzniveau von 0.05 DIF. Das ist aber auch nicht weiter verwunderlich, da der Test sicherlich nicht in Hinblick auf die Vermeidung von DIF konstruiert wurde.</p>
+</div>
+</div>
+</div>
+</section><section id="vergleich-mit-manuellem-linking" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="vergleich-mit-manuellem-linking">
+<span class="header-section-number">1.3</span> Vergleich mit manuellem Linking</h2>
+<p>Da in <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> jetzt genauso gelinkt wurde, können wir jetzt einmal die Ergebnisse aus diesem Vorgehen mit dem aus dem manuellen Linking vergleichen.</p>
+<p>So sehen die Itemparameter aus, die von <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> berechnete wurden:</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### eRm Waldtest</span></span>
-<span><span class="co"># Auch in [TAM möglich](https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm). </span></span>
-<span></span>
-<span></span>
-<span><span class="co">## Annehmen, dass eine Thematische Dimension unidimensional ist!</span></span>
-<span><span class="co">## Evtl. nur die Berliner Studierenden nehmen, damit die Stichprobengröße realistischer wird. </span></span>
-<span></span>
-<span><span class="co">## Wir haben also unterschiedliche domänen, müssen die gesondert analysiert werden?</span></span>
-<span><span class="co">## Ja, wahrscheinlihc schon?</span></span>
-<span></span>
-<span><span class="co">## Außerdem: Nur eine Subgruppe nehmen, und da dann alle? </span></span>
-<span></span>
-<span></span>
-<span></span>
-<span>  <span class="co">## 2 ganz interessant, weil kein DIF so wirklich. Item 3 ist hiuer noch mit am auffälligsten, und war auch im Paper von </span></span>
-<span>  <span class="co">## STrobl auffällig (aber in Interaktion mit age, und sie hatten nur studierende aus bayern genommen). </span></span>
-<span>  <span class="co">## 5 zeigt ein bisschen was Richtung Bestimmung von Vögeln, wie z.B. im anderen Paper. </span></span>
-<span>  <span class="co">## 3 hat glaube ich die Frage mit dem Autochef, ansonsten grünes Biosiegel.</span></span>
-<span>  <span class="co">## 4 hat wieder nichts</span></span>
-<span>  </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">T1</span>, <span class="va">gender</span>, <span class="va">answer</span>, <span class="va">question_code</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">T1</span>, <span class="va">gender</span><span class="op">)</span>, names_from <span class="op">=</span> <span class="va">question_code</span>, values_from <span class="op">=</span> <span class="va">answer</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">T1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">qa_answers_na</span> <span class="op">&lt;-</span> <span class="va">qa_answers</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">eRm</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/eRm/man/RM.html">RM</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">qa_answers</span>, <span class="op">-</span><span class="va">gender</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">m1_na</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/eRm/man/RM.html">RM</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">qa_answers_na</span>, <span class="op">-</span><span class="va">gender</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Andersen's LR test</span></span>
-<span><span class="va">gender_difs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/eRm/man/LRtest.html">LRtest</a></span><span class="op">(</span><span class="va">m1_na</span>, splitcr <span class="op">=</span> <span class="va">qa_answers_na</span><span class="op">$</span><span class="va">gender</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/eRm/man/plotDIF.html">plotDIF</a></span><span class="op">(</span><span class="va">gender_difs</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">gender_diffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/eRm/man/Waldtest.html">Waldtest</a></span><span class="op">(</span><span class="va">m1</span>, splitcr <span class="op">=</span> <span class="va">qa_answers</span><span class="op">$</span><span class="va">gender</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Sooooo, wurde denn vorher gelinkt? Hat das Programm das under the hood direkt gemacht? </span></span>
-<span><span class="co">## Oder wie genau funktioniert das? Weil ich da ja so ein großes aufheben drum mache.</span></span>
-<span></span>
-<span><span class="co">## Very Big, make a lesson about sample sizes and p values out of it. </span></span>
-<span></span>
-<span><span class="va">gender_1_diffs</span> <span class="op">&lt;-</span> <span class="va">gender_diffs</span><span class="op">$</span><span class="va">betapar1</span></span>
-<span><span class="va">gender_2_diffs</span> <span class="op">&lt;-</span> <span class="va">gender_diffs</span><span class="op">$</span><span class="va">betapar2</span></span>
-<span></span>
-<span><span class="va">comparisons</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">gender_diffs</span><span class="op">$</span><span class="va">coef.table</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">graphics.off</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">min.y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">comparisons</span><span class="op">$</span><span class="va">`z-statistic`</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">3</span>, </span>
-<span>                <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">comparisons</span><span class="op">$</span><span class="va">`z-statistic`</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">max.y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">comparisons</span><span class="op">$</span><span class="va">`z-statistic`</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">3</span>, <span class="fl">3</span>, </span>
-<span>                <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">comparisons</span><span class="op">$</span><span class="va">`z-statistic`</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">comparisons</span><span class="op">$</span><span class="va">`z-statistic`</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">min.y</span>, <span class="va">max.y</span><span class="op">)</span>,</span>
-<span>     ylab <span class="op">=</span> <span class="st">"Z"</span>, xlab <span class="op">=</span> <span class="st">"Item"</span>, main <span class="op">=</span> <span class="st">"Test Statistics for Item Comparisons \nbetween gender 1 and gender 2"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="op">-</span><span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Z Statistic"</span>, <span class="st">"Boundaries for Significant Difference"</span><span class="op">)</span>,</span>
-<span>       pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">2</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="co">### DIF Scatterplots:</span></span>
-<span></span>
-<span><span class="co">## First, calculate values for constructing the confidence bands:</span></span>
-<span></span>
-<span><span class="va">mean.1.2</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="op">(</span><span class="va">gender_1_diffs</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gender_1_diffs</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">gender_1_diffs</span><span class="op">)</span> <span class="op">+</span></span>
-<span>               <span class="op">(</span><span class="va">gender_2_diffs</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gender_2_diffs</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">gender_2_diffs</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">joint.se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="va">gender_diffs</span><span class="op">$</span><span class="va">se.beta1</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">gender_1_diffs</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                   <span class="op">(</span><span class="va">gender_diffs</span><span class="op">$</span><span class="va">se.beta2</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">gender_2_diffs</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">upper.group.1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gender_1_diffs</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="op">(</span><span class="va">mean.1.2</span> <span class="op">-</span> <span class="va">joint.se</span> <span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">gender_1_diffs</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">upper.group.2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gender_2_diffs</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="op">(</span><span class="va">mean.1.2</span> <span class="op">+</span> <span class="va">joint.se</span> <span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">gender_2_diffs</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">lower.group.1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gender_1_diffs</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="op">(</span><span class="va">mean.1.2</span> <span class="op">+</span> <span class="va">joint.se</span> <span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">gender_1_diffs</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">lower.group.2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gender_2_diffs</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="op">(</span><span class="va">mean.1.2</span> <span class="op">-</span> <span class="va">joint.se</span> <span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">gender_2_diffs</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">upper</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind.data.frame</a></span><span class="op">(</span><span class="va">upper.group.1</span>, <span class="va">upper.group.2</span><span class="op">)</span></span>
-<span><span class="va">upper</span> <span class="op">&lt;-</span> <span class="va">upper</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">upper</span><span class="op">$</span><span class="va">upper.group.1</span>, decreasing <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,<span class="op">]</span></span>
-<span></span>
-<span></span>
-<span><span class="va">lower</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind.data.frame</a></span><span class="op">(</span><span class="va">lower.group.1</span>, <span class="va">lower.group.2</span><span class="op">)</span></span>
-<span><span class="va">lower</span> <span class="op">&lt;-</span> <span class="va">lower</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">lower</span><span class="op">$</span><span class="va">lower.group.1</span>, decreasing <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,<span class="op">]</span></span>
-<span></span>
-<span><span class="co">## make the scatterplot:</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gender_1_diffs</span>, <span class="va">gender_2_diffs</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span>     xlab <span class="op">=</span> <span class="st">"Group 1"</span>, ylab <span class="op">=</span> <span class="st">"Group 2"</span>, main <span class="op">=</span> <span class="st">"Group 1 Measures \n plotted against \n Group 2 Measures"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"purple"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">upper</span><span class="op">$</span><span class="va">upper.group.1</span>, <span class="va">upper</span><span class="op">$</span><span class="va">upper.group.2</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">lower</span><span class="op">$</span><span class="va">lower.group.1</span>, <span class="va">lower</span><span class="op">$</span><span class="va">lower.group.2</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Item Location"</span>, <span class="st">"Identity Line"</span>, <span class="st">"95% Confidence Band"</span><span class="op">)</span>,</span>
-<span>       pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"purple"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="co">### Bar plot of item differences:</span></span>
-<span></span>
-<span><span class="co"># First, calculate difference in difficulty between subgroups</span></span>
-<span><span class="co"># Note that I multiplied by -1 to reflect item difficulty rather than easiness (eRm quirk):</span></span>
-<span><span class="va">item_dif</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">gender_1_diffs</span><span class="op">*</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">-</span><span class="op">(</span><span class="va">gender_2_diffs</span><span class="op">*</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># Code to use different colors to highlight items with differences &gt;= .5 logits:</span></span>
-<span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
-<span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">item.number</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span><span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="va">colors</span><span class="op">[</span><span class="va">item.number</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">item_dif</span><span class="op">[</span><span class="va">item.number</span><span class="op">]</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"dark blue"</span>, <span class="st">"light green"</span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co"># Bar plot code:</span></span>
-<span><span class="va">item_dif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">item_dif</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">item_dif</span>, horiz <span class="op">=</span> <span class="cn">TRUE</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, </span>
-<span>             col <span class="op">=</span> <span class="va">colors</span>,</span>
-<span>             ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">40</span><span class="op">)</span>, </span>
-<span>             xlab <span class="op">=</span> <span class="st">"Logit Difference"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># code to add labels to the plot:</span></span>
-<span></span>
-<span><span class="va">dif_labs</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
-<span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">subgroup_1_diffs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">dif_labs</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">item_dif</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="va">item_dif</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="fl">.2</span>,</span>
-<span>                        <span class="va">item_dif</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="fl">.2</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">dif_labs</span>, <span class="va">x</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">subgroup_1_diffs</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># add vertical lines to highlight .5 logit differences:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">.5</span>, lty <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="op">-</span><span class="fl">.5</span>, lty <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># add additional text to help with interpretation:</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">40</span>, <span class="st">"Easier to Endorse for Group 1"</span>, cex <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">40</span>, <span class="st">"Easier to Endorse for Group 2"</span>, cex <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Diff &gt;= .5 logits"</span>, <span class="st">"Diff &lt; .5 logits"</span><span class="op">)</span>,</span>
-<span>       pch <span class="op">=</span> <span class="fl">15</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dark blue"</span>, <span class="st">"light green"</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.7</span> <span class="op">)</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="co">## Wir könnten jetzt das stärkste DIF Item entfernen und die Analyse nochmal durchführen. Ist das wirklich So?! Oder splitted das paket schon nach Items? Lassen wir aber, let's take a quick look at rasch trees! </span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dif_test</span><span class="op">$</span><span class="va">coef_trasf</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+           beta1
+3401 -2.40978789
+3402 -0.01907878
+3403 -0.19102453
+3404  0.75291490
+3405  0.19096995
+3406  0.92972284
+3407 -0.95266283
+3408 -0.30686976
+3409  1.65436012
+
+[[2]]
+          beta1
+3401 -1.5885977
+3402 -0.4704207
+3403 -0.6954343
+3404  0.9232955
+3405 -1.0471252
+3406  1.0361797
+3407 -0.6360839
+3408  0.3085281
+3409  1.3261040</code></pre>
 </div>
-</section><section id="equateirt" class="level2"><h2 class="anchored" data-anchor-id="equateirt">equateIRT</h2>
+</div>
+<p>Und das hier waren die Parameter, die wir mit TAM gelinkt haben:</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># https://rdrr.io/cran/equateIRT/man/dif.test.html</span></span>
-<span><span class="co">## DAs wäre ganz cool, weil es klar macht, dass equated wird, und weil das paper auch recht fresh ist dazu. </span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">difficulty_link_f</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.63703272 -0.48116307 -0.25614572 -1.87489822  0.09555167 -1.98778205
+[7] -0.31549713 -1.26012532 -2.27770429</code></pre>
 </div>
-<p>```</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">difficulty_link_m</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1.51485121 -0.87557032 -0.70365354 -1.64743999 -1.08558352 -1.82422270
+[7]  0.05786946 -0.58782743 -2.54877366</code></pre>
+</div>
+</div>
+<p>Was fällt auf?</p>
+<p>:::{.callout-caution collapse = “true”} ## Lösung</p>
+<p>Zuerst einmal scheinen die Vorzeichen der Itemschwierigkeiten vertauscht zu sein. Wir habne in <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> also die Itemleichtigkeiten geschätzt. Das ist aber leicht durch eine Multiplikation mit <code>-1</code> zu beheben.<br>
+Ansonsten scheinen <code>mirt</code> und <code>tam</code> die gleichen Ergebnisse bei der Kalibrierung bekommen zu haben. Das Linking ist auch ähnlich, allerdings nicht exakt, obwohl wir die gleiche Mehtode verwendet haben. Wir könnten jetzt noch auf die Suche gehen, was genau beide Funktionen per Default anders machen, aber für uns soll das erst einmal reichen.</p>
+<p>:::</p>
+</section><section id="beurteilung" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="beurteilung">
+<span class="header-section-number">1.4</span> Beurteilung</h2>
+<p>Wir haben jetzt also gesehen, was die <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> Funktion unter der Haub macht und Signifikanzwerte erhalten, die uns potenziellen DIF anzeigen.</p>
+<div class="callout-importang">
+<p>Natürlich treffen auch hier die üblichen Caveats zu Signifikanztests zu. Bei größer werdender Stichprobe werden so gut wie alle Gruppenunterschiede signifikant. Wir sollten daher auf keinen Fall nur auf die Signifikanz schauen, sondern auch die Effektstärke (z.B. Unterschied in Itemschwierigkeit ziwschen den Gruppen) und unbedingt auch inhaltliche Kriterien in die Beurteilung mit einfließen lassen. Wichtig ist einfach, alles zu kommunizieren, damit nachvollziebar bleibt, was warum getan wurde.</p>
+</div>
+<p>Es gibt also einige Items, die für eine weiter DIF-Analyse in Frage kommen. Wir schauen uns jetzt mal die Unterschiede grafisch an, um auch ein Gefühl für das Ausmaß des DIF zu bekommen.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Für die Fragen benötigt</span></span>
+<span><span class="va">qa_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"raw_data"</span>, <span class="st">"q_a_wirt_b.rds"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">group_difference</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">dif_test</span><span class="op">$</span><span class="va">coef_trasf</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">dif_test</span><span class="op">$</span><span class="va">coef_trasf</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">*</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">questions</span> <span class="op">&lt;-</span> <span class="va">qa_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">question_code</span>, <span class="va">varLabel</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>varLabel <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_wrap.html">str_wrap</a></span><span class="op">(</span><span class="va">varLabel</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Prepare Data for</span></span>
+<span><span class="va">dif_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  item <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">qa_f</span><span class="op">[</span>, <span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">qa_f</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  group_difference <span class="op">=</span> <span class="va">group_difference</span>,</span>
+<span>  group_favour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">group_difference</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">"m"</span>, <span class="st">"f"</span><span class="op">)</span>,</span>
+<span>  p_value <span class="op">=</span> <span class="va">dif_test</span><span class="op">$</span><span class="va">test</span><span class="op">[</span>, <span class="st">"p.value"</span><span class="op">]</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>label_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">group_difference</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>significance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">p_value</span> <span class="op">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Significant"</span>, <span class="st">"Not Significant"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">questions</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html">join_by</a></span><span class="op">(</span><span class="st">"item"</span> <span class="op">==</span> <span class="st">"question_code"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dif_dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">group_difference</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">item</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Add vertical line at x = 0</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"darkgray"</span><span class="op">)</span> <span class="op">+</span></span>
+<span></span>
+<span>  <span class="co"># Add lines from 0 to the points</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, xend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">group_difference</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">item</span>, yend <span class="op">=</span> <span class="va">item</span><span class="op">)</span>,</span>
+<span>    linewidth <span class="op">=</span> <span class="fl">0.75</span>, colour <span class="op">=</span> <span class="st">"grey"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span></span>
+<span>  <span class="co"># Add the points</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="va">group_favour</span>, shape <span class="op">=</span> <span class="va">significance</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_label</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">label_x</span>, label <span class="op">=</span> <span class="va">varLabel</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Optional: Customize the theme</span></span>
+<span>  <span class="fu">theme_bg</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#01364C"</span>, <span class="st">"#9B1B34"</span>, <span class="st">"#F4BA02"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1.75</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Gruppenunterschied in Itemschwierigkeit"</span>, y <span class="op">=</span> <span class="st">"Item"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dif_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Von Interesse ist vielleicht noch bei Item <code>3401</code> von wem dort die Rede ist. Es geht um Dieter Zetsche, den ehemaligen Vorstandsvorsitzenden der Daimler AG (Mercedes-Benz-Group).</p>
+<p><img src="./images/zetsche.jpg" class="img-fluid">[^1]</p>
+<p>[^1] Bild von Matti Blume, heruntergeladen von <a href="https://commons.wikimedia.org/wiki/File:Daimler_press_conference,_GIMS_2018,_Le_Grand-Saconnex_(1X7A0769)_(cropped).jpg">Wikipedia</a>.</p>
+<p>Wie würdest du den DIF beurteilen?</p>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1268,8 +1085,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../../exercises/linking/linking.html" class="pagination-link" aria-label="Linking">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Linking</span>
+      <a href="../../exercises/linking/linking.html" class="pagination-link" aria-label="2. Linking">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Linking</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

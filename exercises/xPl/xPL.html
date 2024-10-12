@@ -158,15 +158,15 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#%C3%BCbung-1" id="toc-übung-1" class="nav-link active" data-scroll-target="#%C3%BCbung-1">Übung 1</a>
+<a href="#%C3%BCbung-1" id="toc-übung-1" class="nav-link active" data-scroll-target="#%C3%BCbung-1"><span class="header-section-number">1</span> Übung 1</a>
   <ul class="collapse">
-<li><a href="#gleichung" id="toc-gleichung" class="nav-link" data-scroll-target="#gleichung">Gleichung</a></li>
-  <li><a href="#pl-funktion" id="toc-pl-funktion" class="nav-link" data-scroll-target="#pl-funktion">2PL Funktion</a></li>
+<li><a href="#gleichung" id="toc-gleichung" class="nav-link" data-scroll-target="#gleichung"><span class="header-section-number">1.1</span> Gleichung</a></li>
+  <li><a href="#pl-funktion" id="toc-pl-funktion" class="nav-link" data-scroll-target="#pl-funktion"><span class="header-section-number">1.2</span> 2PL Funktion</a></li>
   <li>
-<a href="#simulieren-von-daten" id="toc-simulieren-von-daten" class="nav-link" data-scroll-target="#simulieren-von-daten">Simulieren von Daten</a>
+<a href="#simulieren-von-daten" id="toc-simulieren-von-daten" class="nav-link" data-scroll-target="#simulieren-von-daten"><span class="header-section-number">1.3</span> Simulieren von Daten</a>
   <ul class="collapse">
-<li><a href="#items" id="toc-items" class="nav-link" data-scroll-target="#items">Items</a></li>
-  <li><a href="#check-mit-tam" id="toc-check-mit-tam" class="nav-link" data-scroll-target="#check-mit-tam">Check mit <code>TAM</code></a></li>
+<li><a href="#items" id="toc-items" class="nav-link" data-scroll-target="#items"><span class="header-section-number">1.3.1</span> Items</a></li>
+  <li><a href="#check-mit-tam" id="toc-check-mit-tam" class="nav-link" data-scroll-target="#check-mit-tam"><span class="header-section-number">1.3.2</span> Check mit <code>TAM</code></a></li>
   </ul>
 </li>
   </ul>
@@ -195,7 +195,8 @@ window.Quarto = {
   
 
 
-</header><section id="übung-1" class="level1"><h1>Übung 1</h1>
+</header><section id="übung-1" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> Übung 1</h1>
 <p>Wir schauen uns eine ganz simple Version an. Wer interessiert ist, und z.B. Daten für eine Poweranalyse simulieren möchte, findet <a href="">hier</a> Unterstützung. Installieren und/oder lade folgende Pakete für diese Übung:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Wenn noch nicht installiert:</span></span>
@@ -205,7 +206,8 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="gleichung" class="level2"><h2 class="anchored" data-anchor-id="gleichung">Gleichung</h2>
+<section id="gleichung" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="gleichung">
+<span class="header-section-number">1.1</span> Gleichung</h2>
 <p>Zuerst müssen wir festlegen, was wir eigentlich simulieren wollen. Wir starten mit einem 2PL Modell. Wie sah die Gleichung dafür noch einmal aus?</p>
 <p><span id="eq-2PL"><span class="math display">\[
 P(X_{is} = 1|\theta_s,\beta_i,\alpha_i) = \frac{\exp(\alpha_i(\theta_s-\beta_i))}{1 + \exp(a_i (\theta_s - \beta_i))}
@@ -229,7 +231,8 @@ Lösung
 </div>
 </div>
 </div>
-</section><section id="pl-funktion" class="level2"><h2 class="anchored" data-anchor-id="pl-funktion">2PL Funktion</h2>
+</section><section id="pl-funktion" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="pl-funktion">
+<span class="header-section-number">1.2</span> 2PL Funktion</h2>
 <ol start="2" type="1">
 <li>Jetzt beginnt der fun part: Schreibe eine <a href="">Funktion</a> genannt <code>calc_2pl</code> die <a href="#eq-2PL" class="quarto-xref">Gleichung&nbsp;1</a> in R Code umsetzt.</li>
 </ol>
@@ -270,9 +273,11 @@ Lösung
 </div>
 </div>
 </div>
-</section><section id="simulieren-von-daten" class="level2"><h2 class="anchored" data-anchor-id="simulieren-von-daten">Simulieren von Daten</h2>
+</section><section id="simulieren-von-daten" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="simulieren-von-daten">
+<span class="header-section-number">1.3</span> Simulieren von Daten</h2>
 <p>Jetzt geht’s los! Wir wollen nun eigene Daten simulieren. Das tolle ist: wir können so alle Aspekte selber festlegen, und daran untersuchen, wie sich das Variieren von bestimmten Parametern auf das Ergebnis auswirkt.</p>
-<section id="items" class="level3"><h3 class="anchored" data-anchor-id="items">Items</h3>
+<section id="items" class="level3" data-number="1.3.1"><h3 data-number="1.3.1" class="anchored" data-anchor-id="items">
+<span class="header-section-number">1.3.1</span> Items</h3>
 <ol type="1">
 <li>Zuerst die Items. Baue einen <code>data.frame</code> mit dem Namen <code>items</code>. Er soll 13 Zeilen und 4 Spalten haben und folgendes enthalten:</li>
 </ol>
@@ -537,7 +542,8 @@ Lösung
 </div>
 </div>
 </div>
-</section><section id="check-mit-tam" class="level3"><h3 class="anchored" data-anchor-id="check-mit-tam">Check mit <code>TAM</code>
+</section><section id="check-mit-tam" class="level3" data-number="1.3.2"><h3 data-number="1.3.2" class="anchored" data-anchor-id="check-mit-tam">
+<span class="header-section-number">1.3.2</span> Check mit <code>TAM</code>
 </h3>
 <p>Jetzt wollen wir natürlich noch schauen, ob das Ganze so funktioniert hat, wie wir uns das vorgestellt haben. Wir wollen das <code>TAM</code> Paket, um ein 2PL Modell auf die Itemantworten zu fitten. Wenn alles geklappt hat, sollten wir in etwa unsere Itemparameter wiedererkennen.</p>
 <ol type="1">
@@ -623,13 +629,13 @@ Tip
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat_2PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam.mml.2pl</a></span><span class="op">(</span><span class="va">sim_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sub_id</span><span class="op">)</span>, irtmodel <span class="op">=</span> <span class="st">"2PL"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>....................................................
-Processing Data      2024-10-08 16:13:39.092241 
+Processing Data      2024-10-12 13:18:35.410847 
     * Response Data: 100000 Persons and  13 Items 
     * Numerical integration with 21 nodes
-    * Created Design Matrices   ( 2024-10-08 16:13:39.418389 )
-    * Calculated Sufficient Statistics   ( 2024-10-08 16:13:39.497179 )
+    * Created Design Matrices   ( 2024-10-12 13:18:35.744091 )
+    * Calculated Sufficient Statistics   ( 2024-10-12 13:18:35.824625 )
 ....................................................
-Iteration 1     2024-10-08 16:13:39.516284
+Iteration 1     2024-10-12 13:18:35.844103
 E Step
 M Step Intercepts   |----
 M Step Slopes       |---
@@ -639,7 +645,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 2     2024-10-08 16:13:39.756419
+Iteration 2     2024-10-12 13:18:36.10921
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -649,7 +655,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 3     2024-10-08 16:13:39.995414
+Iteration 3     2024-10-12 13:18:36.366368
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -659,7 +665,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 4     2024-10-08 16:13:40.132192
+Iteration 4     2024-10-12 13:18:36.508835
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -669,7 +675,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 5     2024-10-08 16:13:40.328374
+Iteration 5     2024-10-12 13:18:36.717551
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -679,7 +685,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 6     2024-10-08 16:13:40.463592
+Iteration 6     2024-10-12 13:18:36.860549
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -689,7 +695,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 7     2024-10-08 16:13:40.674186
+Iteration 7     2024-10-12 13:18:37.081558
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -699,7 +705,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 8     2024-10-08 16:13:40.777461
+Iteration 8     2024-10-12 13:18:37.195039
 E Step
 M Step Intercepts   |---
 M Step Slopes       |--
@@ -709,7 +715,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 9     2024-10-08 16:13:40.891672
+Iteration 9     2024-10-12 13:18:37.318129
 E Step
 M Step Intercepts   |---
 M Step Slopes       |--
@@ -719,7 +725,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 10     2024-10-08 16:13:41.026681
+Iteration 10     2024-10-12 13:18:37.460514
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -729,7 +735,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 11     2024-10-08 16:13:41.128429
+Iteration 11     2024-10-12 13:18:37.564612
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -739,7 +745,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 12     2024-10-08 16:13:41.241535
+Iteration 12     2024-10-12 13:18:37.68417
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -749,7 +755,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 13     2024-10-08 16:13:41.466754
+Iteration 13     2024-10-12 13:18:37.886874
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -759,7 +765,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 14     2024-10-08 16:13:41.561278
+Iteration 14     2024-10-12 13:18:38.009149
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -769,7 +775,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 15     2024-10-08 16:13:41.675146
+Iteration 15     2024-10-12 13:18:38.107729
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -779,7 +785,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 16     2024-10-08 16:13:41.788331
+Iteration 16     2024-10-12 13:18:38.232659
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -789,7 +795,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 17     2024-10-08 16:13:41.900999
+Iteration 17     2024-10-12 13:18:38.367811
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -799,7 +805,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 18     2024-10-08 16:13:42.013979
+Iteration 18     2024-10-12 13:18:38.486634
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -809,7 +815,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 19     2024-10-08 16:13:42.127335
+Iteration 19     2024-10-12 13:18:38.602985
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -819,7 +825,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 20     2024-10-08 16:13:42.240564
+Iteration 20     2024-10-12 13:18:38.738876
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -829,7 +835,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 21     2024-10-08 16:13:42.353714
+Iteration 21     2024-10-12 13:18:38.962828
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -839,7 +845,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 22     2024-10-08 16:13:42.466869
+Iteration 22     2024-10-12 13:18:39.071872
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -849,7 +855,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 23     2024-10-08 16:13:42.581611
+Iteration 23     2024-10-12 13:18:39.189067
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -859,7 +865,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 24     2024-10-08 16:13:42.813254
+Iteration 24     2024-10-12 13:18:39.329375
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -869,7 +875,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 25     2024-10-08 16:13:42.911298
+Iteration 25     2024-10-12 13:18:39.427666
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -879,7 +885,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 26     2024-10-08 16:13:43.030351
+Iteration 26     2024-10-12 13:18:39.546202
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -889,7 +895,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 27     2024-10-08 16:13:43.167443
+Iteration 27     2024-10-12 13:18:39.667239
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -899,7 +905,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 28     2024-10-08 16:13:43.265898
+Iteration 28     2024-10-12 13:18:39.916708
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -909,7 +915,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 29     2024-10-08 16:13:43.395543
+Iteration 29     2024-10-12 13:18:40.019062
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -919,7 +925,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 30     2024-10-08 16:13:43.607053
+Iteration 30     2024-10-12 13:18:40.142106
 E Step
 M Step Intercepts   |--
 M Step Slopes       |-
@@ -929,7 +935,7 @@ M Step Slopes       |-
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 31     2024-10-08 16:13:43.71272
+Iteration 31     2024-10-12 13:18:40.281356
 E Step
 M Step Intercepts   |--
 M Step Slopes       |-
@@ -939,7 +945,7 @@ M Step Slopes       |-
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 32     2024-10-08 16:13:43.826502
+Iteration 32     2024-10-12 13:18:40.380506
 E Step
 M Step Intercepts   |-
 M Step Slopes       |-
@@ -978,9 +984,9 @@ EAP Reliability:
 [1] 0.626
 
 -----------------------------
-Start:  2024-10-08 16:13:39.088979
-End:  2024-10-08 16:13:44.192986 
-Time difference of 5.104007 secs</code></pre>
+Start:  2024-10-12 13:18:35.407303
+End:  2024-10-12 13:18:40.854776 
+Time difference of 5.447473 secs</code></pre>
 </div>
 </div>
 </div>

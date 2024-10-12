@@ -6,13 +6,16 @@
     ]
   },
   {
-    "listing": "/exercises/index.html",
+    "listing": "/exercises/index_linking.html",
     "items": [
-      "/exercises/index_glm.html",
-      "/exercises/index_intro_r.html",
-      "/exercises/index_linking.html",
-      "/exercises/index_xPL.html"
+      "/exercises/linking/data.html",
+      "/exercises/linking/linking.html",
+      "/exercises/linking/dif.html"
     ]
+  },
+  {
+    "listing": "/exercises/index_xPL.html",
+    "items": []
   },
   {
     "listing": "/exercises/index_intro_r.html",
@@ -25,14 +28,12 @@
     ]
   },
   {
-    "listing": "/exercises/index_xPL.html",
-    "items": []
-  },
-  {
-    "listing": "/exercises/index_linking.html",
+    "listing": "/exercises/index.html",
     "items": [
-      "/exercises/linking/dif.html",
-      "/exercises/linking/linking.html"
+      "/exercises/index_glm.html",
+      "/exercises/index_intro_r.html",
+      "/exercises/index_linking.html",
+      "/exercises/index_xPL.html"
     ]
   }
 ]
