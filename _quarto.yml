@@ -64,3 +64,4 @@ execute:
   echo: true
 callout-appearance: simple
 lang: de
+csl: apa7.csl

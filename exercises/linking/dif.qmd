@@ -16,6 +16,8 @@ qa_dat_wide <- readRDS(here::here("raw_data", "qa_dat_wide.rds"))
 
 ```{r}
 #| echo: false
+#| message: false
+
 library(tidyverse)
 library(TAM)
 
