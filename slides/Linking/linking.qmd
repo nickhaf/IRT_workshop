@@ -510,6 +510,10 @@ Ganz egal welcher Anwendungsfall, das Szenario ist das gleiche: Wir haben versch
     - Gemeinsame Items
     - Gemeinsame Personen
 
+## Übung
+Gehe zur ersten [Übung](https://nickhaf.github.io/IRT_workshop/exercises/linking/data.html) zum Thema Linking/DIF. Es geht hier nochmal um Datenaufbereitung. 
+
+
 ## Gemeinsame Personen
 Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen. 
 
@@ -529,82 +533,132 @@ Ankeritems sind [gemeinsame Items]{.highlight}, die in beiden Testformen vorhand
 ![](images/anker.jpg){.image-right}
 
 :::
-
-
 ::::
 
 ## Linking Verfahren: Grundidee
 
-Die $\theta$ scores des einen Tests müssen so transformiert werden, dass sie auf einer gemeinsamen Skala mit den Scores des anderen Tests liegen:
+Die $\theta$ scores der Focal group müssen so transformiert werden, dass sie auf einer gemeinsamen Skala mit den Scores der Reference group liegen:
 
 $$
-\theta_Y = A \theta_X + B
+\theta_R = A \theta_F + B
 $$
 
 
+Ziel: "Linking constants" $A$ und $B$ zu finden, welche die Itemparameter aus den beiden Gruppen auf der selben Skala plazieren. 
 
-## Linking 
 
-$$
-\theta* = x\theta+y
-$$
-
-...
-
-## Linking
-Ziel: "Linking constants" $x$ und $y$ findend, welche die Item parameter aus den beiden Gruppen auf der selben Skala plazieren. 
+## Linking Methoden
 - Die häufigsten Methoden:
-    - mean-mean
-    - mean-sigma
-    - Stocking-Lord
-    - Haebermann
-         
+    - mean-mean ()
+    - mean-sigma ()
+    - Stocking-Lord ()
+    - Haebermann ()
+
+
+## mean-sigma Transformationen {#sec-transf}
+
+Grundlegend sind einige einfache Transformationen:
+
+- $\theta^* = x\theta+y$
+- $\beta^* = x\beta=y$
+- $\alpha^*=\frac{\alpha}{x}$
+- $c^* = c$
+
+Ziel ist es, die Linkingkonstanten $x$ und $y$ zu finden. 
+
+
+## Finden der Linkingkonstanten
+- $\overline{\beta}_R$ und $\overline{\beta}_F$ als Mittelwert der geschätzten Itemschwierigkeiten in Referenz- und Fokusgruppe
+- $\sigma_R$ und $\sigma_F$ als Standardabweichung der geschätzten Itemschwierigkeiten in Referenz- und Fokusgruppe. 
+
+## Finden der Linkingkonstanten
 $$
-B_B^* = x\beta_b=y
+x = \frac{\sigma_R}{\sigma_F}
 $$
 
-$$
-x = \frac{\sigma_A}{\sigma_B}
-$$
+:::{.callout-note}
+## Mean-mean Linking
+Die mean-mean Methode nutzt hier statt der Standardabweichung der Itemschwierigkeiten die Mittelwerte (Erwartungswerte) der Diskriminationsparamter. In der Praxis werden beide Methoden eher weniger genutzt. 
+:::
 
 $$
-y = \overline{\beta}_A - x(\overline{\beta}_B)
+y = \overline{\beta}_R - x(\overline{\beta}_F)
 $$
 
 Und dann einsetzen in 
 $$
 \theta* = x\theta+y
 $$ 
-
-etc. 
-
-mal ausprobieren!
+$$
+B_F^* = x\beta_F + y
+$$
 
 ## mean-sigma
 
 
 Probleme: linking constants können stark von Outliern beeinflusst werden, und von den differential standards errors of the item difficutly estimates
-- Robust procedures exist. 
-
-Nur die  item difficulty parameters werden zur berechnung der Linking constants genutzt. 
+Es gibt aber auch Robuste Verfahren.  
 
 Alternative: Characteristic curve methods
 
 ## Characteristic curve methods
-Versuch, die Linking constants so zu berechnen, dass die test charctersitic curves so ähnlich wie möglich sind. Nutzen daher alle item parameter um die Linking constants zu finden.  computationally more expensive. 
-Empirical research zeigt keine großen Unterschide zwischen beiden Methoden? Nochmal selber recherchiereen. 
+Versuch, die Linking constants so zu berechnen, dass die test charactersitic curves so ähnlich wie möglich sind. Nutzen daher alle Itemparameter um die Linkingkonstanten zu finden. Ist rechnerisch aufwändiger. 
 
-## Gibt es neuere methoden? Z.B. Multi-group IRT, CFA framework ...?
+- Haebara-Linking
+- Stocking-Lord
 
-## Beispiel
-Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entweder als aufgabe oder demonstrieren. 
--  Man könnte die Linking constants setzen, gukcen was das mit den schwierikeiten macht, und die Simulierten Werte wieder rekapitulieren. 
+## Stocking-Lord
+
+$$
+\sum_{\theta}\left[\sum_j P(Y_i = 1|\theta, a_{R_i}, b_{R_i}, c_{R_i})  - \sum_j P(Y_i=1|\theta,\frac{a_{F_i}}{x}, xb_{F_i}+y, c_{F_i})\right]^2
+$$
+
+- i: Item
+
+## Stocking-Lord
+
+$$
+\sum_{\theta}\left[\color{#9B1B34}{\sum_i P(Y_i = 1|\theta, \alpha_{R_i}, \beta_{R_i}, c_{R_i})}  - \sum_i P(Y_i=1|\theta,\frac{\alpha_{F_i}}{x}, x\beta_{F_i}+y, c_{F_i})\right]^2
+$$
+- Summe der Test Characteristic Curves über alle Items. 
+
+## Stocking-Lord
+
+$$
+\sum_{\theta}\left[\sum_i P(Y_i = 1|\theta, \alpha_{R_i}, \beta_{R_i}, c_{R_i})  - \sum_i P(Y_i=1|\theta,\color{#9B1B34}{\frac{\alpha_{F_i}}{x}, x\beta_{F_i}+y, c_{F_i}})\right]^2
+$$
+
+- Das sind unsere Transformationen von @sec-transf.
+
+
+## Haebara
+
+
+$$
+\sum_{\theta}\color{#9B1B34}{\sum_i}\left[P(Y_i = 1|\theta, \alpha_{R_i}, \beta_{R_i}, c_{R_i}) - P(Y_i=1|\theta,\frac{\alpha_{F_i}}{x}, x\beta_{F_i}+y, c_{F_i})\right]^2
+$$
+Sehr ähnlich, nur dass wir hier die Item Characteristic Curves verwenden. 
+
+
+## Haebara und Stocking-Lord
+
+In beiden Fällen wird die Gleichung so optimiert, dass die Linkingkonstanten $x$ und $y$ so bestimmt werden, dass der Unterschied zwischen den Test/Item Characteristic Curves der Referenz- und Fokusgruppe minimiert wird. 
+
+## Übung
+Gehe zu []() und Löse die Aufgaben zur Datenaufbereitung und zum Linking. 
+
+
+
+## Zurück zum Anfang: Differential Item Functioning 
+
+- Wir haben jetzt gesehen, wie man Item- und Personenparamter aus verschiedenen Kalibrierungen auf die selbe Skala bringen kann. 
+- Jetzt können wir uns also noch einmal mit dem Eingangsproblem dieser Session beschäftigen: Differential Item Functioning. 
 
 
 ## DIF finden
 
 Es gibt viele verschiedene Verfahren, mit denen man Items auf DIF tests kann. 
-Die Grundidee ist folgende: Wir schauen, ob Items in bestimmten Gruppen häufiger beantwortet wurden als in anderen Gruppen. Wenn dem so ist, und wir vorher die Fähigkeitsskalen der Gruppen gelinkt haben, 
+Die Grundidee ist folgende: Wir schauen, ob Items in bestimmten Gruppen häufiger beantwortet wurden als in anderen Gruppen, bzw. ob die Itemparamter in bestimmten Gruppen anders geschätzt wurden (nachdem gelinkt wurde).  
 
 Es gibt viele verschieden Verfahren, die das auf verschiedene Art und Weise versuchen. Ganz grob kann man zwischen Verfahren unterscheiden, die den beobacheteten Testscore oder den latenten Fähigkeitswert zur Berechnung nutzen. 
 
