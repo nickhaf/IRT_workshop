@@ -1,357 +1,178 @@
 ---
-title: "Differential Item Functioning"
+title: "3. Differential Item Functioning"
 subtitle: "Übung"
 author: "Nicklas Hafiz"
 format: html
 ---
 
-# 1. Vorbereitung
-
-## 1.1 Daten laden
-
-Lade die Datei `q_a_wirt.rds` von [GitHub](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.
-
-:::{.callout-note}
-Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/research_data/ZA6268?doi=10.4232/1.13780) von 2009 und beinhaltet Fragen zu Allgemeinwissen in den Themengebieten Politik, Geschichte, Wirtschaft, Kultur und Naturwissenschaften. Insgesamt haben fast 700.000 Personen den Test bearbeitet. Wir haben die Daten bereits etwas aufbereitet und nur ein Subset an Fragen (Thema Wirtschaft) für diese Übung ausgewählt. 
-:::
-
-:::{.callout-caution collapse="true"}
-## Lösung
+```{r}
+source(here::here("R", "plot_functions.R"))
+```
 
 ```{r}
-qa_dat <- readRDS(here::here("raw_data", "q_a_wirt.rds"))
+qa_dat_wide <- readRDS(here::here("raw_data", "qa_dat_wide.rds"))
 ```
 
 
-:::
-
-## 1.2 Überblick
-Verschaffe dir einen [Überblick]() über die Daten. In welchem Formt liegen sie vor? Was könnten die verschiedenen Spalten bedeuten? 
-
-:::{.callout-caution collapse="true"}
-
-## Lösung
-
-Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im [long-Format](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/long-format) vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins [wide-Format umformen](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide). 
-
 ```{r}
-str(qa_dat)
-```
-
-Außerdem scheint der Datensatz folgende Variablen zu beinhalten:
-
-- `T1`: Personen-ID (aber komisch benannt)
-- `gender`: Geschlecht
-- `answer`: Antwort auf die Frage
-- `question_code`: Fragen-ID
-- `varLabel`: Frage (aber komisch benannt)
-
-:::
-
-## 1.3 Spalten umbenennen 
-Hmm, die Spaltennamen sind teilweise noch nicht ganz eindeutig. Benenne `T1` in `ID` und `varLabel` in `question` um. Klare Benennung hilft uns (und anderen) den Überblick zu behalten. 
-
-:::{.callout-tip collapse="true"}
-
-## Tipp
-Ich nutze jetzt einfach mal `tidyverse` Funktionen dafür, aber es gibt immer mehrere Wege zum Ziel. Im `tidyverse` gibt es beispielsweise die Funktion `rename()`. 
-
-:::
-
-:::{.callout-caution collapse="true"}
-
-## Lösung
-
-```{r}
+#| echo: false
 library(tidyverse)
-qa_dat_renamed <- qa_dat %>%
-  rename(ID = T1, question = varLabel)
-```
+library(TAM)
 
-:::
+qa_f <- qa_dat_wide %>%
+  filter(gender == 1)
+qa_m <- qa_dat_wide %>%
+  filter(gender == 2)
 
-## 1.4 Umformen
-Forme jetzt die Daten ins [wide-Format um](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide).
+tam_f <- tam(qa_f[, 6:ncol(qa_f)], verbose = FALSE)
+tam_m <- tam(qa_m[, 6:ncol(qa_m)], verbose = FALSE)
 
-:::{.callout-caution collapse="true"}
-## Tipp
-Das Ganze ist einfacher, wenn du vorher die Spalte `question` entfernst. Außerdem müssen `ID` und `gender` in `pivot_wider` als `id_cols` definiert werden: `..., id_cols = c(ID, gender), ...`.
+tam_link <- tam.linking(list(tam_m, tam_f), type = "SL")
 
-:::
-
-:::{.callout-caution collapse="true"}
-## Lösung
-```{r}
-qa_dat_wide <- qa_dat_renamed %>%
-  pivot_wider(id_cols = c(ID, gender), 
-              names_from = question_code, 
-              values_from = answer
-              )
-```
-
-Jetzt können wir mal testweise schauen ob das geklappt hat:
-
-```{r}
-head(qa_dat_wide)
+difficulty_link_f <- tam_link$parameters_list[[1]]$xsi
+difficulty_link_m <- tam_link$parameters_list[[2]]$xsi
 ```
 
 
-Yaay, sieht gut aus. 
-:::
-
-
-
-# 2. Waldtest
-Wir werden zuerst einen [Waldtest]() durchführen. 
-Es gibt diverse Pakete, mit denen dies möglich ist. Für diese Übung werden wir mit [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
+# Waldtest
+Wir werden einen [Waldtest]() durchführen, einfach weil man hier das Grundlegende Vorgehen ganz gut sehen kann. Wie im [Theorieteil]() besprochen gibt es aber viele verschiedene Optionen, implementiert in diversen Paketen. Für diese Übung werden wir mit [mirt](https://cran.r-project.org/web/packages/mirt/index.html) und [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
 
 :::{.callout-note}
-## Alternativen
+## Alternativen für DIF Analysen
 - [TAM](https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm)  
 - [eRm](https://bookdown.org/chua/new_rasch_demo2/DIF.html) 
 - [mirt](https://philchalmers.github.io/mirt/html/DIF.html)
+
+Und viele mehr. 
 :::
 
-## 2.1 Kalibrierung
-Zuerst müssen wir die Daten kalibrieren (andere Pakete ermöglichen es auch, beides direkt in einer Funktion zu kombinieren).  
-Dafür nutzen wir diesmal [mirt](https://cran.r-project.org/web/packages/mirt/index.html). Wir können unseren Datensatz in die Gruppen (uns interessiert übrigens geschlecht) aufteilen, die wir vergleichen wollen und dann auf jeden Subdatensatz unser IRT-Modell fitten (wie gesagt, andere Pakete ermöglichen das auch in einem Schritt).
+## Kalibrierung
+Zuerst müssen wir die Daten noch einmal kalibrieren (andere Pakete ermöglichen es auch, beides direkt in einer Funktion zu kombinieren).  
+Dafür nutzen wir diesmal aber [mirt](https://cran.r-project.org/web/packages/mirt/index.html), weil `equateIRT` den Output daraus verarbeiten kann. 
 
-### 2.1.1 Subgruppen herstellen
-Erstelle 2 Dataframes, einen nur mit Frauen (1) und einen nur mit Männern (2). Weitere Kategorien gibt es in diesem Datensatz nicht:
-
-```{r}
-unique(qa_dat_wide$gender)
-```
-
-:::{.callout-caution collapse="true"}
-
-## Lösung
-```{r}
-qa_dat_f <- qa_dat_wide %>%
-  filter(gender == 1)
-qa_dat_f <- qa_dat_f[1:500, ]
-
-
-qa_dat_m <- qa_dat_wide %>%
-  filter(gender == 2)
-qa_dat_m <- qa_dat_m[1:500, ]
-```
-:::
-
-### 2.1.2 Kalibrieren
-Fitte jetzt mit `mirt` ein Raschmodell auf beide Subgruppen. Der Datensatz darf nur die Itemspalten enthalten. 
+Fitte jetzt mit `mirt` ein Raschmodell auf beide Subgruppen seperat (männlich und weiblich). Der Datensatz darf nur die Itemspalten enthalten. Setze `SE = TRUE` um die Modell-Informationsmatrix zu berechnen, das ist gleich für den Waldtest nötig. 
 
 ```{r}
 library(mirt)
+library(tidyverse)
 
-m_f <- qa_dat_f %>%
-  select(-ID, -gender) %>%
-  mirt(itemtype = "Rasch", SE = TRUE) ## Durch die Pipe wird der Datensatz automatisch übergeben. Wir müssen ihn also nicht nochmal in die mirt-Funktion schreiben
-
-m_m <- qa_dat_m %>%
-  select(-ID, -gender) %>%
+m_f <- qa_f %>%
+  select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
   mirt(itemtype = "Rasch", SE = TRUE)
 
-## SE = TRUE setzen?
+
+m_m <- qa_m %>%
+  select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
+  mirt(itemtype = "Rasch", SE = TRUE)
 ```
 
 
 
-### 2.1.3 Modellfit
-Eigentlich sollten wir uns noch anschauen, wie das Modell fittet. Aus Zeitgründen verzichten wir jetzt erstmal darauf. 
+## Waldtest
+Nutze jetzt die Funktion `dif.test()` aus dem Paket `equateIRT` um den Waldtest durchzuführen. Nutze, wie in der vorherigen Übung, die Stocking-Lord Methode zum linken. Welche Items zeigen laut Waldtest DIF?
 
-## 2.2 Waldtest
-Nutze jetzt die Funktion `dif.test()` aus dem Paket `equateIRT` um den Waldtest durchzuführen. Nutze Haebara Linking. Welche Items zeigen laut Waldtest DIF?
 
+:::{.callout-caution collapse="true"}
 ```{r}
 library(equateIRT)
 
-dif_test <- dif.test(est.mods = list(m_f, m_m), method = "Haebara", purification = TRUE)
+dif_test <- dif.test(est.mods = list(m_f, m_m), method = "Stocking-Lord", purification = FALSE)
+
+dif_test
 ```
 
-Mit purification wird iterativ gefittet. 
+:::{.callout-note}
+Mit `purification = TRUE` würde ein iteratives Vorgehen verwendet werden, bei dem nacheinander DIF Items entfernt werden, um die Personenfähigkeit ohne die komprimierenden Items zu schätzen. Weil wir aber gleich die Ergebnisse mit unserem Manuellen Vorgehen vergleichen wollen, verzichten wir darauf. 
+:::
 
-## Evaluation 
-- Plot? (https://www.researchgate.net/publication/347337364_Manual_ability_in_hand_surgery_patients_Validation_of_the_ABILHAND_scale_in_four_diagnostic_groups/figures?lo=1)
-- Stärke des DIFs beurteilen
-- Praktische Tipps
+Zuerst einmal zeigen laut Waldtest viele der Items bei einem Signifikanzniveau von 0.05 DIF. Das ist aber auch nicht weiter verwunderlich, da der Test sicherlich nicht in Hinblick auf die Vermeidung von DIF konstruiert wurde.
+:::
+
+## Vergleich mit manuellem Linking
+Da in `dif.test()` jetzt genauso gelinkt wurde, können wir jetzt einmal die Ergebnisse aus diesem Vorgehen mit dem aus dem manuellen Linking vergleichen. 
+
+So sehen die Itemparameter aus, die von `dif.test()` berechnete wurden: 
+```{r}
+dif_test$coef_trasf
+```
+
+Und das hier waren die Parameter, die wir mit TAM gelinkt haben:  
+
 
 ```{r}
-#| eval: false
-
-### eRm Waldtest
-# Auch in [TAM möglich](https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm). 
-
-
-## Annehmen, dass eine Thematische Dimension unidimensional ist!
-## Evtl. nur die Berliner Studierenden nehmen, damit die Stichprobengröße realistischer wird. 
-
-## Wir haben also unterschiedliche domänen, müssen die gesondert analysiert werden?
-## Ja, wahrscheinlihc schon?
-
-## Außerdem: Nur eine Subgruppe nehmen, und da dann alle? 
-
-
-
-  ## 2 ganz interessant, weil kein DIF so wirklich. Item 3 ist hiuer noch mit am auffälligsten, und war auch im Paper von 
-  ## STrobl auffällig (aber in Interaktion mit age, und sie hatten nur studierende aus bayern genommen). 
-  ## 5 zeigt ein bisschen was Richtung Bestimmung von Vögeln, wie z.B. im anderen Paper. 
-  ## 3 hat glaube ich die Frage mit dem Autochef, ansonsten grünes Biosiegel.
-  ## 4 hat wieder nichts
-  
-  select(T1, gender, answer, question_code) %>%
-  pivot_wider(id_cols = c(T1, gender), names_from = question_code, values_from = answer) %>%
-  select(-T1)
-
-qa_answers_na <- qa_answers %>%
-  drop_na(gender)
-
-library(eRm)
-
-m1 <- RM(select(qa_answers, -gender))
-m1_na <- RM(select(qa_answers_na, -gender))
-
-summary(m1)
-
-## Andersen's LR test
-gender_difs <- LRtest(m1_na, splitcr = qa_answers_na$gender)
-plotDIF(gender_difs)
-
-gender_diffs <- Waldtest(m1, splitcr = qa_answers$gender)
-
-## Sooooo, wurde denn vorher gelinkt? Hat das Programm das under the hood direkt gemacht? 
-## Oder wie genau funktioniert das? Weil ich da ja so ein großes aufheben drum mache.
-
-## Very Big, make a lesson about sample sizes and p values out of it. 
-
-gender_1_diffs <- gender_diffs$betapar1
-gender_2_diffs <- gender_diffs$betapar2
-
-comparisons <- as.data.frame(gender_diffs$coef.table)
-
-
-
-graphics.off()
-min.y <- ifelse(ceiling(min(comparisons$`z-statistic`)) > -3, -3, 
-                ceiling(min(comparisons$`z-statistic`)))
-
-max.y <- ifelse(ceiling(max(comparisons$`z-statistic`)) < 3, 3, 
-                ceiling(max(comparisons$`z-statistic`)))
-
-plot(comparisons$`z-statistic`, ylim = c(min.y, max.y),
-     ylab = "Z", xlab = "Item", main = "Test Statistics for Item Comparisons \nbetween gender 1 and gender 2")
-abline(h=2, col = "red", lty = 2)
-abline(h=-2, col = "red", lty = 2)
-
-legend("topright", c("Z Statistic", "Boundaries for Significant Difference"),
-       pch = c(1, NA), lty = c(NA, 2), col = c("black", "red"), cex = .7)
-
-
-
-### DIF Scatterplots:
-
-## First, calculate values for constructing the confidence bands:
-
-mean.1.2 <- ((gender_1_diffs - mean(gender_1_diffs))/2*sd(gender_1_diffs) +
-               (gender_2_diffs - mean(gender_2_diffs))/2*sd(gender_2_diffs))
-
-joint.se <- sqrt((gender_diffs$se.beta1^2/sd(gender_1_diffs)) +
-                   (gender_diffs$se.beta2^2/sd(gender_2_diffs)))
-
-
-upper.group.1 <- mean(gender_1_diffs) + ((mean.1.2 - joint.se )*sd(gender_1_diffs))
-upper.group.2 <- mean(gender_2_diffs) + ((mean.1.2 + joint.se )*sd(gender_2_diffs))
-
-lower.group.1 <- mean(gender_1_diffs) + ((mean.1.2 + joint.se )*sd(gender_1_diffs))
-lower.group.2 <- mean(gender_2_diffs) + ((mean.1.2 - joint.se )*sd(gender_2_diffs))
-
-
-upper <- cbind.data.frame(upper.group.1, upper.group.2)
-upper <- upper[order(upper$upper.group.1, decreasing = FALSE),]
-
-
-lower <- cbind.data.frame(lower.group.1, lower.group.2)
-lower <- lower[order(lower$lower.group.1, decreasing = FALSE),]
-
-## make the scatterplot:
-
-plot(gender_1_diffs, gender_2_diffs, xlim = c(-2, 2), ylim = c(-2, 2),
-     xlab = "Group 1", ylab = "Group 2", main = "Group 1 Measures \n plotted against \n Group 2 Measures")
-abline(a = 0, b = 1, col = "purple")
-
-par(new = T)
-
-lines(upper$upper.group.1, upper$upper.group.2, lty = 2, col = "red")
-
-lines(lower$lower.group.1, lower$lower.group.2, lty = 2, col = "red")
-
-legend("bottomright", c("Item Location", "Identity Line", "95% Confidence Band"),
-       pch = c(1, NA, NA), lty = c(NA, 1, 2), col = c("black", "purple", "red"))
-
-
-
-### Bar plot of item differences:
-
-# First, calculate difference in difficulty between subgroups
-# Note that I multiplied by -1 to reflect item difficulty rather than easiness (eRm quirk):
-item_dif <- (gender_1_diffs*-1)-(gender_2_diffs*-1)
-
-
-# Code to use different colors to highlight items with differences >= .5 logits:
-colors <- NULL
-
-for (item.number in 1:30){
-  
-  colors[item.number] <- ifelse(abs(item_dif[item.number]) > .5, "dark blue", "light green")
-  
-}
-
-# Bar plot code:
-item_dif <- as.vector(item_dif)
-
-x <- barplot(item_dif, horiz = TRUE, xlim = c(-2, 2), 
-             col = colors,
-             ylim = c(1,40), 
-             xlab = "Logit Difference")
-
-# code to add labels to the plot:
-
-dif_labs <- NULL
-
-for (i in 1:length(subgroup_1_diffs)) {
-  dif_labs[i] <- ifelse(item_dif[i] < 0, item_dif[i] - .2,
-                        item_dif[i] + .2)
-}
-
-text(dif_labs, x, labels = c(1:length(subgroup_1_diffs)),
-     xlim = c(-1.5, 1.5), cex = .8)
-
-# add vertical lines to highlight .5 logit differences:
-abline(v = .5, lty = 3)
-abline(v = -.5, lty = 3)
-
-# add additional text to help with interpretation:
-
-text(-1, 40, "Easier to Endorse for Group 1", cex = .8)
-text(1, 40, "Easier to Endorse for Group 2", cex = .8)
-
-legend("bottomright", c("Diff >= .5 logits", "Diff < .5 logits"),
-       pch = 15, col = c("dark blue", "light green"), cex = .7 )
-
-
-
-
-## Wir könnten jetzt das stärkste DIF Item entfernen und die Analyse nochmal durchführen. Ist das wirklich So?! Oder splitted das paket schon nach Items? Lassen wir aber, let's take a quick look at rasch trees! 
+difficulty_link_f
+difficulty_link_m
 ```
 
+Was fällt auf?
 
-## equateIRT
+:::{.callout-caution collapse = "true"}
+## Lösung
+
+Zuerst einmal scheinen die Vorzeichen der Itemschwierigkeiten vertauscht zu sein. Wir habne in `dif.test()` also die Itemleichtigkeiten geschätzt. Das ist aber leicht durch eine Multiplikation mit `-1` zu beheben.  
+Ansonsten scheinen `mirt` und `tam` die gleichen Ergebnisse bei der Kalibrierung bekommen zu haben. Das Linking ist auch ähnlich, allerdings nicht exakt, obwohl wir die gleiche Mehtode verwendet haben. Wir könnten jetzt noch auf die Suche gehen, was genau beide Funktionen per Default anders machen, aber für uns soll das erst einmal reichen. 
+
+::: 
+
+## Beurteilung
+Wir haben jetzt also gesehen, was die `dif.test()` Funktion unter der Haub macht und Signifikanzwerte erhalten, die uns potenziellen DIF anzeigen. 
+
+:::{.callout-importang}
+Natürlich treffen auch hier die üblichen Caveats zu Signifikanztests zu. Bei größer werdender Stichprobe werden so gut wie alle Gruppenunterschiede signifikant. Wir sollten daher auf keinen Fall nur auf die Signifikanz schauen, sondern auch die Effektstärke (z.B. Unterschied in Itemschwierigkeit ziwschen den Gruppen) und unbedingt auch inhaltliche Kriterien in die Beurteilung mit einfließen lassen. Wichtig ist einfach, alles zu kommunizieren, damit nachvollziebar bleibt, was warum getan wurde. 
+:::
+
+Es gibt also einige Items, die für eine weiter DIF-Analyse in Frage kommen.
+Wir schauen uns jetzt mal die Unterschiede grafisch an, um auch ein Gefühl für das Ausmaß des DIF zu bekommen. 
+
 
 ```{r}
-# https://rdrr.io/cran/equateIRT/man/dif.test.html
-## DAs wäre ganz cool, weil es klar macht, dass equated wird, und weil das paper auch recht fresh ist dazu. 
+#| code-fold: true
+
+## Für die Fragen benötigt
+qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_b.rds"))
+
+group_difference <- as.vector(dif_test$coef_trasf[[1]] * -1) - as.vector(dif_test$coef_trasf[[2]] * -1)
+
+questions <- qa_dat %>%
+  select(question_code, varLabel) %>%
+  unique() %>%
+  mutate(varLabel = stringr::str_wrap(varLabel, 20))
+
+## Prepare Data for
+dif_dat <- data.frame(
+  item = colnames(qa_f[, 6:ncol(qa_f)]),
+  group_difference = group_difference,
+  group_favour = ifelse(group_difference > 0, "m", "f"),
+  p_value = dif_test$test[, "p.value"]
+) %>%
+  mutate(label_x = abs(group_difference) + 0.25) %>%
+  mutate(significance = ifelse(p_value < 0.05, "Significant", "Not Significant")) %>%
+  left_join(questions, join_by("item" == "question_code"))
+
+
+ggplot(data = dif_dat, aes(x = abs(group_difference), y = item)) +
+  # Add vertical line at x = 0
+  geom_vline(xintercept = 0, linetype = "dashed", color = "darkgray") +
+
+  # Add lines from 0 to the points
+  geom_segment(aes(x = 0, xend = abs(group_difference), y = item, yend = item),
+    linewidth = 0.75, colour = "grey"
+  ) +
+
+  # Add the points
+  geom_point(aes(colour = group_favour, shape = significance), size = 3) +
+  geom_label(aes(x = label_x, label = varLabel), size = 2) +
+  # Optional: Customize the theme
+  theme_bg() +
+  scale_colour_manual(values = c("#01364C", "#9B1B34", "#F4BA02")) +
+  xlim(0, 1.75) +
+  labs(x = "Gruppenunterschied in Itemschwierigkeit", y = "Item")
 ```
 
+Von Interesse ist vielleicht noch bei Item `3401` von wem dort die Rede ist. Es geht um Dieter Zetsche, den ehemaligen Vorstandsvorsitzenden der Daimler AG (Mercedes-Benz-Group). 
 
-```
+![](./images/zetsche.jpg)[^1]
+  
+[^1] Bild von Matti Blume, heruntergeladen von [Wikipedia](https://commons.wikimedia.org/wiki/File:Daimler_press_conference,_GIMS_2018,_Le_Grand-Saconnex_(1X7A0769)_(cropped).jpg). 
 
+Wie würdest du den DIF beurteilen?
