@@ -604,7 +604,40 @@ Im Embretson machen sie eine kleine Simulation. Könnten wir auch machen, entwed
 
 
 ## DIF finden
-Es gibt viele verschiedene Verfahren, mit denen man Items auf DIF tests kann:
+
+Es gibt viele verschiedene Verfahren, mit denen man Items auf DIF tests kann. 
+Die Grundidee ist folgende: Wir schauen, ob Items in bestimmten Gruppen häufiger beantwortet wurden als in anderen Gruppen. Wenn dem so ist, und wir vorher die Fähigkeitsskalen der Gruppen gelinkt haben, 
+
+Es gibt viele verschieden Verfahren, die das auf verschiedene Art und Weise versuchen. Ganz grob kann man zwischen Verfahren unterscheiden, die den beobacheteten Testscore oder den latenten Fähigkeitswert zur Berechnung nutzen. 
+
+## Grundlegendes Vorgehen
+
+Hier nochmal rüber gehen und verifizieren:
+
+Grundlegende Idee kann sein, verschiedene Modelle zu fitten, in denen die Parameter eines Items auf den gleichen Wert fixiert sind, und diese mit einem Modell zu vergleichen, wo diese Parameter frei geschätzt werden (z.B. [Likelihood Ratio Test]()).   
+Eine andere Idee ist, eine [logistische Regression]() zu rechnen, und zu schauen, ob es eine Interaktion zwischen Gruppenzugehörigkeit und Itemschwierigkeit/Personenfähigkeit gibt.  
+Ein Ansatz, der sich im IRT framework bewegt wäre der Vergleich von Itemschwierigkeiten zwischen den Gruppen zu vergleichen [Lord's Chi Quadrat Test, auch genannt Wald Test](). 
+Dann gibt es noch Ansätze, die Maschinelles lernen nutzen, um 
+
+
+## Latent Trait Ansätze
+- Im Irt Framework.
+- Ganz generell wird geschaut, ob sich die Itemparameter zwischen den Gruppen unterscheiden. 
+
+Beispiele: 
+- Lord's Chiquadrat Test
+- Area Measures
+- Konfirmatorische Faktorenanalyse 
+- Rasch trees
+- Wald type statistics
+
+## Observed Score Ansätze
+- Manche, wie z.B. der bekannte Mantel-Haenszel Test, nutzen Kontingenztabellen, um zu schauen, ob sich die Antwortmusster der einzelenen Items in den verschiednene Gruppen unterscheiden.  
+- In logistischen Regressionsansatz wird die Lösungswahrscheinlichkeit der Items in Abhängigkeit von der Gruppenzugehörigkeit geschätzt. 
+
+
+
+
 
 - Wald-Test etc.
 - Logistische Regression
@@ -626,9 +659,20 @@ See Berrio 2020 for a review.
 Oft werden die Methoden iterativ angewandt, da beim anfänglichen Matchen der Gruppen ja auch eventuell DIF-Items für die Berechnung der Scores verwendet werden. 
 :::
 
+## Pakete
+- difR
+- equateIRT
+- TAM
+- mirt
+- psychotrees
 
-## Eins/Zwei Methoden kurz genauer vorstellen und in der Übung bearbeiten. 
 
+## Welche denn jetzt?
+
+Das ist (natürlich) abhängig vom Modell, der Fragestellung in den Daten. Für kleine Datensätze mag es sinnvoller sein, Verfahren zu wählen die auf beobachtete Scores zurückgreifen (nicht auf geschätzte Trait-Variablen). Hat man hingegen große Datensätze mit vielen Kovariaten (und damit auch vielen verschiedenen Gruppen und Gruppen-Interaktionen) mag es sinnvoller sein, in Verfahren mit maschinellem Lernen zu schauen, z.B. Rasch-Trees. Generell kann es auch eine gute Idee sein, Daten zu simulieren und daran verschiedene Verfahren auszuprobieren um zu schauen, welche zu ähnlichen Ergebnissen führen.   
+Generell ist es auch keine gute Idee, einfach nach p-Werten zu gehen, um Items dann blind auszuschließen. Stattdessen sollten die Itemschwierigkeitsunterschiede zwischen den Gruppen beurteilt, und auch das Item selber untersucht werden.
+
+https://cran.r-project.org/web/packages/difR/difR.pdf
 
 
 ## {background-image="images/penguins.jpg" background-size="1225px"}

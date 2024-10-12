@@ -3,8 +3,16 @@ title: "Linking"
 subtitle: "Übungen"
 listing: 
   type: table
-  contents: ./linking
-  sort: "title"
+  sort: false
+  contents: 
+    - ./linking/data.qmd
+    - ./linking/linking.qmd
+    - ./linking/dif.qmd
 format: html
 ---
 
+Ziel dieser Übung ist es, grundlegendes Linking in R auszuprobieren, und eine erste Differential Item Functioning (DIF) Analyse durchzuführen. 
+
+:::{.callout-note}
+Der erste Teil der Übung behandelt noch einmal Datenaufbereitung im IRT Kontext. Wenn du möchtest, kannst du diesen Teil auch erst einmal überspringen und direkt mit den aufbereiteten Daten arbeiten. 
+:::
