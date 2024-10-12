@@ -117,9 +117,48 @@ Welche Unterarten von Rugby gibt es laut Text?
 Mögliche Fähigkeitsunterschiede zwischen den Gruppen auf dem gemessenen Konstrukt interessieren uns hier nicht. Die rechnen wir gleich in @sec-linking raus.
 :::
 
-## Abbildung
+## Schwierigkeit
 
-Abbildung mit 2 ICR Curves?
+```{r}
+calc_2pl <- function(a, theta, xi){
+  p <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
+  return(p) 
+}
+
+
+plot_data <- data.frame(
+  theta = seq(-4, 4, length.out = 100)
+) %>%
+  mutate(p_1 = calc_2pl(1, theta, -1)) %>%
+  mutate(p_2 = calc_2pl(1, theta, 1)) %>%
+  pivot_longer(cols = c(p_1, p_2), names_to = "group", values_to = "p")
+
+ggplot(plot_data, aes(theta, p, colour = group)) +
+  geom_line() +
+  theme_bg() +
+  labs(title = "Item 1") +
+  scale_color_manual(name = NULL, labels = unname(TeX( c("Gruppe 1 (\\beta = -1)", "Gruppe 2 (\\beta = 1)"))), values = c("#F4BA02", "#9B1B34"))
+```
+
+## Diskriminationsparameter
+
+```{r}
+
+
+plot_data <- data.frame(
+  theta = seq(-4, 4, length.out = 100)
+) %>%
+  mutate(p_1 = calc_2pl(0.3, theta, 1)) %>%
+  mutate(p_2 = calc_2pl(0.9, theta, 1)) %>%
+  pivot_longer(cols = c(p_1, p_2), names_to = "group", values_to = "p")
+
+ggplot(plot_data, aes(theta, p, colour = group)) +
+  geom_line() +
+  theme_bg() +
+  scale_color_manual(name = NULL, labels = unname(TeX( c("Gruppe 1 (\\alpha = 0.3)", "Gruppe 2 (\\alpha = 0.9)"))), values = c("#F4BA02", "#9B1B34"))
+
+```
+
 
 ## Wie? 
 Reference vs. focal group
@@ -302,6 +341,35 @@ set.seed(123)
 
 n_subj <- 100000 ## Als Objekt speichern, da so leichter Änderbar
 
+calc_2pl <- function(a, theta, xi){
+  p <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
+  return(p) 
+}
+
+items <- data.frame(
+    item_id = 1:13, 
+    b = seq(-3, 3, by = 0.5), 
+    a = seq(0.5, 1.5, length.out = 13), 
+    c = rep(0, 13)
+)
+
+items_2 <- data.frame(
+    item_id = 1:2, 
+    b = c(- 0.5, 1.5), 
+    a = rep(1, length = 2), 
+    c = rep(0, 2)
+)
+
+subjects <- data.frame(
+    sub_id = 1:n_subj,
+    theta = c(rnorm(n_subj, 0, 1))
+)
+
+subjects_2 <- data.frame(
+    sub_id = 1:n_subj,
+    theta = seq(-4, 4, length.out = n_subj)
+)
+
 ## Diesmal nehmen wir einfach 2 Gruppen
 subjects_1 <- data.frame(
   sub_id = 1:n_subj,
@@ -409,6 +477,8 @@ Gruppe 2: $\theta \sim N(1, 1)$ \
 ```{r plot_sim_b}
 #| echo: false
 #| warning: false
+
+library(latex2exp)
 
 parameters_b <- readRDS(here::here("sim_data", "parameters_b.rds")) 
 plot_group_pars(parameters_b, beta, beta_2) +
