@@ -10,6 +10,7 @@ title-slide-attributes:
 #| echo: false
 library(TAM)
 library(latex2exp) # Erlaubt es, Latex Syntax in ggplot zu nutzen
+library(tidyverse)
 
 source(here::here("R", "plot_functions.R"))
 source(here::here("R", "irt_formulas.R"))
@@ -120,6 +121,8 @@ Mögliche Fähigkeitsunterschiede zwischen den Gruppen auf dem gemessenen Konstr
 ## Schwierigkeit
 
 ```{r}
+#| echo: false
+
 calc_2pl <- function(a, theta, xi){
   p <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
   return(p) 
@@ -143,7 +146,7 @@ ggplot(plot_data, aes(theta, p, colour = group)) +
 ## Diskriminationsparameter
 
 ```{r}
-
+#| echo: false
 
 plot_data <- data.frame(
   theta = seq(-4, 4, length.out = 100)
@@ -160,15 +163,20 @@ ggplot(plot_data, aes(theta, p, colour = group)) +
 ```
 
 
-## Wie? 
-Reference vs. focal group
+## Wie ghen wir damit um? 
+
+Wir schauen uns die Itemparameter in der [Reference group]{.highlight} und in der [Focal group]{.highlight} an.  
+
 \
-Naive Lösung: Einfach die verschiedenen Subgruppen einzeln kalibrieren und dann die ICRs anschauen.
+
+Naive Lösung: Einfach die verschiedenen Subgruppen einzeln kalibrieren und dann die ICRs/Itemparameter anschauen.  
+
 \
-[Warum funktioniert das nicht?]{.highlight}
+
+[Warum funktioniert das so nicht?]{.highlight}
 
 ## Warum funktioniert das nicht?
-Werte aus versch. Kalibrierungen können nicht ohne weiteres vergleichen werden, da die [Skalen arbiträr festgelegt]{.highlight} werden.  
+Werte aus verschiedenen Kalibrierungen können nicht ohne weiteres vergleichen werden, da die [Skalen arbiträr festgelegt]{.highlight} werden.  
 \ 
 
 [Wir müssen also vorher linken!]{.highlight}
@@ -182,6 +190,19 @@ Linking
 
 :::
 
+
+## Wiederholung: Kalibrierung
+Die kalibrierten Itemparameter und Personenfähigkeiten gelten erst einmal nur für **diese bestimmte Kombintation aus Items und Personen**. 
+
+::: r-fit-text
+[WARUM?]{.highlight}
+:::
+
+## Wiederholung: Kalibrierung
+- Skala der Latenten Variable wird arbiträr festgelegt (meist auf einen Mittelwert von 0 und eine SD von 1).
+- Modell ist sonst nicht idenfiziert. 
+- Itemparameter aus versch. Kalibrierungen dadurch [nicht]{.highlight} auf der selben Skala. 
+- [Sie können also nicht direkt miteinander verglichen werden.]{.highlight}
 
 ## Problem
 
@@ -200,23 +221,10 @@ Die Wahrscheinlichkeit für eine korrekte Antwort auf ein Item hängt also nur v
 :::{.fragment .fade-in}
 **Die Lösung**
 
-Wir müssen die Werte, die wir aus diesen Kalibrierungen bekommen, irgendwie in einen Zusammenhang setzen. 
+Wir müssen die Werte, die wir aus diesen unterschiedlichen Kalibrierungen bekommen, irgendwie in einen Zusammenhang setzen. 
 :::
 ::: 
 ::::
-
-## Wiederholung: Kalibrierung
-Die kalibrierten Itemparameter und Personenfähigkeiten gelten erst einmal nur für **diese bestimmte Kombintation aus Items und Personen**. 
-
-::: r-fit-text
-[WARUM?]{.highlight}
-:::
-
-## Wiederholung: Kalibrierung
-- Skala der Latenten Variable wird arbiträr festgelegt (meist auf einen Mittelwert von 0 und eine SD von 1)
-- Modell sonst nicht idenfiziert. 
-- Itemparameter aus versch. Kalibrierungen dadurch [nicht]{.highlight} auf der selben Skala. 
-- [Sie können also nicht direkt miteinander verglichen werden.]{.highlight}
 
 ## Beispiel 
 Wenn wir eine sehr leistungsstarke Stichprobe haben, und eine sehr leistungsschwache, dann wird nach der Kalibrierung trotzdem bei beiden der Mittelwert der Latenten Variable 0 und die SD 1 sein. Mittelschwere Items werden aber in der schwachen Gruppe eher positive Schwierigkeiten haben, in der starken Gruppe eher negative.
@@ -232,16 +240,17 @@ Für die Kalibrierung legen wir jetzt aber fest, dass gilt:
 Gruppe 1: $\hat{\theta} \sim N(0,1)$ \
 Gruppe 2: $\hat{\theta} \sim N(0,1)$ \
 
-## Beispiel 
-Gruppe 1: $\theta \sim N(0,1)$ \
-Gruppe 2: $\theta \sim N(1, 1)$ \ 
-
-Die Bedeutung des Skalenursprungs (0) unterscheidet sich, dadurch unterscheiden sich auch die Itemparameter. \
+:::{.callout-important}
+Die Bedeutung des Skalenursprungs (0) unterscheidet sich, dadurch unterscheiden sich auch die Itemparameter.
+:::
 
 ## Illustration
 
-Wir nehmen an, dass die gleiche Person in Gruppe 1 und in Gruppe 2 getestet wird:
+Wir nehmen an, dass die gleiche Person in Gruppe 1 und in Gruppe 2 getestet wird. Gruppe 2 ist dabei insgesamt stärker als Gruppe 1.
 
+:::{.columns}
+
+:::{.column width="50%"}
 ```{r}
 #| echo: false
 
@@ -272,8 +281,11 @@ ggplot(data_lines, aes(x, y, group = group, colour = group)) +
   set_colour_scheme()
   
 ```
-
+:::
+:::{.column width="50%"}
 Mit der gleichen Fähigkeit würde sie in Gruppe 2 einen niedrigeren Fähigkeitswert zugewiesen bekommen, da diese Gruppe einfach besser ist als Gruppe 1.
+:::
+:::
 
 :::{.aside}
 Grafik nach [diesem Workshop](https://www.youtube.com/watch?v=AEBcf2zcN9U&t=748s).
@@ -282,8 +294,12 @@ Grafik nach [diesem Workshop](https://www.youtube.com/watch?v=AEBcf2zcN9U&t=748s
 
 ## Illustration 2
 
-Das gleiche gilt für Items:
+:::{.columns}
+:::{.column width="50%"}
+Das gleiche Item wird in Gruppe 2 als leichter geschätzt als in Gruppe 1, einfach weil die Lösungswahrscheinlichkeit in Gruppe 2 insgesamt höher ist. 
 
+:::
+:::{.column width="50%"}
 ```{r}
 #| echo: false
 
@@ -315,8 +331,9 @@ ggplot(data_lines, aes(x, y, group = group, colour = group)) +
   geom_text(aes(x = point, label = "Item 1"), vjust = -1.5, show.legend = FALSE) 
 
 ```
+:::
+:::
 
-Das Item wird in Gruppe 2 als leichter geschätzt als in Gruppe 1, einfach weil die Lösungswahrscheinlichkeit in Gruppe 2 höher ist. 
 
 
 ```{r define_itemparameters}
@@ -335,11 +352,10 @@ items <- data.frame(
 ```{r simulation_nonequivalent}
 #| output: false
 #| echo: false
-#| eval: false
 
 set.seed(123)
 
-n_subj <- 100000 ## Als Objekt speichern, da so leichter Änderbar
+n_subj <- 50000 ## Als Objekt speichern, da so leichter Änderbar
 
 calc_2pl <- function(a, theta, xi){
   p <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
@@ -351,23 +367,6 @@ items <- data.frame(
     b = seq(-3, 3, by = 0.5), 
     a = seq(0.5, 1.5, length.out = 13), 
     c = rep(0, 13)
-)
-
-items_2 <- data.frame(
-    item_id = 1:2, 
-    b = c(- 0.5, 1.5), 
-    a = rep(1, length = 2), 
-    c = rep(0, 2)
-)
-
-subjects <- data.frame(
-    sub_id = 1:n_subj,
-    theta = c(rnorm(n_subj, 0, 1))
-)
-
-subjects_2 <- data.frame(
-    sub_id = 1:n_subj,
-    theta = seq(-4, 4, length.out = n_subj)
 )
 
 ## Diesmal nehmen wir einfach 2 Gruppen
@@ -405,8 +404,8 @@ group_2_prep <- sim_dat_2 %>%
   select(-group, -sub_id)
 
 ## Kalibrieren der beiden Gruppen getrennt
-group_1_2PL <- tam.mml.2pl(group_1_prep, irtmodel = "2PL")
-group_2_2PL <- tam.mml.2pl(group_2_prep, irtmodel = "2PL")
+group_1_2PL <- tam.mml.2pl(group_1_prep, irtmodel = "2PL", verbose = FALSE)
+group_2_2PL <- tam.mml.2pl(group_2_prep, irtmodel = "2PL", verbose = FALSE)
 
 # ## Extrahieren der Itemparameter
 itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
@@ -415,8 +414,6 @@ colnames(itempars_2) <- c("alpha_2", "beta_2")
 
 
 parameters_b <- cbind(itempars_1, itempars_2)
-saveRDS(parameters_b, here::here("sim_data", "parameters_b.rds"))
-
 
 # ----------------------------- Diskriminationsparameter Simulation
 
@@ -455,8 +452,8 @@ group_2_prep <- sim_dat_2 %>%
   select(-group, -sub_id)
 
 ## Kalibrieren der beiden Gruppen getrennt
-group_1_2PL <- tam.mml.2pl(group_1_prep, irtmodel = "2PL")
-group_2_2PL <- tam.mml.2pl(group_2_prep, irtmodel = "2PL")
+group_1_2PL <- tam.mml.2pl(group_1_prep, irtmodel = "2PL", verbose = FALSE)
+group_2_2PL <- tam.mml.2pl(group_2_prep, irtmodel = "2PL", verbose = FALSE)
 
 # ## Extrahieren der Itemparameter
 itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
@@ -464,126 +461,58 @@ itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2,
 colnames(itempars_2) <- c("alpha_2", "beta_2")
 
 parameters_a <- cbind(itempars_1, itempars_2)
-saveRDS(parameters_a, here::here("sim_data", "parameters_a.rds"))
 
 ```
-
-
-## Itemschwierigkeiten in zwei nicht-äquivalenten Gruppen
-Gruppe 1: $\theta \sim N(0,1)$ \
-Gruppe 2: $\theta \sim N(1, 1)$ \ 
-
-
-```{r plot_sim_b}
-#| echo: false
-#| warning: false
-
-library(latex2exp)
-
-parameters_b <- readRDS(here::here("sim_data", "parameters_b.rds")) 
-plot_group_pars(parameters_b, beta, beta_2) +
-  labs(
-    title = "Itemschwierigkeiten für zwei Gruppen",
-    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(1, 1)")
-  )
-```
-
-## Diskriminationsparameter
-Gruppe 1: $\theta \sim N(0,1)$ \
-Gruppe 2: $\theta \sim N(0, 1.4)$ \ 
-
-
-```{r plot_sim_a}
-#| echo: false
-#| warning: false
-
-parameters_a <- readRDS(here::here("sim_data", "parameters_a.rds")) 
-
-plot_group_pars(parameters_a, alpha, alpha_2) +
-  labs(
-    title = "Diskriminationsparameter für zwei Gruppen",
-    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(1, 1)")
-  ) +
-  scale_x_continuous(limits = c(0, 2)) +
-  scale_y_continuous(limits = c(0, 2)) +
-  geom_point(colour = "#F4BA02")
-
-```
-
-## SimIRT
-Übringes: es gibt natürlich auch schon R Pakete, die die Simulationsarbeit für uns übernehmen. Aus didaktischen Gründen haben wir das bisher selber gemacht, aber können uns jetzt ein bisschen Arbeit ersparen, und das ganze von dem Paket `catIrt` übernehmen lassen. Hier nochmal die gleiche Simulation, aber mit 
-
-```{r}
-#| output: false
-
-library(catIrt)
-
-group_1 <- simIrt(theta = rnorm(100000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
-group_2 <- simIrt(theta = rnorm(100000, 0, 1.5), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
-
-## Kalibrieren der beiden Gruppen getrennt
-group_1_2PL <- tam.mml.2pl(group_1$resp, irtmodel = "2PL")
-group_2_2PL <- tam.mml.2pl(group_2$resp, irtmodel = "2PL")
-
-## Extrahieren der Itemparameter
-itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
-itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
-colnames(itempars_2) <- c("alpha_2", "beta_2")
-```
-
-
-## Plots zeigen
-```{r}
-#| code-fold: true
-#| code-summary: "Code zeigen"
-
-parameters <- cbind(itempars_1, itempars_2)
-
-plot_group_pars(parameters, alpha, alpha_2) +
-  labs(
-    title = "Diskriminationsparameter für zwei Gruppen",
-    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(0, 1.5)")
-  )
-```
-
 
 ## Schwierigkeit
 ```{r}
-#| code-fold: true
-#| code-summary: "Code zeigen"
+#| echo: false
 
-plot_group_pars(parameters, beta, beta_2) +
+plot_group_pars(parameters_b, beta, beta_2) +
   labs(
-    title = "Itemschwierigkeiten für zwei Gruppen",
-    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(0, 1.5)")
+    title = "Itemschwierigkeiten für zwei nicht-äquivalente Gruppen",
+    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(1, 1)")
   )
+```
+
+
+## Diskriminationsparameter
+```{r}
+#| echo: false
+
+plot_group_pars(parameters_a, alpha, alpha_2) +
+  labs(
+    title = "Diskriminationsparameter für zwei nicht-äquivalente Gruppen",
+    caption = TeX("\\theta_1 \\sim N(0,1), \\theta_2 \\sim N(0, 1.4)")
+  ) +
+  xlim(0, 1.5) +
+  ylim(0, 2.5)
 ```
 
 
 
 ## Schlusfolgerung
-- Wir brauchen also einen Referenzrahmen um unsere Testergebnisse interpretieren zu können. 
-- Das bedeutet auch, dass wir die Werte aus verschiedenen Kalibrierungen nicht direkt miteinander vergleichen können.
-- Lösung: **Linking**
+Wir brauchen also einen Referenzrahmen um unsere Testergebnisse interpretieren zu können. 
 
-## Identifizierbarkeit
+Lösung: [Linking]{.highlight}
 
-## Linking/Equating {#sec-linking}
-- Szenario: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen. 
+## Linking: Anwendungsbereiche {#sec-linking}
+
+Immer, wenn wir Werte aus verschiedenen Kalibrierungen miteinander vergleichen wollen:
+
+- DIF
+- Tests, die in verschiedenen Jahren bearbeitet wurden
+- Adaptives Testen
+
+
+Ganz egal welcher Anwendungsfall, das Szenario ist das gleiche: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen. 
 - Dafür haben wir zwei Möglichkeiten:
     - Gemeinsame Items
     - Gemeinsame Personen
 
-Abbildung z.B. mit Verteilung von theta scores, die nochmal zeigt was das Problem ist. 
-Dann kann man bestimmte Items markieren, und die Verteilungen entsprechend dieser markierten Items verschieben. 
+## Gemeinsame Personen
+Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen. 
 
-Embretson 2000, S. 253
-
-- Item Parameter werden in beiden Tests geschätzt, und dann anhand der Ankeritems durch eine geeignete Transformation auf eine gemeinsame Skala gebracht.
-
-## Beispiel
-- Schulvergleichsstudien über die Jahre:
-- Itempools von Unternehmen, die Einstellungstests anbieten. 
 
 ## Ankeritems
 
@@ -601,18 +530,17 @@ Ankeritems sind [gemeinsame Items]{.highlight}, die in beiden Testformen vorhand
 
 :::
 
+
 ::::
 
-## Ankeritems
-- Kallibrierungen der Parameterschätzer aus zwei verschiedenen Testformen werden auf eine gemeinsame Skala gebracht.
-- Wir müssen also die theta ($\theta$) scores des einen Tests so transformieren, dass sie auf einer gemeinsamen Skala mit den Scores des anderen Tests liegen:
+## Linking Verfahren: Grundidee
+
+Die $\theta$ scores des einen Tests müssen so transformiert werden, dass sie auf einer gemeinsamen Skala mit den Scores des anderen Tests liegen:
 
 $$
 \theta_Y = A \theta_X + B
 $$
 
-## Ankerpersonen
-Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen. 
 
 
 ## Linking 
@@ -625,12 +553,12 @@ $$
 
 ## Linking
 Ziel: "Linking constants" $x$ und $y$ findend, welche die Item parameter aus den beiden Gruppen auf der selben Skala plazieren. 
-Deutlich machen, für welche Art Modell nutzbar!
-Nochmal mit dem neueren Buch rübergehen, das geht noch mehr in die Tiefe. 
-
-- Zwei häufige Methoden:
-    - mean-sigma:
-        - Annahme: Gemeinsame Ankeritems, oder Zwei Gruppen haben den genau gleichen Test bearbeitet. 
+- Die häufigsten Methoden:
+    - mean-mean
+    - mean-sigma
+    - Stocking-Lord
+    - Haebermann
+         
 $$
 B_B^* = x\beta_b=y
 $$
