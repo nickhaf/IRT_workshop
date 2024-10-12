@@ -4,6 +4,7 @@ format: letterbox-revealjs
 title-slide-attributes:
   data-background-image: ./images/dark_flower.jpg
   data-background-size: cover
+bibliography: references.bib
 ---
 
 ```{r}
@@ -645,91 +646,82 @@ Sehr ähnlich, nur dass wir hier die Item Characteristic Curves verwenden.
 In beiden Fällen wird die Gleichung so optimiert, dass die Linkingkonstanten $x$ und $y$ so bestimmt werden, dass der Unterschied zwischen den Test/Item Characteristic Curves der Referenz- und Fokusgruppe minimiert wird. 
 
 ## Übung
-Gehe zu []() und Löse die Aufgaben zur Datenaufbereitung und zum Linking. 
+Löse die [Übungsaufgaben zum Linking](https://nickhaf.github.io/IRT_workshop/exercises/linking/linking.html). 
 
+## {background-image="images/penguins_group.jpg" background-size="1225px"}
 
+::: {.absolute left="2.5%" bottom="0%" style="font-size:1em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
 
-## Zurück zum Anfang: Differential Item Functioning 
+### Zurück zum Anfang: Differential Item Functioning
 
-- Wir haben jetzt gesehen, wie man Item- und Personenparamter aus verschiedenen Kalibrierungen auf die selbe Skala bringen kann. 
-- Jetzt können wir uns also noch einmal mit dem Eingangsproblem dieser Session beschäftigen: Differential Item Functioning. 
+Wir haben jetzt gesehen, wie man Item- und Personenparamter aus verschiedenen Kalibrierungen auf die selbe Skala bringen kann. Jetzt können wir auf das Eingangsproblem dieser Session zurückkommen: [DIF]{.highlight}. 
 
+:::
 
 ## DIF finden
 
-Es gibt viele verschiedene Verfahren, mit denen man Items auf DIF tests kann. 
-Die Grundidee ist folgende: Wir schauen, ob Items in bestimmten Gruppen häufiger beantwortet wurden als in anderen Gruppen, bzw. ob die Itemparamter in bestimmten Gruppen anders geschätzt wurden (nachdem gelinkt wurde).  
+Viele verschiedene Verfahren, meist wird folgende Frage untersucht: Wurden Items in bestimmten Gruppen häufiger beantwortet wurden als in anderen Gruppen, bzw. wurden die Itemparamter in bestimmten Gruppen anders geschätzt (nachdem gelinkt wurde)?  
 
-Es gibt viele verschieden Verfahren, die das auf verschiedene Art und Weise versuchen. Ganz grob kann man zwischen Verfahren unterscheiden, die den beobacheteten Testscore oder den latenten Fähigkeitswert zur Berechnung nutzen. 
-
-## Grundlegendes Vorgehen
-
-Hier nochmal rüber gehen und verifizieren:
-
-Grundlegende Idee kann sein, verschiedene Modelle zu fitten, in denen die Parameter eines Items auf den gleichen Wert fixiert sind, und diese mit einem Modell zu vergleichen, wo diese Parameter frei geschätzt werden (z.B. [Likelihood Ratio Test]()).   
-Eine andere Idee ist, eine [logistische Regression]() zu rechnen, und zu schauen, ob es eine Interaktion zwischen Gruppenzugehörigkeit und Itemschwierigkeit/Personenfähigkeit gibt.  
-Ein Ansatz, der sich im IRT framework bewegt wäre der Vergleich von Itemschwierigkeiten zwischen den Gruppen zu vergleichen [Lord's Chi Quadrat Test, auch genannt Wald Test](). 
-Dann gibt es noch Ansätze, die Maschinelles lernen nutzen, um 
-
-
-## Latent Trait Ansätze
-- Im Irt Framework.
-- Ganz generell wird geschaut, ob sich die Itemparameter zwischen den Gruppen unterscheiden. 
-
-Beispiele: 
-- Lord's Chiquadrat Test
-- Area Measures
-- Konfirmatorische Faktorenanalyse 
-- Rasch trees
-- Wald type statistics
-
-## Observed Score Ansätze
-- Manche, wie z.B. der bekannte Mantel-Haenszel Test, nutzen Kontingenztabellen, um zu schauen, ob sich die Antwortmusster der einzelenen Items in den verschiednene Gruppen unterscheiden.  
-- In logistischen Regressionsansatz wird die Lösungswahrscheinlichkeit der Items in Abhängigkeit von der Gruppenzugehörigkeit geschätzt. 
-
-
-
-
-
-- Wald-Test etc.
-- Logistische Regression
-- Area Measuures
-- CFA-Ansätze
-- (fixieren von Parametern in beiden Subgruppen und Vergleich mit Modell, wo diese Parameter frei geschätzt werden). 
-- Multigruppen-IRT
-- MIMIC model
-- Raschtrees
-- Regularisierung
+Es werden also entweder die [beobacheteten Testscores]{.highlight} oder die [latenten Fähigkeitswert]{.highlight} zur Berechnung genutzt.  
 
 :::{.aside}
-See Berrio 2020 for a review. 
+Siehe @berrio2020developments für eine ausführliche Übersicht zu verschiedenen DIF-Findungs Ansätzen. 
 :::
+
+## Ansätze
+
+### Observed Score Ansätze
+Z.B. der bekannte [Mantel-Haenszel Test](). Nutzen Kontingenztabellen, um zu schauen, ob sich die Antwortmusster der einzelenen Items in den verschiedenen Gruppen unterscheiden.  
+
+### [Likelihood Ratio Test]()
+Vergleich von Modellen mit zwischen Gruppen fixierten Parametern eines Items, und Modellen mit frei geschätzten Parametern.   
+
+## Ansätze
+### [Logistische Regression]()
+Logistische Regression Interaktionsterm zwischen Gruppenzugehörigkeit und Itemschwierigkeit/Personenfähigkeit gibt.  
+
+### [Lord's Chi Quadrat Test/Wald Test]()
+IRT Ansatz, Vergleich von Itemparametern zwischen den Gruppen.
+
+### [Raschtrees]()
+Gruppensplitting, kann auch diverse Interaktionen zwischen Variablen einfach untersuchen. 
+
+## [Regularisierung]()
+
 
 ## Iteratives Vorgehen
 :::{.callout-note}
-
 Oft werden die Methoden iterativ angewandt, da beim anfänglichen Matchen der Gruppen ja auch eventuell DIF-Items für die Berechnung der Scores verwendet werden. 
 :::
-
-## Pakete
-- difR
-- equateIRT
-- TAM
-- mirt
-- psychotrees
 
 
 ## Welche denn jetzt?
 
-Das ist (natürlich) abhängig vom Modell, der Fragestellung in den Daten. Für kleine Datensätze mag es sinnvoller sein, Verfahren zu wählen die auf beobachtete Scores zurückgreifen (nicht auf geschätzte Trait-Variablen). Hat man hingegen große Datensätze mit vielen Kovariaten (und damit auch vielen verschiedenen Gruppen und Gruppen-Interaktionen) mag es sinnvoller sein, in Verfahren mit maschinellem Lernen zu schauen, z.B. Rasch-Trees. Generell kann es auch eine gute Idee sein, Daten zu simulieren und daran verschiedene Verfahren auszuprobieren um zu schauen, welche zu ähnlichen Ergebnissen führen.   
-Generell ist es auch keine gute Idee, einfach nach p-Werten zu gehen, um Items dann blind auszuschließen. Stattdessen sollten die Itemschwierigkeitsunterschiede zwischen den Gruppen beurteilt, und auch das Item selber untersucht werden.
+Abhängig vom Modell, der Fragestellung und den Daten. 
+
+Für kleine Datensätze eventuell eher Verfahren wählen die auf beobachtete Scores zurückgreifen (nicht auf geschätzte Trait-Variablen).   
+
+Sehr große Datensätze mit vielen Kovariaten (und damit auch vielen verschiedenen Gruppen und Gruppen-Interaktionen) könnten von Machine-Learning profitieren, z.B. Rasch-Trees.  
+
+Ansonste Simulation von Daten und ausprobieren. 
+
+:::{.callout-important}
+Generell ist es keine gute Idee, einfach nach p-Werten zu gehen, um Items dann blind auszuschließen. Stattdessen sollten die Itemschwierigkeitsunterschiede zwischen den Gruppen beurteilt, und auch das Item selbst inhaltlich untersucht werden.
+:::
 
 https://cran.r-project.org/web/packages/difR/difR.pdf
 
 
+## Übung
+Bitte bearbeite die [DIF-Übung](https://nickhaf.github.io/IRT_workshop/exercises/linking/dif.html).
+
 ## {background-image="images/penguins.jpg" background-size="1225px"}
 ::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
 Pause
+:::
+
+## Literatur
+::: {#refs}
 :::
 
 
