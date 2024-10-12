@@ -169,6 +169,7 @@ window.Quarto = {
   <li><a href="#check-mit-tam" id="toc-check-mit-tam" class="nav-link" data-scroll-target="#check-mit-tam"><span class="header-section-number">1.3.2</span> Check mit <code>TAM</code></a></li>
   </ul>
 </li>
+  <li><a href="#simirt" id="toc-simirt" class="nav-link" data-scroll-target="#simirt"><span class="header-section-number">1.4</span> SimIRT</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -629,13 +630,13 @@ Tip
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat_2PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam.mml.2pl</a></span><span class="op">(</span><span class="va">sim_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sub_id</span><span class="op">)</span>, irtmodel <span class="op">=</span> <span class="st">"2PL"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>....................................................
-Processing Data      2024-10-12 13:30:02.784619 
+Processing Data      2024-10-12 20:05:41.329179 
     * Response Data: 100000 Persons and  13 Items 
     * Numerical integration with 21 nodes
-    * Created Design Matrices   ( 2024-10-12 13:30:03.136003 )
-    * Calculated Sufficient Statistics   ( 2024-10-12 13:30:03.216385 )
+    * Created Design Matrices   ( 2024-10-12 20:05:41.645061 )
+    * Calculated Sufficient Statistics   ( 2024-10-12 20:05:41.726554 )
 ....................................................
-Iteration 1     2024-10-12 13:30:03.235967
+Iteration 1     2024-10-12 20:05:41.74544
 E Step
 M Step Intercepts   |----
 M Step Slopes       |---
@@ -645,7 +646,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 2     2024-10-12 13:30:03.503491
+Iteration 2     2024-10-12 20:05:41.987851
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -655,7 +656,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 3     2024-10-12 13:30:03.766546
+Iteration 3     2024-10-12 20:05:42.238124
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -665,7 +666,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 4     2024-10-12 13:30:03.907657
+Iteration 4     2024-10-12 20:05:42.374653
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -675,7 +676,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 5     2024-10-12 13:30:04.121542
+Iteration 5     2024-10-12 20:05:42.568436
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -685,7 +686,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 6     2024-10-12 13:30:04.269649
+Iteration 6     2024-10-12 20:05:42.702103
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -695,7 +696,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 7     2024-10-12 13:30:04.48701
+Iteration 7     2024-10-12 20:05:42.915179
 E Step
 M Step Intercepts   |---
 M Step Slopes       |---
@@ -705,7 +706,7 @@ M Step Slopes       |---
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 8     2024-10-12 13:30:04.592153
+Iteration 8     2024-10-12 20:05:43.017543
 E Step
 M Step Intercepts   |---
 M Step Slopes       |--
@@ -715,7 +716,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 9     2024-10-12 13:30:04.709913
+Iteration 9     2024-10-12 20:05:43.134318
 E Step
 M Step Intercepts   |---
 M Step Slopes       |--
@@ -725,7 +726,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 10     2024-10-12 13:30:04.853889
+Iteration 10     2024-10-12 20:05:43.270895
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -735,7 +736,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 11     2024-10-12 13:30:04.954199
+Iteration 11     2024-10-12 20:05:43.367233
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -745,7 +746,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 12     2024-10-12 13:30:05.070592
+Iteration 12     2024-10-12 20:05:43.47857
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -755,7 +756,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 13     2024-10-12 13:30:05.285787
+Iteration 13     2024-10-12 20:05:43.668658
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -765,7 +766,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 14     2024-10-12 13:30:05.408316
+Iteration 14     2024-10-12 20:05:43.785911
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -775,7 +776,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 15     2024-10-12 13:30:05.510352
+Iteration 15     2024-10-12 20:05:43.882814
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -785,7 +786,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 16     2024-10-12 13:30:05.62703
+Iteration 16     2024-10-12 20:05:43.998543
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -795,7 +796,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 17     2024-10-12 13:30:05.763256
+Iteration 17     2024-10-12 20:05:44.128591
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -805,7 +806,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 18     2024-10-12 13:30:05.879363
+Iteration 18     2024-10-12 20:05:44.241389
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -815,7 +816,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 19     2024-10-12 13:30:05.995527
+Iteration 19     2024-10-12 20:05:44.354792
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -825,7 +826,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 20     2024-10-12 13:30:06.130323
+Iteration 20     2024-10-12 20:05:44.485094
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -835,7 +836,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 21     2024-10-12 13:30:06.34984
+Iteration 21     2024-10-12 20:05:44.698823
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -845,7 +846,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 22     2024-10-12 13:30:06.44435
+Iteration 22     2024-10-12 20:05:44.804112
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -855,7 +856,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 23     2024-10-12 13:30:06.556929
+Iteration 23     2024-10-12 20:05:44.91871
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -865,7 +866,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 24     2024-10-12 13:30:06.690879
+Iteration 24     2024-10-12 20:05:45.05106
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -875,7 +876,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 25     2024-10-12 13:30:06.788023
+Iteration 25     2024-10-12 20:05:45.146892
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -885,7 +886,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 26     2024-10-12 13:30:06.904068
+Iteration 26     2024-10-12 20:05:45.258917
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -895,7 +896,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 27     2024-10-12 13:30:07.022165
+Iteration 27     2024-10-12 20:05:45.373026
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -905,7 +906,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 28     2024-10-12 13:30:07.269747
+Iteration 28     2024-10-12 20:05:45.613167
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -915,7 +916,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 29     2024-10-12 13:30:07.369955
+Iteration 29     2024-10-12 20:05:45.707146
 E Step
 M Step Intercepts   |--
 M Step Slopes       |--
@@ -925,7 +926,7 @@ M Step Slopes       |--
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 30     2024-10-12 13:30:07.48596
+Iteration 30     2024-10-12 20:05:45.820226
 E Step
 M Step Intercepts   |--
 M Step Slopes       |-
@@ -935,7 +936,7 @@ M Step Slopes       |-
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 31     2024-10-12 13:30:07.627214
+Iteration 31     2024-10-12 20:05:45.953805
 E Step
 M Step Intercepts   |--
 M Step Slopes       |-
@@ -945,7 +946,7 @@ M Step Slopes       |-
   Maximum regression parameter change: 0
   Maximum variance parameter change: 0
 ....................................................
-Iteration 32     2024-10-12 13:30:07.732653
+Iteration 32     2024-10-12 20:05:46.049685
 E Step
 M Step Intercepts   |-
 M Step Slopes       |-
@@ -984,9 +985,9 @@ EAP Reliability:
 [1] 0.626
 
 -----------------------------
-Start:  2024-10-12 13:30:02.781105
-End:  2024-10-12 13:30:08.191874 
-Time difference of 5.410769 secs</code></pre>
+Start:  2024-10-12 20:05:41.324725
+End:  2024-10-12 20:05:46.506352 
+Time difference of 5.181627 secs</code></pre>
 </div>
 </div>
 </div>
@@ -1065,9 +1066,27 @@ Lösung
 </div>
 </div>
 </div>
+</section></section><section id="simirt" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="simirt">
+<span class="header-section-number">1.4</span> SimIRT</h2>
+<p>Übringes: es gibt natürlich auch schon R Pakete, die die Simulationsarbeit für uns übernehmen. Aus didaktischen Gründen haben wir das bisher selber gemacht, aber können uns jetzt ein bisschen Arbeit ersparen, und das ganze von dem Paket <code>catIrt</code> übernehmen lassen. Hier nochmal die gleiche Simulation, aber mit</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/swnydick/catIrt">catIrt</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">group_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/catIrt/man/simIrt.html">simIrt</a></span><span class="op">(</span>theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100000</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">items</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, mod <span class="op">=</span> <span class="st">"brm"</span><span class="op">)</span></span>
+<span><span class="va">group_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/catIrt/man/simIrt.html">simIrt</a></span><span class="op">(</span>theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100000</span>, <span class="fl">0</span>, <span class="fl">1.5</span><span class="op">)</span>, params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">items</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, mod <span class="op">=</span> <span class="st">"brm"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Kalibrieren der beiden Gruppen getrennt</span></span>
+<span><span class="va">group_1_2PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam.mml.2pl</a></span><span class="op">(</span><span class="va">group_1</span><span class="op">$</span><span class="va">resp</span>, irtmodel <span class="op">=</span> <span class="st">"2PL"</span><span class="op">)</span></span>
+<span><span class="va">group_2_2PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam.mml.2pl</a></span><span class="op">(</span><span class="va">group_2</span><span class="op">$</span><span class="va">resp</span>, irtmodel <span class="op">=</span> <span class="st">"2PL"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Extrahieren der Itemparameter</span></span>
+<span><span class="va">itempars_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">group_1_2PL</span><span class="op">$</span><span class="va">item_irt</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span><span class="op">)</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">round</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">itempars_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">group_2_2PL</span><span class="op">$</span><span class="va">item_irt</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span><span class="op">)</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">round</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">itempars_2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha_2"</span>, <span class="st">"beta_2"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
-</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
