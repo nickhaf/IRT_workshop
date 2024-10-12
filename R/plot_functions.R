@@ -2,7 +2,8 @@
 theme_bg <- function() {
   theme_minimal() +
     theme(panel.background = element_rect(fill = '#F8F8F8', colour = '#F8F8F8'),
-          plot.background = element_rect(fill = '#F8F8F8', colour = '#01364C'))
+          plot.background = element_rect(fill = '#F8F8F8', colour = '#01364C'),
+          text = element_text(colour = '#01364C'))
 }
 
 plot_pcm <- function(delta){
@@ -48,7 +49,7 @@ plot_pcm <- function(delta){
 
 }
 
-set_colour_scheme <- function(color_scheme = c("#01364C", "#F4BA02", "#9B1B34")){
+set_colour_scheme <- function(color_scheme = c("#F4BA02", "#9B1B34", "#472120")){
   scale_colour_manual(values = color_scheme)
 }
 
