@@ -27,7 +27,7 @@ library(rmarkdown)
 | 13:00 – 16:00       | Höher parametrisierte Modelle              | Höher parametrisierte Modelle: 2pl, 3pl, partial credit (NH)                                                                                                       |
 | 13:00 – 16:00       | Längsschnittliche Designs                  | Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen (SW)     
 |
-: Programm 1 {.striped tbl-colwidths="[20, 30, 50]"}
+: Programm 2 {.striped tbl-colwidths="[20, 30, 50]"}
 
 ### Tag 3
 
