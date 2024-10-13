@@ -15,45 +15,113 @@ source(here::here("R", "irt_formulas.R"))
 
 ```
 
-## Wiederholung 
+## Fahrplan
 
-### 1PL Modell
+
+## {background-image="images/equation.jpg" background-size="1225px" }
+
+::: {.absolute left="0%" bottom="2.5%" style="color:#F8F8F8; backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
+
+Wiederholung: 1PL
+
+:::
+
+## 1PL Modell
 
 $$
 logit(P(X_{pi}=1)) = \theta_p - \beta_i
 $$
-- Logit: Transformation unseres linearen Terms, damit die Werte zwischen 0 und 1 liegen. 
-- Inverse der logit ist die Logistic function.
+
+- Logit: Transformation unseres linearen Terms, damit die Werte zwischen 0 und 1 liegen. Wahrscheinlichkeit $p$ durch Gegenwahrscheinlichkeit $1-p$. 
+- Inverse der logit ist die logistische Funktion.
+
+
+## 1PL Modell: Umformen
+
+$$
+logit(P(X_{pi}=1)) = \ln\left(\frac{P(X_{pi}=1)}{1-P(X_{pi}=1)}\right) = \theta_p - \beta_i
+$$
+
+## 1PL Modell: Umformen
 
 
 $$
-P(X_{pi}=1) = logistic(\theta_p - \beta_i)
+\frac{p_{pi}}{1-p_{pi}} = exp(\theta_p - \beta_i)
+$$
+\
+
+$$
+p_{pi} = exp(\theta_p - \beta_i)*( 1-p_{pi})
 $$
 
-## 1PL exponentielle Form des logistischen Modells
+::: aside
+Mit $p_{pi}$ für $P(X_{pi}=1)$
+:::
 
-https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/The-Logit-Function/index.html
+## 1PL Modell: Umformen
+
+
+$$
+p_{pi} + p_{pi} * exp(\theta_p - \beta_i) = exp(\theta_p - \beta_i)
+$$
+
+\
+
+::: {.fragment .fade-in}
+
+$$
+p_{pi} + p_{pi} * exp(\theta_p - \beta_i) = exp(\theta_p - \beta_i)
+$$ 
+
+:::
+
+\
+
+
+::: {.fragment .fade-in}
+
+$$
+p_{pi}*(1+exp(\theta_p - \beta_i)) = exp(\theta_p - \beta_i)
+$$ 
+
+::: 
+
+
+## 1PL Schreibweise 1
+
+
 $$
 P(X_{pi}=1) = \frac{exp(\theta_p - \beta_i)}{1 + exp(\theta_p - \beta_i)}
 $$
 
-## Umschreiben zu
+::: aside
+$P(X_{pi}=1)$ für $p_{pi}$ einsetzen, um die gängige Notation herzustellen
+:::
+
+## 1PL Schreibweise 2
+
 $$
 P(X_{pi}=1) = \frac{e^{\theta_p - \beta_i}}{1 + e^{\theta_p - \beta_i}}
 $$
 
-## Vereinfachen
+## 1PL Schreibweise 3
+
 $$
-P(X_{pi}=1) = \frac{1}{1 + e^{\color{red}{-}\theta_p \color{red}{+} \beta_i}}
+P(X_{pi}=1) = \frac{1}{1 + e^{\color{#9B1B34}{-}\theta_p \color{#9B1B34}{+} \beta_i}}
 $$
+
 ## Beispiel
 
 $$
 \frac{exp(1 - 0.8)}{1 + exp(1 - 0.8)} = 0.55
 $$
+
+Wahrscheinlichkeit einer richtigen Antwort über 0.5, wenn $\theta_p > \beta_i$. 
+
+::: aside
 - $\theta_p = 1$
 - $\beta_i = 0.8$
-
+:::
 
 ## Beispiel
 
@@ -61,36 +129,68 @@ $$
 \frac{exp(0.8 - 1)}{1 + exp(0.8 - 1)} = 0.45 
 $$
 
+Wahrscheinlichkeit einer richtigen Antwort unter 0.5, wenn $\theta_p < \beta_i$. 
+
+::: aside
+
 - $\theta_p = 0.8$
 - $\beta_i = 1$
 
+:::
 
-# Höher parametrisierte IRT Modelle
+
+## {background-color="#17161e"}
+
+![](images/equations3.jpg){.absolute top="-12.5%" right="12.5%" height="111%" style="max-height: unset; box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
+
+::: {.absolute left="5%" top="2.5%" style="color:#F8F8F8; font-size: 1.5em; text-align: center;"}
+
+Höher parametrisierte 
+\ 
+IRT Modelle
+
+:::
+
+
+## Neue Paramter
 
 Wir können Parameter zu diesem Modell hinzufügen, wodurch wir flexibler in der Modellierung werden:
 
 - Schwierigkeit $\beta_i$ (Intercept)
+
+::: {.fragment .fade-in}
 - Steigung $\alpha$ (Faktorladung, [Diskriminationsparameter]{.highlight})
-- Ratewahrscheinlichkeit $\gamma_i$ ([Guessing probability]{.highlight})
+:::
+
+::: {.fragment .fade-in}
+- [Ratewahrscheinlichkeit]{.highlight} $\gamma_i$ 
+:::
 
 ## 3PL
 
 $$
-P(X_{pi}=1) = \gamma_i + (1-\gamma_i)\frac{exp(\alpha_i(\theta_p - \beta_i)))}{1 + exp(\alpha_i(\theta_p - \beta_i))}
+P(X_{pi}=1) = \color{#aaa938}{\gamma_i} + (1-\color{#aaa938}{\gamma_i})\frac{exp(\color{#F4BA02}{\alpha_i}(\theta_p - \color{#99D9DD}{\beta_i})))}{1 + exp(\color{#F4BA02}{\alpha_i}(\theta_p - \color{#99D9DD}{\beta_i}))}
 $$
-- $\beta_i$: Schwierigkeit
-- $\alpha_i$: discrimination/factor loading/slope
-- $\gamma_i$ : guessing probability
- - Kann entweder geschätzt oder gesetzt werden (z.B. bei 4 Antwortmöglichkeiten: $\gamma_i = 1/4 = 0.25$)
- - Wenn die Lösungswahrscheinlichkeit auf der rehcten Seite sehr gering ist, ist sie immer noch mind. $\gamma_i$
 
+- [Schwierigkeit]{.lightblue}
+- [Diskriminationsparamter]{.highlight}
+- [Ratewahrscheinlichkeit]{.green}
+  - z.B. bei 4 Antwortmöglichkeiten: $\gamma_i = 1/4 = 0.25$
 
 ## 2PL
 $\gamma_i = 0$
 
 $$
-P(X_{pi}=1) = \color{red}{0} + (1-\color{red}{0})\frac{exp(\alpha_i(\theta_p - \beta_i)))}{1 + exp(\alpha_i(\theta_p - \beta_i))}
+P(X_{pi}=1) = \color{#9B1B34}{0} + (1-\color{#9B1B34}{0})\frac{exp(\alpha_i(\theta_p - \beta_i)))}{1 + exp(\alpha_i(\theta_p - \beta_i))}
 $$
+
+## 1PL
+$\alpha_i = 1$
+
+$$
+P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{red}{1}(\theta_p - \beta_i)))}{1 + exp(\color{red}{1}(\theta_p - \beta_i))}
+$$
+
 
 ## Darstellung
 
@@ -107,6 +207,10 @@ viewof beta1 = Inputs.range(
   [-3, 3], 
   {value: 0, step: .1, label: tex`\beta_1`}
 )
+viewof gamma1 = Inputs.range(
+  [0, 1], 
+  {value: 0, step: .1, label: tex`\gamma_1`}
+)
 viewof alpha2 = Inputs.range(
   [-1, 1], 
   {value: 1, step: .1, label: tex`\alpha_2`}
@@ -114,6 +218,10 @@ viewof alpha2 = Inputs.range(
 viewof beta2 = Inputs.range(
   [-3, 3], 
   {value: 0, step: .1, label: tex`\beta_2`}
+)
+viewof gamma2 = Inputs.range(
+  [0, 1], 
+  {value: 0, step: .1, label: tex`\gamma_2`}
 )
 
 
@@ -123,15 +231,15 @@ viewof beta2 = Inputs.range(
 :::{.column width="70%"}
 ```{ojs}
 
-line_function = function(alpha, beta, theta) {
-    return Math.exp(alpha * (theta - beta)) / (1 + Math.exp(alpha * (theta - beta)));
+line_function = function(alpha, beta, gamma, theta) {
+    return gamma + (1 - gamma) * (Math.exp(alpha * (theta - beta)) / (1 + Math.exp(alpha * (theta - beta))));
 }
 
 // X-Variable
 data = d3.range(-3, 3, 0.1).map((theta) => ({
   x: theta,
-  y1: line_function(alpha1, beta1, theta),
-  y2: line_function(alpha2, beta2, theta)
+  y1: line_function(alpha1, beta1, gamma1, theta),
+  y2: line_function(alpha2, beta2, gamma2, theta)
 }));
 
 Plot.plot(
@@ -140,21 +248,13 @@ Plot.plot(
     y: {grid: false, domain: [0, 1]},
     marks: [
       Plot.line(data, {x: "x", y: "y1", stroke: "#9B1B34"}),
-      Plot.line(data, {x: "x", y: "y2", stroke: "#99D9DD"}),
+      Plot.line(data, {x: "x", y: "y2", stroke: "#F4BA02"}),
     ]
   }
 )
 ```
 :::
 :::
-
-## 1PL
-$\alpha_i = 1$
-
-$$
-P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{red}{1}(\theta_p - \beta_i)))}{1 + exp(\color{red}{1}(\theta_p - \beta_i))}
-$$
-
 
 ## Simulieren von IRT Daten
 
@@ -559,6 +659,8 @@ for(item.number in 1:ncol(stresid)){
 
 ## Bildquellen
 - Foto von <a href="https://unsplash.com/de/@pawel_czerwinski?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Pawel Czerwinski</a> auf <a href="https://unsplash.com/de/fotos/ein-schwarzer-und-gruner-abstrakter-hintergrund-mit-wellenformigen-linien-ELaFzBeZ6i0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@roman_lazygeek?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Roman Mager</a> auf <a href="https://unsplash.com/de/fotos/geschriebene-gleichungen-auf-brauner-holztafel-5mZ_M06Fc9g?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- https://www.bing.com/images/create/image-of-a-woman-writing-equations-on-a-window2c-li/1-670bee21dbf4423ca93d0804834a7f46?id=ujHjvSYHngnLxV45OzbrGQ%3d%3d&view=detailv2&idpp=genimg&thId=OIG3.E7px5jYmHkuo3mmm7QIC&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&FORM=GCRIDP&mode=overlay
 - Foto von <a href="https://unsplash.com/de/@crawford?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Crawford Jolly</a> auf <a href="https://unsplash.com/de/fotos/mann-mit-speer-wandmalerei-3IxuF9MCjkA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 
   

@@ -7,6 +7,7 @@ $theme-yellow: #F4BA02;
 $theme-red: #9B1B34;
 $theme-timberwolf: #F8F8F8;
 $theme-brown: #472120;
+$theme-green: #aaa938;
 
 $link-color: $theme-blue;
 $body-bg: $theme-timberwolf;
@@ -41,6 +42,26 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
 
 .highlight{
     color: $theme-highlight;
+    font-weight: bold;
+}
+
+.lightblue{
+    color: $theme-blue;
+    font-weight: bold;
+}
+
+.red{
+    color: $theme-red;
+    font-weight: bold;
+}
+
+.brown{
+    color: $theme-brown;
+    font-weight: bold;
+}
+
+.green{
+    color: $theme-green;
     font-weight: bold;
 }
 
@@ -112,5 +133,6 @@ input[type="range"] {
     height: 5px; // Set your desired height
   }
 }
+
 
 
