@@ -1,0 +1,180 @@
+---
+title: "Modellselektion"
+subititle: "Übung"
+author: "Nicklas Hafiz"
+format: html
+---
+
+```{r}
+#| echo: false
+
+source(here::here("R", "plot_functions.R"))
+```
+
+
+Das 2PL Modell haben wir schon gefittet (und wir wissen ja, dass das richtig ist, weil wir die Daten selbst generiert haben). Wie aber verhalten sich das 1PL Modell und das 3PL Modell? 
+
+# Modellevaluation
+
+## 2PL
+
+### Erwartet vs. beobachtet
+Als Baseline schauen wir uns ein paar Fit-Eigenschaften von unserem 2PL Modell an, das wir so gefittet hatten: 
+
+
+```{r}
+#| message: false
+
+library(TAM)
+library(tidyverse)
+
+sim_dat_wide <- readRDS(here::here("raw_data", "sim_2pl.rds"))
+
+sim_dat_2PL <- tam.mml.2pl(sim_dat_wide %>% select(-sub_id), irtmodel = "2PL", verbose = FALSE)
+```
+
+Zuerst interessiert uns wie gut unsere tatsächlichen Werte mit den Modellerwarungen übereinstimmen. Nutze folgende Funktion um die Itemplots zu erstellen (kommt aus `TAM`):
+
+```{r}
+#| eval: false
+
+plot(sim_dat_2PL,
+  type = "items",
+  export = FALSE,
+  observed = TRUE,
+  package = "graphics"
+)
+```
+
+Fällt dir etwas auf?
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+
+```{r}
+#| message: false
+
+plot(sim_dat_2PL,
+  type = "items",
+  export = FALSE,
+  observed = TRUE,
+  package = "graphics"
+)
+
+```
+
+::: 
+
+### Itemfit
+Als nächstes schauen wir uns die Infit und Outfit - Werte der Items an. Wende dafür die Funktion `tam.fit()` auf dein gefittetes TAM-Modell an.  
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+
+```{r}
+fit_2PL <- tam.fit(sim_dat_2PL)
+
+fit_2PL$itemfit
+```
+
+Manchmal kann es auch helfen, sich das ganze als Plot ausgeben zu lassen:
+
+```{r}
+#| code-fold: true
+
+# Definieren einer eigenen Plot-Funkktion
+plot_infit_outfit <- function(tam_obj){
+fit_tam <- tam.fit(tam_obj)$itemfit
+
+fit_plotdat <- fit_tam %>%
+  # Als Faktor umwandeln, damit die Sortierung im Plot stimmt
+  mutate(Item = factor(parameter, levels = unique(parameter[order(as.numeric(parameter))]))) %>%
+  select(Item, Outfit, Infit) %>%
+  pivot_longer(cols = c(Outfit, Infit), names_to = "fit", values_to = "value")
+
+ggplot(fit_plotdat, aes(x = value, y = Item)) +
+  geom_point(colour = "#F4BA02") +
+  facet_grid(. ~ fit, scales = "fixed") +
+  xlim(0.4, 1.6) +
+  theme_bg() +
+  geom_vline(xintercept = 0.5, linetype = "dotted", colour = "#9B1B34") +
+  geom_vline(xintercept = 1.5, linetype = "dotted", colour = "#9B1B34")
+}
+
+plot_infit_outfit(sim_dat_2PL)
+```
+
+Wenig überraschend sind die Werte fast perfekt. 
+:::
+
+## 1PL
+
+Jetzt wollen wir uns noch zwei alternative Modelle anschauen: Das 1PL Modell und das 3PL Modell. Fitte das 1PL mit `TAM` und schaue dir ebenfalls die Itemplots und die Fit-Statistiken an.
+
+:::{.callout-caution collapse="true"}
+
+```{r}
+sim_dat_1PL <- tam(sim_dat_wide %>% select(-sub_id), irtmodel = "1PL", verbose = FALSE)
+
+plot(sim_dat_1PL,
+  type = "items",
+  export = FALSE,
+  observed = TRUE,
+  package = "graphics"
+)
+```
+
+Und die Infit und Outfitwerte, geplottet mit meiner eigenen Funktion (weiter oben definiert):
+
+```{r}
+#| code-fold: true
+
+plot_infit_outfit(sim_dat_1PL)
+
+```
+
+Hier können wir schön sehen, dass der Fit schon deutlich abnimmt, wenn wir die Steigung ignorieren (die wir ja bewusst simuliert haben). 
+:::
+
+## 3PL
+Fitte jetzt ein 3PL Modell. Nimm für die simulierten Daten eine 50 % Chance an, das Item durch raten zu lösen. 
+
+```{r}
+#| eval: false
+
+
+## Probably just instable because the data is wrong?
+
+sim_dat_3PL <- tam.mml.3pl(sim_dat_wide %>% select(-sub_id), 
+                           verbose = FALSE, guess = rep(0.5, 13))
+
+summary(sim_dat_3PL)
+
+plot(sim_dat_3PL,
+  type = "items",
+  export = FALSE,
+  observed = TRUE,
+  package = "graphics"
+)
+
+tam.fit(sim_dat_3PL)
+
+### Try mirt
+library(mirt)
+sim_dat_3PL <- mirt(sim_dat_wide %>% select(-sub_id), 1, itemtype = "3PL", verbose = FALSE, guess = rep(0.25, 13))
+summary(sim_dat_3PL)
+coef(sim_dat_3PL, IRTpars = TRUE, simplify = TRUE)
+
+
+itemfit(sim_dat_3PL, fit_stats = "infit") # typical for Rasch modeling
+
+# install.packages("devtools")
+# devtools::install_github("masurp/ggmirt")
+library(ggmirt)
+itemfitPlot(sim_dat_3PL)
+tracePlot(sim_dat_3PL)
+```
+
+

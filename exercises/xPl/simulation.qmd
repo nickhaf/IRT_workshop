@@ -1,13 +1,11 @@
 ---
-title: "Höher parametrisierte IRT Modelle"
+title: "Simulation von IRT Daten"
 subititle: "Übung"
-lang: de
 author: "Nicklas Hafiz"
-
 format: html
 ---
 
-# Übung 1
+# Datensimulation
 
 Wir schauen uns eine ganz simple Version an. Wer interessiert ist, und z.B. Daten für eine Poweranalyse simulieren möchte, findet [hier]() Unterstützung.
 Installieren und/oder lade folgende Pakete für diese Übung:
@@ -86,7 +84,7 @@ Jetzt geht's los! Wir wollen nun eigene Daten simulieren. Das tolle ist: wir kö
 1. Zuerst die Items. Baue einen `data.frame` mit dem Namen `items`. Er soll 13 Zeilen und 4 Spalten haben und folgendes enthalten:
 
 - `item_id`: Die ID des Items, von 1 bis 13. 
-- `alpha`: Die Diskriminationsparameter, liegen zwischen 0.5 und 1.5 in 13 gleich langen Schritten.
+- `alpha`: Die Diskriminationsparameter, liegen zwischen 0.1 und 2.5 in 13 gleich langen Schritten.
 - `beta`: Die Schwierigkeitsparameter, liegen zwischen -3 und 3 jeweils im Abstand von 0.5. 
 
 :::{.callout-tip collapse=true}
@@ -102,7 +100,7 @@ Die Funktion `seq()` ist dein Freund. Mehr brauchst du nicht, um die Zahlenreihe
 items <- data.frame(
     item_id = 1:13, 
     b = seq(-3, 3, by = 0.5), 
-    a = seq(0.5, 1.5, length.out = 13), 
+    a = seq(0.1, 2.5, length.out = 13), 
     c = rep(0, 13)
 )
 
@@ -239,6 +237,11 @@ sim_dat_wide <- sim_dat %>%
 head(sim_dat_wide)
 ```
 
+```{r}
+saveRDS(sim_dat_wide, here::here("raw_data", "sim_2pl.rds"))
+```
+
+
 Die Spaltennamen sind jetzt unsere Item-Nummern. Pro Zeile finden sich die Antworten der Personen, entweder hat sie das entsprechende Item richtig (`1`) oder falsch (`0`) beantwortet. 
 
 :::
@@ -252,8 +255,11 @@ Wir brauchen die Funktion `tam.mml.2pl()`.
 :::{.callout-caution collapse=true}
 ## Tip
 ```{r}
-sim_dat_2PL <- tam.mml.2pl(sim_dat_wide %>% select(-sub_id), irtmodel = "2PL")
+sim_dat_2PL <- tam.mml.2pl(sim_dat_wide %>% select(-sub_id), irtmodel = "2PL", verbose = FALSE)
 ```
+
+
+
 
 :::
 
@@ -299,12 +305,11 @@ Das sieht super aus, die Werte stimmen gut überein. Dadurch, dass wir so viele 
 :::
 
 
-
 ## SimIRT
 Übringes: es gibt natürlich auch schon R Pakete, die die Simulationsarbeit für uns übernehmen. Aus didaktischen Gründen haben wir das bisher selber gemacht, aber können uns jetzt ein bisschen Arbeit ersparen, und das ganze von dem Paket `catIrt` übernehmen lassen. Hier nochmal die gleiche Simulation, aber mit 
 
 ```{r}
-#| output: false
+#| output: false 
 
 library(catIrt)
 

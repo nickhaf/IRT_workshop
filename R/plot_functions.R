@@ -31,7 +31,7 @@ plot_pcm <- function(delta){
   delta_theta2 <- theta_vals[which.min(abs(theta_vals - delta[2]))]
 
   # Plotte die Wahrscheinlichkeiten für jede Kategorie x
-  ggplot(results, aes(x = theta, y = prob, color = factor(x))) +
+ p <-  ggplot(results, aes(x = theta, y = prob, color = factor(x))) +
     geom_line(linewidth = 1) +
 
     # Dezente Linien nur bis zum Kreuzungspunkt (max Wahrscheinlichkeiten bei den Näherungen von delta)
@@ -45,11 +45,13 @@ plot_pcm <- function(delta){
          x = "Theta",
          y = "Wahrscheinlichkeit",
          color = "Kategorie") +
-    theme_bg()
+    theme_bg() +
+    set_colour_scheme()
 
+ return(p)
 }
 
-set_colour_scheme <- function(color_scheme = c("#F4BA02", "#9B1B34", "#472120")){
+set_colour_scheme <- function(color_scheme = c("#F4BA02", "#9B1B34", "#aaa938")){
   scale_colour_manual(values = color_scheme)
 }
 
