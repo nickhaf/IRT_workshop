@@ -42,7 +42,7 @@ kalib <- by ( data = datL, INDICES = datL[,"mzp"], FUN = function (mzp) {
          res <- getResults(run)
          prm <- itemFromRes(res)
          return(list(results = res, prm = prm))})
-
+         
 # verlinken: mzp1 vs. mzp2
 # itemparameter von mzp2 gegen itemparameter von mzp1 vergleichen
 mzp2  <- kalib[[2]][["prm"]][,c("item", "est")]
@@ -149,11 +149,7 @@ mods  <- by(data = PV_dat, INDICES = PV_dat[,"imp"], FUN = function (impdata) {l
 pool1 <- miceadds::lmer_pool(mods)
 txt1  <- capture.output(summ1 <- summary(pool1))
 
-<<<<<<< HEAD
 PV_dat_common <- subset(PV_dat, person %in% commonPersons)
 mods2 <- by(data = PV_dat_common, INDICES = PV_dat_common[,"imp"], FUN = function (impdata) {lmer(value~factor(mzp) + (1|person), REML = FALSE, data = impdata)})
 pool2 <- miceadds::lmer_pool(mods2)
 txt2  <- capture.output(summ2 <- summary(pool2))
-=======
- #     https://rpubs.com/alecri/review_longitudinal
->>>>>>> 5155cdd96500a4c6902ef3fa5068a92646da7e3e
