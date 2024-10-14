@@ -7,6 +7,7 @@ $theme-yellow: #F4BA02;
 $theme-red: #9B1B34;
 $theme-timberwolf: #F8F8F8;
 $theme-brown: #472120;
+$theme-green: #aaa938;
 
 $link-color: $theme-blue;
 $body-bg: $theme-timberwolf;
@@ -33,14 +34,34 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
     font-family: 'Roboto Condensed', san-serif;
     font-size:2em;
     padding: 0.5em 0.5em;
-    background-color: rgba(255, 255, 255, .0);
+    background-color: rgba(248, 248, 248, .0);
     backdrop-filter: blur(5px);
-    box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5);
+    box-shadow: 0 0 1rem 0 rgba(248, 248, 248, .5);
     border-radius: 5px;
 }
 
 .highlight{
     color: $theme-highlight;
+    font-weight: bold;
+}
+
+.lightblue{
+    color: $theme-blue;
+    font-weight: bold;
+}
+
+.red{
+    color: $theme-red;
+    font-weight: bold;
+}
+
+.brown{
+    color: $theme-brown;
+    font-weight: bold;
+}
+
+.green{
+    color: $theme-green;
     font-weight: bold;
 }
 
@@ -112,5 +133,6 @@ input[type="range"] {
     height: 5px; // Set your desired height
   }
 }
+
 
 
