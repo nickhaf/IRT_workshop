@@ -39,7 +39,9 @@ website:
           - section: "Höher parametrisierte Modelle"
             href: ./exercises/index_xpl.qmd
             contents:
-              - ./exercises/xPL/xPL.qmd
+              - ./exercises/xPl/simulation.qmd
+              - ./exercises/xPl/model_selection.qmd
+              - ./exercises/xPl/pcm.qmd
           - section: "Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells"
             href: ./exercises/index_glm.qmd
             contents:

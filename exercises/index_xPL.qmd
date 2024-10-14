@@ -3,8 +3,11 @@ title: "Höher parametrisierte Modelle"
 subtitle: "Übungen"
 listing: 
   type: table
-  contents: ./xPL
-  sort: "title"
+  contents: 
+    - ./xPl/simulation.qmd
+    - ./xPl/model_selection.qmd
+    - ./xPl/pcm.qmd
+  sort: false
 format: html
 ---
 
