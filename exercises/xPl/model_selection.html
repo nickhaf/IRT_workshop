@@ -61,6 +61,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../exercises/xPl/pcm.html" rel="next">
+<link href="../../exercises/xPl/simulation.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -97,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 </head>
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
@@ -117,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Folien</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../exercises/index.html"> 
+    <a class="nav-link active" href="../../exercises/index.html" aria-current="page"> 
 <span class="menu-text">Übungen</span></a>
   </li>  
 </ul>
@@ -125,8 +127,156 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../.././exercises/index_xpl.qmd">Höher parametrisierte Modelle</a></li><li class="breadcrumb-item"><a href="../../exercises/xPl/model_selection.html">Modellselektion</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Übungen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../exercises/index_intro_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einführung in R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/intro_r/load_data_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einlesen von Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/intro_r/subsetting_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Subsetting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/intro_r/missings_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Missings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/intro_r/reshaping_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reshaping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/intro_r/merging_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Merging</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../exercises/index_linking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linking</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/linking/data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Die Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/linking/linking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Linking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/linking/dif.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Differential Item Functioning</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../.././exercises/index_xpl.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Höher parametrisierte Modelle</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/xPl/simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation von IRT Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/xPl/model_selection.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Modellselektion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/xPl/pcm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Partial Credit Model</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../exercises/index_glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/glm/glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Auf dieser Seite</h2>
@@ -149,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../.././exercises/index_xpl.qmd">Höher parametrisierte Modelle</a></li><li class="breadcrumb-item"><a href="../../exercises/xPl/model_selection.html">Modellselektion</a></li></ol></nav><div class="quarto-title">
 <h1 class="title">Modellselektion</h1>
 </div>
 
@@ -335,34 +485,34 @@ Lösung
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2PL</span><span class="op">$</span><span class="va">itemfit</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   parameter    Outfit    Outfit_t     Outfit_p Outfit_pholm     Infit
-1          1 0.9999555 -0.04402703 9.648829e-01 1.000000e+00 0.9999606
-2          2 1.0002574  0.10387552 9.172681e-01 1.000000e+00 1.0002775
-3          3 0.9991101 -0.27522024 7.831470e-01 1.000000e+00 0.9997269
-4          4 1.0004823  0.14347263 8.859169e-01 1.000000e+00 1.0009099
-5          5 0.9989908 -0.31946565 7.493734e-01 1.000000e+00 0.9998599
-6          6 0.9967151 -1.12331890 2.613021e-01 1.000000e+00 0.9992365
-7          7 1.0004908  0.16222453 8.711290e-01 1.000000e+00 1.0008955
-8          8 0.9982809 -0.48333391 6.288587e-01 1.000000e+00 0.9985134
-9          9 1.0063468  1.33530559 1.817764e-01 1.000000e+00 0.9983766
-10        10 1.0132763  1.97229001 4.857651e-02 4.857651e-01 1.0028378
-11        11 0.9435614 -5.71163992 1.118926e-08 1.454604e-07 1.0046507
-12        12 1.0634930  3.10071189 1.930560e-03 2.123616e-02 0.9978341
-13        13 0.9101239 -3.24969997 1.155268e-03 1.386322e-02 0.9967425
+<pre><code>   parameter    Outfit     Outfit_t     Outfit_p Outfit_pholm     Infit
+1          1 1.0000187  0.018915844 9.849082e-01 1.000000e+00 1.0000206
+2          2 0.9994588 -0.216079823 8.289255e-01 1.000000e+00 0.9996784
+3          3 1.0000093  0.003974045 9.968292e-01 1.000000e+00 1.0008295
+4          4 1.0003042  0.090168188 9.281536e-01 1.000000e+00 1.0000570
+5          5 1.0002580  0.082137200 9.345376e-01 1.000000e+00 1.0003736
+6          6 0.9958112 -1.432848467 1.519011e-01 1.000000e+00 0.9987564
+7          7 1.0008166  0.271020070 7.863756e-01 1.000000e+00 1.0011935
+8          8 1.0018671  0.523031573 6.009523e-01 1.000000e+00 0.9990953
+9          9 1.0014443  0.295674779 7.674785e-01 1.000000e+00 0.9982504
+10        10 1.0092821  1.344300314 1.788513e-01 1.000000e+00 1.0012724
+11        11 0.9844646 -1.643704706 1.002372e-01 1.000000e+00 0.9990415
+12        12 1.0251172  1.222128195 2.216592e-01 1.000000e+00 0.9978294
+13        13 0.7839303 -7.553831681 4.226363e-14 5.494272e-13 1.0022716
        Infit_t   Infit_p Infit_pholm
-1  -0.03891999 0.9689542           1
-2   0.11195245 0.9108611           1
-3  -0.08368054 0.9333104           1
-4   0.27004246 0.7871276           1
-5  -0.04386548 0.9650116           1
-6  -0.26020128 0.7947085           1
-7   0.29801175 0.7656942           1
-8  -0.41680200 0.6768232           1
-9  -0.34488991 0.7301771           1
-10  0.42536681 0.6705693           1
-11  0.45935057 0.6459824           1
-12 -0.12183013 0.9030335           1
-13 -0.09562841 0.9238157           1</code></pre>
+1   0.02080417 0.9834019           1
+2  -0.12808924 0.8980784           1
+3   0.25814435 0.7962955           1
+4   0.01767789 0.9858958           1
+5   0.11867224 0.9055350           1
+6  -0.42446423 0.6712273           1
+7   0.39615362 0.6919917           1
+8  -0.25293454 0.8003188           1
+9  -0.37406661 0.7083548           1
+10  0.19119200 0.8483752           1
+11 -0.09273715 0.9261124           1
+12 -0.12221218 0.9027310           1
+13  0.08314786 0.9337340           1</code></pre>
 </div>
 </div>
 <p>Manchmal kann es auch helfen, sich das ganze als Plot ausgeben zu lassen:</p>
@@ -989,7 +1139,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../../exercises/xPl/simulation.html" class="pagination-link" aria-label="Simulation von IRT Daten">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Simulation von IRT Daten</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../exercises/xPl/pcm.html" class="pagination-link" aria-label="Partial Credit Model">
+        <span class="nav-page-text">Partial Credit Model</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
