@@ -188,47 +188,31 @@ $$
 $\alpha_i = 1$
 
 $$
-P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{red}{1}(\theta_p - \beta_i)))}{1 + exp(\color{red}{1}(\theta_p - \beta_i))}
+P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{#9B1B34}{1}(\theta_p - \beta_i)))}{1 + exp(\color{#9B1B34}{1}(\theta_p - \beta_i))}
 $$
 
 
 ## Darstellung
 
-:::{.columns}
-:::{.column width="30%"}
-
-
 ```{ojs}
+//| panel: sidebar
+
 viewof alpha1 = Inputs.range(
-  [-1, 1], 
-  {value: 1, step: .1, label: tex`\alpha_1`}
+  [-3, 3], 
+  {value: 1, step: .01, label: tex`\alpha`}
 )
 viewof beta1 = Inputs.range(
   [-3, 3], 
-  {value: 0, step: .1, label: tex`\beta_1`}
+  {value: 0, step: .01, label: tex`\beta`}
 )
 viewof gamma1 = Inputs.range(
   [0, 1], 
-  {value: 0, step: .1, label: tex`\gamma_1`}
-)
-viewof alpha2 = Inputs.range(
-  [-1, 1], 
-  {value: 1, step: .1, label: tex`\alpha_2`}
-)
-viewof beta2 = Inputs.range(
-  [-3, 3], 
-  {value: 0, step: .1, label: tex`\beta_2`}
-)
-viewof gamma2 = Inputs.range(
-  [0, 1], 
-  {value: 0, step: .1, label: tex`\gamma_2`}
+  {value: 0, step: .01, label: tex`\gamma`}
 )
 
 
 ```
-:::
 
-:::{.column width="70%"}
 ```{ojs}
 
 line_function = function(alpha, beta, gamma, theta) {
@@ -236,58 +220,46 @@ line_function = function(alpha, beta, gamma, theta) {
 }
 
 // X-Variable
-data = d3.range(-3, 3, 0.1).map((theta) => ({
+data = d3.range(-6, 6, 0.01).map((theta) => ({
   x: theta,
   y1: line_function(alpha1, beta1, gamma1, theta),
-  y2: line_function(alpha2, beta2, gamma2, theta)
 }));
 
 Plot.plot(
   {
-    x: {grid: false, domain: [-3, 3]}, 
+    x: {grid: false, domain: [-6, 6]}, 
     y: {grid: false, domain: [0, 1]},
     marks: [
-      Plot.line(data, {x: "x", y: "y1", stroke: "#9B1B34"}),
-      Plot.line(data, {x: "x", y: "y2", stroke: "#F4BA02"}),
+      Plot.line(data, {x: "x", y: "y1", stroke: "#F4BA02"}),
     ]
   }
 )
 ```
-:::
-:::
 
 ## Simulieren von IRT Daten
 
 ::::{.columns}
 :::{.column width="30%"}
 
-Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: Daten**simulation**. 
-
-- Einerseits hilft es hoffentlich, die Konzepte hinter IRT und Linking noch besser zu verstehen.
-- Hilfreich, z.B. für Poweranalysen 
+Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: [Datensimulation]{.highlight}. 
 
 :::
 
 ::: {.column width="70%"}
 
-![](images/simulation.jpg)
-
+![](images/simulation.jpg){.absolute top="5%" right="0%" height="70%" style="max-height: unset; box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
 
 :::
 ::::
 
-## Let's take a step back! 
+## Übung
 
-Geht zur [Übung](../../exercises/Linking.qmd) und probiert euch aus! 
+Geht zur [Übung](https://nickhaf.github.io/IRT_workshop/exercises//xPl/simulation.qmd) und probiert euch aus. 
 
 
 # Welches Modell?
 
-## Mögliche Punkte
-- [Gewichtung]{.highlight} der Items
-- Antwort[skala]{.highlight}
-- [Simulation]{.highlight}/Modell[fit]{.highlight}
-- [Ziel]{.highlight}
+
 
 
 ## {background-image="images/sapiens.jpg" background-size="1225px"}
@@ -382,6 +354,17 @@ p_2
 p_6
 ```
 
+## Mögliche Punkte
+
+:::{.callout-note}
+Mehr Parameter müsen also nicht immer auch besser sein. Gerade im IRT-Kontext können komplexere Modelle schnell an ihre Grenzen kommen und nicht konvergieren. 
+:::
+
+Bei Modellwahl zu beachten:
+- [Gewichtung]{.highlight} der Items
+- Antwort[skala]{.highlight}
+- [Simulation]{.highlight}/Modell[fit]{.highlight}
+- [Ziel]{.highlight}
 
 ## Beurteilung von Fit
 z.B.:
@@ -391,8 +374,19 @@ z.B.:
 
 # Was tun bei polytomen Items?
 
-## Beispielaufgabe
-nie -- manchmal -- häufig
+## Beispielaufgabe 
+
+::: center
+Ich bin bequem, neige zur Faulheit.
+:::
+::: small
+(trift überhaupt nicht zu) 1 ... 2 ... 3 ... 4 ... 5 (trift voll und ganz zu) 
+:::
+
+::: aside
+
+Beispielfrage aus dem [Big-Five-Inventory (BFI-10)](https://zis.gesis.org/skala/Rammstedt-Kemper-Klein-Beierlein-Kovaleva-Big-Five-Inventory-(BFI-10)). 
+:::
 
 # 
 <section style="text-align: center;">
@@ -403,14 +397,15 @@ nie -- manchmal -- häufig
 
 # Partial Credit
 
-## 
+## Grundidee {.center}
 
-Grundidee: Den einzelnen Antwortkategorien wird eine [eigene Schwierigkeit]{.highlight} zugeordnet. Dadurch können wir die [Antwortwahrscheinlichkeit]{.highlight} in einer bestimmten [Kategorie]{.highlight} berechnen. 
+Den einzelnen Antwortkategorien wird eine [eigene Schwierigkeit]{.highlight} zugeordnet. Dadurch können wir die [Antwortwahrscheinlichkeit]{.highlight} in einer bestimmten [Kategorie]{.highlight} berechnen. 
 
 ## Anwendungsbereich
 Ordinale Daten (geordnete Antwortkategorien), z.B.:
+
   - Likert-Skalen
-  - Items, die auch mit Teilpunkten bewertet werden können (z.B. Mathe)
+  - Items, die auch mit Teilpunkten bewertet werden können (z.B. in Mathe)
 
 
 ## Darstellung
@@ -418,7 +413,7 @@ Ordinale Daten (geordnete Antwortkategorien), z.B.:
 ```{r}
 #| echo: false
 
-plot_pcm(delta = c(-0.29, 0.95))
+plot_pcm(delta = c(-0.29, 0.95)) 
 ```
 
 
@@ -429,26 +424,27 @@ $$
 \pi_{pix}= P(X_{pi}=x|\theta_p, \beta_{ik})= \frac{exp[\sum^x_{j=0}(\theta_p-\beta_{ij})]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
 $$
 ::: aside
+
 - Person $p$
 - Item $i$
 - Personenscore $x$
+
 :::
 
-
 ## Partial Credit Model
 $$
-\pi_{pix}= \color{red}{P(X_{pi}=x|\theta_p, \beta_{ik})}= \frac{exp[\sum^x_{j=0}(\theta_p-\beta_{ij})]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
+\pi_{pix}= \color{#9B1B34}{P(X_{pi}=x|\theta_p, \beta_{ik})}= \frac{exp[\sum^x_{j=0}(\theta_p-\beta_{ij})]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
 $$
 
 
 ## Partial Credit Model
 
 $$
-\pi_{pix}= P(X_{pi}=x|\theta_p, \beta_{ik})= \frac{exp[\sum^x_{j=0}\color{red}{(\theta_p-\beta_{ij})}]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
+\pi_{pix}= P(X_{pi}=x|\theta_p, \beta_{ik})= \frac{exp[\sum^x_{j=0}\color{#9B1B34}{(\theta_p-\beta_{ij})}]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
 $$
 
 
-Wichtig:$/beta_{i\color{red}{j}}$ ist jetzt der [Schwellenparameter]{.highlight} der Kategorie $j$ des Items $i$.
+Wichtig:$\beta_{i\color{#9B1B34}{j}}$ ist jetzt der [Schwellenparameter]{.highlight} der Kategorie $j$ des Items $i$.
 
 
 ## Raw score curve
@@ -466,195 +462,16 @@ results <- compute_E_score(theta_vals, delta_1, delta_2)
 
 # Plotten mit ggplot2
 ggplot(results, aes(x = theta, y = E_score)) +
-  geom_line(color = "blue", size = 1) +
-  labs(title = "Erwarteter Score (E_score) als Funktion von Theta",
+  geom_line(color = "#9B1B34", size = 1) +
+  labs(title = "Erwarteter Score als Funktion von Theta",
        x = "Theta", 
-       y = "Erwarteter Score (E_score)") +
+       y = "Erwarteter Score") +
    theme_bg()
 
 ```
 
 ## Übung
-Partial Credit Modell fitten. 
-
-- Grit scale
-- Oder Psychometrics data und so tun, als ob die das selber ausgefüllt hätten. Und dann auf 5 Stufen kondensieren oder so. Aber was ist hier mit Eindimensionalität? -> Könnte aber einfach ein subset nehmen, die vermutlich eindimensional sind? Achso, und sollte eigentlich ok sein. Die sollten ja nur aufgrund des Konstruktes korrelieren.  Aber: Was ist mit missings, haben alle alles bearbeitet? 
-
-
-[This](https://rpubs.com/deondb/partial_credit_model) is actuallyu quite a comprehensive tutorial. 
-
-Hier auch nochmal schauen: https://www.edmeasurementsurveys.com/TAM/Tutorials/5PartialCredit.htm
-
-```{r}
-library(TAM)
-library(psych)
-```
-
-
-```{r}
-psych_dat <- read.csv(here::here("raw_data", "psych_stats.csv"), sep = ";") %>%
-  pivot_longer(cols = -char_id, names_to = "item", values_to = "score") %>%
-  mutate(likert = case_when(score <= 20 ~ 1,
-                            score <= 40 ~ 2, 
-                            score <= 60 ~ 3,
-                            score <= 80 ~ 4,
-                            TRUE ~ 5)) %>%
-  select(item, likert, char_id) %>%
-  pivot_wider(names_from = item, values_from = likert) %>%
-  select(char_id, messy_neat, disorganized_self.disciplined, diligent_lazy, on.time_tardy, scheduled_spontaneous, ADHD_OCD, chaotic_orderly, overachiever_underachiever)
-
-## ERstmal: Eine Art Gewissenhaftigkeit wird gemessen.
-## Items:
-# messy_neat, disorganized_self.disciplined, diligent_lazy, on.time_tardy, scheduled_spontaneous, ADHD_OCD, chaotic_orderly, overachiever_underachiever
-
-## Umkodieren! 
-# - diligent_lazy, on.time_tardy, scheduled_spontaneous, overachiever_underachiever
-
-psych_dat <- psych_dat %>%
-  mutate(lazy_diligent = 6 - diligent_lazy,
-         tardy_on.time = 6 - on.time_tardy,
-         spontaneous_scheduled = 6 - scheduled_spontaneous,
-         underachiever_overachiever = 6 - overachiever_underachiever) %>%
-  select(-char_id, -diligent_lazy, -on.time_tardy, -scheduled_spontaneous, -overachiever_underachiever) 
-
-
-
-#### Hier dann loslegen mit der Übung. Umkodieren evtl. im R-Teil? 
-
-## Sind die Daten im richtigen Format? 
-## eventuell nicht eindimensional?
-
-cor(psych_dat)
-
-## Ich glaube es muss bei 0 anfangen, hat mir aber keiner gesagt!
-psych_dat <- psych_dat -1
-## Hohe correlationen zwischen den Items. Aber eignelich niucht weiter schlimm oder?
-
-any(is.na(psych_dat))
-
-alpha(psych_dat)$response.freq
-
-
-## Eigentlich sind die response kategorien ganz gut ausgelastet, teilweise die Ränder etwas weniger. 
-
-pcm_psych <- tam.mml(psych_dat[, -1], irtmodel = "PCM")
-
-summary(pcm_psych)
-
-pcm_psych$xsi
-
-## Identify items with disordered category thresholds
-g <- pcm_psych$item_irt
-gg <- g[g$tau.Cat1 > g$tau.Cat2 | g$tau.Cat2 > g$tau.Cat3 | g$tau.Cat3 > g$tau.Cat4, ]
-rownames(gg)
-
-## Jetzt geordnet!
-deltas <- pcm_psych$xsi
-## HMM, sieht immernoch comisch aus oder? 
-## Aber Delta Schnittpunkte stimmen mit dem Plot überein
-
-## Plot the option characteristic curves
-plot(pcm_psych, 
-     type = "items", 
-     export = FALSE, 
-     package = "graphics", 
-     observed = TRUE, 
-     low = -6, 
-     high = 6)
-
-## Gestrichelt sind die Observed Linien. Aber actually not that weird oder? 
-
-# Was genau sagen die verschiednen Kurven typen?
-
-## Plot the empirical and theoretical expected scores curves
-
-plot(pcm_psych, 
-     type = "expected", 
-     ngroups = 6, 
-     low  = -6, 
-     high = 6,
-     package = "lattice", overlay = FALSE)
-
-## Infit/Outfit anschauen
-
-fit <- msq.itemfit(pcm_psych)$itemfit
-(fit <- data.frame(fit[1], round(fit[3:8], 2)))
-
-## Infit und Outfit sollten zwischen 0.5 und 1.5 liegen (hatte noch andere Grenzen im Kopf, quelle ruassuchen. Auch was genau das nochmal heißt). 
-## underachiever_overachiever passt nicht so rein, ist auch thematisch weiter weg (nette Illustration, sieht man das noch an irgendwelchen Kurven oder andern Werten?)
-
-
-## Q3 Statistic
-q3 <- tam.modelfit(pcm_psych)$stat.itempair
-q3 <- data.frame(q3[1:2], round(q3[5:6], 2), round(q3[7:8], 4))
-## Actually quite interesting! underachiever_overachiever fällt auch hier auf. 
-
-
-## Gut oder schlecht? zuyymindest sehr ähnlich im example. 
-(MADaQ3 <- tam.modelfit(pcm_psych)$stat.MADaQ3)
-
-## Values > 0.6 might reflect unacceptable fit
-(item.RMSD <- IRT.itemfit(pcm_psych)$RMSD_bc)
-
-## Tardy_on.time ebenfalls auffällig (auch ein komischer Gegensatz wenn man drüber nachdenkt, evtl. mehrdimensional)
-
-## Hiernach kommt noch einiges, aber wahrscheinlich genug to get started! 
-```
-
-```{r eRm}
-library(eRm)
-
-erm_pcm <- PCM(psych_dat)
-summary(erm_pcm)
-
-plotPImap(erm_pcm)
-plotICC(erm_pcm, ask = FALSE)
-
-## Scheint anders auszusehen als bei Tam. Nochmal genauer schauen später, aber underachiever_overachiever scheint sich hier erst bei vier die letzte Linie zu kreuzen. 
-
-thresholds(erm_pcm)
-
-person.location.estimate <- person.parameter(erm_pcm)
-
-item_fit_pcm <- itemfit(person.location.estimate)
-
-
-## Maybe plot standardiyed residuals?
-stresid <- item_fit_pcm$st.res
-
-# before constructing the plots, find the max & min residuals:
-max.resid <- ceiling(max(stresid))
-min.resid <- ceiling(min(stresid))
-
-for(item.number in 1:ncol(stresid)){
-  plot(stresid[, item.number], ylim = c(min.resid, max.resid),
-       main = paste("Standardized Residuals for Item ", item.number, sep = ""),
-       ylab = "Standardized Residual", xlab = "Person Index")
-  abline(h = 0, col = "blue")
-  abline(h=2, lty = 2, col = "red")
-  abline(h=-2, lty = 2, col = "red")
-  legend("topright", c("Std. Residual", "Observed = Expected", "+/- 2 SD"), pch = c(1, NA, NA), 
-         lty = c(NA, 1, 2),
-         col = c("black", "blue", "red"), cex = .8)
-}
-
-## Looks okay I gues? For Item 8 am schlechtesten, passt auch wieder!
-```
-
-
-## Personenspezifische Kurve zeichnen? 
-
-
-
-## Reversal vs. non-reversal. 
-
-## Generalized Partial Credit Model?
-
-## Rating Scale Model?
-
-## Beispiele
-
-## Evtl: Wann welches Modell
+Gehe zur [Partial-Credit-Übung]() und bearbeite sie. 
 
 
 ## Bildquellen
@@ -662,5 +479,6 @@ for(item.number in 1:ncol(stresid)){
 - Foto von <a href="https://unsplash.com/de/@roman_lazygeek?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Roman Mager</a> auf <a href="https://unsplash.com/de/fotos/geschriebene-gleichungen-auf-brauner-holztafel-5mZ_M06Fc9g?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - https://www.bing.com/images/create/image-of-a-woman-writing-equations-on-a-window2c-li/1-670bee21dbf4423ca93d0804834a7f46?id=ujHjvSYHngnLxV45OzbrGQ%3d%3d&view=detailv2&idpp=genimg&thId=OIG3.E7px5jYmHkuo3mmm7QIC&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&FORM=GCRIDP&mode=overlay
 - Foto von <a href="https://unsplash.com/de/@crawford?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Crawford Jolly</a> auf <a href="https://unsplash.com/de/fotos/mann-mit-speer-wandmalerei-3IxuF9MCjkA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-
+- Foto von <a href="https://unsplash.com/de/@soymeraki?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Javier Allegue Barros</a> auf <a href="https://unsplash.com/de/fotos/silhouette-der-strassenbeschilderung-wahrend-der-goldenen-stunde-C7B-ExXpOIE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
   
