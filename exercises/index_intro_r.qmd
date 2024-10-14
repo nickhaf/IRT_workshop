@@ -3,8 +3,13 @@ title: "Einführung in R"
 subtitle: "Übungen"
 listing: 
   type: table
-  contents: ./intro_r
-  sort: "title"
+  sort: false
+  contents:
+    - ./intro_r/load_data_ex.qmd
+    - ./intro_r/subsetting_ex.qmd
+    - ./intro_r/missings_ex.qmd
+    - ./intro_r/reshaping_ex.qmd
+    - ./intro_r/merging_ex.qmd
 format: html
 ---
 
