@@ -297,3 +297,27 @@ ggplot(data=item_comparison,
 Das sieht super aus, die Werte stimmen gut überein. Dadurch, dass wir so viele Personen simuliert haben, sehen wir also, dass unsere Simulation gut funktioniert. Wir können das Gerüst dieses Simplen Modells jetzt nutzen, um uns noch spannendere Fragestellungen anzuschauen. Zum Beispiel könnten wir untersuchen, ab welcher Stichprobengröße unser Modell genau genug schätzt, oder wir könnten verschiedene Modelle miteinander vergleichen (Rasch vs. 2PL z.B.). Beides kann uns bei der Studienplanung helfen. 
 
 :::
+
+
+
+## SimIRT
+Übringes: es gibt natürlich auch schon R Pakete, die die Simulationsarbeit für uns übernehmen. Aus didaktischen Gründen haben wir das bisher selber gemacht, aber können uns jetzt ein bisschen Arbeit ersparen, und das ganze von dem Paket `catIrt` übernehmen lassen. Hier nochmal die gleiche Simulation, aber mit 
+
+```{r}
+#| output: false
+
+library(catIrt)
+
+group_1 <- simIrt(theta = rnorm(100000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
+group_2 <- simIrt(theta = rnorm(100000, 0, 1.5), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
+
+## Kalibrieren der beiden Gruppen getrennt
+group_1_2PL <- tam.mml.2pl(group_1$resp, irtmodel = "2PL")
+group_2_2PL <- tam.mml.2pl(group_2$resp, irtmodel = "2PL")
+
+## Extrahieren der Itemparameter
+itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+colnames(itempars_2) <- c("alpha_2", "beta_2")
+```
+

@@ -1,90 +1,113 @@
 ---
-title: "Linking"
-lang: de
+title: "2. Linking"
 author: "Nicklas Hafiz"
-
 format: html
 ---
 
+:::{.callout-note}
+Wenn du die Übung zur Datenaufbereitung nicht gemacht hast, kannst du die aufbereiteten Daten [hier](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunterladen und dann damit arbeiten. Nimm ansonsten einfach deine selbst aufbereiteten Daten.
+
 ```{r}
-library(eatModel)
-library(TAM)
-library(tidyverse)
+qa_dat_wide <- readRDS(here::here("raw_data", "qa_dat_wide.rds"))
+```
+:::
 
-## Ankeritems auf alle Fälle vorgeben!
+# Linking
+Wir haben gleich vor, DIF auf der Geschlecht-Variable zu untersuchen. Es gibt verschiedene Funktionen, die das in mehr oder weniger einem Guss machen, wir schauen uns das Vorgehen jetzt aber erst einmal Schritt für Schritt an. 
 
+## Gruppen kalibrieren
+Zuerst kalibrieren wir die beiden Gruppen, die wir später auf DIF untersuchen wollen, einzeln. Dadurch können wir dann später die Itemparamter vergleichen. 
+Bilde also zwei Subgruppen, eine für Männer und eine für Frauen. 
 
-data(trends)
+### Subgruppen herstellen
+Erstelle dafür 2 Dataframes (`qa_f` und `qa_m`), einen nur mit Frauen (1) und einen nur mit Männern (2). Weitere Kategorien gibt es in diesem Datensatz nicht:
 
-
-
+```{r}
+table(qa_dat_wide$gender)
 ```
 
-# Übung 1
-Forme den `trends` Datensatz so um, wie er von `TAM` benötigt wird. Das bedeutet, dass jedes Item (Spalte `item`) eine eigene Spalte bekommt, in der die Lösungen der Personen stehen (Spalte `value`). Wähle vorher die Spalten `item`, `value`, `year` und `idstud` aus, sodass der Datensatz der umgeformt wird möglichst schlank ist.
+:::{.callout-caution collapse="true"}
+
+## Lösung
+```{r}
+library(tidyverse)
+qa_f <- qa_dat_wide %>%
+  filter(gender == 1)
+
+qa_m <- qa_dat_wide %>%
+  filter(gender == 2)
+```
+:::
+
+### Kalibrieren
+Fitte jetzt für beide Gruppen seperat ein Raschmodell mit TAM. 
+
 
 :::{.callout-tip collapse="true"}
-Reshaping haben wir [hier]() behandelt. Wir wollen den Datensatz ins Wide-Format bringen. 
+## Tipp
+Denk daran nur die Spalten, die auch Itemantworten enthalten, in die TAM-Funktion zu geben. 
+::: 
+
 :::
-
-:::{.callout-caution icon = "false" collapse="true"}
+## Lösung
 ```{r}
+library(TAM)
 
-items <- unique(trends$item)
-
-trends_wide <- trends %>% 
-  select(item, value, year, idstud) %>%
-  pivot_wider(names_from = item, values_from = value)
-
-## Ankeritems können arbiträr festgelegt werden
-## Kalibrieren von 2 Gruppen
-
-## Year 2015
-trends_wide_2015 <- trends_wide %>% 
-  filter(year == 2015) %>% 
-  select(-year)
-
-trends_wide_2015_na <- TAM::tam_remove_missings(trends_wide_2015, items=items)
-mod_2pl_2015 <- TAM::tam.mml.2pl(resp = trends_wide_2015_na$resp, pid = trends_wide_2015_na$dat$idstud)
-summary(mod_2pl_2015)
-
-
-
-## Year 2020
-trends_wide_2020 <- trends_wide %>% 
-  filter(year == 2020) %>% 
-  select(-year)
-
-trends_wide_2020_na <- TAM::tam_remove_missings(trends_wide_2020, items=items)
-mod_2pl_2020 <- TAM::tam.mml.2pl(resp = trends_wide_2020_na$resp, pid = trends_wide_2020_na$dat$idstud)
-summary(mod_2pl_2020)
-
-## Gibt es die Möglichkeit, die Itemtexte anzuschauen? Damit alles etwas weniger abstrakt wird. 
-tamobj_2015_2020 <- list(mod_2pl_2015, mod_2pl_2020)
-
-## Arbiträre Ankeritems festlegen
-trends_wide_2015_na$items %in% trends_wide_2020_na$items
-## Hmm, alle Items gleich. Schlimm?
-
-## Nimmt TAM dann automatisch alle Items als Ankeritems?
-anchor_items <- trends_wide_2015_na$items[1:30]
-
-l_2015_2020 <- TAM::tam.linking(tamobj_2015_2020, type="Hae")
-summary(l_2015_2020)
-l_2015_2020$parameters_list
-
-## In den beispielen werden hiernach noch WLEs berechnet, brauchen wir das?
-
-```
-:::
-
-## Übung 2
-```{r}
-## Dif Analyse mit  TAM: https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm
-## Nutzt 1pl. 2pl vermutlich direkt komplizierter oder? 
-## Mit eRm: https://bookdown.org/chua/new_rasch_demo2/DIF.html
-
+## Rasch Modell fitten, die ersten 5 Spalten enthalten keine Itemantworten und werden entfernt
+tam_f <- tam(qa_f[, 6:ncol(qa_f)], verbose = FALSE)
+tam_m <- tam(qa_m[, 6:ncol(qa_m)], verbose = FALSE)
 
 ```
 
+Die kalibrierten Itemparamter können wir uns so anschauen:
 
+```{r}
+tam_f_difficulty <- tam_f$xsi
+tam_m_difficulty <- tam_m$xsi
+```
+
+::: 
+
+### Linken
+Wir verzichten für diese Übung darauf, den Modellfit zu beurteilen und linken direkt. Nutze dafür die Funktion `tam.linking()` und Linke mit Stocking-Lord Linking. 
+
+:::{.callout-tip collapse="true"}
+## Tipp
+Rufe die Hilfeseite der Funktion auf, um zu erkennen, welche Argumente für das geforderte Linking-Verfahren eingestellt werden müssen. 
+:::
+
+:::{.callout-caution collapse="true"}
+## Lösung
+```{r}
+tam_link <- tam.linking(list(tam_f, tam_m), type="SL")
+```
+
+
+:::
+
+
+### Evaluation
+
+Die Parameter können wir so extrahieren:
+
+```{r}
+difficulty_link_f <- tam_link$parameters_list[[1]]$xsi
+difficulty_link_m <- tam_link$parameters_list[[2]]$xsi
+```
+
+Vergleiche sie mit den kalibrierten Schwierigkeiten:
+
+```{r}
+tam_f_difficulty <- tam_f$xsi
+tam_m_difficulty <- tam_m$xsi
+```
+
+Was fällt auf?
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+Zuerst fällt auf, dass sich natürlich nur die Schwierigkeiten für die zweite Gruppe geändert haben. Für Item 1 ist die Schwierigkeit für die Männer relativ stark gestiegen, es ist für die Männer aber nach wie vor deutlich einfacher als für die Frauen. Schon einmal ein guter Kandidat für die DIF Analyse. 
+:::
+
+Gut, jetzt haben wir ein erstes Linking durchgeführt. Bei der DIF Analyse im nächsten Kapitel machen wir das gleiche nochmal, aber mit anderen Paketen und etwas komprimierter, können die Ergebnisse dann aber auch etwas vergleichen. 

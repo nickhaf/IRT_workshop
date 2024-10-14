@@ -1,0 +1,104 @@
+---
+title: "1. Die Daten"
+author: "Nicklas Hafiz"
+format: html
+---
+
+# Vorbereitung
+
+## Daten laden
+
+Lade die Datei `q_a_wirt.rds` von [GitHub](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.
+
+:::{.callout-note}
+Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/research_data/ZA6268?doi=10.4232/1.13780) von 2009 und beinhaltet Fragen zu Allgemeinwissen in den Themengebieten Politik, Geschichte, Wirtschaft, Kultur und Naturwissenschaften. Insgesamt haben fast 700.000 Personen den Test bearbeitet. Wir haben die Daten bereits etwas aufbereitet und nur ein Subset an Fragen (Thema Wirtschaft) für diese Übung ausgewählt. 
+:::
+
+:::{.callout-caution collapse="true"}
+## Lösung
+
+```{r}
+qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_b.rds"))
+
+```
+
+:::
+
+## Überblick
+Verschaffe dir einen [Überblick]() über die Daten. In welchem Formt liegen sie vor? Was könnten die verschiedenen Spalten bedeuten? 
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+
+Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im [long-Format](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/long-format) vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins [wide-Format umformen](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide). 
+
+```{r}
+str(qa_dat)
+```
+
+Außerdem scheint der Datensatz folgende Variablen zu beinhalten:
+
+- `T1`: Personen-ID (aber komisch benannt)
+- `gender`: Geschlecht
+- `answer`: Antwort auf die Frage
+- `question_code`: Fragen-ID
+- `varLabel`: Frage (aber komisch benannt)
+
+:::
+
+## Spalten umbenennen 
+Hmm, die Spaltennamen sind teilweise noch nicht ganz eindeutig. Benenne `T1` in `ID` und `varLabel` in `question` um. Klare Benennung hilft uns (und anderen) den Überblick zu behalten. 
+
+:::{.callout-tip collapse="true"}
+
+## Tipp
+Ich nutze jetzt einfach mal `tidyverse` Funktionen dafür, aber es gibt immer mehrere Wege zum Ziel. Im `tidyverse` gibt es beispielsweise die Funktion `rename()`. 
+
+:::
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+
+```{r}
+library(tidyverse)
+qa_dat_renamed <- qa_dat %>%
+  rename(ID = T1, question = varLabel)
+```
+
+:::
+
+## Umformen
+Forme jetzt die Daten ins [wide-Format um](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide).
+
+:::{.callout-tip collapse="true"}
+## Tipp
+Alle Spalten, die nicht ins wide-Format übertragen werden sollen, müssen in `pivot_wider()` als `id_cols` definiert werden: `..., id_cols = c(ID, gender, bundeslandStudium, spiegelReadingfreq, age), ...`.
+
+:::
+
+:::{.callout-caution collapse="true"}
+## Lösung
+```{r}
+qa_dat_wide <- qa_dat_renamed %>%
+  pivot_wider(
+    id_cols = c(ID, gender, bundeslandStudium, spiegelReadingfreq, age),
+    names_from = question_code,
+    values_from = answer
+  )
+```
+
+```{r}
+saveRDS(qa_dat_wide, here::here("raw_data", "qa_dat_wide.rds"))
+```
+
+Jetzt können wir mal testweise schauen ob das geklappt hat:
+
+```{r}
+head(qa_dat_wide)
+```
+
+
+Yaay, sieht gut aus. 
+:::

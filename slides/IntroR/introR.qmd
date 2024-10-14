@@ -274,13 +274,13 @@ Datenmanipulation und Transformation
 
 :::
 
-##
+## Überblick bekommen
 
 :::{.columns}
 :::{.column width="50%"}
-:::r-fit-text
-Einen Überblick bekommen
-:::
+- `View()`
+- `str()`
+- `head()`
 :::
 :::{.column width="50%"}
 ![](./images/chess.jpg){.image-right}
@@ -517,25 +517,18 @@ Bitte bearbeite die [Übung zum Reshaping](https://nickhaf.github.io/IRT_worksho
 :::
 
 
-## 
+## Merging
 
 :::{.columns}
-:::{.column width="50%"}
-Merging
-:::
-:::{.column width="50%"}
-![](./images/rivers.jpg){.image-right}
-:::
-:::
+:::{.column width="60%"}
 
-
-## Vorbereitung
+### Vorbereitung
 Zuerst müssen wir die Daten laden und für das Beispiel vorbereiten. 
 
 ```{r, output.lines = 3}
 world_coordinates <- readRDS(file = here::here("raw_data", "world_coordinates.rds"))
 
-## Count the number of gold medla winners in each country
+## Count the number of gold medal winners in each country
 medal_counts <- athletes %>%
   filter(Medal == "Gold") %>%
   group_by(Region) %>%
@@ -543,6 +536,14 @@ medal_counts <- athletes %>%
 
 medal_counts
 ```
+
+
+:::
+:::{.column width="40%"}
+![](./images/rivers.jpg){.image-right}
+:::
+:::
+
 
 ## Merging
 

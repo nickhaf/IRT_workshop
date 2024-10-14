@@ -33,7 +33,9 @@ website:
           - section: "Linking"
             href: ./exercises/index_linking.qmd
             contents:
+              - ./exercises/linking/data.qmd
               - ./exercises/linking/linking.qmd
+              - ./exercises/linking/dif.qmd
           - section: "Höher parametrisierte Modelle"
             href: ./exercises/index_xpl.qmd
             contents:
@@ -48,6 +50,7 @@ format:
     theme: styles_html.scss
     toc: true
     highlight-style: dark.theme
+    number-sections: true
 
 
   letterbox-revealjs:
@@ -61,3 +64,4 @@ execute:
   echo: true
 callout-appearance: simple
 lang: de
+csl: apa7.csl

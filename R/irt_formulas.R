@@ -1,3 +1,8 @@
+## 2PL Funktion
+calc_2pl <- function(a, theta, xi) {
+  p <- (exp(a * (theta - xi))) / (1 + exp(a * (theta - xi)))
+  return(p)
+}
 
 ## For a category
 calc_pcm <- function(theta, x, delta){
