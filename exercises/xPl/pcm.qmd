@@ -10,10 +10,13 @@ format: html
 ```{r}
 library(TAM)
 library(psych)
+library(tidyverse)
 ```
 
 
 ```{r}
+#| eval: false
+
 psych_dat <- read.csv(here::here("raw_data", "psych_stats.csv"), sep = ";") %>%
   pivot_longer(cols = -char_id, names_to = "item", values_to = "score") %>%
   mutate(likert = case_when(score <= 20 ~ 1,
@@ -124,6 +127,8 @@ q3 <- data.frame(q3[1:2], round(q3[5:6], 2), round(q3[7:8], 4))
 ```
 
 ```{r eRm}
+#| eval: false
+
 library(eRm)
 
 erm_pcm <- PCM(psych_dat)
