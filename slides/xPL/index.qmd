@@ -188,47 +188,31 @@ $$
 $\alpha_i = 1$
 
 $$
-P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{red}{1}(\theta_p - \beta_i)))}{1 + exp(\color{red}{1}(\theta_p - \beta_i))}
+P(X_{pi}=1) = 0 + (1-0)\frac{exp(\color{#9B1B34}{1}(\theta_p - \beta_i)))}{1 + exp(\color{#9B1B34}{1}(\theta_p - \beta_i))}
 $$
 
 
 ## Darstellung
 
-:::{.columns}
-:::{.column width="30%"}
-
-
 ```{ojs}
+//| panel: sidebar
+
 viewof alpha1 = Inputs.range(
-  [-1, 1], 
-  {value: 1, step: .1, label: tex`\alpha_1`}
+  [-3, 3], 
+  {value: 1, step: .01, label: tex`\alpha`}
 )
 viewof beta1 = Inputs.range(
   [-3, 3], 
-  {value: 0, step: .1, label: tex`\beta_1`}
+  {value: 0, step: .01, label: tex`\beta`}
 )
 viewof gamma1 = Inputs.range(
   [0, 1], 
-  {value: 0, step: .1, label: tex`\gamma_1`}
-)
-viewof alpha2 = Inputs.range(
-  [-1, 1], 
-  {value: 1, step: .1, label: tex`\alpha_2`}
-)
-viewof beta2 = Inputs.range(
-  [-3, 3], 
-  {value: 0, step: .1, label: tex`\beta_2`}
-)
-viewof gamma2 = Inputs.range(
-  [0, 1], 
-  {value: 0, step: .1, label: tex`\gamma_2`}
+  {value: 0, step: .01, label: tex`\gamma`}
 )
 
 
 ```
-:::
 
-:::{.column width="70%"}
 ```{ojs}
 
 line_function = function(alpha, beta, gamma, theta) {
@@ -236,49 +220,41 @@ line_function = function(alpha, beta, gamma, theta) {
 }
 
 // X-Variable
-data = d3.range(-3, 3, 0.1).map((theta) => ({
+data = d3.range(-6, 6, 0.01).map((theta) => ({
   x: theta,
   y1: line_function(alpha1, beta1, gamma1, theta),
-  y2: line_function(alpha2, beta2, gamma2, theta)
 }));
 
 Plot.plot(
   {
-    x: {grid: false, domain: [-3, 3]}, 
+    x: {grid: false, domain: [-6, 6]}, 
     y: {grid: false, domain: [0, 1]},
     marks: [
-      Plot.line(data, {x: "x", y: "y1", stroke: "#9B1B34"}),
-      Plot.line(data, {x: "x", y: "y2", stroke: "#F4BA02"}),
+      Plot.line(data, {x: "x", y: "y1", stroke: "#F4BA02"}),
     ]
   }
 )
 ```
-:::
-:::
 
 ## Simulieren von IRT Daten
 
 ::::{.columns}
 :::{.column width="30%"}
 
-Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: Daten**simulation**. 
-
-- Einerseits hilft es hoffentlich, die Konzepte hinter IRT und Linking noch besser zu verstehen.
-- Hilfreich, z.B. für Poweranalysen 
+Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: [Datensimulation]{.highlight}. 
 
 :::
 
 ::: {.column width="70%"}
 
-![](images/simulation.jpg)
-
+![](images/simulation.jpg){.absolute top="5%" right="0%" height="70%" style="max-height: unset; box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
 
 :::
 ::::
 
-## Let's take a step back! 
+## Übung
 
-Geht zur [Übung](../../exercises/Linking.qmd) und probiert euch aus! 
+Geht zur [Übung](https://nickhaf.github.io/IRT_workshop/exercises//xPl/simulation.qmd) und probiert euch aus. 
 
 
 # Welches Modell?
@@ -662,5 +638,6 @@ for(item.number in 1:ncol(stresid)){
 - Foto von <a href="https://unsplash.com/de/@roman_lazygeek?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Roman Mager</a> auf <a href="https://unsplash.com/de/fotos/geschriebene-gleichungen-auf-brauner-holztafel-5mZ_M06Fc9g?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - https://www.bing.com/images/create/image-of-a-woman-writing-equations-on-a-window2c-li/1-670bee21dbf4423ca93d0804834a7f46?id=ujHjvSYHngnLxV45OzbrGQ%3d%3d&view=detailv2&idpp=genimg&thId=OIG3.E7px5jYmHkuo3mmm7QIC&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&FORM=GCRIDP&mode=overlay
 - Foto von <a href="https://unsplash.com/de/@crawford?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Crawford Jolly</a> auf <a href="https://unsplash.com/de/fotos/mann-mit-speer-wandmalerei-3IxuF9MCjkA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-
+- Foto von <a href="https://unsplash.com/de/@soymeraki?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Javier Allegue Barros</a> auf <a href="https://unsplash.com/de/fotos/silhouette-der-strassenbeschilderung-wahrend-der-goldenen-stunde-C7B-ExXpOIE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
   
