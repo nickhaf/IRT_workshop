@@ -22,22 +22,22 @@ datL <- readRDS("c:/Users/weirichs/Repositories/IRT_workshop/slides/Tag2_1Vormit
 
 # gibt es einen linearen Haupteffekt der Zeit?
 mod1 <- glmer(value ~ mzp + (1|item) + (1|person), data = datL, family = binomial(link="logit"))
-        save.lmer.effects(lmerObj= mod1, fileName="z:/mod1", standardized = FALSE, quick=TRUE)
+summary(mod1)
 
 # nonlineare Modellierung
 mod2 <- glmer(value ~ factor(mzp) + (1|item) + (1|person), data = datL, family = binomial(link="logit"))
-        save.lmer.effects(lmerObj= mod2, fileName="z:/mod2", standardized = FALSE, quick=TRUE)
+mod2m<- glmer(value ~ factor(mzp) + (1|item) + (-1+factor(mzp)|person), data = datL, family = binomial(link="logit"))
 anova(mod1, mod2)
 
 # unterscheidet sich der Lernzuwachs zwischen Jungen und Maedchen?
 mod3 <- glmer(value ~ factor(mzp) * sex + (1|item) + (1|person), data = datL, family = binomial(link="logit"))
-        save.lmer.effects(lmerObj= mod3, fileName="z:/mod3", standardized = FALSE, quick=TRUE)
 
 # Voraussetzungen pruefen: ist das Messmodell invariant ueber die Zeit?
 # fuer alle drei Zeitpunkte kalibrieren und miteinander verlinken
 kalib <- by ( data = datL, INDICES = datL[,"mzp"], FUN = function (mzp) {
-         datWide <- reshape2::dcast(mzp, person~item, value.var = "value")
-         def <- defineModel(dat = datWide, id="person", items = -1, software="tam")
+         dat_wide <- tidyr::pivot_wider(mzp, id_cols ="person",
+                 names_from = "item", values_from = "value") %>% as.data.frame()
+         def <- defineModel(dat = dat_wide, id="person", items = -1, software="tam")
          run <- runModel(def)
          res <- getResults(run)
          prm <- itemFromRes(res)
@@ -56,15 +56,16 @@ diff # 0.3379
 vgl[,"item_difference"] <- vgl[,"est_mzp1"] - vgl[,"est_mzp2"]
 vgl[,"DIF"] <- vgl[,"item_difference"] - diff
 
+length(which(abs(vgl[,"DIF"]) > .64)) # mzp1 vs. mzp2: 6 Items mit |DIF| > .64
 
 eq1.vs.2 <- equat1pl(results = kalib[[2]][["results"]], prmNorm = kalib[[1]][["prm"]][,c("item", "est")], difBound = 0.64, iterativ = TRUE)
 eq2.vs.3 <- equat1pl(results = kalib[[3]][["results"]], prmNorm = kalib[[2]][["prm"]][,c("item", "est")], difBound = 0.64, iterativ = TRUE)
 eq1.vs.3 <- equat1pl(results = kalib[[3]][["results"]], prmNorm = kalib[[1]][["prm"]][,c("item", "est")], difBound = 0.64, iterativ = TRUE)
 
 # A282?
-subset(kalib[[1]][["prm"]], item=="A282")
-roundDF(subset(kalib[[2]][["prm"]], item=="A282"), digits=3)
-roundDF(subset(kalib[[3]][["prm"]], item=="A282"), digits=3)
+subset(kalib[[1]][["prm"]], item=="A282") # mzp1: nicht vorhanden
+roundDF(subset(kalib[[2]][["prm"]], item=="A282"), digits=3) # mzp2: item extrem schwer
+roundDF(subset(kalib[[3]][["prm"]], item=="A282"), digits=3) # mzp3: item extrem schwer
 
 # A282 entfernen
 datL.sel <- datL[-which(datL[,"item"] == "A282"),]
@@ -94,9 +95,9 @@ mzp2[,"item"] <- recodeLookup(mzp2[,"item"], altneu)
 # gesamtdatensatz
 datL.partInvariance <- rbind(mzp1, mzp2, mzp3)
 
-# nonlineare Modellierung
+# nonlineare Modellierung (unidimensional und multidimensional)
 mod2.pi <- glmer(value ~ factor(mzp) + (1|item) + (1|person), data = datL.partInvariance, family = binomial(link="logit"))
-           save.lmer.effects(lmerObj= mod2.pi, fileName="z:/mod2.pi", standardized = FALSE, quick=TRUE)
+mod2.piM<- glmer(value ~ factor(mzp) + (1|item) + (-1+factor(mzp)|person), data = datL.partInvariance, family = binomial(link="logit"))
 
 # dropout?
 personen <- by(data = datL.partInvariance, INDICES = datL.partInvariance[,"mzp"], FUN = function (x) {unique(x[,"person"])})
@@ -108,7 +109,7 @@ commonPersons <- intersect(intersect(personen[[1]], personen[[2]]), personen[[3]
 dat.common.pers <- subset(datL.partInvariance, person %in% commonPersons)
 
 mod2.cp <- glmer(value ~ factor(mzp) + (1|item) + (1|person), data = dat.common.pers, family = binomial(link="logit"))
-           save.lmer.effects(lmerObj= mod2.cp, fileName="z:/mod2.cp", standardized = FALSE, quick=TRUE)
+mod2.cpM<- glmer(value ~ factor(mzp) + (1|item) + (-1+factor(mzp)|person), data = dat.common.pers, family = binomial(link="logit"))
 
 
 # 2. Laengsschnittliche Modellierung mithilfe plausible values
@@ -120,19 +121,21 @@ mod2.cp <- glmer(value ~ factor(mzp) + (1|item) + (1|person), data = dat.common.
 # Schritt 1: Referenzzeitpunkt festlegen, um die Metrik zu definieren (Messzeitpunkt 1)
 # Daten zu Messzeitpunkt 1 kalibrieren, um Refrenzitemparameter zu gewinnen, die dann zu
 # den anderen Messzeitpunkten fixiert werden
-dat_kalib_mzp1 <-subset(datL.partInvariance, mzp==1)
-datWide <- reshape2::dcast(dat_kalib_mzp1, person~item, value.var = "value")
-def <- defineModel(dat = datWide, id="person", items = grep("^A", colnames(datWide), value=TRUE), software="tam")
+datWide_mzp1 <- subset(datL.partInvariance, mzp==1) %>%
+                tidyr::pivot_wider(id_cols ="person",
+                   names_from = "item", values_from = "value") %>% as.data.frame()
+def <- defineModel(dat = datWide_mzp1, id="person", items = grep("^A", colnames(datWide_mzp1), value=TRUE), software="tam")
 run <- runModel(def)
 res <- getResults(run)
 items_mzp1 <- itemFromRes(res)
 
 # PVs ziehen fuer alle drei Messzeitpunkte mit verankerten Itemparametern
 kalib <- by ( data = datL.partInvariance, INDICES = datL.partInvariance[,"mzp"], FUN = function (mzp) {
-         datWide <- reshape2::dcast(mzp, person+sex~item, value.var = "value")
+         datWide <- tidyr::pivot_wider(mzp, id_cols =c("person", "sex"),
+                   names_from = "item", values_from = "value") %>% as.data.frame()
          def <- defineModel(dat = datWide, id="person", HG.var = "sex", anchor = items_mzp1[,c("item", "est")], items = grep("^A", colnames(datWide), value=TRUE), software="tam", n.plausible = 10)
          run <- runModel(def)
-         res <- getResults(run, ntheta = 40000, theta.model = FALSE)
+         res <- getResults(run, ntheta = 20000, theta.model = FALSE)
          return(res)})
 
 # PVs aus dem Rueckgabeobjekt extrahieren
@@ -142,7 +145,11 @@ PV_dat <- do_call_rbind_withName(df_list = PVs, colName="mzp")
 
 # Daten sind imputiert, man muss die Analysen zehnmal ausfuehren und
 # hinterher poolen
-mods  <- by(data = PV_dat, INDICES = PV_dat[,"imp"], FUN = function (impdata) {lmer(value~factor(mzp) +(1|person), data = impdata)})
+mods  <- by(data = PV_dat, INDICES = PV_dat[,"imp"], FUN = function (impdata) {lmer(value~factor(mzp) + (1|person), REML = FALSE, data = impdata)})
 pool1 <- miceadds::lmer_pool(mods)
+txt1  <- capture.output(summ1 <- summary(pool1))
 
-      https://rpubs.com/alecri/review_longitudinal
+PV_dat_common <- subset(PV_dat, person %in% commonPersons)
+mods2 <- by(data = PV_dat_common, INDICES = PV_dat_common[,"imp"], FUN = function (impdata) {lmer(value~factor(mzp) + (1|person), REML = FALSE, data = impdata)})
+pool2 <- miceadds::lmer_pool(mods2)
+txt2  <- capture.output(summ2 <- summary(pool2))

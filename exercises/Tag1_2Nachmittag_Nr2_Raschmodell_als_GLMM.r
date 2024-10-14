@@ -14,6 +14,7 @@ install.packages("lme4")
 install.packages("mirt")
 remotes::install_github("weirichs/eatModel", upgrade= "never")
 
+library(eatTools)
 
 # 1. Wiederholung: dichotomes Raschmodell
 #########################################
@@ -39,7 +40,7 @@ results <- getResults(run)
 items <- itemFromRes(results)
 
 # als GLMM modellieren ... Datensatz ins Langformat
-datLong <- reshape2::melt(dat, id.vars = "person", measure.vars = grep("^I", colnames(dat), value=TRUE), na.rm=TRUE)
+datLong <- tidyr::pivot_longer(dat, cols = grep("^I", colnames(dat), value=TRUE),  names_to = "variable") %>% as.data.frame()
 
 # itemspalte sollte character oder factor sein
 sapply(datLong, class)
@@ -79,7 +80,10 @@ mod3 <- glmer(value ~ (1|variable) + (1|person), data = datLong, family = binomi
 data(trends)
 
 # personendatensatz im wideformat
-dat_wide <- reshape2::dcast(subset(trends, year == 2010 & domain == "reading"), idstud+sex+ses+country~item, value.var = "value")
+dat_wide  <- tidyr::pivot_wider(subset(trends, year == 2010 & domain == "reading"),
+             id_cols =c("idstud","sex", "ses", "country"),
+             names_from = "item", values_from = "value") %>% as.data.frame()
+
 
 # Geschlecht als kategorielle Variable mit zwei Faktorstufen
 # SES als quasi-metrische Variable
@@ -103,27 +107,14 @@ datL   <- subset(trends, year == 2010 & domain == "reading")
 datL   <- merge(datL, dat_wide[,c("idstud", "ses_std")], by = "idstud")
 modHGM <- glmer(value ~ sex + ses_std + (1|item) + (1|idstud), data = datL, family = binomial(link="logit"))
 summary(modHGM)
-          save.lmer.effects(lmerObj= modHGM, fileName="z:/test", standardized = FALSE, quick=TRUE)
 
 # zusaetzliche Praediktoren aus der Itemseite: Itemformat
 table(datL[,"format"])
 modHGM1<- glmer(value ~ sex + ses_std + format + (1|item) + (1|idstud), data = datL, family = binomial(link="logit"))
 summary(modHGM1)
-          save.lmer.effects(lmerObj= modHGM1, fileName="z:/test1", standardized = FALSE, quick=TRUE)
 
 # mit interaktion
 modHGM2<- glmer(value ~ ses_std + sex * format + (1|item) + (1|idstud), data = datL, family = binomial(link="logit"))
 summary(modHGM2)
-          save.lmer.effects(lmerObj= modHGM2, fileName="z:/test2", standardized = FALSE, quick=TRUE)
 
 
-# 3. Reliabilitaet
-##################
-
-# koennen aus dem "results"-Objekt (dem Objekt, das die getResults()-Funktion zurueckgibt, extrahiert werden)
-def <- defineModel(dat = dat, id = "person", items = 2:41, software="tam")
-run <- runModel(def)
-results <- getResults(run)
-
-eapRelFromRes(results)
-wleRelFromRes(results)

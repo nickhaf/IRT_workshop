@@ -88,17 +88,31 @@ q3  <- q3FromRes(results, out = "wide", triangular = TRUE)
 write.csv2(q3[[1]], file.path(tempdir(), "q3.csv"), na="", row.names=FALSE)
 
 
-# 5. Eigene Uebung fuer Teilnehmer:innen
+# 5. Reliabilitaet
+##################
+
+# koennen aus dem "results"-Objekt (dem Objekt, das die getResults()-Funktion zurueckgibt, extrahiert werden)
+eapRelFromRes(results)
+wleRelFromRes(results)
+
+
+# 6. Eigene Uebung fuer Teilnehmer:innen
 ########################################
 
 # empirischen Uebungsdatensatz aufbereiten
 data(trends)
 
-# personendatensatz im wideformat
-dat_wide <- reshape2::dcast(subset(trends, year == 2010), idstud+sex+ses+country~item, value.var = "value")
+# personendatensatz fuer das Jahr 2010 im wideformat
+dat_wide  <- tidyr::pivot_wider(subset(trends, year == 2010),
+             id_cols =c("idstud","sex", "ses", "country"),
+             names_from = "item", values_from = "value") %>% as.data.frame()
 
 # iteminformationen
 item_info <- unique(subset(trends, year == 2010)[,c("item", "domain", "format")])
+
+# 'item_info' enthaelt zuordnung der Items zu Dimensionen
+qmat <- data.frame(item_info, model.matrix(~domain-1, data = item_info))
+
 
 ###########
 # Loesung #
@@ -124,7 +138,7 @@ write.csv2(q3.jpn[[1]], file.path(tempdir(), "q3_Language.csv"), na="", row.name
 ####################
 
 
-# 6. Differential Item Functioning
+# 7. Differential Item Functioning
 ##################################
 
 # reading und listening sind zwei domaenen; wir betrachten hier deshalb nur reading
@@ -142,16 +156,11 @@ plotDevianceTAM(run1pl)
 ?tam.mml
 
 # zweiter Versuch
-defDif2 <- defineModel(dat = dat_wide, id = "idstud", items = subset(qmat, domainreading == 1)[,"item"], software="tam", DIF.var = "sexnum", increment.factor=1.03, fac.oldxsi=.4, progress=TRUE)
+defDif2 <- defineModel(dat = dat_wide, id = "idstud", items = subset(qmat, domainreading == 1)[,"item"], software="tam", DIF.var = "sexnum", nodes = 40, increment.factor=1.1, fac.oldxsi=.8, Msteps = 25, progress=TRUE)
 runDif2 <- runModel(defDif2)
 
 # sieht etwas besser aus
 plotDevianceTAM(runDif2)
-
-# manchmal hilft aber auch das nicht. Alternative: auf software conquest ausweichen
-defDif3 <- defineModel(dat = dat_wide, id = "idstud", items = subset(qmat, domainreading == 1)[,"item"], software="conquest", DIF.var = "sexnum", dir = tempdir(), analysis.name = "DIF")
-runDif3 <- runModel(defDif3)
-plotDevianceConquest(file.path(tempdir(), "DIF.log"))
 
 # einsammeln der Ergebnisse aus runDif2
 resultsDif2 <- getResults(runDif2)
@@ -162,7 +171,7 @@ resultsDif3 <- getResults(runDif3)
 itemsDif3   <- itemFromRes(resultsDif3)
 
 
-# 7. Konfirmatorische Pruefung der Eindimensionalitaet
+# 8. Konfirmatorische Pruefung der Eindimensionalitaet
 ######################################################
 
 # analog zur 1pl vs. 2pl Logik: ein- vs. zweidimensionales Modell

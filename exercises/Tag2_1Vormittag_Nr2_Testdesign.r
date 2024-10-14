@@ -56,13 +56,17 @@ lme4::isNested(trends[,"idclass"], trends[,"year"])
 
 # Verlinkung innerhalb eines Messzeitpunkts pruefen und einer Domaene pruefen
 # personendatensatz im wideformat, fuer eine Beispieldomaene und ein Beispieljahr
-dat_wide <- reshape2::dcast(subset(trends,year==2015 & domain == "reading"), idstud+sex+ses+country~item, value.var = "value")
+dat_wide  <- subset(trends, year == 2015 & domain == "reading") %>%
+             tidyr::pivot_wider(id_cols =c("idstud","sex", "ses", "country"),
+                 names_from = "item", values_from = "value") %>% as.data.frame()
 
 # Modelldefinition
 def <- defineModel(dat = dat_wide, id = "idstud", items = grep("^T", colnames(dat_wide), value=TRUE), software="tam")
 
 # etwas eleganter/uebersichtlicher
-dat_wide_all <- reshape2::dcast(trends, idstud+sex+ses+country+year~item, value.var = "value")
+dat_wide_all <- trends %>% tidyr::pivot_wider(id_cols =c("idstud","sex", "ses", "country", "year"),
+                 names_from = "item", values_from = "value") %>% as.data.frame()
+
 allModels <- splitModels(qMatrix = qmat[,c("item", "domainlistening", "domainreading")], person.groups = dat_wide_all[,c("idstud", "year")], all.persons = FALSE, nCores = 1)
 defAll    <- defineModel(dat = dat_wide_all, id = "idstud", software="tam", splittedModels = allModels)
 
@@ -71,4 +75,5 @@ defAll    <- defineModel(dat = dat_wide_all, id = "idstud", software="tam", spli
 ###############################################
 
 datL <- readRDS("c:/Users/weirichs/Repositories/IRT_workshop/slides/Tag2_1Vormittag_Nr2_Testdesigns/longitudinal.rds")
-datWideMzp1 <- reshape2::dcast(subset(datL, mzp == 1), TH+person~item, value.var = "value")
+datWideMzp1 <- subset(datL, mzp == 1) %>% tidyr::pivot_wider(id_cols =c("person", "TH"),
+                 names_from = "item", values_from = "value") %>% as.data.frame()
