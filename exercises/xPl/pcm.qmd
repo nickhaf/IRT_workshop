@@ -1,0 +1,167 @@
+---
+title: "Partial Credit Model"
+subititle: "Übung"
+author: "Nicklas Hafiz"
+format: html
+---
+
+
+
+```{r}
+library(TAM)
+library(psych)
+```
+
+
+```{r}
+psych_dat <- read.csv(here::here("raw_data", "psych_stats.csv"), sep = ";") %>%
+  pivot_longer(cols = -char_id, names_to = "item", values_to = "score") %>%
+  mutate(likert = case_when(score <= 20 ~ 1,
+                            score <= 40 ~ 2, 
+                            score <= 60 ~ 3,
+                            score <= 80 ~ 4,
+                            TRUE ~ 5)) %>%
+  select(item, likert, char_id) %>%
+  pivot_wider(names_from = item, values_from = likert) %>%
+  select(char_id, messy_neat, disorganized_self.disciplined, diligent_lazy, on.time_tardy, scheduled_spontaneous, ADHD_OCD, chaotic_orderly, overachiever_underachiever)
+
+## ERstmal: Eine Art Gewissenhaftigkeit wird gemessen.
+## Items:
+# messy_neat, disorganized_self.disciplined, diligent_lazy, on.time_tardy, scheduled_spontaneous, ADHD_OCD, chaotic_orderly, overachiever_underachiever
+
+## Umkodieren! 
+# - diligent_lazy, on.time_tardy, scheduled_spontaneous, overachiever_underachiever
+
+psych_dat <- psych_dat %>%
+  mutate(lazy_diligent = 6 - diligent_lazy,
+         tardy_on.time = 6 - on.time_tardy,
+         spontaneous_scheduled = 6 - scheduled_spontaneous,
+         underachiever_overachiever = 6 - overachiever_underachiever) %>%
+  select(-char_id, -diligent_lazy, -on.time_tardy, -scheduled_spontaneous, -overachiever_underachiever) 
+
+
+
+#### Hier dann loslegen mit der Übung. Umkodieren evtl. im R-Teil? 
+
+## Sind die Daten im richtigen Format? 
+## eventuell nicht eindimensional?
+
+cor(psych_dat)
+
+## Ich glaube es muss bei 0 anfangen, hat mir aber keiner gesagt!
+psych_dat <- psych_dat -1
+## Hohe correlationen zwischen den Items. Aber eignelich niucht weiter schlimm oder?
+
+any(is.na(psych_dat))
+
+alpha(psych_dat)$response.freq
+
+
+## Eigentlich sind die response kategorien ganz gut ausgelastet, teilweise die Ränder etwas weniger. 
+
+pcm_psych <- tam.mml(psych_dat[, -1], irtmodel = "PCM")
+
+summary(pcm_psych)
+
+pcm_psych$xsi
+
+## Identify items with disordered category thresholds
+g <- pcm_psych$item_irt
+gg <- g[g$tau.Cat1 > g$tau.Cat2 | g$tau.Cat2 > g$tau.Cat3 | g$tau.Cat3 > g$tau.Cat4, ]
+rownames(gg)
+
+## Jetzt geordnet!
+deltas <- pcm_psych$xsi
+## HMM, sieht immernoch comisch aus oder? 
+## Aber Delta Schnittpunkte stimmen mit dem Plot überein
+
+## Plot the option characteristic curves
+plot(pcm_psych, 
+     type = "items", 
+     export = FALSE, 
+     package = "graphics", 
+     observed = TRUE, 
+     low = -6, 
+     high = 6)
+
+## Gestrichelt sind die Observed Linien. Aber actually not that weird oder? 
+
+# Was genau sagen die verschiednen Kurven typen?
+
+## Plot the empirical and theoretical expected scores curves
+
+plot(pcm_psych, 
+     type = "expected", 
+     ngroups = 6, 
+     low  = -6, 
+     high = 6,
+     package = "lattice", overlay = FALSE)
+
+## Infit/Outfit anschauen
+
+fit <- msq.itemfit(pcm_psych)$itemfit
+(fit <- data.frame(fit[1], round(fit[3:8], 2)))
+
+## Infit und Outfit sollten zwischen 0.5 und 1.5 liegen (hatte noch andere Grenzen im Kopf, quelle ruassuchen. Auch was genau das nochmal heißt). 
+## underachiever_overachiever passt nicht so rein, ist auch thematisch weiter weg (nette Illustration, sieht man das noch an irgendwelchen Kurven oder andern Werten?)
+
+
+## Q3 Statistic
+q3 <- tam.modelfit(pcm_psych)$stat.itempair
+q3 <- data.frame(q3[1:2], round(q3[5:6], 2), round(q3[7:8], 4))
+## Actually quite interesting! underachiever_overachiever fällt auch hier auf. 
+
+
+## Gut oder schlecht? zuyymindest sehr ähnlich im example. 
+(MADaQ3 <- tam.modelfit(pcm_psych)$stat.MADaQ3)
+
+## Values > 0.6 might reflect unacceptable fit
+(item.RMSD <- IRT.itemfit(pcm_psych)$RMSD_bc)
+
+## Tardy_on.time ebenfalls auffällig (auch ein komischer Gegensatz wenn man drüber nachdenkt, evtl. mehrdimensional)
+
+## Hiernach kommt noch einiges, aber wahrscheinlich genug to get started! 
+```
+
+```{r eRm}
+library(eRm)
+
+erm_pcm <- PCM(psych_dat)
+summary(erm_pcm)
+
+plotPImap(erm_pcm)
+plotICC(erm_pcm, ask = FALSE)
+
+## Scheint anders auszusehen als bei Tam. Nochmal genauer schauen später, aber underachiever_overachiever scheint sich hier erst bei vier die letzte Linie zu kreuzen. 
+
+thresholds(erm_pcm)
+
+person.location.estimate <- person.parameter(erm_pcm)
+
+item_fit_pcm <- itemfit(person.location.estimate)
+
+
+## Maybe plot standardiyed residuals?
+stresid <- item_fit_pcm$st.res
+
+# before constructing the plots, find the max & min residuals:
+max.resid <- ceiling(max(stresid))
+min.resid <- ceiling(min(stresid))
+
+for(item.number in 1:ncol(stresid)){
+  plot(stresid[, item.number], ylim = c(min.resid, max.resid),
+       main = paste("Standardized Residuals for Item ", item.number, sep = ""),
+       ylab = "Standardized Residual", xlab = "Person Index")
+  abline(h = 0, col = "blue")
+  abline(h=2, lty = 2, col = "red")
+  abline(h=-2, lty = 2, col = "red")
+  legend("topright", c("Std. Residual", "Observed = Expected", "+/- 2 SD"), pch = c(1, NA, NA), 
+         lty = c(NA, 1, 2),
+         col = c("black", "blue", "red"), cex = .8)
+}
+
+## Looks okay I gues? For Item 8 am schlechtesten, passt auch wieder!
+```
+
+
+## Personenspezifische Kurve zeichnen? 
