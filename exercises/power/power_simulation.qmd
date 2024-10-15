@@ -8,6 +8,8 @@ Eine häufige Frage die bei der Planung von Studien aufkommt, ist die Frage nach
 
 Wir brauchen folgende Pakete: 
 ```{r}
+#| message: false
+
 library(tidyverse)
 library(TAM)
 library(catIrt)
@@ -101,8 +103,9 @@ Die responses können wir also mit `sim_2PL_dat$resp` extrahieren.
 
 :::{.callout-caution collapse="true"}
 
+## Lösung
 ```{r}
-tam_1PL <- tam(sim_2PL_dat$resp)
+tam_1PL <- tam(sim_2PL_dat$resp, verbose = FALSE)
 ```
 
 :::
@@ -122,7 +125,7 @@ Der Output von `TAM` ist ziemlich groß. Beim Anschauen der Struktur sehen wir n
 :::
 
 
-:::{.callout-tip collapse="true"}
+:::{.callout-caution collapse="true"}
 ## Lösung
 
 ```{r}
@@ -142,26 +145,41 @@ Wir können vor allem anhand des Plots gut erkennen, dass die Differenz zwischen
 
 :::
 
-## Und das ganze von Vorn
-Sehr gut, jetzt haben wir die einzelnen Bausteine der Simulation zusammengetragen. Jetzt kommt aber die eigentliche Aufgabe: Wir wollen ja verschiedene Stichprobengrößen ausprobieren und anhand der Differenz zwi
-schen den wahren und den geschätzten Parametern beurteilen, welche Stichprobengröße für eine adäquate Schätzung ausreichen könnte.
+## Wieder von vorn
+Sehr gut, jetzt haben wir die einzelnen Bausteine der Simulation zusammengetragen. Jetzt kommt aber die eigentliche Aufgabe: Wir wollen ja verschiedene Stichprobengrößen ausprobieren und anhand der Differenz zwischen den wahren und den geschätzten Parametern beurteilen, welche Stichprobengröße für eine adäquate Schätzung ausreichen könnte. 
 
+### Bedingungen
+Zuerst müssen wir die Bedingungen für unsere Simulation festlegen
 
+### Schleife
+Dafür brauchen wir einen [genesteten for-Loop]{.highlight}. Schaue in den @tip-forloop für mehr Infos. 
+
+:::{#tip-forloop .callout-tip collapse="true"}
 
 ```{r}
-# group_2_2PL <- tam.mml.2pl(group_2$resp, irtmodel = "2PL")
-
-plotDevianceTAM(group_1_2PL)
-
-## Extrahieren der Itemparameter
-itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+#| eval: false
 
 
-## OK, now that that worked, do the same for x iterations for different sample sizes.
+
+```
+
+:::
+
+
+:::{.callout-caution collapse="true"}
+
+```{r}
+
+
+```
+
+:::
+
+```{r}
+#| eval: false
 
 n_iterations <- 100
 n_persons <- seq(100, 500, by = 100)
-
 
 for (n in n_persons) {
   for (iter in n_iterations) {
