@@ -138,7 +138,6 @@ result <- data.frame(
 ggplot(data = result, aes(x = b_true, y = abs(b_diff))) +
   geom_point() +
   theme_minimal()
-  
 ```
 
 Wir können vor allem anhand des Plots gut erkennen, dass die Differenz zwischen den wahren und den geschätzten Werten an den Rändern zunimmt. Besonders Schwere oder besonders leichte Items werden also schlechter geschätzt. Das ist ganz normal, da dies Items relativ wenig Informationen enthalten: Entweder benantworten (fast) alle sie richtig oder (fast) alle sie falsch. Es gibt hier also wenig Variation, die für die Schätzung genutzt werden kann. 
@@ -149,18 +148,24 @@ Wir können vor allem anhand des Plots gut erkennen, dass die Differenz zwischen
 Sehr gut, jetzt haben wir die einzelnen Bausteine der Simulation zusammengetragen. Jetzt kommt aber die eigentliche Aufgabe: Wir wollen ja verschiedene Stichprobengrößen ausprobieren und anhand der Differenz zwischen den wahren und den geschätzten Parametern beurteilen, welche Stichprobengröße für eine adäquate Schätzung ausreichen könnte. 
 
 ### Bedingungen
-Zuerst müssen wir die Bedingungen für unsere Simulation festlegen
+Zuerst müssen wir die Bedingungen für unsere Simulation festlegen. Erstelle dafür zwei Vektoren. Einer enthält einfach nur die Anzahl an Iterationen für unsere Simulation. Das ist so, als ob wir das Experiment viele Male wiederholen würden, um ein Maß für die Variabilität im Sampling und damit den Parameterschätzungen zu bekommen.  
+Der andere sollte ein Vektor aus verschiedenen Stichprobengrößen sein. 
+
+:::{.callout-caution collapse="true"}
+## Lösung
+```{r}
+n_iterations <- 100
+n_persons <- seq(100, 500, by = 100)
+```
+:::
 
 ### Schleife
-Dafür brauchen wir einen [genesteten for-Loop]{.highlight}. Schaue in den @tip-forloop für mehr Infos. 
+Jetzt brauchen wir einen [genesteten for-Loop]{.highlight}. Der erste for-loop soll den gerade definierten Stichprobengrößen-Vektor entlang gehen. Darin genested brauchen wir einen zweiten for-loop, der von 1 bis zur maximalen, oben definierten Iterations-Anzahl geht. Schaue in den @tip-forloop für mehr Infos zu for-loops. Baue erst einmal nur das Grundgerüst, also die beiden for-loop Definitionen und die (leeren) Klammern. 
 
 :::{#tip-forloop .callout-tip collapse="true"}
 
 ```{r}
 #| eval: false
-
-
-
 ```
 
 :::
@@ -169,23 +174,132 @@ Dafür brauchen wir einen [genesteten for-Loop]{.highlight}. Schaue in den @tip-
 :::{.callout-caution collapse="true"}
 
 ```{r}
-
-
 ```
 
 :::
 
+### Simulation
+In diesen for-loop kommt jetzt unsere Simulation. In jeder iteration werden also die Daten neu simuliert. Dabei wird $\theta$ jedesmal neu festgelegt, und zwar nach dem aktuellen Wert, der gerade in der äußeren Schleife durchlaufen wird. Kümmere dich erst einmal nicht darum, dass die Daten abgespeichert werden. Das machen wir im nächsten Schritt. Wir wollen erst einmal nur testen, ob n_persons * n_iterations Antworten simuliert werden. 
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+```{r}
+for (n in n_persons) {
+  for (iter in 1:n_iterations) {
+    sim_2PL_dat <- simIrt(
+      theta = rnorm(n, 0, 1),
+      params = as.matrix(item_pars[, c("alpha", "beta", "gamma")]),
+      mod = "brm"
+    )
+  }
+}
+```
+
+`simIrt()` gibt bei jeder Simulation einen kurzen Text aus. Daran können wir erkennen, dass tatsächlich die gewünschete Anzahl an Datensätzen erzeugt wurde. 
+:::
+
+### Modell fitten
+Wir könnten jetzt die Daten erst aus der Schleife heraus abspeichern. Da `TAM` aber die Daten im Output enthält, fitten wir einfach direkt das 1PL Modell in der Schleife und speichern die geschätzen Itemschwierigkeiten **im nächsten Schritt** in einem `data.frame` ab, der zudem Eckdaten zur aktuellen Personenanzahl, zur Iteration und zur wahren Itemschwierigkeit enthält.  
+Ergänze also die Schleife aus der vorherigen Aufgabe um die `tam()` Funktion, die ein 1PL Modell auf die in der aktuellen Iteration simulierten Daten fittet. Extrahiere aus diesem gefitteten `TAM`-Modell direkt die Itemschwierigkeiten mit `tam_result$item_irt[, "beta"]`.
+
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+```{r}
+for (n in n_persons) {
+  for (iter in 1:n_iterations) {
+    sim_2PL_dat <- simIrt(
+      theta = rnorm(n, 0, 1),
+      params = as.matrix(item_pars[, c("alpha", "beta", "gamma")]),
+      mod = "brm"
+    )
+
+    tam_result <- tam(sim_2PL_dat$resp, verbose = FALSE)
+
+    beta_est <- tam_result$item_irt[, "beta"]
+  }
+}
+```
+Bisher wird das Ergebnis-Objekt immer überschrieben, sodass nur das Ergebnis aus der allerletzten Iteration ausgegeben wird. Das wollen wir ändern!
+
+:::
+
+### Abspeichern
+Jetzt müssen wir unsere Ergebnisse noch abspeichern. Erstelle dafür zuerst einen leeren `data.frame`, der die Ergebnisse aufnehmen soll. 
+
+:::{.callout-caution collapse="true"}
 ```{r}
 #| eval: false
 
-n_iterations <- 100
-n_persons <- seq(100, 500, by = 100)
-
+results <- data.frame()
 for (n in n_persons) {
-  for (iter in n_iterations) {
-    dat_sim <- generate_irt_dat()
+  for (iter in 1:n_iterations) {
   }
 }
+```
+:::
+
+
+
+```{r}
+results <- data.frame()
+for (n in n_persons) {
+  for (iter in 1:n_iterations) {
+    sim_2PL_dat <- simIrt(
+      theta = rnorm(n, 0, 1),
+      params = as.matrix(item_pars[, c("alpha", "beta", "gamma")]),
+      mod = "brm"
+    )
+
+    tam_result <- tam(sim_2PL_dat$resp, verbose = FALSE)
+
+    beta_est <- tam_result$item_irt[, "beta"]
+
+    current_result <- data.frame(
+      "item" = paste0("Item", 1:n_items),
+      "n_persons" = n,
+      "iteration" = iter,
+      "beta_true" = item_pars$beta,
+      "beta_est" = beta_est
+    ) %>%
+      mutate(beta_diff = beta_est - beta_true)
+
+    results <- rbind(
+      results,
+      current_result
+    )
+  }
+}
+
+
+str(results)
+```
+
+
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+```{r}
+#| eval: false
+
+for (n in n_persons) {
+  for (iter in 1:n_iterations) {
+    sim_2PL_dat <- simIrt(
+      theta = rnorm(n, 0, 1),
+      params = as.matrix(item_pars[, c("alpha", "beta", "gamma")]),
+      mod = "brm"
+    )
+  }
+}
+```
+
+
+```{r}
+#| eval: false
+
 
 diff_measures <- data.frame("b_est" = itempars_1$beta, "b_true" = items$b) %>%
   mutate(b_diff = b_est - b_true) %>%
@@ -201,6 +315,7 @@ summarise(
 
 plot(itempars_1$beta, itempars_1$beta)
 ```
+
 
 Beispielfrage: What is the appropriate sample size in randomized clinical trials to detect differences in mean scores between groups corresponding to a small treatment effect with adequate power?
 
