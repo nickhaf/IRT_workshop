@@ -707,12 +707,11 @@ Sehr große Datensätze mit vielen Kovariaten (und damit auch vielen verschieden
 
 Ansonste Simulation von Daten und ausprobieren. 
 
+## Umgang mit DIF
+
 :::{.callout-important}
-Generell ist es keine gute Idee, einfach nach p-Werten zu gehen, um Items dann blind auszuschließen. Stattdessen sollten die Itemschwierigkeitsunterschiede zwischen den Gruppen beurteilt, und auch das Item selbst inhaltlich untersucht werden.
-:::
-
-https://cran.r-project.org/web/packages/difR/difR.pdf
-
+Generell ist es keine gute Idee, einfach nach p-Werten zu gehen, um Items dann blind auszuschließen. Stattdessen sollten die Itemschwierigkeitsunterschiede zwischen den Gruppen beurteilt, und auch das Item selbst inhaltlich untersucht werden. Noch mehr Empfehlungen finden sich z.B. bei @hambleton2006good. 
+::
 
 ## Übung
 Bitte bearbeite die [DIF-Übung](https://nickhaf.github.io/IRT_workshop/exercises/linking/dif.html).
