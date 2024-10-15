@@ -1,0 +1,11 @@
+---
+title: "Power Simulation"
+subtitle: "Übung"
+format: html
+---
+
+Eine häufige Frage die bei der Planung von Studien aufkommt, ist die Frage nach der benötigten Stichprobengröße. Eine Möglichkeit diese für eine konkrete Studie zu planen, ist durch Simulationen. Wir haben bereits eine einfache Simulation in der [Übung zu höher parametrisierten Modellen ausprobiert](). In diesem Kapitel wollen wir jetzt darauf aufbauen und uns anschauen, wie Simulationen für das Planen von allen möglichen Studienaspketen genutzt werden können. 
+
+- 1 Dimensional, so ähnlich wie bisher, nur mit Schleife drumrum und dann die Güte der Parameterschätzungen beurteilen irgendwie (siehe Morris paper)
+- 2 Dimensional:
+  - korrelierte Domänen und dann Eindimensional gesondert und einmal mehrdimensional auswerten. Reliabilität ((Konstruktreliabilität, z.B. geteap() in TAM)) sollte steigen, da Informationen vom einen Konstrukt auch bei der Schätzung der Werte auf dem anderen Konstrukt helfen könnten. 
