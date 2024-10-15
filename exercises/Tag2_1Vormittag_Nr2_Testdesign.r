@@ -15,6 +15,11 @@ install.packages("mirt")
 remotes::install_github("weirichs/eatModel", upgrade= "never")
 
 
+library(eatTools)
+library(eatModel)
+library(lme4)
+
+
 # 1. Pruefung der Designfaktoren
 ################################
 
