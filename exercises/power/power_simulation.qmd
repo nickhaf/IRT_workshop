@@ -6,6 +6,226 @@ format: html
 
 Eine häufige Frage die bei der Planung von Studien aufkommt, ist die Frage nach der benötigten Stichprobengröße. Eine Möglichkeit diese für eine konkrete Studie zu planen, ist durch Simulationen. Wir haben bereits eine einfache Simulation in der [Übung zu höher parametrisierten Modellen ausprobiert](). In diesem Kapitel wollen wir jetzt darauf aufbauen und uns anschauen, wie Simulationen für das Planen von allen möglichen Studienaspketen genutzt werden können. 
 
+Wir brauchen folgende Pakete: 
+```{r}
+library(tidyverse)
+library(TAM)
+library(catIrt)
+```
+
+```{r}
+#| echo: false
+
+source(here::here("R", "plot_functions.R"))
+```
+
+# Das Grundgerüst
+Als erstes wollen wir Schritt für Schritt das Grundgerüst für unsere Simulation aufbauen, das wir dann je nach Fragestellung erweitern können. 
+
+## Die Items
+Als erstes definieren wir unsere wahren Itemparameter, aus denen dann die Daten simuliert werden.   
+Erstelle dafür einen `data.frame`, der pro Item eine Zeile mit den entsprechenden Itemparamtern $\alpha$, $\beta$ und $\gamma$ enthält. 
+
+- Wir wollen 20 Items simulieren.
+- $\alpha$ ist der Diskriminationsparameter und soll aus einer Normalverteilung $N(1, 0.1)$ simuliert werden. So ist er noch klein genug, um ein sinnvolles 1PL-Modell ausprobieren zu können. 
+- $\beta$ ist der Schwierigkeitsparameter und soll den gesamte erwartete Schwierigkeitsbereich abdecken. Die Range soll von -2 bis 2 gehen, und Itemschwierigkeiten in gleichmäßigen Abständen enthalten. 
+- $\gamma$ ist der Rate-Parameter, und wird erst einmal als Null für alle Items angenommen. 
+
+1PL und 2PL Modelle sollten hier also beide gut funktionieren. 
+
+:::{.callout-caution collapse="true"}
+## Tipp
+Aus einer Normalverteilung können wir mit `rnorm()` samplen.   
+Die Schwierigkeitsparamter lassen sich mit `seq()` erzeugen.  
+Schaue dir gegebenenfalls die Hilfe an. 
+:::
+
+:::{.callout-caution collapse="true"}
+## Lösung
+```{r}
+set.seed(42) ## Setze den gleichen Seed, um exakt die selben Ergebnisse zu bekommen
+
+n_items <- 20 ## So kann ich die Itemzahl im Nachhinein leicht anpassen
+
+item_pars <- data.frame(
+  item_id = 1:n_items,
+  alpha = rnorm(n_items, 1, 0.1),
+  beta = seq(-2, 2, length.out = n_items),
+  gamma = rep(0, n_items)
+)
+```
+
+:::
+
+## Die Antworten
+
+Perfekt, jetzt können wir die Antworten simulieren. Nutze dafür wieder die Funktion `simIRT()` aus `catIrt`. Andere Pakete wie `mirt` haben aber äquivalente Funktionen, und wir haben ja sogar schon [gelernt](), wie man das ganz manuell machen kann. 
+
+Wir müssen neben den Parametern auch die Theta-Werte angeben. Die sollen aus einer Normalverteilung $N(0,1)$ stammen. Hier haben wir natürlich Spielraum: Wenn wir erwarten, dass die Stichprobe, die wir untersuchen wollen, besonders leistungsstark ist, könnten wir auch eine Normalverteilung mit höherem Mittelwert wählen. 
+
+:::{.callout-tip collapse="true"}
+
+## Tipp
+Die Parameter müssen als [`Matrix`](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/datenstrukturen) dem Funktionsargument `params` übergeben werden. 
+
+:::
+
+:::{.callout-caution collapse="true"}
+
+## Lösung
+```{r}
+sim_2PL_dat <- simIrt(
+  theta = rnorm(100000, 0, 1),
+  params = as.matrix(item_pars[, c("alpha", "beta", "gamma")]),
+  mod = "brm"
+)
+```
+
+:::
+
+## Das Modell
+Jetzt können wir das Modell schätzen. Wir geben uns jetzt erst einmal mit einem 1PL-Modell zufrieden. Fitte also ein 1PL-Modell auf die simulierten Daten (z.B. mit `TAM`). 
+
+:::{.callout-tip collapse="true"}
+## Tipp
+Um an die simulierten Antworten zu kommen, können wir uns einmal die Struktur von dem simulierten Objekt anschauen:
+
+```{r}
+str(sim_2PL_dat)
+```
+
+Die responses können wir also mit `sim_2PL_dat$resp` extrahieren.
+
+:::
+
+
+:::{.callout-caution collapse="true"}
+
+```{r}
+tam_1PL <- tam(sim_2PL_dat$resp)
+```
+
+:::
+
+## Der Vergleich
+Jetzt können wir unsere tatsächlichen Schwierigkeitsparameter mit den duch `TAM` geschätzten Schwierigkeitsparamtern vergleichen. Mach das einmal indem du die Differenz bildest. Fällt dir etwas auf?
+
+:::{.callout-note}
+Obwohl wir eigentlich ein 2PL Modell simuliert haben (wir haben ja Diskriminationsparamter verschieden von 1 gezogen), haben wir nur ein 1PL Modell gefittet. Das dient einfach dazu zu zeigen, dass die Modellschätzung in Fällen wo die Diskriminationsparamter nicht zu verschieden von 1 sind, hinreichend gut funktionieren kann. 
+:::
+
+:::{.callout-tip collapse="true"}
+## Tipp
+
+Der Output von `TAM` ist ziemlich groß. Beim Anschauen der Struktur sehen wir nach einigem Suchen, dass die Paramter sich wahrscheinlich in `tam_1PL$item_irt` verstecken. 
+
+:::
+
+
+:::{.callout-tip collapse="true"}
+## Lösung
+
+```{r}
+result <- data.frame(
+  "b_true" = item_pars$beta,
+  "b_est" = tam_1PL$item_irt[, "beta"]
+) %>%
+  mutate(b_diff = b_est - b_true)
+
+ggplot(data = result, aes(x = b_true, y = abs(b_diff))) +
+  geom_point() +
+  theme_minimal()
+  
+```
+
+Wir können vor allem anhand des Plots gut erkennen, dass die Differenz zwischen den wahren und den geschätzten Werten an den Rändern zunimmt. Besonders Schwere oder besonders leichte Items werden also schlechter geschätzt. Das ist ganz normal, da dies Items relativ wenig Informationen enthalten: Entweder benantworten (fast) alle sie richtig oder (fast) alle sie falsch. Es gibt hier also wenig Variation, die für die Schätzung genutzt werden kann. 
+
+:::
+
+## Und das ganze von Vorn
+Sehr gut, jetzt haben wir die einzelnen Bausteine der Simulation zusammengetragen. Jetzt kommt aber die eigentliche Aufgabe: Wir wollen ja verschiedene Stichprobengrößen ausprobieren und anhand der Differenz zwi
+schen den wahren und den geschätzten Parametern beurteilen, welche Stichprobengröße für eine adäquate Schätzung ausreichen könnte.
+
+
+
+```{r}
+# group_2_2PL <- tam.mml.2pl(group_2$resp, irtmodel = "2PL")
+
+plotDevianceTAM(group_1_2PL)
+
+## Extrahieren der Itemparameter
+itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+
+
+## OK, now that that worked, do the same for x iterations for different sample sizes.
+
+n_iterations <- 100
+n_persons <- seq(100, 500, by = 100)
+
+
+for (n in n_persons) {
+  for (iter in n_iterations) {
+    dat_sim <- generate_irt_dat()
+  }
+}
+
+diff_measures <- data.frame("b_est" = itempars_1$beta, "b_true" = items$b) %>%
+  mutate(b_diff = b_est - b_true) %>%
+  group_by(item, n_persons) ## do the summary for each item and sample size seperatly
+summarise(
+  MSE = mean(b_diff, na.rm = TRUE), # Calculate the MSE for item difficulties
+  MCSE = sd(b_diff, na.rm = TRUE) / sqrt(n() - 1), # Calculate the MCSE
+  .groups = "drop"
+)
+
+# itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
+# colnames(itempars_2) <- c("alpha_2", "beta_2")
+
+plot(itempars_1$beta, itempars_1$beta)
+```
+
+Beispielfrage: What is the appropriate sample size in randomized clinical trials to detect differences in mean scores between groups corresponding to a small treatment effect with adequate power?
+
+
 - 1 Dimensional, so ähnlich wie bisher, nur mit Schleife drumrum und dann die Güte der Parameterschätzungen beurteilen irgendwie (siehe Morris paper)
 - 2 Dimensional:
   - korrelierte Domänen und dann Eindimensional gesondert und einmal mehrdimensional auswerten. Reliabilität ((Konstruktreliabilität, z.B. geteap() in TAM)) sollte steigen, da Informationen vom einen Konstrukt auch bei der Schätzung der Werte auf dem anderen Konstrukt helfen könnten. 
+  
+
+Example 1 und 4 sehen interessant aus. 
+
+## 1 Dimensional
+Idee: Screening Test für irgendetwas, deswegen ability am unteren Spektrum ansiedeln?
+
+
+Nach Schroeders 2024:
+
+- Anzahl und Verteilung der Faktoren (eindimensional vs. mehrdimensional)
+- Anzahl Itemparamter (z.B. 1PL, also nur Schwierigkeiten für das erste Beispiel) (Anzahl der Items brauchen wir nicht, wir schauen uns einfach Werte über eine bestimmte range an. 
+- Item Typ: Dichotom
+
+Testdesign:
+(Missings erstmal weglassen?)
+- Z.B. zwei Testformen, die gelinkt werden sollen. 
+- Missing Pattern (Missing completely at random (MCAR), Linking-Design)
+- Wie viel Missing Data
+
+IRT Model und interessierende Paramter
+- 1PL, 2PL ...
+- software (die wir auch bei der Auswertung nutzen wollen)
+- Parameter, die extrahiert werden sollen
+
+Monte Carlo simulation aufsetzen
+- Anzahl an iterations:
+  - 
+- zu evaluierende Sample sizes
+
+  
+Evaluation:
+- Mean squared error (MSE) der Itemschwierigkeiten wird genommen, um die Präzision der Schätzung zu ermitteln. Acceptable Cutoff below 0.05 (warum?). 
+
+  
+The first application example deals with two test forms of a reasoning test that are linked by a subset of common items. The accuracy of item difficulty estimation is examined as a function of sample size.
+  
+  
+https://psych-irt.netlify.app/
