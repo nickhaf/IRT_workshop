@@ -149,8 +149,9 @@ Wir können vor allem anhand des Plots gut erkennen, dass die Differenz zwischen
 Sehr gut, jetzt haben wir die einzelnen Bausteine der Simulation zusammengetragen. Jetzt kommt aber die eigentliche Aufgabe: Wir wollen ja verschiedene Stichprobengrößen ausprobieren und anhand der Differenz zwischen den wahren und den geschätzten Parametern beurteilen, welche Stichprobengröße für eine adäquate Schätzung ausreichen könnte. 
 
 ### Bedingungen
-Zuerst müssen wir die Bedingungen für unsere Simulation festlegen. Erstelle dafür zwei Vektoren. Einer enthält einfach nur die Anzahl an Iterationen für unsere Simulation. Das ist so, als ob wir das Experiment viele Male wiederholen würden, um ein Maß für die Variabilität im Sampling und damit den Parameterschätzungen zu bekommen.  
-Der andere sollte ein Vektor aus verschiedenen Stichprobengrößen sein. 
+Zuerst müssen wir die Bedingungen für unsere Simulation festlegen. Erstelle dafür zwei Vektoren. Einer enthält einfach nur die Anzahl an Iterationen für unsere Simulation. Das ist so, als ob wir das Experiment viele Male wiederholen würden, um ein Maß für die Variabilität im Sampling und damit den Parameterschätzungen zu bekommen. 
+Der andere sollte ein Vektor aus verschiedenen Stichprobengrößen sein.   
+<!-- Außerdem sollten wir noch festlegen, welche Abweichung vom Wahren Schwierigkeitswert wir noch akzeptable finden. Wir sagen einfach mal, dass ein mittlerer Unterschied von 0.2 Logits noch in Ordnung ist. D.h. also, wir suchen eine Stichprobenzahl, bei der unsere Abweichung darunter liegt.  -->
 
 :::{.callout-caution collapse="true"}
 ## Lösung
@@ -164,9 +165,10 @@ n_persons <- seq(100, 500, by = 100)
 Jetzt brauchen wir einen [genesteten for-Loop]{.highlight}. Der erste for-loop soll den gerade definierten Stichprobengrößen-Vektor entlang gehen. Darin genested brauchen wir einen zweiten for-loop, der von 1 bis zur maximalen, oben definierten Iterations-Anzahl geht. Schaue in den @tip-forloop für mehr Infos zu for-loops. Baue erst einmal nur das Grundgerüst, also die beiden for-loop Definitionen und die (leeren) Klammern. 
 
 :::{#tip-forloop .callout-tip collapse="true"}
-
 ```{r}
 #| eval: false
+
+
 ```
 
 :::
@@ -175,6 +177,11 @@ Jetzt brauchen wir einen [genesteten for-Loop]{.highlight}. Der erste for-loop s
 :::{.callout-caution collapse="true"}
 
 ```{r}
+for (n in n_persons) {
+  for (iter in 1:n_iterations) {
+    
+  }
+}
 ```
 
 :::
@@ -391,7 +398,9 @@ mse_results <- results %>%
     MSE = mean(beta_diff_2),
     MCSE = sd(beta_diff_2) / sqrt(n() - 1), 
 .groups = "drop"
-  )
+  ) %>%
+  mutate(RMSE = sqrt(MSE), 
+         RMCSE = sqrt(MCSE)) ## Ich nehme hier noch die Wurzel aus dem MSE, damit die Ergebnisse wieder auf der Schwierigkeitsskala sind. 
 
 head(mse_results)
 ```
@@ -403,15 +412,15 @@ head(mse_results)
 ## Visualisierung
 Klasse. Um die Ergebnisse leichter auszuwerten, können wir sie jetzt noch visualisieren. 
 
-
 ```{r}
 mse_results %>%
 filter(item %in% c("Item1", "Item10", "Item20")) %>%
-ggplot( aes(x = n_persons, y = MSE, colour = item)) +
+ggplot( aes(x = n_persons, y = RMSE, colour = item)) +
   geom_point() +
 geom_line() +
-  geom_ribbon(aes(ymin = MSE - 1.96 * MCSE, ymax = MSE + 1.96 * MCSE, fill = item), 
+  geom_ribbon(aes(ymin = RMSE - 1.96 * MCSE, ymax = RMSE + 1.96 * MCSE, fill = item), 
               alpha = 0.05, color = NA) +
+  geom_hline(yintercept = 0.2, linetype = "dashed", colour = '#01364C') + ## Cutoff Wert)
 ## and some styling, not relevant, but the functions can be found in the R folder on GitHub
 set_colour_scheme() +  
 set_fill_scheme() +
@@ -420,7 +429,10 @@ xlab("Stichprobengröße")
 
 ```
 
-Fantastisch. Die Daten verhalten sich so, wie wir es erwarten würden, da der MSE mit zunehmender Stichprobengröße abnimmt, der Unterschied zwischen geschätzter und tatsächlicher Itemschwierigkeit wird also kleiner. Wir haben ja oben unseren Cutoff Wert berechnet, und können daran erkennen, dass wir für unser kleines Modell eine Stichprobengröße von ... bräuchten, um die Itemschwierigkeiten präzise genug zu schätzen. 
+Fantastisch. Die Daten verhalten sich so, wie wir es erwarten würden, da der MSE mit zunehmender Stichprobengröße abnimmt, der Unterschied zwischen geschätzter und tatsächlicher Itemschwierigkeit wird also kleiner. 
+
+
+Wir haben ja oben unseren Cutoff Wert berechnet, und können daran erkennen, dass wir für unser kleines Modell eine Stichprobengröße von ... bräuchten, um die Itemschwierigkeiten präzise genug zu schätzen. 
 
 Und Cutoff oben festlegen! 
 
