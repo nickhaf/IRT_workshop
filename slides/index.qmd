@@ -3,17 +3,22 @@ title: "Folien"
 format: html
 ---
 
-# Einführung Item Response Theorie
+# Tag 1
+## Einführung Item Response Theorie
 {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}}
 
-# Einführung in R
+## Einführung in R
 {{< revealjs "./IntroR/introR.html" >}}
 
-# GLM
+## GLM
 {{< revealjs "./GLM/glm.html" >}}
 
-# Linking
+## Validität
+{{< revealjs "./Validity/validity.html" >}}
+
+# Tag 2
+## Linking
 {{< revealjs "./Linking/linking.html" >}}
 
-# Höher Parametrisierte Modelle
+## Höher Parametrisierte Modelle
 {{< revealjs "./xPL/index.html" >}}
