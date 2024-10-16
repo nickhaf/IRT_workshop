@@ -37,7 +37,7 @@ website:
               - ./exercises/linking/linking.qmd
               - ./exercises/linking/dif.qmd
           - section: "Höher parametrisierte Modelle"
-            href: ./exercises/index_xpl.qmd
+            href: ./exercises/index_xPL.qmd
             contents:
               - ./exercises/xPl/simulation.qmd
               - ./exercises/xPl/model_selection.qmd

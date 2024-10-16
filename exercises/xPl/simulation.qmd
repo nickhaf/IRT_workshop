@@ -1,7 +1,6 @@
 ---
 title: "Simulation von IRT Daten"
-subititle: "Übung"
-author: "Nicklas Hafiz"
+subtitle: "Übung"
 format: html
 ---
 

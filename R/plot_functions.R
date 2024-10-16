@@ -55,6 +55,10 @@ set_colour_scheme <- function(color_scheme = c("#F4BA02", "#9B1B34", "#aaa938"))
   scale_colour_manual(values = color_scheme)
 }
 
+set_fill_scheme <- function(color_scheme = c("#F4BA02", "#9B1B34", "#aaa938")){
+  scale_fill_manual(values = color_scheme)
+}
+
 
 ## Und weil ich das gleich noch ein paar mal brauche bastel ich mir mal eine Funktion draus:
 plot_group_pars <- function(dat, x, y) {

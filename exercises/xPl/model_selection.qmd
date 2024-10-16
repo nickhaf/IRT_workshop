@@ -1,6 +1,6 @@
 ---
 title: "Modellselektion"
-subititle: "Übung"
+subtitle: "Übung"
 author: "Nicklas Hafiz"
 format: html
 ---

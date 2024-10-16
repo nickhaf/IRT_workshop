@@ -1,7 +1,6 @@
 ---
 title: "Partial Credit Model"
-subititle: "Übung"
-author: "Nicklas Hafiz"
+subtitle: "Übung"
 format: html
 ---
 
