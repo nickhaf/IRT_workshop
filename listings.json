@@ -1,24 +1,11 @@
 [
   {
-    "listing": "/exercises/index_glm.html",
+    "listing": "/exercises/index.html",
     "items": [
-      "/exercises/glm/glm.html"
-    ]
-  },
-  {
-    "listing": "/exercises/index_linking.html",
-    "items": [
-      "/exercises/linking/data.html",
-      "/exercises/linking/linking.html",
-      "/exercises/linking/dif.html"
-    ]
-  },
-  {
-    "listing": "/exercises/index_xPL.html",
-    "items": [
-      "/exercises/xPl/simulation.html",
-      "/exercises/xPl/model_selection.html",
-      "/exercises/xPl/pcm.html"
+      "/exercises/index_glm.html",
+      "/exercises/index_intro_r.html",
+      "/exercises/index_linking.html",
+      "/exercises/index_xPL.html"
     ]
   },
   {
@@ -32,12 +19,25 @@
     ]
   },
   {
-    "listing": "/exercises/index.html",
+    "listing": "/exercises/index_xPL.html",
     "items": [
-      "/exercises/index_glm.html",
-      "/exercises/index_intro_r.html",
-      "/exercises/index_linking.html",
-      "/exercises/index_xPL.html"
+      "/exercises/xPl/simulation.html",
+      "/exercises/xPl/model_selection.html",
+      "/exercises/xPl/pcm.html"
+    ]
+  },
+  {
+    "listing": "/exercises/index_linking.html",
+    "items": [
+      "/exercises/linking/data.html",
+      "/exercises/linking/linking.html",
+      "/exercises/linking/dif.html"
+    ]
+  },
+  {
+    "listing": "/exercises/index_glm.html",
+    "items": [
+      "/exercises/glm/glm.html"
     ]
   }
 ]
