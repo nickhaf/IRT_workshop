@@ -13,7 +13,7 @@ $link-color: $theme-blue;
 $body-bg: $theme-timberwolf;
 $body-color: $theme_darkblue;
 
-$theme-highlight: $theme_red;
+$theme-highlight: $theme_yellow;
 $theme-background: $theme_timberwolf;
 $theme-codeblock: $theme_darkblue;
 
@@ -47,6 +47,12 @@ $presentation-heading-font: 'Roboto Condensed', san-serif;
 
 .highlight{
     color: $theme-highlight;
+    font-weight: bold;
+}
+
+.red{
+    color: $theme-red;
+    font-weight: bold;
 }
 
 .link{

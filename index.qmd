@@ -5,36 +5,35 @@ format: html
 ```{r setup, include=FALSE}
 library(rmarkdown)
 ```
+# Grundkonzepte
 
-### Tag 1
+| Zeit          | Thema                                               | Beschreibung                                                                                                                                |
+|---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| 10:00 – 11:30 | **Einführung in die Modellierung latenter Variablen** | Theoretische Einführung in die Modellierung latenter Variablen in Klassischer Testtheorie und Item Response Theory (IRT).                   |
+| 11:30 – 13:00 | **Einführung in R**                       | Einführung in die R-Programmierumgebung. Datenaufbereitung für IRT-Analysen.                                                                |
+| 14:00 – 15:30 | **IRT-Modelle in TAM**                    | Übung: Einfacher IRT-Modelle in TAM. Vergleich verschiedener Pakete.                                                                        |
+| 15:00 – 16:00 | **Raschmodell und GLMM**                  | Theoretische Einführung und praktische Illustration: Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM).|
+| 16:00 – 17:00 | **Reliabilität und Validität**            | Theoretische Einführung in Reliabilität und Validität.                                                                                       |
 
-| Zeit                | Thema                                      | Beschreibung                                                                                                                                                       |
-|---------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 10:00 – 13:00       | Einführung in Modellierung latenter Variablen | Theoretische Einführung in die Modellierung latenter Variablen in Klassischer Testtheorie und Item Response Theory (IRT) (90 min.; SW)                             |
-| 11:30 – 13:00       | Einführung in R                            | Einführung in die R-Programmierumgebung. Datenaufbereitung für IRT-Analysen. (90 min.; NH)                                                                         |
-| 14:00 – 17:00       | IRT-Modelle in TAM                         | Übung: einfacher IRT-Modelle in TAM. Theoretische Unterscheidung zwischen `JML`, `CML` und `MML` (SW).                                                             |
-| 14:00 – 17:00       | Raschmodell und GLMM                       | Theoretische Einführung und praktische Illustration: Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM) (NH + SW).            |
-| 14:00 – 17:00       | Reliabilität und Validität                 | Reliabilität, Validität, lokale stochastische Unabhängigkeit                                                                                                       |
+: Tag 1 {.striped tbl-colwidths="[25, 30, 45]"}
 
-: Programm 1 {.striped tbl-colwidths="[20, 30, 50]"}
+# Praktische Anwendung
 
-### Tag 2
+| Zeit          | Thema                                               | Beschreibung                                                                                                                                |
+|---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| 09:00 – 10:30 | **Linking und Differential Item Functioning**  | Verlinkte Items, lokale stochastische Unabhängigkeit, Differential Item Functioning (DIF)                                                  |
+| 10:30 – 12:00 | **Bedeutung von Testdesigns**              | Die Bedeutung von Testdesigns. Was kann schiefgehen, wenn Testdesigns ungeeignet sind?                                                     |
+| 13:00 – 16:00 | **Höher parametrisierte Modelle**          | Höher parametrisierte Modelle: 2pl, 3pl, partial credit.                                                                                   |
+| 13:00 – 16:00 | **Längsschnittliche Designs**              | Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen (SW)                                           |
 
-| Zeit                | Thema                                      | Beschreibung                                                                                                                                                       |
-|---------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 09:00 – 12:00       | Linking und Differential Item Functioning  | Verlinkte Items, lokale stochastische Unabhängigkeit, Messinvarianz (90 min.; NH)                                                                                  |
-| 09:00 – 12:00       | Bedeutung von Testdesigns                  | Die Bedeutung von Testdesigns. Was kann schiefgehen, wenn Testdesigns ungeeignet sind? (SW)                                                                        |
-| 13:00 – 16:00       | Höher parametrisierte Modelle              | Höher parametrisierte Modelle: 2pl, 3pl, partial credit (NH)                                                                                                       |
-| 13:00 – 16:00       | Längsschnittliche Designs                  | Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen (SW)     
-|
-: Programm 2 {.striped tbl-colwidths="[20, 30, 50]"}
+: Tag 2 {.striped tbl-colwidths="[25, 30, 45]"}
 
-### Tag 3
+# Fragen, Übungen ...
 
-| Zeit                | Thema                                      | Beschreibung                                                                                                                                                       |
-|---------------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 09:00 – 12:00       | Praktische Überlegungen                    | Praktische Überlegungen: Welches Modell für welche Forschungsfrage? Wieviele Personen sind notwendig für welches Forschungsdesign? Theoretische Überlegungen und praktische Empfehlungen (180 min., SW + NH) |
-| 13:00 – 16:00       | Das ganze Bild                             | Vollständige “Schritt für Schritt”-Analyse von Forschungsdaten: Datenaufbereitung, Kalibrierung, Plausibilitätsprüfungen, Messinvarianz, Beantworten von Forschungsfragen (180 Min., SW/NH) |
+| Zeit          | Thema                                               | Beschreibung                                                                                                                                |
+|---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| 09:00 – 11:30 | **Fragen, Puffer**                        | Etwas freiere Gestaltung, offen gehalten für Fragen, Wiederholung, Interessierende Themen                                                  |
+| 11:30 – 13:00 | **Studienplanung: Stichprobengröße**      | Simulation als Werkzeug zur Studienplanung                                                                                                 |
+| 13:00 – 16:00 | **Auswertung von eigenen Daten**          | Bei Bedarf können hier Ideen für die Auswertung von Daten der Teilnehmenden gesammelt und ausprobiert werden                               |
 
-
-: Programm 3 {.striped tbl-colwidths="[20, 30, 50]"}
+: Tag 3 {.striped tbl-colwidths="[25, 30, 45]"}
