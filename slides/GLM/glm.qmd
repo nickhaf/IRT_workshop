@@ -9,41 +9,58 @@ title-slide-attributes:
   data-background-size: cover
 ---
 
+```{r}
+#| echo: false
+source(here::here("R", "plot_functions.R"))
+```
+
+
 ## Überblick
-- Generalized Linear Modell (GLM)
+- Generalisiertes Lineares Modell (GLM)
 - Linear Mixed Model (LMM) 
 - Übertragung auf IRT Kontext
 
-## Generalized Linear Model
+## Generalisiertes Lineares Modell
 
 $$
 y = Xb+e
 $$
 
+Das funktioniert gut für kontinuierliche Outcomes $y$. Was aber machen wir, wenn wir nur 0 und 1 vorhersagen wollen (wie bei IRT)?   
+Dann sind viele Annahmen der linearen Regression verletzt. Außerdem will das Modell auch Werte zwischen 0 und 1 vorhersagen, was ja gar keinen Sinn ergibt. 
+
+## Logistische Regression
+Wir können die Prädiktorseite  aber transformieren, damit die Outcome-Werte auf der gewünschten Skala liegen:
+
 $$
 E(y) = \mu = g^{-1}(Xb)
 $$
 
-- mit $g$ als Link Funktion
+::: aside
+mit $g$ als Link Funktion und $g^{-1}$ als Inverse der Link Funktion.
+:::
 
-Varianzfunktion auch zeigen?
+## Logistische Regression
+Item Response Theorie nutzt die logistische Regression, um die Wahrscheinlichkeit von 0 oder 1 vorherzusagen. Dafür nutzen wir keine linear Funktion, sondern die probit oder logit Funktion als die Link Funktion $g()$ (Darstellbar durch die S-Kurve, die wir schon oft gesehen haben):
 
-## IRT Modell als GLM
 $$
-g(\mu) = ln(\frac{\mu}{1-\mu}) = Xb
+g(\mu) = ln\left(\frac{\mu}{1-\mu}\right) = Xb
 $$
 
-## IRT Modell als GLM
-- Logistische Regression: Modellierung der Wahrscheinlichkeit einer korrekten Antwort. 
-- Zusammenhang der Variablen linear. Muss dann noch auf die logit-scale gebracht werden (Link Funktion).
--  
+:::{.callout-note}
+Die logit Funktion bringt also unsere Werte auf die logit-Skala, sodass sie zwiscehn 0 und 1 liegen.
+:::
 
+::: aside
+Die Inverse $g^{-1}$ der logit Funktion ist die logistische Funktion. Das schauen wir uns morgen aber noch einmal an. [Hier](https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/The-Logit-Function/index.html) noch eine genauere Erklärung bei Interesse. 
+
+:::
 
 ## {background-image="images/hogwarts.jpg" background-size="1250px"}
 
-::: {.absolute left="15%" top="5%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
+::: {.absolute left="15%" top="2.5%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .0); backdrop-filter: blur(0px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, 0); border-radius: 5px;"}
 
-Linear Mixed Models
+Linear Gemischte Modelle
 
 :::
 
@@ -52,24 +69,46 @@ Foto von [Mauro Lima](https://unsplash.com/de/@limamauro23?utm_content=creditCop
 
 :::
 
-## LLM
 
+## Beispiel
+Wir haben einen Datensatz der Schüler*innen aus verschiedenen Schulen enthält:
 ```{r}
-#| echo: true
+#| echo: false
+#| message: false
 
 library(tidyverse)
 
 ## Daten laden
 load(here::here("raw_data", "multilevel_data.rda"))
 
-## Überblick
+
+```
+
+```{r}
 str(stud_data)
 ```
 
 
+:::{.callout-important}
+Es fällt direkt auf: Die Daten sind genestet. Schüler*innen sind in Schulen gruppiert. [Wie gehen wir damit um?]{.highlight}
+:::
+
+::: aside
+Daten aus diesem [Tutorial](https://raffaelevacca.github.io/Intro-multilevel-with-R/)
+:::
+
+## Warum dieses Beispiel?
+
+Als kleiner Teaser: genauso wie hier Schüler*innen in Schulen genestet sind, können wir Items als genestet in Personen betrachten.
+
+
+# Umgang mit genesteten Daten
+
 ```{r}
+#| echo: false
+
 illustration_dat <- stud_data %>% 
-filter(school %in% c("1224", "1288", "1296", "1308", "1317", "1358", "1374", "1433", "1436"))
+filter(school %in% c("1224", "1288", "1296")) #, "1308", "1317", "1358", "1374", "1433", "1436"))
 
 ## Zentrieren
 illustration_dat <- illustration_dat %>% 
@@ -78,25 +117,21 @@ illustration_dat <- illustration_dat %>%
 ```
 
 
-::: aside
-Daten aus diesem [Tutorial](https://raffaelevacca.github.io/Intro-multilevel-with-R/)
-:::
-
-
-
-# Umgang mit genesteten Daten
-
 ## Option 1: Ignorieren
 
 ```{r}
+#| echo: false
+#
 ggplot(data = illustration_dat , aes(x = ses_cent, y = mathach)) +
   geom_point(aes(colour = school)) +
-  geom_smooth(method = "lm", se = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, colour = "#01364C") +
   labs(title = "Math Score by Socioeconomic Status",
        x = "Socioeconomic Status",
        y = "Math Score") +
-       theme_classic() +
-       ylim(c(-5, 25))
+       ylim(c(-5, 25)) +
+  set_colour_scheme() +
+         theme_bg() +
+NULL
 ```
 
 ## Option 1: Ignorieren
@@ -106,14 +141,13 @@ Generell eher keine gute Idee:
 - Die genestete Struktur kann von Interesse sein!
 - Wir tun so, als ob wir mehr Informationen hätten, als wir letztendlich haben. Das liegt daran, dass Abhängigkeiten zwischen den Daten bestehen. Konsequenz:    
 
-
 Standardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden eher signifikant. 
-
-
 
 ## Option 2: Aggregieren
 
 ```{r}
+#| echo: false
+
 illustration_dat %>%
   group_by(school) %>%
   summarise(mean_mathach = mean(mathach),
@@ -125,39 +159,65 @@ ggplot(aes(x = mean_ses, y = mean_mathach)) +
        x = "Mean Socioeconomic Status",
        y = "Mean Math Score") +
        theme_classic() +
-       ylim(c(-5, 25))
+       ylim(c(-5, 25)) +
+    set_colour_scheme() +
+         theme_bg() +
+NULL
+
 
 ```
 
 ## Option 2: Aggregieren
-
+- Gefahr eines ökologischen Fehlschlusses
+- Verlust an Informationen und an Power. 
+- Gruppenstrukturen sind meist auch von Interesse. 
 
 ## Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren
-Verstehe noch nicht so ganz, wie das grafisch aussehen würde. 
-https://www.cambridge.org/core/journals/political-science-research-and-methods/article/abs/should-i-use-fixed-or-random-effects/12DFCB222123587A37163F2226E85C67
-
-random effect models reduce bias, but can reduce the variance of estimates of coefficients of interest. some sort of regularization
 
 ```{r}
-#| eval: false
+mod1 <- lm(mathach ~ ses_cent + school + ses_cent*school, data = illustration_dat)
 
-lm(mathach ~ ses_cent + school, data = illustration_dat) %>% 
-    summary()
+coef(mod1)
+```
 
-mod2 <- lmer(mathach ~ ses_cent + (1|school), data = illustration_dat) 
-ranef(mod2)
-
-``` 
-
-Wird schnell unübersichtlich, lm z.B. gibt uns viele Infos raus, die uns eigentlich gar nicht interssieren. 
-An sich müsste die Grafik ähnlich aussehen wie im nächsten Beispiel? Die Berechnungen sind aber ein bisscehn anders, v.a. wegen Partial pooling. 
 
 ## Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren
 
+```{r}
+#| echo: false
+
+ggplot(data = illustration_dat , aes(x = ses_cent, y = mathach)) +
+  geom_point(aes(colour = school)) +
+  geom_smooth(method = "lm", se = FALSE, colour = "#01364C") +
+  labs(title = "Math Score by Socioeconomic Status",
+       x = "Mean Socioeconomic Status",
+       y = "Mean Math Score") +
+       theme_classic() +
+       ylim(c(-5, 25)) +
+    set_colour_scheme() +
+         theme_bg() +
+  facet_grid( . ~ school) +
+NULL
+
+```
+
+## Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren
+- Wird bei vielen Gruppen schnell unübersichtlich (vor allem auch mit verschiedenen Interkationen). 
+- Multilevel-Modelle können die Nestung explizieter berücksichtigen.
 
 ## Option 4: Multilevel-Modell
 
 ```{r}
+library(lme4)
+mod2 <- lmer(mathach ~ ses_cent + (1|school), data = illustration_dat) 
+summary(mod2)
+```
+
+## Option 4: Multilevel-Modell
+
+```{r}
+#| echo: false
+
 ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
@@ -165,23 +225,54 @@ ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school))
        x = "Socioeconomic Status",
        y = "Math Score") +
        theme_classic() +
-       ylim(c(-5, 25))
+       ylim(c(-5, 25)) +
+  set_colour_scheme() +
+         theme_bg() +
+  NULL
 ```
 
 
-## Notizen 
 
-Rein Optisch betrachtet scheint es recht wichtig zu sein, auf welche Schule man geht. Die Abweichung von Mittelwert des GesamtSES hat auch einen Einfluss. 
+## {background-color="#17161e"}
 
-# Gleichungen
+![](images/equations2.jpg){.absolute top="-12.5%" right="12.5%" height="111%" style="max-height: unset; box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
+
+::: {.absolute left="28%" top="2.5%" style="color:#F8F8F8; font-size: 1.5em; text-align: center;"}
+
+Gleichungen
+
+:::
+
+
 ## Level 1 Gleichung
 
-Für jede Gruppe j:
+Für jede Person i in Gruppe j:
 $$
 y_{ij} = \beta_{0j} + \beta_{1j}x_{ij} + e_{ij}
 $$
 
-Abbildung 
+## Level 1 Gleichung 
+```{r}
+#| echo: false
+
+illustration_dat <- illustration_dat %>%
+  mutate(regression_point = predict(mod1))
+
+ep <- illustration_dat[which(illustration_dat$mathach == max(illustration_dat[illustration_dat$school == 1288, "mathach"])), ]
+
+ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
+    geom_segment(x = ep$ses_cent, xend = ep$ses_cent, y = ep$mathach, yend = ep$regression_point, colour = "black") +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Math Score by Socioeconomic Status",
+       x = "Socioeconomic Status",
+       y = "Math Score") +
+       theme_classic() +
+       ylim(c(-5, 25)) +
+  set_colour_scheme() +
+         theme_bg() +
+  NULL
+```
 
 ## Level-2 Gleichung
 
@@ -193,7 +284,22 @@ $$
 \beta_{1j} = \beta_1 + \zeta_{1j}
 $$
 
-Abbildung
+## Level 2 Gleichung
+```{r}
+#| echo: false
+
+ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, colour = "#01364C") +
+  labs(title = "Math Score by Socioeconomic Status",
+       x = "Socioeconomic Status",
+       y = "Math Score") +
+       theme_classic() +
+       ylim(c(-5, 25)) +
+  set_colour_scheme() +
+         theme_bg() +
+  NULL
+```
 
 ## Das gemischte Modell
 Jetzt müssen wir nur noch einsetzen:
@@ -211,9 +317,38 @@ $$
 $$
 
 $$
-y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}
+\color{#F4BA02}{y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}}
 $$
 
+
+## Das gemischte Modell
+```{r}
+#| echo: false
+
+ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, colour = "#01364C") +
+  labs(title = "Math Score by Socioeconomic Status",
+       x = "Socioeconomic Status",
+       y = "Math Score") +
+       theme_classic() +
+       ylim(c(-5, 25)) +
+  set_colour_scheme() +
+         theme_bg() +
+  NULL
+```
+
+## Prädiktoren
+Wir können jetzt auf beiden Ebenen auch noch Prädiktoren in die Gleichung mit aufnehmen und schauen, ob sich dadurch Varianz in den jeweiligen Leveln ($x_{ij}$ oder $\zeta_{0j}$ aufklären lässt).
+Und das tolle: wir können auch eine Cross-Level-Interaktion modellieren (interagiert ein Level-1 Prädiktor mit einem Level 2 Prädiktor?).
+
+:::{.callout-note}
+## Beispiel Cross-Level-Interaktion
+
+Zusammenhang zwischen Lernzeit (Level 1 Prädiktor, da individuell) und Lehrqualität könnte an Schulen mit hoher Lehrqualität stärker sein als an Schulen mit niedrigerer Lehrqualität. 
+
+:::
 
 ## 
 
@@ -267,21 +402,38 @@ $$
 **Fixed Effects**
 
 - Hier machen wir diese Annahme einfach nicht. 
-- Uns interessieren die tatsächlichen Gruppen, bei Wiederholung würden wird die gleichen ziehen.
+- Uns interessieren die tatsächlichen Gruppen, bei Wiederholung würden wir vermutlich die gleichen ziehen.
 
 :::
 
 
 ::::
 
+
+
 ## Beispiel
 
+:::{.columns}
+:::{.column width="50%"}
+::: small
 Wir untersuchen den Erfolg von Verhaltenstherapie und Psychoanalyse anhand der Rückfallquote nach einem Jahr.  
-Patient*innen müssen hier nach Therapeut*innen genested werden. Dabei können wir die Therapeut*innen als random effects betrachten, wir haben sie ja schließlich nur als Mittel zum Zweck aus der Population an Therapeut*innen gezogen. Die Behandlungsform (Verhaltenstherapie, Psychoanalyse) ist hingegen ein fixed effect, da wir nur diese beiden Behandlungsformen untersuchen wollen.
+Patient\*innen müssen hier nach Therapeut\*innen genested werden. Dabei können wir die Therapeut\*innen als random effects betrachten, wir haben sie ja schließlich nur als Mittel zum Zweck aus der Population an Therapeut\*innen gezogen. Die Behandlungsform (Verhaltenstherapie, Psychoanalyse) ist hingegen ein fixed effect, da wir nur diese beiden Behandlungsformen untersuchen wollen.
 
 Anders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Therapeut*innen interessieren würde. Dann könnten wir sie ebenfalls als fixed effect im Modell mit aufnehmen. 
 
+:::
 
+:::
+:::{.column width="50%"}
+![](images/therapy.jpg){.image-right}
+:::
+:::
+
+
+## 
+::: r-fit-text
+Sind unsere Schulen und Schüler*innen nun also [random]{.highlight} oder [fixed]{.highlight} effects?
+:::
 
 ## lme4
 
@@ -299,6 +451,8 @@ Warum das Ganze? Es geht doch eigentlich um IRT?
 
 ## Raschmodell als Spezialfall von LMM
 
+Wir können die Items genestet in Personen betrachten.
+
 Dafür müssen wir zwei Dinge beachten:
 - Link Funktion.  
 - Entscheidung über Annahme von fixed/random effects von Personen und Items.
@@ -309,26 +463,18 @@ Dafür müssen wir zwei Dinge beachten:
 :::
 
 
-## Link Funktion
-
-
-
 ## Fixed und Random Effects
 
-- Entwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed
-- Entwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random
-
-
-## Exercise 
-- Direkt übertragen auf den IRT-KOntext? Also sagen: Nehmt die Daten aus dem letzten Beispiel und fittet ein LLM Modell. 
-- Dann Vergleich mit TAM.
+- Entwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed.
+- Entwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random.
 
 
 ## Prädiktoren
-- Beispiel aufgreifen, zeigen, wass man mit diesen Modell noch machen kann. 
-
+Die Formulierung von IRT Modellen als Multilevel Modell erlaubt es uns, auf elegante Art Prädiktoren mit in das Modell aufzunehmen. 
 
 ## Bildquellen
 - Foto von <a href="https://unsplash.com/de/@brenomachado?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Breno Machado</a> auf <a href="https://unsplash.com/de/fotos/fotografie-eines-gewitters-in9-n0JwgZ0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@finnnyc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Mitch</a> auf <a href="https://unsplash.com/de/fotos/brauner-betonbau-tagsuber-nJupV3AOP-U?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
   
 
