@@ -1,11 +1,29 @@
 ---
-title: "IRT Workshop"
+title: "Anwendung von Modellen der Item-Response-Theorie in R"
 format: html
+about:
+  id: irt-heading
+  template: jolla
+  image: images/yellow.jpg
+number-sections: false
 ---
 ```{r setup, include=FALSE}
 library(rmarkdown)
 ```
-# Grundkonzepte
+
+:::{#irt-heading}
+# Dozenten
+
+- Sebastian Weirich
+- Nicklas Hafiz
+
+# Seminarinhalt
+
+Der Workshop vermittelt theoretische und praktische Einblicke in die Modellierung dichotomer und polytomer Testdaten mit Hilfe von Modellen aus der Item Response Theory (IRT). Die IRT ist geeignet, latente Konstrukte zu messen und zu modellieren, die über manifeste Indikatoren operationalisiert werden. Ein Beispiel sind etwa Schulleistungen im Fach Mathematik, die über Mathematikaufgaben operationalisiert werden und am Ende Vergleiche zwischen Personengruppen bezüglich ihrer mathematischen Kompetenz erlauben. 
+:::
+
+# Zeitplan
+## Grundkonzepte
 
 | Zeit          | Thema                                               | Beschreibung                                                                                                                                |
 |---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
@@ -17,7 +35,7 @@ library(rmarkdown)
 
 : Tag 1 {.striped tbl-colwidths="[25, 30, 45]"}
 
-# Praktische Anwendung
+## Praktische Anwendung
 
 | Zeit          | Thema                                               | Beschreibung                                                                                                                                |
 |---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
@@ -28,7 +46,7 @@ library(rmarkdown)
 
 : Tag 2 {.striped tbl-colwidths="[25, 30, 45]"}
 
-# Fragen, Übungen ...
+## Fragen, Übungen ...
 
 | Zeit          | Thema                                               | Beschreibung                                                                                                                                |
 |---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
@@ -37,3 +55,11 @@ library(rmarkdown)
 | 13:00 – 16:00 | **Auswertung von eigenen Daten**          | Bei Bedarf können hier Ideen für die Auswertung von Daten der Teilnehmenden gesammelt und ausprobiert werden.                               |
 
 : Tag 3 {.striped tbl-colwidths="[25, 30, 45]"}
+
+
+::: aside
+<!-- Foto von <a href="https://unsplash.com/de/@leochane?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Leo Chane</a> auf <a href="https://unsplash.com/de/fotos/grunes-bananenblatt-G0a0ejar1A8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> -->
+
+Foto von <a href="https://unsplash.com/de/@romangphotography?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Roman gomez</a> auf <a href="https://unsplash.com/de/fotos/gelbe-holztur-tagsuber-geschlossen-L63O5G11LqM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
+:::
