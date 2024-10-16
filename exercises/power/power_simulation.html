@@ -1,0 +1,7244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Stichprobenplanung durch Simulation – IRT</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">IRT</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Suchen"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navigation umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../slides/index.html"> 
+<span class="menu-text">Folien</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../exercises/index.html"> 
+<span class="menu-text">Übungen</span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Auf dieser Seite</h2>
+   
+  <ul>
+<li>
+<a href="#das-grundger%C3%BCst" id="toc-das-grundgerüst" class="nav-link active" data-scroll-target="#das-grundger%C3%BCst"><span class="header-section-number">1</span> Das Grundgerüst</a>
+  <ul class="collapse">
+<li><a href="#die-items" id="toc-die-items" class="nav-link" data-scroll-target="#die-items"><span class="header-section-number">1.1</span> Die Items</a></li>
+  <li><a href="#die-antworten" id="toc-die-antworten" class="nav-link" data-scroll-target="#die-antworten"><span class="header-section-number">1.2</span> Die Antworten</a></li>
+  <li><a href="#das-modell" id="toc-das-modell" class="nav-link" data-scroll-target="#das-modell"><span class="header-section-number">1.3</span> Das Modell</a></li>
+  <li><a href="#der-vergleich" id="toc-der-vergleich" class="nav-link" data-scroll-target="#der-vergleich"><span class="header-section-number">1.4</span> Der Vergleich</a></li>
+  <li>
+<a href="#wieder-von-vorn" id="toc-wieder-von-vorn" class="nav-link" data-scroll-target="#wieder-von-vorn"><span class="header-section-number">1.5</span> Wieder von vorn</a>
+  <ul class="collapse">
+<li><a href="#bedingungen" id="toc-bedingungen" class="nav-link" data-scroll-target="#bedingungen"><span class="header-section-number">1.5.1</span> Bedingungen</a></li>
+  <li><a href="#schleife" id="toc-schleife" class="nav-link" data-scroll-target="#schleife"><span class="header-section-number">1.5.2</span> Schleife</a></li>
+  <li><a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation"><span class="header-section-number">1.5.3</span> Simulation</a></li>
+  <li><a href="#modell-fitten" id="toc-modell-fitten" class="nav-link" data-scroll-target="#modell-fitten"><span class="header-section-number">1.5.4</span> Modell fitten</a></li>
+  <li><a href="#abspeichern" id="toc-abspeichern" class="nav-link" data-scroll-target="#abspeichern"><span class="header-section-number">1.5.5</span> Abspeichern</a></li>
+  </ul>
+</li>
+  <li><a href="#auswertung" id="toc-auswertung" class="nav-link" data-scroll-target="#auswertung"><span class="header-section-number">1.6</span> Auswertung</a></li>
+  <li><a href="#visualisierung" id="toc-visualisierung" class="nav-link" data-scroll-target="#visualisierung"><span class="header-section-number">1.7</span> Visualisierung</a></li>
+  <li><a href="#dimensional" id="toc-dimensional" class="nav-link" data-scroll-target="#dimensional"><span class="header-section-number">1.8</span> 1 Dimensional</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Stichprobenplanung durch Simulation</h1>
+<p class="subtitle lead">Übung</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Eine häufige Frage die bei der Planung von Studien aufkommt, ist die Frage nach der benötigten Stichprobengröße. Eine Möglichkeit diese für eine konkrete Studie zu planen, ist durch Simulationen. Wir haben bereits eine einfache Simulation in der <a href="">Übung zu höher parametrisierten Modellen ausprobiert</a>. In diesem Kapitel wollen wir jetzt darauf aufbauen und uns anschauen, wie Simulationen für das Planen von allen möglichen Studienaspketen genutzt werden können.</p>
+<p>Wir brauchen folgende Pakete:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/swnydick/catIrt">catIrt</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="das-grundgerüst" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> Das Grundgerüst</h1>
+<p>Als erstes wollen wir Schritt für Schritt das Grundgerüst für unsere Simulation aufbauen, das wir dann je nach Fragestellung erweitern können.</p>
+<section id="die-items" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="die-items">
+<span class="header-section-number">1.1</span> Die Items</h2>
+<p>Als erstes definieren wir unsere wahren Itemparameter, aus denen dann die Daten simuliert werden.<br>
+Erstelle dafür einen <code>data.frame</code>, der pro Item eine Zeile mit den entsprechenden Itemparamtern <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> und <span class="math inline">\(\gamma\)</span> enthält.</p>
+<ul>
+<li>Wir wollen 20 Items simulieren.</li>
+<li>
+<span class="math inline">\(\alpha\)</span> ist der Diskriminationsparameter und soll aus einer Normalverteilung <span class="math inline">\(N(1, 0.1)\)</span> simuliert werden. So ist er noch klein genug, um ein sinnvolles 1PL-Modell ausprobieren zu können.</li>
+<li>
+<span class="math inline">\(\beta\)</span> ist der Schwierigkeitsparameter und soll den gesamte erwartete Schwierigkeitsbereich abdecken. Die Range soll von -2 bis 2 gehen, und Itemschwierigkeiten in gleichmäßigen Abständen enthalten.</li>
+<li>
+<span class="math inline">\(\gamma\)</span> ist der Rate-Parameter, und wird erst einmal als Null für alle Items angenommen.</li>
+</ul>
+<p>1PL und 2PL Modelle sollten hier also beide gut funktionieren.</p>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Aus einer Normalverteilung können wir mit <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> samplen.<br>
+Die Schwierigkeitsparamter lassen sich mit <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> erzeugen.<br>
+Schaue dir gegebenenfalls die Hilfe an.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span> <span class="co">## Setze den gleichen Seed, um exakt die selben Ergebnisse zu bekommen</span></span>
+<span></span>
+<span><span class="va">n_items</span> <span class="op">&lt;-</span> <span class="fl">20</span> <span class="co">## So kann ich die Itemzahl im Nachhinein leicht anpassen</span></span>
+<span></span>
+<span><span class="va">item_pars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  item_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_items</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n_items</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>  beta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span>, length.out <span class="op">=</span> <span class="va">n_items</span><span class="op">)</span>,</span>
+<span>  gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n_items</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="die-antworten" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="die-antworten">
+<span class="header-section-number">1.2</span> Die Antworten</h2>
+<p>Perfekt, jetzt können wir die Antworten simulieren. Nutze dafür wieder die Funktion <code>simIRT()</code> aus <code>catIrt</code>. Andere Pakete wie <code>mirt</code> haben aber äquivalente Funktionen, und wir haben ja sogar schon <a href="">gelernt</a>, wie man das ganz manuell machen kann.</p>
+<p>Wir müssen neben den Parametern auch die Theta-Werte angeben. Die sollen aus einer Normalverteilung <span class="math inline">\(N(0,1)\)</span> stammen. Hier haben wir natürlich Spielraum: Wenn wir erwarten, dass die Stichprobe, die wir untersuchen wollen, besonders leistungsstark ist, könnten wir auch eine Normalverteilung mit höherem Mittelwert wählen.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Die Parameter müssen als <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/datenstrukturen"><code>Matrix</code></a> dem Funktionsargument <code>params</code> übergeben werden.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_2PL_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/catIrt/man/simIrt.html">simIrt</a></span><span class="op">(</span></span>
+<span>  theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100000</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">item_pars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  mod <span class="op">=</span> <span class="st">"brm"</span></span>
+<span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Binary response model simulation:
+    100000  simulees,  20  items</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="das-modell" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="das-modell">
+<span class="header-section-number">1.3</span> Das Modell</h2>
+<p>Jetzt können wir das Modell schätzen. Wir geben uns jetzt erst einmal mit einem 1PL-Modell zufrieden. Fitte also ein 1PL-Modell auf die simulierten Daten (z.B. mit <code>TAM</code>).</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Um an die simulierten Antworten zu kommen, können wir uns einmal die Struktur von dem simulierten Objekt anschauen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">sim_2PL_dat</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 3
+ $ resp  : num [1:100000, 1:20] 1 0 0 1 1 1 1 1 1 1 ...
+ $ params: 'brm' num [1:20, 1:4] 1 2 3 4 5 6 7 8 9 10 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : NULL
+  .. ..$ : chr [1:4] "item" "a" "b" "c"
+ $ theta : num [1:100000] -0.307 -1.781 -0.172 1.215 1.895 ...</code></pre>
+</div>
+</div>
+<p>Die responses können wir also mit <code>sim_2PL_dat$resp</code> extrahieren.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_1PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">sim_2PL_dat</span><span class="op">$</span><span class="va">resp</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="der-vergleich" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="der-vergleich">
+<span class="header-section-number">1.4</span> Der Vergleich</h2>
+<p>Jetzt können wir unsere tatsächlichen Schwierigkeitsparameter mit den duch <code>TAM</code> geschätzten Schwierigkeitsparamtern vergleichen. Mach das einmal indem du die Differenz bildest. Fällt dir etwas auf?</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Obwohl wir eigentlich ein 2PL Modell simuliert haben (wir haben ja Diskriminationsparamter verschieden von 1 gezogen), haben wir nur ein 1PL Modell gefittet. Das dient einfach dazu zu zeigen, dass die Modellschätzung in Fällen wo die Diskriminationsparamter nicht zu verschieden von 1 sind, hinreichend gut funktionieren kann.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Der Output von <code>TAM</code> ist ziemlich groß. Beim Anschauen der Struktur sehen wir nach einigem Suchen, dass die Paramter sich wahrscheinlich in <code>tam_1PL$item_irt</code> verstecken.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="st">"b_true"</span> <span class="op">=</span> <span class="va">item_pars</span><span class="op">$</span><span class="va">beta</span>,</span>
+<span>  <span class="st">"b_est"</span> <span class="op">=</span> <span class="va">tam_1PL</span><span class="op">$</span><span class="va">item_irt</span><span class="op">[</span>, <span class="st">"beta"</span><span class="op">]</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>b_diff <span class="op">=</span> <span class="va">b_est</span> <span class="op">-</span> <span class="va">b_true</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">result</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">b_true</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">b_diff</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="power_simulation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wir können vor allem anhand des Plots gut erkennen, dass die Differenz zwischen den wahren und den geschätzten Werten an den Rändern zunimmt. Besonders Schwere oder besonders leichte Items werden also schlechter geschätzt. Das ist ganz normal, da dies Items relativ wenig Informationen enthalten: Entweder benantworten (fast) alle sie richtig oder (fast) alle sie falsch. Es gibt hier also wenig Variation, die für die Schätzung genutzt werden kann.</p>
+</div>
+</div>
+</div>
+</section><section id="wieder-von-vorn" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="wieder-von-vorn">
+<span class="header-section-number">1.5</span> Wieder von vorn</h2>
+<p>Sehr gut, jetzt haben wir die einzelnen Bausteine der Simulation zusammengetragen. Jetzt kommt aber die eigentliche Aufgabe: Wir wollen ja verschiedene Stichprobengrößen ausprobieren und anhand der Differenz zwischen den wahren und den geschätzten Parametern beurteilen, welche Stichprobengröße für eine adäquate Schätzung ausreichen könnte.</p>
+<section id="bedingungen" class="level3" data-number="1.5.1"><h3 data-number="1.5.1" class="anchored" data-anchor-id="bedingungen">
+<span class="header-section-number">1.5.1</span> Bedingungen</h3>
+<p>Zuerst müssen wir die Bedingungen für unsere Simulation festlegen. Erstelle dafür zwei Vektoren. Einer enthält einfach nur die Anzahl an Iterationen für unsere Simulation. Das ist so, als ob wir das Experiment viele Male wiederholen würden, um ein Maß für die Variabilität im Sampling und damit den Parameterschätzungen zu bekommen. Der andere sollte ein Vektor aus verschiedenen Stichprobengrößen sein.<br><!-- Außerdem sollten wir noch festlegen, welche Abweichung vom Wahren Schwierigkeitswert wir noch akzeptable finden. Wir sagen einfach mal, dass ein mittlerer Unterschied von 0.2 Logits noch in Ordnung ist. D.h. also, wir suchen eine Stichprobenzahl, bei der unsere Abweichung darunter liegt.  --></p>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n_iterations</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">n_persons</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">500</span>, by <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="schleife" class="level3" data-number="1.5.2"><h3 data-number="1.5.2" class="anchored" data-anchor-id="schleife">
+<span class="header-section-number">1.5.2</span> Schleife</h3>
+<p>Jetzt brauchen wir einen <span class="highlight">genesteten for-Loop</span>. Der erste for-loop soll den gerade definierten Stichprobengrößen-Vektor entlang gehen. Darin genested brauchen wir einen zweiten for-loop, der von 1 bis zur maximalen, oben definierten Iterations-Anzahl geht. Schaue in den <a href="#tip-forloop" class="quarto-xref">Tip&nbsp;1</a> für mehr Infos zu for-loops. Baue erst einmal nur das Grundgerüst, also die beiden for-loop Definitionen und die (leeren) Klammern.</p>
+<div id="tip-forloop" class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip&nbsp;1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-caution">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="va">n_persons</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iter</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_iterations</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    </span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="simulation" class="level3" data-number="1.5.3"><h3 data-number="1.5.3" class="anchored" data-anchor-id="simulation">
+<span class="header-section-number">1.5.3</span> Simulation</h3>
+<p>In diesen for-loop kommt jetzt unsere Simulation. In jeder iteration werden also die Daten neu simuliert. Dabei wird <span class="math inline">\(\theta\)</span> jedesmal neu festgelegt, und zwar nach dem aktuellen Wert, der gerade in der äußeren Schleife durchlaufen wird. Kümmere dich erst einmal nicht darum, dass die Daten abgespeichert werden. Das machen wir im nächsten Schritt. Wir wollen erst einmal nur testen, ob n_persons * n_iterations Antworten simuliert werden.</p>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="va">n_persons</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iter</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_iterations</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">sim_2PL_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/catIrt/man/simIrt.html">simIrt</a></span><span class="op">(</span></span>
+<span>      theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>      params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">item_pars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>      mod <span class="op">=</span> <span class="st">"brm"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items</code></pre>
+</div>
+</div>
+<p><code><a href="https://rdrr.io/pkg/catIrt/man/simIrt.html">simIrt()</a></code> gibt bei jeder Simulation einen kurzen Text aus. Daran können wir erkennen, dass tatsächlich die gewünschete Anzahl an Datensätzen erzeugt wurde.</p>
+</div>
+</div>
+</div>
+</section><section id="modell-fitten" class="level3" data-number="1.5.4"><h3 data-number="1.5.4" class="anchored" data-anchor-id="modell-fitten">
+<span class="header-section-number">1.5.4</span> Modell fitten</h3>
+<p>Wir könnten jetzt die Daten erst aus der Schleife heraus abspeichern. Da <code>TAM</code> aber die Daten im Output enthält, fitten wir einfach direkt das 1PL Modell in der Schleife und speichern die geschätzen Itemschwierigkeiten <strong>im nächsten Schritt</strong> in einem <code>data.frame</code> ab, der zudem Eckdaten zur aktuellen Personenanzahl, zur Iteration und zur wahren Itemschwierigkeit enthält.<br>
+Ergänze also die Schleife aus der vorherigen Aufgabe um die <code><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam()</a></code> Funktion, die ein 1PL Modell auf die in der aktuellen Iteration simulierten Daten fittet. Extrahiere aus diesem gefitteten <code>TAM</code>-Modell direkt die Itemschwierigkeiten mit <code>tam_result$item_irt[, "beta"]</code>.</p>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="va">n_persons</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iter</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_iterations</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">sim_2PL_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/catIrt/man/simIrt.html">simIrt</a></span><span class="op">(</span></span>
+<span>      theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>      params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">item_pars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>      mod <span class="op">=</span> <span class="st">"brm"</span></span>
+<span>    <span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">tam_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">sim_2PL_dat</span><span class="op">$</span><span class="va">resp</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">beta_est</span> <span class="op">&lt;-</span> <span class="va">tam_result</span><span class="op">$</span><span class="va">item_irt</span><span class="op">[</span>, <span class="st">"beta"</span><span class="op">]</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items</code></pre>
+</div>
+</div>
+<p>Bisher wird das Ergebnis-Objekt immer überschrieben, sodass nur das Ergebnis aus der allerletzten Iteration ausgegeben wird. Das wollen wir ändern!</p>
+</div>
+</div>
+</div>
+</section><section id="abspeichern" class="level3" data-number="1.5.5"><h3 data-number="1.5.5" class="anchored" data-anchor-id="abspeichern">
+<span class="header-section-number">1.5.5</span> Abspeichern</h3>
+<p>Jetzt müssen wir unsere Ergebnisse noch abspeichern. Erstelle dafür zuerst einen leeren <code>data.frame</code>, der die Ergebnisse aufnehmen soll.</p>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="va">n_persons</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iter</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_iterations</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>Jetzt müssen wir die Ergebnisse aus jedem Durchlauf in einem eigenen <code>data.frame</code> festhalten. Erstelle also innerhalb der inneren for-Schleife einen <code>data.frame</code>, der folgende Spalten enthält:</p>
+<ul>
+<li>
+<code>item</code>: Die Item-Nummer. Das kann einfach ein Vektor mit den Item aus dem oben erzeugten <code>data.frame</code> item_pars` sein.</li>
+<li>
+<code>n_persons</code>: Die Anzahl an Personen, die in dieser Iteration simuliert wurden. Die Zahl kann einfach aus dem Zähler des äußeren for-loops genommen werden.</li>
+<li>
+<code>iteration</code>: Die aktuelle Iteration für das aktuelle <code>n</code>. Kann aus dem Zähler des inneren loops genommen werden.</li>
+<li>
+<code>beta_true</code>: Die wahren Itemschwierigkeiten, die wir im <code>data.frame</code> <code>item_pars</code> festgelegt haben.</li>
+<li>
+<code>beta_est</code>: Die geschätzten Itemschwierigkeiten, die wir im vorherigen Schritt aus dem <code>TAM</code>-Modell extrahiert haben.</li>
+</ul>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   0 obs. of  0 variables</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Zu guter Letzt müssen wir diesen neu erzeugten <code>data.frame</code> jetzt noch in jeder Iteration abspeichern. Dafür nutzen wir am besten die Funktion <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code>, mit der man <code>data.frames</code> untereinander zusammenfügen kann.<br>
+Nutze also innerhalb der Schleife <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code>, um den leeren <code>data.frame</code> von außerhalb der Schleife mit dem in der Schleife erzeugten Ergebnis-<code>data.frame</code> zu verbinden. Das Ergebnis aus dieser Verbindung muss den selben Namen bekommen wie der ursprüngliche, leer <code>data.frame</code>, damit das Ergebnis fortlaufend in jeder Iteration erweitert wird.</p>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="va">n_persons</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iter</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_iterations</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">sim_2PL_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/catIrt/man/simIrt.html">simIrt</a></span><span class="op">(</span></span>
+<span>      theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>      params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">item_pars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>      mod <span class="op">=</span> <span class="st">"brm"</span></span>
+<span>    <span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">tam_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">sim_2PL_dat</span><span class="op">$</span><span class="va">resp</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">beta_est</span> <span class="op">&lt;-</span> <span class="va">tam_result</span><span class="op">$</span><span class="va">item_irt</span><span class="op">[</span>, <span class="st">"beta"</span><span class="op">]</span></span>
+<span></span>
+<span>    <span class="va">current_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>      <span class="st">"item"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Item"</span>, <span class="fl">1</span><span class="op">:</span><span class="va">n_items</span><span class="op">)</span>,</span>
+<span>      <span class="st">"n_persons"</span> <span class="op">=</span> <span class="va">n</span>,</span>
+<span>      <span class="st">"iteration"</span> <span class="op">=</span> <span class="va">iter</span>,</span>
+<span>      <span class="st">"beta_true"</span> <span class="op">=</span> <span class="va">item_pars</span><span class="op">$</span><span class="va">beta</span>,</span>
+<span>      <span class="st">"beta_est"</span> <span class="op">=</span> <span class="va">beta_est</span></span>
+<span>    <span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span></span>
+<span>      <span class="va">results</span>,</span>
+<span>      <span class="va">current_result</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    100  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    200  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    300  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    400  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items
+
+
+Binary response model simulation:
+    500  simulees,  20  items</code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   10000 obs. of  5 variables:
+ $ item     : chr  "Item1" "Item2" "Item3" "Item4" ...
+ $ n_persons: num  100 100 100 100 100 100 100 100 100 100 ...
+ $ iteration: int  1 1 1 1 1 1 1 1 1 1 ...
+ $ beta_true: num  -2 -1.79 -1.58 -1.37 -1.16 ...
+ $ beta_est : num  -2.14 -1.8 -1.44 -1.07 -1.19 ...</code></pre>
+</div>
+</div>
+<p>Das sieht super aus. Der Ergebnis-<code>data.frame</code> hat 10000 Zeilen, was genau dem Produkt aus Itemzahl, Personenzahl und Iterationszahl entspricht.</p>
+</div>
+</div>
+</div>
+</section></section><section id="auswertung" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="auswertung">
+<span class="header-section-number">1.6</span> Auswertung</h2>
+<p>Jetzt haben wir es gleich geschafft! Wir haben die Daten nach unseren Vorstellungen simuliert und ausprobiert, wie unser Modell damit umgehen kann.<br>
+Jetzt müssen wir nur noch die Ergebnisse auswerten. Dafür nutzen wir den <span class="highlight">Mean Squared Error (MSE)</span>. Das ist einfach der Mittelwert aus der quadrierten Differenz zwischen den wahren und den geschätzten Itemschwierigkeiten. Um den zu berechnen, erstellen wir zuerst eine neue Spalte, die die Differenz zwischen den wahren und den geschätzten Itemschwierigkeiten enthält. Siehe @#tip-mutate zum Erstellen einer neuen Spalte.</p>
+<p>:::{#tip-mutate .callout-tip collapse = “true”} ## Tipp</p>
+<p>Eine elegante Lösung eine neue Spalte aus der Differenz von zwei Spalten in einem <code>data.frame</code> zu bilden ist die <code>tidyverse</code>-Funktion <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="st">"a"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  <span class="st">"b"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>diff <span class="op">=</span> <span class="va">b</span> <span class="op">-</span> <span class="va">a</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  a b diff
+1 1 2    1
+2 2 3    1
+3 3 4    1</code></pre>
+</div>
+</div>
+<p>:::</p>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>beta_diff_2 <span class="op">=</span> <span class="op">(</span><span class="va">beta_est</span> <span class="op">-</span> <span class="va">beta_true</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>Perfekt. Jetzt müssen wir nur noch den Mittelwert aus diesen Differenzen berechnen. Das ist dann der MSE. Zusätzlich schauen wir uns noch den Monte Carlo Standard Error (MCSE) an, um ein Variabilitätsmaß für den Schätzer MSE zu bekommen. Der MCSE wird berechnet, indem wir pro Item pro Personenanzahl die Standardabweichung durch <code>sqrt(n() - 1)</code> teilen. Das ist einfachdie Wurzel aus der Größe der Gruppe minus 1. Das machen wir natürlich nicht über alle Durchläufe hinweg, innerhalb jeder Personenanzahl für jedes Item gesondert. Wir brauchen also pro simulierter Personenzahl pro Item einen Mittelwert (und eine Standardabweichung) über alle Iterationen. Das können wir sehr einfach mit der <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> und <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> Kombination aus dem <code>tidyverse</code> machen, siehe @#tip-group.</p>
+<p>:::{#tip-group .callout-tip collapse = “true”} ## Tipp</p>
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="st">"group_1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"a"</span>,<span class="st">"b"</span>, <span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"c"</span><span class="op">)</span>,</span>
+<span>  <span class="st">"c"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">group_1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
+<span>    mean_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  group_1 mean_c
+  &lt;chr&gt;    &lt;dbl&gt;
+1 a          1.5
+2 b          2  
+3 c          2.5</code></pre>
+</div>
+</div>
+<p>Wir gruppieren zuerst nach der Spalte <code>group_1</code>. <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> berechnet dann innerhalb jeder Gruppe den Mittelwert aus der Spalte <code>c</code> (das sind pro Gruppe 2 Werte in diesem Fall). :::</p>
+<p>:::{.callout-caution collapse = “true”} ## Lösung</p>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mse_results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">n_persons</span>, <span class="va">item</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    MSE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">beta_diff_2</span><span class="op">)</span>,</span>
+<span>    MCSE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">beta_diff_2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>, </span>
+<span>.groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>RMSE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">MSE</span><span class="op">)</span>, </span>
+<span>         RMCSE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">MCSE</span><span class="op">)</span><span class="op">)</span> <span class="co">## Ich nehme hier noch die Wurzel aus dem MSE, damit die Ergebnisse wieder auf der Schwierigkeitsskala sind. </span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mse_results</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  n_persons item      MSE    MCSE  RMSE  RMCSE
+      &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1       100 Item1  0.198  0.0287  0.444 0.170 
+2       100 Item10 0.0737 0.0129  0.272 0.114 
+3       100 Item11 0.0735 0.00988 0.271 0.0994
+4       100 Item12 0.0707 0.00893 0.266 0.0945
+5       100 Item13 0.0710 0.00747 0.267 0.0864
+6       100 Item14 0.0658 0.00780 0.256 0.0883</code></pre>
+</div>
+</div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> gruppiert unsere Daten nach den Spalten <code>n_persons</code> und <code>item</code>. <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> berechnet dann <span class="highlight">innerhalb jeder Gruppenkombination, also pro Personenanzahl pro Item</span> den Mittelwert und den MCSE.</p>
+<p>:::</p>
+</section><section id="visualisierung" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="visualisierung">
+<span class="header-section-number">1.7</span> Visualisierung</h2>
+<p>Klasse. Um die Ergebnisse leichter auszuwerten, können wir sie jetzt noch visualisieren.</p>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mse_results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">item</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Item1"</span>, <span class="st">"Item10"</span>, <span class="st">"Item20"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">n_persons</span>, y <span class="op">=</span> <span class="va">RMSE</span>, colour <span class="op">=</span> <span class="va">item</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">RMSE</span> <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">MCSE</span>, ymax <span class="op">=</span> <span class="va">RMSE</span> <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">MCSE</span>, fill <span class="op">=</span> <span class="va">item</span><span class="op">)</span>, </span>
+<span>              alpha <span class="op">=</span> <span class="fl">0.05</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.2</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">'#01364C'</span><span class="op">)</span> <span class="op">+</span> <span class="co">## Cutoff Wert)</span></span>
+<span><span class="co">## and some styling, not relevant, but the functions can be found in the R folder on GitHub</span></span>
+<span><span class="fu">set_colour_scheme</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>  </span>
+<span><span class="fu">set_fill_scheme</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu">theme_bg</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Stichprobengröße"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="power_simulation_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Fantastisch. Die Daten verhalten sich so, wie wir es erwarten würden, da der MSE mit zunehmender Stichprobengröße abnimmt, der Unterschied zwischen geschätzter und tatsächlicher Itemschwierigkeit wird also kleiner.</p>
+<p>Wir haben ja oben unseren Cutoff Wert berechnet, und können daran erkennen, dass wir für unser kleines Modell eine Stichprobengröße von … bräuchten, um die Itemschwierigkeiten präzise genug zu schätzen.</p>
+<p>Und Cutoff oben festlegen!</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Diese Grundgerüst können wir jetzt natürlich entsprechend unserer Fragestellung erweitern. Einige mögliche Fragestellungen:</p>
+<p>Für mehr Infos, und weiteren (auch komplexeren) <a href="https://psych-irt.netlify.app/">Codebeispielen</a>, siehe <span class="citation" data-cites="schroederssample">@schroederssample</span></p>
+</div>
+</div>
+</div>
+<p>Beispielfrage: What is the appropriate sample size in randomized clinical trials to detect differences in mean scores between groups corresponding to a small treatment effect with adequate power?</p>
+<ul>
+<li>1 Dimensional, so ähnlich wie bisher, nur mit Schleife drumrum und dann die Güte der Parameterschätzungen beurteilen irgendwie (siehe Morris paper)</li>
+<li>2 Dimensional:
+<ul>
+<li>korrelierte Domänen und dann Eindimensional gesondert und einmal mehrdimensional auswerten. Reliabilität ((Konstruktreliabilität, z.B. geteap() in TAM)) sollte steigen, da Informationen vom einen Konstrukt auch bei der Schätzung der Werte auf dem anderen Konstrukt helfen könnten.</li>
+</ul>
+</li>
+</ul>
+<p>Example 1 und 4 sehen interessant aus.</p>
+</section><section id="dimensional" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="dimensional">
+<span class="header-section-number">1.8</span> 1 Dimensional</h2>
+<p>Idee: Screening Test für irgendetwas, deswegen ability am unteren Spektrum ansiedeln?</p>
+<p>Nach Schroeders 2024:</p>
+<ul>
+<li>Anzahl und Verteilung der Faktoren (eindimensional vs.&nbsp;mehrdimensional)</li>
+<li>Anzahl Itemparamter (z.B. 1PL, also nur Schwierigkeiten für das erste Beispiel) (Anzahl der Items brauchen wir nicht, wir schauen uns einfach Werte über eine bestimmte range an.</li>
+<li>Item Typ: Dichotom</li>
+</ul>
+<p>Testdesign: (Missings erstmal weglassen?) - Z.B. zwei Testformen, die gelinkt werden sollen. - Missing Pattern (Missing completely at random (MCAR), Linking-Design) - Wie viel Missing Data</p>
+<p>IRT Model und interessierende Paramter - 1PL, 2PL … - software (die wir auch bei der Auswertung nutzen wollen) - Parameter, die extrahiert werden sollen</p>
+<p>Monte Carlo simulation aufsetzen - Anzahl an iterations: - - zu evaluierende Sample sizes</p>
+<p>Evaluation: - Mean squared error (MSE) der Itemschwierigkeiten wird genommen, um die Präzision der Schätzung zu ermitteln. Acceptable Cutoff below 0.05 (warum?).</p>
+<p>The first application example deals with two test forms of a reasoning test that are linked by a subset of common items. The accuracy of item difficulty estimation is examined as a function of sample size.</p>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/nickhaf\.github\.io\/IRT_workshop\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

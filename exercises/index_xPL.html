@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../exercises/xPl/simulation.html" rel="next">
+<link href="../exercises/linking/dif.html" rel="prev">
 <script src="../site_libs/quarto-listing/list.min.js"></script>
 <script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -130,7 +132,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -152,7 +154,7 @@ window.Quarto = {
 <span class="menu-text">Folien</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../exercises/index.html"> 
+    <a class="nav-link active" href="../exercises/index.html" aria-current="page"> 
 <span class="menu-text">Übungen</span></a>
   </li>  
 </ul>
@@ -161,10 +163,162 @@ window.Quarto = {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../exercises/index_xPL.html">Höher parametrisierte Modelle</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Übungen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index_intro_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einführung in R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/intro_r/load_data_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einlesen von Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/intro_r/subsetting_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Subsetting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/intro_r/missings_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Missings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/intro_r/reshaping_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reshaping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/intro_r/merging_ex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Merging</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index_linking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linking</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/linking/data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Die Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/linking/linking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Linking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/linking/dif.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Differential Item Functioning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index_xPL.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Höher parametrisierte Modelle</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/xPl/simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation von IRT Daten</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/xPl/model_selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modellselektion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/xPl/pcm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Partial Credit Model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index_glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/glm/glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
@@ -172,7 +326,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../exercises/index_xPL.html">Höher parametrisierte Modelle</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Höher parametrisierte Modelle</h1>
 <p class="subtitle lead">Übungen</p>
@@ -228,15 +382,15 @@ window.Quarto = {
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-file-modified-sort="1729016068389" data-listing-reading-time-sort="8" data-listing-word-count-sort="1470" data-listing-title-sort="Simulation von IRT Daten" data-listing-filename-sort="simulation.qmd">
+<tr data-index="0" data-listing-file-modified-sort="1729078092416" data-listing-reading-time-sort="8" data-listing-word-count-sort="1470" data-listing-title-sort="Simulation von IRT Daten" data-listing-filename-sort="simulation.qmd">
 <td>
 <a href="../exercises/xPl/simulation.html" class="title listing-title">Simulation von IRT Daten</a>
 </td>
 <td>
-<span class="listing-author">Nicklas Hafiz</span>
+<span class="listing-author">&nbsp;</span>
 </td>
 </tr>
-<tr data-index="1" data-listing-file-modified-sort="1729016068389" data-listing-reading-time-sort="3" data-listing-word-count-sort="496" data-listing-title-sort="Modellselektion" data-listing-filename-sort="model_selection.qmd">
+<tr data-index="1" data-listing-file-modified-sort="1729078092416" data-listing-reading-time-sort="3" data-listing-word-count-sort="496" data-listing-title-sort="Modellselektion" data-listing-filename-sort="model_selection.qmd">
 <td>
 <a href="../exercises/xPl/model_selection.html" class="title listing-title">Modellselektion</a>
 </td>
@@ -244,12 +398,12 @@ window.Quarto = {
 <span class="listing-author">Nicklas Hafiz</span>
 </td>
 </tr>
-<tr data-index="2" data-listing-file-modified-sort="1729016068389" data-listing-reading-time-sort="3" data-listing-word-count-sort="515" data-listing-title-sort="Partial Credit Model" data-listing-filename-sort="pcm.qmd">
+<tr data-index="2" data-listing-file-modified-sort="1729078092416" data-listing-reading-time-sort="3" data-listing-word-count-sort="515" data-listing-title-sort="Partial Credit Model" data-listing-filename-sort="pcm.qmd">
 <td>
 <a href="../exercises/xPl/pcm.html" class="title listing-title">Partial Credit Model</a>
 </td>
 <td>
-<span class="listing-author">Nicklas Hafiz</span>
+<span class="listing-author">&nbsp;</span>
 </td>
 </tr>
 </tbody>
@@ -678,6 +832,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../exercises/linking/dif.html" class="pagination-link" aria-label="3. Differential Item Functioning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3. Differential Item Functioning</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../exercises/xPl/simulation.html" class="pagination-link" aria-label="Simulation von IRT Daten">
+        <span class="nav-page-text">Simulation von IRT Daten</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
