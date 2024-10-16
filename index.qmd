@@ -21,10 +21,10 @@ library(rmarkdown)
 
 | Zeit          | Thema                                               | Beschreibung                                                                                                                                |
 |---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| 09:00 – 10:30 | **Linking und Differential Item Functioning**  | Verlinkte Items, lokale stochastische Unabhängigkeit, Differential Item Functioning (DIF)                                                  |
+| 09:00 – 10:30 | **Linking und Differential Item Functioning**  | Verlinkte Items, lokale stochastische Unabhängigkeit, Differential Item Functioning (DIF).                                                  |
 | 10:30 – 12:00 | **Bedeutung von Testdesigns**              | Die Bedeutung von Testdesigns. Was kann schiefgehen, wenn Testdesigns ungeeignet sind?                                                     |
 | 13:00 – 16:00 | **Höher parametrisierte Modelle**          | Höher parametrisierte Modelle: 2pl, 3pl, partial credit.                                                                                   |
-| 13:00 – 16:00 | **Längsschnittliche Designs**              | Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen (SW)                                           |
+| 13:00 – 16:00 | **Längsschnittliche Designs**              | Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen.                                          |
 
 : Tag 2 {.striped tbl-colwidths="[25, 30, 45]"}
 
@@ -32,8 +32,8 @@ library(rmarkdown)
 
 | Zeit          | Thema                                               | Beschreibung                                                                                                                                |
 |---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| 09:00 – 11:30 | **Fragen, Puffer**                        | Etwas freiere Gestaltung, offen gehalten für Fragen, Wiederholung, Interessierende Themen                                                  |
-| 11:30 – 13:00 | **Studienplanung: Stichprobengröße**      | Simulation als Werkzeug zur Studienplanung                                                                                                 |
-| 13:00 – 16:00 | **Auswertung von eigenen Daten**          | Bei Bedarf können hier Ideen für die Auswertung von Daten der Teilnehmenden gesammelt und ausprobiert werden                               |
+| 09:00 – 11:30 | **Fragen, Puffer**                        | Etwas freiere Gestaltung, offen gehalten für Fragen, Wiederholung, Interessierende Themen.                                                 |
+| 11:30 – 13:00 | **Studienplanung: Stichprobengröße**      | Simulation als Werkzeug zur Studienplanung.                                                                                                 |
+| 13:00 – 16:00 | **Auswertung von eigenen Daten**          | Bei Bedarf können hier Ideen für die Auswertung von Daten der Teilnehmenden gesammelt und ausprobiert werden.                               |
 
 : Tag 3 {.striped tbl-colwidths="[25, 30, 45]"}
