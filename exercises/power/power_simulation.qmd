@@ -1,7 +1,8 @@
 ---
-title: "Power Simulation"
+title: "Stichprobenplanung durch Simulation"
 subtitle: "Übung"
 format: html
+bibliographyu: references.bib
 ---
 
 Eine häufige Frage die bei der Planung von Studien aufkommt, ist die Frage nach der benötigten Stichprobengröße. Eine Möglichkeit diese für eine konkrete Studie zu planen, ist durch Simulationen. Wir haben bereits eine einfache Simulation in der [Übung zu höher parametrisierten Modellen ausprobiert](). In diesem Kapitel wollen wir jetzt darauf aufbauen und uns anschauen, wie Simulationen für das Planen von allen möglichen Studienaspketen genutzt werden können. 
@@ -230,6 +231,7 @@ Bisher wird das Ergebnis-Objekt immer überschrieben, sodass nur das Ergebnis au
 Jetzt müssen wir unsere Ergebnisse noch abspeichern. Erstelle dafür zuerst einen leeren `data.frame`, der die Ergebnisse aufnehmen soll. 
 
 :::{.callout-caution collapse="true"}
+## Lösung
 ```{r}
 #| eval: false
 
@@ -241,9 +243,20 @@ for (n in n_persons) {
 ```
 :::
 
+Jetzt müssen wir die Ergebnisse aus jedem Durchlauf in einem eigenen `data.frame` festhalten. Erstelle also innerhalb der inneren for-Schleife einen `data.frame`, der folgende Spalten enthält:
 
+- `item`: Die Item-Nummer. Das kann einfach ein Vektor mit den Item aus dem oben erzeugten `data.frame` item_pars` sein. 
+- `n_persons`: Die Anzahl an Personen, die in dieser Iteration simuliert wurden. Die Zahl kann einfach aus dem Zähler des äußeren for-loops genommen werden. 
+- `iteration`: Die aktuelle Iteration für das aktuelle `n`. Kann aus dem Zähler des inneren loops genommen werden. 
+- `beta_true`: Die wahren Itemschwierigkeiten, die wir im `data.frame` `item_pars` festgelegt haben.
+- `beta_est`: Die geschätzten Itemschwierigkeiten, die wir im vorherigen Schritt aus dem `TAM`-Modell extrahiert haben.
 
+:::{.callout-caution collapse="true"}
+## Lösung
 ```{r}
+#| message: false
+#| include: false
+
 results <- data.frame()
 for (n in n_persons) {
   for (iter in 1:n_iterations) {
@@ -266,6 +279,47 @@ for (n in n_persons) {
     ) %>%
       mutate(beta_diff = beta_est - beta_true)
 
+  }
+}
+
+```
+
+```{r}
+str(results)
+```
+
+:::
+
+Zu guter Letzt müssen wir diesen neu erzeugten `data.frame` jetzt noch in jeder Iteration abspeichern. Dafür nutzen wir am besten die Funktion `rbind()`, mit der man `data.frames` untereinander zusammenfügen kann.  
+Nutze also innerhalb der Schleife `rbind()`, um den leeren `data.frame` von außerhalb der Schleife mit dem in der Schleife erzeugten Ergebnis-`data.frame` zu verbinden. Das Ergebnis aus dieser Verbindung muss den selben Namen bekommen wie der ursprüngliche, leer `data.frame`, damit das Ergebnis fortlaufend in jeder Iteration erweitert wird.
+
+
+:::{.callout-caution collapse="true"}
+## Lösung
+```{r}
+#| message: false
+
+results <- data.frame()
+for (n in n_persons) {
+  for (iter in 1:n_iterations) {
+    sim_2PL_dat <- simIrt(
+      theta = rnorm(n, 0, 1),
+      params = as.matrix(item_pars[, c("alpha", "beta", "gamma")]),
+      mod = "brm"
+    )
+
+    tam_result <- tam(sim_2PL_dat$resp, verbose = FALSE)
+
+    beta_est <- tam_result$item_irt[, "beta"]
+
+    current_result <- data.frame(
+      "item" = paste0("Item", 1:n_items),
+      "n_persons" = n,
+      "iteration" = iter,
+      "beta_true" = item_pars$beta,
+      "beta_est" = beta_est
+    )
+
     results <- rbind(
       results,
       current_result
@@ -277,45 +331,106 @@ for (n in n_persons) {
 str(results)
 ```
 
+Das sieht super aus. Der Ergebnis-`data.frame` hat `r nrow(results)` Zeilen, was genau dem Produkt aus Itemzahl, Personenzahl und Iterationszahl entspricht. 
 
+:::
+
+## Auswertung
+Jetzt haben wir es gleich geschafft! Wir haben die Daten nach unseren Vorstellungen simuliert und ausprobiert, wie unser Modell damit umgehen kann.  
+Jetzt müssen wir nur noch die Ergebnisse auswerten. Dafür nutzen wir den [Mean Squared Error (MSE)]{.highlight}. Das ist einfach der Mittelwert aus der quadrierten Differenz zwischen den wahren und den geschätzten Itemschwierigkeiten. Um den zu berechnen, erstellen wir zuerst eine neue Spalte, die die Differenz zwischen den wahren und den geschätzten Itemschwierigkeiten enthält. Siehe @#tip-mutate zum Erstellen einer neuen Spalte. 
+
+:::{#tip-mutate .callout-tip collapse = "true"}
+## Tipp
+
+Eine elegante Lösung eine neue Spalte aus der Differenz von zwei Spalten in einem `data.frame` zu bilden ist die `tidyverse`-Funktion `mutate()`: 
+
+```{r}
+data.frame(
+  "a" = c(1, 2, 3),
+  "b" = c(2, 3, 4)
+) %>%
+  mutate(diff = b - a)
+```
+:::
 
 :::{.callout-caution collapse="true"}
-
 ## Lösung
 ```{r}
-#| eval: false
-
-for (n in n_persons) {
-  for (iter in 1:n_iterations) {
-    sim_2PL_dat <- simIrt(
-      theta = rnorm(n, 0, 1),
-      params = as.matrix(item_pars[, c("alpha", "beta", "gamma")]),
-      mod = "brm"
-    )
-  }
-}
+results <- results %>%
+  mutate(beta_diff_2 = (beta_est - beta_true)^2)
 ```
+:::
+
+Perfekt. Jetzt müssen wir nur noch den Mittelwert aus diesen Differenzen berechnen. Das ist dann der MSE. Zusätzlich schauen wir uns noch den Monte Carlo Standard Error (MCSE) an, um ein Variabilitätsmaß für den Schätzer MSE zu bekommen. 
+Der MCSE wird berechnet, indem wir pro Item pro Personenanzahl die Standardabweichung durch `sqrt(n() - 1)` teilen. Das ist einfachdie Wurzel aus der Größe der Gruppe minus 1. 
+Das machen wir natürlich nicht über alle Durchläufe hinweg, innerhalb jeder Personenanzahl für jedes Item gesondert. Wir brauchen also pro simulierter Personenzahl pro Item einen Mittelwert (und eine Standardabweichung) über alle Iterationen. Das können wir sehr einfach mit der `group_by()` und `summarize()` Kombination aus dem `tidyverse` machen, siehe @#tip-group. 
+
+:::{#tip-group .callout-tip collapse = "true"}
+## Tipp
+
+```{r}
+data.frame(
+  "group_1" = c("a", "a","b", "b","c","c"),
+  "c" = c(1, 2, 3, 1, 2, 3)) %>%
+  group_by(group_1) %>%
+  summarize(
+    mean_c = mean(c))
+
+```
+
+Wir gruppieren zuerst nach der Spalte `group_1`. `summarize()` berechnet dann innerhalb jeder Gruppe den Mittelwert aus der Spalte `c` (das sind pro Gruppe 2 Werte in diesem Fall). 
+:::
+
+:::{.callout-caution collapse = "true"}
+## Lösung
+
+```{r}
+mse_results <- results %>%
+  group_by(n_persons, item) %>%
+  summarise(
+    MSE = mean(beta_diff_2),
+    MCSE = sd(beta_diff_2) / sqrt(n() - 1), 
+.groups = "drop"
+  )
+
+head(mse_results)
+```
+
+`group_by()` gruppiert unsere Daten nach den Spalten `n_persons` und `item`. `summarise()` berechnet dann [innerhalb jeder Gruppenkombination, also pro Personenanzahl pro Item]{.highlight} den Mittelwert und den MCSE. 
+
+:::
+
+## Visualisierung
+Klasse. Um die Ergebnisse leichter auszuwerten, können wir sie jetzt noch visualisieren. 
 
 
 ```{r}
-#| eval: false
+mse_results %>%
+filter(item %in% c("Item1", "Item10", "Item20")) %>%
+ggplot( aes(x = n_persons, y = MSE, colour = item)) +
+  geom_point() +
+geom_line() +
+  geom_ribbon(aes(ymin = MSE - 1.96 * MCSE, ymax = MSE + 1.96 * MCSE, fill = item), 
+              alpha = 0.05, color = NA) +
+## and some styling, not relevant, but the functions can be found in the R folder on GitHub
+set_colour_scheme() +  
+set_fill_scheme() +
+theme_bg() +
+xlab("Stichprobengröße")
 
-
-diff_measures <- data.frame("b_est" = itempars_1$beta, "b_true" = items$b) %>%
-  mutate(b_diff = b_est - b_true) %>%
-  group_by(item, n_persons) ## do the summary for each item and sample size seperatly
-summarise(
-  MSE = mean(b_diff, na.rm = TRUE), # Calculate the MSE for item difficulties
-  MCSE = sd(b_diff, na.rm = TRUE) / sqrt(n() - 1), # Calculate the MCSE
-  .groups = "drop"
-)
-
-# itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
-# colnames(itempars_2) <- c("alpha_2", "beta_2")
-
-plot(itempars_1$beta, itempars_1$beta)
 ```
 
+Fantastisch. Die Daten verhalten sich so, wie wir es erwarten würden, da der MSE mit zunehmender Stichprobengröße abnimmt, der Unterschied zwischen geschätzter und tatsächlicher Itemschwierigkeit wird also kleiner. Wir haben ja oben unseren Cutoff Wert berechnet, und können daran erkennen, dass wir für unser kleines Modell eine Stichprobengröße von ... bräuchten, um die Itemschwierigkeiten präzise genug zu schätzen. 
+
+Und Cutoff oben festlegen! 
+
+:::{.callout-note}
+Diese Grundgerüst können wir jetzt natürlich entsprechend unserer Fragestellung erweitern. Einige mögliche Fragestellungen:
+
+
+Für mehr Infos, und weiteren (auch komplexeren) [Codebeispielen](https://psych-irt.netlify.app/), siehe @schroederssample
+
+:::
 
 Beispielfrage: What is the appropriate sample size in randomized clinical trials to detect differences in mean scores between groups corresponding to a small treatment effect with adequate power?
 
@@ -361,4 +476,4 @@ Evaluation:
 The first application example deals with two test forms of a reasoning test that are linked by a subset of common items. The accuracy of item difficulty estimation is examined as a function of sample size.
   
   
-https://psych-irt.netlify.app/
+
