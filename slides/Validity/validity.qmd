@@ -1,0 +1,84 @@
+---
+title: "Validität"
+format: letterbox-revealjs
+title-slide-attributes:
+  data-background-image: ./images/measurement.jpg
+  data-background-size: cover
+execute:
+  echo: false
+bibliography: ./references.bib
+---
+
+## Validität
+Misst unser Verfahren tatsächlich das Konstrukt, dass es messen soll?
+
+:::{.callout-note}
+Abzugrenzen von der Reliabilität, die aussagt wie genau wir das messen, was wir messen (unabhängig davon, ob wir das auch wirklich messen wollen). 
+:::
+
+## Validität
+Es gibt nur verschiedene Arten von Validität, nicht "die" Validität. Es geht also immer um die Validität der Interpretation der Testwerte, welcher unter bestimmten Bedingungen erhoben wurde. 
+
+# Arten von Validität
+
+## Kriteriumsvalidität 
+
+:::{.columns}
+::::{.column width="50%"}
+Zusammenhang der Testscores mit anderen Variablen (z.B. Erfolg im Beruf, 
+Schulnoten). 
+
+::::
+
+::::{.column width="50%"}
+![](./images/graduation.jpg)
+
+::::
+:::
+
+## Konstruktvalidität
+
+Wird das interessierende Merkmal gemessen?
+
+:::{.columns}
+::::{.column width="50%"}
+**Konvergente Validität**
+
+[Dasselbe]{.highlight} Merkmal, [andere]{.highlight} Methode
+
+::::
+
+::::{.column width="50%"}
+**Diskriminante Validität**
+[Anderes]{.highlight} Merkmal, [selbe oder andere]{.highlight} Methode
+
+::::
+:::
+
+## Multitrait-Multimethod (MTMM) Ansatz 
+Korrelation zwischen Testscores für verschiedene Kombintationen:
+
+- Mono-Trait Hetero-Method
+- Hetero-Trait Mono-Method
+- Hetero-Trait Hetero-Method
+
+
+
+## Validität und IRT
+Ideen:
+
+- Test-Scores (Theta-Werte, WLEs, PVs) können mit den oben besprochenen Kriterien korreliert werden.  
+- Wenn man das ganze komplexer modellieren möchte, kann man auch in MTMM-Modelle auf der Basis von Konfirmatorischer Faktorenanalyse schauen (z.B. @eid2008structural). 
+- Oder mit Multidimensionalen Item Response Modellen? Man könnte z.B. diskriminante Validität prüfen, indem man einmal undidimensional und einmal mehrdimensional modeliert, und schaut ob das mehrdimensionale Modell deutlich besser passt?  
+
+## Literatur
+
+::: {#refs}
+
+:::
+
+## Bildquellen
+- Foto von <a href="https://unsplash.com/de/@diana_pole?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Diana Polekhina</a> auf <a href="https://unsplash.com/de/fotos/silberne-und-schwarze-halskette-auf-gelbem-textil-iUfusOthmgQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@goodfreephoto_com?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Good Free Photos</a> auf <a href="https://unsplash.com/de/fotos/luftaufnahme-von-absolventen-mit-huten-YZsvNs2GCPU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
+  
