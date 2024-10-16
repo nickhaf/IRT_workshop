@@ -29,7 +29,7 @@ qa_m <- qa_dat_wide %>%
 tam_f <- tam(qa_f[, 6:ncol(qa_f)], verbose = FALSE)
 tam_m <- tam(qa_m[, 6:ncol(qa_m)], verbose = FALSE)
 
-tam_link <- tam.linking(list(tam_m, tam_f), type = "SL")
+tam_link <- tam.linking(list(tam_f, tam_m), type = "SL")
 
 difficulty_link_f <- tam_link$parameters_list[[1]]$xsi
 difficulty_link_m <- tam_link$parameters_list[[2]]$xsi
