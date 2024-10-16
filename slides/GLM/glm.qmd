@@ -10,6 +10,7 @@ title-slide-attributes:
 ---
 
 ```{r}
+#| echo: false
 source(here::here("R", "plot_functions.R"))
 ```
 
@@ -145,6 +146,8 @@ Standardfehler werden unterschätzt, unsere Inferenzstatistischen Tests werden e
 ## Option 2: Aggregieren
 
 ```{r}
+#| echo: false
+
 illustration_dat %>%
   group_by(school) %>%
   summarise(mean_mathach = mean(mathach),
@@ -165,20 +168,23 @@ NULL
 ```
 
 ## Option 2: Aggregieren
-
+- Gefahr eines ökologischen Fehlschlusses
+- Verlust an Informationen und an Power. 
+- Gruppenstrukturen sind meist auch von Interesse. 
 
 ## Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren
 
 ```{r}
-lm(mathach ~ ses_cent + school + ses_cent*school, data = illustration_dat) %>% 
-    coef()
+mod1 <- lm(mathach ~ ses_cent + school + ses_cent*school, data = illustration_dat)
+
+coef(mod1)
 ```
 
 
 ## Option 3: Disaggregiert Analyse mit Gruppen als Prädiktoren
 
 ```{r}
-#| eval: false
+#| echo: false
 
 ggplot(data = illustration_dat , aes(x = ses_cent, y = mathach)) +
   geom_point(aes(colour = school)) +
@@ -210,36 +216,52 @@ summary(mod2)
 ## Option 4: Multilevel-Modell
 
 ```{r}
-ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school, fill = school)) +
+#| echo: false
+
+ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
   geom_point() +
-  geom_smooth(method = "lm", se = TRUE) +
+  geom_smooth(method = "lm", se = FALSE) +
   labs(title = "Math Score by Socioeconomic Status",
        x = "Socioeconomic Status",
        y = "Math Score") +
        theme_classic() +
        ylim(c(-5, 25)) +
   set_colour_scheme() +
-  set_fill_scheme() +
          theme_bg() +
   NULL
 ```
 
 
-## Notizen 
 
-Rein Optisch betrachtet scheint es recht wichtig zu sein, auf welche Schule man geht. Die Abweichung von Mittelwert des GesamtSES hat auch einen Einfluss. 
+## {background-color="#17161e"}
 
-# Gleichungen
+![](images/equations2.jpg){.absolute top="-12.5%" right="12.5%" height="111%" style="max-height: unset; box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
+
+::: {.absolute left="28%" top="2.5%" style="color:#F8F8F8; font-size: 1.5em; text-align: center;"}
+
+Gleichungen
+
+:::
+
+
 ## Level 1 Gleichung
 
-Für jede Gruppe j:
+Für jede Person i in Gruppe j:
 $$
 y_{ij} = \beta_{0j} + \beta_{1j}x_{ij} + e_{ij}
 $$
 
 ## Level 1 Gleichung 
 ```{r}
+#| echo: false
+
+illustration_dat <- illustration_dat %>%
+  mutate(regression_point = predict(mod1))
+
+ep <- illustration_dat[which(illustration_dat$mathach == max(illustration_dat[illustration_dat$school == 1288, "mathach"])), ]
+
 ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
+    geom_segment(x = ep$ses_cent, xend = ep$ses_cent, y = ep$mathach, yend = ep$regression_point, colour = "black") +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   labs(title = "Math Score by Socioeconomic Status",
@@ -264,9 +286,10 @@ $$
 
 ## Level 2 Gleichung
 ```{r}
+#| echo: false
+
 ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
   geom_point() +
-  geom_smooth(method = "lm", se = FALSE) +
   geom_smooth(method = "lm", se = FALSE, colour = "#01364C") +
   labs(title = "Math Score by Socioeconomic Status",
        x = "Socioeconomic Status",
@@ -294,9 +317,38 @@ $$
 $$
 
 $$
-y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}
+\color{#F4BA02}{y_{ij} = \beta_{0}+\beta_1x_{ij} + \zeta_{0j} + \zeta_{1j}x_{ij} + e_{ij}}
 $$
 
+
+## Das gemischte Modell
+```{r}
+#| echo: false
+
+ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, colour = "#01364C") +
+  labs(title = "Math Score by Socioeconomic Status",
+       x = "Socioeconomic Status",
+       y = "Math Score") +
+       theme_classic() +
+       ylim(c(-5, 25)) +
+  set_colour_scheme() +
+         theme_bg() +
+  NULL
+```
+
+## Prädiktoren
+Wir können jetzt auf beiden Ebenen auch noch Prädiktoren in die Gleichung mit aufnehmen und schauen, ob sich dadurch Varianz in den jeweiligen Leveln ($x_{ij}$ oder $\zeta_{0j}$ aufklären lässt).
+Und das tolle: wir können auch eine Cross-Level-Interaktion modellieren (interagiert ein Level-1 Prädiktor mit einem Level 2 Prädiktor?).
+
+:::{.callout-note}
+## Beispiel Cross-Level-Interaktion
+
+Zusammenhang zwischen Lernzeit (Level 1 Prädiktor, da individuell) und Lehrqualität könnte an Schulen mit hoher Lehrqualität stärker sein als an Schulen mit niedrigerer Lehrqualität. 
+
+:::
 
 ## 
 
@@ -350,21 +402,38 @@ $$
 **Fixed Effects**
 
 - Hier machen wir diese Annahme einfach nicht. 
-- Uns interessieren die tatsächlichen Gruppen, bei Wiederholung würden wird die gleichen ziehen.
+- Uns interessieren die tatsächlichen Gruppen, bei Wiederholung würden wir vermutlich die gleichen ziehen.
 
 :::
 
 
 ::::
 
+
+
 ## Beispiel
 
+:::{.columns}
+:::{.column width="50%"}
+::: small
 Wir untersuchen den Erfolg von Verhaltenstherapie und Psychoanalyse anhand der Rückfallquote nach einem Jahr.  
-Patient*innen müssen hier nach Therapeut*innen genested werden. Dabei können wir die Therapeut*innen als random effects betrachten, wir haben sie ja schließlich nur als Mittel zum Zweck aus der Population an Therapeut*innen gezogen. Die Behandlungsform (Verhaltenstherapie, Psychoanalyse) ist hingegen ein fixed effect, da wir nur diese beiden Behandlungsformen untersuchen wollen.
+Patient\*innen müssen hier nach Therapeut\*innen genested werden. Dabei können wir die Therapeut\*innen als random effects betrachten, wir haben sie ja schließlich nur als Mittel zum Zweck aus der Population an Therapeut\*innen gezogen. Die Behandlungsform (Verhaltenstherapie, Psychoanalyse) ist hingegen ein fixed effect, da wir nur diese beiden Behandlungsformen untersuchen wollen.
 
 Anders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Therapeut*innen interessieren würde. Dann könnten wir sie ebenfalls als fixed effect im Modell mit aufnehmen. 
 
+:::
 
+:::
+:::{.column width="50%"}
+![](images/therapy.jpg){.image-right}
+:::
+:::
+
+
+## 
+::: r-fit-text
+Sind unsere Schulen und Schüler*innen nun also [random]{.highlight} oder [fixed]{.highlight} effects?
+:::
 
 ## lme4
 
@@ -394,26 +463,18 @@ Dafür müssen wir zwei Dinge beachten:
 :::
 
 
-## Link Funktion
-
-
-
 ## Fixed und Random Effects
 
-- Entwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed
-- Entwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random
-
-
-## Exercise 
-- Direkt übertragen auf den IRT-KOntext? Also sagen: Nehmt die Daten aus dem letzten Beispiel und fittet ein LLM Modell. 
-- Dann Vergleich mit TAM.
+- Entwicklung Fragebogen um diesen an verschiedenen Stichproben zu nutzen: Person als random, Items als fixed.
+- Entwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random.
 
 
 ## Prädiktoren
-- Beispiel aufgreifen, zeigen, wass man mit diesen Modell noch machen kann. 
-
+Die Formulierung von IRT Modellen als Multilevel Modell erlaubt es uns, auf elegante Art Prädiktoren mit in das Modell aufzunehmen. 
 
 ## Bildquellen
 - Foto von <a href="https://unsplash.com/de/@brenomachado?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Breno Machado</a> auf <a href="https://unsplash.com/de/fotos/fotografie-eines-gewitters-in9-n0JwgZ0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@finnnyc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Mitch</a> auf <a href="https://unsplash.com/de/fotos/brauner-betonbau-tagsuber-nJupV3AOP-U?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
   
 
