@@ -10,7 +10,7 @@ format: html
 
 # Missings
 ::: {.callout-caution icon="false" collapse="true"}
-## Previous code
+## Vorheriger Code
 
 ```{r, message = FALSE}
 # install.packages("tidyverse")
@@ -28,14 +28,14 @@ psych_stats <- read.csv(
 ```
 :::
 
-## Exercise 1
+## Übung
 
-1.  Does the `characters` data set contain any `NAs`?
+1.  Hat der `characters` Datensatz irgendwelche `NAs`?
 
 ::: {.callout-tip collapse="true"}
-## Hint
+## Tipp
 
-Use `any()` to see if a logical vector contains any `TRUE` values.
+Nutze `any()` um zu prüfen, ob ein logischer Vektor irgendwelche `TRUE` Werte enthält.
 :::
 
 ::: {.callout-caution collapse="true"}
@@ -45,14 +45,15 @@ Use `any()` to see if a logical vector contains any `TRUE` values.
 any(is.na(characters))
 ```
 
-No, there don't seem to be any `NAs` in this data set, which would be great in real life. For this exercise it's not great, so let's introduce some `NAs` manually.
+Nein, es scheinen keine `NAs` in diesem Datensatz zu sein, was im echten Leben großartig wäre. Für diese Übung ist es nicht so toll, also fügen wir manuell einige `NAs` hinzu.
 :::
 
-2.  Be careful not to overwrite the `characters` data frame, so copy it into the new object `characters_na` before doing anything. Then set the `name` to `NA` in the rows `34, 103, 300` and the `uni_name` to `NA` in the rows `404, 670`.
+2.  Pass auf, dass du den `characters` `data.frame` nicht überschreibst, also kopiere ihn in das neue Objekt `characters_na`, bevor du weiter machst. Setze dann den `name` auf `NA` in den Zeilen `34, 103, 300` und den `uni_name` auf `NA` in den Zeilen `404, 670`.
+
 
 ::: {.callout-tip collapse="true"}
-## Hint
-To overwrite values, you can select them on the **left** side of the assignment operator `<-` and assign them a new value on the right side.
+## Tipp
+Um Werte zu überschreiben, kannst du sie auf der **linken** Seite des Zuweisungsoperators `<-` auswählen und ihnen auf der rechten Seite einen neuen Wert zuweisen.
 :::
 
 ::: {.callout-caution collapse="true"}
@@ -66,7 +67,7 @@ characters_na[c(404, 670), "uni_name"] <- NA
 ```
 :::
 
-3.  Remove all rows containing missing values in the column `name` from the `characters_na` data frame.
+3.  Entferne alle Zeilen aus dem `characters_na` `data.frame`, die fehlende Werte in der Spalte `name` enthalten. 
 
 ::: {.callout-caution collapse="true"}
 ## Lösung
@@ -75,7 +76,7 @@ characters_na[c(404, 670), "uni_name"] <- NA
 characters_na <- characters_na[!is.na(characters_na$name), ]
 ```
 
-Or:
+Oder:
 
 ::: tidy
 ```{r}

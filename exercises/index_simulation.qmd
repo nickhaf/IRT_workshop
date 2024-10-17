@@ -1,0 +1,11 @@
+---
+title: "Höher parametrisierte Modelle"
+subtitle: "Übungen"
+listing: 
+  type: table
+  contents: 
+    - ./simulation/power_simulation.qmd
+  sort: false
+format: html
+---
+

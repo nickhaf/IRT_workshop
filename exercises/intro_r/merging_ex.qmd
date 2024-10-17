@@ -8,7 +8,7 @@ format: html
 
 # Merging
 ::: {.callout-caution icon="false" collapse="true"}
-## Previous code
+## Vorheriger Code
 
 ```{r, message = FALSE}
 # install.packages("tidyverse")
@@ -36,29 +36,29 @@ str(psych_stats)
 ```
 :::
 
-Now we have gotten to know our `characters` data set a bit more. However, the personality ratings are not included yet. For that, we need to combine it with the `psych_stats` data set.
+Jetzt haben wir unseren `characters` Datensatz ein bisschen genauer kennen gelernt. Die Persönlichkeitsratings sind allerdings noch nicht enthalten. Dafür müssen wir ihn mit dem `psych_stats` Datensatz kombinieren. 
 
-## Exercise 1
+## Übung 
 
-Merge the `characters` data frame and the `psych_stats` data frame on a common column.
+Merge den `characters` `data.frame` und den `psych_stats` `data.frame` anhand einer gemeinsamen Spalte.
 
 ::: {.callout-tip collapse="true"}
-## Hint
+## Tipp
 
-Identify the common columns. Are they named the same in both data frames? Look at the documentation of `?merge` to see, how you can merge data frames that don't have identically named columns.
+Identifiziere die gemeinsame Spalte. Haben sie in beiden Datensätzen den gleichen Namen? Schaue dir die Dokumentation von `?merge` an um zu sehen, wie man `data.frames` mergen kann, die keinen gemeinsamen Spaltennamen haben.
 :::
 
 ::: {.callout-caution collapse="true"}
 ## Lösung
 
-First, let's take a look at both data sets again:
+Als erstes schauen wir uns noch einmal beide Datensätze an:
 
 ```{r}
 str(characters)
 str(psych_stats)
 ```
 
-It seems like both data frames have a column containing an ID for the character. We can use that column for merging:
+Es sieht so aus, also ob beide `data.frames` eine Spalte enhalten, in der die ID für den jeweiligen Film-Charakater gespeichert ist. Wir können diese Spalte für das Mergen verwenden:
 
 ```{r}
 characters_stats <- merge(
@@ -71,5 +71,4 @@ characters_stats <- merge(
 str(characters_stats)
 ```
 
-Worked like a charm!
 :::
