@@ -12,7 +12,6 @@ execute:
 library(tidyverse)
 source(here::here("R", "plot_functions.R"))
 source(here::here("R", "irt_formulas.R"))
-
 ```
 
 ## Fahrplan
@@ -259,118 +258,221 @@ Geht zur [Übung](https://nickhaf.github.io/IRT_workshop/exercises//xPl/simulati
 
 # Welches Modell?
 
+## 1PL vs. 3PL
 
+## Modellfit beurteilen
 
-
-## {background-image="images/sapiens.jpg" background-size="1225px"}
-
-::: {.absolute right="2.5%" top="5%" style="backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, .0); border-radius: 0px;"}
-Exkurs: \ 
-Tradeoff zwischen \
-Underfit und \
-Overfit
-:::
-
-## Tradeoff zwischen Underfit und Overfit
- 
-```{r}
-#| echo: false
-
-colour_highlight <- "#9B1B34"
-
-# #013D5A, 
-
-library(latex2exp)
-
-sppnames <- c( "afarensis","africanus","habilis","boisei", "rudolfensis","ergaster","sapiens")
-brainvolcc <- c( 438 , 452 , 612, 521, 752, 871, 1350 ) 
-masskg <- c( 37.0 , 35.5 , 34.5 , 41.5 , 55.5 , 61.0 , 53.5 )
-d <- data.frame( species=sppnames , brain=brainvolcc , mass=masskg )
-
-d$mass_std <- (d$mass - mean(d$mass))/sd(d$mass) 
-d$brain_std <- d$brain / max(d$brain)
-
-# Data setup
-sppnames <- c("afarensis", "africanus", "habilis", "boisei", "rudolfensis", "ergaster", "sapiens")
-brainvolcc <- c(438, 452, 612, 521, 752, 871, 1350)
-masskg <- c(37.0, 35.5, 34.5, 41.5, 55.5, 61.0, 53.5)
-d <- data.frame(species = sppnames, brain = brainvolcc, mass = masskg)
-
-# Check if ggplot2 is installed; install and load if necessary
-if (!require('ggplot2')) {
-  install.packages('ggplot2')
-  library(ggplot2)
-}
-
-# Create scatterplot with quadratic regression line
-
-p_1 <- ggplot(d, aes(x = mass, y = brain)) +
-  geom_point() +
-  stat_smooth(method = "lm", formula = y ~ x , se = FALSE, color = colour_highlight) +
-  labs(title = "brain ~ mass",
-       x = "Mass",
-       y = "Brain Volume") +
-  theme_minimal()
-
-p_2 <- ggplot(d, aes(x = mass, y = brain)) +
-  geom_point() +
-  stat_smooth(method = "lm", formula = y ~ x + I(x^2) , se = FALSE, color = colour_highlight) +
-  labs(title = TeX("$brain \\sim mass + mass^2$"),
-       x = "Mass",
-       y = "Brain Volume") +
-  theme_minimal()
-
-p_6 <- ggplot(d, aes(x = mass, y = brain)) +
-  geom_point() +
-  stat_smooth(method = "lm", formula = y ~ x + I(x^2) + I(x^3) + I(x^4) + I(x^5) + I(x^6), se = FALSE, color = colour_highlight) +
-  labs(title = TeX("$brain = mass + mass^2$ + mass^3 + mass^4 + mass^5 + mass^6$"),
-       x = "Mass",
-       y = "Brain Volume") +
-  theme_bg()
-
-
-p_1
-
-
-```
-
+- Gesamtmodell
+- Itemfit
+- Personenfit
 
 ::: aside
-Nach @mcelreath2018statistical, Kapitel 7
+Siehe auch [dieses Tutorial](https://philippmasur.de/2022/05/13/how-to-run-irt-analyses-in-r/). 
 :::
 
-## Tradeoff zwischen Underfit und Overfit
-```{r}
-#| echo: false
+# Gesamten Modellfit
 
-p_2
+Es gibt verschiedene Fit-Statistiken, die uns bei Aussagen über den Modellfit helfen, z.B.:
+
+## Deviance
+Deviance ist ein Maß für die relative Distanz einer Vorhersage von perfeketer Accuracy.  
+Wir können uns die Konvergenzplots anschauen:
+
+```{r}
+#| code-fold: true
+#| echo: true
+
+library(TAM)
+
+data(data.sim.rasch)
+
+mod_2pl <- tam.mml.2pl(resp = data.sim.rasch, verbose = FALSE, irtmodel = "2PL")
+
+plotDevianceTAM(mod_2pl)
+```
+
+## Fit Indices (z.B. AIC, BIC)
+Da die Deviance (fast) immer besser wird, je mehr Parameter wir ins Modell mit aufnehmen, bestrafen bestimmte Fit Indices die Anzahl der Parameter.  
+Schätzen die out-of-Sample predictive accuracy.  
+Es gibt keine Daumenregeln für Cutoff Werte, allerdings können wir die Fit Indices für den Vergleich von genesteten Modellen nutzen. 
+
+
+```{r}
+#| echo: true
+
+summary(tam.modelfit(mod_2pl))
+```
+
+## Inferenzstatistisch
+Wir könne auch den Likelihood Ratio Test nutzen, um die Modelle zu vergleichen. Er erlaubt zum einen den Vergleich der empirischen und der Modellimplizierten Kovarianzmatrix, aber auch den Vergleich der Kovarianzmatrizen genesteter Modelle. 
+
+:::{.callout-important}
+Hängt von der Stichprobengröße ab und hat auch einige weitere Probleme. Sollte deshalb nicht in Isolation genutzt werden, sondern möglichst mit den besprochenen deskriptiven Fitmaßen zusammen. 
+
+:::
+
+## Itemfit
+Um den Itemfit zu beurteilen, plotten wir die erwarteten und die beobachteten Itemkurven übereinander: 
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| layout-ncol: 3
+#| incldue: false 
+#| results: "hide"
+#| fig.keep: "all"
+
+invisible(
+plot(mod_2pl,
+  items = 1:3, 
+  type = "items",
+  export = FALSE,
+  observed = TRUE,
+  package = "graphics")
+)
+```
+
+## Infit/Outfit
+
+```{r}
+tam.fit(mod_2pl)
+
+```
+
+## Infit/Outfit
+```{r}
+#| code-fold: true
+
+# Definieren einer eigenen Plot-Funkktion
+plot_infit_outfit <- function(tam_obj){
+fit_tam <- tam.fit(tam_obj)$itemfit
+
+fit_plotdat <- fit_tam %>%
+  # Als Faktor umwandeln, damit die Sortierung im Plot stimmt
+  mutate(Item = factor(parameter, levels = unique(parameter[order(as.numeric(parameter))]))) %>%
+  select(Item, Outfit, Infit) %>%
+  pivot_longer(cols = c(Outfit, Infit), names_to = "fit", values_to = "value")
+
+ggplot(fit_plotdat, aes(x = value, y = Item)) +
+  geom_point(colour = "#F4BA02") +
+  facet_grid(. ~ fit, scales = "fixed") +
+  xlim(0.4, 1.6) +
+  theme_bg() +
+  geom_vline(xintercept = 0.5, linetype = "dotted", colour = "#9B1B34") +
+  geom_vline(xintercept = 1.5, linetype = "dotted", colour = "#9B1B34")
+}
+
+plot_infit_outfit(mod_2pl)
 ```
 
 
-## Tradeoff zwischen Underfit und Overfit
-```{r}
-#| echo: false
+# Personfit
+Wie gut stimmen die Antwortmuster der Personen mit dem Modell überein?
 
-p_6
+## Infit Outfit
+```{r}
+#| code-fold: true
+
+p_fit <- tam.personfit(mod_2pl) %>%
+  pivot_longer(cols = c(outfitPerson, infitPerson), names_to = "fit", values_to = "value")
+
+ggplot(p_fit, aes(x = value)) +
+  geom_histogram(colour= "#F4BA02", fill = "#01364C", binwidth = 0.1) +
+  theme_bg() +
+  xlim(0, 2) +
+  facet_grid(. ~ fit)
+  
 ```
+
+
+## Mögliche weitere Fragestellungen
+Wir können uns noch viele weitere Dinge mit unseren Modellen anschauen. Sehr hilfreich dabei kann das Paket [ggmirt](https://github.com/masurp/ggmirt) sein, dass eine Vielzahl von praktischen Plots für die Auswertung bereitstellt. 
+
+```{r}
+library(ggmirt)
+library(mirt)
+
+## Nochmal mit mirt fitten
+mod_mirt <- mirt(data.sim.rasch, 1, itemtype = "2PL", verbose = FALSE)
+```
+
+## Item Person Map
+Ist die Fähigkeitsrange durch die Items gut Abgedeckt?
+```{r}
+#| code-fold: true
+
+itempersonMap(mod_mirt) + theme_bg()
+```
+
+## ICC
+
+```{r}
+#| code-fold: true
+
+tracePlot(mod_mirt) + theme_bg()
+```
+
+## ICC
+
+```{r}
+#| code-fold: true
+
+tracePlot(mod_mirt, facet = F, legend = T) + theme_bg()
+```
+
+## Item Information Curves
+Wie viel Information steuert jedes Item zur Schätzung von Theta bei? 
+```{r}
+#| code-fold: true
+
+itemInfoPlot(mod_mirt) + theme_bg()
+```
+
+## Item Information Curves
+```{r}
+#| code-fold: true
+
+itemInfoPlot(mod_mirt, facet = T) + theme_bg()
+```
+
+## Test Information Curve
+```{r}
+#| code-fold: true
+
+testInfoPlot(mod_mirt, adj_factor = 2) + theme_bg()
+```
+
+
+## Summary
+:::{.columns}
+
+:::{.column width="80%"}
+```{r}
+#| code-fold: true
+
+summaryPlot(mod_mirt, adj_factor = 2) +
+  theme_bg() 
+```
+:::
+
+:::{.column width="20%"}
+Zusammenfassung verschiedener Plots
+:::
+
+:::
 
 ## Mögliche Punkte
 
 :::{.callout-note}
-Mehr Parameter müsen also nicht immer auch besser sein. Gerade im IRT-Kontext können komplexere Modelle schnell an ihre Grenzen kommen und nicht konvergieren. 
+Mehr Parameter müsen nicht immer auch besser sein. Gerade im IRT-Kontext können komplexere Modelle schnell an ihre Grenzen kommen und nicht konvergieren. 
 :::
 
 Bei Modellwahl zu beachten:
+
 - [Gewichtung]{.highlight} der Items
 - Antwort[skala]{.highlight}
 - [Simulation]{.highlight}/Modell[fit]{.highlight}
 - [Ziel]{.highlight}
-
-## Beurteilung von Fit
-z.B.:
-- lokLikelihood/$\chi^2$
-- AIC, BIC 
-
 
 # Was tun bei polytomen Items?
 
@@ -413,7 +515,7 @@ Ordinale Daten (geordnete Antwortkategorien), z.B.:
 ```{r}
 #| echo: false
 
-plot_pcm(delta = c(-0.29, 0.95)) 
+plot_pcm(delta = c(-0.29, 0.95))
 ```
 
 
@@ -454,8 +556,8 @@ Wichtig:$\beta_{i\color{#9B1B34}{j}}$ ist jetzt der [Schwellenparameter]{.highli
 theta_vals <- seq(-3, 3, length.out = 100)
 
 # Schwellenwerte für beide Items
-delta_1 <- c(-0.29, 0.95)  # Schwellen für Item 1
-delta_2 <- c(-0.5, 0.78)   # Schwellen für Item 2
+delta_1 <- c(-0.29, 0.95) # Schwellen für Item 1
+delta_2 <- c(-0.5, 0.78) # Schwellen für Item 2
 
 # Berechne E_score für verschiedene Theta-Werte
 results <- compute_E_score(theta_vals, delta_1, delta_2)
@@ -463,11 +565,12 @@ results <- compute_E_score(theta_vals, delta_1, delta_2)
 # Plotten mit ggplot2
 ggplot(results, aes(x = theta, y = E_score)) +
   geom_line(color = "#9B1B34", size = 1) +
-  labs(title = "Erwarteter Score als Funktion von Theta",
-       x = "Theta", 
-       y = "Erwarteter Score") +
-   theme_bg()
-
+  labs(
+    title = "Erwarteter Score als Funktion von Theta",
+    x = "Theta",
+    y = "Erwarteter Score"
+  ) +
+  theme_bg()
 ```
 
 ## Übung

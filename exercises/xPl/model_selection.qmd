@@ -138,6 +138,8 @@ plot_infit_outfit(sim_dat_1PL)
 Hier können wir schön sehen, dass der Fit schon deutlich abnimmt, wenn wir die Steigung ignorieren (die wir ja bewusst simuliert haben). 
 :::
 
+
+
 ## 3PL
 Fitte jetzt ein 3PL Modell. Nimm für die simulierten Daten eine 50 % Chance an, das Item durch raten zu lösen. 
 
@@ -177,4 +179,14 @@ itemfitPlot(sim_dat_3PL)
 tracePlot(sim_dat_3PL)
 ```
 
+## Modellvergleich
+Nutze jetzt die Funktion `CMD::IRT.compareModels()` um das 1PL und das 2PL Modell zu vergleichen. Für welches Modell würdest du dich aufgrund der Fit-Kriterien entscheiden?
 
+:::{.callout-caution collapse="true"}
+
+```{r}
+CDM::IRT.compareModels(sim_dat_1PL, sim_dat_2PL)
+```
+
+In diesem Fall scheint das 2PL Modell besser zu sein, da beispielsweise AIC und BIC niedriger sind. Der Unterschied zwischen den Modellen ist laut Likelihood Ratio Test signifikant. Insgesamt würden wir uns also für das 2PL Modell entscheiden. 
+::: 
