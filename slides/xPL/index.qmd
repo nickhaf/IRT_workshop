@@ -330,7 +330,14 @@ plot(mod_2pl,
   observed = TRUE,
   package = "graphics")
 )
+
 ```
+
+## Itemfit
+
+:::{.callout-important}
+Achtung! Die grafische Überprüfung ist stark von der Binwidth abhängig, die man wählt. 
+:::
 
 ## Infit/Outfit
 

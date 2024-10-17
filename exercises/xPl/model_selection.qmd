@@ -62,6 +62,12 @@ plot(sim_dat_2PL,
   package = "graphics"
 )
 
+
+plot(sim_dat_2PL,
+  type = "expected",
+  export = FALSE,
+  observed = TRUE,
+  package = "graphics")
 ```
 
 ::: 

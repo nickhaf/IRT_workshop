@@ -205,7 +205,7 @@ Wir können jetzt noch ein Item hinzufügen, dass überhaupt nicht der 2PL Gleic
 ## Item wird von hohen Theta falsch beantwortet und von niedrigem Theta richtig
 
 sim_dat <- sim_dat %>%
-  mutate(p = ifelse(item_id == 3, ifelse(theta > 1, 0.05, 0.8), p))
+  mutate(p = ifelse(item_id == 3, ifelse(theta < -1.5, 0.95, 0.05), p))
 
 ```
 
