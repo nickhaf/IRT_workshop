@@ -344,7 +344,6 @@ group_1_2PL <- tam.mml.2pl(group_1$resp, irtmodel = "2PL", verbose = FALSE)
 
 ## Extrahieren der Itemparameter
 itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
-colnames(itempars_2) <- c("alpha_2", "beta_2")
 itempars_1
 ```
 
