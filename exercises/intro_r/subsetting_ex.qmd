@@ -28,7 +28,7 @@ psych_stats <- read.csv(
 ```
 :::
 
-## 1. Frage
+## Übung
 
 Korrigiere den folgenden Code, sodass nur die ersten 10 Zeilen und die letzten 3 Spalten ausgewählt werden. 
 
@@ -49,7 +49,7 @@ characters[1:10, 4:6]
 ```
 :::
 
-## 2. Frage
+## Übung
 
 1.  Warum funktioniert der folgende Code nicht? Korrigiere ihn in deinem eigenen Skript. 
 ```{r, eval = FALSE}
@@ -58,9 +58,7 @@ characters[uni_name == "Friends", ]
 
 ::: {.callout-tip collapse="true"}
 ## Tipp
-
-
-You need to extract the column from the data frame with `$` before you can compare it to the string.
+Du musst die Spalte aus dem `data.frame` mit `$` extrahieren, bevor du sie mit dem Character-String vergleichen kannst.
 :::
 
 ::: {.callout-caution collapse="true"}
@@ -71,31 +69,30 @@ characters[characters$uni_name == "Friends", ]
 ```
 :::
 
-2.  Which characters will this code extract: `characters[(characters$uni_name == "Harry Potter" | characters$uni_name != "Harry Potter") & !(characters$notability > 90), ]`?
-    -   [ ] All Harry Potter characters with a notability over `90`.
-    -   [ ] All characters that are not from the Harry Potter universe and have a notability under 90.
-    -   [ ] All characters with a notability over `90`.
-    -   [ ] All characters with a notability under `90`.
-
+2.  Welche Charactere wird dieser Code extrahieren: `characters[(characters$uni_name == "Harry Potter" | characters$uni_name != "Harry Potter") & !(characters$notability > 90), ]`?
+    -   [ ] Alle Harry Potter Character mit einer notability über `90`.
+    -   [ ] Alle Charactere, die nicht aus dem Harry Potter Universum stammen und eine notability unter `90` haben.
+    -   [ ] Alle Charactere mit einer notability über `90`.
+    -   [ ] Alle Charactere mit einer notability unter `90`.
+    
 ::: {.callout-caution collapse="true"}
 ## Lösung
 
--   [ ] All Harry Potter characters with a notability over `90`.
--   [ ] All characters that are not from the Harry Potter universe and have a notability under 90.
--   [ ] All characters with a notability over `90`.
--   [x] All characters with a notability under `90`.
-
-Kind of a trick question: because we select all characters that are from the Harry Potter universe OR are not from there, we select all characters independent of their TV show. But we select all characters that have notability under 90 (beware of the `!` in front of the respective comparison).
+-   [ ] Alle Harry Potter Character mit einer notability über `90`.
+-   [ ] Alle Charactere, die nicht aus dem Harry Potter Universum stammen und eine notability unter `90` haben.
+-   [ ] Alle Charactere mit einer notability über `90`.
+-   [x] Alle Charactere mit einer notability unter `90`.
+    
+Bisschen eine Trick-Frage: weil wir alle Charactere auswählen, die aus dem Harry Potter Universum ODER nicht von dort stammen, wählen wir alle Charactere unabhängig von ihrer TV-Serie aus. Aber wir wählen alle Charactere aus, die eine Notability unter 90 haben (Vorsicht vor dem `!` vor dem jeweiligen Vergleich).
 :::
 
 ## Exercise 3
 
-1.  Which character(s) from "Game of Thrones" has a notability rating over `90`? Use `Base R`.
+1. Welche Charactere aus "Game of Thrones" haben eine Notability über `90`? Benutze `Base R`.
 
 ::: {.callout-tip collapse="true"}
-## Hint
-
-You need to define a logical vector which contains `TRUE` values for all "Game of Thrones" characters that have a notability over `90`.
+## Tipp
+Du musst einen logischen Vektor definieren, der `TRUE` Werte für alle "Game of Thrones" Charactere enthält, die eine Notability über `90` haben.
 :::
 
 ::: {.callout-caution collapse="true"}
@@ -104,17 +101,16 @@ You need to define a logical vector which contains `TRUE` values for all "Game o
 ```{r}
 characters[characters$uni_name == "Game of Thrones" & characters$notability > 90, ]
 ```
-That's only Tyrion Lannister.
-
+Nur Tyrion Lannister hat eine Notability über `90`.
 :::
 
 
-2.  Which characters from "How I Met Your Mother" or "Breaking Bad" are included in the data? Use the `tidyverse`.
+2.  Welche Charactere aus "How I Met Your Mother" oder "Breaking Bad" sind in den Daten enthalten? Benutze das `tidyverse`.
 
 ::: {.callout-tip collapse="true"}
-## Hint
+## Tipp
 
-Use the `filter()` function.
+Nutze die `filter()` Funktion.
 :::
 
 ::: {.callout-caution collapse="true"}
