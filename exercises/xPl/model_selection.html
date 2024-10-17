@@ -367,19 +367,20 @@ Lösung
 <span>  observed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  package <span class="op">=</span> <span class="st">"graphics"</span></span>
 <span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in log((PersonScores + 0.5)/(PersonMax - PersonScores + 1)): NaNs
+produced</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Iteration in WLE/MLE estimation  1   | Maximal change  2.2568 
-Iteration in WLE/MLE estimation  2   | Maximal change  0.6867 
-Iteration in WLE/MLE estimation  3   | Maximal change  0.3037 
-Iteration in WLE/MLE estimation  4   | Maximal change  0.1007 
-Iteration in WLE/MLE estimation  5   | Maximal change  0.0286 
-Iteration in WLE/MLE estimation  6   | Maximal change  0.0077 
-Iteration in WLE/MLE estimation  7   | Maximal change  0.002 
-Iteration in WLE/MLE estimation  8   | Maximal change  5e-04 
-Iteration in WLE/MLE estimation  9   | Maximal change  1e-04 
-Iteration in WLE/MLE estimation  10   | Maximal change  0 
+<pre><code>Iteration in WLE/MLE estimation  1   | Maximal change  2.7244 
+Iteration in WLE/MLE estimation  2   | Maximal change  1.0279 
+Iteration in WLE/MLE estimation  3   | Maximal change  0.3349 
+Iteration in WLE/MLE estimation  4   | Maximal change  0.012 
+Iteration in WLE/MLE estimation  5   | Maximal change  0.0018 
+Iteration in WLE/MLE estimation  6   | Maximal change  3e-04 
+Iteration in WLE/MLE estimation  7   | Maximal change  0 
 ----
- WLE Reliability= 0.593 </code></pre>
+ WLE Reliability= 0.615 </code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -459,6 +460,104 @@ Iteration in WLE/MLE estimation  10   | Maximal change  0
 </figure>
 </div>
 </div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">sim_dat_2PL</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"expected"</span>,</span>
+<span>  export <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  observed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  package <span class="op">=</span> <span class="st">"graphics"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in log((PersonScores + 0.5)/(PersonMax - PersonScores + 1)): NaNs
+produced</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Iteration in WLE/MLE estimation  1   | Maximal change  2.7244 
+Iteration in WLE/MLE estimation  2   | Maximal change  1.0279 
+Iteration in WLE/MLE estimation  3   | Maximal change  0.3349 
+Iteration in WLE/MLE estimation  4   | Maximal change  0.012 
+Iteration in WLE/MLE estimation  5   | Maximal change  0.0018 
+Iteration in WLE/MLE estimation  6   | Maximal change  3e-04 
+Iteration in WLE/MLE estimation  7   | Maximal change  0 
+----
+ WLE Reliability= 0.615 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-14.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-15.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-16.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-17.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-18.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-19.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-20.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-21.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-22.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-23.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-24.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-25.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="model_selection_files/figure-html/unnamed-chunk-4-26.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -479,47 +578,47 @@ Lösung
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.fit.html">tam.fit</a></span><span class="op">(</span><span class="va">sim_dat_2PL</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.fit.html">tam.fit</a></span><span class="op">(</span><span class="va">sim_dat_2PL</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Item fit calculation based on 5 simulations
+<pre><code>Item fit calculation based on 40 simulations
 |**********|
 |----------|</code></pre>
 </div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2PL</span><span class="op">$</span><span class="va">itemfit</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2PL</span><span class="op">$</span><span class="va">itemfit</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   parameter    Outfit    Outfit_t     Outfit_p Outfit_pholm     Infit
-1          1 1.0000839  0.08380758 9.332094e-01 1.000000e+00 1.0000793
-2          2 0.9996118 -0.15484815 8.769410e-01 1.000000e+00 0.9997694
-3          3 0.9992692 -0.22570370 8.214319e-01 1.000000e+00 1.0001232
-4          4 1.0009982  0.29643850 7.668952e-01 1.000000e+00 1.0007398
-5          5 1.0004286  0.13512505 8.925130e-01 1.000000e+00 1.0001263
-6          6 0.9992016 -0.27303735 7.848245e-01 1.000000e+00 1.0008868
-7          7 0.9997768 -0.07489313 9.402997e-01 1.000000e+00 0.9988429
-8          8 1.0093066  2.60025369 9.315487e-03 1.117858e-01 1.0019657
-9          9 1.0034659  0.73361712 4.631821e-01 1.000000e+00 0.9986081
-10        10 0.9982302 -0.27484161 7.834379e-01 1.000000e+00 1.0003460
-11        11 0.9934288 -0.73788191 4.605862e-01 1.000000e+00 1.0024609
-12        12 0.9749416 -1.52827192 1.264450e-01 1.000000e+00 0.9994978
-13        13 0.8711244 -4.71308323 2.439965e-06 3.171954e-05 1.0033277
-       Infit_t   Infit_p Infit_pholm
-1   0.07921886 0.9368585           1
-2  -0.09165345 0.9269734           1
-3   0.03936050 0.9686030           1
-4   0.22011912 0.8257784           1
-5   0.04056239 0.9676448           1
-6   0.30317668 0.7617552           1
-7  -0.38398686 0.7009882           1
-8   0.55104298 0.5816042           1
-9  -0.29536799 0.7677128           1
-10  0.05326678 0.9575193           1
-11  0.24349979 0.8076182           1
-12 -0.02400475 0.9808488           1
-13  0.11715514 0.9067371           1</code></pre>
+<pre><code>   parameter    Outfit    Outfit_t   Outfit_p Outfit_pholm     Infit
+1          1 1.0002608  0.02225897 0.98224138    1.0000000 1.0002215
+2          2 0.9983238 -0.04652100 0.96289500    1.0000000 1.0009655
+3          3 1.2236160  1.98625327 0.04700521    0.6110677 0.9829984
+4          4 1.0000475  0.01129502 0.99098807    1.0000000 1.0039609
+5          5 0.9749986 -0.56215243 0.57401217    1.0000000 0.9988334
+6          6 0.9958246 -0.11445677 0.90887571    1.0000000 0.9981145
+7          7 0.9720874 -0.70744853 0.47928779    1.0000000 0.9962062
+8          8 1.0123678  0.10375860 0.91736092    1.0000000 0.9881376
+9          9 0.9620679 -0.67278237 0.50108575    1.0000000 0.9996628
+10        10 0.9893044 -0.12713611 0.89883267    1.0000000 0.9987846
+11        11 0.9276868 -0.70215610 0.48258182    1.0000000 0.9873472
+12        12 0.9044987 -0.53041486 0.59582433    1.0000000 1.0093978
+13        13 0.6060598 -0.55826067 0.57666640    1.0000000 1.0045086
+        Infit_t   Infit_p Infit_pholm
+1   0.019656568 0.9843173           1
+2   0.036765235 0.9706722           1
+3  -0.144999948 0.8847109           1
+4   0.093944916 0.9251529           1
+5  -0.020532420 0.9836187           1
+6  -0.045319785 0.9638524           1
+7  -0.092868986 0.9260076           1
+8  -0.201506075 0.8403029           1
+9   0.004031571 0.9967833           1
+10  0.012851319 0.9897464           1
+11 -0.038450617 0.9693284           1
+12  0.102247110 0.9185605           1
+13  0.230925133 0.8173730           1</code></pre>
 </div>
 </div>
 <p>Manchmal kann es auch helfen, sich das ganze als Plot ausgeben zu lassen:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Definieren einer eigenen Plot-Funkktion</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Definieren einer eigenen Plot-Funkktion</span></span>
 <span><span class="va">plot_infit_outfit</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">tam_obj</span><span class="op">)</span><span class="op">{</span></span>
 <span><span class="va">fit_tam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.fit.html">tam.fit</a></span><span class="op">(</span><span class="va">tam_obj</span><span class="op">)</span><span class="op">$</span><span class="va">itemfit</span></span>
 <span></span>
@@ -540,7 +639,7 @@ Lösung
 <span></span>
 <span><span class="fu">plot_infit_outfit</span><span class="op">(</span><span class="va">sim_dat_2PL</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>Item fit calculation based on 5 simulations
+<pre><code>Item fit calculation based on 40 simulations
 |**********|
 |----------|</code></pre>
 </div>
@@ -565,7 +664,7 @@ Lösung
 </div>
 <div class="callout-body-container">
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat_1PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">sim_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sub_id</span><span class="op">)</span>, irtmodel <span class="op">=</span> <span class="st">"1PL"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat_1PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">sim_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sub_id</span><span class="op">)</span>, irtmodel <span class="op">=</span> <span class="st">"1PL"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">sim_dat_1PL</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"items"</span>,</span>
@@ -574,18 +673,13 @@ Lösung
 <span>  package <span class="op">=</span> <span class="st">"graphics"</span></span>
 <span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Iteration in WLE/MLE estimation  1   | Maximal change  2.6387 
-Iteration in WLE/MLE estimation  2   | Maximal change  1.1571 
-Iteration in WLE/MLE estimation  3   | Maximal change  0.118 
-Iteration in WLE/MLE estimation  4   | Maximal change  0.0371 
-Iteration in WLE/MLE estimation  5   | Maximal change  0.0132 
-Iteration in WLE/MLE estimation  6   | Maximal change  0.0045 
-Iteration in WLE/MLE estimation  7   | Maximal change  0.0016 
-Iteration in WLE/MLE estimation  8   | Maximal change  5e-04 
-Iteration in WLE/MLE estimation  9   | Maximal change  2e-04 
-Iteration in WLE/MLE estimation  10   | Maximal change  1e-04 
+<pre><code>Iteration in WLE/MLE estimation  1   | Maximal change  1.8167 
+Iteration in WLE/MLE estimation  2   | Maximal change  0.2765 
+Iteration in WLE/MLE estimation  3   | Maximal change  0.0052 
+Iteration in WLE/MLE estimation  4   | Maximal change  5e-04 
+Iteration in WLE/MLE estimation  5   | Maximal change  1e-04 
 ----
- WLE Reliability= 0.599 </code></pre>
+ WLE Reliability= 0.495 </code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -668,11 +762,15 @@ Iteration in WLE/MLE estimation  10   | Maximal change  1e-04
 </div>
 <p>Und die Infit und Outfitwerte, geplottet mit meiner eigenen Funktion (weiter oben definiert):</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_infit_outfit</span><span class="op">(</span><span class="va">sim_dat_1PL</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_infit_outfit</span><span class="op">(</span><span class="va">sim_dat_1PL</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>Item fit calculation based on 5 simulations
+<pre><code>Item fit calculation based on 40 simulations
 |**********|
 |----------|</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -689,7 +787,7 @@ Iteration in WLE/MLE estimation  10   | Maximal change  1e-04
 <span class="header-section-number">1.3</span> 3PL</h2>
 <p>Fitte jetzt ein 3PL Modell. Nimm für die simulierten Daten eine 50 % Chance an, das Item durch raten zu lösen.</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Probably just instable because the data is wrong?</span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Probably just instable because the data is wrong?</span></span>
 <span></span>
 <span><span class="va">sim_dat_3PL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.3pl.html">tam.mml.3pl</a></span><span class="op">(</span><span class="va">sim_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sub_id</span><span class="op">)</span>, </span>
 <span>                           verbose <span class="op">=</span> <span class="cn">FALSE</span>, guess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span></span>
@@ -730,19 +828,19 @@ Iteration in WLE/MLE estimation  10   | Maximal change  1e-04
 </div>
 <div class="callout-body-container">
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">CDM</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/CDM/man/IRT.compareModels.html">IRT.compareModels</a></span><span class="op">(</span><span class="va">sim_dat_1PL</span>, <span class="va">sim_dat_2PL</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">CDM</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/CDM/man/IRT.compareModels.html">IRT.compareModels</a></span><span class="op">(</span><span class="va">sim_dat_1PL</span>, <span class="va">sim_dat_2PL</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$IC
-        Model   loglike Deviance Npars  Nobs     AIC     BIC    AIC3    AICc
-1 sim_dat_1PL -623571.7  1247143    14 1e+05 1247171 1247305 1247185 1247171
-2 sim_dat_2PL -609848.5  1219697    26 1e+05 1219749 1219996 1219775 1219749
-     CAIC       GHP
-1 1247319 0.4796813
-2 1220022 0.4691342
+        Model   loglike Deviance Npars Nobs      AIC      BIC     AIC3     AICc
+1 sim_dat_1PL -3042.583 6085.166    14  500 6113.166 6172.170 6127.166 6114.032
+2 sim_dat_2PL -2917.823 5835.646    26  500 5887.646 5997.226 5913.646 5890.614
+      CAIC       GHP
+1 6186.170 0.4702435
+2 6023.226 0.4528958
 
 $LRtest
-       Model1      Model2     Chi2 df p
-1 sim_dat_1PL sim_dat_2PL 27446.35 12 0
+       Model1      Model2   Chi2 df p
+1 sim_dat_1PL sim_dat_2PL 249.52 12 0
 
 attr(,"class")
 [1] "IRT.compareModels"</code></pre>
