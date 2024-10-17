@@ -265,9 +265,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">
 <li class="sidebar-item">
+ <span class="menu-text">./exercises/glm/glm.qmd</span>
+  </li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../exercises/index_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation zur Stichprobenplanung</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/glm/glm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+  <a href="../../exercises/simulation/power_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stichprobenplanung durch Simulation</span></a>
   </div>
 </li>
       </ul>
@@ -282,9 +296,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul>
-<li><a href="#exercise-1" id="toc-exercise-1" class="nav-link active" data-scroll-target="#exercise-1"><span class="header-section-number">1</span> Exercise 1</a></li>
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="header-section-number">2</span> Exercise 2</a></li>
-  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3"><span class="header-section-number">3</span> Exercise 3</a></li>
+<li><a href="#%C3%BCbung" id="toc-übung" class="nav-link active" data-scroll-target="#%C3%BCbung"><span class="header-section-number">1</span> Übung</a></li>
+  <li><a href="#%C3%BCbung-1" id="toc-übung-1" class="nav-link" data-scroll-target="#%C3%BCbung-1"><span class="header-section-number">2</span> Übung</a></li>
+  <li><a href="#%C3%BCbung-2" id="toc-übung-2" class="nav-link" data-scroll-target="#%C3%BCbung-2"><span class="header-section-number">3</span> Übung</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -316,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Previous code
+Vorheriger Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -339,13 +353,13 @@ Previous code
 </div>
 </div>
 </div>
-<section id="exercise-1" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="exercise-1">
-<span class="header-section-number">1</span> Exercise 1</h2>
-<p>Take a look at the data frame <code>psych_stats</code>. Which format does it have?</p>
+<section id="übung" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="übung">
+<span class="header-section-number">1</span> Übung</h2>
+<p>Schaue dir den <code>psych_stats</code> Datensatz an. Welches Format hat er?</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Wide format</label></li>
 <li><label><input type="checkbox">Long format</label></li>
-<li><label><input type="checkbox">None of the above</label></li>
+<li><label><input type="checkbox">Keins davon</label></li>
 </ul>
 <div class="callout callout-style-simple callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -362,15 +376,15 @@ Lösung
 <ul class="task-list">
 <li><label><input type="checkbox" checked="">Wide format</label></li>
 <li><label><input type="checkbox">Long format</label></li>
-<li><label><input type="checkbox">None of the above</label></li>
+<li><label><input type="checkbox">Keins davon</label></li>
 </ul>
-<p>Each unit of observation, in this case each character, only has one row.</p>
+<p>Jede Beobachtungseinheit, in diesem Fall jeder Charakter, hat nur eine Zeile.</p>
 </div>
 </div>
 </div>
-</section><section id="exercise-2" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="exercise-2">
-<span class="header-section-number">2</span> Exercise 2</h2>
-<p>Reshape it, so there are only three columns in the data set: <code>char_id</code>, <code>question</code> and <code>rating</code>.</p>
+</section><section id="übung-1" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="übung-1">
+<span class="header-section-number">2</span> Übung</h2>
+<p>Reshape den Datensatz, sodass es nur noch drei Spalten gibt: <code>char_id</code>, <code>question</code> und <code>rating</code>.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -383,7 +397,7 @@ Hint
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>You can select multiple columns like this: <code>column_1:column_10</code>.</p>
+<p>Du kannst mehrere Spalten auf einmal so auswählen: <code>column_1:column_10</code>.</p>
 </div>
 </div>
 </div>
@@ -418,13 +432,13 @@ Lösung
 6 F2      scheduled_spontaneous           6.60</code></pre>
 </div>
 </div>
-<p>Now we have multiple rows for every character, but all question ratings are nicely aligned in one column.</p>
+<p>Jetzt haben wir mehrere Zeilen für jeden Charakter, aber alle Ratings sind schön ordentlich in einer Spalte eingetragen.</p>
 </div>
 </div>
 </div>
-</section><section id="exercise-3" class="level2" data-number="3"><h2 data-number="3" class="anchored" data-anchor-id="exercise-3">
-<span class="header-section-number">3</span> Exercise 3</h2>
-<p>Try to reshape the data into long format again.</p>
+</section><section id="übung-2" class="level2" data-number="3"><h2 data-number="3" class="anchored" data-anchor-id="übung-2">
+<span class="header-section-number">3</span> Übung</h2>
+<p>Versuche jetzt, den Datensatz wieder in das wide Format zu bringen.</p>
 <div class="callout callout-style-simple callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -465,7 +479,7 @@ Lösung
 #   precise_vague &lt;dbl&gt;, bad.cook_good.cook &lt;dbl&gt;, manicured_scruffy &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<p>This is how we got it! But scratch that, it was just for the sake of the exercise. We want to use <code>psych_stats</code> in the long format from now on.</p>
+<p>So haben wir angefangen!</p>
 </div>
 </div>
 </div>

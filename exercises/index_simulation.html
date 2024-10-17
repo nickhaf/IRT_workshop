@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Nicklas Hafiz">
 
-<title>Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells – IRT</title>
+<title>Höher parametrisierte Modelle – IRT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,23 +23,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../exercises/index_glm.html" rel="prev">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../exercises/simulation/power_simulation.html" rel="next">
+<link href="../exercises/index_glm.html" rel="prev">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,7 +70,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Suchen"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -79,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">IRT</span>
     </a>
   </div>
@@ -90,11 +150,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../slides/index.html"> 
+    <a class="nav-link" href="../slides/index.html"> 
 <span class="menu-text">Folien</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../exercises/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../exercises/index.html" aria-current="page"> 
 <span class="menu-text">Übungen</span></a>
   </li>  
 </ul>
@@ -108,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_glm.html">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</a></li><li class="breadcrumb-item"><a href="../../exercises/glm/glm.html">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../exercises/index_simulation.html">Simulation zur Stichprobenplanung</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -130,7 +190,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../exercises/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Übungen</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -139,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../exercises/index_intro_r.html" class="sidebar-item-text sidebar-link">
+            <a href="../exercises/index_intro_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Einführung in R</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -148,31 +208,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/intro_r/load_data_ex.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/intro_r/load_data_ex.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Einlesen von Daten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/intro_r/subsetting_ex.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/intro_r/subsetting_ex.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Subsetting</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/intro_r/missings_ex.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/intro_r/missings_ex.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Missings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/intro_r/reshaping_ex.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/intro_r/reshaping_ex.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reshaping</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/intro_r/merging_ex.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/intro_r/merging_ex.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Merging</span></a>
   </div>
 </li>
@@ -180,7 +240,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../exercises/index_linking.html" class="sidebar-item-text sidebar-link">
+            <a href="../exercises/index_linking.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Linking</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -189,19 +249,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/linking/data.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/linking/data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Die Daten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/linking/linking.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/linking/linking.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2. Linking</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/linking/dif.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/linking/dif.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Differential Item Functioning</span></a>
   </div>
 </li>
@@ -209,7 +269,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../exercises/index_xPL.html" class="sidebar-item-text sidebar-link">
+            <a href="../exercises/index_xPL.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Höher parametrisierte Modelle</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -218,19 +278,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/xPl/simulation.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/xPl/simulation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulation von IRT Daten</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/xPl/model_selection.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/xPl/model_selection.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Modellselektion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/xPl/pcm.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/xPl/pcm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Partial Credit Model</span></a>
   </div>
 </li>
@@ -238,17 +298,31 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../exercises/index_glm.html" class="sidebar-item-text sidebar-link">
+            <a href="../exercises/index_glm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+ <span class="menu-text">./exercises/glm/glm.qmd</span>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../exercises/index_simulation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Simulation zur Stichprobenplanung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/glm/glm.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+  <a href="../exercises/simulation/power_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stichprobenplanung durch Simulation</span></a>
   </div>
 </li>
       </ul>
@@ -260,37 +334,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Auf dieser Seite</h2>
-   
-  <ul>
-  <li><a href="#simulation" id="toc-simulation" class="nav-link active" data-scroll-target="#simulation"><span class="header-section-number">1</span> 1) Simulation</a>
-  <ul class="collapse">
-  <li><a href="#level-1-gleichung" id="toc-level-1-gleichung" class="nav-link" data-scroll-target="#level-1-gleichung"><span class="header-section-number">1.1</span> 1.1) Level 1 Gleichung</a></li>
-  <li><a href="#level-2-gleichung" id="toc-level-2-gleichung" class="nav-link" data-scroll-target="#level-2-gleichung"><span class="header-section-number">1.2</span> 1.2) Level 2 Gleichung</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_glm.html">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</a></li><li class="breadcrumb-item"><a href="../../exercises/glm/glm.html">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../exercises/index_simulation.html">Simulation zur Stichprobenplanung</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</h1>
+<h1 class="title">Höher parametrisierte Modelle</h1>
+<p class="subtitle lead">Übungen</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor:in</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nicklas Hafiz </p>
-          </div>
-  </div>
     
   
     
@@ -301,36 +360,56 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="simulation" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="simulation"><span class="header-section-number">1</span> 1) Simulation</h2>
-<p>Ziel dieser übung ist es, Daten für ein einfachs Raschmodell zu simulieren. Warum? Weil wir so die Datengenerierenden Prozesse besser verstehen können. Also, let’s get started.</p>
-<section id="level-1-gleichung" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="level-1-gleichung"><span class="header-section-number">1.1</span> 1.1) Level 1 Gleichung</h3>
-<div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Hint
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Use</p>
-</div>
-</div>
-</div>
-</section>
-<section id="level-2-gleichung" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="level-2-gleichung"><span class="header-section-number">1.2</span> 1.2) Level 2 Gleichung</h3>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Sortieren nach" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Sortieren nach</option>
+       <option value="index" data-direction="asc">Voreinstellung</option>
+         <option value="listing-title-sort" data-direction="asc">
+          Titel
+        </option>
+         <option value="listing-author" data-direction="asc">
+          Autor:in
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Titel</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Autor:in</a>
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-listing-file-modified-sort="1729188958082" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632" data-listing-title-sort="Stichprobenplanung durch Simulation" data-listing-filename-sort="power_simulation.qmd">
+<td>
+<a href="../exercises/simulation/power_simulation.html" class="title listing-title">Stichprobenplanung durch Simulation</a>
+</td>
+<td>
+<span class="listing-author">&nbsp;</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="listing-no-matching d-none">
+Keine Treffer
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -753,11 +832,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../exercises/index_glm.html" class="pagination-link" aria-label="Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells">
+      <a href="../exercises/index_glm.html" class="pagination-link" aria-label="Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../exercises/simulation/power_simulation.html" class="pagination-link" aria-label="Stichprobenplanung durch Simulation">
+        <span class="nav-page-text">Stichprobenplanung durch Simulation</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

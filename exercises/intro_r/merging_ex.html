@@ -265,9 +265,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">
 <li class="sidebar-item">
+ <span class="menu-text">./exercises/glm/glm.qmd</span>
+  </li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../exercises/index_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation zur Stichprobenplanung</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exercises/glm/glm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+  <a href="../../exercises/simulation/power_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stichprobenplanung durch Simulation</span></a>
   </div>
 </li>
       </ul>
@@ -285,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>
 <a href="#merging" id="toc-merging" class="nav-link active" data-scroll-target="#merging"><span class="header-section-number">1</span> Merging</a>
   <ul class="collapse">
-<li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="header-section-number">1.1</span> Exercise 1</a></li>
+<li><a href="#%C3%BCbung" id="toc-übung" class="nav-link" data-scroll-target="#%C3%BCbung"><span class="header-section-number">1.1</span> Übung</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -321,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Previous code
+Vorheriger Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -370,23 +384,23 @@ Previous code
 </div>
 </div>
 </div>
-<p>Now we have gotten to know our <code>characters</code> data set a bit more. However, the personality ratings are not included yet. For that, we need to combine it with the <code>psych_stats</code> data set.</p>
-<section id="exercise-1" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="exercise-1">
-<span class="header-section-number">1.1</span> Exercise 1</h2>
-<p>Merge the <code>characters</code> data frame and the <code>psych_stats</code> data frame on a common column.</p>
+<p>Jetzt haben wir unseren <code>characters</code> Datensatz ein bisschen genauer kennen gelernt. Die Persönlichkeitsratings sind allerdings noch nicht enthalten. Dafür müssen wir ihn mit dem <code>psych_stats</code> Datensatz kombinieren.</p>
+<section id="übung" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="übung">
+<span class="header-section-number">1.1</span> Übung</h2>
+<p>Merge den <code>characters</code> <code>data.frame</code> und den <code>psych_stats</code> <code>data.frame</code> anhand einer gemeinsamen Spalte.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hint
+Tipp
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Identify the common columns. Are they named the same in both data frames? Look at the documentation of <code><a href="https://rdrr.io/r/base/merge.html">?merge</a></code> to see, how you can merge data frames that don’t have identically named columns.</p>
+<p>Identifiziere die gemeinsame Spalte. Haben sie in beiden Datensätzen den gleichen Namen? Schaue dir die Dokumentation von <code><a href="https://rdrr.io/r/base/merge.html">?merge</a></code> an um zu sehen, wie man <code>data.frames</code> mergen kann, die keinen gemeinsamen Spaltennamen haben.</p>
 </div>
 </div>
 </div>
@@ -402,7 +416,7 @@ Lösung
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>First, let’s take a look at both data sets again:</p>
+<p>Als erstes schauen wir uns noch einmal beide Datensätze an:</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">characters</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -423,7 +437,7 @@ Lösung
  $ rating  : num [1:323596] 95.7 95.2 6.1 6.2 6.4 ...</code></pre>
 </div>
 </div>
-<p>It seems like both data frames have a column containing an ID for the character. We can use that column for merging:</p>
+<p>Es sieht so aus, also ob beide <code>data.frames</code> eine Spalte enhalten, in der die ID für den jeweiligen Film-Charakater gespeichert ist. Wir können diese Spalte für das Mergen verwenden:</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">characters_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">characters</span>,</span>
@@ -446,7 +460,6 @@ Lösung
  $ rating    : num  68.6 73.3 10.8 22.2 45.1 16.2 86.3 74.7 15.4 36.2 ...</code></pre>
 </div>
 </div>
-<p>Worked like a charm!</p>
 </div>
 </div>
 </div>
