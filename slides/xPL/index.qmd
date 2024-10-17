@@ -371,6 +371,12 @@ Wie gut stimmen die Antwortmuster der Personen mit dem Modell überein?
 
 ## Infit Outfit
 ```{r}
+#| echo: false
+library(ggpubr)
+
+```
+
+```{r}
 #| code-fold: true
 
 p_fit <- tam.personfit(mod_2pl) %>%
