@@ -13,3 +13,4 @@ listing:
 format: html
 ---
 
+In dieser Übungsreihe werden die Grundlagen der Arbeit mit R wiederholt und trainiert.
