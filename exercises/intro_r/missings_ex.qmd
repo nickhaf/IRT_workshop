@@ -10,7 +10,7 @@ format: html
 
 # Missings
 ::: {.callout-caution icon="false" collapse="true"}
-## Previous code
+## Vorheriger Code
 
 ```{r, message = FALSE}
 # install.packages("tidyverse")
