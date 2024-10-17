@@ -647,6 +647,11 @@ Sehr ähnlich, nur dass wir hier die Item Characteristic Curves verwenden.
 
 In beiden Fällen wird die Gleichung so optimiert, dass die Linkingkonstanten $x$ und $y$ so bestimmt werden, dass der Unterschied zwischen den Test/Item Characteristic Curves der Referenz- und Fokusgruppe minimiert wird. 
 
+## Linkingfehler
+Nur damit ihr es schon einmal gehört habt, wir werden später noch etwas mehr dazu lernen:
+Die beim Linking geschätzten Mittelwerte und Standardfehler von $\theta$ hängen zum Teil von der Wahl der Ankeritems ab. Wenn wir andere Items zum Linken verwenden würden, würden wir aufgrund von zufälliger Variation auch teils andere Fähigkeitsschätzer bekommen. Das wird als [Linkingfehler]{.highlight} bezeichnet.  
+Das wird später vor allem für die Berechnung von Standardfehlern bei Trendvergleichen relevant. 
+
 ## Übung
 Löse die [Übungsaufgaben zum Linking](https://nickhaf.github.io/IRT_workshop/exercises/linking/linking.html). 
 
