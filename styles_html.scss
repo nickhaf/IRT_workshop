@@ -1,7 +1,7 @@
 /*-- scss:defaults --*/
 
 $theme-darkblue: #01364C;
-$theme-blue: #99D9DD;
+$theme-blue: #00e0e0;
 $theme-white: #E1E8EB;
 $theme-yellow: #F4BA02;
 $theme-brown: #472120;
@@ -19,7 +19,7 @@ $theme-codeblock: $theme_darkblue;
 
 $code-block-border-color: lighten($body-bg, 70%);
 $code-block-bg: $theme-codeblock;
-$code-color: $theme-highlight;
+$code-color: $theme-red;
 
 $navbar-bg: $theme-darkblue;
 
