@@ -62,8 +62,8 @@ Befülle sie nun mit  @eq-2PL. `alpha`, `theta` und `beta` sind hier also die Fu
 :::{.callout-caution collapse=true}
 ## Lösung
 ```{r}
-calc_2pl <- function(a, theta, xi){
-  p <- (exp(a*(theta - xi)))/(1 + exp(a*(theta - xi))) 
+calc_2pl <- function(a, theta, b){
+  p <- (exp(a*(theta - b)))/(1 + exp(a*(theta - b))) 
   return(p) 
 }
 ```
@@ -126,11 +126,11 @@ Wir können zufällige Daten aus einer Normalverteilung mit Hilfe der Funktion `
 set.seed(666) 
 ## Ich setzte hier einen Seed, damit meine zufällig erzeugten Werte replizierbar bleiben.
 ## Wenn du den Seed in deinem Skript auf die gleiche Zahl setzt, bekommst du genau die gleichen Zufallswerte und kannst besser vergleichen. 
-
+n_subj <- 500
 
 subjects <- data.frame(
-    sub_id = 1:100000,
-    theta = c(rnorm(100000, 0, 1))
+    sub_id = 1:n_subj,
+    theta = c(rnorm(n_subj, 0, 1))
 )
 ```
 
@@ -192,6 +192,27 @@ head(sim_dat)
 Auf den ersten Blick sieht das schonmal gut aus. Personen mit niedrigerem $\theta$ Wert haben auch eine geringere Wahrscheinlichkeit, das Item richtig zu beantworten (vgl. z.B. Zeile 2 und 3).
 :::
 
+## Ein zufälliges Item simulieren
+Wir können jetzt noch ein Item hinzufügen, dass überhaupt nicht der 2PL Gleichung folgt. Dafür überschreiben wir die answer-Werte von einem Item (z.B. Item 10) einfach mit zufälligen Werten:
+
+```{r}
+
+## Random theta Werte, unabhängig von Schwierigkeit
+# sim_dat <- sim_dat %>%
+#   mutate(p = ifelse(item_id == 10, exp(sin(a*(theta - b)))/(1 + exp(sin(a*(theta - b)))), p)) 
+#   
+
+## Item wird von hohen Theta falsch beantwortet und von niedrigem Theta richtig
+
+sim_dat <- sim_dat %>%
+  mutate(p = ifelse(item_id == 3, ifelse(theta > 1, 0.05, 0.8), p))
+
+```
+
+Item 10 wird also unabhängig von der Fähigkeit der Person einfach zufällig 50/50 beantwortet. Wir können später mal schauen, ob das Item auffällig wird. 
+
+
+
 5. Jetzt sind wir auch schon fast am Ende. Wir müssen lediglich aus den Wahrscheinlichkeiten die tatsächlichen Antworten der Personen simulieren. Nutze die Berechneten Antwortwahrscheinlichkeiten `p`, um für jede Person und jedes Item einen Wert aus einer [Bernoulliverteilung](https://de.wikipedia.org/wiki/Bernoulli-Verteilung) zu ziehen. 
 
 :::{.callout-tip collapse=true}
@@ -213,6 +234,9 @@ head(sim_dat)
 Auch das sieht erst einmal plausibel aus! Toll!
 
 :::
+
+
+
 
 ### Check mit `TAM`
 
@@ -299,13 +323,13 @@ ggplot(data=item_comparison,
 
 ```
 
-Das sieht super aus, die Werte stimmen gut überein. Dadurch, dass wir so viele Personen simuliert haben, sehen wir also, dass unsere Simulation gut funktioniert. Wir können das Gerüst dieses Simplen Modells jetzt nutzen, um uns noch spannendere Fragestellungen anzuschauen. Zum Beispiel könnten wir untersuchen, ab welcher Stichprobengröße unser Modell genau genug schätzt, oder wir könnten verschiedene Modelle miteinander vergleichen (Rasch vs. 2PL z.B.). Beides kann uns bei der Studienplanung helfen. 
+Das sieht super aus, die Werte stimmen gut überein (natürlich mit Ausnahme von unserem Missspezifiziertem Item 10). Dadurch, dass wir so viele Personen simuliert haben, sehen wir also, dass unsere Simulation gut funktioniert. Wir können das Gerüst dieses Simplen Modells jetzt nutzen, um uns noch spannendere Fragestellungen anzuschauen. Zum Beispiel könnten wir untersuchen, ab welcher Stichprobengröße unser Modell genau genug schätzt, oder wir könnten verschiedene Modelle miteinander vergleichen (Rasch vs. 2PL z.B.). Beides kann uns bei der Studienplanung helfen. 
 
 :::
 
 
 ## SimIRT
-Übringes: es gibt natürlich auch schon R Pakete, die die Simulationsarbeit für uns übernehmen. Aus didaktischen Gründen haben wir das bisher selber gemacht, aber können uns jetzt ein bisschen Arbeit ersparen, und das ganze von dem Paket `catIrt` übernehmen lassen. Hier nochmal die gleiche Simulation, aber mit 
+Übringes: es gibt natürlich auch schon R Pakete, die die Simulationsarbeit für uns übernehmen. Aus didaktischen Gründen haben wir das bisher selber gemacht, aber können uns jetzt ein bisschen Arbeit ersparen, und das ganze von dem Paket `catIrt` übernehmen lassen. Hier nochmal die gleiche Simulation, aber mit `simIrt` (ohne Misspezifizierung von Item 10, wir könnten es aber natürlich genauso überschreiben):
 
 ```{r}
 #| output: false 
@@ -313,15 +337,14 @@ Das sieht super aus, die Werte stimmen gut überein. Dadurch, dass wir so viele 
 library(catIrt)
 
 group_1 <- simIrt(theta = rnorm(100000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
-group_2 <- simIrt(theta = rnorm(100000, 0, 1.5), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
+
 
 ## Kalibrieren der beiden Gruppen getrennt
-group_1_2PL <- tam.mml.2pl(group_1$resp, irtmodel = "2PL")
-group_2_2PL <- tam.mml.2pl(group_2$resp, irtmodel = "2PL")
+group_1_2PL <- tam.mml.2pl(group_1$resp, irtmodel = "2PL", verbose = FALSE)
 
 ## Extrahieren der Itemparameter
 itempars_1 <- as.data.frame(apply(group_1_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
-itempars_2 <- as.data.frame(apply(group_2_2PL$item_irt[, c("alpha", "beta")], 2, round, 2))
 colnames(itempars_2) <- c("alpha_2", "beta_2")
+itempars_1
 ```
 
