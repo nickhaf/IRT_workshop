@@ -1422,6 +1422,25 @@
       ],
       "Hash": "ab2ca7d6bd706ed218d096b7b16d7233"
     },
+    "ggmirt": {
+      "Package": "ggmirt",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "ggmirt",
+      "RemoteUsername": "masurp",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "4cfa1069f12409e0d8420ec67468a7f32351d0b3",
+      "Requirements": [
+        "dplyr",
+        "ggplot2",
+        "magrittr",
+        "mirt",
+        "tidyr"
+      ],
+      "Hash": "4ca13b8136f09920be935de947e1a6f5"
+    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.5.1",
