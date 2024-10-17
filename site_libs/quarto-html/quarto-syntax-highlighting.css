@@ -19,7 +19,7 @@
   --quarto-hl-fu-color: #F4BA02;
   --quarto-hl-im-color: #abe338;
   --quarto-hl-in-color: #d4d0ab;
-  --quarto-hl-kw-color: #ffa07a;
+  --quarto-hl-kw-color: #9B1B34;
   --quarto-hl-op-color: #F4BA02;
   --quarto-hl-ot-color: #00e0e0;
   --quarto-hl-pp-color: #dcc6e0;
@@ -121,7 +121,7 @@ code span.in {
 
 code span.kw {
   font-weight: bold;
-  color: #ffa07a;
+  color: #9B1B34;
 }
 
 pre > code.sourceCode > span {
