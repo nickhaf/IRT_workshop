@@ -266,6 +266,10 @@ Geht zur [Übung](https://nickhaf.github.io/IRT_workshop/exercises//xPl/simulati
 - Itemfit
 - Personenfit
 
+::: aside
+Siehe auch [dieses Tutorial](https://philippmasur.de/2022/05/13/how-to-run-irt-analyses-in-r/). 
+:::
+
 # Gesamten Modellfit
 
 Es gibt verschiedene Fit-Statistiken, die uns bei Aussagen über den Modellfit helfen, z.B.:
@@ -395,36 +399,58 @@ mod_mirt <- mirt(data.sim.rasch, 1, itemtype = "2PL", verbose = FALSE)
 ## Item Person Map
 Ist die Fähigkeitsrange durch die Items gut Abgedeckt?
 ```{r}
-itempersonMap(mod_mirt)
+#| code-fold: true
+
+itempersonMap(mod_mirt) + theme_bg()
 ```
 
 ## ICC
 
 ```{r}
-tracePlot(mod_mirt)
+#| code-fold: true
+
+tracePlot(mod_mirt) + theme_bg()
 ```
 
 ## ICC
 
 ```{r}
-tracePlot(mod_mirt, facet = F, legend = T)
+#| code-fold: true
+
+tracePlot(mod_mirt, facet = F, legend = T) + theme_bg()
 ```
 
 ## Item Information Curves
 Wie viel Information steuert jedes Item zur Schätzung von Theta bei? 
 ```{r}
-itemInfoPlot(mod_mirt)
+#| code-fold: true
+
+itemInfoPlot(mod_mirt) + theme_bg()
 ```
 
 ## Item Information Curves
 ```{r}
-itemInfoPlot(mod_mirt, facet = T)
+#| code-fold: true
+
+itemInfoPlot(mod_mirt, facet = T) + theme_bg()
 ```
 
 ## Test Information Curve
 ```{r}
-testInfoPlot(mod_mirt, adj_factor = 2)
+#| code-fold: true
+
+testInfoPlot(mod_mirt, adj_factor = 2) + theme_bg()
 ```
+
+
+## Summary
+```{r}
+#| code-fold: true
+
+summaryPlot(mod_mirt, adj_factor = 2) +
+  theme_bg() 
+```
+
 
 ## Mögliche Punkte
 
