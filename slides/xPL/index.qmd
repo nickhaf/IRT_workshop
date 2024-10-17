@@ -444,13 +444,22 @@ testInfoPlot(mod_mirt, adj_factor = 2) + theme_bg()
 
 
 ## Summary
+:::{.columns}
+
+:::{.column width="80%"}
 ```{r}
 #| code-fold: true
 
 summaryPlot(mod_mirt, adj_factor = 2) +
   theme_bg() 
 ```
+:::
 
+:::{.column width="20%"}
+Zusammenfassung verschiedener Plots
+:::
+
+:::
 
 ## Mögliche Punkte
 
@@ -459,6 +468,7 @@ Mehr Parameter müsen nicht immer auch besser sein. Gerade im IRT-Kontext könne
 :::
 
 Bei Modellwahl zu beachten:
+
 - [Gewichtung]{.highlight} der Items
 - Antwort[skala]{.highlight}
 - [Simulation]{.highlight}/Modell[fit]{.highlight}
