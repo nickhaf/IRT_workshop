@@ -99,7 +99,7 @@ Daten aus diesem [Tutorial](https://raffaelevacca.github.io/Intro-multilevel-wit
 
 ## Warum dieses Beispiel?
 
-Als kleiner Teaser: genauso wie hier Schüler*innen in Schulen genestet sind, können wir Items als genestet in Personen betrachten.
+Als kleiner Teaser: genauso wie hier Schüler*innen in Schulen genestet sind, können wir Items als genestet in Personen betrachten. Diese Session soll ein bisschen zeigen, dass die ganzen verschiedenen Modelle, so unterschiedlich sie auch auf den ersten Blick scheinen mögen, doch sehr ähnlich sind, und in den meisten Fällen ineinander übersetzt werden können. 
 
 
 # Umgang mit genesteten Daten
