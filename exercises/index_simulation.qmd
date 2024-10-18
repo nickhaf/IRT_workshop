@@ -1,5 +1,5 @@
 ---
-title: "Höher parametrisierte Modelle"
+title: "Studienplanung durch Simulationen"
 subtitle: "Übungen"
 listing: 
   type: table
@@ -7,5 +7,12 @@ listing:
     - ./simulation/power_simulation.qmd
   sort: false
 format: html
+image: ../slides/xPL/images/simulation.jpg
 ---
 
+Ziel dieser Übung ist es, eine erste kleine Simulation zur Planung von Stichprobengrößen zu schreiben. Dies kann dann als Grundlage für eigne Projekte genutzt werden. 
+
+:::{.callout-tip #tip-sim}
+Für mehr Infos, und weitere (auch komplexeren) [Codebeispielen](https://psych-irt.netlify.app/), siehe @schroederssample.  
+In @morris2019using findet man eine tolle Übersicht zum Workflow in Simulationsstudien allgemein. 
+:::

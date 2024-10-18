@@ -2,8 +2,32 @@
 title: "Übungen"
 format: html
 listing: 
-  contents: ./*.qmd
-  type: default
+  type: grid
+  contents: 
+    - index_intro_r.qmd
+    - index_linking.qmd
+    - index_xPL.qmd
+    - index_simulation.qmd
   sort: "grid"
+about:
+  id: irt-heading
+  template: marquee
+  image: exercise.jpg
 ---
+
+:::{#irt-heading}
+Das ist der Trainingsteil des Workshops. An der entsprechenden Stelle in den Folien wird auf die jeweilige Übung verwiesen. Das Material ist sehr Umfangreich, wir werden also vermutlich nicht alles besprechen können. Bei Interesse kann es aber natürlich auch selbstständig weiter durchgearbeitet werden.  
+
+:::
+::: aside
+Foto von <a href="https://unsplash.com/de/@johnarano?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">John Arano</a> auf <a href="https://unsplash.com/de/fotos/frau-beim-gewichtheben-h4i9G-de7Po?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
+:::
+\ 
+
+\ 
+
+
+# Übersicht
+
 

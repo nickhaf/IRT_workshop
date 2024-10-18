@@ -5,7 +5,7 @@ format: html
 bibliographyu: references.bib
 ---
 
-Eine häufige Frage die bei der Planung von Studien aufkommt, ist die Frage nach der benötigten Stichprobengröße. Eine Möglichkeit diese für eine konkrete Studie zu planen, ist durch Simulationen. Wir haben bereits eine einfache Simulation in der [Übung zu höher parametrisierten Modellen ausprobiert](). In diesem Kapitel wollen wir jetzt darauf aufbauen und uns anschauen, wie Simulationen für das Planen von allen möglichen Studienaspketen genutzt werden können. 
+Eine häufige Frage die bei der Planung von Studien aufkommt, ist die Frage nach der benötigten Stichprobengröße. Eine Möglichkeit diese für eine konkrete Studie zu planen, ist durch Simulationen. Wir haben bereits eine einfache Simulation in der [Übung zu höher parametrisierten Modellen ausprobiert](https://nickhaf.github.io/IRT_workshop/exercises/xPl/simulation.html). In diesem Kapitel wollen wir jetzt darauf aufbauen und uns anschauen, wie Simulationen für das Planen von allen möglichen Studienaspketen genutzt werden können. 
 
 Wir brauchen folgende Pakete: 
 ```{r}
@@ -442,14 +442,5 @@ Es ist ein bisschen schwierig, allgemeine Cut-Off Werte für den MSE zu definier
 
 ## Ausblick
 
-:::{.callout-note}
-Diese Grundgerüst können wir jetzt natürlich entsprechend unserer Fragestellung erweitern. Einige mögliche Fragestellungen:
-
-
-Für mehr Infos, und weiteren (auch komplexeren) [Codebeispielen](https://psych-irt.netlify.app/), siehe @schroederssample.  
-In @morris2019using findet man eine tolle Übersicht zum Workflow in Simulationsstudien allgemein. 
-
-:::
-
 Dieses Grundgerüst könnten wir jetzt nach unseren Vorstellungen Erweitern. Wir könnten z.B. weitere Domänen hinzufügen und den Zusammenhang mit der Reliabilität anschauen. Wir könnten eine Linkingstudie simulieren, indem wir zwei Gruppen erstellen, von denen jede jeweils einige der Items nicht beantwortet hat. Wir könnten schauen, welche Stichprobengröße nötig wäre, um einen kleinen treatment-Effekt in einem randomisierten klinischen Versuch zu finden.
-
+Sie @#tip-sim für weitere Ressourcen dazu. 
