@@ -36,7 +36,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
@@ -79,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-subtitle','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -131,7 +130,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -297,7 +296,7 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../exercises/index_glm.html" class="sidebar-item-text sidebar-link">
+            <a href=".././exercises/index_glm.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -333,212 +332,140 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Auf dieser Seite</h2>
+   
+  <ul>
+  <li><a href="#übersicht" id="toc-übersicht" class="nav-link active" data-scroll-target="#übersicht"><span class="header-section-number">1</span> Übersicht</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+
+
+
+<div class="quarto-about-marquee">
+  <div class="about-image-container">
+    <img src="exercise.jpg" class="about-image " style="width: 100%;">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Übungen</h1>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    
-  
-    
   </div>
-  
-
-
-</header>
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1729260018824" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<div class="thumbnail">
-<p><a href="../exercises/index_glm.html" class="no-external"></a></p><a href="../exercises/index_glm.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="../exercises/index_glm.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../exercises/index_glm.html" class="no-external">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../exercises/index_glm.html" class="no-external">Übungen</a>
-</div>
-<div class="listing-description">
-<a href="../exercises/index_glm.html" class="no-external">
-<div class="listing-actions-group">
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-</tr>
-</thead>
-<tbody class="list">
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-Keine Treffer
-</div>
-</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="../exercises/index_glm.html" class="no-external"></a></p><a href="../exercises/index_glm.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1729260018824" data-listing-reading-time-sort="1" data-listing-word-count-sort="13">
-<div class="thumbnail">
-<p><a href="../exercises/index_intro_r.html" class="no-external"></a></p><a href="../exercises/index_intro_r.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="../exercises/index_intro_r.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../exercises/index_intro_r.html" class="no-external">Einführung in R</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../exercises/index_intro_r.html" class="no-external">Übungen</a>
-</div>
-<div class="listing-description">
-<a href="../exercises/index_intro_r.html" class="no-external">In dieser Übungsreihe werden die Grundlagen der Arbeit mit R wiederholt und trainiert.</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="../exercises/index_intro_r.html" class="no-external"></a></p><a href="../exercises/index_intro_r.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1729260018824" data-listing-reading-time-sort="1" data-listing-word-count-sort="50">
-<div class="thumbnail">
-<p><a href="../exercises/index_linking.html" class="no-external"></a></p><a href="../exercises/index_linking.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="../exercises/index_linking.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../exercises/index_linking.html" class="no-external">Linking</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../exercises/index_linking.html" class="no-external">Übungen</a>
-</div>
-<div class="listing-description">
-<a href="../exercises/index_linking.html" class="no-external">Ziel dieser Übung ist es, grundlegendes Linking in R auszuprobieren, und eine erste Differential Item Functioning (DIF) Analyse durchzuführen.</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="../exercises/index_linking.html" class="no-external"></a></p><a href="../exercises/index_linking.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1729260018824" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<div class="thumbnail">
-<p><a href="../exercises/index_simulation.html" class="no-external"></a></p><a href="../exercises/index_simulation.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="../exercises/index_simulation.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../exercises/index_simulation.html" class="no-external">Höher parametrisierte Modelle</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../exercises/index_simulation.html" class="no-external">Übungen</a>
-</div>
-<div class="listing-description">
-<a href="../exercises/index_simulation.html" class="no-external">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Sortieren nach" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Sortieren nach</option>
-       <option value="index" data-direction="asc">Voreinstellung</option>
-         <option value="listing-title-sort" data-direction="asc">
-          Titel
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Autor:in
-        </option>
-     </select>
+</header> <div id="irt-heading">
+<p>Das ist der Trainingsteil des Workshops. An der entsprechenden Stelle in den Folien wird auf die jeweilige Übung verwiesen. Das Material ist sehr Umfangreich, wir werden also vermutlich nicht alles besprechen können. Bei Interesse kann es aber natürlich auch selbstständig weiter durchgearbeitet werden.</p>
+</div> 
   </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
 </div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-T…</th><th></th></tr></thead><tbody class="list"><tr data-index="0" data-listing-file-modified-sort="1729260018836" data-listing-reading-time-sort="13" data-listing-word-count-sort="2557" data-listing-title-sort="Stichprobenplanung durch Simulation" data-listing-filename-sort="power_simulation.qmd"><td></td><td><span class="listing-author"></span></td></tr></tbody></table><div class="listing-no-matching d-none"></div></a>
+
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>Foto von <a href="https://unsplash.com/de/@johnarano?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">John Arano</a> auf <a href="https://unsplash.com/de/fotos/frau-beim-gewichtheben-h4i9G-de7Po?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
+</div></div><p>&nbsp;</p>
+<p>&nbsp;</p>
+<section id="übersicht" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Übersicht</h1>
+
+
+
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1729263774785" data-listing-reading-time-sort="1" data-listing-word-count-sort="13">
+<a href="../exercises/index_intro_r.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../slides/IntroR/images/r_desktop.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Einführung in R
+</h5>
+<div class="card-text listing-description">
+In dieser Übungsreihe werden die Grundlagen der Arbeit mit R wiederholt und trainiert.
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+
 </div>
 </div>
-<div class="metadata">
-<p><a href="../exercises/index_simulation.html" class="no-external"></a></p><a href="../exercises/index_simulation.html" class="no-external">
+</div>
+</div>
 </a>
 </div>
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1729263774785" data-listing-reading-time-sort="1" data-listing-word-count-sort="50">
+<a href="../exercises/index_linking.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../slides/Linking/images/link.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Linking und Differential Item Functioning
+</h5>
+<div class="card-text listing-description">
+Ziel dieser Übung ist es, grundlegendes Linking in R auszuprobieren, und eine erste Differential Item Functioning (DIF) Analyse durchzuführen.
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1729260018824" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<div class="thumbnail">
-<p><a href="../exercises/index_xPL.html" class="no-external"></a></p><a href="../exercises/index_xPL.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="../exercises/index_xPL.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../exercises/index_xPL.html" class="no-external">Höher parametrisierte Modelle</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../exercises/index_xPL.html" class="no-external">Übungen</a>
-</div>
-<div class="listing-description">
-<a href="../exercises/index_xPL.html" class="no-external">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Sortieren nach" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Sortieren nach</option>
-       <option value="index" data-direction="asc">Voreinstellung</option>
-         <option value="listing-title-sort" data-direction="asc">
-          Titel
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Autor:in
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-T…</th><th></th></tr></thead><tbody class="list"><tr data-index="0" data-listing-file-modified-sort="1729260018844" data-listing-reading-time-sort="8" data-listing-word-count-sort="1590" data-listing-title-sort="Simulation von IRT Daten" data-listing-filename-sort="simulation.qmd"><td></td><td><span class="listing-author"></span></td></tr><tr data-index="1" data-listing-file-modified-sort="1729260018836" data-listing-reading-time-sort="4" data-listing-word-count-sort="725" data-listing-title-sort="Modellselektion" data-listing-filename-sort="model_selection.qmd"><td></td><td><span class="listing-author"></span></td></tr><tr data-index="2" data-listing-file-modified-sort="1729260018844" data-listing-reading-time-sort="3" data-listing-word-count-sort="515" data-listing-title-sort="Partial Credit Model" data-listing-filename-sort="pcm.qmd"><td></td><td><span class="listing-author"></span></td></tr></tbody></table><div class="listing-no-matching d-none"></div></a>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+
 </div>
 </div>
-<div class="metadata">
-<p><a href="../exercises/index_xPL.html" class="no-external"></a></p><a href="../exercises/index_xPL.html" class="no-external">
+</div>
+</div>
 </a>
 </div>
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1729263774785" data-listing-reading-time-sort="1" data-listing-word-count-sort="24">
+<a href="../exercises/index_xPL.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../slides/xPL/images/choice.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Höher parametrisierte Modelle
+</h5>
+<div class="card-text listing-description">
+Ziel dieser Übung ist es 2PL, 3PL und Partial Credit Modelle auszuprobieren. In diesem Zuge werden auch IRT-Daten simuliert, Modelle ausgewertet und miteeinander verglichen.
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1729263774785" data-listing-reading-time-sort="1" data-listing-word-count-sort="50">
+<a href="../exercises/index_simulation.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../slides/xPL/images/simulation.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Studienplanung durch Simulationen
+</h5>
+<div class="card-text listing-description">
+Ziel dieser Übung ist es, eine erste kleine Simulation zur Planung von Stichprobengrößen zu schreiben. Dies kann dann als Grundlage für eigne Projekte genutzt werden.
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+
+</div>
+</div>
+</div>
+</div>
+</a>
 </div>
 </div>
 <div class="listing-no-matching d-none">
@@ -565,13 +492,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
