@@ -710,7 +710,13 @@ Für kleine Datensätze eventuell eher Verfahren wählen die auf beobachtete Sco
 
 Sehr große Datensätze mit vielen Kovariaten (und damit auch vielen verschiedenen Gruppen und Gruppen-Interaktionen) könnten von Machine-Learning profitieren, z.B. Rasch-Trees.  
 
-Ansonste Simulation von Daten und ausprobieren. 
+Ansonsten Simulation von Daten und ausprobieren. 
+
+
+::: aside
+Ideen zu alternativen Vorgehensweisen finden sich z.B. in @schneider2022r (mit R-Code).
+
+:::
 
 ## Umgang mit DIF
 
