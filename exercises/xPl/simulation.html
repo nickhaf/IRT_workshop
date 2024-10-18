@@ -332,7 +332,7 @@ window.Quarto = {
   </ul>
 </li>
   <li>
-<a href="#ein-zuf%C3%A4lliges-item-simulieren" id="toc-ein-zufälliges-item-simulieren" class="nav-link" data-scroll-target="#ein-zuf%C3%A4lliges-item-simulieren"><span class="header-section-number">1.4</span> Ein zufälliges Item simulieren</a>
+<a href="#auff%C3%A4llige-itemmuster-simulieren" id="toc-auffällige-itemmuster-simulieren" class="nav-link" data-scroll-target="#auff%C3%A4llige-itemmuster-simulieren"><span class="header-section-number">1.4</span> Auffällige Itemmuster simulieren</a>
   <ul class="collapse">
 <li><a href="#check-mit-tam" id="toc-check-mit-tam" class="nav-link" data-scroll-target="#check-mit-tam"><span class="header-section-number">1.4.1</span> Check mit <code>TAM</code></a></li>
   </ul>
@@ -368,7 +368,9 @@ window.Quarto = {
 <span><span class="co"># install.packages("TAM")</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n_items</span> <span class="op">&lt;-</span> <span class="fl">20</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="gleichung" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="gleichung">
 <span class="header-section-number">1.1</span> Gleichung</h2>
@@ -443,13 +445,13 @@ Lösung
 <section id="items" class="level3" data-number="1.3.1"><h3 data-number="1.3.1" class="anchored" data-anchor-id="items">
 <span class="header-section-number">1.3.1</span> Items</h3>
 <ol type="1">
-<li>Zuerst die Items. Baue einen <code>data.frame</code> mit dem Namen <code>items</code>. Er soll 13 Zeilen und 4 Spalten haben und folgendes enthalten:</li>
+<li>Zuerst die Items. Baue einen <code>data.frame</code> mit dem Namen <code>items</code>. Er soll <code>r</code>n_items` Zeilen und 4 Spalten haben und folgendes enthalten:</li>
 </ol>
 <ul>
 <li>
-<code>item_id</code>: Die ID des Items, von 1 bis 13.</li>
+<code>item_id</code>: Die ID des Items, von 1 bis 20`</li>
 <li>
-<code>alpha</code>: Die Diskriminationsparameter, liegen zwischen 0.1 und 2.5 in 13 gleich langen Schritten.</li>
+<code>alpha</code>: Die Diskriminationsparameter, liegen zwischen 0.1 und 2.5 in <code>r</code>n_items` gleich langen Schritten.</li>
 <li>
 <code>beta</code>: Die Schwierigkeitsparameter, liegen zwischen -3 und 3 jeweils im Abstand von 0.5.</li>
 </ul>
@@ -482,11 +484,14 @@ Lösung
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">items</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>    item_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">13</span>, </span>
-<span>    b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span>, by <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, </span>
-<span>    a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">2.5</span>, length.out <span class="op">=</span> <span class="fl">13</span><span class="op">)</span>, </span>
-<span>    c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">13</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1820</span><span class="op">)</span> </span>
+<span><span class="va">n_items</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
+<span></span>
+<span><span class="va">items</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    item_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_items</span>, </span>
+<span>    b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">3</span>, length.out <span class="op">=</span> <span class="va">n_items</span><span class="op">)</span>, </span>
+<span>    a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">3</span>, length.out <span class="op">=</span> <span class="va">n_items</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, </span>
+<span>    c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n_items</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Das sind also die Itemparameter, die wir in unsere Simulation packen.</p>
@@ -531,10 +536,9 @@ Lösung
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">666</span><span class="op">)</span> </span>
-<span><span class="co">## Ich setzte hier einen Seed, damit meine zufällig erzeugten Werte replizierbar bleiben.</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Ich setzte hier einen Seed, damit meine zufällig erzeugten Werte replizierbar bleiben.</span></span>
 <span><span class="co">## Wenn du den Seed in deinem Skript auf die gleiche Zahl setzt, bekommst du genau die gleichen Zufallswerte und kannst besser vergleichen. </span></span>
-<span><span class="va">n_subj</span> <span class="op">&lt;-</span> <span class="fl">500</span></span>
+<span><span class="va">n_subj</span> <span class="op">&lt;-</span> <span class="fl">5000</span></span>
 <span></span>
 <span><span class="va">subjects</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>    sub_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_subj</span>,</span>
@@ -546,7 +550,7 @@ Lösung
 </div>
 <p>Perfekt! Jetzt können wir die Itemantworten simulieren. Dazu sind noch ein paar kleine Schritte nötig:</p>
 <ol start="3" type="1">
-<li>Merge die beiden <code>data.frames</code> <code>subjects</code> und <code>items</code> zu einem neuen <code>data.frame</code> <code>sim_dat</code> zusammen. Und zwar so, dass wir <span class="math inline">\(1000 * 13\)</span> Zeilen bekommen, also jede Person jedes der 13 Items zugeordnet wird (bisher noch ohne Antwort der Person, nur mit den Itemkennwerten. Das erleichtert uns im nächsten Schritt, die Antworten der Personen zu simulieren).</li>
+<li>Merge die beiden <code>data.frames</code> <code>subjects</code> und <code>items</code> zu einem neuen <code>data.frame</code> <code>sim_dat</code> zusammen. Und zwar so, dass wir 10^{5} Zeilen bekommen, also jede Person jedes der 20 Items zugeordnet wird (bisher noch ohne Antwort der Person, nur mit den Itemkennwerten. Das erleichtert uns im nächsten Schritt, die Antworten der Personen zu simulieren).</li>
 </ol>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
@@ -583,22 +587,22 @@ Lösung
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">sim_dat</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   6500 obs. of  6 variables:
+<pre><code>'data.frame':   100000 obs. of  6 variables:
  $ sub_id : int  1 2 3 4 5 6 7 8 9 10 ...
- $ theta  : num  0.753 2.014 -0.355 2.028 -2.217 ...
+ $ theta  : num  0.1634 0.9585 -1.1718 0.0475 -2.1447 ...
  $ item_id: int  1 1 1 1 1 1 1 1 1 1 ...
  $ b      : num  -3 -3 -3 -3 -3 -3 -3 -3 -3 -3 ...
- $ a      : num  0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 ...
+ $ a      : num  0.253 0.253 0.253 0.253 0.253 ...
  $ c      : num  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
 </div>
 </div>
-<p>Unser finaler <code>data.frame</code> hat 1300000 Zeilen, wie verlangt. Lasst uns auch noch einmal schauen, ob eine zufällige Person alle Items beantwortet hat:</p>
+<p>Unser finaler <code>data.frame</code> hat 10^{5} Zeilen, wie verlangt. Lasst uns auch noch einmal schauen, ob eine zufällige Person alle Items beantwortet hat:</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sub_id</span> <span class="op">==</span> <span class="fl">420</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">item_id</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13</code></pre>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 </div>
 </div>
 <p>Das sieht gut aus!</p>
@@ -643,32 +647,28 @@ Lösung
 <span><span class="co">## Mal nachschauen:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sim_dat</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  sub_id      theta item_id  b   a c         p
-1      1  0.7533110       1 -3 0.1 0 0.5927465
-2      2  2.0143547       1 -3 0.1 0 0.6227966
-3      3 -0.3551345       1 -3 0.1 0 0.5657389
-4      4  2.0281678       1 -3 0.1 0 0.6231211
-5      5 -2.2168745       1 -3 0.1 0 0.5195681
-6      6  0.7583962       1 -3 0.1 0 0.5928693</code></pre>
+<pre><code>  sub_id       theta item_id  b         a c         p
+1      1  0.16343542       1 -3 0.2526316 0 0.6897998
+2      2  0.95846482       1 -3 0.2526316 0 0.7310651
+3      3 -1.17181043       1 -3 0.2526316 0 0.6134550
+4      4  0.04748595       1 -3 0.2526316 0 0.6834974
+5      5 -2.14467200       1 -3 0.2526316 0 0.5538115
+6      6  0.03659090       1 -3 0.2526316 0 0.6829016</code></pre>
 </div>
 </div>
 <p>Auf den ersten Blick sieht das schonmal gut aus. Personen mit niedrigerem <span class="math inline">\(\theta\)</span> Wert haben auch eine geringere Wahrscheinlichkeit, das Item richtig zu beantworten (vgl. z.B. Zeile 2 und 3).</p>
 </div>
 </div>
 </div>
-</section></section><section id="ein-zufälliges-item-simulieren" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="ein-zufälliges-item-simulieren">
-<span class="header-section-number">1.4</span> Ein zufälliges Item simulieren</h2>
-<p>Wir können jetzt noch ein Item hinzufügen, dass überhaupt nicht der 2PL Gleichung folgt. Dafür überschreiben wir die answer-Werte von einem Item (z.B. Item 10) einfach mit zufälligen Werten:</p>
+</section></section><section id="auffällige-itemmuster-simulieren" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="auffällige-itemmuster-simulieren">
+<span class="header-section-number">1.4</span> Auffällige Itemmuster simulieren</h2>
+<p>Wir können jetzt auch ein bisschen die Antwortmuster manipulieren, um zu schauen, wie sich die Items verhalten, wenn bestimmte Auffälligkeiten vorliegen. Z.B. können wir festlegen, dass Item 3 von Leuten mit hoher Fähigkeit eher mal falsch beantwortet wird, obwohl es ansonsten ein recht einfaches Item ist:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Random theta Werte, unabhängig von Schwierigkeit</span></span>
-<span><span class="co"># sim_dat &lt;- sim_dat %&gt;%</span></span>
-<span><span class="co">#   mutate(p = ifelse(item_id == 10, exp(sin(a*(theta - b)))/(1 + exp(sin(a*(theta - b)))), p)) </span></span>
-<span><span class="co">#   </span></span>
-<span></span>
-<span><span class="co">## Item wird von hohen Theta falsch beantwortet und von niedrigem Theta richtig</span></span>
-<span></span>
-<span><span class="va">sim_dat</span> <span class="op">&lt;-</span> <span class="va">sim_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">item_id</span> <span class="op">==</span> <span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">theta</span> <span class="op">&lt;</span> <span class="op">-</span><span class="fl">1.5</span>, <span class="fl">0.95</span>, <span class="fl">0.05</span><span class="op">)</span>, <span class="va">p</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sim_dat</span> <span class="op">&lt;-</span> <span class="va">sim_dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co">## Outfit</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">item_id</span> <span class="op">==</span> <span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="fl">1.5</span>, <span class="fl">0.05</span>, <span class="fl">0.9</span><span class="op">)</span>, <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co">## Infit</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">item_id</span> <span class="op">==</span> <span class="fl">11</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">0.2</span> <span class="op">&amp;</span> <span class="va">theta</span> <span class="op">&lt;</span> <span class="fl">0.1</span>, <span class="fl">0.95</span>, <span class="va">p</span><span class="op">)</span>, <span class="va">p</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Item 10 wird also unabhängig von der Fähigkeit der Person einfach zufällig 50/50 beantwortet. Wir können später mal schauen, ob das Item auffällig wird.</p>
 <ol start="5" type="1">
@@ -708,13 +708,13 @@ Lösung
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sim_dat</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  sub_id      theta item_id  b   a c         p answer
-1      1  0.7533110       1 -3 0.1 0 0.5927465      0
-2      2  2.0143547       1 -3 0.1 0 0.6227966      1
-3      3 -0.3551345       1 -3 0.1 0 0.5657389      0
-4      4  2.0281678       1 -3 0.1 0 0.6231211      0
-5      5 -2.2168745       1 -3 0.1 0 0.5195681      0
-6      6  0.7583962       1 -3 0.1 0 0.5928693      1</code></pre>
+<pre><code>  sub_id       theta item_id  b         a c         p answer
+1      1  0.16343542       1 -3 0.2526316 0 0.6897998      1
+2      2  0.95846482       1 -3 0.2526316 0 0.7310651      0
+3      3 -1.17181043       1 -3 0.2526316 0 0.6134550      1
+4      4  0.04748595       1 -3 0.2526316 0 0.6834974      1
+5      5 -2.14467200       1 -3 0.2526316 0 0.5538115      1
+6      6  0.03659090       1 -3 0.2526316 0 0.6829016      1</code></pre>
 </div>
 </div>
 <p>Auch das sieht erst einmal plausibel aus! Toll!</p>
@@ -763,16 +763,17 @@ Lösung
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sim_dat_wide</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 14
+<pre><code># A tibble: 6 × 21
   sub_id   `1`   `2`   `3`   `4`   `5`   `6`   `7`   `8`   `9`  `10`  `11`  `12`
    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-1      1     0     1     0     1     0     1     1     0     1     0     0     0
-2      2     1     1     0     1     1     1     0     1     1     0     0     0
-3      3     0     0     0     1     1     1     0     0     0     0     0     0
-4      4     0     0     0     1     1     1     1     1     0     1     1     1
-5      5     0     0     1     0     1     0     0     0     0     0     0     0
-6      6     1     1     0     1     0     1     1     0     0     0     0     0
-# ℹ 1 more variable: `13` &lt;int&gt;</code></pre>
+1      1     1     1     1     0     1     1     1     1     1     1     1     0
+2      2     0     1     1     1     1     1     1     1     1     0     0     0
+3      3     1     1     1     1     0     0     0     1     1     1     1     0
+4      4     1     1     1     1     1     1     1     0     0     1     1     1
+5      5     1     1     0     0     1     0     0     0     0     0     1     0
+6      6     1     1     1     1     1     1     1     1     0     0     1     0
+# ℹ 8 more variables: `13` &lt;int&gt;, `14` &lt;int&gt;, `15` &lt;int&gt;, `16` &lt;int&gt;,
+#   `17` &lt;int&gt;, `18` &lt;int&gt;, `19` &lt;int&gt;, `20` &lt;int&gt;</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -834,20 +835,27 @@ Lösung
 <span></span>
 <span><span class="va">item_comparison</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   alpha  beta   a    b
-1   0.06 -5.87 0.1 -3.0
-2   0.34 -1.96 0.3 -2.5
-3  -1.25 -2.04 0.5 -2.0
-4   0.69 -1.57 0.7 -1.5
-5   1.17 -0.69 0.9 -1.0
-6   1.16 -0.34 1.1 -0.5
-7   1.21 -0.04 1.3  0.0
-8   1.98  0.44 1.5  0.5
-9   1.96  0.93 1.7  1.0
-10  1.15  1.99 1.9  1.5
-11  1.90  2.18 2.1  2.0
-12  1.91  2.69 2.3  2.5
-13  1.39  4.65 2.5  3.0</code></pre>
+<pre><code>   alpha  beta         a          b
+1   0.23 -3.25 0.2526316 -3.0000000
+2   1.24 -2.79 1.3210526 -2.6842105
+3  -1.03  1.93 1.1684211 -2.3684211
+4   0.90 -1.95 0.8631579 -2.0526316
+5   2.34 -1.76 2.5421053 -1.7368421
+6   1.66 -1.34 1.6263158 -1.4210526
+7   2.13 -1.09 2.0842105 -1.1052632
+8   1.88 -0.77 1.9315789 -0.7894737
+9   0.69 -0.41 0.7105263 -0.4736842
+10  0.37 -0.22 0.4052632 -0.1578947
+11  0.06 -2.59 0.1000000  0.1578947
+12  1.83  0.49 1.7789474  0.4736842
+13  2.26  0.79 2.3894737  0.7894737
+14  0.54  1.15 0.5578947  1.1052632
+15  1.46  1.44 1.4736842  1.4210526
+16  2.75  1.72 2.6947368  1.7368421
+17  2.58  2.13 2.8473684  2.0526316
+18  2.45  2.60 3.0000000  2.3684211
+19  0.93  2.84 1.0157895  2.6842105
+20  2.25  3.11 2.2368421  3.0000000</code></pre>
 </div>
 </div>
 <div class="cell">

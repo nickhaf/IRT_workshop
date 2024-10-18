@@ -338,7 +338,7 @@ window.Quarto = {
 </li>
   <li><a href="#auswertung" id="toc-auswertung" class="nav-link" data-scroll-target="#auswertung"><span class="header-section-number">1.6</span> Auswertung</a></li>
   <li><a href="#visualisierung" id="toc-visualisierung" class="nav-link" data-scroll-target="#visualisierung"><span class="header-section-number">1.7</span> Visualisierung</a></li>
-  <li><a href="#dimensional" id="toc-dimensional" class="nav-link" data-scroll-target="#dimensional"><span class="header-section-number">1.8</span> 1 Dimensional</a></li>
+  <li><a href="#ausblick" id="toc-ausblick" class="nav-link" data-scroll-target="#ausblick"><span class="header-section-number">1.8</span> Ausblick</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -375,7 +375,7 @@ window.Quarto = {
 <p>Als erstes definieren wir unsere wahren Itemparameter, aus denen dann die Daten simuliert werden.<br>
 Erstelle dafür einen <code>data.frame</code>, der pro Item eine Zeile mit den entsprechenden Itemparamtern <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> und <span class="math inline">\(\gamma\)</span> enthält.</p>
 <ul>
-<li>Wir wollen 20 Items simulieren.</li>
+<li>Wir wollen 20` Items simulieren.</li>
 <li>
 <span class="math inline">\(\alpha\)</span> ist der Diskriminationsparameter und soll aus einer Normalverteilung <span class="math inline">\(N(1, 0.1)\)</span> simuliert werden. So ist er noch klein genug, um ein sinnvolles 1PL-Modell ausprobieren zu können.</li>
 <li>
@@ -6870,7 +6870,7 @@ Lösung
 </div>
 </div>
 </div>
-<p>Perfekt. Jetzt müssen wir nur noch den Mittelwert aus diesen Differenzen berechnen. Das ist dann der MSE. Zusätzlich schauen wir uns noch den Monte Carlo Standard Error (MCSE) an, um ein Variabilitätsmaß für den Schätzer MSE zu bekommen. Der MCSE wird berechnet, indem wir pro Item pro Personenanzahl die Standardabweichung durch <code>sqrt(n() - 1)</code> teilen. Das ist einfachdie Wurzel aus der Größe der Gruppe minus 1. Das machen wir natürlich nicht über alle Durchläufe hinweg, innerhalb jeder Personenanzahl für jedes Item gesondert. Wir brauchen also pro simulierter Personenzahl pro Item einen Mittelwert (und eine Standardabweichung) über alle Iterationen. Das können wir sehr einfach mit der <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> und <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> Kombination aus dem <code>tidyverse</code> machen, siehe @#tip-group.</p>
+<p>Perfekt. Jetzt müssen wir nur noch den Mittelwert aus diesen Differenzen berechnen. Das ist dann der MSE. Zusätzlich schauen wir uns noch den Monte Carlo Standard Error (MCSE) an, um ein Variabilitätsmaß für den Schätzer MSE zu bekommen. Der MCSE wird berechnet, indem wir pro Item pro Personenanzahl die Standardabweichung durch <code>sqrt(n() - 1)</code> teilen. Das ist einfach die Wurzel aus der Größe der Gruppe minus 1. Das machen wir natürlich nicht über alle Durchläufe hinweg, sondern innerhalb jeder Personenanzahl für jedes Item gesondert. Wir brauchen also pro simulierter Personenzahl pro Item einen Mittelwert (und eine Standardabweichung) über alle Iterationen. Das können wir sehr einfach mit der <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> und <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> Kombination aus dem <code>tidyverse</code> machen, siehe @#tip-group.</p>
 <p>:::{#tip-group .callout-tip collapse = “true”} ## Tipp</p>
 <div class="cell">
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
@@ -6897,21 +6897,18 @@ Lösung
 <span>    MSE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">beta_diff_2</span><span class="op">)</span>,</span>
 <span>    MCSE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">beta_diff_2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>, </span>
 <span>.groups <span class="op">=</span> <span class="st">"drop"</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>RMSE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">MSE</span><span class="op">)</span>, </span>
-<span>         RMCSE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">MCSE</span><span class="op">)</span><span class="op">)</span> <span class="co">## Ich nehme hier noch die Wurzel aus dem MSE, damit die Ergebnisse wieder auf der Schwierigkeitsskala sind. </span></span>
-<span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mse_results</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 6
-  n_persons item      MSE    MCSE  RMSE  RMCSE
-      &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-1       100 Item1  0.198  0.0287  0.444 0.170 
-2       100 Item10 0.0737 0.0129  0.272 0.114 
-3       100 Item11 0.0735 0.00988 0.271 0.0994
-4       100 Item12 0.0707 0.00893 0.266 0.0945
-5       100 Item13 0.0710 0.00747 0.267 0.0864
-6       100 Item14 0.0658 0.00780 0.256 0.0883</code></pre>
+<pre><code># A tibble: 6 × 4
+  n_persons item      MSE    MCSE
+      &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1       100 Item1  0.198  0.0287 
+2       100 Item10 0.0737 0.0129 
+3       100 Item11 0.0735 0.00988
+4       100 Item12 0.0707 0.00893
+5       100 Item13 0.0710 0.00747
+6       100 Item14 0.0658 0.00780</code></pre>
 </div>
 </div>
 <p><code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> gruppiert unsere Daten nach den Spalten <code>n_persons</code> und <code>item</code>. <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> berechnet dann <span class="highlight">innerhalb jeder Gruppenkombination, also pro Personenanzahl pro Item</span> den Mittelwert und den MCSE.</p>
@@ -6922,13 +6919,11 @@ Lösung
 <div class="cell">
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mse_results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">item</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Item1"</span>, <span class="st">"Item10"</span>, <span class="st">"Item20"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">n_persons</span>, y <span class="op">=</span> <span class="va">RMSE</span>, colour <span class="op">=</span> <span class="va">item</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">n_persons</span>, y <span class="op">=</span> <span class="va">MSE</span>, colour <span class="op">=</span> <span class="va">item</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">RMSE</span> <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">MCSE</span>, ymax <span class="op">=</span> <span class="va">RMSE</span> <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">MCSE</span>, fill <span class="op">=</span> <span class="va">item</span><span class="op">)</span>, </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">MSE</span> <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">MCSE</span>, ymax <span class="op">=</span> <span class="va">MSE</span> <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">MCSE</span>, fill <span class="op">=</span> <span class="va">item</span><span class="op">)</span>, </span>
 <span>              alpha <span class="op">=</span> <span class="fl">0.05</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.2</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">'#01364C'</span><span class="op">)</span> <span class="op">+</span> <span class="co">## Cutoff Wert)</span></span>
-<span><span class="co">## and some styling, not relevant, but the functions can be found in the R folder on GitHub</span></span>
 <span><span class="fu">set_colour_scheme</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>  </span>
 <span><span class="fu">set_fill_scheme</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span><span class="fu">theme_bg</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -6940,9 +6935,24 @@ Lösung
 </div>
 </div>
 </div>
-<p>Fantastisch. Die Daten verhalten sich so, wie wir es erwarten würden, da der MSE mit zunehmender Stichprobengröße abnimmt, der Unterschied zwischen geschätzter und tatsächlicher Itemschwierigkeit wird also kleiner.</p>
-<p>Wir haben ja oben unseren Cutoff Wert berechnet, und können daran erkennen, dass wir für unser kleines Modell eine Stichprobengröße von … bräuchten, um die Itemschwierigkeiten präzise genug zu schätzen.</p>
-<p>Und Cutoff oben festlegen!</p>
+<p>Welche Stichprobengröße würdest du für die Studie verwenden?</p>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Diese Frage ist natürlich so pauschal nicht beantwortbar. Zuerst einmal sehen wir, dass die Daten sich so verhalten, wie wir es erwarten würden, da der MSE mit zunehmender Stichprobengröße abnimmt, der Unterschied zwischen geschätzter und tatsächlicher Itemschwierigkeit wird also kleiner.<br>
+Es fällt außerdem auf, dass die Items 1 und 20 (die wir als sehr leicht und sehr schwer definiert haben) ungenauer geschätzt werden (höherer MSE und auch größeres Konfidenzintervall) als Item 10, das in der Mitte liegt. Das ist auch zu erwarten, da Items, die entweder von fast allen oder von fast niemandem beantwortet werden, weniger Informationen enthalten.</p>
+<p>Es ist ein bisschen schwierig, allgemeine Cut-Off Werte für den MSE zu definieren. Ein besseres Vorgehen ist vermutlich, zu schauen, ab welcher Stichprobengröße es keine zu großen Änderungen mehr gibt. Für Item 10 wäre das z.B. in etwa bei 200 Personen. Dort haben wir einen MSE von ca. 0.03, was, wenn wir die Wurzel nehmen, einer Abweichung von ca. 0.17 Logits auf der Itemschwierigkeits-Skala entspricht. Das ist doch ein guter Kompromiss zwischen Genauigkeit und Aufwand von Probanden-Rekrutierung. Wenn wir allerdings an den Rändern interssiert sind, also z.B. vor allem schwere Fragen erstellen wollen, weil wir vor allem die leistungsstarken Testteilnehmer*innen differenzieren wollen, müssten wir vermutlich eine größere Stichprobe nehmen, damit die schweren Items auch mit einer adäquaten Genauigkeit geschätzt werden können. Gleiches gilt für leicht Items, wenn wir in einer Art Screening die besonders leistungsschwachen Testteilnehmer*innen herausfiltern wollen.</p>
+</div>
+</div>
+</section><section id="ausblick" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="ausblick">
+<span class="header-section-number">1.8</span> Ausblick</h2>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -6950,34 +6960,12 @@ Lösung
 </div>
 <div class="callout-body-container">
 <p>Diese Grundgerüst können wir jetzt natürlich entsprechend unserer Fragestellung erweitern. Einige mögliche Fragestellungen:</p>
-<p>Für mehr Infos, und weiteren (auch komplexeren) <a href="https://psych-irt.netlify.app/">Codebeispielen</a>, siehe <span class="citation" data-cites="schroederssample">@schroederssample</span></p>
+<p>Für mehr Infos, und weiteren (auch komplexeren) <a href="https://psych-irt.netlify.app/">Codebeispielen</a>, siehe <span class="citation" data-cites="schroederssample">@schroederssample</span>.<br>
+In <span class="citation" data-cites="morris2019using">@morris2019using</span> findet man eine tolle Übersicht zum Workflow in Simulationsstudien allgemein.</p>
 </div>
 </div>
 </div>
-<p>Beispielfrage: What is the appropriate sample size in randomized clinical trials to detect differences in mean scores between groups corresponding to a small treatment effect with adequate power?</p>
-<ul>
-<li>1 Dimensional, so ähnlich wie bisher, nur mit Schleife drumrum und dann die Güte der Parameterschätzungen beurteilen irgendwie (siehe Morris paper)</li>
-<li>2 Dimensional:
-<ul>
-<li>korrelierte Domänen und dann Eindimensional gesondert und einmal mehrdimensional auswerten. Reliabilität ((Konstruktreliabilität, z.B. geteap() in TAM)) sollte steigen, da Informationen vom einen Konstrukt auch bei der Schätzung der Werte auf dem anderen Konstrukt helfen könnten.</li>
-</ul>
-</li>
-</ul>
-<p>Example 1 und 4 sehen interessant aus.</p>
-</section><section id="dimensional" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="dimensional">
-<span class="header-section-number">1.8</span> 1 Dimensional</h2>
-<p>Idee: Screening Test für irgendetwas, deswegen ability am unteren Spektrum ansiedeln?</p>
-<p>Nach Schroeders 2024:</p>
-<ul>
-<li>Anzahl und Verteilung der Faktoren (eindimensional vs.&nbsp;mehrdimensional)</li>
-<li>Anzahl Itemparamter (z.B. 1PL, also nur Schwierigkeiten für das erste Beispiel) (Anzahl der Items brauchen wir nicht, wir schauen uns einfach Werte über eine bestimmte range an.</li>
-<li>Item Typ: Dichotom</li>
-</ul>
-<p>Testdesign: (Missings erstmal weglassen?) - Z.B. zwei Testformen, die gelinkt werden sollen. - Missing Pattern (Missing completely at random (MCAR), Linking-Design) - Wie viel Missing Data</p>
-<p>IRT Model und interessierende Paramter - 1PL, 2PL … - software (die wir auch bei der Auswertung nutzen wollen) - Parameter, die extrahiert werden sollen</p>
-<p>Monte Carlo simulation aufsetzen - Anzahl an iterations: - - zu evaluierende Sample sizes</p>
-<p>Evaluation: - Mean squared error (MSE) der Itemschwierigkeiten wird genommen, um die Präzision der Schätzung zu ermitteln. Acceptable Cutoff below 0.05 (warum?).</p>
-<p>The first application example deals with two test forms of a reasoning test that are linked by a subset of common items. The accuracy of item difficulty estimation is examined as a function of sample size.</p>
+<p>Dieses Grundgerüst könnten wir jetzt nach unseren Vorstellungen Erweitern. Wir könnten z.B. weitere Domänen hinzufügen und den Zusammenhang mit der Reliabilität anschauen. Wir könnten eine Linkingstudie simulieren, indem wir zwei Gruppen erstellen, von denen jede jeweils einige der Items nicht beantwortet hat. Wir könnten schauen, welche Stichprobengröße nötig wäre, um einen kleinen treatment-Effekt in einem randomisierten klinischen Versuch zu finden.</p>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
