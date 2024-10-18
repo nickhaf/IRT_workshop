@@ -369,8 +369,8 @@ results <- results %>%
 :::
 
 Perfekt. Jetzt müssen wir nur noch den Mittelwert aus diesen Differenzen berechnen. Das ist dann der MSE. Zusätzlich schauen wir uns noch den Monte Carlo Standard Error (MCSE) an, um ein Variabilitätsmaß für den Schätzer MSE zu bekommen. 
-Der MCSE wird berechnet, indem wir pro Item pro Personenanzahl die Standardabweichung durch `sqrt(n() - 1)` teilen. Das ist einfachdie Wurzel aus der Größe der Gruppe minus 1. 
-Das machen wir natürlich nicht über alle Durchläufe hinweg, innerhalb jeder Personenanzahl für jedes Item gesondert. Wir brauchen also pro simulierter Personenzahl pro Item einen Mittelwert (und eine Standardabweichung) über alle Iterationen. Das können wir sehr einfach mit der `group_by()` und `summarize()` Kombination aus dem `tidyverse` machen, siehe @#tip-group. 
+Der MCSE wird berechnet, indem wir pro Item pro Personenanzahl die Standardabweichung durch `sqrt(n() - 1)` teilen. Das ist einfach die Wurzel aus der Größe der Gruppe minus 1. 
+Das machen wir natürlich nicht über alle Durchläufe hinweg, sondern innerhalb jeder Personenanzahl für jedes Item gesondert. Wir brauchen also pro simulierter Personenzahl pro Item einen Mittelwert (und eine Standardabweichung) über alle Iterationen. Das können wir sehr einfach mit der `group_by()` und `summarize()` Kombination aus dem `tidyverse` machen, siehe @#tip-group. 
 
 :::{#tip-group .callout-tip collapse = "true"}
 ## Tipp
@@ -440,52 +440,12 @@ Und Cutoff oben festlegen!
 Diese Grundgerüst können wir jetzt natürlich entsprechend unserer Fragestellung erweitern. Einige mögliche Fragestellungen:
 
 
-Für mehr Infos, und weiteren (auch komplexeren) [Codebeispielen](https://psych-irt.netlify.app/), siehe @schroederssample
+Für mehr Infos, und weiteren (auch komplexeren) [Codebeispielen](https://psych-irt.netlify.app/), siehe @schroederssample.  
+In @morris2019using findet man eine tolle Übersicht zum Workflow in Simulationsstudien allgemein. 
 
 :::
 
-Beispielfrage: What is the appropriate sample size in randomized clinical trials to detect differences in mean scores between groups corresponding to a small treatment effect with adequate power?
 
-
-- 1 Dimensional, so ähnlich wie bisher, nur mit Schleife drumrum und dann die Güte der Parameterschätzungen beurteilen irgendwie (siehe Morris paper)
-- 2 Dimensional:
-  - korrelierte Domänen und dann Eindimensional gesondert und einmal mehrdimensional auswerten. Reliabilität ((Konstruktreliabilität, z.B. geteap() in TAM)) sollte steigen, da Informationen vom einen Konstrukt auch bei der Schätzung der Werte auf dem anderen Konstrukt helfen könnten. 
-  
-
-Example 1 und 4 sehen interessant aus. 
-
-## 1 Dimensional
-Idee: Screening Test für irgendetwas, deswegen ability am unteren Spektrum ansiedeln?
-
-
-Nach Schroeders 2024:
-
-- Anzahl und Verteilung der Faktoren (eindimensional vs. mehrdimensional)
-- Anzahl Itemparamter (z.B. 1PL, also nur Schwierigkeiten für das erste Beispiel) (Anzahl der Items brauchen wir nicht, wir schauen uns einfach Werte über eine bestimmte range an. 
-- Item Typ: Dichotom
-
-Testdesign:
-(Missings erstmal weglassen?)
-- Z.B. zwei Testformen, die gelinkt werden sollen. 
-- Missing Pattern (Missing completely at random (MCAR), Linking-Design)
-- Wie viel Missing Data
-
-IRT Model und interessierende Paramter
-- 1PL, 2PL ...
-- software (die wir auch bei der Auswertung nutzen wollen)
-- Parameter, die extrahiert werden sollen
-
-Monte Carlo simulation aufsetzen
-- Anzahl an iterations:
-  - 
-- zu evaluierende Sample sizes
-
-  
-Evaluation:
-- Mean squared error (MSE) der Itemschwierigkeiten wird genommen, um die Präzision der Schätzung zu ermitteln. Acceptable Cutoff below 0.05 (warum?). 
-
-  
-The first application example deals with two test forms of a reasoning test that are linked by a subset of common items. The accuracy of item difficulty estimation is examined as a function of sample size.
-  
-  
+## Ausblick
+Dieses Grundgerüst könnten wir jetzt nach unseren Vorstellungen Erweitern. Wir könnten z.B. weitere Domänen hinzufügen und den Zusammenhang mit der Reliabilität anschauen. Wir könnten eine Linkingstudie simulieren, indem wir zwei Gruppen erstellen, von denen jede jeweils einige der Items nicht beantwortet hat. Wir könnten schauen, welche Stichprobengröße nötig wäre, um einen kleinen treatment-Effekt in einem randomisierten klinischen Versuch zu finden.
 
