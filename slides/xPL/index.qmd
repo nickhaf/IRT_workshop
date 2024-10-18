@@ -325,7 +325,6 @@ Um den Itemfit zu beurteilen, plotten wir die erwarteten und die beobachteten It
 invisible(
 plot(mod_2pl,
   items = 1:3, 
-  type = "items",
   export = FALSE,
   observed = TRUE,
   package = "graphics")
@@ -340,6 +339,26 @@ Achtung! Die grafische Überprüfung ist stark von der Binwidth abhängig, die m
 :::
 
 ## Infit/Outfit
+Sind Residuen-basierte Fit-Statistiken, die die Steigung der ICC characterisieren. Wenn erwartete und modellimplizierte Steigung sich unterscheiden, schlagen die Fit-Kriterien aus. 
+Fit-Kriterien unter 1 sind stärker diskriminierend, über 1 sind sie weniger diskriminierend als die mittlere Item-Diskrimination. Es sollten also vor allem Items mit einem Fit-Kriterium über 1 genauer betrachtet werden.  
+Infit/Outfit sind relativ, da sie den Item-Fit relativ zu den anderen Items im Itemset beurteilen.  
+
+Cut-off Werte sind abhängig von der Stichprobengröße (siehe [hier]()https://www.edmeasurementsurveys.com/residual-based-item-fit-statistics.html)
+
+:::{.columns}
+
+:::{.column width="50%"}
+### Infit
+Sensitiv für Abweichungen bei Items, die von der Schwierigkeit auf die Person zugeschnitten sind (Itemschwierigkeit und Personenfähigkeit passen zu einander). 
+:::
+
+
+:::{.column width="50%"}
+### Outfit
+- Sensitiv für Outlier (z.B. leistungsstarke Personen beantworten ein sonst leichtes Item falsch)
+
+:::
+:::
 
 ```{r}
 tam.fit(mod_2pl)
