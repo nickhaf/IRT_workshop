@@ -1,12 +1,10 @@
 ---
-title: Algemeines Linear Gemischtes Modell (ALGM)
-subtitle: "Das Raschmodell als eine Spezialfall des ALGM"
-author: "Nicklas Hafiz"
-date: "`r format(Sys.time(), '%Y %B, %d')`"
+title: Allgemeines Linear Gemischtes Modell (ALGM)
 format: letterbox-revealjs
 title-slide-attributes:
   data-background-image: ./images/dark_storm.jpg
   data-background-size: cover
+bibliography: references.bib
 ---
 
 ```{r}
@@ -15,19 +13,23 @@ source(here::here("R", "plot_functions.R"))
 ```
 
 
-## Überblick
-- Generalisiertes Lineares Modell (GLM)
-- Linear Mixed Model (LMM) 
-- Übertragung auf IRT Kontext
+## Überblick {.center}
+1. Generalisiertes Lineares Modell (GLM)
+2. Linear Mixed Model (LMM) 
+3. Alles das gleiche? Übertragung auf IRT Kontext
 
 ## Generalisiertes Lineares Modell
+
+Lineare Regression:
 
 $$
 y = Xb+e
 $$
 
-Das funktioniert gut für kontinuierliche Outcomes $y$. Was aber machen wir, wenn wir nur 0 und 1 vorhersagen wollen (wie bei IRT)?   
-Dann sind viele Annahmen der linearen Regression verletzt. Außerdem will das Modell auch Werte zwischen 0 und 1 vorhersagen, was ja gar keinen Sinn ergibt. 
+Was aber machen wir, wenn wir statt eines kontinuierlichen Outcomes $y$ nur 0 und 1 vorhersagen wollen (wie bei IRT)?   
+
+- Verletzung vieler Annahmen 
+- Dass Modell würde auch Werte außerhalb der sinnvollen Range vorhersagen.
 
 ## Logistische Regression
 Wir können die Prädiktorseite  aber transformieren, damit die Outcome-Werte auf der gewünschten Skala liegen:
@@ -41,18 +43,36 @@ mit $g$ als Link Funktion und $g^{-1}$ als Inverse der Link Funktion.
 :::
 
 ## Logistische Regression
-Item Response Theorie nutzt die logistische Regression, um die Wahrscheinlichkeit von 0 oder 1 vorherzusagen. Dafür nutzen wir keine linear Funktion, sondern die probit oder logit Funktion als die Link Funktion $g()$ (Darstellbar durch die S-Kurve, die wir schon oft gesehen haben):
+IRT nutzt die logistische Regression, um die Wahrscheinlichkeit von 0 oder 1 vorherzusagen.
 
+Link Funktion $g()$: probit oder [logit]{.highlight}, S-Kurve.  
+Mit Hilfe der Link Funktion transformieren wir die Outcomes, damit sie auf der gewünschten Skala liegen. 
+
+
+## Logit-Funktion
 $$
-g(\mu) = ln\left(\frac{\mu}{1-\mu}\right) = Xb
+g(\mu) = logit(\mu) = ln\left(\frac{\mu}{1-\mu}\right) = Xb
 $$
+<!-- Wir haben hier die Antwortwahrscheinlichkeit in Logits. Um die Wahrscheinlichkeit auf der interpretierbaren Skala zu erhalten, brauchen wir für Xb das Inverse der Logit-Funktion, also die logistische Funktion. -->
 
 :::{.callout-note}
-Die logit Funktion bringt also unsere Werte auf die logit-Skala, sodass sie zwiscehn 0 und 1 liegen.
+Die logit Funktion bringt also unsere Werte auf die logit-Skala, sodass sie zwischen 0 und 1 liegen.
 :::
 
+
+## Im IRT Fall
+
+$$
+logit(P(X_{pi}=1)) = \ln\left(\frac{P(X_{pi}=1)}{1-P(X_{pi}=1)}\right) = \theta_p - \beta_i
+$$
+
+
+$$
+P(X_{pi}=1) = g^{-1}(\theta_p - \beta_i)
+$$
+
 ::: aside
-Die Inverse $g^{-1}$ der logit Funktion ist die logistische Funktion. Das schauen wir uns morgen aber noch einmal an. [Hier](https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/The-Logit-Function/index.html) noch eine genauere Erklärung bei Interesse. 
+Die Inverse $g^{-1}$ der logit Funktion ist die logistische Funktion $\frac{e^{\mu}}{1+e^{\mu}}$. Das schauen wir uns [morgen](https://nickhaf.github.io/IRT_workshop/slides/xPL/#/pl-modell) aber noch einmal an. Mit Hilfe der logistischen Funktion kommen wir dann von dieser Gleichung auf die bekannte IRT Formel. [Hier](https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/The-Logit-Function/index.html) gibt es bei Interesse noch eine genauere Erklärung.  
 
 :::
 
@@ -97,12 +117,16 @@ Es fällt direkt auf: Die Daten sind genestet. Schüler*innen sind in Schulen gr
 Daten aus diesem [Tutorial](https://raffaelevacca.github.io/Intro-multilevel-with-R/)
 :::
 
-## Warum dieses Beispiel?
+## Warum dieses Beispiel? {.center}
 
-Als kleiner Teaser: genauso wie hier Schüler*innen in Schulen genestet sind, können wir Items als genestet in Personen betrachten. Diese Session soll ein bisschen zeigen, dass die ganzen verschiedenen Modelle, so unterschiedlich sie auch auf den ersten Blick scheinen mögen, doch sehr ähnlich sind, und in den meisten Fällen ineinander übersetzt werden können. 
+Genauso wie hier Schüler*innen in Schulen genestet sind, können wir Items als genestet in Personen betrachten. 
 
 
-# Umgang mit genesteten Daten
+## {background-image="images/groups.jpg" background-size="1225px"}
+
+::: {.absolute right="5%" bottom="7%" style="font-size:1.5em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255 .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255 .5); border-radius: 5px;"}
+Umgang mit genesteten Daten
+:::
 
 ```{r}
 #| echo: false
@@ -257,21 +281,24 @@ $$
 
 illustration_dat <- illustration_dat %>%
   mutate(regression_point = predict(mod1))
+# Filter the data for school 1288
+school_1288_data <- illustration_dat %>%
+  filter(school == 1288)
 
-ep <- illustration_dat[which(illustration_dat$mathach == max(illustration_dat[illustration_dat$school == 1288, "mathach"])), ]
-
+# Plot with a dotted line for each point from school 1288
 ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
-    geom_segment(x = ep$ses_cent, xend = ep$ses_cent, y = ep$mathach, yend = ep$regression_point, colour = "black") +
+  # Add geom_segment for each point in school 1288
+  geom_segment(data = school_1288_data, aes(x = ses_cent, xend = ses_cent, y = mathach, yend = regression_point), linetype = "dotted") +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   labs(title = "Math Score by Socioeconomic Status",
        x = "Socioeconomic Status",
        y = "Math Score") +
-       theme_classic() +
-       ylim(c(-5, 25)) +
-  set_colour_scheme() +
-         theme_bg() +
+  theme_bg() +
+    set_colour_scheme() +
+  ylim(c(-5, 25)) +
   NULL
+
 ```
 
 ## Level-2 Gleichung
@@ -289,7 +316,7 @@ $$
 #| echo: false
 
 ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
-  geom_point() +
+  geom_smooth(aes(x = ses_cent, y = mathach, group = school, colour = school), method = "lm", se = FALSE) +
   geom_smooth(method = "lm", se = FALSE, colour = "#01364C") +
   labs(title = "Math Score by Socioeconomic Status",
        x = "Socioeconomic Status",
@@ -350,62 +377,41 @@ Zusammenhang zwischen Lernzeit (Level 1 Prädiktor, da individuell) und Lehrqual
 
 :::
 
-## 
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-**Random** effects
-
-\
-\
-
- ![](images/dice.jpg)
-
-:::
-
-::: {.column width="50%"}
-
-::: {layout-ncol=1}
-
- ![](images/screws.jpg)
- 
- \
- \
-
- **Fixed** effects
-
-:::
-
-:::
-
-::::
 
 ## Random und Fixed effects
 
 :::: {.columns}
 
 ::: {.column width="50%"}
+
 **Random Effects**
 
-- Annahme eines zugrundeliegenden Gesamtmittelwerts. Von diesem weichen die Gruppen **random** ab. 
-- Bei Wiederholung würden wir andere Gruppen ziehen. 
+::: {.fragment .fade-in}
+
+::: small
+- Annahme eines zugrundeliegenden Populationsmittelwerts. Von diesem weichen die Gruppen [random]{.highlight} ab. Bei Wiederholung würden wir andere Gruppen ziehen. 
 - Partial Pooling: Regularisierung der Extremen Werte in Richtung Gruppenmittelwert. 
-<!-- - Anders ausgedrückt: Wir nehmen an, dass die Gruppen aus einer Grundverteilung gezogen wurden. Wir hätten theoretisch aber auch andere Gruppen ziehen können: Wenn wir das Experiment wiederholen, die level auf diesem Faktor werden andere sein.
-- Dadurch können wir Informationen aus den Anderen Gruppen ebenfalls nutzen.  -->
+:::
 
 :::
 
+![](images/dice.jpg){.absolute bottom="-2.5%" left="0%" height="51.5%" style="max-height: unset; box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);padding: 0em 0em;"}
+
+:::
 
 ::: {.column width="50%"}
-**Fixed Effects**
 
+**Fixed Effects**
+ ![](images/screws.jpg)
+
+::: {.fragment .fade-in}
+
+::: small
 - Hier machen wir diese Annahme einfach nicht. 
 - Uns interessieren die tatsächlichen Gruppen, bei Wiederholung würden wir vermutlich die gleichen ziehen.
-
 :::
-
+:::
+:::
 
 ::::
 
@@ -430,10 +436,13 @@ Anders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Ther
 :::
 
 
-## 
-::: r-fit-text
-Sind unsere Schulen und Schüler*innen nun also [random]{.highlight} oder [fixed]{.highlight} effects?
+## {background-image="images/pupils.jpg" background-size="1225px"}
+
+::: {.absolute right="5%" top="5%" style="font-size:1.5em;"}
+[Nehmen wir unsere Schulen und Schüler*innen nun also [random]{.highlight} oder [fixed]{.highlight} effects ins Modell auf?]{.highlight}
+
 :::
+
 
 ## lme4
 
@@ -454,12 +463,21 @@ Warum das Ganze? Es geht doch eigentlich um IRT?
 Wir können die Items genestet in Personen betrachten.
 
 Dafür müssen wir zwei Dinge beachten:
+
 - Link Funktion.  
 - Entscheidung über Annahme von fixed/random effects von Personen und Items.
 
 ::: aside
-- De Boeck and Wilson (2004)
-- Doran et al. (2007)
+Siehe @doran2007estimating. 
+:::
+
+
+
+## {background-image="images/items.jpg" background-size="1225px"}
+
+::: {.absolute right="5%" bottom="5%" style="font-size:1.5em;"}
+[Nehmen wir unsere Personen und Items nun als [random]{.highlight} oder [fixed]{.highlight} effects ins Modell auf?]{.highlight}
+
 :::
 
 
@@ -469,12 +487,22 @@ Dafür müssen wir zwei Dinge beachten:
 - Entwicklung von Items für einen großen Fragenkatalog: Items ebenfalls als random.
 
 
+::: aside
+@burkner2019bayesian stellen die Frage anders (vor allem im Bayesianischen Kontext): Ist parital Pooling gewünscht oder nicht?
+:::
+
 ## Prädiktoren
 Die Formulierung von IRT Modellen als Multilevel Modell erlaubt es uns, auf elegante Art Prädiktoren mit in das Modell aufzunehmen. 
+
+
+## Literatur
+::: {#refs}
+:::
 
 ## Bildquellen
 - Foto von <a href="https://unsplash.com/de/@brenomachado?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Breno Machado</a> auf <a href="https://unsplash.com/de/fotos/fotografie-eines-gewitters-in9-n0JwgZ0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@finnnyc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Mitch</a> auf <a href="https://unsplash.com/de/fotos/brauner-betonbau-tagsuber-nJupV3AOP-U?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@etiennegirardet?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Etienne Girardet</a> auf <a href="https://unsplash.com/de/fotos/menschen-im-gelben-hemd-stehen-auf-grauem-boden-RLT2oxS-Krk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@museumsvictoria?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Museums Victoria</a> auf <a href="https://unsplash.com/de/fotos/graustufenfoto-von-menschen-die-auf-einem-stuhl-sitzen-n1LIveUPls4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  - Foto von <a href="https://unsplash.com/de/@nguyendhn?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Nguyen Dang Hoang Nhu</a> auf <a href="https://unsplash.com/de/fotos/person-die-auf-whitepaper-schreibt-qDgTQOYk6B8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   
-  
-
