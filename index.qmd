@@ -51,7 +51,7 @@ Der Workshop vermittelt theoretische und praktische Einblicke in die Modellierun
 | Zeit          | Thema                                               | Beschreibung                                                                                                                                |
 |---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | 09:00 – 11:30 | **Fragen, Puffer**                        | Etwas freiere Gestaltung, offen gehalten für Fragen, Wiederholung, Interessierende Themen.                                                 |
-| 11:30 – 13:00 | **Studienplanung: Stichprobengröße**      | Simulation als Werkzeug zur Studienplanung.                                                                                                 |
+| 11:30 – 13:00 | **Simulationen für Studienplanung und Modellevaluation**      | Simulation als Werkzeug zur Planung der Stichprobengröße, und zur Modellbeurteilung.                                                                                                 |
 | 13:00 – 16:00 | **Auswertung von eigenen Daten**          | Bei Bedarf können hier Ideen für die Auswertung von Daten der Teilnehmenden gesammelt und ausprobiert werden.                               |
 
 : Tag 3 {.striped tbl-colwidths="[25, 30, 45]"}
