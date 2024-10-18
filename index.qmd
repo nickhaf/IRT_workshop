@@ -41,8 +41,8 @@ Der Workshop vermittelt theoretische und praktische Einblicke in die Modellierun
 |---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | 09:00 – 10:30 | **Linking und Differential Item Functioning**  | Verlinkte Items, lokale stochastische Unabhängigkeit, Differential Item Functioning (DIF).                                                  |
 | 10:30 – 12:00 | **Bedeutung von Testdesigns**              | Die Bedeutung von Testdesigns. Was kann schiefgehen, wenn Testdesigns ungeeignet sind?                                                     |
-| 13:00 – 16:00 | **Höher parametrisierte Modelle**          | Höher parametrisierte Modelle: 2PL, 3PL, Partial Credit.                                                                                   |
-| 13:00 – 16:00 | **Längsschnittliche Designs**              | Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen.                                          |
+| 13:00 – 14:30 | **Höher parametrisierte Modelle**          | Höher parametrisierte Modelle: 2PL, 3PL, Partial Credit.                                                                                   |
+| 14:30 – 16:00 | **Längsschnittliche Designs**              | Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen.                                          |
 
 : Tag 2 {.striped tbl-colwidths="[25, 30, 45]"}
 

@@ -107,7 +107,7 @@ Los Geht's!
 - `seq()` oder `:`: Sequenzen erstellen
 - `&`, `|`, `!`: Logische Operatoren (und, oder, nicht)
 
-## Datenstrukturen: 
+## Datenstrukturen
 
 ```{r, echo = FALSE, results = 'asis'}
 dat_structs <- data.frame(" " = c("1d", "2d", "nd"),
@@ -263,12 +263,12 @@ athletes <- readRDS(here::here("raw_data", "athletes.rds"))
 
 :::{.callout-note}
 ## Übung
-Bitte bearbeite die [Übung zum Einlesen von Daten](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/introR.html).
+Bitte bearbeite die [Übung zum Einlesen von Daten](https://nickhaf.github.io/IRT_workshop/exercises/intro_r/load_data_ex.html).
 :::
 
 ## {background-image="images/butterfly.jpg" background-size="1225px"}
 
-::: {.absolute left="2.5%" bottom="0.5%" style="color:#01364C; font-size:1.5em;"}
+::: {.absolute left="2.5%" bottom="0.5%" style="color:#01364C; font-size:1.5em; box-shadow: 0 0 0rem 0 rgba(248, 248, 248, .0); padding: 0em 0em; backdrop-filter: blur(0px);"}
 
 Datenmanipulation und Transformation
 
@@ -380,7 +380,7 @@ head(athletes_3)
 
 :::{.callout-important}
 ## `NA`
-Viele der Zeilen enthalten nur `NA` Werte. Das schauen wir uns gleich im Kapitel @sec-missings genauer an.
+Viele der Zeilen enthalten nur `NA` Werte. Das schauen wir uns gleich im @sec-missings genauer an.
 :::
 
 ## Subsetting Zeilen: [Tidyverse](https://www.tidyverse.org/)
@@ -533,8 +533,6 @@ medal_counts <- athletes %>%
   filter(Medal == "Gold") %>%
   group_by(Region) %>%
   count(Medal) 
-
-medal_counts
 ```
 
 
@@ -580,9 +578,16 @@ Bitte bearbeite die [Übung zum Merging](https://nickhaf.github.io/IRT_workshop/
 :::
 
 
-## Funktionen
 
+## {background-image="images/zahnrad.jpg" background-size="1225px"}
+
+::: {.absolute left="0%" bottom="0%" style="color:#01364C; font-size:1.5em; box-shadow: 0 0 0rem 0 rgba(248, 248, 248, .0); padding: 0em 0em; backdrop-filter: blur(0px); color: '#F8F8F8'"}
+
+Funktionen
+
+:::
 ## Basics
+::: {.fragment .fade-in}
 
 ```{r}
 #| eval: false
@@ -591,9 +596,9 @@ function_name <- function(argument_1, argument_2, ...){
   return(result)
 }
 ```
-
+:::
 ### Motivation
-- Alles was etwas in R **tut** ist eine Funktion. 
+- Alles was etwas in R [tut]{.highlight} ist eine Funktion. 
 - Superhilfreich, sich eigene Funktionen zu schreiben, weil das eine Menge Code-Duplikationen vermeidet (und die sind schlecht). 
 
 ## Beispiel
@@ -609,6 +614,10 @@ sum_num(x = 1, y = 1)
 ```
 
 
+## {background-image="images/empty_coffee.jpg" background-size="1225px"}
+::: {.absolute left="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
+Pause
+:::
 
 ## Bildquellen
 - Foto von <a href="https://unsplash.com/de/@afgprogrammer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Mohammad Rahmani</a> auf <a href="https://unsplash.com/de/fotos/schwarzer-flachbildschirm-gA396xahf-Q?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
@@ -626,6 +635,7 @@ sum_num(x = 1, y = 1)
 - Foto von <a href="https://unsplash.com/de/@zoeholling?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Zoe Holling</a> auf <a href="https://unsplash.com/de/fotos/mann-steht-auf-grossem-schachbrett-mit-brustfiguren-im-park-UDfmSK4AS3E?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@steinart?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Steinar Engeland</a> auf <a href="https://unsplash.com/de/fotos/grauer-und-weisser-blumenvorhang-BfMbxUu0EGE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@muhil?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Muhil Mohan</a> auf <a href="https://unsplash.com/de/fotos/ein-fluss-der-durch-einen-uppigen-grunen-hugel-fliesst-n1evnqIt9BQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@luk10?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Lukas Tennie</a> auf <a href="https://unsplash.com/de/fotos/nahaufnahme-eines-zifferblatts-das-die-zahnrader-zeigt-DAWnMmUSMdU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   
   
   

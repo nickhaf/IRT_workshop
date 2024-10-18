@@ -73,7 +73,7 @@ characters[characters$uni_name == "Friends", ]
     -   [ ] Alle Harry Potter Character mit einer notability über `90`.
     -   [ ] Alle Charactere, die nicht aus dem Harry Potter Universum stammen und eine notability unter `90` haben.
     -   [ ] Alle Charactere mit einer notability über `90`.
-    -   [ ] Alle Charactere mit einer notability unter `90`.
+    -   [ ] Alle Charactere mit einer notability unter oder gleich `90`.
     
 ::: {.callout-caution collapse="true"}
 ## Lösung
@@ -81,12 +81,12 @@ characters[characters$uni_name == "Friends", ]
 -   [ ] Alle Harry Potter Character mit einer notability über `90`.
 -   [ ] Alle Charactere, die nicht aus dem Harry Potter Universum stammen und eine notability unter `90` haben.
 -   [ ] Alle Charactere mit einer notability über `90`.
--   [x] Alle Charactere mit einer notability unter `90`.
+-   [x] Alle Charactere mit einer notability unter oder gleich `90`.
     
 Bisschen eine Trick-Frage: weil wir alle Charactere auswählen, die aus dem Harry Potter Universum ODER nicht von dort stammen, wählen wir alle Charactere unabhängig von ihrer TV-Serie aus. Aber wir wählen alle Charactere aus, die eine Notability unter 90 haben (Vorsicht vor dem `!` vor dem jeweiligen Vergleich).
 :::
 
-## Exercise 3
+## Übung
 
 1. Welche Charactere aus "Game of Thrones" haben eine Notability über `90`? Benutze `Base R`.
 
