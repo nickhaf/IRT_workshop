@@ -9,5 +9,7 @@ listing:
     - ./xPl/pcm.qmd
   sort: false
 format: html
+image: ../slides/xPL/images/choice.jpg
 ---
 
+Ziel dieser Übung ist es 2PL, 3PL und Partial Credit Modelle auszuprobieren. In diesem Zuge werden auch IRT-Daten simuliert, Modelle ausgewertet und miteeinander verglichen.

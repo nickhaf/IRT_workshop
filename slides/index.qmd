@@ -10,15 +10,28 @@ format: html
 ## Einführung in R
 {{< revealjs "./IntroR/introR.html" >}}
 
-## GLM
-{{< revealjs "./GLM/glm.html" >}}
+## IRT-Modelle in `TAM`
+<!-- {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}} -->
 
-## Validität
+## Raschmodell und Generalized Linear Mixed Models (GLMM)
+{{< revealjs "./GLM/glm.html" >}}
+<!-- {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}} -->
+
+## Reliabilität und Validität
 {{< revealjs "./Validity/validity.html" >}}
 
 # Tag 2
-## Linking
+## Linking und Differential Item Functioning
 {{< revealjs "./Linking/linking.html" >}}
+
+## Bedeutung von Testdesigns
+<!-- {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}} -->
 
 ## Höher Parametrisierte Modelle
 {{< revealjs "./xPL/index.html" >}}
+
+## Längsschnittliche Designs
+<!-- {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}} -->
+
+# Tag 3
+Siehe [Übungen](https://nickhaf.github.io/IRT_workshop/exercises/). 

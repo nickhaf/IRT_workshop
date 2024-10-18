@@ -1,5 +1,5 @@
 ---
-title: "Linking"
+title: "Linking und Differential Item Functioning"
 subtitle: "Übungen"
 listing: 
   type: table
@@ -9,6 +9,7 @@ listing:
     - ./linking/linking.qmd
     - ./linking/dif.qmd
 format: html
+image: ../slides/Linking/images/link.jpg
 ---
 
 Ziel dieser Übung ist es, grundlegendes Linking in R auszuprobieren, und eine erste Differential Item Functioning (DIF) Analyse durchzuführen. 
