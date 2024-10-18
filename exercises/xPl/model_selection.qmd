@@ -39,7 +39,6 @@ Zuerst interessiert uns wie gut unsere tatsächlichen Werte mit den Modellerwaru
 #| eval: false
 
 plot(sim_dat_2PL,
-  type = "items",
   export = FALSE,
   observed = TRUE,
   package = "graphics"
@@ -54,21 +53,40 @@ Fällt dir etwas auf?
 
 ```{r}
 #| message: false
-
-plot(sim_dat_2PL,
-  type = "items",
-  export = FALSE,
-  observed = TRUE,
-  package = "graphics"
-)
-
-
 plot(sim_dat_2PL,
   type = "expected",
   export = FALSE,
   observed = TRUE,
-  package = "graphics")
+  package = "graphics",
+  ngroups = 4)
 ```
+
+:::{.callout-important}
+Noch ein Wort zur Warnung zur grafischen Überprüfung: je nach `ngroups` ist unser Item 11, das wir ja mit Infit simuliert haben, relativ gut passend, oder  es ist der simulierte Hügel zu sehen:
+
+```{r}
+plot(sim_dat_2PL,
+  type = "expected",
+  item = 11,
+  export = FALSE,
+  observed = TRUE,
+  package = "graphics",
+  ngroups = 3)
+```
+
+Versus:
+
+```{r}
+plot(sim_dat_2PL,
+  type = "expected",
+  item = 11,
+  export = FALSE,
+  observed = TRUE,
+  package = "graphics",
+  ngroups = 8)
+```
+
+:::
 
 ::: 
 
@@ -126,11 +144,12 @@ Jetzt wollen wir uns noch zwei alternative Modelle anschauen: Das 1PL Modell und
 sim_dat_1PL <- tam(sim_dat_wide %>% select(-sub_id), irtmodel = "1PL", verbose = FALSE)
 
 plot(sim_dat_1PL,
-  type = "items",
   export = FALSE,
   observed = TRUE,
-  package = "graphics"
+  package = "graphics", 
+  ngroups = 7
 )
+
 ```
 
 Und die Infit und Outfitwerte, geplottet mit meiner eigenen Funktion (weiter oben definiert):
@@ -142,7 +161,9 @@ plot_infit_outfit(sim_dat_1PL)
 
 ```
 
-Hier können wir schön sehen, dass der Fit schon deutlich abnimmt, wenn wir die Steigung ignorieren (die wir ja bewusst simuliert haben). 
+Hier können wir schön sehen, dass der Fit schon deutlich abnimmt, wenn wir die Steigung ignorieren (die wir ja bewusst simuliert haben).  
+Unsere beiden verhunzten Items 3 und 11 sind hier jetzt auch auffällig. 
+
 :::
 
 

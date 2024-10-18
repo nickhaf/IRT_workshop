@@ -18,7 +18,7 @@ library(catIrt)
 
 ```{r}
 #| echo: false
-
+n_items <- 20
 source(here::here("R", "plot_functions.R"))
 ```
 
@@ -29,7 +29,7 @@ Als erstes wollen wir Schritt für Schritt das Grundgerüst für unsere Simulati
 Als erstes definieren wir unsere wahren Itemparameter, aus denen dann die Daten simuliert werden.   
 Erstelle dafür einen `data.frame`, der pro Item eine Zeile mit den entsprechenden Itemparamtern $\alpha$, $\beta$ und $\gamma$ enthält. 
 
-- Wir wollen 20 Items simulieren.
+- Wir wollen `r n_items`` Items simulieren.
 - $\alpha$ ist der Diskriminationsparameter und soll aus einer Normalverteilung $N(1, 0.1)$ simuliert werden. So ist er noch klein genug, um ein sinnvolles 1PL-Modell ausprobieren zu können. 
 - $\beta$ ist der Schwierigkeitsparameter und soll den gesamte erwartete Schwierigkeitsbereich abdecken. Die Range soll von -2 bis 2 gehen, und Itemschwierigkeiten in gleichmäßigen Abständen enthalten. 
 - $\gamma$ ist der Rate-Parameter, und wird erst einmal als Null für alle Items angenommen. 
@@ -398,10 +398,7 @@ mse_results <- results %>%
     MSE = mean(beta_diff_2),
     MCSE = sd(beta_diff_2) / sqrt(n() - 1), 
 .groups = "drop"
-  ) %>%
-  mutate(RMSE = sqrt(MSE), 
-         RMCSE = ) ## Ich nehme hier noch die Wurzel aus dem MSE, damit die Ergebnisse wieder auf der Schwierigkeitsskala sind. Wir haben dann also den Root Mean Square Error.
-
+  )
 head(mse_results)
 ```
 
