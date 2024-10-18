@@ -121,6 +121,7 @@ Jetzt wollen wir uns noch zwei alternative Modelle anschauen: Das 1PL Modell und
 
 :::{.callout-caution collapse="true"}
 
+## Lösung
 ```{r}
 sim_dat_1PL <- tam(sim_dat_wide %>% select(-sub_id), irtmodel = "1PL", verbose = FALSE)
 
@@ -147,52 +148,54 @@ Hier können wir schön sehen, dass der Fit schon deutlich abnimmt, wenn wir die
 
 
 ## 3PL
-Fitte jetzt ein 3PL Modell. Nimm für die simulierten Daten eine 50 % Chance an, das Item durch raten zu lösen. 
-
+Fitte jetzt ein 3PL Modell. Nutze dafür diesmal `mirt` und nutze `ggmirt`, um dir die [in den Folien gezeigten Plots](https://nickhaf.github.io/IRT_workshop/slides/xPL/#/item-person-map) anzuschauen. 
+:::{.callout-caution collapse = "true"}
+## Lösung
 ```{r}
-#| eval: false
-
-
-## Probably just instable because the data is wrong?
-
-sim_dat_3PL <- tam.mml.3pl(sim_dat_wide %>% select(-sub_id), 
-                           verbose = FALSE, guess = rep(0.5, 13))
-
-summary(sim_dat_3PL)
-
-plot(sim_dat_3PL,
-  type = "items",
-  export = FALSE,
-  observed = TRUE,
-  package = "graphics"
-)
-
-tam.fit(sim_dat_3PL)
-
-### Try mirt
 library(mirt)
-sim_dat_3PL <- mirt(sim_dat_wide %>% select(-sub_id), 1, itemtype = "3PL", verbose = FALSE, guess = rep(0.25, 13))
+sim_dat_3PL <- mirt(sim_dat_wide %>% select(-sub_id), 1, itemtype = "3PL", verbose = FALSE)
 summary(sim_dat_3PL)
 coef(sim_dat_3PL, IRTpars = TRUE, simplify = TRUE)
 
+```
 
-itemfit(sim_dat_3PL, fit_stats = "infit") # typical for Rasch modeling
-
+```{r}
 # install.packages("devtools")
 # devtools::install_github("masurp/ggmirt")
 library(ggmirt)
 itemfitPlot(sim_dat_3PL)
 tracePlot(sim_dat_3PL)
+summaryPlot(sim_dat_3PL)
 ```
 
+- Bei Item 2 scheint ein recht hoher Rateparamter geschätzt zu werden. Das sehen wir in den ICCs. 
+- Item 3 hatten wir ja so simuliert, dass Personen mit niedriger Fähigkeit richtig antworten, alle anderen aber falsch. Wäre das ein echtes Item sollten wir unbedingt noch einmal raufschauen (eventuell ist es falsch herum kodiert, oder die Lösung ist falsch?).  
+:::
+
 ## Modellvergleich
+
+### 1PL vs. 2PL
 Nutze jetzt die Funktion `CMD::IRT.compareModels()` um das 1PL und das 2PL Modell zu vergleichen. Für welches Modell würdest du dich aufgrund der Fit-Kriterien entscheiden?
 
 :::{.callout-caution collapse="true"}
-
+## Lösung
 ```{r}
 CDM::IRT.compareModels(sim_dat_1PL, sim_dat_2PL)
 ```
 
-In diesem Fall scheint das 2PL Modell besser zu sein, da beispielsweise AIC und BIC niedriger sind. Der Unterschied zwischen den Modellen ist laut Likelihood Ratio Test signifikant. Insgesamt würden wir uns also für das 2PL Modell entscheiden. 
+In diesem Fall scheint das 2PL Modell zu bevorzugen zu sein, da beispielsweise AIC und BIC niedriger sind. Der Unterschied zwischen den Modellen ist laut Likelihood Ratio Test signifikant. Insgesamt würden wir uns also für das 2PL Modell entscheiden. 
 ::: 
+
+### 2PL vs. 3PL
+Wir können das gleiche auch in `mirt` machen. Fitte dafür zuerst das 2PL Modell noch einmal mit `mirt`, und vergleiche es dann mit dem 3PL Modell mit Hilfe der Funktion `anova()`. 
+
+
+:::{.callout-caution collapse="true"}
+## Lösung
+```{r}
+sim_dat_2PL <- mirt(sim_dat_wide %>% select(-sub_id), 1, itemtype = "2PL", verbose = FALSE)
+anova(sim_dat_2PL, sim_dat_3PL)
+```
+
+In diesem Fall scheint das 3PL Modell keinen wirklichen Vorteil zu bieten (haben wir ja auch nicht so simuliert). Wir könnten uns also ruhigen Gewissens für das 2PL Modell entscheiden.
+:::

@@ -159,7 +159,7 @@ str(sim_dat)
 
 ```
 
-Unser finaler `data.frame` hat 1300000 Zeilen, wie verlangt. Lasst uns auch noch einmal schauen, ob eine zufällige Person alle Items beantwortet hat:
+Unser finaler `data.frame` hat `r n_subj * 13` Zeilen, wie verlangt. Lasst uns auch noch einmal schauen, ob eine zufällige Person alle Items beantwortet hat:
 
 ```{r}
 sim_dat %>%
@@ -192,17 +192,11 @@ head(sim_dat)
 Auf den ersten Blick sieht das schonmal gut aus. Personen mit niedrigerem $\theta$ Wert haben auch eine geringere Wahrscheinlichkeit, das Item richtig zu beantworten (vgl. z.B. Zeile 2 und 3).
 :::
 
-## Ein zufälliges Item simulieren
-Wir können jetzt noch ein Item hinzufügen, dass überhaupt nicht der 2PL Gleichung folgt. Dafür überschreiben wir die answer-Werte von einem Item (z.B. Item 10) einfach mit zufälligen Werten:
+## Auffällige Itemmuster simulieren
+
+Wir können jetzt auch ein bisschen die Antwortmuster manipulieren, um zu schauen, wie sich die Items verhalten, wenn bestimmte Auffälligkeiten vorliegen. Z.B. können wir festlegen, dass Item 3 von Leuten mit niederiger Fähigkeit eher richtig beantwortet wird, von allen anderen leuten aber eher falsch. 
 
 ```{r}
-
-## Random theta Werte, unabhängig von Schwierigkeit
-# sim_dat <- sim_dat %>%
-#   mutate(p = ifelse(item_id == 10, exp(sin(a*(theta - b)))/(1 + exp(sin(a*(theta - b)))), p)) 
-#   
-
-## Item wird von hohen Theta falsch beantwortet und von niedrigem Theta richtig
 
 sim_dat <- sim_dat %>%
   mutate(p = ifelse(item_id == 3, ifelse(theta < -1.5, 0.95, 0.05), p))
