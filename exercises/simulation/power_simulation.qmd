@@ -400,7 +400,7 @@ mse_results <- results %>%
 .groups = "drop"
   ) %>%
   mutate(RMSE = sqrt(MSE), 
-         RMCSE = sqrt(MCSE)) ## Ich nehme hier noch die Wurzel aus dem MSE, damit die Ergebnisse wieder auf der Schwierigkeitsskala sind. 
+         RMCSE = ) ## Ich nehme hier noch die Wurzel aus dem MSE, damit die Ergebnisse wieder auf der Schwierigkeitsskala sind. Wir haben dann also den Root Mean Square Error.
 
 head(mse_results)
 ```
@@ -415,13 +415,11 @@ Klasse. Um die Ergebnisse leichter auszuwerten, können wir sie jetzt noch visua
 ```{r}
 mse_results %>%
 filter(item %in% c("Item1", "Item10", "Item20")) %>%
-ggplot( aes(x = n_persons, y = RMSE, colour = item)) +
+ggplot( aes(x = n_persons, y = MSE, colour = item)) +
   geom_point() +
 geom_line() +
-  geom_ribbon(aes(ymin = RMSE - 1.96 * MCSE, ymax = RMSE + 1.96 * MCSE, fill = item), 
+  geom_ribbon(aes(ymin = MSE - 1.96 * MCSE, ymax = MSE + 1.96 * MCSE, fill = item), 
               alpha = 0.05, color = NA) +
-  geom_hline(yintercept = 0.2, linetype = "dashed", colour = '#01364C') + ## Cutoff Wert)
-## and some styling, not relevant, but the functions can be found in the R folder on GitHub
 set_colour_scheme() +  
 set_fill_scheme() +
 theme_bg() +
@@ -429,12 +427,23 @@ xlab("Stichprobengröße")
 
 ```
 
-Fantastisch. Die Daten verhalten sich so, wie wir es erwarten würden, da der MSE mit zunehmender Stichprobengröße abnimmt, der Unterschied zwischen geschätzter und tatsächlicher Itemschwierigkeit wird also kleiner. 
+Welche Stichprobengröße würdest du für die Studie verwenden?
 
 
-Wir haben ja oben unseren Cutoff Wert berechnet, und können daran erkennen, dass wir für unser kleines Modell eine Stichprobengröße von ... bräuchten, um die Itemschwierigkeiten präzise genug zu schätzen. 
 
-Und Cutoff oben festlegen! 
+
+:::{.callout-caution}
+## Lösung
+
+Diese Frage ist natürlich so pauschal nicht beantwortbar. 
+Zuerst einmal sehen wir, dass die Daten sich so verhalten, wie wir es erwarten würden, da der MSE mit zunehmender Stichprobengröße abnimmt, der Unterschied zwischen geschätzter und tatsächlicher Itemschwierigkeit wird also kleiner.  
+Es fällt außerdem auf, dass die Items 1 und 20 (die wir als sehr leicht und sehr schwer definiert haben) ungenauer geschätzt werden (höherer MSE und auch größeres Konfidenzintervall) als Item 10, das in der Mitte liegt. Das ist auch zu erwarten, da Items, die entweder von fast allen oder von fast niemandem beantwortet werden, weniger Informationen enthalten.
+
+Es ist ein bisschen schwierig, allgemeine Cut-Off Werte für den MSE zu definieren. Ein besseres Vorgehen ist vermutlich, zu schauen, ab welcher Stichprobengröße es keine zu großen Änderungen mehr gibt. Für Item 10 wäre das z.B. in etwa bei 200 Personen. Dort haben wir einen MSE von ca. 0.03, was, wenn wir die Wurzel nehmen, einer Abweichung von ca. 0.17 Logits auf der Itemschwierigkeits-Skala entspricht. Das ist doch ein guter Kompromiss zwischen Genauigkeit und Aufwand von Probanden-Rekrutierung. Wenn wir allerdings an den Rändern interssiert sind, also z.B. vor allem schwere Fragen erstellen wollen, weil wir vor allem die leistungsstarken Testteilnehmer\*innen differenzieren wollen, müssten wir vermutlich eine größere Stichprobe nehmen, damit die schweren Items auch mit einer adäquaten Genauigkeit geschätzt werden können. Gleiches gilt für leicht Items, wenn wir in einer Art Screening die besonders leistungsschwachen Testteilnehmer\*innen herausfiltern wollen. 
+::: 
+
+
+## Ausblick
 
 :::{.callout-note}
 Diese Grundgerüst können wir jetzt natürlich entsprechend unserer Fragestellung erweitern. Einige mögliche Fragestellungen:
@@ -445,7 +454,5 @@ In @morris2019using findet man eine tolle Übersicht zum Workflow in Simulations
 
 :::
 
-
-## Ausblick
 Dieses Grundgerüst könnten wir jetzt nach unseren Vorstellungen Erweitern. Wir könnten z.B. weitere Domänen hinzufügen und den Zusammenhang mit der Reliabilität anschauen. Wir könnten eine Linkingstudie simulieren, indem wir zwei Gruppen erstellen, von denen jede jeweils einige der Items nicht beantwortet hat. Wir könnten schauen, welche Stichprobengröße nötig wäre, um einen kleinen treatment-Effekt in einem randomisierten klinischen Versuch zu finden.
 
