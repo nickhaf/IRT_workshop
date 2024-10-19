@@ -13,7 +13,7 @@ In diesem Abschnitt linken wir unsere ersten Kalibrierungen. In diesem Schritt m
 
 
 :::{.callout-note}
-Wenn du die Übung zur Datenaufbereitung nicht gemacht hast, kannst du die aufbereiteten Daten [hier](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunterladen und dann damit arbeiten. Nimm ansonsten einfach deine selbst aufbereiteten Daten.
+Wenn du die Übung zur Datenaufbereitung nicht gemacht hast, kannst du die aufbereiteten Daten `qa_dat_wide.rds` [hier](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunterladen und dann damit arbeiten. Nimm ansonsten einfach deine selbst aufbereiteten Daten.
 
 ```{r}
 qa_dat_wide <- readRDS(here::here("raw_data", "qa_dat_wide.rds"))
@@ -29,6 +29,16 @@ Foto von <a href="https://unsplash.com/de/@cleipelt?utm_content=creditCopyText&u
 
 
 # Linking
+
+:::{.callout-note}
+## Benötigte Pakete
+```{r}
+library(TAM)
+library(tidyverse)
+```
+
+:::
+
 Wir haben gleich vor, DIF auf der Geschlecht-Variable zu untersuchen. Es gibt verschiedene Funktionen, die das in mehr oder weniger einem Guss machen, wir schauen uns das Vorgehen jetzt aber erst einmal Schritt für Schritt an. 
 
 ## Gruppen kalibrieren
@@ -46,7 +56,8 @@ table(qa_dat_wide$gender)
 
 ## Lösung
 ```{r}
-library(tidyverse)
+#| message: false
+
 qa_f <- qa_dat_wide %>%
   filter(gender == 1)
 
@@ -56,18 +67,17 @@ qa_m <- qa_dat_wide %>%
 :::
 
 ### Kalibrieren
-Fitte jetzt für beide Gruppen seperat ein Raschmodell mit TAM. 
+Fitte jetzt für beide Gruppen seperat ein Raschmodell mit `TAM`. 
 
 
 :::{.callout-tip collapse="true"}
 ## Tipp
-Denk daran nur die Spalten, die auch Itemantworten enthalten, in die TAM-Funktion zu geben. 
+Denk daran nur die Spalten, die auch Itemantworten enthalten, in die `TAM`-Funktion zu geben. 
 ::: 
 
-:::
+:::{.callout-caution collapse="true"}
 ## Lösung
 ```{r}
-library(TAM)
 
 ## Rasch Modell fitten, die ersten 5 Spalten enthalten keine Itemantworten und werden entfernt
 tam_f <- tam(qa_f[, 6:ncol(qa_f)], verbose = FALSE)
@@ -78,8 +88,11 @@ tam_m <- tam(qa_m[, 6:ncol(qa_m)], verbose = FALSE)
 Die kalibrierten Itemparamter können wir uns so anschauen:
 
 ```{r}
-tam_f_difficulty <- tam_f$xsi
-tam_m_difficulty <- tam_m$xsi
+tam_f_difficulty <- tam_f$item_irt
+tam_m_difficulty <- tam_m$item_irt
+
+tam_f_difficulty
+tam_m_difficulty
 ```
 
 ::: 
@@ -88,7 +101,7 @@ tam_m_difficulty <- tam_m$xsi
 Wir verzichten für diese Übung darauf, den Modellfit zu beurteilen und linken direkt. Nutze dafür die Funktion `tam.linking()` und Linke mit Stocking-Lord Linking. 
 
 :::{.callout-important}
-Denk zurück an unsere Besprechung von [Ankeritems](https://nickhaf.github.io/IRT_workshop/slides/Linking/linking.html#/ankeritems). Eigentlich sollten wir möglichst non-DIF Items zum Linking verwenden. Das untersuchen wir aber erst in der nächsten Übung. Manche Linking-Funktionen wie `equat1pl` aus [eatMode](https://github.com/weirichs/eatModel)` ermöglichen es, DIF Items direkt automatisch auszuschließen. Ansonsten kann es auch sinnvoll sein bei der Untersuchung von DIF iterativ vorzugehen, und Items mit DIF nacheinander auszuschließen und dann erneut zu linken. Wie wir in der nächsten Übung sehen werden übernehmen einige Funktionen zur Untersuchung von DIF das automatisch. 
+Denk zurück an unsere Besprechung von [Ankeritems](https://nickhaf.github.io/IRT_workshop/slides/Linking/linking.html#/ankeritems). Eigentlich sollten wir möglichst non-DIF Items zum Linking verwenden. Das untersuchen wir aber erst in der nächsten Übung. Manche Linking-Funktionen wie `equat1pl()` aus [eatModel](https://github.com/weirichs/eatModel)` ermöglichen es, DIF Items direkt automatisch auszuschließen. Ansonsten kann es auch sinnvoll sein bei der Untersuchung von DIF iterativ vorzugehen, und Items mit DIF nacheinander auszuschließen und dann erneut zu linken. Wie wir in der nächsten Übung sehen werden übernehmen einige Funktionen zur Untersuchung von DIF das automatisch. 
 
 :::
 
@@ -119,8 +132,12 @@ difficulty_link_m <- tam_link$parameters_list[[2]]$xsi
 Vergleiche sie mit den kalibrierten Schwierigkeiten:
 
 ```{r}
-tam_f_difficulty <- tam_f$xsi
-tam_m_difficulty <- tam_m$xsi
+#| eval: false
+tam_f_difficulty <- tam_f$item_irt
+tam_m_difficulty <- tam_m$item_irt
+
+tam_f_difficulty
+tam_m_difficulty
 ```
 
 Was fällt auf?
@@ -128,7 +145,21 @@ Was fällt auf?
 :::{.callout-caution collapse="true"}
 
 ## Lösung
-Zuerst fällt auf, dass sich natürlich nur die Schwierigkeiten für die zweite Gruppe geändert haben. Für Item 1 ist die Schwierigkeit für die Männer relativ stark gestiegen, es ist für die Männer aber nach wie vor deutlich einfacher als für die Frauen. Schon einmal ein guter Kandidat für die DIF Analyse. 
+
+Für Frauen:
+```{r}
+tam_f_difficulty$linked_beta <- difficulty_link_f
+tam_f_difficulty
+```
+ 
+
+Für Männer:
+```{r}
+tam_m_difficulty$linked_beta <- difficulty_link_m
+tam_m_difficulty
+``` 
+ 
+Zuerst fällt auf, dass sich natürlich nur die Schwierigkeiten für die zweite Gruppe geändert haben. Für Item 3401 ist die Schwierigkeit beispielsweise für die Männer relativ stark gestiegen, es ist für die Männer aber nach wie vor deutlich einfacher als für die Frauen. Schon einmal ein guter Kandidat für die DIF Analyse. 
 :::
 
-Gut, jetzt haben wir ein erstes Linking durchgeführt. Bei der DIF Analyse im nächsten Kapitel machen wir das gleiche nochmal, aber mit anderen Paketen und etwas komprimierter, können die Ergebnisse dann aber auch etwas vergleichen. 
+Gut, jetzt haben wir ein erstes Linking durchgeführt. Bei der DIF Analyse im nächsten Kapitel machen wir das gleiche nochmal, aber mit anderen Paketen und etwas komprimierter. Wir werden dann die Ergebnisse vergleichen. 
