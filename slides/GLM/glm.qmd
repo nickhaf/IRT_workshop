@@ -13,10 +13,22 @@ source(here::here("R", "plot_functions.R"))
 ```
 
 
-## Überblick {.center}
+
+
+## Plan 
+
+::::{.columns}
+:::{.column width="50%"}
 1. Generalisiertes Lineares Modell (GLM)
 2. Linear Mixed Model (LMM) 
 3. Alles das gleiche? Übertragung auf IRT Kontext
+:::
+
+:::{.column width="50%"}
+![](images/plan.jpg){.image-right}
+:::
+::::
+
 
 ## Generalisiertes Lineares Modell
 
