@@ -1,8 +1,16 @@
 ---
 title: "2. Linking"
-author: "Nicklas Hafiz"
 format: html
+about:
+  id: link-heading
+  template: marquee
+  image: images/link.jpg
 ---
+
+:::{#link-heading}
+
+In diesem Abschnitt linken wir unsere ersten Kalibrierungen. In diesem Schritt machen wir das manuell, um im nächsten Kapitel DIF untersuchen zu können. Viele DIF-Funktionen übernehmen die Arbeit für uns, nichtsdestotrotz ist es hilfreich, das Vorgehen einmal kennen gelernt zu haben. Vor allem, weil Linking auch unabhängig von DIF wichtig ist. 
+
 
 :::{.callout-note}
 Wenn du die Übung zur Datenaufbereitung nicht gemacht hast, kannst du die aufbereiteten Daten [hier](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunterladen und dann damit arbeiten. Nimm ansonsten einfach deine selbst aufbereiteten Daten.
@@ -11,6 +19,14 @@ Wenn du die Übung zur Datenaufbereitung nicht gemacht hast, kannst du die aufbe
 qa_dat_wide <- readRDS(here::here("raw_data", "qa_dat_wide.rds"))
 ```
 :::
+:::
+
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@cleipelt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Chris Leipelt</a> auf <a href="https://unsplash.com/de/fotos/collage-aus-grauer-metallkette-TcFq4-ulczU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::
+
+
 
 # Linking
 Wir haben gleich vor, DIF auf der Geschlecht-Variable zu untersuchen. Es gibt verschiedene Funktionen, die das in mehr oder weniger einem Guss machen, wir schauen uns das Vorgehen jetzt aber erst einmal Schritt für Schritt an. 

@@ -1,25 +1,36 @@
 ---
 title: "3. Differential Item Functioning"
 subtitle: "Übung"
-author: "Nicklas Hafiz"
 format: html
+about:
+  id: dif-heading
+  template: marquee
+  image: images/penguins_two.jpg
 ---
 
-```{r}
-source(here::here("R", "plot_functions.R"))
-```
+:::{#dif-heading}
+In diesem Kapitel führen wir eine DIF-Analyse durch: zuerst mit den im letzten Kapitel gelinkten Daten, und dann noch einmal "in einem Guss". Dadurch wird hoffentlich deutlicher, was im Hintergrund abläuft. 
+:::
 
-```{r}
-qa_dat_wide <- readRDS(here::here("raw_data", "qa_dat_wide.rds"))
-```
+::: aside
 
+Foto von <a href="https://unsplash.com/de/@ncx1701d?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Martin Wettstein</a> auf <a href="https://unsplash.com/de/fotos/weisser-und-schwarzer-pinguin-auf-grauem-felsen-o4snRPEZRRs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::
 
+:::{.callout-caution collapse="true"}
+
+## Vorheriger Code
 ```{r}
-#| echo: false
 #| message: false
 
 library(tidyverse)
 library(TAM)
+
+## Optional. Lädt Plotting-Funktionen
+source(here::here("R", "plot_functions.R"))
+
+## Daten laden, aufbereiten und Kalibrieren
+qa_dat_wide <- readRDS(here::here("raw_data", "qa_dat_wide.rds"))
 
 qa_f <- qa_dat_wide %>%
   filter(gender == 1)
@@ -35,6 +46,7 @@ difficulty_link_f <- tam_link$parameters_list[[1]]$xsi
 difficulty_link_m <- tam_link$parameters_list[[2]]$xsi
 ```
 
+::: 
 
 # Waldtest
 Wir werden einen [Waldtest]() durchführen, einfach weil man hier das Grundlegende Vorgehen ganz gut sehen kann. Wie im [Theorieteil]() besprochen gibt es aber viele verschiedene Optionen, implementiert in diversen Paketen. Für diese Übung werden wir mit [mirt](https://cran.r-project.org/web/packages/mirt/index.html) und [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
