@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-image','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
       searchColumns: ["listing-title","listing-author"],
     };
@@ -298,27 +298,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href=".././exercises/index_glm.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+            <a href="../exercises/index_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation zur Stichprobenplanung</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
- <span class="menu-text">./exercises/glm/glm.qmd</span>
-  </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../exercises/index_simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Simulation zur Stichprobenplanung</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../exercises/simulation/power_simulation.html" class="sidebar-item-text sidebar-link">
@@ -375,9 +361,6 @@ window.Quarto = {
          <option value="listing-title-sort" data-direction="asc">
           Titel
         </option>
-         <option value="listing-author" data-direction="asc">
-          Autor:in
-        </option>
      </select>
   </div>
     <div class="input-group input-group-sm quarto-listing-filter">
@@ -389,36 +372,35 @@ window.Quarto = {
 <thead>
 <tr>
 <th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Titel</a>
 </th>
 <th>
-<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Autor:in</a>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Titel</a>
 </th>
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-file-modified-sort="1729353124708" data-listing-reading-time-sort="8" data-listing-word-count-sort="1590" data-listing-title-sort="Simulation von IRT Daten" data-listing-filename-sort="simulation.qmd">
+<tr data-index="0" data-listing-file-modified-sort="1729353918394" data-listing-reading-time-sort="8" data-listing-word-count-sort="1590" data-listing-title-sort="Simulation von IRT Daten" data-listing-filename-sort="simulation.qmd">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="xPl/simulation_files/figure-html/unnamed-chunk-15-1.png" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
+</td>
 <td>
 <a href="../exercises/xPl/simulation.html" class="title listing-title">Simulation von IRT Daten</a>
 </td>
-<td>
-<span class="listing-author">&nbsp;</span>
-</td>
 </tr>
-<tr data-index="1" data-listing-file-modified-sort="1729353124708" data-listing-reading-time-sort="4" data-listing-word-count-sort="725" data-listing-title-sort="Modellselektion" data-listing-filename-sort="model_selection.qmd">
+<tr data-index="1" data-listing-file-modified-sort="1729353918394" data-listing-reading-time-sort="4" data-listing-word-count-sort="725" data-listing-title-sort="Modellselektion" data-listing-filename-sort="model_selection.qmd">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="xPl/model_selection_files/figure-html/unnamed-chunk-4-1.png" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
+</td>
 <td>
 <a href="../exercises/xPl/model_selection.html" class="title listing-title">Modellselektion</a>
 </td>
-<td>
-<span class="listing-author">Nicklas Hafiz</span>
-</td>
 </tr>
-<tr data-index="2" data-listing-file-modified-sort="1729353124708" data-listing-reading-time-sort="3" data-listing-word-count-sort="515" data-listing-title-sort="Partial Credit Model" data-listing-filename-sort="pcm.qmd">
+<tr data-index="2" data-listing-file-modified-sort="1729353918394" data-listing-reading-time-sort="3" data-listing-word-count-sort="515" data-listing-title-sort="Partial Credit Model" data-listing-filename-sort="pcm.qmd">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="xPl/pcm_files/figure-html/unnamed-chunk-2-1.png" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
+</td>
 <td>
 <a href="../exercises/xPl/pcm.html" class="title listing-title">Partial Credit Model</a>
-</td>
-<td>
-<span class="listing-author">&nbsp;</span>
 </td>
 </tr>
 </tbody>

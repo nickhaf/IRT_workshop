@@ -257,27 +257,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../.././exercises/index_glm.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells</span></a>
+            <a href="../../exercises/index_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation zur Stichprobenplanung</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">
-<li class="sidebar-item">
- <span class="menu-text">./exercises/glm/glm.qmd</span>
-  </li>
-      </ul>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../exercises/index_simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Simulation zur Stichprobenplanung</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../exercises/simulation/power_simulation.html" class="sidebar-item-text sidebar-link">
@@ -624,47 +610,47 @@ Lösung
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2PL</span><span class="op">$</span><span class="va">itemfit</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   parameter    Outfit    Outfit_t     Outfit_p Outfit_pholm     Infit
-1          1 0.9997554 -0.01885830 9.849541e-01 1.000000e+00 1.0005573
-2          2 0.9894802 -0.19699202 8.438338e-01 1.000000e+00 1.0107466
-3          3 1.2391749  8.63590478 5.826403e-18 1.165281e-16 0.9609825
-4          4 0.9944669 -0.24035942 8.100516e-01 1.000000e+00 1.0016628
-5          5 1.2337976  3.84005244 1.230080e-04 2.091137e-03 1.0079841
-6          6 1.0456734  1.77538745 7.583393e-02 1.000000e+00 0.9892965
-7          7 1.0237013  0.79311618 4.277101e-01 1.000000e+00 0.9966017
-8          8 1.0053395  0.27181630 7.857633e-01 1.000000e+00 1.0114137
-9          9 0.9984179 -0.17414778 8.617493e-01 1.000000e+00 0.9988944
-10        10 1.0002456  0.05019167 9.599697e-01 1.000000e+00 1.0005067
-11        11 1.0002032  0.08296956 9.338757e-01 1.000000e+00 1.0001451
-12        12 1.0933074  4.77520139 1.795275e-06 3.231495e-05 1.0041638
-13        13 1.0396601  1.72876089 8.385190e-02 1.000000e+00 1.0011567
-14        14 0.9953447 -0.44770553 6.543657e-01 1.000000e+00 1.0000369
-15        15 0.9448985 -2.27922611 2.265363e-02 3.398044e-01 1.0098090
-16        16 0.7543897 -5.97706575 2.271925e-09 4.316658e-08 1.0085661
-17        17 1.0191668 -0.96667963 3.337042e-01 1.000000e+00 1.0127669
-18        18 1.4722781  2.86042247 4.230770e-03 6.769232e-02 0.9898138
-19        19 0.9864893 -0.34310913 7.315164e-01 1.000000e+00 1.0004303
-20        20 1.0163044 -0.01642721 9.868936e-01 1.000000e+00 0.9759077
-        Infit_t   Infit_p Infit_pholm
-1   0.054271334 0.9567190           1
-2   0.225471364 0.8216126           1
-3  -1.528914609 0.1262856           1
-4   0.076376647 0.9391194           1
-5   0.197495787 0.8434396           1
-6  -0.425951824 0.6701430           1
-7  -0.133656739 0.8936740           1
-8   0.575779286 0.5647644           1
-9  -0.120606332 0.9040029           1
-10  0.101830732 0.9188910           1
-11  0.059433945 0.9526065           1
-12  0.238279660 0.8116642           1
-13  0.052912212 0.9578019           1
-14  0.005788919 0.9953811           1
-15  0.402472203 0.6873365           1
-16  0.195219822 0.8452209           1
-17  0.231579813 0.8168644           1
-18 -0.090128843 0.9281848           1
-19  0.023831155 0.9809873           1
-20 -0.143525333 0.8858753           1</code></pre>
+1          1 1.0007791  0.07461651 9.405198e-01 1.000000e+00 1.0010777
+2          2 0.9798416 -0.39810442 6.905532e-01 1.000000e+00 0.9951386
+3          3 1.2317647  8.40516460 4.272619e-17 8.545239e-16 0.9554781
+4          4 0.9872827 -0.54510856 5.856789e-01 1.000000e+00 0.9980387
+5          5 0.9749257 -0.80836939 4.188780e-01 1.000000e+00 1.0086382
+6          6 1.0536041  2.10304173 3.546212e-02 6.028561e-01 0.9906991
+7          7 0.9950070 -0.22461520 8.222786e-01 1.000000e+00 0.9995476
+8          8 0.9824163 -0.88096051 3.783392e-01 1.000000e+00 1.0050580
+9          9 1.0004599  0.05032703 9.598618e-01 1.000000e+00 1.0003756
+10        10 0.9998368 -0.03096621 9.752965e-01 1.000000e+00 1.0001492
+11        11 1.0002663  0.10882960 9.133376e-01 1.000000e+00 1.0002065
+12        12 1.0273275  1.44958566 1.471741e-01 1.000000e+00 1.0002996
+13        13 1.1250915  5.25860940 1.451488e-07 2.757828e-06 0.9952738
+14        14 0.9980406 -0.18625674 8.522434e-01 1.000000e+00 1.0028909
+15        15 0.9770801 -0.94552030 3.443933e-01 1.000000e+00 1.0133944
+16        16 0.8205309 -4.29018009 1.785283e-05 3.213509e-04 0.9937105
+17        17 0.9898041 -1.09246972 2.746267e-01 1.000000e+00 1.0026684
+18        18 1.1178069  1.09732622 2.724988e-01 1.000000e+00 0.9775319
+19        19 0.9837496 -0.42313356 6.721978e-01 1.000000e+00 1.0024604
+20        20 0.9496991 -0.56012408 5.753948e-01 1.000000e+00 0.9983303
+       Infit_t    Infit_p Infit_pholm
+1   0.10183452 0.91888802           1
+2  -0.08086756 0.93554728           1
+3  -1.75379438 0.07946575           1
+4  -0.07863360 0.93732406           1
+5   0.22001418 0.82586011           1
+6  -0.36720207 0.71346830           1
+7  -0.01337487 0.98932872           1
+8   0.25802860 0.79638483           1
+9   0.04110925 0.96720880           1
+10  0.03085053 0.97538875           1
+11  0.08459263 0.93258526           1
+12  0.02139265 0.98293244           1
+13 -0.20533116 0.83731340           1
+14  0.28213415 0.77784065           1
+15  0.55006908 0.58227199           1
+16 -0.13225404 0.89478336           1
+17  0.06331905 0.94951245           1
+18 -0.23879541 0.81126423           1
+19  0.07693270 0.93867709           1
+20  0.02009213 0.98396988           1</code></pre>
 </div>
 </div>
 <p>Manchmal kann es auch helfen, sich das ganze als Plot ausgeben zu lassen:</p>
