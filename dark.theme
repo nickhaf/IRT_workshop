@@ -71,8 +71,8 @@
       "text-color": "#d4d0ab"
     },
     "Function": {
-      "selected-text-color": "#ffa07a",
-      "text-color": "#F4BA02"
+      "selected-text-color": "#00e0e0",
+      "text-color": "#00e0e0"
     },
     "Import": {
       "selected-text-color": "#abe338",
@@ -92,12 +92,12 @@
       "text-color": "#f8f8f2"
     },
     "Operator": {
-      "selected-text-color": "#ffa07a",
-      "text-color": "#F4BA02"
-    },
-    "Other": {
       "selected-text-color": "#00e0e0",
       "text-color": "#00e0e0"
+    },
+    "Other": {
+      "selected-text-color": "#F4BA02",
+      "text-color": "#F4BA02"
     },
     "Preprocessor": {
       "selected-text-color": "#dcc6e0",
@@ -121,8 +121,8 @@
       "text-color": "#abe338"
     },
     "Variable": {
-      "selected-text-color": "#00e0e0",
-      "text-color": "#00e0e0"
+      "selected-text-color": "#F4BA02",
+      "text-color": "#F4BA02"
     },
     "VerbatimString": {
       "selected-text-color": "#abe338",

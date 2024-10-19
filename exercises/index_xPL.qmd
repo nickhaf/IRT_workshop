@@ -8,6 +8,7 @@ listing:
     - ./xPl/model_selection.qmd
     - ./xPl/pcm.qmd
   sort: false
+  fields: [image, title]
 format: html
 image: ../slides/xPL/images/choice.jpg
 ---

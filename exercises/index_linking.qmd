@@ -2,7 +2,7 @@
 title: "Linking und Differential Item Functioning"
 subtitle: "Übungen"
 listing: 
-  type: table
+  type: default
   sort: false
   contents: 
     - ./linking/data.qmd

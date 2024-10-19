@@ -718,9 +718,9 @@ Wir haben jetzt gesehen, wie man Item- und Personenparamter aus verschiedenen Ka
 
 Viele verschiedene Verfahren, Grundidee: 
 
-\
+**Wurden Items in bestimmten Gruppen häufiger beantwortet wurden als in anderen Gruppen, bzw. wurden die Itemparamter in bestimmten Gruppen anders geschätzt (nachdem gelinkt wurde)?**
 
-Wurden Items in bestimmten Gruppen häufiger beantwortet wurden als in anderen Gruppen, bzw. wurden die Itemparamter in bestimmten Gruppen anders geschätzt (nachdem gelinkt wurde)?  
+\
 
 Es werden also entweder die [beobacheteten Testscores]{.highlight} oder die [latenten Fähigkeitswert]{.highlight} zur Berechnung genutzt.  
 
