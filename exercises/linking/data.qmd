@@ -13,9 +13,7 @@ Foto von <a href="https://unsplash.com/de/@domlafou?utm_content=creditCopyText&u
 :::
 
 :::{#data-heading}
-:::{.callout-note}
 Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/research_data/ZA6268?doi=10.4232/1.13780) von 2009 und beinhaltet Fragen zu Allgemeinwissen in den Themengebieten Politik, Geschichte, Wirtschaft, Kultur und Naturwissenschaften. Insgesamt haben fast 700.000 Personen den Test bearbeitet. Wir haben die Daten bereits etwas aufbereitet und nur ein Subset an Fragen (Thema Wirtschaft), sowie nur Studierende aus Berlin für diese Übung ausgewählt, um den Datensatz in einer . 
-:::
 
 :::
 
@@ -76,6 +74,7 @@ Ich nutze jetzt einfach mal `tidyverse` Funktionen dafür, aber es gibt immer me
 ## Lösung
 
 ```{r}
+#| message: false
 library(tidyverse)
 qa_dat_renamed <- qa_dat %>%
   rename(ID = T1, question = varLabel)
@@ -102,6 +101,8 @@ qa_dat_wide <- qa_dat_renamed %>%
     values_from = answer
   )
 ```
+
+Abspeichern für die nächste Übung: 
 
 ```{r}
 saveRDS(qa_dat_wide, here::here("raw_data", "qa_dat_wide.rds"))
