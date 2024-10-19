@@ -598,8 +598,6 @@ B_F^* = x\beta_F + y
 $$
 
 ## mean-sigma
-
-
 Probleme: linking constants können stark von Outliern beeinflusst werden, und von den differential standards errors of the item difficutly estimates
 Es gibt aber auch Robuste Verfahren.  
 
