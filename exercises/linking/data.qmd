@@ -2,17 +2,28 @@
 title: "1. Die Daten"
 author: "Nicklas Hafiz"
 format: html
+about:
+  id: data-heading
+  template: marquee
+  image: images/students.jpg
 ---
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@domlafou?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Dom Fou</a> auf <a href="https://unsplash.com/de/fotos/menschen-die-auf-einem-stuhl-vor-dem-computer-sitzen-YRMWVcdyhmI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::
+
+:::{#data-heading}
+:::{.callout-note}
+Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/research_data/ZA6268?doi=10.4232/1.13780) von 2009 und beinhaltet Fragen zu Allgemeinwissen in den Themengebieten Politik, Geschichte, Wirtschaft, Kultur und Naturwissenschaften. Insgesamt haben fast 700.000 Personen den Test bearbeitet. Wir haben die Daten bereits etwas aufbereitet und nur ein Subset an Fragen (Thema Wirtschaft), sowie nur Studierende aus Berlin für diese Übung ausgewählt, um den Datensatz in einer . 
+:::
+
+:::
 
 # Vorbereitung
 
 ## Daten laden
 
-Lade die Datei `q_a_wirt.rds` von [GitHub](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.
-
-:::{.callout-note}
-Die Daten stammen aus dem [SPIEGEL-Studentenpisa-Test](https://search.gesis.org/research_data/ZA6268?doi=10.4232/1.13780) von 2009 und beinhaltet Fragen zu Allgemeinwissen in den Themengebieten Politik, Geschichte, Wirtschaft, Kultur und Naturwissenschaften. Insgesamt haben fast 700.000 Personen den Test bearbeitet. Wir haben die Daten bereits etwas aufbereitet und nur ein Subset an Fragen (Thema Wirtschaft) für diese Übung ausgewählt. 
-:::
+Lade die Datei `q_a_wirt_b.rds` von [GitHub](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data) herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.
 
 :::{.callout-caution collapse="true"}
 ## Lösung
@@ -25,13 +36,13 @@ qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_b.rds"))
 :::
 
 ## Überblick
-Verschaffe dir einen [Überblick]() über die Daten. In welchem Formt liegen sie vor? Was könnten die verschiedenen Spalten bedeuten? 
+Verschaffe dir einen [Überblick](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/%C3%BCberblick-bekommen) über die Daten. In welchem Format liegen sie vor? Was könnten die verschiedenen Spalten bedeuten? 
 
 :::{.callout-caution collapse="true"}
 
 ## Lösung
 
-Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im [long-Format](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/long-format) vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins [wide-Format umformen](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide). 
+Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im [long-Format](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/long-format) vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins [wide-Format umformen](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide), da das von `TAM` so gewünscht ist. 
 
 ```{r}
 str(qa_dat)
@@ -41,6 +52,9 @@ Außerdem scheint der Datensatz folgende Variablen zu beinhalten:
 
 - `T1`: Personen-ID (aber komisch benannt)
 - `gender`: Geschlecht
+- `bundeslandStudium`: Bundesland des Studiums. `3` steht in diesem Fall für Berlin.
+- `spiegelReadingfreq`: Häufigkeit des Lesens des SPIEGELs.
+- `age`: Alter der testbearbeitenden Person
 - `answer`: Antwort auf die Frage
 - `question_code`: Fragen-ID
 - `varLabel`: Frage (aber komisch benannt)
