@@ -19,19 +19,27 @@ Abzugrenzen von der Reliabilität, die aussagt wie genau wir das messen, was wir
 ## Validität
 Es gibt nur verschiedene Arten von Validität, nicht "die" Validität. Es geht also immer um die Validität der Interpretation der Testwerte, welcher unter bestimmten Bedingungen erhoben wurde. 
 
-# Arten von Validität
+## {background-image="images/validator.jpg" background-size="1250px"}
+
+::: {.absolute left="-5%" bottom="-5%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(248, 248, 248, 0); backdrop-filter: blur(0px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, 0); border-radius: 5px; color:#F8F8F8;"}
+
+Arten von Validität
+:::
+
 
 ## Kriteriumsvalidität 
 
 :::{.columns}
 ::::{.column width="50%"}
-Zusammenhang der Testscores mit anderen Variablen (z.B. Erfolg im Beruf, 
-Schulnoten). 
+Zusammenhang der Testscores mit anderen Variablen z.B.:
+
+- Erfolg im Beruf
+- Schulnoten 
 
 ::::
 
 ::::{.column width="50%"}
-![](./images/graduation.jpg)
+![](./images/graduation.jpg){.image-right}
 
 ::::
 :::
@@ -40,19 +48,33 @@ Schulnoten).
 
 Wird das interessierende Merkmal gemessen?
 
+\
+
 :::{.columns}
 ::::{.column width="50%"}
-**Konvergente Validität**
+
+### Konvergente Validität
+
+::: {.fragment .fade-in}
 
 [Dasselbe]{.highlight} Merkmal, [andere]{.highlight} Methode
 
+:::
+
 ::::
 
 ::::{.column width="50%"}
-**Diskriminante Validität**
+
+### Diskriminante Validität
+
+::: {.fragment .fade-in}
+
 [Anderes]{.highlight} Merkmal, [selbe oder andere]{.highlight} Methode
 
+:::
+
 ::::
+
 :::
 
 ## Multitrait-Multimethod (MTMM) Ansatz 
@@ -68,8 +90,7 @@ Korrelation zwischen Testscores für verschiedene Kombintationen:
 Ideen:
 
 - Test-Scores (Theta-Werte, WLEs, PVs) können mit den oben besprochenen Kriterien korreliert werden.  
-- Wenn man das ganze komplexer modellieren möchte, kann man auch in MTMM-Modelle auf der Basis von Konfirmatorischer Faktorenanalyse schauen (z.B. @eid2008structural). 
-- Oder mit Multidimensionalen Item Response Modellen? Man könnte z.B. diskriminante Validität prüfen, indem man einmal undidimensional und einmal mehrdimensional modeliert, und schaut ob das mehrdimensionale Modell deutlich besser passt?  
+- MTMM-Modelle, z.B. auf Basis von Konfirmatorischer Faktorenanalyse schauen (siehe @eid2008structural). 
 
 ## Literatur
 
@@ -80,5 +101,7 @@ Ideen:
 ## Bildquellen
 - Foto von <a href="https://unsplash.com/de/@diana_pole?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Diana Polekhina</a> auf <a href="https://unsplash.com/de/fotos/silberne-und-schwarze-halskette-auf-gelbem-textil-iUfusOthmgQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@goodfreephoto_com?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Good Free Photos</a> auf <a href="https://unsplash.com/de/fotos/luftaufnahme-von-absolventen-mit-huten-YZsvNs2GCPU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@mnelen?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Anastasia Nelen</a> auf <a href="https://unsplash.com/de/fotos/ein-blauer-pfosten-mit-einer-person-im-hintergrund-OfHZYig9SQc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
   
   
