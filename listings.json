@@ -1,16 +1,17 @@
 [
   {
+    "listing": "/exercises/index_simulation.html",
+    "items": [
+      "/exercises/simulation/power_simulation.html",
+      "/exercises/simulation/loop.html"
+    ]
+  },
+  {
     "listing": "/exercises/index_xPL.html",
     "items": [
       "/exercises/xPl/simulation.html",
       "/exercises/xPl/model_selection.html",
       "/exercises/xPl/pcm.html"
-    ]
-  },
-  {
-    "listing": "/exercises/index_simulation.html",
-    "items": [
-      "/exercises/simulation/power_simulation.html"
     ]
   },
   {
