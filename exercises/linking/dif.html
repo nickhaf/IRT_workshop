@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="Nicklas Hafiz">
 <title>3. Differential Item Functioning – IRT</title>
 <style>
 code{white-space: pre-wrap;}
@@ -66,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
@@ -99,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 </head>
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
@@ -294,35 +292,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_linking.html">Linking</a></li><li class="breadcrumb-item"><a href="../../exercises/linking/dif.html">3. Differential Item Functioning</a></li></ol></nav><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><div class="quarto-about-marquee">
+  <div class="about-image-container">
+    <img src="images/penguins_two.jpg" class="about-image " style="width: 100%;">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_linking.html">Linking</a></li><li class="breadcrumb-item"><a href="../../exercises/linking/dif.html">3. Differential Item Functioning</a></li></ol></nav><div class="quarto-title">
 <h1 class="title">3. Differential Item Functioning</h1>
 <p class="subtitle lead">Übung</p>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Autor:in</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nicklas Hafiz </p>
-          </div>
   </div>
-    
-  
-    
+</header> <div id="dif-heading">
+<p>In diesem Kapitel führen wir eine DIF-Analyse durch: zuerst mit den im letzten Kapitel gelinkten Daten, und dann noch einmal “in einem Guss”. Dadurch wird hoffentlich deutlicher, was im Hintergrund abläuft.</p>
+</div> 
   </div>
-  
+</div>
 
 
-</header><div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"plot_functions.R"</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>Foto von <a href="https://unsplash.com/de/@ncx1701d?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Martin Wettstein</a> auf <a href="https://unsplash.com/de/fotos/weisser-und-schwarzer-pinguin-auf-grauem-felsen-o4snRPEZRRs?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
+</div></div><div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">qa_dat_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"raw_data"</span>, <span class="st">"qa_dat_wide.rds"</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-title-container flex-fill">
+Vorheriger Code
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Optional. Lädt Plotting-Funktionen</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"plot_functions.R"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Daten laden, aufbereiten und Kalibrieren</span></span>
+<span><span class="va">qa_dat_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"raw_data"</span>, <span class="st">"qa_dat_wide.rds"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">qa_f</span> <span class="op">&lt;-</span> <span class="va">qa_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">qa_m</span> <span class="op">&lt;-</span> <span class="va">qa_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tam_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">qa_f</span><span class="op">[</span>, <span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">qa_f</span><span class="op">)</span><span class="op">]</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">tam_m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">qa_m</span><span class="op">[</span>, <span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">qa_m</span><span class="op">)</span><span class="op">]</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tam_link</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.linking.html">tam.linking</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">tam_f</span>, <span class="va">tam_m</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"SL"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>N = 2, M = 5 machine precision = 2.22045e-16
 This problem is unconstrained.
@@ -337,6 +357,11 @@ final function value 0.00180261
 
 final  value 0.001803 
 converged</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">difficulty_link_f</span> <span class="op">&lt;-</span> <span class="va">tam_link</span><span class="op">$</span><span class="va">parameters_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">xsi</span></span>
+<span><span class="va">difficulty_link_m</span> <span class="op">&lt;-</span> <span class="va">tam_link</span><span class="op">$</span><span class="va">parameters_list</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">xsi</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </div>
 </div>
 <section id="waldtest" class="level1" data-number="1"><h1 data-number="1">
@@ -362,7 +387,7 @@ Alternativen für DIF Analysen
 <p>Und viele mehr.</p>
 </div>
 </div>
-<section id="kalibrierung" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="kalibrierung">
+<section id="kalibrierung" class="level2" data-number="1.1"><h2 data-number="1.1" data-anchor-id="kalibrierung">
 <span class="header-section-number">1.1</span> Kalibrierung</h2>
 <p>Zuerst müssen wir die Daten noch einmal kalibrieren (andere Pakete ermöglichen es auch, beides direkt in einer Funktion zu kombinieren).<br>
 Dafür nutzen wir diesmal aber <a href="https://cran.r-project.org/web/packages/mirt/index.html">mirt</a>, weil <code>equateIRT</code> den Output daraus verarbeiten kann.</p>
@@ -495,7 +520,7 @@ Iteration: 39, Log-Lik: -1524.073, Max-Change: 0.00008
 Calculating information matrix...</code></pre>
 </div>
 </div>
-</section><section id="waldtest-1" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="waldtest-1">
+</section><section id="waldtest-1" class="level2" data-number="1.2"><h2 data-number="1.2" data-anchor-id="waldtest-1">
 <span class="header-section-number">1.2</span> Waldtest</h2>
 <p>Nutze jetzt die Funktion <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> aus dem Paket <code>equateIRT</code> um den Waldtest durchzuführen. Nutze, wie in der vorherigen Übung, die Stocking-Lord Methode zum linken. Welche Items zeigen laut Waldtest DIF?</p>
 <div class="callout callout-style-simple callout-caution">
@@ -547,7 +572,7 @@ Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </div>
-</section><section id="vergleich-mit-manuellem-linking" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="vergleich-mit-manuellem-linking">
+</section><section id="vergleich-mit-manuellem-linking" class="level2" data-number="1.3"><h2 data-number="1.3" data-anchor-id="vergleich-mit-manuellem-linking">
 <span class="header-section-number">1.3</span> Vergleich mit manuellem Linking</h2>
 <p>Da in <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> jetzt genauso gelinkt wurde, können wir jetzt einmal die Ergebnisse aus diesem Vorgehen mit dem aus dem manuellen Linking vergleichen.</p>
 <p>So sehen die Itemparameter aus, die von <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> berechnete wurden:</p>
@@ -597,7 +622,7 @@ Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Zuerst einmal scheinen die Vorzeichen der Itemschwierigkeiten vertauscht zu sein. Wir habne in <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> also die Itemleichtigkeiten geschätzt. Das ist aber leicht durch eine Multiplikation mit <code>-1</code> zu beheben.<br>
 Ansonsten scheinen <code>mirt</code> und <code>tam</code> die gleichen Ergebnisse bei der Kalibrierung bekommen zu haben. Das Linking ist auch ähnlich, allerdings nicht exakt, obwohl wir die gleiche Mehtode verwendet haben. Wir könnten jetzt noch auf die Suche gehen, was genau beide Funktionen per Default anders machen, aber für uns soll das erst einmal reichen.</p>
 <p>:::</p>
-</section><section id="beurteilung" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="beurteilung">
+</section><section id="beurteilung" class="level2" data-number="1.4"><h2 data-number="1.4" data-anchor-id="beurteilung">
 <span class="header-section-number">1.4</span> Beurteilung</h2>
 <p>Wir haben jetzt also gesehen, was die <code><a href="https://rdrr.io/pkg/equateIRT/man/dif.test.html">dif.test()</a></code> Funktion unter der Haub macht und Signifikanzwerte erhalten, die uns potenziellen DIF anzeigen.</p>
 <div class="callout-importang">
@@ -646,7 +671,7 @@ Ansonsten scheinen <code>mirt</code> und <code>tam</code> die gleichen Ergebniss
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Gruppenunterschied in Itemschwierigkeit"</span>, y <span class="op">=</span> <span class="st">"Item"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="dif_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="dif_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -655,6 +680,7 @@ Ansonsten scheinen <code>mirt</code> und <code>tam</code> die gleichen Ergebniss
 <p><img src="./images/zetsche.jpg" class="img-fluid">[^1]</p>
 <p>[^1] Bild von Matti Blume, heruntergeladen von <a href="https://commons.wikimedia.org/wiki/File:Daimler_press_conference,_GIMS_2018,_Le_Grand-Saconnex_(1X7A0769)_(cropped).jpg">Wikipedia</a>.</p>
 <p>Wie würdest du den DIF beurteilen?</p>
+
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -677,13 +703,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

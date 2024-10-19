@@ -2,98 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/slides/index.html</loc>
-    <lastmod>2024-10-19T16:05:18.798Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.741Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/slides/GLM/glm.html</loc>
-    <lastmod>2024-10-19T16:05:18.450Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.377Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/slides/Validity/validity.html</loc>
-    <lastmod>2024-10-19T16:05:18.798Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.741Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/xPl/model_selection.html</loc>
-    <lastmod>2024-10-19T16:05:18.394Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.321Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/xPl/simulation.html</loc>
-    <lastmod>2024-10-19T16:05:18.394Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.321Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/linking/data.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/linking/dif.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/intro_r/merging_ex.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/intro_r/load_data_ex.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/intro_r/missings_ex.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/simulation/power_simulation.html</loc>
-    <lastmod>2024-10-19T16:05:18.390Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.321Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/index_xPL.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/index.html</loc>
-    <lastmod>2024-10-19T16:05:18.410Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.337Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/index_simulation.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/index_linking.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/intro_r/reshaping_ex.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/intro_r/subsetting_ex.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/index_intro_r.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/linking/linking.html</loc>
-    <lastmod>2024-10-19T16:05:18.390Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.321Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/index.html</loc>
-    <lastmod>2024-10-19T16:05:18.374Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.277Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/exercises/xPl/pcm.html</loc>
-    <lastmod>2024-10-19T16:05:18.394Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.321Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/slides/xPL/index.html</loc>
-    <lastmod>2024-10-19T16:05:18.842Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.781Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/slides/Linking/linking.html</loc>
-    <lastmod>2024-10-19T16:05:18.774Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.717Z</lastmod>
   </url>
   <url>
     <loc>https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html</loc>
-    <lastmod>2024-10-19T16:05:18.654Z</lastmod>
+    <lastmod>2024-10-19T16:35:39.597Z</lastmod>
   </url>
 </urlset>
