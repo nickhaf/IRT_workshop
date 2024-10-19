@@ -98,7 +98,7 @@ tam_m_difficulty
 ::: 
 
 ### Linken
-Wir verzichten für diese Übung darauf, den Modellfit zu beurteilen und linken direkt. Nutze dafür die Funktion `tam.linking()` und Linke mit Stocking-Lord Linking. 
+Wir verzichten für diese Übung darauf, den Modellfit zu beurteilen und linken direkt. Nutze dafür die Funktion `tam.linking()` und Linke mit [Stocking-Lord](https://nickhaf.github.io/IRT_workshop/slides/Linking/linking.html#/stocking-lord). 
 
 :::{.callout-important}
 Denk zurück an unsere Besprechung von [Ankeritems](https://nickhaf.github.io/IRT_workshop/slides/Linking/linking.html#/ankeritems). Eigentlich sollten wir möglichst non-DIF Items zum Linking verwenden. Das untersuchen wir aber erst in der nächsten Übung. Manche Linking-Funktionen wie `equat1pl()` aus [eatModel](https://github.com/weirichs/eatModel)` ermöglichen es, DIF Items direkt automatisch auszuschließen. Ansonsten kann es auch sinnvoll sein bei der Untersuchung von DIF iterativ vorzugehen, und Items mit DIF nacheinander auszuschließen und dann erneut zu linken. Wie wir in der nächsten Übung sehen werden übernehmen einige Funktionen zur Untersuchung von DIF das automatisch. 

@@ -9,7 +9,7 @@ about:
 ---
 
 :::{#dif-heading}
-In diesem Kapitel führen wir eine DIF-Analyse durch: zuerst mit den im letzten Kapitel gelinkten Daten, und dann noch einmal "in einem Guss". Dadurch wird hoffentlich deutlicher, was im Hintergrund abläuft. 
+In diesem Kapitel führen wir eine DIF-Analyse für ein 1PL-Modell durch: zuerst mit den im letzten Kapitel gelinkten Daten, und dann noch einmal "in einem Guss". Dadurch wird hoffentlich deutlicher, was im Hintergrund abläuft. 
 :::
 
 ::: aside
@@ -17,15 +17,24 @@ In diesem Kapitel führen wir eine DIF-Analyse durch: zuerst mit den im letzten 
 Foto von <a href="https://unsplash.com/de/@ncx1701d?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Martin Wettstein</a> auf <a href="https://unsplash.com/de/fotos/weisser-und-schwarzer-pinguin-auf-grauem-felsen-o4snRPEZRRs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 :::
 
+
+:::{.callout-note}
+## Benötigte Pakete
+```{r}
+#| message: false
+library(TAM)
+library(tidyverse)
+library(mirt)
+library(equateIRT)
+```
+
+:::
+
 :::{.callout-caution collapse="true"}
 
 ## Vorheriger Code
 ```{r}
 #| message: false
-
-library(tidyverse)
-library(TAM)
-
 ## Optional. Lädt Plotting-Funktionen
 source(here::here("R", "plot_functions.R"))
 
@@ -49,13 +58,12 @@ difficulty_link_m <- tam_link$parameters_list[[2]]$xsi
 ::: 
 
 # Waldtest
-Wir werden einen [Waldtest]() durchführen, einfach weil man hier das Grundlegende Vorgehen ganz gut sehen kann. Wie im [Theorieteil]() besprochen gibt es aber viele verschiedene Optionen, implementiert in diversen Paketen. Für diese Übung werden wir mit [mirt](https://cran.r-project.org/web/packages/mirt/index.html) und [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
+Wir werden einen [Waldtest](https://nickhaf.github.io/IRT_workshop/slides/Linking/linking.html#/verfahren-1) durchführen, einfach weil man hier das grundlegende Vorgehen ganz gut sehen kann. Wie im [Theorieteil](https://nickhaf.github.io/IRT_workshop/slides/Linking/linking.html#/dif-finden) besprochen gibt es aber viele verschiedene Optionen, implementiert in diversen Paketen. Für diese Übung werden wir mit [mirt](https://cran.r-project.org/web/packages/mirt/index.html) und [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
 
 :::{.callout-note}
 ## Alternativen für DIF Analysen
 - [TAM](https://www.edmeasurementsurveys.com/TAM/Tutorials/7DIF.htm)  
 - [eRm](https://bookdown.org/chua/new_rasch_demo2/DIF.html) 
-- [mirt](https://philchalmers.github.io/mirt/html/DIF.html)
 
 Und viele mehr. 
 :::
@@ -66,44 +74,52 @@ Dafür nutzen wir diesmal aber [mirt](https://cran.r-project.org/web/packages/mi
 
 Fitte jetzt mit `mirt` ein Raschmodell auf beide Subgruppen seperat (männlich und weiblich). Der Datensatz darf nur die Itemspalten enthalten. Setze `SE = TRUE` um die Modell-Informationsmatrix zu berechnen, das ist gleich für den Waldtest nötig. 
 
-```{r}
-library(mirt)
-library(tidyverse)
 
+:::{.callout-caution collapse="true"}
+## Lösung
+```{r}
 m_f <- qa_f %>%
+  ## Entfernen aller Spalten, die keine Itemantworten enthalten
   select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
-  mirt(itemtype = "Rasch", SE = TRUE)
+  ## Fitten mit mirt
+  mirt(itemtype = "Rasch", SE = TRUE, verbose = FALSE)
 
 
 m_m <- qa_m %>%
   select(-ID, -gender, -bundeslandStudium, -spiegelReadingfreq, -age) %>%
-  mirt(itemtype = "Rasch", SE = TRUE)
+  mirt(itemtype = "Rasch", SE = TRUE, verbose = FALSE)
 ```
-
+:::
 
 
 ## Waldtest
 Nutze jetzt die Funktion `dif.test()` aus dem Paket `equateIRT` um den Waldtest durchzuführen. Nutze, wie in der vorherigen Übung, die Stocking-Lord Methode zum linken. Welche Items zeigen laut Waldtest DIF?
 
 
-:::{.callout-caution collapse="true"}
-```{r}
-library(equateIRT)
+:::{.callout-tip collapse="true"}
+## Tipp
+Schau dir wieder mit `?dif.test` die Dokumentation an um die Einstellungsmöglichkeiten für die Funktion zu sehen. 
+:::
 
-dif_test <- dif.test(est.mods = list(m_f, m_m), method = "Stocking-Lord", purification = FALSE)
+:::{.callout-caution collapse="true"}
+## Lösung
+```{r}
+dif_test <- dif.test(est.mods = list(m_f, m_m), 
+                     method = "Stocking-Lord", 
+                     purification = FALSE)
 
 dif_test
 ```
 
 :::{.callout-note}
-Mit `purification = TRUE` würde ein iteratives Vorgehen verwendet werden, bei dem nacheinander DIF Items entfernt werden, um die Personenfähigkeit ohne die komprimierenden Items zu schätzen. Weil wir aber gleich die Ergebnisse mit unserem Manuellen Vorgehen vergleichen wollen, verzichten wir darauf. 
+Mit `purification = TRUE` würde ein iteratives Vorgehen verwendet werden, bei dem nacheinander DIF Items entfernt werden, um die Personenfähigkeit ohne die komprimierenden Items zu schätzen. Weil wir aber gleich die Ergebnisse mit unserem manuellen Vorgehen vergleichen wollen, verzichten wir darauf. 
 :::
 
 Zuerst einmal zeigen laut Waldtest viele der Items bei einem Signifikanzniveau von 0.05 DIF. Das ist aber auch nicht weiter verwunderlich, da der Test sicherlich nicht in Hinblick auf die Vermeidung von DIF konstruiert wurde.
 :::
 
 ## Vergleich mit manuellem Linking
-Da in `dif.test()` jetzt genauso gelinkt wurde, können wir jetzt einmal die Ergebnisse aus diesem Vorgehen mit dem aus dem manuellen Linking vergleichen. 
+Da in `dif.test()` automatisch gelinkt wurde, können wir jetzt einmal die Ergebnisse aus diesem Vorgehen mit dem aus dem manuellen Linking vergleichen. 
 
 So sehen die Itemparameter aus, die von `dif.test()` berechnete wurden: 
 ```{r}
@@ -120,19 +136,19 @@ difficulty_link_m
 
 Was fällt auf?
 
-:::{.callout-caution collapse = "true"}
+:::{.callout-caution collapse="true"}
 ## Lösung
 
-Zuerst einmal scheinen die Vorzeichen der Itemschwierigkeiten vertauscht zu sein. Wir habne in `dif.test()` also die Itemleichtigkeiten geschätzt. Das ist aber leicht durch eine Multiplikation mit `-1` zu beheben.  
-Ansonsten scheinen `mirt` und `tam` die gleichen Ergebnisse bei der Kalibrierung bekommen zu haben. Das Linking ist auch ähnlich, allerdings nicht exakt, obwohl wir die gleiche Mehtode verwendet haben. Wir könnten jetzt noch auf die Suche gehen, was genau beide Funktionen per Default anders machen, aber für uns soll das erst einmal reichen. 
+Zuerst einmal scheinen die Vorzeichen der Itemschwierigkeiten vertauscht zu sein. Wir haben in `dif.test()` also die Item[leichtigkeiten]{.highlight} geschätzt. Das ist aber leicht durch eine Multiplikation mit `-1` zu beheben.  
+Ansonsten scheinen `mirt` und `tam` die gleichen Ergebnisse bei der Kalibrierung bekommen zu haben. Das Linking ist auch ähnlich, allerdings nicht exakt, obwohl wir die gleiche Methode verwendet haben. Wir könnten jetzt noch auf die Suche gehen, was genau beide Funktionen per default anders machen, aber für uns soll das erst einmal reichen. 
 
 ::: 
 
 ## Beurteilung
-Wir haben jetzt also gesehen, was die `dif.test()` Funktion unter der Haub macht und Signifikanzwerte erhalten, die uns potenziellen DIF anzeigen. 
+Wir haben jetzt also gesehen, was die `dif.test()` Funktion unter der Haube macht und Signifikanzwerte erhalten, die uns potenziellen DIF anzeigen. 
 
-:::{.callout-importang}
-Natürlich treffen auch hier die üblichen Caveats zu Signifikanztests zu. Bei größer werdender Stichprobe werden so gut wie alle Gruppenunterschiede signifikant. Wir sollten daher auf keinen Fall nur auf die Signifikanz schauen, sondern auch die Effektstärke (z.B. Unterschied in Itemschwierigkeit ziwschen den Gruppen) und unbedingt auch inhaltliche Kriterien in die Beurteilung mit einfließen lassen. Wichtig ist einfach, alles zu kommunizieren, damit nachvollziebar bleibt, was warum getan wurde. 
+:::{.callout-important}
+Natürlich treffen auch hier die üblichen Caveats zu Signifikanztests zu. Bei größer werdender Stichprobe werden so gut wie alle Gruppenunterschiede signifikant. Wir sollten daher auf keinen Fall nur auf die Signifikanz schauen, sondern auch die Effektstärke (z.B. Unterschied in Itemschwierigkeit zwischen den Gruppen) und unbedingt auch inhaltliche Kriterien in die Beurteilung mit einfließen lassen. Wichtig ist einfach, alles zu kommunizieren, damit nachvollziebar bleibt, was warum getan wurde. 
 :::
 
 Es gibt also einige Items, die für eine weiter DIF-Analyse in Frage kommen.
@@ -152,7 +168,7 @@ questions <- qa_dat %>%
   unique() %>%
   mutate(varLabel = stringr::str_wrap(varLabel, 20))
 
-## Prepare Data for
+## Prepare Data for plot
 dif_dat <- data.frame(
   item = colnames(qa_f[, 6:ncol(qa_f)]),
   group_difference = group_difference,
@@ -163,7 +179,7 @@ dif_dat <- data.frame(
   mutate(significance = ifelse(p_value < 0.05, "Significant", "Not Significant")) %>%
   left_join(questions, join_by("item" == "question_code"))
 
-
+## Plot group differences in Item difficulty 
 ggplot(data = dif_dat, aes(x = abs(group_difference), y = item)) +
   # Add vertical line at x = 0
   geom_vline(xintercept = 0, linetype = "dashed", color = "darkgray") +
@@ -185,8 +201,10 @@ ggplot(data = dif_dat, aes(x = abs(group_difference), y = item)) +
 
 Von Interesse ist vielleicht noch bei Item `3401` von wem dort die Rede ist. Es geht um Dieter Zetsche, den ehemaligen Vorstandsvorsitzenden der Daimler AG (Mercedes-Benz-Group). 
 
-![](./images/zetsche.jpg)[^1]
-  
-[^1] Bild von Matti Blume, heruntergeladen von [Wikipedia](https://commons.wikimedia.org/wiki/File:Daimler_press_conference,_GIMS_2018,_Le_Grand-Saconnex_(1X7A0769)_(cropped).jpg). 
+![](./images/zetsche.jpg)
 
-Wie würdest du den DIF beurteilen?
+::: aside  
+Bild von Matti Blume, heruntergeladen von [Wikipedia](https://commons.wikimedia.org/wiki/File:Daimler_press_conference,_GIMS_2018,_Le_Grand-Saconnex_(1X7A0769)_(cropped).jpg). 
+:::
+
+Würdest du Items überarbeiten/entfernen um DIF zu vermeiden?
