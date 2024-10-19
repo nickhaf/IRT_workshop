@@ -2,17 +2,31 @@
 title: "Studienplanung durch Simulationen"
 subtitle: "Übungen"
 listing: 
-  type: table
+  type: default
   contents: 
     - ./simulation/power_simulation.qmd
+    - ./simulation/loop.qmd
   sort: false
 format: html
-image: ../slides/xPL/images/simulation.jpg
+about:
+  id: simindex-heading
+  template: marquee
+  image: ../slides/xPL/images/simulation.jpg
+bibliography: ./simulation/references.bib
 ---
 
-Ziel dieser Übung ist es, eine erste kleine Simulation zur Planung von Stichprobengrößen zu schreiben. Dies kann dann als Grundlage für eigne Projekte genutzt werden. 
+:::{#simindex-heading}
+
+Ziel dieser Übung ist es, eine erste kleine Simulation zur Planung von Stichprobengrößen zu schreiben. Dies kann dann als Grundlage für eigene Projekte genutzt werden. 
+
+Eine häufige Frage die bei der Planung von Studien aufkommt, ist die nach der benötigten Stichprobengröße. Simulationen bieten eine Möglichkeit, diese für eine konkrete Studie zu planen. Wir haben bereits eine einfache Simulation in der [Übung zu höher parametrisierten Modellen ausprobiert](https://nickhaf.github.io/IRT_workshop/exercises/xPl/simulation.html). In diesem Kapitel wollen wir jetzt darauf aufbauen und uns anschauen, wie Simulationen für das Planen von allen möglichen Studienaspketen genutzt werden können. 
 
 :::{.callout-tip #tip-sim}
+## Ressourcen
 Für mehr Infos, und weitere (auch komplexeren) [Codebeispielen](https://psych-irt.netlify.app/), siehe @schroederssample.  
 In @morris2019using findet man eine tolle Übersicht zum Workflow in Simulationsstudien allgemein. 
 :::
+:::
+
+
+

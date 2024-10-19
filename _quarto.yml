@@ -46,6 +46,8 @@ website:
             href: ./exercises/index_simulation.qmd
             contents:
               - ./exercises/simulation/power_simulation.qmd
+              - ./simulation/loop.qmd
+
 format:
   html:
     theme: styles_html.scss
