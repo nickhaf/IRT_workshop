@@ -18,8 +18,20 @@ source(here::here("R", "irt_formulas.R"))
 
 ```
 
-## Fahrplan
-1. 
+
+## {background-image="images/map.jpg" background-size="1225px"}
+
+::: {.absolute left=10% right="10%" top="7.5%" style="font-size:1em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 10px"}
+
+
+**Roadmap**
+
+1. Wiederholung: Eindimensionalität und Lokale Unabhängigkeit
+2. Differential Item Functioning (DIF)
+3. Was wir noch dafür brauchen: Linking
+4. DIF finden
+
+:::
 
 
 ## Wiederholung: Voraussetzungen für IRT
@@ -122,7 +134,7 @@ Welche Unterarten von Rugby gibt es laut Text?
 Mögliche Fähigkeitsunterschiede zwischen den Gruppen auf dem gemessenen Konstrukt interessieren uns hier nicht. Die rechnen wir gleich in @sec-linking raus.
 :::
 
-## Schwierigkeit
+## Uniformer DIF
 
 ```{r}
 #| echo: false
@@ -147,7 +159,7 @@ ggplot(plot_data, aes(theta, p, colour = group)) +
   scale_color_manual(name = NULL, labels = unname(TeX( c("Gruppe 1 (\\beta = -1)", "Gruppe 2 (\\beta = 1)"))), values = c("#F4BA02", "#9B1B34"))
 ```
 
-## Diskriminationsparameter
+## Non-Uniformer DIF
 
 ```{r}
 #| echo: false
@@ -167,7 +179,8 @@ ggplot(plot_data, aes(theta, p, colour = group)) +
 ```
 
 
-## Wie ghen wir damit um? 
+
+## Wie gehen wir damit um? 
 
 Wir schauen uns die Itemparameter in der [Reference group]{.highlight} und in der [Focal group]{.highlight} an.  
 
@@ -254,7 +267,7 @@ Wir nehmen an, dass die gleiche Person in Gruppe 1 und in Gruppe 2 getestet wird
 
 :::{.columns}
 
-:::{.column width="50%"}
+:::{.column width="70%"}
 ```{r}
 #| echo: false
 
@@ -286,8 +299,11 @@ ggplot(data_lines, aes(x, y, group = group, colour = group)) +
   
 ```
 :::
-:::{.column width="50%"}
+:::{.column width="30%"}
+
+::: small
 Mit der gleichen Fähigkeit würde sie in Gruppe 2 einen niedrigeren Fähigkeitswert zugewiesen bekommen, da diese Gruppe einfach besser ist als Gruppe 1.
+:::
 :::
 :::
 
@@ -299,11 +315,13 @@ Grafik nach [diesem Workshop](https://www.youtube.com/watch?v=AEBcf2zcN9U&t=748s
 ## Illustration 2
 
 :::{.columns}
-:::{.column width="50%"}
+:::{.column width="30%"}
+::: small
 Das gleiche Item wird in Gruppe 2 als leichter geschätzt als in Gruppe 1, einfach weil die Lösungswahrscheinlichkeit in Gruppe 2 insgesamt höher ist. 
+:::
 
 :::
-:::{.column width="50%"}
+:::{.column width="70%"}
 ```{r}
 #| echo: false
 
@@ -498,7 +516,12 @@ plot_group_pars(parameters_a, alpha, alpha_2) +
 ## Schlusfolgerung
 Wir brauchen also einen Referenzrahmen um unsere Testergebnisse interpretieren zu können. 
 
-Lösung: [Linking]{.highlight}
+Lösung:
+
+::: r-fit-text
+
+[Linking]{.highlight}
+:::
 
 ## Linking: Anwendungsbereiche {#sec-linking}
 
@@ -508,11 +531,13 @@ Immer, wenn wir Werte aus verschiedenen Kalibrierungen miteinander vergleichen w
 - Tests, die in verschiedenen Jahren bearbeitet wurden
 - Adaptives Testen
 
+## Linking
 
 Ganz egal welcher Anwendungsfall, das Szenario ist das gleiche: Wir haben verschiedene Testformen, und wollen die Scores auf eine gemeinsame Skala bringen. 
-- Dafür haben wir zwei Möglichkeiten:
-    - Gemeinsame Items
-    - Gemeinsame Personen
+Dafür haben wir zwei Möglichkeiten:
+
+- Gemeinsame [Items]{.highlight}
+- Gemeinsame [Personen]{.highlight}
 
 ## Übung
 Gehe zur ersten [Übung](https://nickhaf.github.io/IRT_workshop/exercises/linking/data.html) zum Thema Linking/DIF. Es geht hier nochmal um Datenaufbereitung. 
@@ -522,15 +547,15 @@ Gehe zur ersten [Übung](https://nickhaf.github.io/IRT_workshop/exercises/linkin
 Personen bearbeiten beide Tests. Personenfähigkeit wird basierend auf einem Referenztest geschätzt, und dann fixiert und konstant gehalten, wenn andere Testformen bearbeitet werden. Die Fähigkeitswerte werden dann genutzt, um Itemparameter auf beiden Testformen zu schätzen. 
 
 
-## Ankeritems
+## Gemeinsame Items
 
 :::: {.columns} 
+
 ::: {.column width="50%"}
 
-Ankeritems sind [gemeinsame Items]{.highlight}, die in beiden Testformen vorhanden sind. Hauptproblem bei der Auswahl: Sie sollten in beiden Gruppen nicht unterschiedlich funktionieren, es sollte also kein Differential Item Functioning (DIF) geben.
+[Ankeritems]{.highlight} sind gemeinsame Items, die in beiden Testformen vorhanden sind. Hauptproblem bei der Auswahl: Sie sollten in beiden Gruppen nicht unterschiedlich funktionieren, es sollte also kein Differential Item Functioning (DIF) geben.
 
 :::
-
 
 ::: {.column width="50%"}
 
@@ -541,22 +566,26 @@ Ankeritems sind [gemeinsame Items]{.highlight}, die in beiden Testformen vorhand
 
 ## Linking Verfahren: Grundidee
 
-Die $\theta$ scores der Focal group müssen so transformiert werden, dass sie auf einer gemeinsamen Skala mit den Scores der Reference group liegen:
+Die $\theta$ scores der Focal Group müssen so transformiert werden, dass sie auf einer gemeinsamen Skala mit den Scores der Reference Group liegen:
 
 $$
-\theta_R = A \theta_F + B
+\theta_R = x \theta_F + y
 $$
 
 
-Ziel: "Linking constants" $A$ und $B$ zu finden, welche die Itemparameter aus den beiden Gruppen auf der selben Skala plazieren. 
+Ziel: [Linking constants]{.highlight} $x$ und $y$ zu finden, welche die Itemparameter aus den beiden Gruppen auf der selben Skala plazieren. 
 
 
 ## Linking Methoden
 - Die häufigsten Methoden:
-    - mean-mean ()
-    - mean-sigma ()
-    - Stocking-Lord ()
-    - Haebermann ()
+    - mean-mean
+    - mean-sigma
+    - Stocking-Lord
+    - Haebermann
+    
+::: aside
+Siehe @kolen2004test für mehr. 
+:::
 
 
 ## mean-sigma Transformationen {#sec-transf}
@@ -564,7 +593,7 @@ Ziel: "Linking constants" $A$ und $B$ zu finden, welche die Itemparameter aus de
 Grundlegend sind einige einfache Transformationen:
 
 - $\theta^* = x\theta+y$
-- $\beta^* = x\beta=y$
+- $\beta^* = x\beta+y$
 - $\alpha^*=\frac{\alpha}{x}$
 - $c^* = c$
 
@@ -579,67 +608,89 @@ Ziel ist es, die Linkingkonstanten $x$ und $y$ zu finden.
 $$
 x = \frac{\sigma_R}{\sigma_F}
 $$
-
-:::{.callout-note}
-## Mean-mean Linking
-Die mean-mean Methode nutzt hier statt der Standardabweichung der Itemschwierigkeiten die Mittelwerte (Erwartungswerte) der Diskriminationsparamter. In der Praxis werden beide Methoden eher weniger genutzt. 
-:::
-
 $$
 y = \overline{\beta}_R - x(\overline{\beta}_F)
 $$
 
+:::{.callout-note}
+
+## Mean-mean Linking
+
+Die mean-mean Methode nutzt statt der Standardabweichung der Itemschwierigkeiten die Mittelwerte (Erwartungswerte) der Diskriminationsparamter (und tauscht dabei Nenner und Zähler). In der Praxis werden beide Methoden eher weniger genutzt. 
+
+:::
+
+## Finden der Linkingkonstanten
 Und dann einsetzen in 
 $$
 \theta* = x\theta+y
 $$ 
 $$
-B_F^* = x\beta_F + y
+\beta^* = x\beta+y
 $$
 
 ## mean-sigma
-Probleme: linking constants können stark von Outliern beeinflusst werden, und von den differential standards errors of the item difficutly estimates
-Es gibt aber auch Robuste Verfahren.  
+In der Praxis eher seltener verwendet, da es einige Problem gibt (allerdings auch robuste verfahren). 
 
-Alternative: Characteristic curve methods
+Alternative: [Characteristic curve methods]{.highlight}
 
 ## Characteristic curve methods
-Versuch, die Linking constants so zu berechnen, dass die test charactersitic curves so ähnlich wie möglich sind. Nutzen daher alle Itemparameter um die Linkingkonstanten zu finden. Ist rechnerisch aufwändiger. 
+Versuch, die Linking constants so zu berechnen, dass die Test/Item Charactersitic Curves so ähnlich wie möglich sind. Nutzen daher alle Itemparameter um die Linkingkonstanten zu finden.
 
 - Haebara-Linking
 - Stocking-Lord
 
 ## Stocking-Lord
 
+::: small-latex
 $$
-\sum_{\theta}\left[\sum_j P(Y_i = 1|\theta, a_{R_i}, b_{R_i}, c_{R_i})  - \sum_j P(Y_i=1|\theta,\frac{a_{F_i}}{x}, xb_{F_i}+y, c_{F_i})\right]^2
+\sum_{\theta}\left[\sum_i P(Y_i = 1|\theta, a_{R_i}, b_{R_i}, c_{R_i})  - \sum_i P(Y_i=1|\theta,\frac{a_{F_i}}{x}, xb_{F_i}+y, c_{F_i})\right]^2
 $$
+::: 
 
 - i: Item
 
 ## Stocking-Lord
 
+::: small-latex
+
 $$
 \sum_{\theta}\left[\color{#9B1B34}{\sum_i P(Y_i = 1|\theta, \alpha_{R_i}, \beta_{R_i}, c_{R_i})}  - \sum_i P(Y_i=1|\theta,\frac{\alpha_{F_i}}{x}, x\beta_{F_i}+y, c_{F_i})\right]^2
 $$
-- Summe der Test Characteristic Curves über alle Items. 
+:::
+
+\
+
+Summe der [Test Characteristic Curves]{.highlight} über alle Items. 
 
 ## Stocking-Lord
+
+::: small-latex
 
 $$
 \sum_{\theta}\left[\sum_i P(Y_i = 1|\theta, \alpha_{R_i}, \beta_{R_i}, c_{R_i})  - \sum_i P(Y_i=1|\theta,\color{#9B1B34}{\frac{\alpha_{F_i}}{x}, x\beta_{F_i}+y, c_{F_i}})\right]^2
 $$
 
-- Das sind unsere Transformationen von @sec-transf.
+:::
+
+\
+
+Das sind unsere Transformationen von @sec-transf.
 
 
 ## Haebara
 
+::: small-latex
 
 $$
 \sum_{\theta}\color{#9B1B34}{\sum_i}\left[P(Y_i = 1|\theta, \alpha_{R_i}, \beta_{R_i}, c_{R_i}) - P(Y_i=1|\theta,\frac{\alpha_{F_i}}{x}, x\beta_{F_i}+y, c_{F_i})\right]^2
 $$
-Sehr ähnlich, nur dass wir hier die Item Characteristic Curves verwenden. 
+
+:::
+
+\
+
+Sehr ähnlich, nur dass wir hier die [Item Characteristic Curves]{.highlight} verwenden. 
 
 
 ## Haebara und Stocking-Lord
@@ -647,7 +698,6 @@ Sehr ähnlich, nur dass wir hier die Item Characteristic Curves verwenden.
 In beiden Fällen wird die Gleichung so optimiert, dass die Linkingkonstanten $x$ und $y$ so bestimmt werden, dass der Unterschied zwischen den Test/Item Characteristic Curves der Referenz- und Fokusgruppe minimiert wird. 
 
 ## Linkingfehler
-Nur damit ihr es schon einmal gehört habt, wir werden später noch etwas mehr dazu lernen:
 Die beim Linking geschätzten Mittelwerte und Standardfehler von $\theta$ hängen zum Teil von der Wahl der Ankeritems ab. Wenn wir andere Items zum Linken verwenden würden, würden wir aufgrund von zufälliger Variation auch teils andere Fähigkeitsschätzer bekommen. Das wird als [Linkingfehler]{.highlight} bezeichnet.  
 Das wird später vor allem für die Berechnung von Standardfehlern bei Trendvergleichen relevant. 
 
@@ -656,9 +706,9 @@ Löse die [Übungsaufgaben zum Linking](https://nickhaf.github.io/IRT_workshop/e
 
 ## {background-image="images/penguins_group.jpg" background-size="1225px"}
 
-::: {.absolute left="2.5%" bottom="0%" style="font-size:1em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
+::: {.absolute left="5%" right="5%" bottom="0%" style="font-size:1em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 10px;"}
 
-### Zurück zum Anfang: Differential Item Functioning
+**Zurück zum Anfang: Differential Item Functioning**
 
 Wir haben jetzt gesehen, wie man Item- und Personenparamter aus verschiedenen Kalibrierungen auf die selbe Skala bringen kann. Jetzt können wir auf das Eingangsproblem dieser Session zurückkommen: [DIF]{.highlight}. 
 
@@ -666,7 +716,11 @@ Wir haben jetzt gesehen, wie man Item- und Personenparamter aus verschiedenen Ka
 
 ## DIF finden
 
-Viele verschiedene Verfahren, meist wird folgende Frage untersucht: Wurden Items in bestimmten Gruppen häufiger beantwortet wurden als in anderen Gruppen, bzw. wurden die Itemparamter in bestimmten Gruppen anders geschätzt (nachdem gelinkt wurde)?  
+Viele verschiedene Verfahren, Grundidee: 
+
+\
+
+Wurden Items in bestimmten Gruppen häufiger beantwortet wurden als in anderen Gruppen, bzw. wurden die Itemparamter in bestimmten Gruppen anders geschätzt (nachdem gelinkt wurde)?  
 
 Es werden also entweder die [beobacheteten Testscores]{.highlight} oder die [latenten Fähigkeitswert]{.highlight} zur Berechnung genutzt.  
 
@@ -674,32 +728,92 @@ Es werden also entweder die [beobacheteten Testscores]{.highlight} oder die [lat
 Siehe @berrio2020developments für eine ausführliche Übersicht zu verschiedenen DIF-Findungs Ansätzen. 
 :::
 
-## Ansätze
+## Verfahren
 
-### Observed Score Ansätze
-Z.B. der bekannte [Mantel-Haenszel Test](). Nutzen Kontingenztabellen, um zu schauen, ob sich die Antwortmusster der einzelenen Items in den verschiedenen Gruppen unterscheiden.  
+### Mantel-Haenszel Test [@holland1986differential]
+Analysiert Kontingenztabellen (vergleicht also die Häufigkeit von richtigen und falschen Antworten für ein Item $i$ zwischen zwei Gruppen. Nur für uniformen DIF. 
 
-### [Likelihood Ratio Test]()
+### Likelihood Ratio Test [@thissen1986beyond]
 Vergleich von Modellen mit zwischen Gruppen fixierten Parametern eines Items, und Modellen mit frei geschätzten Parametern.   
 
-## Ansätze
-### [Logistische Regression]()
-Logistische Regression Interaktionsterm zwischen Gruppenzugehörigkeit und Itemschwierigkeit/Personenfähigkeit gibt.  
+## Verfahren
+### Logistische Regression [@swaminathan1990detecting]
+Logistische Regression mit Interaktionsterm zwischen Gruppenzugehörigkeit und Itemschwierigkeit/Personenfähigkeit.  
 
-### [Lord's Chi Quadrat Test/Wald Test]()
+### Lord's Chi Quadrat Test/Wald Test [@lord1980applications]
 IRT Ansatz, Vergleich von Itemparametern zwischen den Gruppen.
-
-### [Raschtrees]()
-Gruppensplitting, kann auch diverse Interaktionen zwischen Variablen einfach untersuchen. 
-
-## [Regularisierung]()
-
 
 ## Iteratives Vorgehen
 :::{.callout-note}
 Oft werden die Methoden iterativ angewandt, da beim anfänglichen Matchen der Gruppen ja auch eventuell DIF-Items für die Berechnung der Scores verwendet werden. 
 :::
 
+## Machine-Learning
+
+:::{.columns}
+
+:::: {.column width="50%"}
+
+- Umgehen Probleme wie multiples Testen und Finden der Ankeritems und können gut mit Interaktionen umgehen.
+- Aber: größere Stichproben. 
+
+::::
+
+:::: {.column width="50%"}
+![](images/machine_learning.jpg){.image-right}
+::::
+:::
+
+
+
+## Raschtrees  {style="text-align: right;"}
+:::{.columns}
+:::{.column width="60%"}
+
+![](images/tree.jpg){.image-left}
+
+:::
+
+:::{.column width="40%"}
+
+
+Gruppensplitting, kann auch diverse Interaktionen zwischen Variablen einfach untersuchen. 
+
+\ 
+\
+\
+\
+\
+\
+
+::: small
+@strobl2015rasch
+:::
+
+
+:::
+:::
+
+## Regularisierung
+
+:::{.columns}
+:::{.column width="50%"}
+
+- Aufnahme von "Difference Parametern" (im Vergleich zur Reference Group) in das Modell. 
+- Bestrafung mit Penalty-Term, sodass unbedeutende Unterschiede wieder entfernt werden. 
+
+
+::: aside
+@belzak2020improving
+:::
+
+:::
+
+:::{.column width="50%"}
+![](images/pruning.jpg){.image-right}
+
+:::
+:::
 
 ## Welche denn jetzt?
 
@@ -709,26 +823,22 @@ Für kleine Datensätze eventuell eher Verfahren wählen die auf beobachtete Sco
 
 Sehr große Datensätze mit vielen Kovariaten (und damit auch vielen verschiedenen Gruppen und Gruppen-Interaktionen) könnten von Machine-Learning profitieren, z.B. Rasch-Trees.  
 
-Ansonsten Simulation von Daten und ausprobieren. 
-
 
 ::: aside
 Ideen zu alternativen Vorgehensweisen finden sich z.B. in @schneider2022r (mit R-Code).
-
 :::
 
 ## Umgang mit DIF
 
 :::{.callout-important}
 Generell ist es keine gute Idee, einfach nach p-Werten zu gehen, um Items dann blind auszuschließen. Stattdessen sollten die Itemschwierigkeitsunterschiede zwischen den Gruppen beurteilt, und auch das Item selbst inhaltlich untersucht werden. Noch mehr Empfehlungen finden sich z.B. bei @hambleton2006good. 
-::
+:::
 
-## Übung
-Bitte bearbeite die [DIF-Übung](https://nickhaf.github.io/IRT_workshop/exercises/linking/dif.html).
 
 ## {background-image="images/penguins.jpg" background-size="1225px"}
-::: {.absolute right="5%" top="0%" style="font-size:2em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 5px;"}
-Pause
+
+::: {.absolute right="2.5%" top="12%" style="font-size:1.25em; padding: 0.5em 0.5em; background-color: rgba(255, 255, 255, .7); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .5); border-radius: 7.5px;"}
+Bitte bearbeite die [DIF-Übung](https://nickhaf.github.io/IRT_workshop/exercises/linking/dif.html).
 :::
 
 ## Literatur
@@ -737,14 +847,19 @@ Pause
 
 
 ## Bildquellen
+::: small
 - Foto von <a href="https://unsplash.com/de/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a> auf <a href="https://unsplash.com/de/fotos/rosa-blattrige-blume-nahaufnahme-fotografie-r9eIL7jtenc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@glenncarstenspeters?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Glenn Carstens-Peters</a> auf <a href="https://unsplash.com/de/fotos/person-die-auf-weissem-papier-schreibt-ZWD3Dx6aUJg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@ncx1701d?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Martin Wettstein</a> auf <a href="https://unsplash.com/de/fotos/weisser-und-schwarzer-pinguin-auf-grauem-felsen-o4snRPEZRRs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@ncx1701d?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Martin Wettstein</a> auf <a href="https://unsplash.com/de/fotos/menschen-auf-grunem-rasen-tagsuber-GJQUr0SgKi0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von [Bryson Hammer](https://unsplash.com/de/@trhammerhead?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) auf [Unsplash](https://unsplash.com/de/fotos/selektives-fokusfoto-von-grauen-metallketten-JZ8AHFr2aEg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
 - Erstellt mit [Bing Bild-Ersteller](ttps://www.bing.com/images/create/a-simulation-that-we-are-all-living-in-a-simulatio/1-66e33509faf2483e82f8b47ed577a221?id=9qHmBvQeaNYbK1HW5T0qLQ%3D%3D&view=detailv2&idpp=genimg&idpclose=1&thid=OIG1.o1KL86Aq8PP9cXCbZnHc&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&form=SYDBIC).
 - Foto von <a href="https://unsplash.com/de/@quinoal?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Quino Al</a> auf <a href="https://unsplash.com/de/fotos/graustufenfoto-einer-frau-die-fussball-spielt-hCfZwxu6auo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@jhc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">James Coleman</a> auf <a href="https://unsplash.com/de/fotos/graustufenfoto-eines-nfl-spielers-der-den-ball-fangt-CTEvFbFpVC8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-- https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/1920px-Flag_of_Germany.svg.png
-- https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_New_Zealand.svg/800px-Flag_of_New_Zealand.svg.png
+- [Deutschlandfahne von Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/1920px-Flag_of_Germany.svg.png)
+- [Neuseelandfahne von Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_New_Zealand.svg/800px-Flag_of_New_Zealand.svg.png)
 - Foto von <a href="https://unsplash.com/de/@westbeach013?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Casey Allen</a> auf <a href="https://unsplash.com/de/fotos/afrikanische-pinguine-am-meeresufer-neben-felsbrocken-UjpEGHu8uNU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-  
+- Foto von <a href="https://unsplash.com/de/@possessedphotography?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Possessed Photography</a> auf <a href="https://unsplash.com/de/fotos/weisse-und-braune-mensch-roboter-illustration-YKW0JjP7rlU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@aaronburden?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Aaron Burden</a> auf <a href="https://unsplash.com/de/fotos/braune-holzbank-neben-baum-b9drVB7xIOI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@mhnsw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Museums of History New South Wales</a> auf <a href="https://unsplash.com/de/fotos/eine-gruppe-von-mannern-die-nebeneinander-in-der-nahe-eines-baumes-stehen-Bdf1xgjQe_M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::  
