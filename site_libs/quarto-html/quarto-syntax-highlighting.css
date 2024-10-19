@@ -16,18 +16,18 @@
   --quarto-hl-er-color: #f07178;
   --quarto-hl-ex-color: #00e0e0;
   --quarto-hl-fl-color: #d4d0ab;
-  --quarto-hl-fu-color: #F4BA02;
+  --quarto-hl-fu-color: #00e0e0;
   --quarto-hl-im-color: #abe338;
   --quarto-hl-in-color: #d4d0ab;
   --quarto-hl-kw-color: #9B1B34;
-  --quarto-hl-op-color: #F4BA02;
-  --quarto-hl-ot-color: #00e0e0;
+  --quarto-hl-op-color: #00e0e0;
+  --quarto-hl-ot-color: #F4BA02;
   --quarto-hl-pp-color: #dcc6e0;
   --quarto-hl-re-color: #00e0e0;
   --quarto-hl-sc-color: #abe338;
   --quarto-hl-ss-color: #abe338;
   --quarto-hl-st-color: #abe338;
-  --quarto-hl-va-color: #00e0e0;
+  --quarto-hl-va-color: #F4BA02;
   --quarto-hl-vs-color: #abe338;
   --quarto-hl-wa-color: #dcc6e0;
 }
@@ -108,7 +108,7 @@ code span.fl {
 }
 
 code span.fu {
-  color: #F4BA02;
+  color: #00e0e0;
 }
 
 code span.im {
@@ -142,11 +142,11 @@ div.sourceCode pre.sourceCode {
 }
 
 code span.op {
-  color: #F4BA02;
+  color: #00e0e0;
 }
 
 code span.ot {
-  color: #00e0e0;
+  color: #F4BA02;
 }
 
 code span.pp {
@@ -171,7 +171,7 @@ code span.st {
 }
 
 code span.va {
-  color: #00e0e0;
+  color: #F4BA02;
 }
 
 code span.vs {

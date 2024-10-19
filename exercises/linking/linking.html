@@ -315,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Wenn du die Übung zur Datenaufbereitung nicht gemacht hast, kannst du die aufbereiteten Daten <a href="https://github.com/nickhaf/IRT_workshop/tree/main/raw_data">hier</a> herunterladen und dann damit arbeiten. Nimm ansonsten einfach deine selbst aufbereiteten Daten.</p>
+<p>Wenn du die Übung zur Datenaufbereitung nicht gemacht hast, kannst du die aufbereiteten Daten <code>qa_dat_wide.rds</code> <a href="https://github.com/nickhaf/IRT_workshop/tree/main/raw_data">hier</a> herunterladen und dann damit arbeiten. Nimm ansonsten einfach deine selbst aufbereiteten Daten.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">qa_dat_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"raw_data"</span>, <span class="st">"qa_dat_wide.rds"</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -331,78 +331,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Foto von <a href="https://unsplash.com/de/@cleipelt?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Chris Leipelt</a> auf <a href="https://unsplash.com/de/fotos/collage-aus-grauer-metallkette-TcFq4-ulczU?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
 </div></div><section id="linking" class="level1" data-number="1"><h1 data-number="1">
 <span class="header-section-number">1</span> Linking</h1>
-<p>Wir haben gleich vor, DIF auf der Geschlecht-Variable zu untersuchen. Es gibt verschiedene Funktionen, die das in mehr oder weniger einem Guss machen, wir schauen uns das Vorgehen jetzt aber erst einmal Schritt für Schritt an.</p>
-<section id="gruppen-kalibrieren" class="level2" data-number="1.1"><h2 data-number="1.1" data-anchor-id="gruppen-kalibrieren">
-<span class="header-section-number">1.1</span> Gruppen kalibrieren</h2>
-<p>Zuerst kalibrieren wir die beiden Gruppen, die wir später auf DIF untersuchen wollen, einzeln. Dadurch können wir dann später die Itemparamter vergleichen. Bilde also zwei Subgruppen, eine für Männer und eine für Frauen.</p>
-<section id="subgruppen-herstellen" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" data-anchor-id="subgruppen-herstellen">
-<span class="header-section-number">1.1.1</span> Subgruppen herstellen</h3>
-<p>Erstelle dafür 2 Dataframes (<code>qa_f</code> und <code>qa_m</code>), einen nur mit Frauen (1) und einen nur mit Männern (2). Weitere Kategorien gibt es in diesem Datensatz nicht:</p>
-<div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">qa_dat_wide</span><span class="op">$</span><span class="va">gender</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-  1   2 
-222 303 </code></pre>
-</div>
-</div>
-<div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Lösung
+Benötigte Pakete
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">qa_f</span> <span class="op">&lt;-</span> <span class="va">qa_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">qa_m</span> <span class="op">&lt;-</span> <span class="va">qa_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section><section id="kalibrieren" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" data-anchor-id="kalibrieren">
-<span class="header-section-number">1.1.2</span> Kalibrieren</h3>
-<p>Fitte jetzt für beide Gruppen seperat ein Raschmodell mit TAM.</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tipp
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Denk daran nur die Spalten, die auch Itemantworten enthalten, in die TAM-Funktion zu geben.</p>
-</div>
-</div>
-</div>
-<p>::: ## Lösung</p>
-<div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: CDM</code></pre>
 </div>
@@ -418,29 +358,64 @@ Tipp
 <div class="cell-output cell-output-stderr">
 <pre><code>* TAM 4.2-21 (2024-02-19 18:52:08)</code></pre>
 </div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Rasch Modell fitten, die ersten 5 Spalten enthalten keine Itemantworten und werden entfernt</span></span>
-<span><span class="va">tam_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">qa_f</span><span class="op">[</span>, <span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">qa_f</span><span class="op">)</span><span class="op">]</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">tam_m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">qa_m</span><span class="op">[</span>, <span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">qa_m</span><span class="op">)</span><span class="op">]</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     </code></pre>
 </div>
-<p>Die kalibrierten Itemparamter können wir uns so anschauen:</p>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Wir haben gleich vor, DIF auf der Geschlecht-Variable zu untersuchen. Es gibt verschiedene Funktionen, die das in mehr oder weniger einem Guss machen, wir schauen uns das Vorgehen jetzt aber erst einmal Schritt für Schritt an.</p>
+<section id="gruppen-kalibrieren" class="level2" data-number="1.1"><h2 data-number="1.1" data-anchor-id="gruppen-kalibrieren">
+<span class="header-section-number">1.1</span> Gruppen kalibrieren</h2>
+<p>Zuerst kalibrieren wir die beiden Gruppen, die wir später auf DIF untersuchen wollen, einzeln. Dadurch können wir dann später die Itemparamter vergleichen. Bilde also zwei Subgruppen, eine für Männer und eine für Frauen.</p>
+<section id="subgruppen-herstellen" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" data-anchor-id="subgruppen-herstellen">
+<span class="header-section-number">1.1.1</span> Subgruppen herstellen</h3>
+<p>Erstelle dafür 2 Dataframes (<code>qa_f</code> und <code>qa_m</code>), einen nur mit Frauen (1) und einen nur mit Männern (2). Weitere Kategorien gibt es in diesem Datensatz nicht:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_f_difficulty</span> <span class="op">&lt;-</span> <span class="va">tam_f</span><span class="op">$</span><span class="va">xsi</span></span>
-<span><span class="va">tam_m_difficulty</span> <span class="op">&lt;-</span> <span class="va">tam_m</span><span class="op">$</span><span class="va">xsi</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">qa_dat_wide</span><span class="op">$</span><span class="va">gender</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  1   2 
+222 303 </code></pre>
 </div>
-<p>:::</p>
-</section><section id="linken" class="level3" data-number="1.1.3"><h3 data-number="1.1.3" data-anchor-id="linken">
-<span class="header-section-number">1.1.3</span> Linken</h3>
-<p>Wir verzichten für diese Übung darauf, den Modellfit zu beurteilen und linken direkt. Nutze dafür die Funktion <code><a href="https://rdrr.io/pkg/TAM/man/tam.linking.html">tam.linking()</a></code> und Linke mit Stocking-Lord Linking.</p>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
+</div>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-body-container">
-<p>Denk zurück an unsere Besprechung von <a href="https://nickhaf.github.io/IRT_workshop/slides/Linking/linking.html#/ankeritems">Ankeritems</a>. Eigentlich sollten wir möglichst non-DIF Items zum Linking verwenden. Das untersuchen wir aber erst in der nächsten Übung. Manche Linking-Funktionen wie <code>equat1pl</code> aus <a href="https://github.com/weirichs/eatModel">eatMode</a>` ermöglichen es, DIF Items direkt automatisch auszuschließen. Ansonsten kann es auch sinnvoll sein bei der Untersuchung von DIF iterativ vorzugehen, und Items mit DIF nacheinander auszuschließen und dann erneut zu linken. Wie wir in der nächsten Übung sehen werden übernehmen einige Funktionen zur Untersuchung von DIF das automatisch.</p>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">qa_f</span> <span class="op">&lt;-</span> <span class="va">qa_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">qa_m</span> <span class="op">&lt;-</span> <span class="va">qa_dat_wide</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+</div>
+</section><section id="kalibrieren" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" data-anchor-id="kalibrieren">
+<span class="header-section-number">1.1.2</span> Kalibrieren</h3>
+<p>Fitte jetzt für beide Gruppen seperat ein Raschmodell mit <code>TAM</code>.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -453,7 +428,7 @@ Tipp
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Rufe die Hilfeseite der Funktion auf, um zu erkennen, welche Argumente für das geforderte Linking-Verfahren eingestellt werden müssen.</p>
+<p>Denk daran nur die Spalten, die auch Itemantworten enthalten, in die <code>TAM</code>-Funktion zu geben.</p>
 </div>
 </div>
 </div>
@@ -470,7 +445,88 @@ Lösung
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_link</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.linking.html">tam.linking</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">tam_f</span>, <span class="va">tam_m</span><span class="op">)</span>, type<span class="op">=</span><span class="st">"SL"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Rasch Modell fitten, die ersten 5 Spalten enthalten keine Itemantworten und werden entfernt</span></span>
+<span><span class="va">tam_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">qa_f</span><span class="op">[</span>, <span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">qa_f</span><span class="op">)</span><span class="op">]</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">tam_m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam</a></span><span class="op">(</span><span class="va">qa_m</span><span class="op">[</span>, <span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">qa_m</span><span class="op">)</span><span class="op">]</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Die kalibrierten Itemparamter können wir uns so anschauen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_f_difficulty</span> <span class="op">&lt;-</span> <span class="va">tam_f</span><span class="op">$</span><span class="va">item_irt</span></span>
+<span><span class="va">tam_m_difficulty</span> <span class="op">&lt;-</span> <span class="va">tam_m</span><span class="op">$</span><span class="va">item_irt</span></span>
+<span></span>
+<span><span class="va">tam_f_difficulty</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  item alpha        beta
+1 3401     1  2.40949640
+2 3402     1  0.01907487
+3 3403     1  0.19099166
+4 3404     1 -0.75279480
+5 3405     1 -0.19093832
+6 3406     1 -0.92957750
+7 3407     1  0.95251466
+8 3408     1  0.30681776
+9 3409     1 -1.65412846</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_m_difficulty</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  item alpha        beta
+1 3401     1  0.63703272
+2 3402     1 -0.48116307
+3 3403     1 -0.25614572
+4 3404     1 -1.87489822
+5 3405     1  0.09555167
+6 3406     1 -1.98778205
+7 3407     1 -0.31549713
+8 3408     1 -1.26012532
+9 3409     1 -2.27770429</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="linken" class="level3" data-number="1.1.3"><h3 data-number="1.1.3" data-anchor-id="linken">
+<span class="header-section-number">1.1.3</span> Linken</h3>
+<p>Wir verzichten für diese Übung darauf, den Modellfit zu beurteilen und linken direkt. Nutze dafür die Funktion <code><a href="https://rdrr.io/pkg/TAM/man/tam.linking.html">tam.linking()</a></code> und Linke mit Stocking-Lord Linking.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Denk zurück an unsere Besprechung von <a href="https://nickhaf.github.io/IRT_workshop/slides/Linking/linking.html#/ankeritems">Ankeritems</a>. Eigentlich sollten wir möglichst non-DIF Items zum Linking verwenden. Das untersuchen wir aber erst in der nächsten Übung. Manche Linking-Funktionen wie <code>equat1pl()</code> aus <a href="https://github.com/weirichs/eatModel">eatModel</a>` ermöglichen es, DIF Items direkt automatisch auszuschließen. Ansonsten kann es auch sinnvoll sein bei der Untersuchung von DIF iterativ vorzugehen, und Items mit DIF nacheinander auszuschließen und dann erneut zu linken. Wie wir in der nächsten Übung sehen werden übernehmen einige Funktionen zur Untersuchung von DIF das automatisch.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Rufe die Hilfeseite der Funktion auf, um zu erkennen, welche Argumente für das geforderte Linking-Verfahren eingestellt werden müssen.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_link</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.linking.html">tam.linking</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">tam_f</span>, <span class="va">tam_m</span><span class="op">)</span>, type<span class="op">=</span><span class="st">"SL"</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>N = 2, M = 5 machine precision = 2.22045e-16
 This problem is unconstrained.
@@ -494,17 +550,20 @@ converged</code></pre>
 <span class="header-section-number">1.1.4</span> Evaluation</h3>
 <p>Die Parameter können wir so extrahieren:</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">difficulty_link_f</span> <span class="op">&lt;-</span> <span class="va">tam_link</span><span class="op">$</span><span class="va">parameters_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">xsi</span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">difficulty_link_f</span> <span class="op">&lt;-</span> <span class="va">tam_link</span><span class="op">$</span><span class="va">parameters_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">xsi</span></span>
 <span><span class="va">difficulty_link_m</span> <span class="op">&lt;-</span> <span class="va">tam_link</span><span class="op">$</span><span class="va">parameters_list</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">xsi</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Vergleiche sie mit den kalibrierten Schwierigkeiten:</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_f_difficulty</span> <span class="op">&lt;-</span> <span class="va">tam_f</span><span class="op">$</span><span class="va">xsi</span></span>
-<span><span class="va">tam_m_difficulty</span> <span class="op">&lt;-</span> <span class="va">tam_m</span><span class="op">$</span><span class="va">xsi</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_f_difficulty</span> <span class="op">&lt;-</span> <span class="va">tam_f</span><span class="op">$</span><span class="va">item_irt</span></span>
+<span><span class="va">tam_m_difficulty</span> <span class="op">&lt;-</span> <span class="va">tam_m</span><span class="op">$</span><span class="va">item_irt</span></span>
+<span></span>
+<span><span class="va">tam_f_difficulty</span></span>
+<span><span class="va">tam_m_difficulty</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Was fällt auf?</p>
 <div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -513,13 +572,47 @@ Lösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Zuerst fällt auf, dass sich natürlich nur die Schwierigkeiten für die zweite Gruppe geändert haben. Für Item 1 ist die Schwierigkeit für die Männer relativ stark gestiegen, es ist für die Männer aber nach wie vor deutlich einfacher als für die Frauen. Schon einmal ein guter Kandidat für die DIF Analyse.</p>
+<p>Für Frauen:</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_f_difficulty</span><span class="op">$</span><span class="va">linked_beta</span> <span class="op">&lt;-</span> <span class="va">difficulty_link_f</span></span>
+<span><span class="va">tam_f_difficulty</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  item alpha        beta linked_beta
+1 3401     1  2.40949640  2.40949640
+2 3402     1  0.01907487  0.01907487
+3 3403     1  0.19099166  0.19099166
+4 3404     1 -0.75279480 -0.75279480
+5 3405     1 -0.19093832 -0.19093832
+6 3406     1 -0.92957750 -0.92957750
+7 3407     1  0.95251466  0.95251466
+8 3408     1  0.30681776  0.30681776
+9 3409     1 -1.65412846 -1.65412846</code></pre>
+</div>
+</div>
+<p>Für Männer:</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tam_m_difficulty</span><span class="op">$</span><span class="va">linked_beta</span> <span class="op">&lt;-</span> <span class="va">difficulty_link_m</span></span>
+<span><span class="va">tam_m_difficulty</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  item alpha        beta linked_beta
+1 3401     1  0.63703272   1.5018798
+2 3402     1 -0.48116307   0.3836840
+3 3403     1 -0.25614572   0.6087014
+4 3404     1 -1.87489822  -1.0100511
+5 3405     1  0.09555167   0.9603988
+6 3406     1 -1.98778205  -1.1229350
+7 3407     1 -0.31549713   0.5493499
+8 3408     1 -1.26012532  -0.3952782
+9 3409     1 -2.27770429  -1.4128572</code></pre>
+</div>
+</div>
+<p>Zuerst fällt auf, dass sich natürlich nur die Schwierigkeiten für die zweite Gruppe geändert haben. Für Item 3401 ist die Schwierigkeit beispielsweise für die Männer relativ stark gestiegen, es ist für die Männer aber nach wie vor deutlich einfacher als für die Frauen. Schon einmal ein guter Kandidat für die DIF Analyse.</p>
 </div>
 </div>
 </div>
-<p>Gut, jetzt haben wir ein erstes Linking durchgeführt. Bei der DIF Analyse im nächsten Kapitel machen wir das gleiche nochmal, aber mit anderen Paketen und etwas komprimierter, können die Ergebnisse dann aber auch etwas vergleichen.</p>
+<p>Gut, jetzt haben wir ein erstes Linking durchgeführt. Bei der DIF Analyse im nächsten Kapitel machen wir das gleiche nochmal, aber mit anderen Paketen und etwas komprimierter. Wir werden dann die Ergebnisse vergleichen.</p>
 
 
 
