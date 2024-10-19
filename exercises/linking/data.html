@@ -66,7 +66,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
@@ -99,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 </head>
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
@@ -308,42 +307,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_linking.html">Linking</a></li><li class="breadcrumb-item"><a href="../../exercises/linking/data.html">1. Die Daten</a></li></ol></nav><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content">
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>Foto von <a href="https://unsplash.com/de/@domlafou?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Dom Fou</a> auf <a href="https://unsplash.com/de/fotos/menschen-die-auf-einem-stuhl-vor-dem-computer-sitzen-YRMWVcdyhmI?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
+</div></div><div class="quarto-about-marquee">
+  <div class="about-image-container">
+    <img src="images/students.jpg" class="about-image " style="width: 100%;">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_linking.html">Linking</a></li><li class="breadcrumb-item"><a href="../../exercises/linking/data.html">1. Die Daten</a></li></ol></nav><div class="quarto-title">
 <h1 class="title">1. Die Daten</h1>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
     <div>
     <div class="quarto-title-meta-heading">Autor:in</div>
     <div class="quarto-title-meta-contents">
              <p>Nicklas Hafiz </p>
           </div>
   </div>
-    
-  
-    
   </div>
-  
-
-
-</header><section id="vorbereitung" class="level1" data-number="1"><h1 data-number="1">
-<span class="header-section-number">1</span> Vorbereitung</h1>
-<section id="daten-laden" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="daten-laden">
-<span class="header-section-number">1.1</span> Daten laden</h2>
-<p>Lade die Datei <code>q_a_wirt.rds</code> von <a href="https://github.com/nickhaf/IRT_workshop/tree/main/raw_data">GitHub</a> herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.</p>
+</header> <div id="data-heading">
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Die Daten stammen aus dem <a href="https://search.gesis.org/research_data/ZA6268?doi=10.4232/1.13780">SPIEGEL-Studentenpisa-Test</a> von 2009 und beinhaltet Fragen zu Allgemeinwissen in den Themengebieten Politik, Geschichte, Wirtschaft, Kultur und Naturwissenschaften. Insgesamt haben fast 700.000 Personen den Test bearbeitet. Wir haben die Daten bereits etwas aufbereitet und nur ein Subset an Fragen (Thema Wirtschaft) für diese Übung ausgewählt.</p>
+<p>Die Daten stammen aus dem <a href="https://search.gesis.org/research_data/ZA6268?doi=10.4232/1.13780">SPIEGEL-Studentenpisa-Test</a> von 2009 und beinhaltet Fragen zu Allgemeinwissen in den Themengebieten Politik, Geschichte, Wirtschaft, Kultur und Naturwissenschaften. Insgesamt haben fast 700.000 Personen den Test bearbeitet. Wir haben die Daten bereits etwas aufbereitet und nur ein Subset an Fragen (Thema Wirtschaft), sowie nur Studierende aus Berlin für diese Übung ausgewählt, um den Datensatz in einer .</p>
 </div>
 </div>
 </div>
+</div> 
+  </div>
+</div>
+
+<section id="vorbereitung" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> Vorbereitung</h1>
+<section id="daten-laden" class="level2" data-number="1.1"><h2 data-number="1.1" data-anchor-id="daten-laden">
+<span class="header-section-number">1.1</span> Daten laden</h2>
+<p>Lade die Datei <code>q_a_wirt_b.rds</code> von <a href="https://github.com/nickhaf/IRT_workshop/tree/main/raw_data">GitHub</a> herunter (am besten in einen eigenen Daten-Ordner in deinem Projektordner) und in dein R-Skript ein.</p>
 <div class="callout callout-style-simple callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -362,9 +364,9 @@ Lösung
 </div>
 </div>
 </div>
-</section><section id="überblick" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="überblick">
+</section><section id="überblick" class="level2" data-number="1.2"><h2 data-number="1.2" data-anchor-id="überblick">
 <span class="header-section-number">1.2</span> Überblick</h2>
-<p>Verschaffe dir einen <a href="">Überblick</a> über die Daten. In welchem Formt liegen sie vor? Was könnten die verschiedenen Spalten bedeuten?</p>
+<p>Verschaffe dir einen <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/%C3%BCberblick-bekommen">Überblick</a> über die Daten. In welchem Format liegen sie vor? Was könnten die verschiedenen Spalten bedeuten?</p>
 <div class="callout callout-style-simple callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -377,7 +379,7 @@ Lösung
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/long-format">long-Format</a> vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide">wide-Format umformen</a>.</p>
+<p>Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/long-format">long-Format</a> vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide">wide-Format umformen</a>, da das von <code>TAM</code> so gewünscht ist.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">qa_dat</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -399,6 +401,12 @@ Lösung
 <li>
 <code>gender</code>: Geschlecht</li>
 <li>
+<code>bundeslandStudium</code>: Bundesland des Studiums. <code>3</code> steht in diesem Fall für Berlin.</li>
+<li>
+<code>spiegelReadingfreq</code>: Häufigkeit des Lesens des SPIEGELs.</li>
+<li>
+<code>age</code>: Alter der testbearbeitenden Person</li>
+<li>
 <code>answer</code>: Antwort auf die Frage</li>
 <li>
 <code>question_code</code>: Fragen-ID</li>
@@ -408,7 +416,7 @@ Lösung
 </div>
 </div>
 </div>
-</section><section id="spalten-umbenennen" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="spalten-umbenennen">
+</section><section id="spalten-umbenennen" class="level2" data-number="1.3"><h2 data-number="1.3" data-anchor-id="spalten-umbenennen">
 <span class="header-section-number">1.3</span> Spalten umbenennen</h2>
 <p>Hmm, die Spaltennamen sind teilweise noch nicht ganz eindeutig. Benenne <code>T1</code> in <code>ID</code> und <code>varLabel</code> in <code>question</code> um. Klare Benennung hilft uns (und anderen) den Überblick zu behalten.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
@@ -459,7 +467,7 @@ Lösung
 </div>
 </div>
 </div>
-</section><section id="umformen" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="umformen">
+</section><section id="umformen" class="level2" data-number="1.4"><h2 data-number="1.4" data-anchor-id="umformen">
 <span class="header-section-number">1.4</span> Umformen</h2>
 <p>Forme jetzt die Daten ins <a href="https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/von-long-zu-wide">wide-Format um</a>.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
@@ -524,6 +532,7 @@ Lösung
 </div>
 
 
+
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -544,13 +553,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
