@@ -2,12 +2,24 @@
 title: "Partial Credit Model"
 subtitle: "Übung"
 format: html
+about:
+  id: pcm-heading
+  template: marquee
+  image: images/friends.jpg
 ---
 
-## Einige Worte zu den Daten
+:::{#pcm-heading}
+
+## Die Daten
 
 - kontinuierliche Skala in Likert Skala umgewandelt (nicht optimal, Infos gehen verloren)
 - Wir können jetzt auch nicht wirklich sagen, was die verschiedenen Kategorien aussagen (außer 1 und 5).
+
+:::
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@lgtts?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Ilse Orsel</a> auf <a href="https://unsplash.com/de/fotos/rot-weisses-unks-cafe-fwPHQB4kGzA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::
 
 ```{r}
 library(TAM)

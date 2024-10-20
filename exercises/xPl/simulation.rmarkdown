@@ -2,20 +2,16 @@
 title: "Simulation von IRT Daten"
 subtitle: "Übung"
 format: html
-about:
-  id: simulation-heading
-  template: marquee
-  image: images/crossroads.jpg
 ---
 
 
-:::{#simulation-heading}
+
+# Datensimulation
 
 Wir schauen uns eine ganz simple Version an. Wer interessiert ist, und z.B. Daten für eine Poweranalyse simulieren möchte, findet [hier]() Unterstützung.
-
-:::
-
 Installieren und/oder lade folgende Pakete für diese Übung:
+
+
 
 ```{r}
 #| message: false
@@ -32,6 +28,8 @@ library(TAM)
 n_items <- 20
 
 ```
+
+
 
 
 
@@ -58,12 +56,16 @@ Wir versuchen zu schätzen wie hoch die Wahrscheinlichkeit ist, dass eine Person
 :::{.callout-tip collapse=true}
 Der Aufbau der Funktion könnte so aussehen:
 
+
+
 ```{r}
 #| eval: FALSE
 
 calc_2pl <- function(alpha, theta, beta){
 }
 ```
+
+
 
 Befülle sie nun mit  @eq-2PL. `alpha`, `theta` und `beta` sind hier also die Funktionsargumente (weil sie innerhalb der Klammern von `function()` stehen), und müssen beim späteren Aufruf der Funktion von der nutzenden Person mit Werten befüllt werden. Diese Werte können dann im Funktionskörper (zwischen `{}`) genutzt werden, um @eq-2PL in R Code zu übersetzen.
 
@@ -72,12 +74,16 @@ Befülle sie nun mit  @eq-2PL. `alpha`, `theta` und `beta` sind hier also die Fu
 
 :::{.callout-caution collapse=true}
 ## Lösung
+
+
 ```{r}
 calc_2pl <- function(a, theta, b){
   p <- (exp(a*(theta - b)))/(1 + exp(a*(theta - b))) 
   return(p) 
 }
 ```
+
+
 
 
 `alpha`, `theta` und `beta` sind hier also die Funktionsargumente (weil sie innerhalb der Klammern von `function()` stehen), und müssen beim späteren Aufruf der Funktion von der nutzenden Person mit Werten befüllt werden. Im Funktionskörper (zwischen `{}`) werden sie genutzt, um $p$ anhand von @eq-2PL zu berechnen.
@@ -106,6 +112,8 @@ Die Funktion `seq()` ist dein Freund. Mehr brauchst du nicht, um die Zahlenreihe
 
 :::{.callout-caution collapse=true}
 ## Lösung
+
+
 ```{r}
 set.seed(1820) 
 n_items <- 20
@@ -118,6 +126,8 @@ items <- data.frame(
 )
 
 ```
+
+
 
 Das sind also die Itemparameter, die wir in unsere Simulation packen. 
 :::
@@ -136,6 +146,8 @@ Wir können zufällige Daten aus einer Normalverteilung mit Hilfe der Funktion `
 :::{.callout-caution collapse=true}
 ## Lösung
 
+
+
 ```{r}
 ## Ich setzte hier einen Seed, damit meine zufällig erzeugten Werte replizierbar bleiben.
 ## Wenn du den Seed in deinem Skript auf die gleiche Zahl setzt, bekommst du genau die gleichen Zufallswerte und kannst besser vergleichen. 
@@ -146,6 +158,8 @@ subjects <- data.frame(
     theta = c(rnorm(n_subj, 0, 1))
 )
 ```
+
+
 
 :::
 
@@ -163,6 +177,8 @@ Nutze die Funktion `merge()` ohne irgendwelche weiteren Argumente.
 :::{.callout-caution collapse=true}
 ## Lösung
 
+
+
 ```{r}
 sim_dat <- merge(subjects, items)
 
@@ -172,13 +188,19 @@ str(sim_dat)
 
 ```
 
+
+
 Unser finaler `data.frame` hat `r n_subj * n_items` Zeilen, wie verlangt. Lasst uns auch noch einmal schauen, ob eine zufällige Person alle Items beantwortet hat:
+
+
 
 ```{r}
 sim_dat %>%
   filter(sub_id == 420) %>%
   pull(item_id)
 ```
+
+
 
 Das sieht gut aus! 
 
@@ -194,6 +216,8 @@ Supereinfach geht das ganze mit der `mutate()` Funktion aus dem `tidyverse`.
 
 :::{.callout-caution collapse=true}
 ## Lösung
+
+
 ```{r}
 sim_dat <- sim_dat %>%
   mutate(p = calc_2pl(a, theta, b))
@@ -202,12 +226,16 @@ sim_dat <- sim_dat %>%
 head(sim_dat)
 ```
 
+
+
 Auf den ersten Blick sieht das schonmal gut aus. Personen mit niedrigerem $\theta$ Wert haben auch eine geringere Wahrscheinlichkeit, das Item richtig zu beantworten (vgl. z.B. Zeile 2 und 3).
 :::
 
 ## Auffällige Itemmuster simulieren
 
 Wir können jetzt auch ein bisschen die Antwortmuster manipulieren, um zu schauen, wie sich die Items verhalten, wenn bestimmte Auffälligkeiten vorliegen. Z.B. können wir festlegen, dass Item 3 von Leuten mit hoher Fähigkeit eher mal falsch beantwortet wird, obwohl es ansonsten ein recht einfaches Item ist:
+
+
 
 ```{r}
 
@@ -217,6 +245,8 @@ sim_dat <- sim_dat %>%
   ## Infit
   mutate(p = ifelse(item_id == 11, ifelse(theta > -0.2 & theta < 0.1, 0.95, p), p))
 ```
+
+
 
 Item 10 wird also unabhängig von der Fähigkeit der Person einfach zufällig 50/50 beantwortet. Wir können später mal schauen, ob das Item auffällig wird. 
 
@@ -233,12 +263,16 @@ Eine Bernoulliverteilung ist eine Binomialverteilung mit nur einem Versuch. Wir 
 
 :::{.callout-caution collapse=true}
 ## Lösung
+
+
 ```{r}
 sim_dat <- sim_dat %>%
   mutate(answer = rbinom(n = nrow(.), size = 1, prob = p))
 
 head(sim_dat)
 ```
+
+
 
 Auch das sieht erst einmal plausibel aus! Toll!
 
@@ -261,6 +295,8 @@ Ich nutze dafür immer deutlich lieber die `tidyverse` Funktion `pivot_wider()` 
 
 :::{.callout-caution collapse=true}
 ## Lösung
+
+
 ```{r}
 sim_dat_wide <- sim_dat %>%
     select(item_id, sub_id, answer) %>%
@@ -272,6 +308,8 @@ head(sim_dat_wide)
 ```{r}
 saveRDS(sim_dat_wide, here::here("raw_data", "sim_2pl.rds"))
 ```
+
+
 
 
 Die Spaltennamen sind jetzt unsere Item-Nummern. Pro Zeile finden sich die Antworten der Personen, entweder hat sie das entsprechende Item richtig (`1`) oder falsch (`0`) beantwortet. 
@@ -286,9 +324,13 @@ Wir brauchen die Funktion `tam.mml.2pl()`.
 
 :::{.callout-caution collapse=true}
 ## Tip
+
+
 ```{r}
 sim_dat_2PL <- tam.mml.2pl(sim_dat_wide %>% select(-sub_id), irtmodel = "2PL", verbose = FALSE)
 ```
+
+
 
 
 
@@ -300,6 +342,8 @@ sim_dat_2PL <- tam.mml.2pl(sim_dat_wide %>% select(-sub_id), irtmodel = "2PL", v
 :::{.callout-caution collapse=true}
 
 ## Lösung
+
+
 ```{r}
 items_2pl <- apply(sim_dat_2PL$item_irt[, c("alpha", "beta")], 2, round, 2)
 item_comparison <- cbind(items_2pl, items[, c("a", "b")])
@@ -332,6 +376,8 @@ ggplot(data=item_comparison,
 
 ```
 
+
+
 Das sieht super aus, die Werte stimmen gut überein (natürlich mit Ausnahme von unserem Missspezifiziertem Item 10). Dadurch, dass wir so viele Personen simuliert haben, sehen wir also, dass unsere Simulation gut funktioniert. Wir können das Gerüst dieses Simplen Modells jetzt nutzen, um uns noch spannendere Fragestellungen anzuschauen. Zum Beispiel könnten wir untersuchen, ab welcher Stichprobengröße unser Modell genau genug schätzt, oder wir könnten verschiedene Modelle miteinander vergleichen (Rasch vs. 2PL z.B.). Beides kann uns bei der Studienplanung helfen. 
 
 :::
@@ -339,6 +385,8 @@ Das sieht super aus, die Werte stimmen gut überein (natürlich mit Ausnahme von
 
 ## SimIRT
 Übringes: es gibt natürlich auch schon R Pakete, die die Simulationsarbeit für uns übernehmen. Aus didaktischen Gründen haben wir das bisher selber gemacht, aber können uns jetzt ein bisschen Arbeit ersparen, und das ganze von dem Paket `catIrt` übernehmen lassen. Hier nochmal die gleiche Simulation, aber mit `simIrt` (ohne Misspezifizierung von Item 10, wir könnten es aber natürlich genauso überschreiben):
+
+
 
 ```{r}
 #| output: false 

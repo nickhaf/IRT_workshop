@@ -2,7 +2,18 @@
 title: "Einfache IRT Modelle"
 subtitle: "Übungen"
 format: html
-image: ../slides/IntroR/images/r_desktop.jpg
+image: ./images/sapling.jpg
 ---
 
-Das Übungsskript ´Tag1_2Nachmittag_NR1_einfache_IRT_Modelle.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+![](./images/sapling.jpg)
+\
+
+Ziel dieser Übung ist es, erste IRT Modelle in R zu fitten. 
+
+:::{.callout-note}
+Das Übungsskript `Tag1_2Nachmittag_NR1_einfache_IRT_Modelle.r` findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+:::
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@adelau1?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Austin D</a> auf <a href="https://unsplash.com/de/fotos/selektive-fokusfotografie-von-green-leaf-72XZgeY3IY4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+::: 

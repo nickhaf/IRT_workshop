@@ -2,10 +2,18 @@
 title: "Längsschnitt"
 subtitle: "Übungen"
 format: html
-image: ../slides/IntroR/images/r_desktop.jpg
+image: ./images/road.jpg
 ---
 
 
+![](./images/road.jpg)
+
 :::{.callout-note}
-Das Übungsskript ´Tag2_2Nachmittag_Nr2_Laengsschnitt.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+Das Übungsskript `Tag2_2Nachmittag_Nr2_Laengsschnitt.r` findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+:::
+
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@kimonmaritz?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Kimon Maritz</a> auf <a href="https://unsplash.com/de/fotos/luftaufnahme-der-von-baumen-umgebenen-strasse-1-ISIwuBMiw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
 :::

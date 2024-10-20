@@ -9,6 +9,8 @@ image: ./images/mix.jpg
 
 \
 
+Ziel dieser Übung ist es, die Anwendung von Mixed IRT Modellen zu üben.
+
 :::{.callout-note}
 Das Übungsskript ´Tag3_1Vormittag_mixed_IRT.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
 :::

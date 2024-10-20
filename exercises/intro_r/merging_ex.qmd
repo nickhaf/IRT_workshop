@@ -4,9 +4,20 @@ subtitle: "Übung"
 lang: de
 author: "Nicklas Hafiz"
 format: html
+about:
+  id: merge-heading
+  template: marquee
+  image: images/merge.jpg
 ---
 
-# Merging
+:::{#merge-heading}
+Jetzt haben wir unseren `characters` Datensatz ein bisschen genauer kennen gelernt. Die Persönlichkeitsratings sind allerdings noch nicht enthalten. Dafür müssen wir ihn mit dem `psych_stats` Datensatz kombinieren. 
+:::
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@lg17?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Lance Grandahl</a> auf <a href="https://unsplash.com/de/fotos/braune-metallbahn-in-der-nahe-von-rocky-mountain-tagsuber-nShLC-WruxQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::
+
 ::: {.callout-caution icon="false" collapse="true"}
 ## Vorheriger Code
 
@@ -35,9 +46,6 @@ str(characters)
 str(psych_stats)
 ```
 :::
-
-Jetzt haben wir unseren `characters` Datensatz ein bisschen genauer kennen gelernt. Die Persönlichkeitsratings sind allerdings noch nicht enthalten. Dafür müssen wir ihn mit dem `psych_stats` Datensatz kombinieren. 
-
 ## Übung 
 
 Merge den `characters` `data.frame` und den `psych_stats` `data.frame` anhand einer gemeinsamen Spalte.

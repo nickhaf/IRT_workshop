@@ -10,7 +10,7 @@ image: ./images/levels.jpg
 \
 
 :::{.callout-note}
-Das Übungsskript ´Tag1_2Nachmittag_Nr2_Raschmodell_als_GLMM.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+Das Übungsskript `Tag1_2Nachmittag_Nr2_Raschmodell_als_GLMM.r` findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
 :::
 
 ::: aside

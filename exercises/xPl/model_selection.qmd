@@ -3,7 +3,20 @@ title: "Modellselektion"
 subtitle: "Übung"
 author: "Nicklas Hafiz"
 format: html
+about:
+  id: selection-heading
+  template: marquee
+  image: images/crossroads.jpg
 ---
+
+
+:::{#selection-heading}
+Das 2PL Modell haben wir schon gefittet (und wir wissen ja, dass das richtig ist, weil wir die Daten selbst generiert haben). Wie aber verhalten sich das 1PL Modell und das 3PL Modell? 
+:::
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@stenqvist?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Jakob Stenqvist</a> auf <a href="https://unsplash.com/de/fotos/landschaft-der-mit-schnee-bedeckten-baume-f_RPPpNH0VA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::
 
 ```{r}
 #| echo: false
@@ -11,8 +24,6 @@ format: html
 source(here::here("R", "plot_functions.R"))
 ```
 
-
-Das 2PL Modell haben wir schon gefittet (und wir wissen ja, dass das richtig ist, weil wir die Daten selbst generiert haben). Wie aber verhalten sich das 1PL Modell und das 3PL Modell? 
 
 # Modellevaluation
 
