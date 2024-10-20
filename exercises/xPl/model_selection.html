@@ -66,7 +66,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
@@ -99,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 </head>
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
@@ -156,7 +155,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_1pl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einfache IRT Modelle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_intro_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Einführung in R</span></a>
@@ -197,6 +202,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Raschmodell als GLMM</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_linking.html" class="sidebar-item-text sidebar-link">
@@ -226,6 +237,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_testdesign.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testdesigns</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_xPL.html" class="sidebar-item-text sidebar-link">
@@ -254,6 +271,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_laengs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Längsschnitt</span></a>
+  </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -312,34 +335,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_xPL.html">Höher parametrisierte Modelle</a></li><li class="breadcrumb-item"><a href="../../exercises/xPl/model_selection.html">Modellselektion</a></li></ol></nav><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><div class="quarto-about-marquee">
+  <div class="about-image-container">
+    <img src="images/crossroads.jpg" class="about-image " style="width: 100%;">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_xPL.html">Höher parametrisierte Modelle</a></li><li class="breadcrumb-item"><a href="../../exercises/xPl/model_selection.html">Modellselektion</a></li></ol></nav><div class="quarto-title">
 <h1 class="title">Modellselektion</h1>
 <p class="subtitle lead">Übung</p>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
     <div>
     <div class="quarto-title-meta-heading">Autor:in</div>
     <div class="quarto-title-meta-contents">
              <p>Nicklas Hafiz </p>
           </div>
   </div>
-    
-  
-    
   </div>
-  
+</header> <div id="selection-heading">
+<p>Das 2PL Modell haben wir schon gefittet (und wir wissen ja, dass das richtig ist, weil wir die Daten selbst generiert haben). Wie aber verhalten sich das 1PL Modell und das 3PL Modell?</p>
+</div> 
+  </div>
+</div>
 
 
-</header><p>Das 2PL Modell haben wir schon gefittet (und wir wissen ja, dass das richtig ist, weil wir die Daten selbst generiert haben). Wie aber verhalten sich das 1PL Modell und das 3PL Modell?</p>
-<section id="modellevaluation" class="level1" data-number="1"><h1 data-number="1">
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>Foto von <a href="https://unsplash.com/de/@stenqvist?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Jakob Stenqvist</a> auf <a href="https://unsplash.com/de/fotos/landschaft-der-mit-schnee-bedeckten-baume-f_RPPpNH0VA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
+</div></div><section id="modellevaluation" class="level1" data-number="1"><h1 data-number="1">
 <span class="header-section-number">1</span> Modellevaluation</h1>
-<section id="pl" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="pl">
+<section id="pl" class="level2" data-number="1.1"><h2 data-number="1.1" data-anchor-id="pl">
 <span class="header-section-number">1.1</span> 2PL</h2>
-<section id="erwartet-vs.-beobachtet" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" class="anchored" data-anchor-id="erwartet-vs.-beobachtet">
+<section id="erwartet-vs.-beobachtet" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" data-anchor-id="erwartet-vs.-beobachtet">
 <span class="header-section-number">1.1.1</span> Erwartet vs.&nbsp;beobachtet</h3>
 <p>Als Baseline schauen wir uns ein paar Fit-Eigenschaften von unserem 2PL Modell an, das wir so gefittet hatten:</p>
 <div class="cell">
@@ -591,7 +617,7 @@ Iteration in WLE/MLE estimation  8   | Maximal change  1e-04
 </div>
 </div>
 </div>
-</section><section id="itemfit" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="itemfit">
+</section><section id="itemfit" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" data-anchor-id="itemfit">
 <span class="header-section-number">1.1.2</span> Itemfit</h3>
 <p>Als nächstes schauen wir uns die Infit und Outfit - Werte der Items an. Wende dafür die Funktion <code><a href="https://rdrr.io/pkg/TAM/man/tam.fit.html">tam.fit()</a></code> auf dein gefittetes TAM-Modell an.</p>
 <div class="callout callout-style-simple callout-caution callout-titled">
@@ -616,47 +642,47 @@ Lösung
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_2PL</span><span class="op">$</span><span class="va">itemfit</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   parameter    Outfit     Outfit_t     Outfit_p Outfit_pholm     Infit
-1          1 0.9999198 -0.003586365 9.971385e-01 1.000000e+00 1.0005072
-2          2 1.0032667  0.050525679 9.597035e-01 1.000000e+00 0.9976555
-3          3 1.2520564  9.114665026 7.891387e-20 1.578277e-18 0.9603736
-4          4 0.9895370 -0.446458134 6.552663e-01 1.000000e+00 0.9999388
-5          5 1.1900915  4.324541252 1.528496e-05 2.904142e-04 0.9972065
-6          6 1.0439622  1.730770860 8.349264e-02 1.000000e+00 0.9871241
-7          7 1.0112399  0.426168576 6.699850e-01 1.000000e+00 1.0061170
-8          8 1.0007978  0.015968926 9.872592e-01 1.000000e+00 1.0065601
-9          9 0.9996217 -0.040620627 9.675983e-01 1.000000e+00 1.0001200
-10        10 1.0011829  0.235500086 8.138206e-01 1.000000e+00 1.0014092
-11        11 1.0002332  0.095273071 9.240979e-01 1.000000e+00 1.0001773
-12        12 0.9884816 -0.677613505 4.980168e-01 1.000000e+00 0.9987654
-13        13 1.0876725  3.549787178 3.855427e-04 6.939769e-03 0.9914619
-14        14 0.9962495 -0.360595440 7.184019e-01 1.000000e+00 0.9999704
-15        15 0.9636817 -1.490802877 1.360133e-01 1.000000e+00 1.0026480
-16        16 0.8652549 -3.537694519 4.036368e-04 6.939769e-03 0.9850283
-17        17 0.8745896 -2.233441483 2.551985e-02 3.827977e-01 0.9892002
-18        18 1.1112065  1.088972188 2.761662e-01 1.000000e+00 1.0113718
-19        19 0.9936385 -0.156078285 8.759713e-01 1.000000e+00 0.9995646
-20        20 0.7352865 -2.258754289 2.389867e-02 3.823788e-01 0.9951262
-         Infit_t   Infit_p Infit_pholm
-1   4.992778e-02 0.9601799           1
-2  -3.008259e-02 0.9760012           1
-3  -1.560020e+00 0.1187552           1
-4   5.121478e-03 0.9959137           1
-5  -5.489834e-02 0.9562195           1
-6  -5.116609e-01 0.6088884           1
-7   2.504041e-01 0.8022749           1
-8   3.310989e-01 0.7405698           1
-9   1.424320e-02 0.9886360           1
-10  2.801865e-01 0.7793344           1
-11  7.261692e-02 0.9421110           1
-12 -6.850882e-02 0.9453806           1
-13 -3.787530e-01 0.7048713           1
-14 -9.979802e-05 0.9999204           1
-15  1.153329e-01 0.9081813           1
-16 -3.254542e-01 0.7448373           1
-17 -1.701693e-01 0.8648770           1
-18  1.555587e-01 0.8763809           1
-19  1.210458e-03 0.9990342           1
-20  2.706171e-03 0.9978408           1</code></pre>
+1          1 1.0004837  0.047468456 9.621399e-01 1.000000e+00 1.0008611
+2          2 0.9526640 -0.950433734 3.418919e-01 1.000000e+00 1.0073356
+3          3 1.2371224  8.613001151 7.117238e-18 1.423448e-16 0.9552234
+4          4 0.9869249 -0.560592795 5.750752e-01 1.000000e+00 0.9960539
+5          5 1.0716352  1.606376478 1.081912e-01 1.000000e+00 1.0017450
+6          6 1.0612844  2.406611025 1.610131e-02 2.737223e-01 0.9947534
+7          7 1.0057075  0.211713373 8.323307e-01 1.000000e+00 0.9965297
+8          8 0.9933112 -0.327977040 7.429290e-01 1.000000e+00 1.0196892
+9          9 0.9985399 -0.158911690 8.737385e-01 1.000000e+00 0.9991036
+10        10 0.9999584 -0.005782593 9.953862e-01 1.000000e+00 0.9998725
+11        11 0.9997760 -0.089941324 9.283338e-01 1.000000e+00 0.9997229
+12        12 1.0007320  0.046166148 9.631778e-01 1.000000e+00 1.0091167
+13        13 1.0354373  1.511042594 1.307776e-01 1.000000e+00 1.0056707
+14        14 0.9953997 -0.443257841 6.575792e-01 1.000000e+00 0.9987144
+15        15 0.9606251 -1.664103136 9.609182e-02 1.000000e+00 1.0031968
+16        16 0.8179421 -4.514129671 6.357731e-06 1.207969e-04 0.9829094
+17        17 0.8909553 -2.855310444 4.299478e-03 7.739060e-02 0.9807129
+18        18 0.9619279 -0.888803618 3.741086e-01 1.000000e+00 0.9971913
+19        19 0.9658957 -0.900818839 3.676846e-01 1.000000e+00 0.9994906
+20        20 1.0212997 -0.195496732 8.450041e-01 1.000000e+00 0.9819678
+        Infit_t    Infit_p Infit_pholm
+1   0.081886931 0.93473663           1
+2   0.157375185 0.87494917           1
+3  -1.768272176 0.07701541           1
+4  -0.163271044 0.87030503           1
+5   0.053062513 0.95768210           1
+6  -0.205606915 0.83709798           1
+7  -0.131247710 0.89557936           1
+8   0.981609105 0.32629246           1
+9  -0.096062823 0.92347068           1
+10 -0.022788789 0.98181875           1
+11 -0.111472812 0.91124142           1
+12  0.515252719 0.60637643           1
+13  0.252314740 0.80079780           1
+14 -0.121667862 0.90316207           1
+15  0.136896420 0.89111267           1
+16 -0.381298936 0.70298144           1
+17 -0.310774934 0.75597173           1
+18 -0.004802889 0.99616786           1
+19 -0.001218575 0.99902772           1
+20 -0.095052591 0.92427305           1</code></pre>
 </div>
 </div>
 <p>Manchmal kann es auch helfen, sich das ganze als Plot ausgeben zu lassen:</p>
@@ -697,7 +723,7 @@ Lösung
 </div>
 </div>
 </div>
-</section></section><section id="pl-1" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="pl-1">
+</section></section><section id="pl-1" class="level2" data-number="1.2"><h2 data-number="1.2" data-anchor-id="pl-1">
 <span class="header-section-number">1.2</span> 1PL</h2>
 <p>Jetzt wollen wir uns noch zwei alternative Modelle anschauen: Das 1PL Modell und das 3PL Modell. Fitte das 1PL mit <code>TAM</code> und schaue dir ebenfalls die Itemplots und die Fit-Statistiken an.</p>
 <div class="callout callout-style-simple callout-caution callout-titled">
@@ -876,7 +902,7 @@ Unsere beiden verhunzten Items 3 und 11 sind hier jetzt auch auffällig.</p>
 </div>
 </div>
 </div>
-</section><section id="pl-2" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="pl-2">
+</section><section id="pl-2" class="level2" data-number="1.3"><h2 data-number="1.3" data-anchor-id="pl-2">
 <span class="header-section-number">1.3</span> 3PL</h2>
 <p>Fitte jetzt ein 3PL Modell. Nutze dafür diesmal <code>mirt</code> und nutze <code>ggmirt</code>, um dir die <a href="https://nickhaf.github.io/IRT_workshop/slides/xPL/#/item-person-map">in den Folien gezeigten Plots</a> anzuschauen. :::{.callout-caution collapse = “true”} ## Lösung</p>
 <div class="cell">
@@ -994,9 +1020,9 @@ F1  1</code></pre>
 <li>Bei Item 2 scheint ein recht hoher Rateparamter geschätzt zu werden. Das sehen wir in den ICCs.</li>
 <li>Item 3 hatten wir ja so simuliert, dass Personen mit niedriger Fähigkeit richtig antworten, alle anderen aber falsch. Wäre das ein echtes Item sollten wir unbedingt noch einmal raufschauen (eventuell ist es falsch herum kodiert, oder die Lösung ist falsch?).<br>
 :::</li>
-</ul></section><section id="modellvergleich" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="modellvergleich">
+</ul></section><section id="modellvergleich" class="level2" data-number="1.4"><h2 data-number="1.4" data-anchor-id="modellvergleich">
 <span class="header-section-number">1.4</span> Modellvergleich</h2>
-<section id="pl-vs.-2pl" class="level3" data-number="1.4.1"><h3 data-number="1.4.1" class="anchored" data-anchor-id="pl-vs.-2pl">
+<section id="pl-vs.-2pl" class="level3" data-number="1.4.1"><h3 data-number="1.4.1" data-anchor-id="pl-vs.-2pl">
 <span class="header-section-number">1.4.1</span> 1PL vs.&nbsp;2PL</h3>
 <p>Nutze jetzt die Funktion <code>CMD::IRT.compareModels()</code> um das 1PL und das 2PL Modell zu vergleichen. Für welches Modell würdest du dich aufgrund der Fit-Kriterien entscheiden?</p>
 <div class="callout callout-style-simple callout-caution callout-titled">
@@ -1034,7 +1060,7 @@ attr(,"class")
 </div>
 </div>
 </div>
-</section><section id="pl-vs.-3pl" class="level3" data-number="1.4.2"><h3 data-number="1.4.2" class="anchored" data-anchor-id="pl-vs.-3pl">
+</section><section id="pl-vs.-3pl" class="level3" data-number="1.4.2"><h3 data-number="1.4.2" data-anchor-id="pl-vs.-3pl">
 <span class="header-section-number">1.4.2</span> 2PL vs.&nbsp;3PL</h3>
 <p>Wir können das gleiche auch in <code>mirt</code> machen. Fitte dafür zuerst das 2PL Modell noch einmal mit <code>mirt</code>, und vergleiche es dann mit dem 3PL Modell mit Hilfe der Funktion <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code>.</p>
 <div class="callout callout-style-simple callout-caution callout-titled">
@@ -1064,6 +1090,7 @@ sim_dat_3PL 80645.42 80845.79 80782.47 81036.45 -40262.71 3.072 20 1</code></pre
 </div>
 
 
+
 </section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1084,13 +1111,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="Nicklas Hafiz">
 <title>Reshaping – IRT</title>
 <style>
 code{white-space: pre-wrap;}
@@ -66,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
@@ -99,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 </head>
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
@@ -156,7 +154,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_1pl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einfache IRT Modelle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_intro_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Einführung in R</span></a>
@@ -197,6 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Raschmodell als GLMM</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_linking.html" class="sidebar-item-text sidebar-link">
@@ -226,6 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_testdesign.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testdesigns</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_xPL.html" class="sidebar-item-text sidebar-link">
@@ -254,6 +270,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_laengs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Längsschnitt</span></a>
+  </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -294,29 +316,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_intro_r.html">Einführung in R</a></li><li class="breadcrumb-item"><a href="../../exercises/intro_r/reshaping_ex.html">Reshaping</a></li></ol></nav><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><div class="quarto-about-marquee">
+  <div class="about-image-container">
+    <img src="images/shape.jpg" class="about-image " style="width: 100%;">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_intro_r.html">Einführung in R</a></li><li class="breadcrumb-item"><a href="../../exercises/intro_r/reshaping_ex.html">Reshaping</a></li></ol></nav><div class="quarto-title">
 <h1 class="title">Reshaping</h1>
 <p class="subtitle lead">Übung</p>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Autor:in</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nicklas Hafiz </p>
-          </div>
   </div>
-    
-  
-    
+</header> <div id="shape-heading">
+<p>Wir wollen uns jetzt einmal mit dem Format von unserem Datensatz beschäftigen.</p>
+</div> 
   </div>
-  
+</div>
 
 
-</header><div class="callout callout-style-simple callout-caution no-icon callout-titled">
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>Foto von <a href="https://unsplash.com/de/@rgaleriacom?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Ricardo Gomez Angel</a> auf <a href="https://unsplash.com/de/fotos/graue-digitale-tapete-9AdeEdYB2yk?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
+</div></div><div class="callout callout-style-simple callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -345,7 +365,7 @@ Vorheriger Code
 </div>
 </div>
 </div>
-<section id="übung" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="übung">
+<section id="übung" class="level2" data-number="1"><h2 data-number="1" data-anchor-id="übung">
 <span class="header-section-number">1</span> Übung</h2>
 <p>Schaue dir den <code>psych_stats</code> Datensatz an. Welches Format hat er?</p>
 <ul class="task-list">
@@ -374,7 +394,7 @@ Lösung
 </div>
 </div>
 </div>
-</section><section id="übung-1" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="übung-1">
+</section><section id="übung-1" class="level2" data-number="2"><h2 data-number="2" data-anchor-id="übung-1">
 <span class="header-section-number">2</span> Übung</h2>
 <p>Reshape den Datensatz, sodass es nur noch drei Spalten gibt: <code>char_id</code>, <code>question</code> und <code>rating</code>.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
@@ -428,7 +448,7 @@ Lösung
 </div>
 </div>
 </div>
-</section><section id="übung-2" class="level2" data-number="3"><h2 data-number="3" class="anchored" data-anchor-id="übung-2">
+</section><section id="übung-2" class="level2" data-number="3"><h2 data-number="3" data-anchor-id="übung-2">
 <span class="header-section-number">3</span> Übung</h2>
 <p>Versuche jetzt, den Datensatz wieder in das wide Format zu bringen.</p>
 <div class="callout callout-style-simple callout-caution callout-titled">
@@ -477,6 +497,7 @@ Lösung
 </div>
 
 
+
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -497,13 +518,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

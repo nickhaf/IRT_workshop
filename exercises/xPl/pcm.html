@@ -60,12 +60,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../exercises/index_simulation.html" rel="next">
+<link href="../../exercises/index_laengs.html" rel="next">
 <link href="../../exercises/xPl/model_selection.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
@@ -98,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 </head>
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
@@ -155,7 +154,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_1pl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einfache IRT Modelle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_intro_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Einführung in R</span></a>
@@ -196,6 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Raschmodell als GLMM</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_linking.html" class="sidebar-item-text sidebar-link">
@@ -225,6 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_testdesign.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testdesigns</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_xPL.html" class="sidebar-item-text sidebar-link">
@@ -253,6 +270,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_laengs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Längsschnitt</span></a>
+  </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -287,34 +310,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul>
-<li><a href="#einige-worte-zu-den-daten" id="toc-einige-worte-zu-den-daten" class="nav-link active" data-scroll-target="#einige-worte-zu-den-daten"><span class="header-section-number">1</span> Einige Worte zu den Daten</a></li>
+<li><a href="#die-daten" id="toc-die-daten" class="nav-link active" data-scroll-target="#die-daten"><span class="header-section-number">1</span> Die Daten</a></li>
   <li><a href="#personenspezifische-kurve-zeichnen" id="toc-personenspezifische-kurve-zeichnen" class="nav-link" data-scroll-target="#personenspezifische-kurve-zeichnen"><span class="header-section-number">2</span> Personenspezifische Kurve zeichnen?</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_xPL.html">Höher parametrisierte Modelle</a></li><li class="breadcrumb-item"><a href="../../exercises/xPl/pcm.html">Partial Credit Model</a></li></ol></nav><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><div class="quarto-about-marquee">
+  <div class="about-image-container">
+    <img src="images/friends.jpg" class="about-image " style="width: 100%;">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_xPL.html">Höher parametrisierte Modelle</a></li><li class="breadcrumb-item"><a href="../../exercises/xPl/pcm.html">Partial Credit Model</a></li></ol></nav><div class="quarto-title">
 <h1 class="title">Partial Credit Model</h1>
 <p class="subtitle lead">Übung</p>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    
-  
-    
   </div>
-  
-
-
-</header><section id="einige-worte-zu-den-daten" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="einige-worte-zu-den-daten">
-<span class="header-section-number">1</span> Einige Worte zu den Daten</h2>
+</header> <div id="pcm-heading">
+<section id="die-daten" class="level2" data-number="1"><h2 data-number="1" data-anchor-id="die-daten">
+<span class="header-section-number">1</span> Die Daten</h2>
 <ul>
 <li>kontinuierliche Skala in Likert Skala umgewandelt (nicht optimal, Infos gehen verloren)</li>
 <li>Wir können jetzt auch nicht wirklich sagen, was die verschiedenen Kategorien aussagen (außer 1 und 5).</li>
-</ul>
-<div class="cell">
+</ul></section>
+</div> 
+  </div>
+</div>
+
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>Foto von <a href="https://unsplash.com/de/@lgtts?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Ilse Orsel</a> auf <a href="https://unsplash.com/de/fotos/rot-weisses-unks-cafe-fwPHQB4kGzA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
+</div></div><div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: CDM</code></pre>
@@ -370,11 +396,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>------------------------------------------------------------
 TAM 4.2-21 (2024-02-19 18:52:08) 
-R version 4.4.1 (2024-06-14) x86_64, linux-gnu | nodename=fv-az1537-656 | login=unknown 
+R version 4.4.1 (2024-06-14) x86_64, linux-gnu | nodename=fv-az1758-738 | login=unknown 
 
-Date of Analysis: 2024-10-20 07:59:38.279702 
-Time difference of 0.1582637 secs
-Computation time: 0.1582637 
+Date of Analysis: 2024-10-20 16:15:06.63727 
+Time difference of 0.1600564 secs
+Computation time: 0.1600564 
 
 Multidimensional Item Response Model in TAM 
 
@@ -740,8 +766,9 @@ Iteration in WLE/MLE estimation  7   | Maximal change  1e-04
 <span><span class="co">## Looks okay I gues? For Item 8 am schlechtesten, passt auch wieder!</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Gibt es Items, die suspicious sind?</p>
-</section><section id="personenspezifische-kurve-zeichnen" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="personenspezifische-kurve-zeichnen">
+<section id="personenspezifische-kurve-zeichnen" class="level2" data-number="2"><h2 data-number="2" data-anchor-id="personenspezifische-kurve-zeichnen">
 <span class="header-section-number">2</span> Personenspezifische Kurve zeichnen?</h2>
+
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -764,13 +791,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -1169,8 +1189,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../exercises/index_simulation.html" class="pagination-link" aria-label="Simulation zur Stichprobenplanung">
-        <span class="nav-page-text">Simulation zur Stichprobenplanung</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../exercises/index_laengs.html" class="pagination-link" aria-label="Längsschnitt">
+        <span class="nav-page-text">Längsschnitt</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

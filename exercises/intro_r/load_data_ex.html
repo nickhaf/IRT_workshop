@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="Nicklas Hafiz">
 <title>Einlesen von Daten – IRT</title>
 <style>
 code{white-space: pre-wrap;}
@@ -66,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
@@ -99,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 </head>
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
@@ -156,7 +154,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_1pl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Einfache IRT Modelle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_intro_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Einführung in R</span></a>
@@ -197,6 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_glmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Raschmodell als GLMM</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_linking.html" class="sidebar-item-text sidebar-link">
@@ -226,6 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_testdesign.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testdesigns</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../exercises/index_xPL.html" class="sidebar-item-text sidebar-link">
@@ -254,6 +270,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index_laengs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Längsschnitt</span></a>
+  </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -288,36 +310,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul>
-<li><a href="#download" id="toc-download" class="nav-link active" data-scroll-target="#download"><span class="header-section-number">1</span> 1. Download</a></li>
-  <li><a href="#einlesen" id="toc-einlesen" class="nav-link" data-scroll-target="#einlesen"><span class="header-section-number">2</span> 2. Einlesen</a></li>
+<li><a href="#einlesen" id="toc-einlesen" class="nav-link active" data-scroll-target="#einlesen"><span class="header-section-number">1</span> Einlesen</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_intro_r.html">Einführung in R</a></li><li class="breadcrumb-item"><a href="../../exercises/intro_r/load_data_ex.html">Einlesen von Daten</a></li></ol></nav><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><div class="quarto-about-marquee">
+  <div class="about-image-container">
+    <img src="images/load.jpg" class="about-image " style="width: 100%;">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../exercises/index.html">Übungen</a></li><li class="breadcrumb-item"><a href="../../exercises/index_intro_r.html">Einführung in R</a></li><li class="breadcrumb-item"><a href="../../exercises/intro_r/load_data_ex.html">Einlesen von Daten</a></li></ol></nav><div class="quarto-title">
 <h1 class="title">Einlesen von Daten</h1>
 <p class="subtitle lead">Übung</p>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Autor:in</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nicklas Hafiz </p>
-          </div>
   </div>
-    
-  
-    
-  </div>
-  
-
-
-</header><section id="download" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="download">
-<span class="header-section-number">1</span> 1. Download</h2>
-<p>Erstelle einen neuen Ordner <code>data</code> in deinem Arbeitsverzeichnis. Gehe dann auf <a href="https://github.com/nickhaf/IRT_workshop/tree/main/raw_data">GitHub</a>, downloade die beiden Datensätze <code>psych_stats.csv</code> und <code>characters.rds</code>, und speichere sie in deinem neu erstellen <code>data</code> Ordner ab.</p>
+</header> <div id="load-heading">
+<p>Bevor es losgeht:<br>
+Erstelle einen neuen Ordner <code>data</code> in deinem Arbeitsverzeichnis. Gehe dann auf <a href="https://github.com/nickhaf/IRT_workshop/tree/main/raw_data">GitHub</a>, downloade die beiden Datensätze <code>psych_stats.csv</code> und <code>characters.rds</code>, und speichere sie in deinem neu erstellen <code>data</code> Ordner ab.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -328,8 +338,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="einlesen" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="einlesen">
-<span class="header-section-number">2</span> 2. Einlesen</h2>
+</div> 
+  </div>
+</div>
+
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p>Foto von <a href="https://unsplash.com/de/@voznenko_artur?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Artur Voznenko</a> auf <a href="https://unsplash.com/de/fotos/blick-auf-eine-fabrik-aus-der-rauch-aus-den-schornsteinen-steigt-rwPIQQPz1ew?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
+</div></div><section id="einlesen" class="level2" data-number="1"><h2 data-number="1" data-anchor-id="einlesen">
+<span class="header-section-number">1</span> Einlesen</h2>
 <p>Lies beide Datensätze in deinem R-Skript ein. Schaue dir vor allem den <code>psych_stats</code> Datensatz danach genauer an. Hat alles geklappt? Wenn nicht, woran könnte es liegen?</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -387,6 +404,7 @@ Lösung
 </div>
 
 
+
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -407,13 +425,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
