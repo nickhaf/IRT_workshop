@@ -2,7 +2,7 @@
 title: "Höher parametrisierte Modelle"
 subtitle: "Übungen"
 listing: 
-  type: table
+  type: default
   contents: 
     - ./xPl/simulation.qmd
     - ./xPl/model_selection.qmd
@@ -12,5 +12,7 @@ listing:
 format: html
 image: ../slides/xPL/images/choice.jpg
 ---
+
+![](../slides/xPL/images/choice.jpg)
 
 Ziel dieser Übung ist es 2PL, 3PL und Partial Credit Modelle auszuprobieren. In diesem Zuge werden auch IRT-Daten simuliert, Modelle ausgewertet und miteeinander verglichen.

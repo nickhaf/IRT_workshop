@@ -2,11 +2,19 @@
 title: "Simulation von IRT Daten"
 subtitle: "Übung"
 format: html
+about:
+  id: simulation-heading
+  template: marquee
+  image: images/crossroads.jpg
 ---
 
-# Datensimulation
+
+:::{#simulation-heading}
 
 Wir schauen uns eine ganz simple Version an. Wer interessiert ist, und z.B. Daten für eine Poweranalyse simulieren möchte, findet [hier]() Unterstützung.
+
+:::
+
 Installieren und/oder lade folgende Pakete für diese Übung:
 
 ```{r}

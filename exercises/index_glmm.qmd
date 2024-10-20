@@ -1,0 +1,19 @@
+---
+title: "Raschmodell als Allgemeines Mulit Level Modell"
+subtitle: "Übungen"
+format: html
+image: ./images/levels.jpg
+---
+
+![](./images/levels.jpg)
+
+\
+
+:::{.callout-note}
+Das Übungsskript `Tag1_2Nachmittag_Nr2_Raschmodell_als_GLMM.r` findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+:::
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@detait?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">detait</a> auf <a href="https://unsplash.com/de/fotos/eine-grosse-bibliothek-mit-vielen-buchern-A1_rJmm6hz8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
+:::

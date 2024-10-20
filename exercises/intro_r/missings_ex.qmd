@@ -1,14 +1,22 @@
 ---
 title: "Missings"
 subtitle: "Übung"
-lang: de
-author: "Nicklas Hafiz"
-
 format: html
+about:
+  id: miss-heading
+  template: marquee
+  image: images/missings.jpg
 ---
 
+:::{#miss-heading}
+Das Überprüfen und der Umgang mit fehlenden Werten ist ein wichtiger Schritt, der bei der Datenaufbereitung bewusst angegangen werden sollte.
+:::
 
-# Missings
+::: aside
+Foto von <a href="https://unsplash.com/de/@bamin?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Pierre Bamin</a> auf <a href="https://unsplash.com/de/fotos/nahaufnahme-eines-puzzleteils-5B0IXL2wAQ0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
+:::
+
 ::: {.callout-caution icon="false" collapse="true"}
 ## Vorheriger Code
 

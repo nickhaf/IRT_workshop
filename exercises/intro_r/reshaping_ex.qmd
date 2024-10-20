@@ -1,10 +1,21 @@
 ---
 title: "Reshaping"
 subtitle: "Übung"
-lang: de
-author: "Nicklas Hafiz"
 format: html
+about:
+  id: shape-heading
+  template: marquee
+  image: images/shape.jpg
 ---
+
+:::{#shape-heading}
+Wir wollen uns jetzt einmal mit dem Format von unserem Datensatz beschäftigen. 
+:::
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@rgaleriacom?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Ricardo Gomez Angel</a> auf <a href="https://unsplash.com/de/fotos/graue-digitale-tapete-9AdeEdYB2yk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
+:::
 
 ::: {.callout-caution icon="false" collapse="true"}
 ## Vorheriger Code

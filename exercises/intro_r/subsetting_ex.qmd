@@ -1,8 +1,6 @@
 ---
 title: "Subsetting"
 subtitle: "Übung"
-lang: de
-author: "Nicklas Hafiz"
 format: html
 ---
 

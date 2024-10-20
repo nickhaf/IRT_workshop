@@ -16,6 +16,10 @@ source(here::here("R", "irt_formulas.R"))
 
 ## Fahrplan
 
+1. Kurze Wiederholung: 1PL Gleichungen
+2. Erweiterung: 2PL und 3PL
+3. Modellfit beurteilen
+4. Partial Credit Modelle (PCM)
 
 ## {background-image="images/equation.jpg" background-size="1225px" }
 
@@ -31,11 +35,20 @@ $$
 logit(P(X_{pi}=1)) = \theta_p - \beta_i
 $$
 
-- Logit: Transformation unseres linearen Terms, damit die Werte zwischen 0 und 1 liegen. Wahrscheinlichkeit $p$ durch Gegenwahrscheinlichkeit $1-p$. 
-- Inverse der logit ist die logistische Funktion.
+### Logit
+
+$$
+ln\left(\frac{P(X_{pi}=1)}{1-P(X_{pi}=1)}\right) 
+$$
+
+Transformation der Ergebnisse unseres linearen Terms, damit die Werte zwischen 0 und 1 liegen. Wahrscheinlichkeit $p$ durch Gegenwahrscheinlichkeit $1-p$. Inverse der logit ist die logistische Funktion.
 
 
 ## 1PL Modell: Umformen
+
+\
+
+\
 
 $$
 logit(P(X_{pi}=1)) = \ln\left(\frac{P(X_{pi}=1)}{1-P(X_{pi}=1)}\right) = \theta_p - \beta_i
@@ -63,16 +76,6 @@ Mit $p_{pi}$ für $P(X_{pi}=1)$
 $$
 p_{pi} + p_{pi} * exp(\theta_p - \beta_i) = exp(\theta_p - \beta_i)
 $$
-
-\
-
-::: {.fragment .fade-in}
-
-$$
-p_{pi} + p_{pi} * exp(\theta_p - \beta_i) = exp(\theta_p - \beta_i)
-$$ 
-
-:::
 
 \
 
@@ -142,7 +145,7 @@ Wahrscheinlichkeit einer richtigen Antwort unter 0.5, wenn $\theta_p < \beta_i$.
 
 ![](images/equations3.jpg){.absolute top="-12.5%" right="12.5%" height="111%" style="max-height: unset; box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
 
-::: {.absolute left="5%" top="2.5%" style="color:#F8F8F8; font-size: 1.5em; text-align: center;"}
+::: {.absolute left="5%" top="2.5%" style="font-size: 1.5em; text-align: center; background-color: rgba(248, 248, 248, .7);"}
 
 Höher parametrisierte 
 \ 
@@ -158,7 +161,7 @@ Wir können Parameter zu diesem Modell hinzufügen, wodurch wir flexibler in der
 - Schwierigkeit $\beta_i$ (Intercept)
 
 ::: {.fragment .fade-in}
-- Steigung $\alpha$ (Faktorladung, [Diskriminationsparameter]{.highlight})
+- Steigung $\alpha_i$ (Faktorladung, [Diskriminationsparameter]{.highlight})
 :::
 
 ::: {.fragment .fade-in}
@@ -168,7 +171,7 @@ Wir können Parameter zu diesem Modell hinzufügen, wodurch wir flexibler in der
 ## 3PL
 
 $$
-P(X_{pi}=1) = \color{#aaa938}{\gamma_i} + (1-\color{#aaa938}{\gamma_i})\frac{exp(\color{#F4BA02}{\alpha_i}(\theta_p - \color{#99D9DD}{\beta_i})))}{1 + exp(\color{#F4BA02}{\alpha_i}(\theta_p - \color{#99D9DD}{\beta_i}))}
+P(X_{pi}=1) = \color{#aaa938}{\gamma_i} + (1-\color{#aaa938}{\gamma_i})\frac{exp(\color{#F4BA02}{\alpha_i}(\theta_p - \color{#00e0e0}{\beta_i})))}{1 + exp(\color{#F4BA02}{\alpha_i}(\theta_p - \color{#00e0e0}{\beta_i}))}
 $$
 
 - [Schwierigkeit]{.lightblue}
@@ -226,8 +229,8 @@ data = d3.range(-6, 6, 0.01).map((theta) => ({
 
 Plot.plot(
   {
-    x: {grid: false, domain: [-6, 6]}, 
-    y: {grid: false, domain: [0, 1]},
+    x: {grid: false, domain: [-6, 6], label: "\u03B8"}, 
+    y: {grid: false, domain: [0, 1], label: "Lösungswahrscheinlichkeit"},
     marks: [
       Plot.line(data, {x: "x", y: "y1", stroke: "#F4BA02"}),
     ]
@@ -238,264 +241,26 @@ Plot.plot(
 ## Simulieren von IRT Daten
 
 ::::{.columns}
-:::{.column width="30%"}
+:::{.column width="40%"}
 
-Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: [Datensimulation]{.highlight}. 
+Jetzt ist ein guter Zeitpunkt, und uns ein sehr mächtiges Werkzeug anzuschauen: [Datensimulation]{.highlight}.  
+Geht zur [Übung](https://nickhaf.github.io/IRT_workshop/exercises/xPl/simulation.html) und probiert es aus. 
 
 :::
 
-::: {.column width="70%"}
+::: {.column width="60%"}
 
-![](images/simulation.jpg){.absolute top="5%" right="0%" height="70%" style="max-height: unset; box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0);"}
+![](images/simulation.jpg){.absolute top="5%" right="0%" height="70%" style="max-height: unset; box-shadow: 0 0 0rem 0 rgba(255, 255, 255, 0); border-radius: 0px; backdrop-filter: blur(0px);"}
 
 :::
 ::::
 
-## Übung
-
-Geht zur [Übung](https://nickhaf.github.io/IRT_workshop/exercises//xPl/simulation.qmd) und probiert euch aus. 
-
 
 # Welches Modell?
 
-## 1PL vs. 3PL
-
-## Modellfit beurteilen
-
-- Gesamtmodell
-- Itemfit
-- Personenfit
-
-::: aside
-Siehe auch [dieses Tutorial](https://philippmasur.de/2022/05/13/how-to-run-irt-analyses-in-r/). 
-:::
-
-# Gesamten Modellfit
-
-Es gibt verschiedene Fit-Statistiken, die uns bei Aussagen über den Modellfit helfen, z.B.:
-
-## Deviance
-Deviance ist ein Maß für die relative Distanz einer Vorhersage von perfeketer Accuracy.  
-Wir können uns die Konvergenzplots anschauen:
-
-```{r}
-#| code-fold: true
-#| echo: true
-
-library(TAM)
-
-data(data.sim.rasch)
-
-mod_2pl <- tam.mml.2pl(resp = data.sim.rasch, verbose = FALSE, irtmodel = "2PL")
-
-plotDevianceTAM(mod_2pl)
-```
-
-## Fit Indices (z.B. AIC, BIC)
-Da die Deviance (fast) immer besser wird, je mehr Parameter wir ins Modell mit aufnehmen, bestrafen bestimmte Fit Indices die Anzahl der Parameter.  
-Schätzen die out-of-Sample predictive accuracy.  
-Es gibt keine Daumenregeln für Cutoff Werte, allerdings können wir die Fit Indices für den Vergleich von genesteten Modellen nutzen. 
-
-
-```{r}
-#| echo: true
-
-summary(tam.modelfit(mod_2pl))
-```
-
-## Inferenzstatistisch
-Wir könne auch den Likelihood Ratio Test nutzen, um die Modelle zu vergleichen. Er erlaubt zum einen den Vergleich der empirischen und der Modellimplizierten Kovarianzmatrix, aber auch den Vergleich der Kovarianzmatrizen genesteter Modelle. 
-
-:::{.callout-important}
-Hängt von der Stichprobengröße ab und hat auch einige weitere Probleme. Sollte deshalb nicht in Isolation genutzt werden, sondern möglichst mit den besprochenen deskriptiven Fitmaßen zusammen. 
-
-:::
-
-## Itemfit
-Um den Itemfit zu beurteilen, plotten wir die erwarteten und die beobachteten Itemkurven übereinander: 
-
-```{r}
-#| echo: true
-#| code-fold: true
-#| layout-ncol: 3
-#| incldue: false 
-#| results: "hide"
-#| fig.keep: "all"
-
-invisible(
-plot(mod_2pl,
-  items = 1:3, 
-  export = FALSE,
-  observed = TRUE,
-  package = "graphics")
-)
-
-```
-
-## Itemfit
-
-:::{.callout-important}
-Achtung! Die grafische Überprüfung ist stark von der Binwidth abhängig, die man wählt. 
-:::
-
-## Infit/Outfit
-Sind Residuen-basierte Fit-Statistiken, die die Steigung der ICC characterisieren. Wenn erwartete und modellimplizierte Steigung sich unterscheiden, schlagen die Fit-Kriterien aus. 
-Fit-Kriterien unter 1 sind stärker diskriminierend, über 1 sind sie weniger diskriminierend als die mittlere Item-Diskrimination. Es sollten also vor allem Items mit einem Fit-Kriterium über 1 genauer betrachtet werden.  
-Infit/Outfit sind relativ, da sie den Item-Fit relativ zu den anderen Items im Itemset beurteilen.  
-
-Cut-off Werte sind abhängig von der Stichprobengröße (siehe [hier]()https://www.edmeasurementsurveys.com/residual-based-item-fit-statistics.html)
-
-:::{.columns}
-
-:::{.column width="50%"}
-### Infit
-Sensitiv für Abweichungen bei Items, die von der Schwierigkeit auf die Person zugeschnitten sind (Itemschwierigkeit und Personenfähigkeit passen zu einander). 
-:::
-
-
-:::{.column width="50%"}
-### Outfit
-- Sensitiv für Outlier (z.B. leistungsstarke Personen beantworten ein sonst leichtes Item falsch)
-
-:::
-:::
-
-```{r}
-tam.fit(mod_2pl)
-
-```
-
-## Infit/Outfit
-```{r}
-#| code-fold: true
-
-# Definieren einer eigenen Plot-Funkktion
-plot_infit_outfit <- function(tam_obj){
-fit_tam <- tam.fit(tam_obj)$itemfit
-
-fit_plotdat <- fit_tam %>%
-  # Als Faktor umwandeln, damit die Sortierung im Plot stimmt
-  mutate(Item = factor(parameter, levels = unique(parameter[order(as.numeric(parameter))]))) %>%
-  select(Item, Outfit, Infit) %>%
-  pivot_longer(cols = c(Outfit, Infit), names_to = "fit", values_to = "value")
-
-ggplot(fit_plotdat, aes(x = value, y = Item)) +
-  geom_point(colour = "#F4BA02") +
-  facet_grid(. ~ fit, scales = "fixed") +
-  xlim(0.4, 1.6) +
-  theme_bg() +
-  geom_vline(xintercept = 0.5, linetype = "dotted", colour = "#9B1B34") +
-  geom_vline(xintercept = 1.5, linetype = "dotted", colour = "#9B1B34")
-}
-
-plot_infit_outfit(mod_2pl)
-```
-
-
-# Personfit
-Wie gut stimmen die Antwortmuster der Personen mit dem Modell überein?
-
-## Infit Outfit
-```{r}
-#| echo: false
-library(ggpubr)
-
-```
-
-```{r}
-#| code-fold: true
-
-p_fit <- tam.personfit(mod_2pl) %>%
-  pivot_longer(cols = c(outfitPerson, infitPerson), names_to = "fit", values_to = "value")
-
-ggplot(p_fit, aes(x = value)) +
-  geom_histogram(colour= "#F4BA02", fill = "#01364C", binwidth = 0.1) +
-  theme_bg() +
-  xlim(0, 2) +
-  facet_grid(. ~ fit)
-  
-```
-
-
-## Mögliche weitere Fragestellungen
-Wir können uns noch viele weitere Dinge mit unseren Modellen anschauen. Sehr hilfreich dabei kann das Paket [ggmirt](https://github.com/masurp/ggmirt) sein, dass eine Vielzahl von praktischen Plots für die Auswertung bereitstellt. 
-
-```{r}
-library(ggmirt)
-library(mirt)
-
-## Nochmal mit mirt fitten
-mod_mirt <- mirt(data.sim.rasch, 1, itemtype = "2PL", verbose = FALSE)
-```
-
-## Item Person Map
-Ist die Fähigkeitsrange durch die Items gut Abgedeckt?
-```{r}
-#| code-fold: true
-
-itempersonMap(mod_mirt) + theme_bg()
-```
-
-## ICC
-
-```{r}
-#| code-fold: true
-
-tracePlot(mod_mirt) + theme_bg()
-```
-
-## ICC
-
-```{r}
-#| code-fold: true
-
-tracePlot(mod_mirt, facet = F, legend = T) + theme_bg()
-```
-
-## Item Information Curves
-Wie viel Information steuert jedes Item zur Schätzung von Theta bei? 
-```{r}
-#| code-fold: true
-
-itemInfoPlot(mod_mirt) + theme_bg()
-```
-
-## Item Information Curves
-```{r}
-#| code-fold: true
-
-itemInfoPlot(mod_mirt, facet = T) + theme_bg()
-```
-
-## Test Information Curve
-```{r}
-#| code-fold: true
-
-testInfoPlot(mod_mirt, adj_factor = 2) + theme_bg()
-```
-
-
-## Summary
-:::{.columns}
-
-:::{.column width="80%"}
-```{r}
-#| code-fold: true
-
-summaryPlot(mod_mirt, adj_factor = 2) +
-  theme_bg() 
-```
-:::
-
-:::{.column width="20%"}
-Zusammenfassung verschiedener Plots
-:::
-
-:::
-
 ## {background-image="images/sapiens.jpg" background-size="1225px"}
 
-::: {.absolute right="2.5%" top="5%" style="backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, .0); border-radius: 0px;"}
+::: {.absolute right="0%" top="5%" style="backdrop-filter: blur(0px); box-shadow: 0 0 0rem 0 rgba(255, 255, 255, .0); border-radius: 2px;"}
 Exkurs: \ 
 Tradeoff zwischen \
 Underfit und \
@@ -541,7 +306,7 @@ p_1 <- ggplot(d, aes(x = mass, y = brain)) +
   labs(title = "brain ~ mass",
        x = "Mass",
        y = "Brain Volume") +
-  theme_minimal()
+  theme_bg()
 
 p_2 <- ggplot(d, aes(x = mass, y = brain)) +
   geom_point() +
@@ -549,7 +314,7 @@ p_2 <- ggplot(d, aes(x = mass, y = brain)) +
   labs(title = TeX("$brain \\sim mass + mass^2$"),
        x = "Mass",
        y = "Brain Volume") +
-  theme_minimal()
+  theme_bg()
 
 p_6 <- ggplot(d, aes(x = mass, y = brain)) +
   geom_point() +
@@ -585,12 +350,21 @@ p_2
 p_6
 ```
 
-## Mögliche Punkte
+## 1PL vs. 3PL
 
 :::{.callout-note}
 Mehr Parameter müsen nicht immer auch besser sein. Gerade im IRT-Kontext können komplexere Modelle schnell an ihre Grenzen kommen und nicht konvergieren.  
-1PL Modelle sind außerdem nicht so sehr von den tatsächlichen Daten abhängig (ähnlich wie die lineare Regression im Beispiel) und damit ähnlicher über verschiedene Datenerhebungen (da es weniger Möglichkeiten gibt, sich direkt an die Daten anzupassen).
 :::
+
+### 1PL
+1PL Modelle sind nicht so sehr von den tatsächlichen Daten abhängig (ähnlich wie die lineare Regression im Beispiel) und damit ähnlicher über verschiedene Datenerhebungen (da es weniger Möglichkeiten gibt, sich direkt an die Daten anzupassen). Andererseits kann es natürlich sein, dass sie zu sehr vereinfachen. 
+
+## 1PL vs. 3PL
+### 3PL
+Können Personen mit hohen Fähigkeitswerten bestrafen, da die obere Asympotete bei 1 liegt, und somit eine 0% Wahrscheinlichkeit besteht, dass jemand im hohen Fähigkeitsbereich ein Item falsch beantwortet. Andersrum gibt es eine minimale Lösungswahrscheinlichkeit. 
+
+
+## Mögliche Punkte
 
 Bei Modellwahl zu beachten:
 
@@ -598,6 +372,265 @@ Bei Modellwahl zu beachten:
 - Antwort[skala]{.highlight}
 - [Simulation]{.highlight}/Modell[fit]{.highlight}
 - [Ziel]{.highlight}
+
+
+## {background-image="images/fit.jpg" background-size="1225px" }
+
+::: {.absolute right="0%" top="2.5%" style="font-size:1em; backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .7); background-color: rgba(248, 248, 248, .7);"}
+
+**Modellfit beurteilen**
+
+- Gesamtmodell
+- Itemfit
+- Personenfit
+
+::: aside
+Siehe auch [dieses Tutorial](https://philippmasur.de/2022/05/13/how-to-run-irt-analyses-in-r/). 
+:::
+
+:::
+
+# Gesamten Modellfit
+
+Es gibt verschiedene Fit-Statistiken, die uns bei Aussagen über den Modellfit helfen, z.B.:
+
+## Deviance
+Deviance ist ein Maß für die relative Distanz einer Vorhersage von perfeketer Accuracy.  
+Wir können uns die Konvergenzplots anschauen:
+
+```{r}
+#| code-fold: true
+#| echo: true
+
+library(TAM)
+
+data(data.sim.rasch)
+
+mod_2pl <- tam.mml.2pl(resp = data.sim.rasch, verbose = FALSE, irtmodel = "2PL")
+
+plotDevianceTAM(mod_2pl)
+```
+
+## Fit Indices (z.B. AIC, BIC)
+Da die Deviance (fast) immer besser wird, je mehr Parameter wir ins Modell mit aufnehmen, bestrafen Fit Indices die Anzahl der Parameter.   
+Keine Daumenregeln für Cutoff Werte, daher für Vergleich von genesteten Modellen. 
+
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+summary(tam.modelfit(mod_2pl))
+```
+
+:::{.callout-important}
+Schätzen die out-of-Sample predictive accuracy. Das muss nicht immer das Ziel sein. 
+:::
+
+## Inferenzstatistisch
+Wir könne auch den Likelihood Ratio Test nutzen, um die Modelle zu vergleichen. Er erlaubt zum einen den Vergleich der empirischen und der Modellimplizierten Kovarianzmatrix, aber auch den Vergleich der Kovarianzmatrizen genesteter Modelle. 
+
+:::{.callout-important}
+Hängt von der Stichprobengröße ab und hat auch einige weitere Probleme. Sollte deshalb nicht in Isolation genutzt werden, sondern möglichst mit anderen Fitmaßen, z.B. den besprochenen deskriptiven, zusammen. 
+
+:::
+
+# Itemfit
+
+## Itemfitplots
+Erwartete und die beobachtete Itemkurven übereinander: 
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| layout-ncol: 3
+#| incldue: false 
+#| results: "hide"
+#| fig.keep: "all"
+
+invisible(
+plot(mod_2pl,
+  items = 1:3, 
+  export = FALSE,
+  observed = TRUE,
+  package = "graphics")
+)
+
+```
+
+:::{.callout-important}
+Achtung! Die grafische Überprüfung ist stark von der Binwidth abhängig, die man wählt. 
+:::
+
+## Infit/Outfit
+Residuen-basierte Fit-Statistiken, die die Steigung der ICC characterisieren. 
+
+<!-- Wenn erwartete und modellimplizierte Steigung sich unterscheiden, schlagen die Fit-Kriterien aus.  -->
+<!-- Fit-Kriterien unter 1 sind stärker diskriminierend, über 1 sind sie weniger diskriminierend als die mittlere Item-Diskrimination.  -->
+
+Es sollten also vor allem Items mit einem Fit-Kriterium über 1 genauer betrachtet werden.  
+Infit/Outfit sind relativ, da sie den Item-Fit relativ zu den anderen Items im Itemset beurteilen.
+
+:::{.callout-note}
+Cut-off Werte sind abhängig von der Stichprobengröße (siehe [hier](https://www.edmeasurementsurveys.com/residual-based-item-fit-statistics.html)
+:::
+
+## Infit/Outfit
+
+:::{.columns}
+
+:::{.column width="50%"}
+### Infit
+Sensitiv für Abweichungen bei Items, die von der Schwierigkeit auf die Person zugeschnitten sind (Itemschwierigkeit und Personenfähigkeit passen zu einander). 
+:::
+
+
+:::{.column width="50%"}
+### Outfit
+Sensitiv für Outlier (z.B. leistungsstarke Personen beantworten ein sonst leichtes Item falsch)
+
+:::
+:::
+
+
+
+```{r}
+#| code-fold: true
+#| echo: false
+
+tam.fit(mod_2pl)
+
+```
+
+## Infit/Outfit
+```{r}
+#| code-fold: true
+#| echo: true
+
+# Definieren einer eigenen Plot-Funkktion
+plot_infit_outfit <- function(tam_obj){
+fit_tam <- tam.fit(tam_obj)$itemfit
+
+fit_plotdat <- fit_tam %>%
+  # Als Faktor umwandeln, damit die Sortierung im Plot stimmt
+  mutate(Item = factor(parameter, levels = unique(parameter[order(as.numeric(parameter))]))) %>%
+  select(Item, Outfit, Infit) %>%
+  pivot_longer(cols = c(Outfit, Infit), names_to = "fit", values_to = "value")
+
+ggplot(fit_plotdat, aes(x = value, y = Item)) +
+  geom_point(colour = "#F4BA02") +
+  facet_grid(. ~ fit, scales = "fixed") +
+  xlim(0.4, 1.6) +
+  theme_bg() +
+  geom_vline(xintercept = 0.5, linetype = "dotted", colour = "#9B1B34") +
+  geom_vline(xintercept = 1.5, linetype = "dotted", colour = "#9B1B34")
+}
+
+plot_infit_outfit(mod_2pl)
+```
+
+
+# Personfit
+Wie gut stimmen die Antwortmuster der Personen mit dem Modell überein?
+
+## Infit Outfit
+```{r}
+#| echo: false
+library(ggpubr)
+
+```
+
+```{r}
+#| code-fold: true
+#| echo: true
+
+p_fit <- tam.personfit(mod_2pl) %>%
+  pivot_longer(cols = c(outfitPerson, infitPerson), names_to = "fit", values_to = "value")
+
+ggplot(p_fit, aes(x = value)) +
+  geom_histogram(colour= "#F4BA02", fill = "#01364C", binwidth = 0.1) +
+  theme_bg() +
+  xlim(0, 2) +
+  facet_grid(. ~ fit)
+  
+```
+
+
+## Mögliche weitere Fragestellungen
+Wir können uns noch viele weitere Dinge mit unseren Modellen anschauen. Sehr hilfreich dabei kann das Paket [ggmirt](https://github.com/masurp/ggmirt) sein, dass eine Vielzahl von praktischen Plots für die Auswertung bereitstellt. 
+
+```{r}
+library(ggmirt)
+library(mirt)
+
+## Nochmal mit mirt fitten
+mod_mirt <- mirt(data.sim.rasch, 1, itemtype = "2PL", verbose = FALSE)
+```
+
+## Item Person Map
+Ist die Fähigkeitsrange durch die Items gut Abgedeckt?
+```{r}
+#| echo: true
+
+itempersonMap(mod_mirt) + theme_bg() 
+```
+
+## ICC
+
+```{r}
+#| echo: true
+
+tracePlot(mod_mirt) + theme_bg()
+```
+
+## ICC
+
+```{r}
+#| echo: true
+
+tracePlot(mod_mirt, facet = F, legend = T) + theme_bg()
+```
+
+## Item Information Curves
+Wie viel Information steuert jedes Item zur Schätzung von Theta bei? 
+```{r}
+#| echo: true
+
+itemInfoPlot(mod_mirt) + theme_bg()
+```
+
+## Item Information Curves
+```{r}
+#| echo: true
+
+itemInfoPlot(mod_mirt, facet = T) + theme_bg()
+```
+
+## Test Information Curve
+```{r}
+#| echo: true
+
+testInfoPlot(mod_mirt, adj_factor = 2) + theme_bg()
+```
+
+
+## Summary
+:::{.columns}
+
+:::{.column width="80%"}
+```{r}
+#| echo: true
+
+summaryPlot(mod_mirt, adj_factor = 2) +
+  theme_bg() 
+```
+:::
+
+:::{.column width="20%"}
+Zusammenfassung verschiedener Plots
+:::
+
+:::
 
 # Was tun bei polytomen Items?
 
@@ -642,8 +675,6 @@ Ordinale Daten (geordnete Antwortkategorien), z.B.:
 
 plot_pcm(delta = c(-0.29, 0.95))
 ```
-
-
 
 ## Formel
 
@@ -708,5 +739,6 @@ Gehe zur [Partial-Credit-Übung]() und bearbeite sie.
 - Bild erstellt mit [Bing Designer]( https://www.bing.com/images/create/image-of-a-woman-writing-equations-on-a-window2c-li/1-670bee21dbf4423ca93d0804834a7f46?id=ujHjvSYHngnLxV45OzbrGQ%3d%3d&view=detailv2&idpp=genimg&thId=OIG3.E7px5jYmHkuo3mmm7QIC&skey=wPdVodkEkkpUXZMJ6uYMCEO41l21b_tAfYC2zWMLPmY&FORM=GCRIDP&mode=overlay)
 - Foto von <a href="https://unsplash.com/de/@crawford?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Crawford Jolly</a> auf <a href="https://unsplash.com/de/fotos/mann-mit-speer-wandmalerei-3IxuF9MCjkA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - Foto von <a href="https://unsplash.com/de/@soymeraki?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Javier Allegue Barros</a> auf <a href="https://unsplash.com/de/fotos/silhouette-der-strassenbeschilderung-wahrend-der-goldenen-stunde-C7B-ExXpOIE?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Foto von <a href="https://unsplash.com/de/@lgnwvr?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">LOGAN WEAVER | @LGNWVR</a> auf <a href="https://unsplash.com/de/fotos/grau-weiss-karierte-anzugjacke-JqRQtSr2MCI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   
   

@@ -1,0 +1,17 @@
+---
+title: "Testdesigns"
+subtitle: "Übungen"
+format: html
+image: ./images/testdesign.jpg
+---
+
+![](./images/testdesign.jpg)
+
+:::{.callout-note}
+Das Übungsskript ´Tag2_1Vormittag_Nr2_Testdesign.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+:::
+
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@glenncarstenspeters?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Glenn Carstens-Peters</a> auf <a href="https://unsplash.com/de/fotos/person-die-eine-bucket-list-auf-ein-buch-schreibt-RLw-UC03Gwc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::
