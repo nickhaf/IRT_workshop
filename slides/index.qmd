@@ -1,7 +1,8 @@
 ---
 title: "Folien"
-format: html
-  number-sections: true
+format: 
+  html:
+    number-sections: true
 ---
 
 # Tag 1
