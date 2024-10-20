@@ -10,12 +10,13 @@ format: html
 ## Einführung in R
 {{< revealjs "./IntroR/introR.html" >}}
 
-## IRT-Modelle in `TAM`
-<!-- {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}} -->
+## IRT Modelle in `TAM`
+{{< pdf file="./Tag1_2Nachmittag_Nr1_Uebungen/02_Uebung_einfache_IRT-Modelle_in_R.pdf" >}}
 
 ## Raschmodell und Generalized Linear Mixed Models (GLMM)
 {{< revealjs "./GLM/glm.html" >}}
-<!-- {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}} -->
+
+{{< pdf file="./Tag1_2Nachmittag_Nr2_Raschmodell_als_GLMM/03_Raschmodell_als_GLMM.pdf" >}}
 
 ## Reliabilität und Validität
 {{< revealjs "./Validity/validity.html" >}}
@@ -25,13 +26,15 @@ format: html
 {{< revealjs "./Linking/linking.html" >}}
 
 ## Bedeutung von Testdesigns
-<!-- {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}} -->
+{{< pdf file="./Tag2_1Vormittag_Nr2_Testdesigns/Testdesigns.pdf" >}}
 
 ## Höher Parametrisierte Modelle
 {{< revealjs "./xPL/index.html" >}}
 
 ## Längsschnittliche Designs
-<!-- {{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}} -->
+{{< pdf file="./Tag2_2Nachmittag_Nr2_Laengsschnitt/Langsschnitt.pdf" >}}
 
 # Tag 3
-Siehe [Übungen](https://nickhaf.github.io/IRT_workshop/exercises/). 
+{{< pdf file="./Tag3_1Vormittag_mixed_IRT/mixed_IRT.pdf" >}}
+
+Ansonsten, siehe [Übungen](https://nickhaf.github.io/IRT_workshop/exercises/). 
