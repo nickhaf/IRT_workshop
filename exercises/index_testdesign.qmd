@@ -2,13 +2,18 @@
 title: "Testdesigns"
 subtitle: "Übungen"
 format: html
-image: ./images/testdesign.jpg
+about:
+  id: laengs-heading
+  template: marquee
+  image: ./images/testdesign.jpg
 ---
 
-![](./images/testdesign.jpg)
+:::{#laengs-heading}
+Hier schauen wir uns verschiedene Testdesigns im IRT Kontext an. 
+:::
 
 :::{.callout-note}
-Das Übungsskript ´Tag2_1Vormittag_Nr2_Testdesign.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+Das Übungsskript `Tag2_1Vormittag_Nr2_Testdesign.r` findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
 :::
 
 

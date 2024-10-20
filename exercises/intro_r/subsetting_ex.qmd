@@ -2,10 +2,19 @@
 title: "Subsetting"
 subtitle: "Übung"
 format: html
+about:
+  id: sub-heading
+  template: marquee
+  image: images/subset.jpg
 ---
 
+:::{#sub-heading}
+Hier wird das subsetten von spezifischen Zeilen geübt.
+:::
 
-# Subsetting
+:::
+Foto von <a href="https://unsplash.com/de/@impatrickt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Patrick Tomasso</a> auf <a href="https://unsplash.com/de/fotos/offenes-buch-lot-Oaqk7qqNh_c?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::
 
 ::: {.callout-caution icon="false" collapse="true"}
 ## Vorheriger Code
