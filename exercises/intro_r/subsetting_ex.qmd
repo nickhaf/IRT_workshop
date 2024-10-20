@@ -9,10 +9,10 @@ about:
 ---
 
 :::{#sub-heading}
-Hier wird das subsetten von spezifischen Zeilen geübt.
+Hier wird das Subsetten von spezifischen Zeilen geübt.
 :::
 
-:::
+::: aside
 Foto von <a href="https://unsplash.com/de/@impatrickt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Patrick Tomasso</a> auf <a href="https://unsplash.com/de/fotos/offenes-buch-lot-Oaqk7qqNh_c?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 :::
 
