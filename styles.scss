@@ -135,6 +135,9 @@ input[type="range"] {
   }
 }
 
-
-
-
+.plot-frame {
+  border: 2px solid #000; /* Black border, you can change the color */
+  padding: 10px; /* Padding around the plot */
+  border-radius: 5px; /* Optional: rounded corners */
+  background-color: #f8f8f8; /* Optional: background color */
+}
