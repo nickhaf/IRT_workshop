@@ -6,12 +6,17 @@ bibliography: references.bib
 about:
   id: loop-heading
   template: marquee
-  image: surf.jpg
+  image: images/loop.jpg
 ---
 
 :::{#loop-heading}
 
 Nachdem wir im vorherigen Schritt das Grundgerüst gebaut haben, wollen wir jetzt die Simulation so erweitern, dass wir verschiedene Stichprobengrößen `n` bei der Datensimulation und Modellschätzung ausprobieren können. 
+:::
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@tine999?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Tine Ivanič</a> auf <a href="https://unsplash.com/de/fotos/wendeltreppe-aus-beton-u2d0BPZFXOY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
 :::
 
 ```{r}
@@ -37,6 +42,7 @@ set.seed(42) ## Setze den gleichen Seed, um exakt die selben Ergebnisse zu bekom
 
 n_items <- 20 ## So kann ich die Itemzahl im Nachhinein leicht anpassen
 
+## Gewünschte Itemparameter definieren
 item_pars <- data.frame(
   item_id = 1:n_items,
   alpha = rnorm(n_items, 1, 0.1),
@@ -50,14 +56,15 @@ item_pars <- data.frame(
 Sehr gut, wir haben die einzelnen Bausteine der Simulation zusammengetragen. Jetzt kommt aber die eigentliche Aufgabe: Wir wollen ja verschiedene Stichprobengrößen ausprobieren und anhand der Differenz zwischen den wahren und den geschätzten Parametern beurteilen, welche Stichprobengröße für eine adäquate Schätzung ausreichen könnte. 
 
 ### Bedingungen
-Zuerst müssen wir die Bedingungen für unsere Simulation festlegen. Erstelle dafür zwei Vektoren. Einer enthält einfach nur die Anzahl an Iterationen für unsere Simulation. Das ist so, als ob wir das Experiment viele Male wiederholen würden, um ein Maß für die Variabilität im Sampling und damit den Parameterschätzungen zu bekommen. 
-Der andere sollte ein Vektor aus verschiedenen Stichprobengrößen sein.   
-<!-- Außerdem sollten wir noch festlegen, welche Abweichung vom Wahren Schwierigkeitswert wir noch akzeptable finden. Wir sagen einfach mal, dass ein mittlerer Unterschied von 0.2 Logits noch in Ordnung ist. D.h. also, wir suchen eine Stichprobenzahl, bei der unsere Abweichung darunter liegt.  -->
+Zuerst müssen wir die Bedingungen für unsere Simulation festlegen. Erstelle dafür zwei Vektoren. Einer enthält einfach nur die Anzahl an Iterationen für unsere Simulation. Das ist so, als ob wir das Experiment viele Male wiederholen würden, um ein Maß für die Variabilität im Sampling und damit den Parameterschätzungen zu bekommen. Wir legen den Wert einfach mal auf 200 fest (könnten aber ausrechnen, wie viele Iterationen wir für einen bestimmten Effekt bräuchten). 
+Der andere sollte ein Vektor aus verschiedenen Stichprobengrößen sein. Dafür probieren wir einfach mal Stichproben von 100 bis 500 Personen in Schritten von 100 Personen aus.   
+Beide Werte sind recht niedrig angesetzt, damit wir beim Ausprobieren nicht immer warten müssen, dass alles durchläuft. Im real life würde man die Werte am Ende hochsetzten, und dann je nach Komplexität alles ein paar Stunden/Tage durchlaufen lassen. 
+Eigentlich müssten wir vor dem Durchlaufen der Simulationen noch mehr Planung machen, vor allem sollten wir festlegen, wie wir die Ergebnisse auswerten wollen. Wir machen das in diesem Tutorial aber erst einmal Schrittweise wenn es aufkommt. 
 
 :::{.callout-caution collapse="true"}
 ## Lösung
 ```{r}
-n_iterations <- 100
+n_iterations <- 200
 n_persons <- seq(100, 500, by = 100)
 ```
 :::
@@ -77,7 +84,6 @@ for(counter in values){
 ```
 
 ```{r}
-#| eval: false
 for(i in 10:20){
   new_i <- i * 100
   print(new_i)
@@ -107,12 +113,13 @@ By the way: Wir können unseren counter so nennen wie wir wollen, er muss nicht 
 :::
 
 ### Simulation
-In diesen for-loop kommt jetzt unsere Simulation. In jeder Iteration werden also die Daten neu simuliert. Dabei wird $\theta$ jedesmal neu festgelegt, und zwar nach dem aktuellen Wert, der gerade in der äußeren Schleife durchlaufen wird. Kümmere dich erst einmal nicht darum, dass die Daten abgespeichert werden. Das machen wir im nächsten Schritt. Wir wollen erst einmal nur testen, ob n_persons * n_iterations Antworten simuliert werden. 
+In diesen for-loop kommt jetzt unsere Simulation. In jeder Iteration werden also die Daten neu simuliert. Dabei wird $\theta$ jedesmal neu festgelegt, indem $\theta$-Werte anhand des aktuellen `n_persons`-Wert, der gerade in der äußeren Schleife durchlaufen wird, simuliert werden. Kümmere dich erst einmal nicht darum, dass die Daten abgespeichert werden. Das machen wir im nächsten Schritt. Wir wollen erst einmal nur testen, ob `n_persons * n_iterations` Antworten simuliert werden. 
 
 :::{.callout-caution collapse="true"}
 
 ## Lösung
 ```{r}
+#| mewsage: false
 for (n in n_persons) {
   for (iter in 1:n_iterations) {
     sim_2PL_dat <- simIrt(
@@ -159,7 +166,7 @@ Bisher wird das Ergebnis-Objekt immer überschrieben, sodass nur das Ergebnis au
 :::
 
 ### Abspeichern
-Jetzt müssen wir unsere Ergebnisse noch abspeichern. Erstelle dafür zuerst einen leeren `data.frame`, der die Ergebnisse aufnehmen soll. 
+Jetzt müssen wir unsere Ergebnisse noch abspeichern. Erstelle dafür **vor Start** des for-loops zuerst einen leeren `data.frame`, der die Ergebnisse aufnehmen soll. 
 
 :::{.callout-caution collapse="true"}
 ## Lösung
@@ -167,6 +174,7 @@ Jetzt müssen wir unsere Ergebnisse noch abspeichern. Erstelle dafür zuerst ein
 #| eval: false
 
 results <- data.frame()
+
 for (n in n_persons) {
   for (iter in 1:n_iterations) {
   }
@@ -174,7 +182,7 @@ for (n in n_persons) {
 ```
 :::
 
-Jetzt müssen wir die Ergebnisse aus jedem Durchlauf in einem eigenen `data.frame` festhalten. Erstelle also innerhalb der inneren for-Schleife einen `data.frame`, der folgende Spalten enthält:
+Wir halten die Ergebnisse aus jedem Durchlauf in einem eigenen `data.frame` fest. Erstelle dafür **innerhalb** der inneren for-Schleife einen `data.frame`, der folgende Spalten enthält:
 
 - `item`: Die Item-Nummer. Das kann einfach ein Vektor mit den Item aus dem oben erzeugten `data.frame` `item_pars` sein. 
 - `n_persons`: Die Anzahl an Personen, die in dieser Iteration simuliert wurden. Die Zahl kann einfach aus dem counter des äußeren for-loops genommen werden. 
@@ -186,9 +194,9 @@ Jetzt müssen wir die Ergebnisse aus jedem Durchlauf in einem eigenen `data.fram
 ## Lösung
 ```{r}
 #| message: false
-#| include: false
 
 results <- data.frame()
+
 for (n in n_persons) {
   for (iter in 1:n_iterations) {
     sim_2PL_dat <- simIrt(
@@ -221,8 +229,8 @@ str(results)
 
 :::
 
-Zu guter Letzt müssen wir diesen neu erzeugten `data.frame` jetzt noch in jeder Iteration abspeichern. Dafür nutzen wir am besten die Funktion `rbind()`, mit der man `data.frames` untereinander zusammenfügen kann.  
-Nutze also innerhalb der Schleife `rbind()`, um den leeren `data.frame` von außerhalb der Schleife mit dem in der Schleife erzeugten Ergebnis-`data.frame` zu verbinden. Das Ergebnis aus dieser Verbindung muss den selben Namen bekommen wie der ursprüngliche, leer `data.frame`, damit das Ergebnis fortlaufend in jeder Iteration erweitert wird.
+Zu guter Letzt müssen wir diesen neu erzeugten `data.frame` noch in jeder Iteration abspeichern. Dafür nutzen wir am besten die Funktion `rbind()`, mit der man `data.frames` untereinander zusammenfügen kann.  
+Nutze also innerhalb der Schleife `rbind()`, um den leeren `data.frame` von außerhalb der Schleife mit dem in der Schleife erzeugten Ergebnis-`data.frame` zu verbinden. Das Ergebnis aus dieser Verbindung muss den selben Namen bekommen wie der ursprüngliche, leere `data.frame`, damit das Ergebnis fortlaufend in jeder Iteration erweitert wird.
 
 
 :::{.callout-caution collapse="true"}
@@ -268,7 +276,7 @@ Das sieht super aus. Der Ergebnis-`data.frame` hat `r nrow(results)` Zeilen, was
 
 ## Auswertung
 Jetzt haben wir es gleich geschafft! Wir haben die Daten nach unseren Vorstellungen simuliert und ausprobiert, wie unser Modell damit umgehen kann.  
-Jetzt müssen wir nur noch die Ergebnisse auswerten. Dafür nutzen wir den [Mean Squared Error (MSE)]{.highlight}. Das ist einfach der Mittelwert aus der quadrierten Differenz zwischen den wahren und den geschätzten Itemschwierigkeiten. Um den zu berechnen, erstellen wir zuerst eine neue Spalte, die die Differenz zwischen den wahren und den geschätzten Itemschwierigkeiten enthält. Siehe @#tip-mutate zum Erstellen einer neuen Spalte. 
+Jetzt müssen wir nur noch die Ergebnisse auswerten. Dafür nutzen wir den [Mean Squared Error (MSE)]{.highlight}. Das ist einfach der Mittelwert aus der quadrierten Differenz zwischen den wahren und den geschätzten Itemschwierigkeiten. Um den zu berechnen, erstellen wir zuerst eine neue Spalte, die die Differenz zwischen den wahren und den geschätzten Itemschwierigkeiten enthält. Siehe @tip-mutate zum Erstellen einer neuen Spalte. 
 
 :::{#tip-mutate .callout-tip collapse="true"}
 
@@ -295,7 +303,7 @@ results <- results %>%
 
 Perfekt. Jetzt müssen wir nur noch den Mittelwert aus diesen Differenzen berechnen. Das ist dann der MSE. Zusätzlich schauen wir uns noch den Monte Carlo Standard Error (MCSE) an, um ein Variabilitätsmaß für den Schätzer MSE zu bekommen. 
 Der MCSE wird berechnet, indem wir pro Item pro Personenanzahl die Standardabweichung durch `sqrt(n() - 1)` teilen. Das ist einfach die Wurzel aus der Größe der Gruppe minus 1. 
-Das machen wir natürlich nicht über alle Durchläufe hinweg, sondern innerhalb jeder Personenanzahl für jedes Item gesondert. Wir brauchen also pro simulierter Personenzahl pro Item einen Mittelwert (und eine Standardabweichung) über alle Iterationen. Das können wir sehr einfach mit der `group_by()` und `summarize()` Kombination aus dem `tidyverse` machen, siehe @#tip-group. 
+Das machen wir natürlich nicht über alle Durchläufe hinweg, sondern innerhalb jeder Personenanzahl für jedes Item gesondert. Wir brauchen also pro simulierter Personenzahl pro Item einen Mittelwert (und eine Standardabweichung) über alle Iterationen. Das können wir sehr einfach mit der `group_by()` und `summarize()` Kombination aus dem `tidyverse` machen, siehe @tip-group.
 
 :::{#tip-group .callout-tip collapse="true"}
 ## Tipp
@@ -306,11 +314,12 @@ data.frame(
   "c" = c(1, 2, 3, 1, 2, 3)) %>%
   group_by(group_1) %>%
   summarize(
-    mean_c = mean(c))
+    mean_c = mean(c)
+    )
 
 ```
 
-Wir gruppieren zuerst nach der Spalte `group_1`. `summarize()` berechnet dann innerhalb jeder Gruppe den Mittelwert aus der Spalte `c` (das sind pro Gruppe 2 Werte in diesem Fall). 
+Wir gruppieren zuerst nach der Spalte `group_1`. `summarize()` berechnet dann innerhalb jeder Gruppe den Mittelwert aus der Spalte `c` (das sind pro Gruppe 2 Werte in diesem Fall).  Gruppiere für die Aufgaben nach `n_persons` und `item`.
 :::
 
 :::{.callout-caution collapse="true"}
@@ -343,9 +352,10 @@ geom_line() +
   geom_ribbon(aes(ymin = MSE - 1.96 * MCSE, ymax = MSE + 1.96 * MCSE, fill = item), 
               alpha = 0.05, color = NA) +
 set_colour_scheme() +  
+xlab("Stichprobengröße") +
+  ## Noch styling mit eigenen Funktionen, nicht nötig
 set_fill_scheme() +
-theme_bg() +
-xlab("Stichprobengröße")
+theme_bg()
 
 ```
 
@@ -359,11 +369,11 @@ Diese Frage ist natürlich so pauschal nicht beantwortbar.
 Zuerst einmal sehen wir, dass die Daten sich so verhalten, wie wir es erwarten würden, da der MSE mit zunehmender Stichprobengröße abnimmt, der Unterschied zwischen geschätzter und tatsächlicher Itemschwierigkeit wird also kleiner.  
 Es fällt außerdem auf, dass die Items 1 und 20 (die wir als sehr leicht und sehr schwer definiert haben) ungenauer geschätzt werden (höherer MSE und auch größeres Konfidenzintervall) als Item 10, das in der Mitte liegt. Das ist auch zu erwarten, da Items, die entweder von fast allen oder von fast niemandem beantwortet werden, weniger Informationen enthalten.
 
-Es ist ein bisschen schwierig, allgemeine Cut-Off Werte für den MSE zu definieren. Ein besseres Vorgehen ist vermutlich, zu schauen, ab welcher Stichprobengröße es keine zu großen Änderungen mehr gibt. Für Item 10 wäre das z.B. in etwa bei 200 Personen. Dort haben wir einen MSE von ca. 0.03, was, wenn wir die Wurzel nehmen, einer Abweichung von ca. 0.17 Logits auf der Itemschwierigkeits-Skala entspricht. Das ist doch ein guter Kompromiss zwischen Genauigkeit und Aufwand von Probanden-Rekrutierung. Wenn wir allerdings an den Rändern interssiert sind, also z.B. vor allem schwere Fragen erstellen wollen, weil wir vor allem die leistungsstarken Testteilnehmer\*innen differenzieren wollen, müssten wir vermutlich eine größere Stichprobe nehmen, damit die schweren Items auch mit einer adäquaten Genauigkeit geschätzt werden können. Gleiches gilt für leicht Items, wenn wir in einer Art Screening die besonders leistungsschwachen Testteilnehmer\*innen herausfiltern wollen. 
+Es ist ein bisschen schwierig, allgemeine Cut-Off Werte für den MSE zu definieren. Ein besseres Vorgehen ist vermutlich, zu schauen, ab welcher Stichprobengröße es keine zu großen Änderungen mehr gibt. Für Item 10 wäre das z.B. in etwa bei 200 Personen (vielleicht wäre aber ein Wert zwischen 100 und 200 Personen ausreichend, dafür müssten wir mehr Stichprobengrößen ausprobieren). Dort haben wir einen MSE von ca. 0.03, was, wenn wir die Wurzel nehmen, einer Abweichung von ca. 0.17 Logits auf der Itemschwierigkeits-Skala entspricht. Das ist doch ein guter Kompromiss zwischen Genauigkeit und Aufwand von Probanden-Rekrutierung. Wenn wir allerdings an den Rändern interssiert sind, also z.B. vor allem schwere Fragen erstellen wollen, weil wir vor allem die leistungsstarken Testteilnehmer\*innen differenzieren wollen, müssten wir vermutlich eine größere Stichprobe nehmen, damit die schweren Items auch mit einer adäquaten Genauigkeit geschätzt werden können. Gleiches gilt für leicht Items, wenn wir in einer Art Screening die besonders leistungsschwachen Testteilnehmer\*innen herausfiltern wollen. 
 ::: 
 
 
 ## Ausblick
 
-Dieses Grundgerüst könnten wir jetzt nach unseren Vorstellungen Erweitern. Wir könnten z.B. weitere Domänen hinzufügen und den Zusammenhang mit der Reliabilität anschauen. Wir könnten eine Linkingstudie simulieren, indem wir zwei Gruppen erstellen, von denen jede jeweils einige der Items nicht beantwortet hat. Wir könnten schauen, welche Stichprobengröße nötig wäre, um einen kleinen treatment-Effekt in einem randomisierten klinischen Versuch zu finden.
-Sie @#tip-sim für weitere Ressourcen dazu. 
+Dieses Grundgerüst könnten wir jetzt nach unseren Vorstellungen erweitern. Wir könnten z.B. weitere Domänen hinzufügen und den Zusammenhang mit der Reliabilität anschauen. Wir könnten eine Linkingstudie simulieren, indem wir zwei Gruppen erstellen, von denen jede jeweils einige der Items nicht beantwortet hat. Wir könnten schauen, welche Stichprobengröße nötig wäre, um einen kleinen treatment-Effekt in einem randomisierten klinischen Versuch zu finden, zusammen mit zusätzlichen Prädiktor-Variablen. Wir könnten DIF simmulieren, indem wir Items in einer Gruppe schwerer machen als in der anderen, und dann schauen wie gut verschiedene Verfahren im Rahmen unserer Studienbedingungen damit klarkommen. Und viele viele weitere ...
+[Hier](https://nickhaf.github.io/IRT_workshop/exercises/index_simulation.html) findest du weitere Ressourcen. 
