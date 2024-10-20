@@ -1,19 +1,29 @@
 ---
 title: "Einlesen von Daten"
 subtitle: "Übung"
-author: "Nicklas Hafiz"
 format: html
+about:
+  id: load-heading
+  template: marquee
+  image: images/load.jpg
 ---
 
-## 1. Download
-
+:::{#load-heading}
+Bevor es losgeht:  
 Erstelle einen neuen Ordner `data` in deinem Arbeitsverzeichnis. Gehe dann auf [GitHub](https://github.com/nickhaf/IRT_workshop/tree/main/raw_data), downloade die beiden Datensätze `psych_stats.csv` und `characters.rds`, und speichere sie in deinem neu erstellen `data` Ordner ab. 
 
 :::{.callout-tip}
 Zum Downloaden von GitHub, klicke auf die Datei. Es öffnet sich eine neue Seite, auf der du oben rechts den Button "Download" findest. 
 :::
+:::
 
-## 2. Einlesen
+::: aside
+Foto von <a href="https://unsplash.com/de/@voznenko_artur?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Artur Voznenko</a> auf <a href="https://unsplash.com/de/fotos/blick-auf-eine-fabrik-aus-der-rauch-aus-den-schornsteinen-steigt-rwPIQQPz1ew?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
+:::
+
+
+## Einlesen
 Lies beide Datensätze in deinem R-Skript ein. Schaue dir vor allem den `psych_stats` Datensatz danach genauer an. Hat alles geklappt? Wenn nicht, woran könnte es liegen?
 
 ::: {.callout-tip collapse="true"}

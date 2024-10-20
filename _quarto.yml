@@ -21,7 +21,7 @@ website:
         - section: "Übungen"
           href: exercises/index.qmd
           contents:
-          - section: "Einfache IRT Modelle"
+          - text: "Einfache IRT Modelle"
             href: ./exercises/index_1pl.qmd
           - section: "Einführung in R"
             href: ./exercises/index_intro_r.qmd
@@ -31,7 +31,7 @@ website:
               - ./exercises/intro_r/missings_ex.qmd
               - ./exercises/intro_r/reshaping_ex.qmd
               - ./exercises/intro_r/merging_ex.qmd
-          - section: "Raschmodell als GLMM"
+          - text: "Raschmodell als GLMM"
             href: ./exercises/index_glmm.qmd
           - section: "Linking"
             href: ./exercises/index_linking.qmd
@@ -39,7 +39,7 @@ website:
               - ./exercises/linking/data.qmd
               - ./exercises/linking/linking.qmd
               - ./exercises/linking/dif.qmd
-          - section: "Testdesigns"
+          - text: "Testdesigns"
             href: ./exercises/index_testdesign.qmd
           - section: "Höher parametrisierte Modelle"
             href: ./exercises/index_xPL.qmd
@@ -47,7 +47,7 @@ website:
               - ./exercises/xPl/simulation.qmd
               - ./exercises/xPl/model_selection.qmd
               - ./exercises/xPl/pcm.qmd
-          - section: "Längsschnitt"
+          - text: "Längsschnitt"
             href: ./exercises/index_laengs.qmd
           - section: "Simulation zur Stichprobenplanung"
             href: ./exercises/index_simulation.qmd

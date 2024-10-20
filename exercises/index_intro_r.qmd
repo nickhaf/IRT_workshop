@@ -2,7 +2,7 @@
 title: "Einführung in R"
 subtitle: "Übungen"
 listing: 
-  type: table
+  type: default
   sort: false
   contents:
     - ./intro_r/load_data_ex.qmd

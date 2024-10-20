@@ -2,7 +2,7 @@
 title: "Höher parametrisierte Modelle"
 subtitle: "Übungen"
 listing: 
-  type: table
+  type: default
   contents: 
     - ./xPl/simulation.qmd
     - ./xPl/model_selection.qmd
