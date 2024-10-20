@@ -1,5 +1,5 @@
 ---
-title: "Raschmodell als Allgemeines Mulit Level Modell"
+title: "Raschmodell als Allgemeines Multi-Level Modell"
 subtitle: "Übungen"
 format: html
 about:

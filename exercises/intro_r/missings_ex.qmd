@@ -9,7 +9,7 @@ about:
 ---
 
 :::{#miss-heading}
-Das Überprüfen und der Umgang mit fehlenden Werten ist ein wichtiger Schritt, der bei der Datenaufbereitung bewusst angegangen werden sollte.
+Hier untersuchen und entfernen wir fehlender Werte. 
 :::
 
 ::: aside
