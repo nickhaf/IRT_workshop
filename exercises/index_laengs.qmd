@@ -1,0 +1,11 @@
+---
+title: "Längsschnitt"
+subtitle: "Übungen"
+format: html
+image: ../slides/IntroR/images/r_desktop.jpg
+---
+
+
+:::{.callout-note}
+Das Übungsskript ´Tag2_2Nachmittag_Nr2_Laengsschnitt.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+:::

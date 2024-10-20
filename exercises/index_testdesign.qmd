@@ -1,0 +1,8 @@
+---
+title: "Testdesigns"
+subtitle: "Übungen"
+format: html
+image: ../slides/IntroR/images/r_desktop.jpg
+---
+
+Das Übungsskript ´Tag2_1Vormittag_Nr2_Testdesign.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).

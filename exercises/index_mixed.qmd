@@ -1,0 +1,18 @@
+---
+title: "Mixed IRT"
+subtitle: "Übungen"
+format: html
+image: ./images/mix.jpg
+---
+
+![](./images/mix.jpg)
+
+\
+
+:::{.callout-note}
+Das Übungsskript ´Tag3_1Vormittag_mixed_IRT.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).
+:::
+
+::: aside
+Foto von <a href="https://unsplash.com/de/@chuttersnap?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">CHUTTERSNAP</a> auf <a href="https://unsplash.com/de/fotos/selektive-fokusfotografie-des-schwarzen-und-roten-audiomischers-QA2clzv9E8c?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+:::

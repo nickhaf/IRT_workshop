@@ -390,9 +390,6 @@ Siehe auch [dieses Tutorial](https://philippmasur.de/2022/05/13/how-to-run-irt-a
 
 :::
 
-
-
-
 # Gesamten Modellfit
 
 Es gibt verschiedene Fit-Statistiken, die uns bei Aussagen über den Modellfit helfen, z.B.:
@@ -415,7 +412,7 @@ plotDevianceTAM(mod_2pl)
 ```
 
 ## Fit Indices (z.B. AIC, BIC)
-Da die Deviance (fast) immer besser wird, je mehr Parameter wir ins Modell mit aufnehmen, bestrafen bestimmte Fit Indices die Anzahl der Parameter.   
+Da die Deviance (fast) immer besser wird, je mehr Parameter wir ins Modell mit aufnehmen, bestrafen Fit Indices die Anzahl der Parameter.   
 Keine Daumenregeln für Cutoff Werte, daher für Vergleich von genesteten Modellen. 
 
 
@@ -466,11 +463,19 @@ Achtung! Die grafische Überprüfung ist stark von der Binwidth abhängig, die m
 :::
 
 ## Infit/Outfit
-Residuen-basierte Fit-Statistiken, die die Steigung der ICC characterisieren. Wenn erwartete und modellimplizierte Steigung sich unterscheiden, schlagen die Fit-Kriterien aus. 
-Fit-Kriterien unter 1 sind stärker diskriminierend, über 1 sind sie weniger diskriminierend als die mittlere Item-Diskrimination. Es sollten also vor allem Items mit einem Fit-Kriterium über 1 genauer betrachtet werden.  
-Infit/Outfit sind relativ, da sie den Item-Fit relativ zu den anderen Items im Itemset beurteilen.  
+Residuen-basierte Fit-Statistiken, die die Steigung der ICC characterisieren. 
 
-Cut-off Werte sind abhängig von der Stichprobengröße (siehe [hier]()https://www.edmeasurementsurveys.com/residual-based-item-fit-statistics.html)
+<!-- Wenn erwartete und modellimplizierte Steigung sich unterscheiden, schlagen die Fit-Kriterien aus.  -->
+<!-- Fit-Kriterien unter 1 sind stärker diskriminierend, über 1 sind sie weniger diskriminierend als die mittlere Item-Diskrimination.  -->
+
+Es sollten also vor allem Items mit einem Fit-Kriterium über 1 genauer betrachtet werden.  
+Infit/Outfit sind relativ, da sie den Item-Fit relativ zu den anderen Items im Itemset beurteilen.
+
+:::{.callout-note}
+Cut-off Werte sind abhängig von der Stichprobengröße (siehe [hier](https://www.edmeasurementsurveys.com/residual-based-item-fit-statistics.html)
+:::
+
+## Infit/Outfit
 
 :::{.columns}
 
@@ -482,12 +487,17 @@ Sensitiv für Abweichungen bei Items, die von der Schwierigkeit auf die Person z
 
 :::{.column width="50%"}
 ### Outfit
-- Sensitiv für Outlier (z.B. leistungsstarke Personen beantworten ein sonst leichtes Item falsch)
+Sensitiv für Outlier (z.B. leistungsstarke Personen beantworten ein sonst leichtes Item falsch)
 
 :::
 :::
+
+
 
 ```{r}
+#| code-fold: true
+#| echo: false
+
 tam.fit(mod_2pl)
 
 ```
@@ -665,8 +675,6 @@ Ordinale Daten (geordnete Antwortkategorien), z.B.:
 
 plot_pcm(delta = c(-0.29, 0.95))
 ```
-
-
 
 ## Formel
 

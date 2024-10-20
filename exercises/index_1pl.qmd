@@ -1,0 +1,8 @@
+---
+title: "Einfache IRT Modelle"
+subtitle: "Übungen"
+format: html
+image: ../slides/IntroR/images/r_desktop.jpg
+---
+
+Das Übungsskript ´Tag1_2Nachmittag_NR1_einfache_IRT_Modelle.r´ findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).

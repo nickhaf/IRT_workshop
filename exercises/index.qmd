@@ -2,12 +2,17 @@
 title: "Übungen"
 format: html
 listing: 
-  type: grid
+  type: default
   contents: 
+    - index_1pl.qmd
     - index_intro_r.qmd
+    - index_glmm.qmd
     - index_linking.qmd
+    - index_testdesign.qmd
     - index_xPL.qmd
+    - index_laengs.qmd
     - index_simulation.qmd
+    - index_mixed.qmd
   sort: "grid"
 about:
   id: irt-heading
