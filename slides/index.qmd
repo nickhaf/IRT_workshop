@@ -2,7 +2,7 @@
 title: "Folien"
 format: 
   html:
-    number-sections: true
+    number-sections: false
 ---
 
 # Tag 1
