@@ -2,10 +2,16 @@
 title: "Raschmodell als Allgemeines Mulit Level Modell"
 subtitle: "Übungen"
 format: html
-image: ./images/levels.jpg
+about:
+  id: glmm-heading
+  template: marquee
+  image: ./images/levels.jpg
 ---
 
-![](./images/levels.jpg)
+:::{#glmm-heading}
+Hier geht es um das fitten von Raschmodellen mit `lme4`.
+:::
+
 
 \
 

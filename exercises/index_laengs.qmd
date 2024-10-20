@@ -2,11 +2,17 @@
 title: "Längsschnitt"
 subtitle: "Übungen"
 format: html
-image: ./images/road.jpg
+about:
+  id: laengs-heading
+  template: marquee
+  image: ./images/road.jpg
 ---
 
+:::{#laengs-heading}
 
-![](./images/road.jpg)
+Hier geht es um längsschnittliche IRT-Modelle.  
+
+:::
 
 :::{.callout-note}
 Das Übungsskript `Tag2_2Nachmittag_Nr2_Laengsschnitt.r` findet sich [hier](https://github.com/nickhaf/IRT_workshop/tree/main/exercises).

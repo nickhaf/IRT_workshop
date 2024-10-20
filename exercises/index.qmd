@@ -21,7 +21,7 @@ about:
 ---
 
 :::{#irt-heading}
-Das ist der Trainingsteil des Workshops. An der entsprechenden Stelle in den Folien wird auf die jeweilige Übung verwiesen. Das Material ist sehr Umfangreich, wir werden also vermutlich nicht alles besprechen können. Bei Interesse kann es aber natürlich auch selbstständig weiter durchgearbeitet werden.  
+Das ist der Trainingsteil des Workshops. An der entsprechenden Stelle in den Folien wird auf die jeweilige Übung verwiesen. Das Material ist sehr umfangreich, wir werden also vermutlich nicht alles besprechen können. Bei Interesse kann es aber natürlich auch selbstständig weiter durchgearbeitet werden.  
 :::
 
 ::: aside
