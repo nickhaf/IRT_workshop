@@ -89,6 +89,7 @@ plotICC(erm_pcm, ask = FALSE)
 
 thresholds(erm_pcm)
 
+person.location.estimate <- person.parameter(erm_pcm)
 item_fit_pcm <- eRm::itemfit(person.location.estimate)
 ```
 
