@@ -1,7 +1,6 @@
 ---
 title: "Modellselektion"
 subtitle: "Übung"
-author: "Nicklas Hafiz"
 format: html
 about:
   id: selection-heading
@@ -173,7 +172,7 @@ plot_infit_outfit(sim_dat_1PL)
 ```
 
 Hier können wir schön sehen, dass der Fit schon deutlich abnimmt, wenn wir die Steigung ignorieren (die wir ja bewusst simuliert haben).  
-Unsere beiden verhunzten Items 3 und 11 sind hier jetzt auch auffällig. 
+Unsere beiden missspezifizierten Items 3 und 11 sind hier jetzt auch auffällig. 
 
 :::
 
@@ -181,7 +180,8 @@ Unsere beiden verhunzten Items 3 und 11 sind hier jetzt auch auffällig.
 
 ## 3PL
 Fitte jetzt ein 3PL Modell. Nutze dafür diesmal `mirt` und nutze `ggmirt`, um dir die [in den Folien gezeigten Plots](https://nickhaf.github.io/IRT_workshop/slides/xPL/#/item-person-map) anzuschauen. 
-:::{.callout-caution collapse = "true"}
+
+:::{.callout-caution collapse="true"}
 ## Lösung
 ```{r}
 library(mirt)
