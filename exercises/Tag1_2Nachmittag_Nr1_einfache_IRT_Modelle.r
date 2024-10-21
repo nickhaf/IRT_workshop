@@ -118,6 +118,29 @@ item_info <- unique(subset(trends, year == 2010)[,c("item", "domain", "format")]
 # 'item_info' enthaelt zuordnung der Items zu Dimensionen
 qmat <- data.frame(item_info, model.matrix(~domain-1, data = item_info))
 
+###########
+# Loesung #
+###########
+
+def1pl <- defineModel(dat = dat_wide, id = "idstud", items = grep("^T", colnames(dat_wide), value=TRUE), software="tam")
+run1pl <- runModel(def1pl)
+res1pl <- getResults(run1pl)
+item1pl<- itemFromRes(res1pl)
+
+plotICC(resultsObj=res1pl, defineModelObj = def1pl, pdfFolder = file.path(tempdir(), "iccsLanguage.pdf"))
+
+def2pl <- defineModel(dat = dat_wide, id = "idstud", items = grep("^T", colnames(dat_wide), value=TRUE), software="tam", irtmodel="2PL")
+run2pl <- runModel(def2pl)
+anova(run1pl, run2pl)
+
+q3.jpn  <- q3FromRes(res1pl, out = "wide", triangular = TRUE)
+write.csv2(q3.jpn[[1]], file.path(tempdir(), "q3_Language.csv"), na="", row.names=FALSE)
+
+
+####################
+# Ende der Loesung #
+####################
+
 
 # 7. Differential Item Functioning
 ##################################
