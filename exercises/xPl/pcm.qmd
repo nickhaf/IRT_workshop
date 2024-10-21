@@ -42,6 +42,41 @@ psych_dat <- psych_dat - 1
 any(is.na(psych_dat))
 ```
 
+# PCM Modell fitten: `TAM`
+
+```{r}
+
+## Alle kategorien wurden genutzt
+# alpha(psych_dat)$response.freq
+
+pcm_psych <- tam.mml(psych_dat[, -1], irtmodel = "PCM", verbose = FALSE)
+
+summary(pcm_psych)
+
+
+deltas <- pcm_psych$xsi
+
+## Plot the option characteristic curves
+plot(pcm_psych, 
+     type = "items", 
+     export = FALSE, 
+     package = "graphics", 
+     observed = TRUE, 
+     low = -6, 
+     high = 6)
+```
+
+Die Schnittpunkte stimmen mit unseren Schwellenparametern überein:
+
+```{r}
+deltas
+```
+
+```{r}
+fit <- msq.itemfit(pcm_psych)$itemfit
+fit
+```
+
 
 # PCM Modell fitten: `eRm`
 
