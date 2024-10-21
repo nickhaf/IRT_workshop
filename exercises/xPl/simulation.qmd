@@ -343,7 +343,7 @@ Das sieht super aus, die Werte stimmen gut überein (natürlich mit Ausnahme von
 
 library(catIrt)
 
-group_1 <- simIrt(theta = rnorm(100000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
+group_1 <- simIrt(theta = rnorm(5000, 0, 1), params = as.matrix(items[, c("a", "b", "c")]), mod = "brm")
 
 
 ## Kalibrieren der beiden Gruppen getrennt
