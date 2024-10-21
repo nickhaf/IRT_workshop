@@ -53,9 +53,9 @@ Wir versuchen zu schätzen wie hoch die Wahrscheinlichkeit ist, dass eine Person
 
 
 ## 2PL Funktion
-2. Jetzt beginnt der fun part: Schreibe eine [Funktion]() genannt `calc_2pl` die @eq-2PL in R Code umsetzt. 
+2. Schreibe eine [Funktion]() genannt `calc_2pl` die @eq-2PL in R Code umsetzt. 
 
-:::{.callout-tip collapse=true}
+:::{.callout-tip collapse='true'}
 Der Aufbau der Funktion könnte so aussehen:
 
 ```{r}
@@ -87,21 +87,22 @@ calc_2pl <- function(a, theta, b){
 
 
 ## Simulieren von Daten
-Jetzt geht's los! Wir wollen nun eigene Daten simulieren. Das tolle ist: wir können so alle Aspekte selber festlegen, und daran untersuchen, wie sich das Variieren von bestimmten Parametern auf das Ergebnis auswirkt. 
+Jetzt geht's los! Wir wollen nun eigene Daten simulieren. Das Tolle ist: wir können so alle Aspekte selber festlegen, und daran untersuchen, wie sich das Variieren von bestimmten Parametern auf das Ergebnis auswirkt. 
 
 
 ### Items
-1. Zuerst die Items. Baue einen `data.frame` mit dem Namen `items`. Er soll `r `n_items` Zeilen und 4 Spalten haben und folgendes enthalten:
+1. Zuerst die Items. Baue einen `data.frame` mit dem Namen `items`. Er soll `r `n_items` Zeilen und 3 Spalten haben und folgendes enthalten:
 
 - `item_id`: Die ID des Items, von 1 bis `r n_items`` 
-- `alpha`: Die Diskriminationsparameter, liegen zwischen 0.1 und 2.5 in `r `n_items` gleich langen Schritten.
+- `alpha`: Die Diskriminationsparameter, liegen zwischen 0.1 und 2.5 in `r n_items` gleich langen Schritten, sollen aber zufällig gesampelt werden, sodass die leichten Items nicht automatisch auch eine niedrige Steigung haben.
 - `beta`: Die Schwierigkeitsparameter, liegen zwischen -3 und 3 jeweils im Abstand von 0.5. 
 
 :::{.callout-tip collapse=true}
 ## Tip
 
-Die Funktion `seq()` ist dein Freund. Mehr brauchst du nicht, um die Zahlenreihen zu erzeugen. Schaue dir die Dokumentation an. 
+Mit der Funktion `seq()` kannst du die gewünschten Zahlenreihen zu erzeugen. Schaue dir die Dokumentation an. 
 
+Mit `sample(seq(0.1, 3, length.out = n_items), replace = FALSE)` kannst du aus einer Sequenz samplen. 
 :::
 
 :::{.callout-caution collapse=true}
@@ -123,9 +124,9 @@ Das sind also die Itemparameter, die wir in unsere Simulation packen.
 :::
 
 
-2. Jetzt können wir die Personen simulieren. Unser Ziel ist also ein `data.frame`, der $\theta$ Werte für die untersuchten Personen enthält. Wir simulieren 100000 Personen, der `data.frame` sollte also 100000 Zeilen haben. Außerdem benötigen wir zwei Spalten:
+2. Jetzt können wir die Personen simulieren. Unser Ziel ist also ein `data.frame`, der $\theta$ Werte für die untersuchten Personen enthält. Wir simulieren 5000 Personen, der `data.frame` sollte also 5000 Zeilen haben. Außerdem benötigen wir zwei Spalten:
 
-- `ID`: Die ID der Person, von 1 bis 100000.
+- `ID`: Die ID der Person, von 1 bis 5000
 - `theta`: Die Fähigkeit der Person, die wir simulieren. Wir nehmen an, dass die Fähigkeit normalverteilt ist, mit einem Mittelwert von 0 und einer Standardabweichung von 1.
 
 :::{.callout-tip collapse=true}
@@ -185,7 +186,7 @@ Das sieht gut aus!
 
 :::
 
-4. Jetzt simulieren wir aus diesem Vorbereiteten `data.frame` die Antworten der Personen, abhängig von ihren Fähigkeiten $\theta$ (jede Person hat hier einen zufälligen Wert aus einer Normalverteilung mit $\mu = 1$ und $\sigma = 1$ bekommen) und den Itemparametern $\alpha$ und $\beta$ (die hatten wir einfach als Sequenz festgelegt). Lege eine neue Spalte `p` in `sim_dat` an, die für jede Person die Wahrscheinlichkeit enthält, dass sie das jeweilige Item richtig beantwortet. Dafür brauchen wir jetzt unsere Funktion `calc_2pl`, die wir am Anfang definiert haben! Diese nimmt aus jeder Zeile den `theta`, `alpha` und `beta` Wert als input, und berechnet daraus die Wahrscheinlichkeit, dass die Person das Item richtig beantwortet.
+4. Jetzt simulieren wir aus diesem vorbereiteten `data.frame` die Antworten der Personen, abhängig von ihren Fähigkeiten $\theta$ (jede Person hat hier einen zufälligen Wert aus einer Normalverteilung mit $\mu = 1$ und $\sigma = 1$ bekommen) und den Itemparametern $\alpha$ und $\beta$ (die hatten wir einfach als Sequenz festgelegt). Lege eine neue Spalte `p` in `sim_dat` an, die für jede Person die Wahrscheinlichkeit enthält, dass sie das jeweilige Item richtig beantwortet. Dafür brauchen wir jetzt unsere Funktion `calc_2pl`, die wir am Anfang definiert haben! Diese nimmt aus jeder Zeile den `theta`, `alpha` und `beta` Wert als Input, und berechnet daraus die Wahrscheinlichkeit, dass die Person das Item richtig beantwortet.
 
 :::{.callout-tip collapse=true}
 ## Tip
@@ -218,16 +219,13 @@ sim_dat <- sim_dat %>%
   mutate(p = ifelse(item_id == 11, ifelse(theta > -0.2 & theta < 0.1, 0.95, p), p))
 ```
 
-Item 10 wird also unabhängig von der Fähigkeit der Person einfach zufällig 50/50 beantwortet. Wir können später mal schauen, ob das Item auffällig wird. 
-
-
 
 5. Jetzt sind wir auch schon fast am Ende. Wir müssen lediglich aus den Wahrscheinlichkeiten die tatsächlichen Antworten der Personen simulieren. Nutze die Berechneten Antwortwahrscheinlichkeiten `p`, um für jede Person und jedes Item einen Wert aus einer [Bernoulliverteilung](https://de.wikipedia.org/wiki/Bernoulli-Verteilung) zu ziehen. 
 
 :::{.callout-tip collapse=true}
 ## Tip
 
-Eine Bernoulliverteilung ist eine Binomialverteilung mit nur einem Versuch. Wir können daher die Funktion `rbinom()` nutzen, und das `size`-Argument auf 1 setzen.
+Eine Bernoulliverteilung ist eine Binomialverteilung mit nur einem Versuch. Wir können daher die Funktion `rbinom()` nutzen, und das `size`-Argument auf 1 setzen. Als Wahrscheinlichkeit nehmen wir einfach unsere berechnete Antwortwahrscheinlichkeit `p`.
 
 :::
 
@@ -332,7 +330,7 @@ ggplot(data=item_comparison,
 
 ```
 
-Das sieht super aus, die Werte stimmen gut überein (natürlich mit Ausnahme von unserem Missspezifiziertem Item 10). Dadurch, dass wir so viele Personen simuliert haben, sehen wir also, dass unsere Simulation gut funktioniert. Wir können das Gerüst dieses Simplen Modells jetzt nutzen, um uns noch spannendere Fragestellungen anzuschauen. Zum Beispiel könnten wir untersuchen, ab welcher Stichprobengröße unser Modell genau genug schätzt, oder wir könnten verschiedene Modelle miteinander vergleichen (Rasch vs. 2PL z.B.). Beides kann uns bei der Studienplanung helfen. 
+Das sieht super aus, die Werte stimmen gut überein (natürlich mit Ausnahme von unseren manuell missspezifiziertem Items. Dadurch, dass wir so viele Personen simuliert haben, sehen wir also, dass unsere Simulation gut funktioniert. Wir können das Gerüst dieses simplen Modells jetzt nutzen, um uns noch spannendere Fragestellungen anzuschauen. Zum Beispiel könnten wir untersuchen, ab welcher Stichprobengröße unser Modell genau genug schätzt, oder wir könnten verschiedene Modelle miteinander vergleichen (Rasch vs. 2PL z.B.). Beides kann uns bei der Studienplanung helfen. 
 
 :::
 

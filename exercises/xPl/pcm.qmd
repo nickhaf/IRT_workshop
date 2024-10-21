@@ -12,7 +12,7 @@ about:
 
 ## Die Daten
 
-- kontinuierliche Skala in Likert Skala umgewandelt (nicht optimal, Infos gehen verloren)
+- Kontinuierliche Skala in Likert Skala umgewandelt (nicht optimal, Infos gehen verloren)
 - Wir können jetzt auch nicht wirklich sagen, was die verschiedenen Kategorien aussagen (außer 1 und 5).
 
 :::
@@ -22,25 +22,29 @@ Foto von <a href="https://unsplash.com/de/@lgtts?utm_content=creditCopyText&utm_
 :::
 
 ```{r}
+#| message: false
+
 library(TAM)
 library(psych)
 library(tidyverse)
+library(eRm)
 ```
 
+# Daten laden und umkodieren
 
 ```{r}
-
 psych_dat <- readRDS(here::here("raw_data", "psych_pcm.rds"))
 
-## Kategorien müssen bei 0 anfangen, 0 wird nämlich als Referenzkategorie oder so genommen?
-psych_dat <- psych_dat -1
+## Kategorien müssen bei 0 anfangen
+psych_dat <- psych_dat - 1
 
 ## Zu allen characteren liegen Infos vor
 any(is.na(psych_dat))
+```
 
-## Alle kategorien wurden genutzt
-# alpha(psych_dat)$response.freq
+# PCM Modell fitten: `TAM`
 
+```{r}
 pcm_psych <- tam.mml(psych_dat[, -1], irtmodel = "PCM", verbose = FALSE)
 
 summary(pcm_psych)
@@ -54,95 +58,69 @@ gg <- g[g$tau.Cat1 > g$tau.Cat2 | g$tau.Cat2 > g$tau.Cat3 | g$tau.Cat3 > g$tau.C
 deltas <- pcm_psych$xsi
 
 ## Plot the option characteristic curves
-plot(pcm_psych, 
-     type = "items", 
-     export = FALSE, 
-     package = "graphics", 
-     observed = TRUE, 
-     low = -6, 
-     high = 6)
+plot(pcm_psych,
+  type = "items",
+  export = FALSE,
+  package = "graphics",
+  observed = FALSE,
+  low = -6,
+  high = 6
+)
 
-## Gestrichelt sind die Observed Linien. Aber actually not that weird oder? 
 
-# Was genau sagen die verschiednen Kurven typen?
 
 ## Plot the empirical and theoretical expected scores curves
 
-plot(pcm_psych, 
-     type = "expected", 
-     ngroups = 6, 
-     low  = -6, 
-     high = 6,
-     package = "lattice", overlay = FALSE)
-
-## Infit/Outfit anschauen
-
-fit <- msq.itemfit(pcm_psych)$itemfit
-(fit <- data.frame(fit[1], round(fit[3:8], 2)))
-
-## Infit und Outfit sollten zwischen 0.5 und 1.5 liegen (hatte noch andere Grenzen im Kopf, quelle ruassuchen. Auch was genau das nochmal heißt). 
-## underachiever_overachiever passt nicht so rein, ist auch thematisch weiter weg (nette Illustration, sieht man das noch an irgendwelchen Kurven oder andern Werten?)
-
+plot(pcm_psych,
+  type = "expected",
+  ngroups = 6,
+  low = -6,
+  high = 6,
+  package = "lattice", overlay = FALSE
+)
 
 ## Q3 Statistic
 q3 <- tam.modelfit(pcm_psych)$stat.itempair
 q3 <- data.frame(q3[1:2], round(q3[5:6], 2), round(q3[7:8], 4))
-## Actually quite interesting! underachiever_overachiever fällt auch hier auf. 
-
-
-## Gut oder schlecht? zuyymindest sehr ähnlich im example. 
-MADaQ3 <- tam.modelfit(pcm_psych)$stat.MADaQ3
-
-## Values > 0.6 might reflect unacceptable fit
-item.RMSD <- IRT.itemfit(pcm_psych)$RMSD_bc
-
-## Tardy_on.time ebenfalls auffällig (auch ein komischer Gegensatz wenn man drüber nachdenkt, evtl. mehrdimensional)
-
-## Hiernach kommt noch einiges, aber wahrscheinlich genug to get started! 
 ```
 
+
+# PCM Modell fitten: `eRm`
+
 ```{r eRm}
-#| eval: false
-
-library(eRm)
-
 erm_pcm <- PCM(psych_dat)
 summary(erm_pcm)
 
 plotPImap(erm_pcm)
 plotICC(erm_pcm, ask = FALSE)
 
-## Scheint anders auszusehen als bei Tam. Nochmal genauer schauen später, aber underachiever_overachiever scheint sich hier erst bei vier die letzte Linie zu kreuzen. 
-
 thresholds(erm_pcm)
 
-person.location.estimate <- person.parameter(erm_pcm)
-
 item_fit_pcm <- eRm::itemfit(person.location.estimate)
+```
 
+## Residualplot
 
-## Maybe plot standardiyed residuals?
+```{r}
 stresid <- item_fit_pcm$st.res
 
 # before constructing the plots, find the max & min residuals:
 max.resid <- ceiling(max(stresid))
 min.resid <- ceiling(min(stresid))
 
-for(item.number in colnames(stresid)){
-  plot(stresid[, item.number], ylim = c(min.resid, max.resid),
-       main = paste("Standardized Residuals for Item ", item.number, sep = ""),
-       ylab = "Standardized Residual", xlab = "Person Index")
+for (item.number in colnames(stresid)) {
+  plot(stresid[, item.number],
+    ylim = c(min.resid, max.resid),
+    main = paste("Standardized Residuals for Item ", item.number, sep = ""),
+    ylab = "Standardized Residual", xlab = "Person Index"
+  )
   abline(h = 0, col = "blue")
-  abline(h=2, lty = 2, col = "red")
-  abline(h=-2, lty = 2, col = "red")
-  legend("topright", c("Std. Residual", "Observed = Expected", "+/- 2 SD"), pch = c(1, NA, NA), 
-         lty = c(NA, 1, 2),
-         col = c("black", "blue", "red"), cex = .8)
+  abline(h = 2, lty = 2, col = "red")
+  abline(h = -2, lty = 2, col = "red")
+  legend("topright", c("Std. Residual", "Observed = Expected", "+/- 2 SD"),
+    pch = c(1, NA, NA),
+    lty = c(NA, 1, 2),
+    col = c("black", "blue", "red"), cex = .8
+  )
 }
-
-## Looks okay I gues? For Item 8 am schlechtesten, passt auch wieder!
 ```
-
-Gibt es Items, die suspicious sind?
-
-## Personenspezifische Kurve zeichnen? 
