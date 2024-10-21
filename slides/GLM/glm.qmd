@@ -68,7 +68,7 @@ $$
 <!-- Wir haben hier die Antwortwahrscheinlichkeit in Logits. Um die Wahrscheinlichkeit auf der interpretierbaren Skala zu erhalten, brauchen wir für Xb das Inverse der Logit-Funktion, also die logistische Funktion. -->
 
 :::{.callout-note}
-Die logit Funktion bringt also unsere Werte auf die logit-Skala, sodass sie zwischen 0 und 1 liegen.
+Die logit Funktion bringt also unsere Werte auf die logit-Skala, sodass sie die Wahrscheinlichkeiten nicht mehr zwischen 0 und 1 liegen.
 :::
 
 
