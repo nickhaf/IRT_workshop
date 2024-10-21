@@ -630,7 +630,7 @@ $$
 $$
 
 ## mean-sigma
-In der Praxis eher seltener verwendet, da es einige Problem gibt (allerdings auch robuste verfahren). 
+In der Praxis eher seltener verwendet, da es einige Problem gibt (allerdings auch robuste Verfahren). 
 
 Alternative: [Characteristic curve methods]{.highlight}
 
@@ -731,7 +731,7 @@ Siehe @berrio2020developments für eine ausführliche Übersicht zu verschiedene
 ## Verfahren
 
 ### Mantel-Haenszel Test [@holland1986differential]
-Analysiert Kontingenztabellen (vergleicht also die Häufigkeit von richtigen und falschen Antworten für ein Item $i$ zwischen zwei Gruppen. Nur für uniformen DIF. 
+Analysiert Kontingenztabellen (vergleicht also die Häufigkeit von richtigen und falschen Antworten für ein Item $i$ zwischen zwei Gruppen). Nur für uniformen DIF. 
 
 ### Likelihood Ratio Test [@thissen1986beyond]
 Vergleich von Modellen mit zwischen Gruppen fixierten Parametern eines Items, und Modellen mit frei geschätzten Parametern.   
