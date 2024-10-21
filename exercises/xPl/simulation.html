@@ -409,7 +409,7 @@ Lösung
 </section><section id="pl-funktion" class="level2" data-number="2"><h2 data-number="2" data-anchor-id="pl-funktion">
 <span class="header-section-number">2</span> 2PL Funktion</h2>
 <ol start="2" type="1">
-<li>Jetzt beginnt der fun part: Schreibe eine <a href="">Funktion</a> genannt <code>calc_2pl</code> die <a href="#eq-2PL" class="quarto-xref">Gleichung&nbsp;1</a> in R Code umsetzt.</li>
+<li>Schreibe eine <a href="">Funktion</a> genannt <code>calc_2pl</code> die <a href="#eq-2PL" class="quarto-xref">Gleichung&nbsp;1</a> in R Code umsetzt.</li>
 </ol>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
@@ -450,17 +450,17 @@ Lösung
 </div>
 </section><section id="simulieren-von-daten" class="level2" data-number="3"><h2 data-number="3" data-anchor-id="simulieren-von-daten">
 <span class="header-section-number">3</span> Simulieren von Daten</h2>
-<p>Jetzt geht’s los! Wir wollen nun eigene Daten simulieren. Das tolle ist: wir können so alle Aspekte selber festlegen, und daran untersuchen, wie sich das Variieren von bestimmten Parametern auf das Ergebnis auswirkt.</p>
+<p>Jetzt geht’s los! Wir wollen nun eigene Daten simulieren. Das Tolle ist: wir können so alle Aspekte selber festlegen, und daran untersuchen, wie sich das Variieren von bestimmten Parametern auf das Ergebnis auswirkt.</p>
 <section id="items" class="level3" data-number="3.1"><h3 data-number="3.1" data-anchor-id="items">
 <span class="header-section-number">3.1</span> Items</h3>
 <ol type="1">
-<li>Zuerst die Items. Baue einen <code>data.frame</code> mit dem Namen <code>items</code>. Er soll <code>r</code>n_items` Zeilen und 4 Spalten haben und folgendes enthalten:</li>
+<li>Zuerst die Items. Baue einen <code>data.frame</code> mit dem Namen <code>items</code>. Er soll <code>r</code>n_items` Zeilen und 3 Spalten haben und folgendes enthalten:</li>
 </ol>
 <ul>
 <li>
 <code>item_id</code>: Die ID des Items, von 1 bis 20`</li>
 <li>
-<code>alpha</code>: Die Diskriminationsparameter, liegen zwischen 0.1 und 2.5 in <code>r</code>n_items` gleich langen Schritten.</li>
+<code>alpha</code>: Die Diskriminationsparameter, liegen zwischen 0.1 und 2.5 in 20 gleich langen Schritten, sollen aber zufällig gesampelt werden, sodass die leichten Items nicht automatisch auch eine niedrige Steigung haben.</li>
 <li>
 <code>beta</code>: Die Schwierigkeitsparameter, liegen zwischen -3 und 3 jeweils im Abstand von 0.5.</li>
 </ul>
@@ -476,7 +476,8 @@ Tip
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Die Funktion <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> ist dein Freund. Mehr brauchst du nicht, um die Zahlenreihen zu erzeugen. Schaue dir die Dokumentation an.</p>
+<p>Mit der Funktion <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> kannst du die gewünschten Zahlenreihen zu erzeugen. Schaue dir die Dokumentation an.</p>
+<p>Mit <code>sample(seq(0.1, 3, length.out = n_items), replace = FALSE)</code> kannst du aus einer Sequenz samplen.</p>
 </div>
 </div>
 </div>
@@ -508,11 +509,11 @@ Lösung
 </div>
 </div>
 <ol start="2" type="1">
-<li>Jetzt können wir die Personen simulieren. Unser Ziel ist also ein <code>data.frame</code>, der <span class="math inline">\(\theta\)</span> Werte für die untersuchten Personen enthält. Wir simulieren 100000 Personen, der <code>data.frame</code> sollte also 100000 Zeilen haben. Außerdem benötigen wir zwei Spalten:</li>
+<li>Jetzt können wir die Personen simulieren. Unser Ziel ist also ein <code>data.frame</code>, der <span class="math inline">\(\theta\)</span> Werte für die untersuchten Personen enthält. Wir simulieren 5000 Personen, der <code>data.frame</code> sollte also 5000 Zeilen haben. Außerdem benötigen wir zwei Spalten:</li>
 </ol>
 <ul>
 <li>
-<code>ID</code>: Die ID der Person, von 1 bis 100000.</li>
+<code>ID</code>: Die ID der Person, von 1 bis 5000</li>
 <li>
 <code>theta</code>: Die Fähigkeit der Person, die wir simulieren. Wir nehmen an, dass die Fähigkeit normalverteilt ist, mit einem Mittelwert von 0 und einer Standardabweichung von 1.</li>
 </ul>
@@ -619,7 +620,7 @@ Lösung
 </div>
 </div>
 <ol start="4" type="1">
-<li>Jetzt simulieren wir aus diesem Vorbereiteten <code>data.frame</code> die Antworten der Personen, abhängig von ihren Fähigkeiten <span class="math inline">\(\theta\)</span> (jede Person hat hier einen zufälligen Wert aus einer Normalverteilung mit <span class="math inline">\(\mu = 1\)</span> und <span class="math inline">\(\sigma = 1\)</span> bekommen) und den Itemparametern <span class="math inline">\(\alpha\)</span> und <span class="math inline">\(\beta\)</span> (die hatten wir einfach als Sequenz festgelegt). Lege eine neue Spalte <code>p</code> in <code>sim_dat</code> an, die für jede Person die Wahrscheinlichkeit enthält, dass sie das jeweilige Item richtig beantwortet. Dafür brauchen wir jetzt unsere Funktion <code>calc_2pl</code>, die wir am Anfang definiert haben! Diese nimmt aus jeder Zeile den <code>theta</code>, <code>alpha</code> und <code>beta</code> Wert als input, und berechnet daraus die Wahrscheinlichkeit, dass die Person das Item richtig beantwortet.</li>
+<li>Jetzt simulieren wir aus diesem vorbereiteten <code>data.frame</code> die Antworten der Personen, abhängig von ihren Fähigkeiten <span class="math inline">\(\theta\)</span> (jede Person hat hier einen zufälligen Wert aus einer Normalverteilung mit <span class="math inline">\(\mu = 1\)</span> und <span class="math inline">\(\sigma = 1\)</span> bekommen) und den Itemparametern <span class="math inline">\(\alpha\)</span> und <span class="math inline">\(\beta\)</span> (die hatten wir einfach als Sequenz festgelegt). Lege eine neue Spalte <code>p</code> in <code>sim_dat</code> an, die für jede Person die Wahrscheinlichkeit enthält, dass sie das jeweilige Item richtig beantwortet. Dafür brauchen wir jetzt unsere Funktion <code>calc_2pl</code>, die wir am Anfang definiert haben! Diese nimmt aus jeder Zeile den <code>theta</code>, <code>alpha</code> und <code>beta</code> Wert als Input, und berechnet daraus die Wahrscheinlichkeit, dass die Person das Item richtig beantwortet.</li>
 </ol>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -679,7 +680,6 @@ Lösung
 <span>  <span class="co">## Infit</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">item_id</span> <span class="op">==</span> <span class="fl">11</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">0.2</span> <span class="op">&amp;</span> <span class="va">theta</span> <span class="op">&lt;</span> <span class="fl">0.1</span>, <span class="fl">0.95</span>, <span class="va">p</span><span class="op">)</span>, <span class="va">p</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Item 10 wird also unabhängig von der Fähigkeit der Person einfach zufällig 50/50 beantwortet. Wir können später mal schauen, ob das Item auffällig wird.</p>
 <ol start="5" type="1">
 <li>Jetzt sind wir auch schon fast am Ende. Wir müssen lediglich aus den Wahrscheinlichkeiten die tatsächlichen Antworten der Personen simulieren. Nutze die Berechneten Antwortwahrscheinlichkeiten <code>p</code>, um für jede Person und jedes Item einen Wert aus einer <a href="https://de.wikipedia.org/wiki/Bernoulli-Verteilung">Bernoulliverteilung</a> zu ziehen.</li>
 </ol>
@@ -695,7 +695,7 @@ Tip
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Eine Bernoulliverteilung ist eine Binomialverteilung mit nur einem Versuch. Wir können daher die Funktion <code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code> nutzen, und das <code>size</code>-Argument auf 1 setzen.</p>
+<p>Eine Bernoulliverteilung ist eine Binomialverteilung mit nur einem Versuch. Wir können daher die Funktion <code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code> nutzen, und das <code>size</code>-Argument auf 1 setzen. Als Wahrscheinlichkeit nehmen wir einfach unsere berechnete Antwortwahrscheinlichkeit <code>p</code>.</p>
 </div>
 </div>
 </div>
@@ -899,7 +899,7 @@ Lösung
 </div>
 </div>
 </div>
-<p>Das sieht super aus, die Werte stimmen gut überein (natürlich mit Ausnahme von unserem Missspezifiziertem Item 10). Dadurch, dass wir so viele Personen simuliert haben, sehen wir also, dass unsere Simulation gut funktioniert. Wir können das Gerüst dieses Simplen Modells jetzt nutzen, um uns noch spannendere Fragestellungen anzuschauen. Zum Beispiel könnten wir untersuchen, ab welcher Stichprobengröße unser Modell genau genug schätzt, oder wir könnten verschiedene Modelle miteinander vergleichen (Rasch vs.&nbsp;2PL z.B.). Beides kann uns bei der Studienplanung helfen.</p>
+<p>Das sieht super aus, die Werte stimmen gut überein (natürlich mit Ausnahme von unseren manuell missspezifiziertem Items. Dadurch, dass wir so viele Personen simuliert haben, sehen wir also, dass unsere Simulation gut funktioniert. Wir können das Gerüst dieses simplen Modells jetzt nutzen, um uns noch spannendere Fragestellungen anzuschauen. Zum Beispiel könnten wir untersuchen, ab welcher Stichprobengröße unser Modell genau genug schätzt, oder wir könnten verschiedene Modelle miteinander vergleichen (Rasch vs.&nbsp;2PL z.B.). Beides kann uns bei der Studienplanung helfen.</p>
 </div>
 </div>
 </div>

@@ -310,8 +310,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul>
-<li><a href="#die-daten" id="toc-die-daten" class="nav-link active" data-scroll-target="#die-daten"><span class="header-section-number">1</span> Die Daten</a></li>
-  <li><a href="#personenspezifische-kurve-zeichnen" id="toc-personenspezifische-kurve-zeichnen" class="nav-link" data-scroll-target="#personenspezifische-kurve-zeichnen"><span class="header-section-number">2</span> Personenspezifische Kurve zeichnen?</a></li>
+<li><a href="#die-daten" id="toc-die-daten" class="nav-link active" data-scroll-target="#die-daten"><span class="header-section-number">0.1</span> Die Daten</a></li>
+  <li><a href="#daten-laden-und-umkodieren" id="toc-daten-laden-und-umkodieren" class="nav-link" data-scroll-target="#daten-laden-und-umkodieren"><span class="header-section-number">1</span> Daten laden und umkodieren</a></li>
+  <li><a href="#pcm-modell-fitten-tam" id="toc-pcm-modell-fitten-tam" class="nav-link" data-scroll-target="#pcm-modell-fitten-tam"><span class="header-section-number">2</span> PCM Modell fitten: <code>TAM</code></a></li>
+  <li>
+<a href="#pcm-modell-fitten-erm" id="toc-pcm-modell-fitten-erm" class="nav-link" data-scroll-target="#pcm-modell-fitten-erm"><span class="header-section-number">3</span> PCM Modell fitten: <code>eRm</code></a>
+  <ul class="collapse">
+<li><a href="#residualplot" id="toc-residualplot" class="nav-link" data-scroll-target="#residualplot"><span class="header-section-number">3.1</span> Residualplot</a></li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -327,10 +334,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
   </div>
 </header> <div id="pcm-heading">
-<section id="die-daten" class="level2" data-number="1"><h2 data-number="1" data-anchor-id="die-daten">
-<span class="header-section-number">1</span> Die Daten</h2>
+<section id="die-daten" class="level2" data-number="0.1"><h2 data-number="0.1" data-anchor-id="die-daten">
+<span class="header-section-number">0.1</span> Die Daten</h2>
 <ul>
-<li>kontinuierliche Skala in Likert Skala umgewandelt (nicht optimal, Infos gehen verloren)</li>
+<li>Kontinuierliche Skala in Likert Skala umgewandelt (nicht optimal, Infos gehen verloren)</li>
 <li>Wir können jetzt auch nicht wirklich sagen, was die verschiedenen Kategorien aussagen (außer 1 und 5).</li>
 </ul></section>
 </div> 
@@ -341,53 +348,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="no-row-height column-margin column-container"><div class="margin-aside">
 <p>Foto von <a href="https://unsplash.com/de/@lgtts?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Ilse Orsel</a> auf <a href="https://unsplash.com/de/fotos/rot-weisses-unks-cafe-fwPHQB4kGzA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></p>
 </div></div><div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: CDM</code></pre>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.edmeasurementsurveys.com/TAM/Tutorials/">TAM</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">eRm</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: mvtnorm</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>**********************************
-** CDM 8.2-6 (2022-08-25 15:43:23)       
-** Cognitive Diagnostic Models  **
-**********************************</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>* TAM 4.2-21 (2024-02-19 18:52:08)</code></pre>
-</div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ ggplot2::%+%()   masks psych::%+%()
-✖ ggplot2::alpha() masks psych::alpha()
-✖ dplyr::filter()  masks stats::filter()
-✖ dplyr::lag()     masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-</div>
+<section id="daten-laden-und-umkodieren" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> Daten laden und umkodieren</h1>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">psych_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"raw_data"</span>, <span class="st">"psych_pcm.rds"</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">psych_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"raw_data"</span>, <span class="st">"psych_pcm.rds"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## Kategorien müssen bei 0 anfangen, 0 wird nämlich als Referenzkategorie oder so genommen?</span></span>
-<span><span class="va">psych_dat</span> <span class="op">&lt;-</span> <span class="va">psych_dat</span> <span class="op">-</span><span class="fl">1</span></span>
+<span><span class="co">## Kategorien müssen bei 0 anfangen</span></span>
+<span><span class="va">psych_dat</span> <span class="op">&lt;-</span> <span class="va">psych_dat</span> <span class="op">-</span> <span class="fl">1</span></span>
 <span></span>
 <span><span class="co">## Zu allen characteren liegen Infos vor</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">psych_dat</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Alle kategorien wurden genutzt</span></span>
+</div>
+</section><section id="pcm-modell-fitten-tam" class="level1" data-number="2"><h1 data-number="2">
+<span class="header-section-number">2</span> PCM Modell fitten: <code>TAM</code>
+</h1>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Alle kategorien wurden genutzt</span></span>
 <span><span class="co"># alpha(psych_dat)$response.freq</span></span>
 <span></span>
 <span><span class="va">pcm_psych</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html">tam.mml</a></span><span class="op">(</span><span class="va">psych_dat</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>, irtmodel <span class="op">=</span> <span class="st">"PCM"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -396,11 +380,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>------------------------------------------------------------
 TAM 4.2-21 (2024-02-19 18:52:08) 
-R version 4.4.1 (2024-06-14) x86_64, linux-gnu | nodename=fv-az711-519 | login=unknown 
+R version 4.4.1 (2024-06-14) x86_64, linux-gnu | nodename=fv-az693-317 | login=unknown 
 
-Date of Analysis: 2024-10-21 15:15:59.193098 
-Time difference of 0.2061098 secs
-Computation time: 0.2061098 
+Date of Analysis: 2024-10-21 19:05:55.721683 
+Time difference of 0.1497269 secs
+Computation time: 0.1497269 
 
 Multidimensional Item Response Model in TAM 
 
@@ -514,7 +498,73 @@ Item Parameters in IRT parameterization
 6    2.885
 7    3.677</code></pre>
 </div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pcm_psych</span><span class="op">$</span><span class="va">xsi</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">deltas</span> <span class="op">&lt;-</span> <span class="va">pcm_psych</span><span class="op">$</span><span class="va">xsi</span></span>
+<span></span>
+<span><span class="co">## Plot the option characteristic curves</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pcm_psych</span>, </span>
+<span>     type <span class="op">=</span> <span class="st">"items"</span>, </span>
+<span>     export <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>     package <span class="op">=</span> <span class="st">"graphics"</span>, </span>
+<span>     observed <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>     low <span class="op">=</span> <span class="op">-</span><span class="fl">6</span>, </span>
+<span>     high <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Iteration in WLE/MLE estimation  1   | Maximal change  2.0474 
+Iteration in WLE/MLE estimation  2   | Maximal change  1.09 
+Iteration in WLE/MLE estimation  3   | Maximal change  0.3975 
+Iteration in WLE/MLE estimation  4   | Maximal change  0.0102 
+Iteration in WLE/MLE estimation  5   | Maximal change  0.002 
+Iteration in WLE/MLE estimation  6   | Maximal change  4e-04 
+Iteration in WLE/MLE estimation  7   | Maximal change  1e-04 
+----
+ WLE Reliability= 0.918 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-3-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-3-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Die Schnittpunkte stimmen mit unseren Schwellenparametern überein:</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">deltas</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                           xsi     se.xsi
 disorganized_self.disciplined_Cat1 -3.79709749 0.17457941
@@ -546,232 +596,273 @@ underachiever_overachiever_Cat2    -2.93873958 0.14531083
 underachiever_overachiever_Cat3    -1.27212871 0.10459447
 underachiever_overachiever_Cat4     1.69738710 0.10346930</code></pre>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Identify items with disordered category thresholds</span></span>
-<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">pcm_psych</span><span class="op">$</span><span class="va">item_irt</span></span>
-<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="va">g</span><span class="op">[</span><span class="va">g</span><span class="op">$</span><span class="va">tau.Cat1</span> <span class="op">&gt;</span> <span class="va">g</span><span class="op">$</span><span class="va">tau.Cat2</span> <span class="op">|</span> <span class="va">g</span><span class="op">$</span><span class="va">tau.Cat2</span> <span class="op">&gt;</span> <span class="va">g</span><span class="op">$</span><span class="va">tau.Cat3</span> <span class="op">|</span> <span class="va">g</span><span class="op">$</span><span class="va">tau.Cat3</span> <span class="op">&gt;</span> <span class="va">g</span><span class="op">$</span><span class="va">tau.Cat4</span>, <span class="op">]</span></span>
-<span></span>
-<span><span class="va">deltas</span> <span class="op">&lt;-</span> <span class="va">pcm_psych</span><span class="op">$</span><span class="va">xsi</span></span>
-<span></span>
-<span><span class="co">## Plot the option characteristic curves</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pcm_psych</span>, </span>
-<span>     type <span class="op">=</span> <span class="st">"items"</span>, </span>
-<span>     export <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>     package <span class="op">=</span> <span class="st">"graphics"</span>, </span>
-<span>     observed <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>     low <span class="op">=</span> <span class="op">-</span><span class="fl">6</span>, </span>
-<span>     high <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Iteration in WLE/MLE estimation  1   | Maximal change  2.0474 
-Iteration in WLE/MLE estimation  2   | Maximal change  1.09 
-Iteration in WLE/MLE estimation  3   | Maximal change  0.3975 
-Iteration in WLE/MLE estimation  4   | Maximal change  0.0102 
-Iteration in WLE/MLE estimation  5   | Maximal change  0.002 
-Iteration in WLE/MLE estimation  6   | Maximal change  4e-04 
-Iteration in WLE/MLE estimation  7   | Maximal change  1e-04 
-----
- WLE Reliability= 0.918 </code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-5.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-6.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-7.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Gestrichelt sind die Observed Linien. Aber actually not that weird oder? </span></span>
-<span></span>
-<span><span class="co"># Was genau sagen die verschiednen Kurven typen?</span></span>
-<span></span>
-<span><span class="co">## Plot the empirical and theoretical expected scores curves</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pcm_psych</span>, </span>
-<span>     type <span class="op">=</span> <span class="st">"expected"</span>, </span>
-<span>     ngroups <span class="op">=</span> <span class="fl">6</span>, </span>
-<span>     low  <span class="op">=</span> <span class="op">-</span><span class="fl">6</span>, </span>
-<span>     high <span class="op">=</span> <span class="fl">6</span>,</span>
-<span>     package <span class="op">=</span> <span class="st">"lattice"</span>, overlay <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Iteration in WLE/MLE estimation  1   | Maximal change  2.0474 
-Iteration in WLE/MLE estimation  2   | Maximal change  1.09 
-Iteration in WLE/MLE estimation  3   | Maximal change  0.3975 
-Iteration in WLE/MLE estimation  4   | Maximal change  0.0102 
-Iteration in WLE/MLE estimation  5   | Maximal change  0.002 
-Iteration in WLE/MLE estimation  6   | Maximal change  4e-04 
-Iteration in WLE/MLE estimation  7   | Maximal change  1e-04 
-----
- WLE Reliability= 0.918 </code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-8.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-9.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-10.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-11.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-12.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-13.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-2-14.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>....................................................
- Plots exported in png format into folder:
- /home/runner/work/IRT_workshop/IRT_workshop/exercises/xPl/Plots</code></pre>
-</div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Infit/Outfit anschauen</span></span>
-<span></span>
-<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/msq.itemfit.html">msq.itemfit</a></span><span class="op">(</span><span class="va">pcm_psych</span><span class="op">)</span><span class="op">$</span><span class="va">itemfit</span></span>
-<span><span class="op">(</span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">fit</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">fit</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                           item Outfit Outfit_t Outfit_p Infit Infit_t Infit_p
-1 disorganized_self.disciplined   0.63    -6.18     0.00  0.66   -7.62    0.00
-2                      ADHD_OCD   0.84    -3.25     0.00  0.84   -3.56    0.00
-3               chaotic_orderly   0.90    -1.82     0.07  0.91   -1.92    0.05
-4                 lazy_diligent   0.96    -0.29     0.77  1.01    0.26    0.80
-5                 tardy_on.time   0.65    -6.76     0.00  0.67   -7.71    0.00
-6         spontaneous_scheduled   1.06     1.11     0.27  1.07    1.34    0.18
-7    underachiever_overachiever   1.64     9.05     0.00  1.56    9.84    0.00</code></pre>
-</div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Infit und Outfit sollten zwischen 0.5 und 1.5 liegen (hatte noch andere Grenzen im Kopf, quelle ruassuchen. Auch was genau das nochmal heißt). </span></span>
-<span><span class="co">## underachiever_overachiever passt nicht so rein, ist auch thematisch weiter weg (nette Illustration, sieht man das noch an irgendwelchen Kurven oder andern Werten?)</span></span>
-<span></span>
-<span></span>
-<span><span class="co">## Q3 Statistic</span></span>
-<span><span class="va">q3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.modelfit.html">tam.modelfit</a></span><span class="op">(</span><span class="va">pcm_psych</span><span class="op">)</span><span class="op">$</span><span class="va">stat.itempair</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>**** Calculate Residuals 
-**** Calculate Counts 
-**** Calculate Covariances </code></pre>
-</div>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">q3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">q3</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">q3</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">q3</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">## Actually quite interesting! underachiever_overachiever fällt auch hier auf. </span></span>
-<span></span>
-<span></span>
-<span><span class="co">## Gut oder schlecht? zuyymindest sehr ähnlich im example. </span></span>
-<span><span class="va">MADaQ3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/tam.modelfit.html">tam.modelfit</a></span><span class="op">(</span><span class="va">pcm_psych</span><span class="op">)</span><span class="op">$</span><span class="va">stat.MADaQ3</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>**** Calculate Residuals 
-**** Calculate Counts 
-**** Calculate Covariances </code></pre>
-</div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Values &gt; 0.6 might reflect unacceptable fit</span></span>
-<span><span class="va">item.RMSD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CDM/man/IRT.itemfit.html">IRT.itemfit</a></span><span class="op">(</span><span class="va">pcm_psych</span><span class="op">)</span><span class="op">$</span><span class="va">RMSD_bc</span></span>
-<span></span>
-<span><span class="co">## Tardy_on.time ebenfalls auffällig (auch ein komischer Gegensatz wenn man drüber nachdenkt, evtl. mehrdimensional)</span></span>
-<span></span>
-<span><span class="co">## Hiernach kommt noch einiges, aber wahrscheinlich genug to get started! </span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">eRm</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">erm_pcm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/eRm/man/PCM.html">PCM</a></span><span class="op">(</span><span class="va">psych_dat</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">erm_pcm</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/eRm/man/plotPImap.html">plotPImap</a></span><span class="op">(</span><span class="va">erm_pcm</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/eRm/man/plotICC.html">plotICC</a></span><span class="op">(</span><span class="va">erm_pcm</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## Scheint anders auszusehen als bei Tam. Nochmal genauer schauen später, aber underachiever_overachiever scheint sich hier erst bei vier die letzte Linie zu kreuzen. </span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/eRm/man/thresholds.html">thresholds</a></span><span class="op">(</span><span class="va">erm_pcm</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">person.location.estimate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/eRm/man/person.parameter.html">person.parameter</a></span><span class="op">(</span><span class="va">erm_pcm</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">item_fit_pcm</span> <span class="op">&lt;-</span> <span class="fu">eRm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/eRm/man/itemfit.ppar.html">itemfit</a></span><span class="op">(</span><span class="va">person.location.estimate</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co">## Maybe plot standardiyed residuals?</span></span>
-<span><span class="va">stresid</span> <span class="op">&lt;-</span> <span class="va">item_fit_pcm</span><span class="op">$</span><span class="va">st.res</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TAM/man/msq.itemfit.html">msq.itemfit</a></span><span class="op">(</span><span class="va">pcm_psych</span><span class="op">)</span><span class="op">$</span><span class="va">itemfit</span></span>
+<span><span class="va">fit</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           item fitgroup    Outfit  Outfit_t     Outfit_p
+1 disorganized_self.disciplined        1 0.6336237 -6.179699 6.422413e-10
+2                      ADHD_OCD        2 0.8437835 -3.249544 1.155900e-03
+3               chaotic_orderly        3 0.9044106 -1.819742 6.879832e-02
+4                 lazy_diligent        4 0.9638408 -0.291076 7.709932e-01
+5                 tardy_on.time        5 0.6524227 -6.757364 1.405244e-11
+6         spontaneous_scheduled        6 1.0629279  1.110858 2.666295e-01
+7    underachiever_overachiever        7 1.6377879  9.045856 1.484967e-19
+      Infit    Infit_t      Infit_p
+1 0.6624574 -7.6207590 2.521884e-14
+2 0.8361233 -3.5551363 3.777832e-04
+3 0.9087765 -1.9228713 5.449622e-02
+4 1.0129870  0.2569472 7.972195e-01
+5 0.6669039 -7.7130627 1.228337e-14
+6 1.0672909  1.3413475 1.798077e-01
+7 1.5625312  9.8420191 7.420635e-23</code></pre>
+</div>
+</div>
+</section><section id="pcm-modell-fitten-erm" class="level1" data-number="3"><h1 data-number="3">
+<span class="header-section-number">3</span> PCM Modell fitten: <code>eRm</code>
+</h1>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">erm_pcm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/eRm/man/PCM.html">PCM</a></span><span class="op">(</span><span class="va">psych_dat</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">erm_pcm</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Results of PCM estimation: 
+
+Call:  PCM(X = psych_dat) 
+
+Conditional log-likelihood: -4387.207 
+Number of iterations: 96 
+Number of parameters: 31 
+
+Item (Category) Difficulty Parameters (eta): with 0.95 CI:
+                                 Estimate Std. Error lower CI upper CI
+messy_neat.c2                      -0.813      0.194   -1.193   -0.432
+messy_neat.c3                       1.239      0.216    0.817    1.662
+messy_neat.c4                       6.087      0.269    5.558    6.615
+disorganized_self.disciplined.c1   -1.960      0.193   -2.339   -1.581
+disorganized_self.disciplined.c2   -1.625      0.211   -2.039   -1.210
+disorganized_self.disciplined.c3   -0.175      0.224   -0.614    0.263
+disorganized_self.disciplined.c4    3.485      0.256    2.983    3.987
+ADHD_OCD.c1                        -2.135      0.189   -2.506   -1.765
+ADHD_OCD.c2                        -1.425      0.205   -1.826   -1.024
+ADHD_OCD.c3                         0.640      0.219    0.210    1.070
+ADHD_OCD.c4                         6.817      0.287    6.254    7.380
+chaotic_orderly.c1                 -0.677      0.140   -0.952   -0.402
+chaotic_orderly.c2                  0.954      0.174    0.613    1.295
+chaotic_orderly.c3                  3.657      0.214    3.237    4.076
+chaotic_orderly.c4                  9.336      0.295    8.758    9.913
+lazy_diligent.c1                   -4.401      0.345   -5.077   -3.725
+lazy_diligent.c2                   -5.861      0.368   -6.581   -5.140
+lazy_diligent.c3                   -5.889      0.353   -6.580   -5.198
+lazy_diligent.c4                   -3.581      0.338   -4.242   -2.919
+tardy_on.time.c1                   -2.112      0.194   -2.491   -1.733
+tardy_on.time.c2                   -1.642      0.210   -2.053   -1.231
+tardy_on.time.c3                    0.111      0.223   -0.326    0.548
+tardy_on.time.c4                    4.297      0.261    3.785    4.809
+spontaneous_scheduled.c1           -0.754      0.148   -1.044   -0.465
+spontaneous_scheduled.c2            0.553      0.179    0.202    0.905
+spontaneous_scheduled.c3            2.615      0.211    2.201    3.029
+spontaneous_scheduled.c4            7.597      0.276    7.055    8.139
+underachiever_overachiever.c1      -3.936      0.295   -4.515   -3.358
+underachiever_overachiever.c2      -4.846      0.307   -5.448   -4.243
+underachiever_overachiever.c3      -3.954      0.295   -4.533   -3.375
+underachiever_overachiever.c4       0.084      0.298   -0.501    0.669
+
+Item Easiness Parameters (beta) with 0.95 CI:
+                                      Estimate Std. Error lower CI upper CI
+beta messy_neat.c1                       1.686      0.174    1.346    2.027
+beta messy_neat.c2                       0.813      0.194    0.432    1.193
+beta messy_neat.c3                      -1.239      0.216   -1.662   -0.817
+beta messy_neat.c4                      -6.087      0.269   -6.615   -5.558
+beta disorganized_self.disciplined.c1    1.960      0.193    1.581    2.339
+beta disorganized_self.disciplined.c2    1.625      0.211    1.210    2.039
+beta disorganized_self.disciplined.c3    0.175      0.224   -0.263    0.614
+beta disorganized_self.disciplined.c4   -3.485      0.256   -3.987   -2.983
+beta ADHD_OCD.c1                         2.135      0.189    1.765    2.506
+beta ADHD_OCD.c2                         1.425      0.205    1.024    1.826
+beta ADHD_OCD.c3                        -0.640      0.219   -1.070   -0.210
+beta ADHD_OCD.c4                        -6.817      0.287   -7.380   -6.254
+beta chaotic_orderly.c1                  0.677      0.140    0.402    0.952
+beta chaotic_orderly.c2                 -0.954      0.174   -1.295   -0.613
+beta chaotic_orderly.c3                 -3.657      0.214   -4.076   -3.237
+beta chaotic_orderly.c4                 -9.336      0.295   -9.913   -8.758
+beta lazy_diligent.c1                    4.401      0.345    3.725    5.077
+beta lazy_diligent.c2                    5.861      0.368    5.140    6.581
+beta lazy_diligent.c3                    5.889      0.353    5.198    6.580
+beta lazy_diligent.c4                    3.581      0.338    2.919    4.242
+beta tardy_on.time.c1                    2.112      0.194    1.733    2.491
+beta tardy_on.time.c2                    1.642      0.210    1.231    2.053
+beta tardy_on.time.c3                   -0.111      0.223   -0.548    0.326
+beta tardy_on.time.c4                   -4.297      0.261   -4.809   -3.785
+beta spontaneous_scheduled.c1            0.754      0.148    0.465    1.044
+beta spontaneous_scheduled.c2           -0.553      0.179   -0.905   -0.202
+beta spontaneous_scheduled.c3           -2.615      0.211   -3.029   -2.201
+beta spontaneous_scheduled.c4           -7.597      0.276   -8.139   -7.055
+beta underachiever_overachiever.c1       3.936      0.295    3.358    4.515
+beta underachiever_overachiever.c2       4.846      0.307    4.243    5.448
+beta underachiever_overachiever.c3       3.954      0.295    3.375    4.533
+beta underachiever_overachiever.c4      -0.084      0.298   -0.669    0.501</code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/eRm/man/plotPImap.html">plotPImap</a></span><span class="op">(</span><span class="va">erm_pcm</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/eRm-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/eRm/man/plotICC.html">plotICC</a></span><span class="op">(</span><span class="va">erm_pcm</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/eRm-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/eRm-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/eRm-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/eRm-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/eRm-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/eRm-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/eRm-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/eRm-9.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/eRm/man/thresholds.html">thresholds</a></span><span class="op">(</span><span class="va">erm_pcm</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Design Matrix Block 1:
+                              Location Threshold 1 Threshold 2 Threshold 3
+messy_neat                     1.52164    -1.68636     0.87371     2.05193
+disorganized_self.disciplined  0.87116    -1.96031     0.33549     1.44938
+ADHD_OCD                       1.70425    -2.13542     0.71080     2.06417
+chaotic_orderly                2.33392    -0.67674     1.63108     2.70220
+lazy_diligent                 -0.89516    -4.40096    -1.45987    -0.02794
+tardy_on.time                  1.07431    -2.11192     0.46992     1.75327
+spontaneous_scheduled          1.89925    -0.75433     1.30753     2.06173
+underachiever_overachiever     0.02106    -3.93612    -0.90950     0.89170
+                              Threshold 4
+messy_neat                        4.84727
+disorganized_self.disciplined     3.66008
+ADHD_OCD                          6.17747
+chaotic_orderly                   5.67916
+lazy_diligent                     2.30814
+tardy_on.time                     4.18596
+spontaneous_scheduled             4.98209
+underachiever_overachiever        4.03816</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">person.location.estimate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/eRm/man/person.parameter.html">person.parameter</a></span><span class="op">(</span><span class="va">erm_pcm</span><span class="op">)</span></span>
+<span><span class="va">item_fit_pcm</span> <span class="op">&lt;-</span> <span class="fu">eRm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/eRm/man/itemfit.ppar.html">itemfit</a></span><span class="op">(</span><span class="va">person.location.estimate</span><span class="op">)</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="residualplot" class="level2" data-number="3.1"><h2 data-number="3.1" data-anchor-id="residualplot">
+<span class="header-section-number">3.1</span> Residualplot</h2>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">stresid</span> <span class="op">&lt;-</span> <span class="va">item_fit_pcm</span><span class="op">$</span><span class="va">st.res</span></span>
 <span></span>
 <span><span class="co"># before constructing the plots, find the max &amp; min residuals:</span></span>
 <span><span class="va">max.resid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">stresid</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">min.resid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">stresid</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">item.number</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">stresid</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">stresid</span><span class="op">[</span>, <span class="va">item.number</span><span class="op">]</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">min.resid</span>, <span class="va">max.resid</span><span class="op">)</span>,</span>
-<span>       main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Standardized Residuals for Item "</span>, <span class="va">item.number</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>,</span>
-<span>       ylab <span class="op">=</span> <span class="st">"Standardized Residual"</span>, xlab <span class="op">=</span> <span class="st">"Person Index"</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">item.number</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">stresid</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">stresid</span><span class="op">[</span>, <span class="va">item.number</span><span class="op">]</span>,</span>
+<span>    ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">min.resid</span>, <span class="va">max.resid</span><span class="op">)</span>,</span>
+<span>    main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Standardized Residuals for Item "</span>, <span class="va">item.number</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>,</span>
+<span>    ylab <span class="op">=</span> <span class="st">"Standardized Residual"</span>, xlab <span class="op">=</span> <span class="st">"Person Index"</span></span>
+<span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">2</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="op">-</span><span class="fl">2</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Std. Residual"</span>, <span class="st">"Observed = Expected"</span>, <span class="st">"+/- 2 SD"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>, </span>
-<span>         lty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span>         col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co">## Looks okay I gues? For Item 8 am schlechtesten, passt auch wieder!</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">2</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Std. Residual"</span>, <span class="st">"Observed = Expected"</span>, <span class="st">"+/- 2 SD"</span><span class="op">)</span>,</span>
+<span>    pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>    lty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.8</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<p>Gibt es Items, die suspicious sind?</p>
-<section id="personenspezifische-kurve-zeichnen" class="level2" data-number="2"><h2 data-number="2" data-anchor-id="personenspezifische-kurve-zeichnen">
-<span class="header-section-number">2</span> Personenspezifische Kurve zeichnen?</h2>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-6-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-6-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-6-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-6-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="pcm_files/figure-html/unnamed-chunk-6-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
