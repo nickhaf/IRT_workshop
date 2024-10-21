@@ -72,6 +72,12 @@ Die Schnittpunkte stimmen mit unseren Schwellenparametern überein:
 deltas
 ```
 
+```{r}
+fit <- msq.itemfit(pcm_psych)$itemfit
+fit
+```
+
+
 # PCM Modell fitten: `eRm`
 
 ```{r eRm}
