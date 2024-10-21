@@ -41,7 +41,9 @@ $$
 ln\left(\frac{P(X_{pi}=1)}{1-P(X_{pi}=1)}\right) 
 $$
 
-Transformation der Ergebnisse unseres linearen Terms, damit die Werte zwischen 0 und 1 liegen. Wahrscheinlichkeit $p$ durch Gegenwahrscheinlichkeit $1-p$. Inverse der logit ist die logistische Funktion.
+- Transformation der Ergebnisse unseres linearen Terms, damit die Wahrscheinlichkeitswerte nicht mehr zwischen 0 und 1 liegen und linear modeliert werden können. 
+- Wahrscheinlichkeit $p$ durch Gegenwahrscheinlichkeit $1-p$. 
+- Inverse der logit ist die logistische Funktion.
 
 
 ## 1PL Modell: Umformen
@@ -459,7 +461,7 @@ plot(mod_2pl,
 ```
 
 :::{.callout-important}
-Achtung! Die grafische Überprüfung ist stark von der Binwidth abhängig, die man wählt. 
+Achtung! Die grafische Überprüfung ist stark von der Anzahl an geplotteten Punkten  abhängig, die man wählt. 
 :::
 
 ## Infit/Outfit
@@ -472,7 +474,7 @@ Es sollten also vor allem Items mit einem Fit-Kriterium über 1 genauer betracht
 Infit/Outfit sind relativ, da sie den Item-Fit relativ zu den anderen Items im Itemset beurteilen.
 
 :::{.callout-note}
-Cut-off Werte sind abhängig von der Stichprobengröße (siehe [hier](https://www.edmeasurementsurveys.com/residual-based-item-fit-statistics.html)
+Cut-off Werte sind abhängig von der Stichprobengröße (siehe [hier](https://www.edmeasurementsurveys.com/residual-based-item-fit-statistics.html))
 :::
 
 ## Infit/Outfit
@@ -496,7 +498,7 @@ Sensitiv für Outlier (z.B. leistungsstarke Personen beantworten ein sonst leich
 
 ```{r}
 #| code-fold: true
-#| echo: false
+#| echo: true
 
 tam.fit(mod_2pl)
 
@@ -615,22 +617,14 @@ testInfoPlot(mod_mirt, adj_factor = 2) + theme_bg()
 
 
 ## Summary
-:::{.columns}
 
-:::{.column width="80%"}
 ```{r}
 #| echo: true
 
 summaryPlot(mod_mirt, adj_factor = 2) +
   theme_bg() 
 ```
-:::
 
-:::{.column width="20%"}
-Zusammenfassung verschiedener Plots
-:::
-
-:::
 
 # Was tun bei polytomen Items?
 
@@ -660,6 +654,7 @@ Beispielfrage aus dem [Big-Five-Inventory (BFI-10)](https://zis.gesis.org/skala/
 ## Grundidee {.center}
 
 Erweiterung des 1PL Modells: Den einzelnen Antwortkategorien wird eine [eigene Schwierigkeit]{.highlight} (Schwellenparameter) zugeordnet. Dadurch können wir die [Antwortwahrscheinlichkeit]{.highlight} in einer bestimmten [Kategorie]{.highlight} berechnen. 
+
 ## Anwendungsbereich
 Ordinale Daten (geordnete Antwortkategorien), z.B.:
 
@@ -668,17 +663,16 @@ Ordinale Daten (geordnete Antwortkategorien), z.B.:
 
 
 ## Darstellung
-
+Für ein Item:
 ```{r}
 #| echo: false
 
 plot_pcm(delta = c(-0.29, 0.95))
 ```
 
-Wichtig:$\beta_{i\color{#9B1B34}{j}}$ ist jetzt der [Schwellenparameter]{.highlight} der Kategorie $j$ des Items $i$.
-
 
 ## Raw score curve
+Für einen "Test" aus 2 Items:
 
 ```{r}
 # Theta-Werte Bereich definieren
