@@ -1,7 +1,5 @@
 ---
 title: "Einführung in R"
-author: "Nicklas Hafiz"
-
 title-slide-attributes:
   data-background-image: ./images/r_desktop.jpg
   data-background-size: cover
