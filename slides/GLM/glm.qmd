@@ -143,12 +143,12 @@ Umgang mit genesteten Daten
 ```{r}
 #| echo: false
 
+stud_data <- stud_data %>%
+  ## zentrieren
+  mutate(ses_cent = ses - mean(ses))
+  
 illustration_dat <- stud_data %>% 
 filter(school %in% c("1224", "1288", "1296")) #, "1308", "1317", "1358", "1374", "1433", "1436"))
-
-## Zentrieren
-illustration_dat <- illustration_dat %>% 
-  mutate(ses_cent = ses - mean(ses))
 
 ```
 
@@ -242,12 +242,12 @@ NULL
 - Multilevel-Modelle können die Nestung explizieter berücksichtigen.
 
 ## Option 4: Multilevel-Modell
-
 ```{r}
 library(lme4)
-mod2 <- lmer(mathach ~ ses_cent + (1|school), data = illustration_dat) 
+mod2 <- lmer(mathach ~ 1 + ses_cent + (1 + ses_cent|school), data = stud_data) 
 summary(mod2)
 ```
+
 
 ## Option 4: Multilevel-Modell
 
@@ -257,6 +257,7 @@ summary(mod2)
 ggplot(data = illustration_dat, aes(x = ses_cent, y = mathach, colour = school)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, colour = "#01364C") +
   labs(title = "Math Score by Socioeconomic Status",
        x = "Socioeconomic Status",
        y = "Math Score") +
@@ -451,7 +452,7 @@ Anders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Ther
 ## {background-image="images/pupils.jpg" background-size="1225px"}
 
 ::: {.absolute right="5%" top="5%" style="font-size:1.5em;"}
-[Nehmen wir unsere Schulen und Schüler*innen nun also [random]{.highlight} oder [fixed]{.highlight} effects ins Modell auf?]{.highlight}
+[Nehmen wir unsere Schulen nun also [random]{.highlight} oder [fixed]{.highlight} effects ins Modell auf?]{.highlight}
 
 :::
 
@@ -462,7 +463,7 @@ Anders würde das Ganze aussehen, wenn uns die Erfolgsquote speziell dieser Ther
 #| echo: true
 library(lme4)
 
-mod1 <- lmer(mathach ~ ses_cent + (1|school), data = illustration_dat) 
+mod1 <- lmer(mathach ~ ses_cent + (1 |school), data = illustration_dat) 
 summary(mod1)
 ```
 
