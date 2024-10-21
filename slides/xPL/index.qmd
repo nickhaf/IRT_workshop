@@ -659,8 +659,7 @@ Beispielfrage aus dem [Big-Five-Inventory (BFI-10)](https://zis.gesis.org/skala/
 
 ## Grundidee {.center}
 
-Den einzelnen Antwortkategorien wird eine [eigene Schwierigkeit]{.highlight} zugeordnet. Dadurch können wir die [Antwortwahrscheinlichkeit]{.highlight} in einer bestimmten [Kategorie]{.highlight} berechnen. 
-
+Erweiterung des 1PL Modells: Den einzelnen Antwortkategorien wird eine [eigene Schwierigkeit]{.highlight} (Schwellenparameter) zugeordnet. Dadurch können wir die [Antwortwahrscheinlichkeit]{.highlight} in einer bestimmten [Kategorie]{.highlight} berechnen. 
 ## Anwendungsbereich
 Ordinale Daten (geordnete Antwortkategorien), z.B.:
 
@@ -675,32 +674,6 @@ Ordinale Daten (geordnete Antwortkategorien), z.B.:
 
 plot_pcm(delta = c(-0.29, 0.95))
 ```
-
-## Formel
-
-$$
-\pi_{pix}= P(X_{pi}=x|\theta_p, \beta_{ik})= \frac{exp[\sum^x_{j=0}(\theta_p-\beta_{ij})]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
-$$
-::: aside
-
-- Person $p$
-- Item $i$
-- Personenscore $x$
-
-:::
-
-## Partial Credit Model
-$$
-\pi_{pix}= \color{#9B1B34}{P(X_{pi}=x|\theta_p, \beta_{ik})}= \frac{exp[\sum^x_{j=0}(\theta_p-\beta_{ij})]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
-$$
-
-
-## Partial Credit Model
-
-$$
-\pi_{pix}= P(X_{pi}=x|\theta_p, \beta_{ik})= \frac{exp[\sum^x_{j=0}\color{#9B1B34}{(\theta_p-\beta_{ij})}]}{1+exp[\sum^k_{j=0}(\theta_p-\beta_{ij})]}
-$$
-
 
 Wichtig:$\beta_{i\color{#9B1B34}{j}}$ ist jetzt der [Schwellenparameter]{.highlight} der Kategorie $j$ des Items $i$.
 
@@ -729,8 +702,13 @@ ggplot(results, aes(x = theta, y = E_score)) +
   theme_bg()
 ```
 
+## Alternativen
+- Partial Credit Modelle nehmen die gleiche Steigung für alle Items an. 
+- Generalisierte PCMs treffen diese Annahme nicht. 
+- Ratingscale Modell: Relative Schwierigkeit der Schwellenparameter unterscheidet sich zwischen den Items nicht (Schritte sind also ähnlich schwer bei jedem Item, z.B. Likert-Skala). 
+
 ## Übung
-Gehe zur [Partial-Credit-Übung]() und bearbeite sie. 
+Gehe zur [Partial-Credit-Übung](https://nickhaf.github.io/IRT_workshop/exercises/xPl/pcm.html) und bearbeite sie. 
 
 
 ## Bildquellen

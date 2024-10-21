@@ -42,48 +42,6 @@ psych_dat <- psych_dat - 1
 any(is.na(psych_dat))
 ```
 
-# PCM Modell fitten: `TAM`
-
-```{r}
-pcm_psych <- tam.mml(psych_dat[, -1], irtmodel = "PCM", verbose = FALSE)
-
-summary(pcm_psych)
-
-pcm_psych$xsi
-
-## Identify items with disordered category thresholds
-g <- pcm_psych$item_irt
-gg <- g[g$tau.Cat1 > g$tau.Cat2 | g$tau.Cat2 > g$tau.Cat3 | g$tau.Cat3 > g$tau.Cat4, ]
-
-deltas <- pcm_psych$xsi
-
-## Plot the option characteristic curves
-plot(pcm_psych,
-  type = "items",
-  export = FALSE,
-  package = "graphics",
-  observed = FALSE,
-  low = -6,
-  high = 6
-)
-
-
-
-## Plot the empirical and theoretical expected scores curves
-
-plot(pcm_psych,
-  type = "expected",
-  ngroups = 6,
-  low = -6,
-  high = 6,
-  package = "lattice", overlay = FALSE
-)
-
-## Q3 Statistic
-q3 <- tam.modelfit(pcm_psych)$stat.itempair
-q3 <- data.frame(q3[1:2], round(q3[5:6], 2), round(q3[7:8], 4))
-```
-
 
 # PCM Modell fitten: `eRm`
 
