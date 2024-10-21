@@ -492,7 +492,7 @@ inhabitants_long_2 <- inhabitants_wide %>%
     values_to = "inhabitants"
   )
 
-head(inhabitants_long)
+head(inhabitants_long_2)
 ```
 
 ## Von Long zu Wide
