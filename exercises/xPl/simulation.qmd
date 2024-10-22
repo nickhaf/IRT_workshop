@@ -283,13 +283,10 @@ Wir brauchen die Funktion `tam.mml.2pl()`.
 :::
 
 :::{.callout-caution collapse=true}
-## Tip
+## Lösung
 ```{r}
 sim_dat_2PL <- tam.mml.2pl(sim_dat_wide %>% select(-sub_id), irtmodel = "2PL", verbose = FALSE)
 ```
-
-
-
 
 :::
 

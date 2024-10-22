@@ -662,6 +662,7 @@ Ordinale Daten (geordnete Antwortkategorien), z.B.:
   - Items, die auch mit Teilpunkten bewertet werden können (z.B. in Mathe)
 
 
+
 ## Darstellung
 Für ein Item:
 ```{r}
