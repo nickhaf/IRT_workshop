@@ -261,63 +261,12 @@ Gruppe 2: $\hat{\theta} \sim N(0,1)$ \
 Die Bedeutung des Skalenursprungs (0) unterscheidet sich, dadurch unterscheiden sich auch die Itemparameter.
 :::
 
-## Illustration
-
-Wir nehmen an, dass die gleiche Person in Gruppe 1 und in Gruppe 2 getestet wird. Gruppe 2 ist dabei insgesamt stärker als Gruppe 1.
-
-:::{.columns}
-
-:::{.column width="70%"}
-```{r}
-#| echo: false
-
-library(tidyverse)
-
-data_lines <- data.frame(
-  x = c(-4:4, -4:4),
-  y = c(rep(2, 9), rep(1, 9)),
-  group = c(rep("Gruppe 1", 9), rep("Gruppe 2", 9)),
-  label = c(-4:4, -5:3),
-  point = c(rep(0, 9), rep(0, 9))
-)
-
-ggplot(data_lines, aes(x, y, group = group, colour = group)) +
-  geom_line() +
-  geom_point(aes(x = point), show.legend = FALSE) +
-  theme_bg() +
-  theme(
-    axis.title.y = element_blank(),
-    axis.text = element_blank(),
-    axis.line = element_blank(),
-    axis.ticks = element_blank(), 
-    legend.title = element_blank()
-  ) +
-  ylim(0, 3) +
-  xlab("Personenfähigkeit") +
-  geom_text(aes(label = label), vjust = 1.5, show.legend = FALSE) +
-  set_colour_scheme()
-  
-```
-:::
-:::{.column width="30%"}
-
-::: small
-Mit der gleichen Fähigkeit würde sie in Gruppe 2 einen niedrigeren Fähigkeitswert zugewiesen bekommen, da diese Gruppe einfach besser ist als Gruppe 1.
-:::
-:::
-:::
-
-:::{.aside}
-Grafik nach [diesem Workshop](https://www.youtube.com/watch?v=AEBcf2zcN9U&t=748s).
-
-:::
-
-## Illustration 2
+## Illustration 
 
 :::{.columns}
 :::{.column width="30%"}
 ::: small
-Das gleiche Item wird in Gruppe 2 als leichter geschätzt als in Gruppe 1, einfach weil die Lösungswahrscheinlichkeit in Gruppe 2 insgesamt höher ist. 
+Das gleiche Item wird in Gruppe 2 als leichter geschätzt als in Gruppe 1, einfach weil die Lösungswahrscheinlichkeit in Gruppe 2 insgesamt höher ist (siehe auch [hier](https://www.youtube.com/watch?v=AEBcf2zcN9U&t=748s))
 :::
 
 :::
