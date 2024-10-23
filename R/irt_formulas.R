@@ -1,6 +1,6 @@
 ## 2PL Funktion
-calc_2pl <- function(a, theta, xi) {
-  p <- (exp(a * (theta - xi))) / (1 + exp(a * (theta - xi)))
+calc_2pl <- function(a, theta, b) {
+  p <- (exp(a * (theta - b))) / (1 + exp(a * (theta - b)))
   return(p)
 }
 
