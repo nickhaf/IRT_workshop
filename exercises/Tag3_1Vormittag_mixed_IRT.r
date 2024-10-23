@@ -209,14 +209,17 @@ dat_read <- merge(dat_read, personpars [,c("idstud", "wle_est")], by = "idstud")
 sim_data <- lapply(1:1000, FUN = function (rep) {
             sim_dat_rep <- dat_read[,c("idstud", "item", "est", "wle_est")]
             sim_dat_rep[,"eta"] <- sim_dat_rep[,"wle_est"] - sim_dat_rep[,"est"]
-            sim_dat_rep[,"value_sim"] <- item.logit ( z = sim_dat_rep[,"eta"], slope = 1, thr = 0)$x
+            sim_dat_rep <- sim_dat_rep %>%
+              mutate(p = calc_2pl(a = 1, theta = wle_est, b = est)) %>%
+              mutate(value_sim = rbinom(nrow(.), size = 1, prob = p))
             sim_dat_rep[,"item_viewed"] <- 1
             sim_wide <- tidyr::pivot_wider(sim_dat_rep, id_cols ="idstud",  names_from = "item", values_from = "value_sim") |> as.data.frame()
-            sim_wide[,"PersonScore"] <- rowSums(sim_wide[,-1], na.rm=TRUE)
+            sim_wide[,"PersonScores"] <- rowSums(sim_wide[,-1], na.rm=TRUE)
             viewed <- tidyr::pivot_wider(sim_dat_rep, id_cols ="idstud",  names_from = "item", values_from = "item_viewed") |> as.data.frame()
             sim_wide[,"PersonMax"]   <- rowSums(viewed[,-1], na.rm=TRUE)
             return(sim_wide[,c("idstud", "PersonScores", "PersonMax")])})
-            
+
+#saveRDS(sim_data, here::here("raw_data", "sim_dat_1pl_ppmc.rds"))
 # absolute summenwerte empirisch
 sumscores <- tam.wle(run)
 sumscores[,"relative"] <- sumscores[,"PersonScores"] / sumscores[,"PersonMax"]
@@ -254,7 +257,7 @@ merged[,"max"] <- apply(merged[,grep("^Freq", colnames(merged))], 1, FUN = max)
 comb <- rbind(data.frame ( group = "empirical", empScores),
         data.frame ( group = "sim.min", score = merged[,"score"], Freq = merged[,"min"]),
         data.frame ( group = "sim.max", score = merged[,"score"], Freq = merged[,"max"]))
-        
+
 # schritt 2
 comb |> ggplot(aes(x=score, y=Freq)) + geom_line(aes(colour = factor(group)))
 
