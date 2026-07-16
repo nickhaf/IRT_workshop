@@ -1,0 +1,22 @@
+---
+title: "Mixed IRT"
+subtitle: "Folien"
+format: html
+image: ../../exercises/images/mix.jpg
+number-sections: false
+---
+
+{{< pdf file="mixed_IRT.pdf" >}}
+
+[Folien herunterladen (PDF)](mixed_IRT.pdf)
+
+**Inhalte**
+
+- Gemeinsame Modellierung von Items mit unterschiedlichen Messmodellen (1PL, 2PL, Partial Credit Model, ...)
+- Umsetzung mit dem R-Paket `mirt`
+- Fallstricke bei der Parametrisierung, insbesondere beim Partial Credit Model
+
+:::{.callout-note}
+## Übung
+Die passende Übung zu diesem Foliensatz: [Mixed IRT](../../exercises/index_mixed.qmd)
+:::

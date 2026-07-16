@@ -8,4 +8,7 @@
 !theme.html
 /_site/
 
+# Von Quarto beim Rendern erzeugte Zwischenordner (Abbildungen etc.)
+*_files/
+
 **/*.quarto_ipynb

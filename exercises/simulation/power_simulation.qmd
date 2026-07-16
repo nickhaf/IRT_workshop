@@ -86,7 +86,7 @@ Wir simulieren in diesem ersten Schritt $\theta$-Werte für `n_sub` Personen. Sp
 :::{.callout-tip collapse="true"}
 
 ## Tipp
-Die Parameter müssen als [`Matrix`](https://nickhaf.github.io/IRT_workshop/slides/IntroR/introR.html#/datenstrukturen) dem Funktionsargument `params` an `simIrt()` übergeben werden. 
+Die Parameter müssen als [`Matrix`](https://nickhaf.github.io/IRT_workshop/slides/IntroR/slides.html#/datenstrukturen) dem Funktionsargument `params` an `simIrt()` übergeben werden. 
 
 :::
 

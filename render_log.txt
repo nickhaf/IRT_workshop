@@ -1,0 +1,584 @@
+[ 1/40] exercises\index.qmd
+[ 2/40] exercises\index_1pl.qmd
+[ 3/40] exercises\index_glmm.qmd
+[ 4/40] exercises\index_intro_r.qmd
+[ 5/40] exercises\index_laengs.qmd
+[ 6/40] exercises\index_linking.qmd
+[ 7/40] exercises\index_mixed.qmd
+[ 8/40] exercises\index_simulation.qmd
+[ 9/40] exercises\index_testdesign.qmd
+[10/40] exercises\index_xPL.qmd
+[11/40] exercises\intro_r\load_data_ex.qmd
+
+
+processing file: load_data_ex.qmd
+1/3                  
+2/3 [unnamed-chunk-1]
+3/3                  
+output file: load_data_ex.knit.md
+
+[12/40] exercises\intro_r\merging_ex.qmd
+
+
+processing file: merging_ex.qmd
+1/7                  
+2/7 [unnamed-chunk-1]
+3/7                  
+4/7 [unnamed-chunk-2]
+5/7                  
+6/7 [unnamed-chunk-3]
+7/7                  
+output file: merging_ex.knit.md
+
+[13/40] exercises\intro_r\missings_ex.qmd
+
+
+processing file: missings_ex.qmd
+1/11                  
+2/11 [unnamed-chunk-1]
+3/11                  
+4/11 [unnamed-chunk-2]
+5/11                  
+6/11 [unnamed-chunk-3]
+7/11                  
+8/11 [unnamed-chunk-4]
+9/11                  
+10/11 [unnamed-chunk-5]
+11/11                  
+output file: missings_ex.knit.md
+
+[14/40] exercises\intro_r\reshaping_ex.qmd
+
+
+processing file: reshaping_ex.qmd
+1/7                  
+2/7 [unnamed-chunk-1]
+3/7                  
+4/7 [unnamed-chunk-2]
+5/7                  
+6/7 [unnamed-chunk-3]
+7/7                  
+output file: reshaping_ex.knit.md
+
+[15/40] exercises\intro_r\subsetting_ex.qmd
+
+
+processing file: subsetting_ex.qmd
+1/15                     
+2/15 [unnamed-chunk-1]   
+3/15                     
+4/15 [correct_subsetting]
+5/15                     
+6/15 [unnamed-chunk-2]   
+7/15                     
+8/15 [unnamed-chunk-3]   
+9/15                     
+10/15 [unnamed-chunk-4]   
+11/15                     
+12/15 [unnamed-chunk-5]   
+13/15                     
+14/15 [unnamed-chunk-6]   
+15/15                     
+output file: subsetting_ex.knit.md
+
+[16/40] exercises\linking\data.qmd
+
+
+processing file: data.qmd
+1/13                  
+2/13 [unnamed-chunk-1]
+3/13                  
+4/13 [unnamed-chunk-2]
+5/13                  
+6/13 [unnamed-chunk-3]
+7/13                  
+8/13 [unnamed-chunk-4]
+9/13                  
+10/13 [unnamed-chunk-5]
+11/13                  
+12/13 [unnamed-chunk-6]
+13/13                  
+output file: data.knit.md
+
+[17/40] exercises\linking\dif.qmd
+
+
+processing file: dif.qmd
+1/15                  
+2/15 [unnamed-chunk-1]
+3/15                  
+4/15 [unnamed-chunk-2]
+5/15                  
+6/15 [unnamed-chunk-3]
+7/15                  
+8/15 [unnamed-chunk-4]
+9/15                  
+10/15 [unnamed-chunk-5]
+11/15                  
+12/15 [unnamed-chunk-6]
+13/15                  
+14/15 [unnamed-chunk-7]
+15/15                  
+output file: dif.knit.md
+
+[18/40] exercises\linking\linking.qmd
+
+
+processing file: linking.qmd
+1/23                   
+2/23 [unnamed-chunk-1] 
+3/23                   
+4/23 [unnamed-chunk-2] 
+5/23                   
+6/23 [unnamed-chunk-3] 
+7/23                   
+8/23 [unnamed-chunk-4] 
+9/23                   
+10/23 [unnamed-chunk-5] 
+11/23                   
+12/23 [unnamed-chunk-6] 
+13/23                   
+14/23 [unnamed-chunk-7] 
+15/23                   
+16/23 [unnamed-chunk-8] 
+17/23                   
+18/23 [unnamed-chunk-9] 
+19/23                   
+20/23 [unnamed-chunk-10]
+21/23                   
+22/23 [unnamed-chunk-11]
+23/23                   
+output file: linking.knit.md
+
+[19/40] exercises\simulation\loop.qmd
+
+
+processing file: loop.qmd
+1/35                   
+2/35 [unnamed-chunk-1] 
+3/35                   
+4/35 [unnamed-chunk-2] 
+5/35                   
+6/35 [unnamed-chunk-3] 
+7/35                   
+8/35 [unnamed-chunk-4] 
+9/35                   
+10/35 [unnamed-chunk-5] 
+11/35                   
+12/35 [unnamed-chunk-6] 
+13/35                   
+14/35 [unnamed-chunk-7] 
+15/35                   
+16/35 [unnamed-chunk-8] 
+17/35                   
+18/35 [unnamed-chunk-9] 
+19/35                   
+20/35 [unnamed-chunk-10]
+21/35                   
+22/35 [unnamed-chunk-11]
+23/35                   
+24/35 [unnamed-chunk-12]
+25/35                   
+26/35 [unnamed-chunk-13]
+27/35                   
+28/35 [unnamed-chunk-14]
+29/35                   
+30/35 [unnamed-chunk-15]
+31/35                   
+32/35 [unnamed-chunk-16]
+33/35                   
+34/35 [unnamed-chunk-17]
+35/35                   
+output file: loop.knit.md
+
+[20/40] exercises\simulation\power_simulation.qmd
+
+
+processing file: power_simulation.qmd
+1/17                  
+2/17 [unnamed-chunk-1]
+3/17                  
+4/17 [unnamed-chunk-2]
+5/17                  
+6/17 [unnamed-chunk-3]
+7/17                  
+8/17 [unnamed-chunk-4]
+9/17                  
+10/17 [unnamed-chunk-5]
+11/17                  
+12/17 [unnamed-chunk-6]
+13/17                  
+14/17 [unnamed-chunk-7]
+15/17                  
+16/17 [unnamed-chunk-8]
+17/17                  
+output file: power_simulation.knit.md
+
+[21/40] exercises\xPl\model_selection.qmd
+
+
+processing file: model_selection.qmd
+1/29                   
+2/29 [unnamed-chunk-1] 
+3/29                   
+4/29 [unnamed-chunk-2] 
+5/29                   
+6/29 [unnamed-chunk-3] 
+7/29                   
+8/29 [unnamed-chunk-4] 
+9/29                   
+10/29 [unnamed-chunk-5] 
+11/29                   
+12/29 [unnamed-chunk-6] 
+13/29                   
+14/29 [unnamed-chunk-7] 
+15/29                   
+16/29 [unnamed-chunk-8] 
+17/29                   
+18/29 [unnamed-chunk-9] 
+19/29                   
+20/29 [unnamed-chunk-10]
+21/29                   
+22/29 [unnamed-chunk-11]
+23/29                   
+24/29 [unnamed-chunk-12]
+25/29                   
+26/29 [unnamed-chunk-13]
+27/29                   
+28/29 [unnamed-chunk-14]
+29/29                   
+output file: model_selection.knit.md
+
+[22/40] exercises\xPl\pcm.qmd
+
+
+processing file: pcm.qmd
+1/11                  
+2/11 [unnamed-chunk-1]
+3/11                  
+4/11 [unnamed-chunk-2]
+5/11                  
+6/11 [unnamed-chunk-3]
+7/11                  
+8/11 [unnamed-chunk-4]
+9/11                  
+10/11 [unnamed-chunk-5]
+11/11                  
+output file: pcm.knit.md
+
+[23/40] exercises\xPl\simulation.qmd
+
+
+processing file: simulation.qmd
+1/35                   
+2/35 [unnamed-chunk-1] 
+3/35                   
+4/35 [unnamed-chunk-2] 
+5/35                   
+6/35 [unnamed-chunk-3] 
+7/35                   
+8/35 [unnamed-chunk-4] 
+9/35                   
+10/35 [unnamed-chunk-5] 
+11/35                   
+12/35 [unnamed-chunk-6] 
+13/35                   
+14/35 [unnamed-chunk-7] 
+15/35                   
+16/35 [unnamed-chunk-8] 
+17/35                   
+18/35 [unnamed-chunk-9] 
+19/35                   
+20/35 [unnamed-chunk-10]
+21/35                   
+22/35 [unnamed-chunk-11]
+23/35                   
+24/35 [unnamed-chunk-12]
+25/35                   
+26/35 [unnamed-chunk-13]
+27/35                   
+28/35 [unnamed-chunk-14]
+29/35                   
+30/35 [unnamed-chunk-15]
+31/35                   
+32/35 [unnamed-chunk-16]
+33/35                   
+34/35 [unnamed-chunk-17]
+35/35                   
+output file: simulation.knit.md
+
+[24/40] index.qmd
+[25/40] slides\GLM\index.qmd
+[26/40] slides\GLM\slides.qmd
+
+
+processing file: slides.qmd
+1/29                   
+2/29 [unnamed-chunk-1] 
+3/29                   
+4/29 [unnamed-chunk-2] 
+5/29                   
+6/29 [unnamed-chunk-3] 
+7/29                   
+8/29 [unnamed-chunk-4] 
+9/29                   
+10/29 [unnamed-chunk-5] 
+11/29                   
+12/29 [unnamed-chunk-6] 
+13/29                   
+14/29 [unnamed-chunk-7] 
+15/29                   
+16/29 [unnamed-chunk-8] 
+17/29                   
+18/29 [unnamed-chunk-9] 
+19/29                   
+20/29 [unnamed-chunk-10]
+21/29                   
+22/29 [unnamed-chunk-11]
+23/29                   
+24/29 [unnamed-chunk-12]
+25/29                   
+26/29 [unnamed-chunk-13]
+27/29                   
+28/29 [unnamed-chunk-14]
+29/29                   
+output file: slides.knit.md
+
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/reset.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/reveal.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/theme/quarto-872e0c7982925267043ae8f9873cb366.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/menu.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-support/footer.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/reveal.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/pdf-export/pdfexport.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/menu.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-support/support.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/notes/notes.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/search/search.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/zoom/zoom.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/math/math.js
+[27/40] slides\index.qmd
+[28/40] slides\IntroR\index.qmd
+[29/40] slides\IntroR\slides.qmd
+
+
+processing file: slides.qmd
+1/65                   
+2/65 [unnamed-chunk-1] 
+3/65                   
+4/65 [unnamed-chunk-2] 
+5/65                   
+6/65 [unnamed-chunk-3] 
+7/65                   
+8/65 [unnamed-chunk-4] 
+9/65                   
+10/65 [unnamed-chunk-5] 
+11/65                   
+12/65 [unnamed-chunk-6] 
+13/65                   
+14/65 [unnamed-chunk-7] 
+15/65                   
+16/65 [unnamed-chunk-8] 
+17/65                   
+18/65 [unnamed-chunk-9] 
+19/65                   
+20/65 [unnamed-chunk-10]
+21/65                   
+22/65 [unnamed-chunk-11]
+23/65                   
+24/65 [unnamed-chunk-12]
+25/65                   
+26/65 [unnamed-chunk-13]
+27/65                   
+28/65 [unnamed-chunk-14]
+29/65                   
+30/65 [unnamed-chunk-15]
+31/65                   
+32/65 [unnamed-chunk-16]
+33/65                   
+34/65 [unnamed-chunk-17]
+35/65                   
+36/65 [unnamed-chunk-18]
+37/65                   
+38/65 [unnamed-chunk-19]
+39/65                   
+40/65 [unnamed-chunk-20]
+41/65                   
+42/65 [unnamed-chunk-21]
+43/65                   
+44/65 [unnamed-chunk-22]
+45/65                   
+46/65 [unnamed-chunk-23]
+47/65                   
+48/65 [unnamed-chunk-24]
+49/65                   
+50/65 [unnamed-chunk-25]
+51/65                   
+52/65 [unnamed-chunk-26]
+53/65                   
+54/65 [unnamed-chunk-27]
+55/65                   
+56/65 [unnamed-chunk-28]
+57/65                   
+58/65 [unnamed-chunk-29]
+59/65                   
+60/65 [unnamed-chunk-30]
+61/65                   
+62/65 [unnamed-chunk-31]
+63/65                   
+64/65 [unnamed-chunk-32]
+65/65                   
+output file: slides.knit.md
+
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/reset.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/reveal.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/theme/quarto-872e0c7982925267043ae8f9873cb366.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/menu.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-support/footer.css
+[WARNING] Could not fetch resource images/empty_coffee.jpg
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/reveal.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/pdf-export/pdfexport.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/menu.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-support/support.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/notes/notes.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/search/search.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/zoom/zoom.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/math/math.js
+[30/40] slides\IRT_Theorie\index.qmd
+[31/40] slides\Laengsschnitt\index.qmd
+[32/40] slides\Linking\index.qmd
+[33/40] slides\Linking\slides.qmd
+
+
+processing file: slides.qmd
+1/17                           
+2/17 [unnamed-chunk-1]         
+3/17                           
+4/17 [unnamed-chunk-2]         
+5/17                           
+6/17 [unnamed-chunk-3]         
+7/17                           
+8/17 [unnamed-chunk-4]         
+9/17                           
+10/17 [define_itemparameters]   
+11/17                           
+12/17 [simulation_nonequivalent]
+13/17                           
+14/17 [unnamed-chunk-5]         
+15/17                           
+16/17 [unnamed-chunk-6]         
+17/17                           
+output file: slides.knit.md
+
+[34/40] slides\Mixed_IRT\index.qmd
+[35/40] slides\TAM\index.qmd
+[36/40] slides\Testdesigns\index.qmd
+[37/40] slides\Validity\index.qmd
+[38/40] slides\Validity\slides.qmd
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/theme\./fonts/source-sans-pro/source-sans-pro.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/menu.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-support/footer.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/reveal.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/pdf-export/pdfexport.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/menu.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-support/support.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/notes/notes.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/search/search.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/zoom/zoom.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/math/math.js
+[39/40] slides\xPL\index.qmd
+[40/40] slides\xPL\slides.qmd
+
+
+processing file: slides.qmd
+1/47                   
+2/47 [unnamed-chunk-1] 
+3/47                   
+4/47 [unnamed-chunk-2] 
+5/47                   
+6/47 [unnamed-chunk-3] 
+7/47                   
+8/47 [unnamed-chunk-4] 
+9/47                   
+10/47 [unnamed-chunk-5] 
+11/47                   
+12/47 [unnamed-chunk-6] 
+13/47                   
+14/47 [unnamed-chunk-7] 
+15/47                   
+16/47 [unnamed-chunk-8] 
+17/47                   
+18/47 [unnamed-chunk-9] 
+19/47                   
+20/47 [unnamed-chunk-10]
+21/47                   
+22/47 [unnamed-chunk-11]
+23/47                   
+24/47 [unnamed-chunk-12]
+25/47                   
+26/47 [unnamed-chunk-13]
+27/47                   
+28/47 [unnamed-chunk-14]
+29/47                   
+30/47 [unnamed-chunk-15]
+31/47                   
+32/47 [unnamed-chunk-16]
+33/47                   
+34/47 [unnamed-chunk-17]
+35/47                   
+36/47 [unnamed-chunk-18]
+37/47                   
+38/47 [unnamed-chunk-19]
+39/47                   
+40/47 [unnamed-chunk-20]
+41/47                   
+42/47 [unnamed-chunk-21]
+43/47                   
+44/47 [unnamed-chunk-22]
+45/47                   
+46/47 [unnamed-chunk-23]
+47/47                   
+output file: slides.knit.md
+
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/theme\./fonts/source-sans-pro/source-sans-pro.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/menu.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-support/footer.css
+[WARNING] Could not fetch resource ../../site_libs/quarto-ojs/quarto-ojs.css
+[WARNING] Could not fetch resource ../../site_libs/revealjs/dist/reveal.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/pdf-export/pdfexport.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/menu.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/quarto-support/support.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/notes/notes.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/search/search.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/zoom/zoom.js
+[WARNING] Could not fetch resource ../../site_libs/revealjs/plugin/math/math.js
+
+ERROR: NotFound: Das System kann die angegebene Datei nicht finden. (os error 2): rename 'C:\Users\Arbeit\Documents\GitHub\IRT_workshop\exercises\simulation\power_simulation.html' -> 'C:\Users\Arbeit\Documents\GitHub\IRT_workshop\_site\exercises\simulation\power_simulation.html'
+
+Stack trace:
+    at Object.renameSync (ext:deno_fs/30_fs.js:264:3)
+    at safeMoveSync (file:///C:/Users/Arbeit/AppData/Local/Programs/Quarto/bin/quarto.js:2515:10)
+    at renderProject (file:///C:/Users/Arbeit/AppData/Local/Programs/Quarto/bin/quarto.js:124279:9)
+    at eventLoopTick (ext:core/01_core.js:178:7)
+    at async _Command.actionHandler (file:///C:/Users/Arbeit/AppData/Local/Programs/Quarto/bin/quarto.js:129745:24)
+    at async _Command.execute (file:///C:/Users/Arbeit/AppData/Local/Programs/Quarto/bin/quarto.js:9840:7)
+    at async _Command.parseCommand (file:///C:/Users/Arbeit/AppData/Local/Programs/Quarto/bin/quarto.js:9717:14)
+    at async quarto (file:///C:/Users/Arbeit/AppData/Local/Programs/Quarto/bin/quarto.js:175538:5)
+    at async file:///C:/Users/Arbeit/AppData/Local/Programs/Quarto/bin/quarto.js:175566:5
+    at async file:///C:/Users/Arbeit/AppData/Local/Programs/Quarto/bin/quarto.js:175421:14

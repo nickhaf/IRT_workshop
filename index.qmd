@@ -6,10 +6,68 @@ about:
   template: jolla
   image: images/yellow.jpg
 number-sections: false
+listing:
+  - id: tag1
+    type: grid
+    sort: false
+    contents:
+      - path: slides/IRT_Theorie/index.qmd
+        title: "Modellierung latenter Variablen"
+        image: images/green.jpg
+        description: "10:00 – 11:30"
+      - path: slides/IntroR/index.qmd
+        title: "Einführung in R"
+        image: slides/IntroR/images/r_desktop.jpg
+        description: "11:30 – 13:00"
+      - path: slides/TAM/index.qmd
+        title: "IRT-Modelle in TAM"
+        image: exercises/images/sapling.jpg
+        description: "14:00 – 15:30"
+      - path: slides/GLM/index.qmd
+        title: "Raschmodell und GLMM"
+        image: slides/GLM/images/dark_storm.jpg
+        description: "15:00 – 16:00"
+      - path: slides/Validity/index.qmd
+        title: "Reliabilität und Validität"
+        image: slides/Validity/images/measurement.jpg
+        description: "16:00 – 17:00"
+  - id: tag2
+    type: grid
+    sort: false
+    contents:
+      - path: slides/Linking/index.qmd
+        title: "Linking und DIF"
+        image: slides/Linking/images/dark_flower.jpg
+        description: "09:00 – 10:30"
+      - path: slides/Testdesigns/index.qmd
+        title: "Bedeutung von Testdesigns"
+        image: exercises/images/testdesign.jpg
+        description: "10:30 – 12:00"
+      - path: slides/xPL/index.qmd
+        title: "Höher parametrisierte Modelle"
+        image: slides/xPL/images/green_waves.jpg
+        description: "13:00 – 14:30"
+      - path: slides/Laengsschnitt/index.qmd
+        title: "Längsschnittliche Designs"
+        image: exercises/images/road.jpg
+        description: "14:30 – 16:00"
+  - id: tag3
+    type: grid
+    sort: false
+    contents:
+      - path: exercises/index_simulation.qmd
+        title: "Simulationen zur Studienplanung"
+        image: slides/xPL/images/simulation.jpg
+        description: "10:30 – 12:00"
+      - path: exercises/index.qmd
+        title: "Auswertung von eigenen Daten & Übungszeit"
+        image: exercises/exercise.jpg
+        description: "13:00 – 16:00"
+      - path: slides/Mixed_IRT/index.qmd
+        title: "Mixed IRT"
+        image: exercises/images/mix.jpg
+        description: "Optional"
 ---
-```{r setup, include=FALSE}
-library(rmarkdown)
-```
 
 :::{#irt-heading}
 # Dozenten
@@ -19,46 +77,29 @@ library(rmarkdown)
 
 # Seminarinhalt
 
-Der Workshop vermittelt theoretische und praktische Einblicke in die Modellierung dichotomer und polytomer Testdaten mit Hilfe von Modellen aus der Item Response Theory (IRT). Die IRT ist geeignet, latente Konstrukte zu messen und zu modellieren, die über manifeste Indikatoren operationalisiert werden. Ein Beispiel sind etwa Schulleistungen im Fach Mathematik, die über Mathematikaufgaben operationalisiert werden und am Ende Vergleiche zwischen Personengruppen bezüglich ihrer mathematischen Kompetenz erlauben. 
+Der Workshop vermittelt theoretische und praktische Einblicke in die Modellierung dichotomer und polytomer Testdaten mit Hilfe von Modellen aus der Item Response Theory (IRT). Die IRT ist geeignet, latente Konstrukte zu messen und zu modellieren, die über manifeste Indikatoren operationalisiert werden. Ein Beispiel sind etwa Schulleistungen im Fach Mathematik, die über Mathematikaufgaben operationalisiert werden und am Ende Vergleiche zwischen Personengruppen bezüglich ihrer mathematischen Kompetenz erlauben.
 :::
 
 # Zeitplan
-## Grundkonzepte
 
-| Zeit          | Thema                                               | Beschreibung                                                                                                                                |
-|---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| 10:00 – 11:30 | **Einführung in die Modellierung latenter Variablen** | Theoretische Einführung in die Modellierung latenter Variablen in Klassischer Testtheorie und Item Response Theory (IRT).                   |
-| 11:30 – 13:00 | **Einführung in R**                       | Einführung in die R-Programmierumgebung. Datenaufbereitung für IRT-Analysen.                                                                |
-| 14:00 – 15:30 | **IRT-Modelle in TAM**                    | Übung: Einfacher IRT-Modelle in TAM. Vergleich verschiedener Pakete.                                                                        |
-| 15:00 – 16:00 | **Raschmodell und GLMM**                  | Theoretische Einführung und praktische Illustration: Das Raschmodell als eine Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM).|
-| 16:00 – 17:00 | **Reliabilität und Validität**            | Theoretische Einführung in Reliabilität und Validität.                                                                                       |
+## Tag 1: Grundkonzepte
 
-: Tag 1 {.striped tbl-colwidths="[25, 30, 45]"}
+:::{#tag1}
+:::
 
-## Praktische Anwendung
+## Tag 2: Praktische Anwendung
 
-| Zeit          | Thema                                               | Beschreibung                                                                                                                                |
-|---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| 09:00 – 10:30 | **Linking und Differential Item Functioning**  | Verlinkte Items, lokale stochastische Unabhängigkeit, Differential Item Functioning (DIF).                                                  |
-| 10:30 – 12:00 | **Bedeutung von Testdesigns**              | Die Bedeutung von Testdesigns. Was kann schiefgehen, wenn Testdesigns ungeeignet sind?                                                     |
-| 13:00 – 14:30 | **Höher parametrisierte Modelle**          | Höher parametrisierte Modelle: 2PL, 3PL, Partial Credit.                                                                                   |
-| 14:30 – 16:00 | **Längsschnittliche Designs**              | Längsschnittliche Designs: Wiederholte Messungen für Individuen, Kohorten oder Populationen.                                          |
+:::{#tag2}
+:::
 
-: Tag 2 {.striped tbl-colwidths="[25, 30, 45]"}
+## Tag 3: Fragen, Übungen ...
 
-## Fragen, Übungen ...
+Der Vormittag von Tag 3 (09:00 – 10:30) ist etwas freier gestaltet und offen gehalten für Fragen, Wiederholung und interessierende Themen. Am Nachmittag können bei Bedarf Ideen für die Auswertung von Daten der Teilnehmenden gesammelt und ausprobiert werden — ansonsten ist hier Zeit, um Übungen zu beenden und Themen weiter zu vertiefen.
 
-| Zeit          | Thema                                               | Beschreibung                                                                                                                                |
-|---------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| 09:00 – 10:30 | **Fragen, Puffer**                        | Etwas freiere Gestaltung, offen gehalten für Fragen, Wiederholung, Interessierende Themen.                                                 |
-| 10:30 – 12:00 | **Simulationen für Studienplanung und Modellevaluation**      | Simulation als Werkzeug zur Planung der Stichprobengröße, und zur Modellbeurteilung.                                                                                                 |
-| 13:00 – 16:00 | **Auswertung von eigenen Daten**          | Bei Bedarf können hier Ideen für die Auswertung von Daten der Teilnehmenden gesammelt und ausprobiert werden.   
-Ansonsten ist hier Zeit um Übungen zu beenden, Themen weiter zu vertiefen etc. |
-
-: Tag 3 {.striped tbl-colwidths="[25, 30, 45]"}
-
+:::{#tag3}
+:::
 
 ::: aside
 Foto von <a href="https://unsplash.com/de/@romangphotography?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Roman gomez</a> auf <a href="https://unsplash.com/de/fotos/gelbe-holztur-tagsuber-geschlossen-L63O5G11LqM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-  
+
 :::
