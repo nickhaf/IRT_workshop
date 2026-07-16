@@ -1,42 +1,80 @@
 ---
 title: "Folien"
-format: 
+format:
   html:
     number-sections: false
+listing:
+  - id: tag1
+    type: grid
+    sort: false
+    contents:
+      - path: IRT_Theorie/index.qmd
+        title: "Modellierung latenter Variablen"
+        image: ../images/green.jpg
+        description: "Tag 1 · 10:00 – 11:30"
+      - path: IntroR/index.qmd
+        title: "Einführung in R"
+        image: IntroR/images/r_desktop.jpg
+        description: "Tag 1 · 11:30 – 13:00"
+      - path: TAM/index.qmd
+        title: "IRT-Modelle in TAM"
+        image: ../exercises/images/sapling.jpg
+        description: "Tag 1 · 14:00 – 15:30"
+      - path: GLM/index.qmd
+        title: "Raschmodell und GLMM"
+        image: GLM/images/dark_storm.jpg
+        description: "Tag 1 · 15:00 – 16:00"
+      - path: Validity/index.qmd
+        title: "Reliabilität und Validität"
+        image: Validity/images/measurement.jpg
+        description: "Tag 1 · 16:00 – 17:00"
+  - id: tag2
+    type: grid
+    sort: false
+    contents:
+      - path: Linking/index.qmd
+        title: "Linking und DIF"
+        image: Linking/images/dark_flower.jpg
+        description: "Tag 2 · 09:00 – 10:30"
+      - path: Testdesigns/index.qmd
+        title: "Bedeutung von Testdesigns"
+        image: ../exercises/images/testdesign.jpg
+        description: "Tag 2 · 10:30 – 12:00"
+      - path: xPL/index.qmd
+        title: "Höher parametrisierte Modelle"
+        image: xPL/images/green_waves.jpg
+        description: "Tag 2 · 13:00 – 14:30"
+      - path: Laengsschnitt/index.qmd
+        title: "Längsschnittliche Designs"
+        image: ../exercises/images/road.jpg
+        description: "Tag 2 · 14:30 – 16:00"
+  - id: tag3
+    type: grid
+    sort: false
+    contents:
+      - path: Mixed_IRT/index.qmd
+        title: "Mixed IRT"
+        image: ../exercises/images/mix.jpg
+        description: "Tag 3"
+      - path: ../exercises/index_simulation.qmd
+        title: "Simulationen zur Studienplanung"
+        image: xPL/images/simulation.jpg
+        description: "Tag 3 · 10:30 – 12:00"
 ---
 
+Hier finden sich alle Foliensätze des Workshops. Jede Seite enthält eine kurze Zusammenfassung der Inhalte, die eingebetteten Folien und — falls vorhanden — den Link zur passenden [Übung](../exercises/index.qmd).
+
 # Tag 1
-## Einführung Item Response Theorie
-{{< pdf file="./Tag1_1Vormittag_Nr1_IRT_Theorie/01_IRT_Theorie.pdf" >}}
 
-## Einführung in R
-{{< revealjs "./IntroR/introR.html" >}}
-
-## IRT Modelle in `TAM`
-{{< pdf file="./Tag1_2Nachmittag_Nr1_Uebungen/02_Uebung_einfache_IRT-Modelle_in_R.pdf" >}}
-
-## Raschmodell und Generalized Linear Mixed Models (GLMM)
-{{< revealjs "./GLM/glm.html" >}}
-
-{{< pdf file="./Tag1_2Nachmittag_Nr2_Raschmodell_als_GLMM/03_Raschmodell_als_GLMM.pdf" >}}
-
-## Reliabilität und Validität
-{{< revealjs "./Validity/validity.html" >}}
+:::{#tag1}
+:::
 
 # Tag 2
-## Linking und Differential Item Functioning
-{{< revealjs "./Linking/linking.html" >}}
 
-## Bedeutung von Testdesigns
-{{< pdf file="./Tag2_1Vormittag_Nr2_Testdesigns/Testdesigns.pdf" >}}
-
-## Höher Parametrisierte Modelle
-{{< revealjs "./xPL/index.html" >}}
-
-## Längsschnittliche Designs
-{{< pdf file="./Tag2_2Nachmittag_Nr2_Laengsschnitt/Langsschnitt.pdf" >}}
+:::{#tag2}
+:::
 
 # Tag 3
-{{< pdf file="./Tag3_1Vormittag_mixed_IRT/mixed_IRT.pdf" >}}
 
-Ansonsten, siehe [Übungen](https://nickhaf.github.io/IRT_workshop/exercises/). 
+:::{#tag3}
+:::

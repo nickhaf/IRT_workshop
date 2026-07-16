@@ -1,0 +1,20 @@
+---
+title: "Einführung: Modellierung latenter Variablen"
+subtitle: "Folien"
+format: html
+image: ../../images/green.jpg
+number-sections: false
+---
+
+{{< pdf file="01_IRT_Theorie.pdf" >}}
+
+[Folien herunterladen (PDF)](01_IRT_Theorie.pdf)
+
+**Inhalte**
+
+- Messinstrumente und Messmodelle in der Kompetenzdiagnostik: Warum braucht man ein Messmodell?
+- Manifeste vs. latente Merkmale
+- Klassische Testtheorie (KTT) und probabilistische Testtheorie (IRT) im Vergleich
+- Warum wird in der Kompetenzdiagnostik vorwiegend auf IRT-Modelle zurückgegriffen?
+- Überblick über verschiedene IRT-Modelle: Raschmodell (1PL), 2PL-/3PL-Modelle, (Generalized) Partial Credit Model, LLTM, Multifacettenmodell
+- Literaturempfehlungen zur Item Response Theory

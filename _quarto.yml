@@ -8,9 +8,43 @@ website:
     background: primary
     search: true
     left:
+      - text: "Tag 1"
+        icon: 1-circle-fill
+        menu:
+          - text: "Modellierung latenter Variablen"
+            href: slides/IRT_Theorie/index.qmd
+          - text: "Einführung in R"
+            href: slides/IntroR/index.qmd
+          - text: "IRT-Modelle in TAM"
+            href: slides/TAM/index.qmd
+          - text: "Raschmodell und GLMM"
+            href: slides/GLM/index.qmd
+          - text: "Reliabilität und Validität"
+            href: slides/Validity/index.qmd
+      - text: "Tag 2"
+        icon: 2-circle-fill
+        menu:
+          - text: "Linking und DIF"
+            href: slides/Linking/index.qmd
+          - text: "Bedeutung von Testdesigns"
+            href: slides/Testdesigns/index.qmd
+          - text: "Höher parametrisierte Modelle"
+            href: slides/xPL/index.qmd
+          - text: "Längsschnittliche Designs"
+            href: slides/Laengsschnitt/index.qmd
+      - text: "Tag 3"
+        icon: 3-circle-fill
+        menu:
+          - text: "Simulationen zur Studienplanung"
+            href: exercises/index_simulation.qmd
+          - text: "Mixed IRT"
+            href: slides/Mixed_IRT/index.qmd
+    right:
       - text: "Folien"
+        icon: easel-fill
         href: slides/index.qmd
       - text: "Übungen"
+        icon: pencil-fill
         href: exercises/index.qmd
   sidebar:
     - title: "Übungen"
@@ -54,6 +88,8 @@ website:
             contents:
               - ./exercises/simulation/power_simulation.qmd
               - ./exercises/simulation/loop.qmd
+          - text: "Mixed IRT"
+            href: ./exercises/index_mixed.qmd
 
 format:
   html:
@@ -61,7 +97,6 @@ format:
     toc: true
     highlight-style: dark.theme
     number-sections: true
-
 
   letterbox-revealjs:
     embed-resources: true
@@ -75,3 +110,4 @@ execute:
 callout-appearance: simple
 lang: de
 csl: apa7.csl
+embed-resources: true

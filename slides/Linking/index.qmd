@@ -1,0 +1,24 @@
+---
+title: "Linking und Differential Item Functioning"
+subtitle: "Folien"
+format: html
+image: images/dark_flower.jpg
+number-sections: false
+---
+
+{{< revealjs "slides.html" >}}
+
+[Folien im Vollbild öffnen](slides.html)
+
+**Inhalte**
+
+- Wiederholung: Voraussetzungen für IRT-Modelle
+- Differential Item Functioning (DIF): uniformer und non-uniformer DIF
+- Wie gehen wir mit DIF um?
+- Verlinkte Items und getrennte Kalibrierung mehrerer Gruppen
+- Illustration in R: zwei Gruppen getrennt kalibrieren und verlinken
+
+:::{.callout-note}
+## Übung
+Die passenden Übungen zu diesem Foliensatz: [Linking und Differential Item Functioning](../../exercises/index_linking.qmd)
+:::

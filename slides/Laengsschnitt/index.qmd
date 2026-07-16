@@ -1,0 +1,23 @@
+---
+title: "Längsschnittliche Designs"
+subtitle: "Folien"
+format: html
+image: ../../exercises/images/road.jpg
+number-sections: false
+---
+
+{{< pdf file="Langsschnitt.pdf" >}}
+
+[Folien herunterladen (PDF)](Langsschnitt.pdf)
+
+**Inhalte**
+
+- Längsschnittliche Analysen als GLMM: Zeit als Within- oder Between-Person-Faktor
+- Item Parameter Drift (IPD) als „DIF zwischen Messzeitpunkten"
+- Plausible Values: Ziehen aus der Posterior-Verteilung, Analysen poolen
+- Vor- und Nachteile von Plausible Values im Vergleich zu GLMMs
+
+:::{.callout-note}
+## Übung
+Die passende Übung zu diesem Foliensatz: [Längsschnitt](../../exercises/index_laengs.qmd)
+:::

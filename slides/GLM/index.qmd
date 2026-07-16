@@ -1,0 +1,33 @@
+---
+title: "Raschmodell und GLMM"
+subtitle: "Folien"
+format: html
+image: images/dark_storm.jpg
+number-sections: false
+---
+
+## Allgemeines Lineares Gemischtes Modell
+
+{{< revealjs "slides.html" >}}
+
+[Folien im Vollbild öffnen](slides.html)
+
+## Das Raschmodell als Spezialfall des GLMM
+
+{{< pdf file="03_Raschmodell_als_GLMM.pdf" >}}
+
+[Folien herunterladen (PDF)](03_Raschmodell_als_GLMM.pdf)
+
+**Inhalte**
+
+- Generalisiertes Lineares Modell und logistische Regression
+- Die Logit-Funktion und ihr Bezug zur IRT
+- Umgang mit gruppierten Daten: ignorieren, aggregieren, disaggregieren oder Multilevel-Modell
+- Level-1- und Level-2-Gleichungen, das gemischte Modell
+- Das Raschmodell als GLMM mit fixierten Item- und zufälligen Personeneffekten
+- Umsetzung in R mit `lme4`
+
+:::{.callout-note}
+## Übung
+Die passende Übung zu diesem Foliensatz: [Raschmodell als GLMM](../../exercises/index_glmm.qmd)
+:::

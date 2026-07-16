@@ -1,0 +1,24 @@
+---
+title: "Bedeutung von Testdesigns"
+subtitle: "Folien"
+format: html
+image: ../../exercises/images/testdesign.jpg
+number-sections: false
+---
+
+{{< pdf file="Testdesigns.pdf" >}}
+
+[Folien herunterladen (PDF)](Testdesigns.pdf)
+
+**Inhalte**
+
+- Wann sind Testdesigns notwendig? Item Sampling in Large-Scale Assessments
+- Was können „schlechte" Testdesigns anrichten — und was zeichnet „gute" aus?
+- Blockdesigns: Items, Blöcke und Testhefte als Designfaktoren
+- Spiralförmige und balancierte Designs
+- Vorlage für eigene Designentwürfe: [Designentwurf.xls](Designentwurf.xls)
+
+:::{.callout-note}
+## Übung
+Die passende Übung zu diesem Foliensatz: [Testdesigns](../../exercises/index_testdesign.qmd)
+:::

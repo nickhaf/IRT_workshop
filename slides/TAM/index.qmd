@@ -1,0 +1,22 @@
+---
+title: "IRT-Modelle in TAM"
+subtitle: "Folien"
+format: html
+image: ../../exercises/images/sapling.jpg
+number-sections: false
+---
+
+{{< pdf file="02_Uebung_einfache_IRT-Modelle_in_R.pdf" >}}
+
+[Folien herunterladen (PDF)](02_Uebung_einfache_IRT-Modelle_in_R.pdf)
+
+**Inhalte**
+
+- Überblick über R-Pakete zur IRT-Modellierung: `TAM`, `lme4`, `mirt` und `eatModel`
+- Vor- und Nachteile der verschiedenen Pakete
+- Fitten erster einfacher IRT-Modelle in R
+
+:::{.callout-note}
+## Übung
+Die passende Übung zu diesem Foliensatz: [Einfache IRT Modelle](../../exercises/index_1pl.qmd)
+:::

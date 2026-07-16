@@ -1,0 +1,19 @@
+---
+title: "Reliabilität und Validität"
+subtitle: "Folien"
+format: html
+image: images/measurement.jpg
+number-sections: false
+---
+
+{{< revealjs "slides.html" >}}
+
+[Folien im Vollbild öffnen](slides.html)
+
+**Inhalte**
+
+- Was bedeutet Validität?
+- Kriteriumsvalidität
+- Konstruktvalidität
+- Der Multitrait-Multimethod-Ansatz (MTMM)
+- Validität im IRT-Kontext

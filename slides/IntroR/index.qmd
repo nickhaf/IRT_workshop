@@ -1,0 +1,25 @@
+---
+title: "Einführung in R"
+subtitle: "Folien"
+format: html
+image: images/r_desktop.jpg
+number-sections: false
+---
+
+{{< revealjs "slides.html" >}}
+
+[Folien im Vollbild öffnen](slides.html)
+
+**Inhalte**
+
+- Die RStudio-Oberfläche: Script Pane, Console, Workspace, Plots & Hilfe
+- Hilfe in R finden
+- Grundlegende Operationen und Datenstrukturen
+- RStudio-Projekte und Skripte
+- Pakete installieren und laden, das `tidyverse` und der Pipe-Operator
+- Einlesen von Daten, Exkurs zum `here`-Paket
+
+:::{.callout-note}
+## Übung
+Die passenden Übungen zu diesem Foliensatz: [Einführung in R](../../exercises/index_intro_r.qmd)
+:::
