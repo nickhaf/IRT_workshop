@@ -7,3 +7,5 @@
 *.html
 !theme.html
 /_site/
+
+**/*.quarto_ipynb
