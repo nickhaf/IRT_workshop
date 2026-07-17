@@ -6,7 +6,9 @@ image: ../../images/green.jpg
 number-sections: false
 ---
 
-{{< pdf file="01_IRT_Theorie.pdf" >}}
+{{< revealjs "slides.html" >}}
+
+[Folien im Vollbild öffnen](slides.html)
 
 [Folien herunterladen (PDF)](01_IRT_Theorie.pdf)
 
