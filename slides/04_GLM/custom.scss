@@ -1,0 +1,45 @@
+/*-- scss:defaults --*/
+
+// Farbcodierung der drei Raschmodell-Komponenten (Originalfarben aus
+// 03_Raschmodell_als_GLMM.pptx): Die Komponente auf der Formelfolie und der
+// zugehörige Teil des glmer()-Aufrufs sind jeweils gleich hinterlegt.
+$komp-modellgleichung: #ffff00;
+$komp-transformation: #f3dbab;
+$komp-random: #ccccff;
+
+/*-- scss:rules --*/
+
+.komp-modellgleichung,
+.komp-transformation,
+.komp-random {
+  padding: 0.05em 0.2em;
+  border-radius: 3px;
+  color: $theme-darkblue;
+}
+
+.komp-modellgleichung {
+  background-color: $komp-modellgleichung;
+}
+
+.komp-transformation {
+  background-color: $komp-transformation;
+}
+
+.komp-random {
+  background-color: $komp-random;
+}
+
+// Innerhalb des Codeblocks sollen die Syntax-Highlighting-Farben nicht mit dem
+// hinterlegten Bereich kollidieren.
+.reveal pre code {
+  .komp-modellgleichung,
+  .komp-transformation,
+  .komp-random {
+    padding: 0.1em 0;
+    color: $theme-darkblue;
+
+    span {
+      color: $theme-darkblue;
+    }
+  }
+}

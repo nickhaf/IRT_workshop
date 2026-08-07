@@ -1,0 +1,178 @@
+---
+title: "Das Raschmodell als Spezialfall des Allgemeinen Linearen Gemischten Modells (GLMM)"
+format:
+  letterbox-revealjs:
+    theme: [../../styles.scss, custom.scss]
+title-slide-attributes:
+  data-background-image: ./images/equations2.jpg
+  data-background-size: cover
+bibliography: references.bib
+author: "Sebastian Weirich und Nicklas Hafiz"
+---
+
+# Einleitung
+
+## Warum überhaupt ein weiteres Modell?
+
+- Bis jetzt: Raschmodell als [reines Messmodell]{.highlight}
+  - Keine Zusammenhangsanalysen
+
+## Generalized Linear Mixed Models
+
+- Framework zur Modellierung (log-)linearer Modelle
+- fixierte oder zufällige Effekte
+  - [Fixiert]{.highlight}: “Levels” der Variablen sind theoretisch begrenzt (z.B. Geschlecht)
+  - [Zufällig]{.highlight}: “Levels” der Variablen sind theoretisch unbegrenzt oder sehr groß, z.B. individuelle Personen und Itemeffekte
+
+## Das Raschmodell im GLMM-Framework
+
+- Das Raschmodell kann als ein GLMM mit [fixierten Item-]{.highlight} und [zufälligen Personeneffekten]{.highlight} verstanden werden
+- Im GLMM können theoretisch noch mehr Ebenen als nur Personen und Items betrachtet werden (→ große Flexibilität), z.B. Messzeitpunkte (genestet in Personen)
+- Im GLMM können auch Interaktionen von Effekten verschiedener Ebenen modelliert werden
+
+# GLMM vs. Raschmodell
+
+## Parametrisierung
+
+Im Raschmodell werden [Itemschwierigkeiten]{.highlight} modelliert (“Minus”-Parametrisierung):
+
+$$
+\operatorname{logit}(P(X_{ni} = 1)) = \theta_n - \beta_i
+$$
+
+## Parametrisierung
+
+Im GLMM [“Itemleichtigkeiten”]{.highlight}, also additive lineare Effekte:
+
+$$
+Y_{pi} = \sum_{k=0}^{K} \beta_k \cdot X_{ik} + \sum_{j=0}^{J} \theta_{pj} \cdot Z_{ij} + \varepsilon_{pi}
+$$
+
+::: aside
+Siehe @deboeck2004explanatory.
+:::
+
+## Notation {.smaller}
+
+- $X$: Prädiktor mit [fixiertem]{.highlight} Effekt
+- $Z$: Prädiktor mit [zufälligem]{.highlight} Effekt
+
+Raschmodell in GLMM-Notation:
+
+$$
+\begin{aligned}
+Y_{pi} &= \sum_{k=0}^{K} \beta_k \cdot X_{ik} + \sum_{j=0}^{J} \theta_{pj} \cdot Z_{ij} + \varepsilon_{pi} \\[0.3em]
+\text{mit} \quad \theta_{pj} &\sim N(0, \sigma_j^2)
+\end{aligned}
+$$
+
+- Letzteres dient der [Modellidentifizierung]{.highlight}
+
+## Random Effects im Modell
+
+```r
+random <- ranef(mod2)
+
+# Mittelwert des random effects entspricht naeherungsweise 0
+round(mean(random$person[, 1]), digits = 4)
+## [1] -4e-04
+
+# Standardabweichung des random effects entspricht naeherungsweise 1
+round(sd(random$person[, 1]), digits = 4)
+## [1] 1.1037
+```
+
+## Flexibilität
+
+- GLMMs sind gut geeignet, um eine Vielzahl von Modellen aus der Rasch-”Familie” (1pl) zu modellieren, z.B. Linear-logistische Testmodelle (LLTMs), Längsschnittmodelle, …
+- “Klassische” IRT-/Raschmodelle sind weniger flexibel
+
+## Die drei Komponenten des Raschmodells {.smaller}
+
+[Modellgleichung:]{.komp-modellgleichung}
+
+$$
+\eta_{ni} = \theta_n - \beta_i
+$$
+
+[Transformationsfunktion:]{.komp-transformation}
+
+$$
+\eta_{ni} = \ln\left(\frac{P(X_{ni} = 1)}{1 - P(X_{ni} = 1)}\right)
+$$
+
+[Random component:]{.komp-random}
+
+$$
+X_{ni} \sim \operatorname{binomial}(1, \pi_{ni})
+\qquad \text{mit} \qquad
+\pi_{ni} = P(X_{ni} = 1)
+$$
+
+## Raschmodell als GLMM in R
+
+```{=html}
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Raschmodell als GLMM</span>
+mod2 <span class="ot">&lt;-</span> <span class="komp-transformation"><span class="fu">glmer</span></span>(<span class="komp-modellgleichung">value <span class="ot">~</span> variable <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> person)</span>,
+              data <span class="ot">=</span> datLong,
+              family <span class="ot">=</span> <span class="komp-random"><span class="fu">binomial</span>(link <span class="ot">=</span> <span class="st">&quot;logit&quot;</span>)</span>)</code></pre></div>
+```
+
+::: aside
+Die Farben verweisen auf die [drei Komponenten](#die-drei-komponenten-des-raschmodells).
+:::
+
+:::{.callout-note}
+## Übung
+Das Übungsskript `Tag1_2Nachmittag_Nr2_Raschmodell_als_GLMM.r` gehört zu diesem Foliensatz: [Raschmodell als GLMM](../../exercises/index_glmm.qmd)
+:::
+
+## Raschmodell
+
+- Items als [fixierte]{.highlight} Effekte, Personen als [zufällige]{.highlight} Effekte
+- Prädiktoren i.d.R. nur auf Personenseite:
+
+$$
+\begin{aligned}
+\operatorname{logit}(P(X_{ni} = 1)) &= \theta_n - \beta_i \\[0.3em]
+\text{mit} \quad \theta_n &= \mathbf{Y}_n \boldsymbol{\beta} + \varepsilon_n \\[0.3em]
+\text{und} \quad \varepsilon_n &\sim N(0, \sigma^2)
+\end{aligned}
+$$
+
+## GLMM
+
+- Oft sinnvoll, auch Items als [zufällige]{.highlight} Effekte zu modellieren
+- Prädiktoren auf Item- und/oder Personenseite
+  - Prädiktoren müssen immer manifest sein
+  - UVs: manifest
+  - AVs: latent
+- Cross-level Interaktionen
+- Für Zusammenhangsanalysen im 1pl-Kontext geeignet
+
+# Gütekriterien
+
+## Raschmodell vs. GLMM
+
+- Empfehlung: [mehrschrittiges Vorgehen]{.highlight}
+  - Raschmodell, um die Eignung der Items für die intendierte Untersuchung zu prüfen
+  - GLMM für die Überprüfung der konkreten Forschungshypothesen
+
+## Eignung des Modells
+
+- [Reliabilität]{.highlight}: da IRT “itembasiert” ist, hängt Reliabilität (notwendig, aber nicht hinreichend) von Itemeigenschaften ab
+  - Passung (Fit)
+  - Lokale stochastische Unabhängigkeit
+  - Unidimensionalität
+- Wenn diese Bedingungen als gegeben gelten können, kann die Reliabilität als WLE- oder Konstrukt- (bzw. EAP/PV)-Reliabilität bestimmt werden
+
+## WLE, EAP und PV
+
+- [WLE]{.highlight}: Weighted Likelihood Estimate [@warm1989weighted]: individueller Personenparameter (= “Personenfähigkeit”)
+- [EAP]{.highlight}: expected a posteriori estimate. Erwartungswert der latenten intra-individuellen Personenfähigkeitsverteilung
+- [PV]{.highlight}: plausible values. Zufallsziehungen aus der EAP-Verteilung
+
+## Literatur
+
+::: {#refs}
+:::

@@ -14,7 +14,9 @@ number-sections: false
 
 ## Das Raschmodell als Spezialfall des GLMM
 
-{{< pdf file="03_Raschmodell_als_GLMM.pdf" >}}
+{{< revealjs "slides_raschmodell_glmm.html" >}}
+
+[Folien im Vollbild öffnen](slides_raschmodell_glmm.html)
 
 [Folien herunterladen (PDF)](03_Raschmodell_als_GLMM.pdf)
 
