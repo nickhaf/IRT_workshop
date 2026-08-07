@@ -8,43 +8,43 @@ listing:
     type: grid
     sort: false
     contents:
-      - path: IRT_Theorie/index.qmd
+      - path: 01_IRT_Theorie/index.qmd
         title: "Modellierung latenter Variablen"
         image: ../images/green.jpg
         description: "Tag 1 · 10:00 – 11:30"
-      - path: IntroR/index.qmd
+      - path: 02_IntroR/index.qmd
         title: "Einführung in R"
-        image: IntroR/images/r_desktop.jpg
+        image: 02_IntroR/images/r_desktop.jpg
         description: "Tag 1 · 11:30 – 13:00"
-      - path: TAM/index.qmd
+      - path: 03_TAM/index.qmd
         title: "IRT-Modelle in TAM"
         image: ../exercises/images/sapling.jpg
         description: "Tag 1 · 14:00 – 15:30"
-      - path: GLM/index.qmd
+      - path: 04_GLM/index.qmd
         title: "Raschmodell und GLMM"
-        image: GLM/images/dark_storm.jpg
+        image: 04_GLM/images/dark_storm.jpg
         description: "Tag 1 · 15:00 – 16:00"
-      - path: Validity/index.qmd
+      - path: 05_Validity/index.qmd
         title: "Reliabilität und Validität"
-        image: Validity/images/measurement.jpg
+        image: 05_Validity/images/measurement.jpg
         description: "Tag 1 · 16:00 – 17:00"
   - id: tag2
     type: grid
     sort: false
     contents:
-      - path: Linking/index.qmd
+      - path: 06_Linking/index.qmd
         title: "Linking und DIF"
-        image: Linking/images/dark_flower.jpg
+        image: 06_Linking/images/dark_flower.jpg
         description: "Tag 2 · 09:00 – 10:30"
-      - path: Testdesigns/index.qmd
+      - path: 07_Testdesigns/index.qmd
         title: "Bedeutung von Testdesigns"
         image: ../exercises/images/testdesign.jpg
         description: "Tag 2 · 10:30 – 12:00"
-      - path: xPL/index.qmd
+      - path: 08_xPL/index.qmd
         title: "Höher parametrisierte Modelle"
-        image: xPL/images/green_waves.jpg
+        image: 08_xPL/images/green_waves.jpg
         description: "Tag 2 · 13:00 – 14:30"
-      - path: Laengsschnitt/index.qmd
+      - path: 09_Laengsschnitt/index.qmd
         title: "Längsschnittliche Designs"
         image: ../exercises/images/road.jpg
         description: "Tag 2 · 14:30 – 16:00"
@@ -52,13 +52,13 @@ listing:
     type: grid
     sort: false
     contents:
-      - path: Mixed_IRT/index.qmd
+      - path: 10_Mixed_IRT/index.qmd
         title: "Mixed IRT"
         image: ../exercises/images/mix.jpg
         description: "Tag 3"
       - path: ../exercises/index_simulation.qmd
         title: "Simulationen zur Studienplanung"
-        image: xPL/images/simulation.jpg
+        image: 08_xPL/images/simulation.jpg
         description: "Tag 3 · 10:30 – 12:00"
 ---
 

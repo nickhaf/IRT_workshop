@@ -35,13 +35,13 @@ qa_dat <- readRDS(here::here("raw_data", "q_a_wirt_b.rds"))
 :::
 
 ## Überblick
-Verschaffe dir einen [Überblick](https://nickhaf.github.io/IRT_workshop/slides/IntroR/slides.html#/%C3%BCberblick-bekommen) über die Daten. In welchem Format liegen sie vor? Was könnten die verschiedenen Spalten bedeuten? 
+Verschaffe dir einen [Überblick](https://nickhaf.github.io/IRT_workshop/slides/02_IntroR/slides.html#/%C3%BCberblick-bekommen) über die Daten. In welchem Format liegen sie vor? Was könnten die verschiedenen Spalten bedeuten? 
 
 :::{.callout-caution collapse="true"}
 
 ## Lösung
 
-Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im [long-Format](https://nickhaf.github.io/IRT_workshop/slides/IntroR/slides.html#/long-format) vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins [wide-Format umformen](https://nickhaf.github.io/IRT_workshop/slides/IntroR/slides.html#/von-long-zu-wide), da das von `TAM` so gewünscht ist. 
+Durch Inspektion der Struktur können wir schnell feststellen, dass die Daten im [long-Format](https://nickhaf.github.io/IRT_workshop/slides/02_IntroR/slides.html#/long-format) vorliegen (jede Person hat pro Itemantwort eine eigene Zeile). Wir müssen sie also gleich ins [wide-Format umformen](https://nickhaf.github.io/IRT_workshop/slides/02_IntroR/slides.html#/von-long-zu-wide), da das von `TAM` so gewünscht ist. 
 
 ```{r}
 str(qa_dat)
@@ -84,7 +84,7 @@ qa_dat_renamed <- qa_dat %>%
 :::
 
 ## Umformen
-Forme jetzt die Daten ins [wide-Format um](https://nickhaf.github.io/IRT_workshop/slides/IntroR/slides.html#/von-long-zu-wide).
+Forme jetzt die Daten ins [wide-Format um](https://nickhaf.github.io/IRT_workshop/slides/02_IntroR/slides.html#/von-long-zu-wide).
 
 :::{.callout-tip collapse="true"}
 ## Tipp

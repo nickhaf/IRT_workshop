@@ -84,7 +84,7 @@ P(X_{pi}=1) = g^{-1}(\theta_p - \beta_i)
 $$
 
 ::: aside
-Die Inverse $g^{-1}$ der logit Funktion ist die logistische Funktion $\frac{e^{\mu}}{1+e^{\mu}}$. Das schauen wir uns [morgen](https://nickhaf.github.io/IRT_workshop/slides/xPL/#/pl-modell) aber noch einmal an. Mit Hilfe der logistischen Funktion kommen wir dann von dieser Gleichung auf die bekannte IRT Formel. [Hier](https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/The-Logit-Function/index.html) gibt es bei Interesse noch eine genauere Erklärung.  
+Die Inverse $g^{-1}$ der logit Funktion ist die logistische Funktion $\frac{e^{\mu}}{1+e^{\mu}}$. Das schauen wir uns [morgen](https://nickhaf.github.io/IRT_workshop/slides/08_xPL/#/pl-modell) aber noch einmal an. Mit Hilfe der logistischen Funktion kommen wir dann von dieser Gleichung auf die bekannte IRT Formel. [Hier](https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/The-Logit-Function/index.html) gibt es bei Interesse noch eine genauere Erklärung.  
 
 :::
 

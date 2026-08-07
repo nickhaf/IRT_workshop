@@ -58,7 +58,7 @@ difficulty_link_m <- tam_link$parameters_list[[2]]$xsi
 ::: 
 
 # Waldtest
-Wir werden einen [Waldtest](https://nickhaf.github.io/IRT_workshop/slides/Linking/slides.html#/verfahren-1) durchführen, einfach weil man hier das grundlegende Vorgehen ganz gut sehen kann. Wie im [Theorieteil](https://nickhaf.github.io/IRT_workshop/slides/Linking/slides.html#/dif-finden) besprochen gibt es aber viele verschiedene Optionen, implementiert in diversen Paketen. Für diese Übung werden wir mit [mirt](https://cran.r-project.org/web/packages/mirt/index.html) und [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
+Wir werden einen [Waldtest](https://nickhaf.github.io/IRT_workshop/slides/06_Linking/slides.html#/verfahren-1) durchführen, einfach weil man hier das grundlegende Vorgehen ganz gut sehen kann. Wie im [Theorieteil](https://nickhaf.github.io/IRT_workshop/slides/06_Linking/slides.html#/dif-finden) besprochen gibt es aber viele verschiedene Optionen, implementiert in diversen Paketen. Für diese Übung werden wir mit [mirt](https://cran.r-project.org/web/packages/mirt/index.html) und [equateIRT](https://cran.r-project.org/web/packages/equateIRT/vignettes/equateIRT_tutorial.html) arbeiten.  
 
 :::{.callout-note}
 ## Alternativen für DIF Analysen

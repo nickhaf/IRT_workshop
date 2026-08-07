@@ -12,33 +12,33 @@ website:
         icon: 1-circle-fill
         menu:
           - text: "Modellierung latenter Variablen"
-            href: slides/IRT_Theorie/index.qmd
+            href: slides/01_IRT_Theorie/index.qmd
           - text: "Einführung in R"
-            href: slides/IntroR/index.qmd
+            href: slides/02_IntroR/index.qmd
           - text: "IRT-Modelle in TAM"
-            href: slides/TAM/index.qmd
+            href: slides/03_TAM/index.qmd
           - text: "Raschmodell und GLMM"
-            href: slides/GLM/index.qmd
+            href: slides/04_GLM/index.qmd
           - text: "Reliabilität und Validität"
-            href: slides/Validity/index.qmd
+            href: slides/05_Validity/index.qmd
       - text: "Tag 2"
         icon: 2-circle-fill
         menu:
           - text: "Linking und DIF"
-            href: slides/Linking/index.qmd
+            href: slides/06_Linking/index.qmd
           - text: "Bedeutung von Testdesigns"
-            href: slides/Testdesigns/index.qmd
+            href: slides/07_Testdesigns/index.qmd
           - text: "Höher parametrisierte Modelle"
-            href: slides/xPL/index.qmd
+            href: slides/08_xPL/index.qmd
           - text: "Längsschnittliche Designs"
-            href: slides/Laengsschnitt/index.qmd
+            href: slides/09_Laengsschnitt/index.qmd
       - text: "Tag 3"
         icon: 3-circle-fill
         menu:
           - text: "Simulationen zur Studienplanung"
             href: exercises/index_simulation.qmd
           - text: "Mixed IRT"
-            href: slides/Mixed_IRT/index.qmd
+            href: slides/10_Mixed_IRT/index.qmd
     right:
       - text: "Folien"
         icon: easel-fill

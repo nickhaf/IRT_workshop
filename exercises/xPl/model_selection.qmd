@@ -179,7 +179,7 @@ Unsere beiden missspezifizierten Items 3 und 11 sind hier jetzt auch auffällig.
 
 
 ## 3PL
-Fitte jetzt ein 3PL Modell. Nutze dafür diesmal `mirt` und nutze `ggmirt`, um dir die [in den Folien gezeigten Plots](https://nickhaf.github.io/IRT_workshop/slides/xPL/#/item-person-map) anzuschauen. 
+Fitte jetzt ein 3PL Modell. Nutze dafür diesmal `mirt` und nutze `ggmirt`, um dir die [in den Folien gezeigten Plots](https://nickhaf.github.io/IRT_workshop/slides/08_xPL/#/item-person-map) anzuschauen. 
 
 :::{.callout-caution collapse="true"}
 ## Lösung

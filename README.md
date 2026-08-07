@@ -6,9 +6,9 @@ Quarto-Website für den Workshop **„Anwendung von Modellen der Item-Response-T
 
 ```
 ├── index.qmd            # Startseite mit Zeitplan (Listing-Grids pro Tag)
-├── slides/              # Ein Ordner pro Foliensatz
+├── slides/              # Ein Ordner pro Foliensatz, nummeriert in Präsentationsreihenfolge
 │   ├── index.qmd        # Übersicht aller Foliensätze
-│   └── <Thema>/
+│   └── <NN>_<Thema>/
 │       ├── index.qmd    # Übersichtsseite: Zusammenfassung, eingebettete Folien, Link zur Übung
 │       └── slides.qmd   # Reveal.js-Foliensatz (bzw. PDF/PPTX bei importierten Folien)
 ├── exercises/           # Übungen (eigener Bereich mit Sidebar-Navigation)

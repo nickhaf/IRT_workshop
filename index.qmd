@@ -11,43 +11,43 @@ listing:
     type: grid
     sort: false
     contents:
-      - path: slides/IRT_Theorie/index.qmd
+      - path: slides/01_IRT_Theorie/index.qmd
         title: "Modellierung latenter Variablen"
         image: images/green.jpg
         description: "10:00 – 11:30"
-      - path: slides/IntroR/index.qmd
+      - path: slides/02_IntroR/index.qmd
         title: "Einführung in R"
-        image: slides/IntroR/images/r_desktop.jpg
+        image: slides/02_IntroR/images/r_desktop.jpg
         description: "11:30 – 13:00"
-      - path: slides/TAM/index.qmd
+      - path: slides/03_TAM/index.qmd
         title: "IRT-Modelle in TAM"
         image: exercises/images/sapling.jpg
         description: "14:00 – 15:30"
-      - path: slides/GLM/index.qmd
+      - path: slides/04_GLM/index.qmd
         title: "Raschmodell und GLMM"
-        image: slides/GLM/images/dark_storm.jpg
+        image: slides/04_GLM/images/dark_storm.jpg
         description: "15:00 – 16:00"
-      - path: slides/Validity/index.qmd
+      - path: slides/05_Validity/index.qmd
         title: "Reliabilität und Validität"
-        image: slides/Validity/images/measurement.jpg
+        image: slides/05_Validity/images/measurement.jpg
         description: "16:00 – 17:00"
   - id: tag2
     type: grid
     sort: false
     contents:
-      - path: slides/Linking/index.qmd
+      - path: slides/06_Linking/index.qmd
         title: "Linking und DIF"
-        image: slides/Linking/images/dark_flower.jpg
+        image: slides/06_Linking/images/dark_flower.jpg
         description: "09:00 – 10:30"
-      - path: slides/Testdesigns/index.qmd
+      - path: slides/07_Testdesigns/index.qmd
         title: "Bedeutung von Testdesigns"
         image: exercises/images/testdesign.jpg
         description: "10:30 – 12:00"
-      - path: slides/xPL/index.qmd
+      - path: slides/08_xPL/index.qmd
         title: "Höher parametrisierte Modelle"
-        image: slides/xPL/images/green_waves.jpg
+        image: slides/08_xPL/images/green_waves.jpg
         description: "13:00 – 14:30"
-      - path: slides/Laengsschnitt/index.qmd
+      - path: slides/09_Laengsschnitt/index.qmd
         title: "Längsschnittliche Designs"
         image: exercises/images/road.jpg
         description: "14:30 – 16:00"
@@ -57,13 +57,13 @@ listing:
     contents:
       - path: exercises/index_simulation.qmd
         title: "Simulationen zur Studienplanung"
-        image: slides/xPL/images/simulation.jpg
+        image: slides/08_xPL/images/simulation.jpg
         description: "10:30 – 12:00"
       - path: exercises/index.qmd
         title: "Auswertung von eigenen Daten & Übungszeit"
         image: exercises/exercise.jpg
         description: "13:00 – 16:00"
-      - path: slides/Mixed_IRT/index.qmd
+      - path: slides/10_Mixed_IRT/index.qmd
         title: "Mixed IRT"
         image: exercises/images/mix.jpg
         description: "Optional"

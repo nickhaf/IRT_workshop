@@ -11,7 +11,7 @@ format: html
 about:
   id: simindex-heading
   template: marquee
-  image: ../slides/xPL/images/simulation.jpg
+  image: ../slides/08_xPL/images/simulation.jpg
 bibliography: ./simulation/references.bib
 ---
 

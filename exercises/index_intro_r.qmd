@@ -11,7 +11,7 @@ listing:
     - ./intro_r/reshaping_ex.qmd
     - ./intro_r/merging_ex.qmd
 format: html
-image: ../slides/IntroR/images/r_desktop.jpg
+image: ../slides/02_IntroR/images/r_desktop.jpg
 ---
 
 In dieser Übungsreihe werden die Grundlagen der Arbeit mit R wiederholt und trainiert.
