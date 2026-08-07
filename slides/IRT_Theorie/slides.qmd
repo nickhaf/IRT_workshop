@@ -1,6 +1,8 @@
 ---
 title: "Modellierung latenter Variablen in Klassischer Testtheorie und Item Response Theory"
-format: letterbox-revealjs
+format:
+  letterbox-revealjs:
+    theme: [../../styles.scss, custom.scss]
 title-slide-attributes:
   data-background-image: ./images/dark_flower.jpg
   data-background-size: cover
@@ -12,28 +14,13 @@ author: "Sebastian Weirich"
 
 ## Überblick
 
-\
-\
-
-[1. Messinstrumente und Messmodelle in der Kompetenzdiagnostik]{.highlight}
-
+1. **Messinstrumente und Messmodelle in der Kompetenzdiagnostik**
    - Warum braucht man ein Messmodell?
-
-## Überblick
-
-\
-
-2. Messmodelle werden aus Testtheorien abgeleitet
+2. **Messmodelle werden aus Testtheorien abgeleitet**
    - Klassische Testtheorie (KTT)
    - Probabilistische Testtheorie (oder Item Response Theory; IRT)
    - Warum wird in der Kompetenzdiagnostik vorwiegend auf Modelle der IRT anstatt der KTT zurückgegriffen?
-
-
-## Überblick
-
-\
-
-3. Verschiedene Modelle der IRT
+3. **Verschiedene Modelle der IRT**
    - Raschmodell (oder 1PL-Modell)
    - 2PL/3PL-Modelle
    - Partial Credit model (PCM), Generalized Partial Credit model (GPCM)
@@ -52,21 +39,18 @@ author: "Sebastian Weirich"
 
 → Messmodelle sind notwendig, wenn die zu messenden Merkmale latent sind
 
-## Manifest vs. latent
-
+::: {.fragment}
 ::: {.columns}
 :::{ .column width="50%"}
-### Manifest
-::::{.medium}
+[Manifest]{.highlight}
+
   - direkt zu beobachten
   - Messwert = Merkmalswert
   - Beispiele: Körpergröße und -gewicht
 :::
-:::
 :::{ .column width="50%"}
-### Latent
+[Latent]{.highlight}
 
-::: {.medium}  
   - nicht direkt zu beobachten
   - hypothetische bzw. theoretisch definierte Konstrukte
   - Messwert ≠ Merkmalswert
@@ -77,16 +61,12 @@ author: "Sebastian Weirich"
 :::
 :::
 
+
 ## Messmodelle werden aus Testtheorien abgeleitet
-
-
-\
 
 Die prominentesten Testtheorien in der Sozial- und Verhaltensforschung sind die [klassische Testtheorie]{.highlight} (KTT) und die [probabilistische Testtheorie]{.highlight} (Item Response Theory; IRT)
 
-## Testtheorien und Messmodelle
-
-!(images/testtheorien_messmodelle.png)
+![](images/testtheorien_messmodelle.png)
 
 # KTT vs. IRT
 
@@ -101,7 +81,6 @@ Die prominentesten Testtheorien in der Sozial- und Verhaltensforschung sind die 
 
 ## KTT: Bsp. Beck’s Depressions Inventar (BDI)
 
-::: {.small}
 - Erfasst den Schweregrad einer (endogenen) Depression
 - 21 Fragen mit jeweils 4 Antwortoptionen, z.B.
   - (0) Ich bin nicht traurig.
@@ -114,7 +93,6 @@ Die prominentesten Testtheorien in der Sozial- und Verhaltensforschung sind die 
   - 14-19: Leichte Depression
   - 20-28: Mittelschwere Depression
   - 29-63: Schwere Depression
-:::
 
 ## KTT vs. IRT
 
@@ -124,15 +102,12 @@ Die prominentesten Testtheorien in der Sozial- und Verhaltensforschung sind die 
   - Voraussetzung: die Verlässlichkeit des Messinstruments ist unabhängig davon
     - wie oft es bereits eingesetzt wurde
     - wie bekannt es ggf. Ist
-
-## KTT vs. IRT
 - [Diese Voraussetzungen sind in bestimmten Tests (Leistungs- oder Kompetenztests) möglicherweise nicht gegeben]{.highlight}
   - Wenn die Items eines Intelligenz-/Kompetenztests bekannt sind, ist die Güte des Tests eingeschränkt
   - Mögliche Lösung: Paralleltests
 
 ## Kompetenztests (z.B. PISA)
 
-::: {.small}
 - Das Testinstrument wechselt von Jahr zu Jahr (durch Aufgabenveröffentlichung); trotzdem sollen die Ergebnisse jeweils auf derselben Metrik abgebildet werden
 
 - Kompetenzstufenmodelle definieren kriteriale Standards (z.B. Regelstandard). Diese Beschreibungen beziehen sich auf Testaufgaben (Testitems)
@@ -142,11 +117,9 @@ Die prominentesten Testtheorien in der Sozial- und Verhaltensforschung sind die 
   - wenn das Testinstrument sich zwischen Erhebungen verändert, die Skala jedoch gleich bleiben soll
   - wenn Testleistungen nicht nur im Sinne eines “Person X ist besser als Person Y” interpretiert, sondern kriterial beschrieben werden sollen
   - → Diese kriterialen Beschreibungen beziehen sich auf Testitems und erfordern eine Modellierung auf Itemebene
-:::
 
 ## KTT vs. IRT (Hambleton & Jones, 1993)
 
-::: {.medium}
 | KTT | IRT |
 |---|---|
 | Vergleicht Personen mit anderen Personen | Vergleicht Personen mit Items |
@@ -154,7 +127,6 @@ Die prominentesten Testtheorien in der Sozial- und Verhaltensforschung sind die 
 | Item- und Teststatistiken sind stichprobenabhängig | Item- und Teststatistiken sind stichprobenunabhängig: Item- und Personenparameter können auf gemeinsamer Skala abgebildet werden |
 | Abhängigkeit der Itemparameter von Stichprobeneigenschaften | Invarianz von Item- und Personenparametern |
 | „testbasiert“ | „itembasiert“ |
-:::
 
 # Raschmodell: Grundlegende Annahmen
 
@@ -162,11 +134,6 @@ Die prominentesten Testtheorien in der Sozial- und Verhaltensforschung sind die 
 ## Raschmodell: einfachstes Modell der IRT
   - Abhängige Variable (AV): Lösungswahrscheinlichkeit $P(X_{ni})$ der Person $n$ für Item $i$
   - nicht die Wahrscheinlichkeit selbst, sondern eine transformierte Wahrscheinlichkeit (“logit”) wird vorhergesagt
-
-
-## Warum Transformation? 
-
-::: {.medium}
 - Wahrscheinlichkeitswerte sind auf das Intervall [0, 1] beschränkt und können nicht adäquat linear zerlegt werden. Um lineare Modelle schätzen zu können, muss Transformation erfolgen
     - Logit-Transformation einer Wahrscheinlichkeit $P$: $\operatorname{logit}(P) = \log\left(\frac{P}{1-P}\right)$
     - Wahrscheinlichkeit > 50% führt zu positivem Logit-Wert
@@ -177,11 +144,9 @@ Die prominentesten Testtheorien in der Sozial- und Verhaltensforschung sind die 
       - 5% → logit von -2.94
     - Wahrscheinlichkeit = 50% führt zu Logit = 0
     - Theoretischer Wertebereich des Logits: $-\infty < \operatorname{logit}(P) < +\infty$
-::: 
 
 ## Raschmodell: einfachstes Modell der IRT
 
-::: {.small}
 - Raschmodell: einfachstes Modell der IRT
   - Der Logit der Lösungswahrscheinlichkeit $P(X_{ni})$ schreibt sich $\operatorname{logit}(P(X_{ni} = 1))$ und ist die abhängige Variable (AV) im Raschmodell
   - Im Raschmodell hängt dieser Logit ausschließlich von der Fähigkeit der Person $\theta_n$ und der Schwierigkeit des Items $\beta_i$ ab → $\theta_n$ und $\beta_i$ sind Prädiktoren im Raschmodell
@@ -195,15 +160,13 @@ $$
   - Ein konkreter Itemschwierigkeitswert $\beta_i$ ist immer auf eine Personenpopulation bezogen (z.B. die Population der Sekundarschüler der 9. Klasse, die den MSA anstreben)
 - setzt man diese Modellbeziehung voraus, können beruhend auf einem Datensatz die Modellparameter (also die Schwierigkeit der Items $\beta_i$ und die Fähigkeit der Personen $\theta_n$) geschätzt werden
 - Raschmodell wird auch das einparametrische logistische Modell (1PL) genannt, weil pro Item nur ein Parameter (die Schwierigkeit des Items $\beta_i$) geschätzt wird
-::: 
 
 ## Annahme 1
 
 [Parallele Itemcharakteristikkurven]{.highlight}
 
-::: {.column}
-::: {.column-width="50%"}
-::: {.small}
+::: {.columns}
+::: {.column width="45%"}
 - $\theta_n$: unidimensional latent trait
 - Doppelte Monotonizität
   - Rangfolge der Items ist für alle Personen-populationen gleich
@@ -213,8 +176,7 @@ $$
   - Kurven überschneiden sich nicht
   - Item A ist für jede beliebige Person und in jeder beliebigen Population schwerer als Item B
 :::
-:::
-::: {.column-width="50%"}
+::: {.column width="55%"}
 ![](images/parallele_itemcharakteristikkurven.png){.image-right}
 :::
 :::
@@ -222,7 +184,6 @@ $$
 ## Annahme 2
 [$\theta_n$ ist unidimensional]{.highlight}
 
-::: {.small}
 - Die Wahrscheinlichkeit $P(X_{ni} = 1)$ wird lediglich durch $\theta_n$ und $\beta_i$ bestimmt
   - das bedeutet, dass sämtliche Items nur zwischen Personen mit unterschiedlichem $\theta_n$ unterscheiden dürfen, nicht etwa zwischen bspw. Personen mit unterschiedlichen Sprachhintergrund etc.
     - Mögliche Verletzung dieser Annahme: Angenommen, zwei Personen mit gleicher (wahrer) Mathematikfähigkeit aber unterschiedlichen Sprachfähigkeiten erreichen einen unterschiedlichen Fähigkeitswert im Mathematiktest
@@ -233,12 +194,10 @@ $$
 - Mehrdimensional: $\operatorname{logit}(P(X_{ni} = 1|\theta)) = \theta - \beta$ mit $\theta = (\theta_1, \theta_2, ..., \theta_D)$
 
 - DIF: $\operatorname{logit}(P(X_{ni} = 1)) = \theta_n - \beta_i + \tau_1 g_j + \tau_2(\beta_i g_j)$
-:::
 
 ## Annahme 3
 [lokale stochastische Unabhängigkeit]{.highlight}
 
-::: {.small}
 - Lokale stochastische Unabhängigkeit
   - Nach Kontrolle der Personenfähigkeit $\theta_n$ existieren keine Beziehungen (= Korrelationen) der Items zueinander mehr
   - Ist äquivalent zur Annahme einer eindimensionalen latenten Fähigkeit (Lord & Novick, 1968)
@@ -261,11 +220,8 @@ $$
 
 - Die Wahrscheinlichkeit eines Antwortmusters einer Person wird über das Produkt der Einzelwahrscheinlichkeiten bestimmt. Das ist nur zulässig, wenn die Einzelereignisse (= einzelnen Antworten) zueinander unabhängig sind
 
-:::
-
 ## Alternative: Modelle, die lokale Abhängigkeiten parametrisieren
 
-::: {.small}
 - Modelle zur Behandlung lokaler Abhängigkeit
   - Copula-Modelle (Braeken, 2011; Braeken, Tuerlinckx & de Boeck, 2007)
   - Marginale Modelle für stochastische Abhängigkeit (Tuerlinckx & de Boeck, 2004)
@@ -278,11 +234,7 @@ $$
   - “All models are wrong but some are useful” (Box & Draper, 1987; S. 74)
   - Wie findet man den besten Kompromiss zwischen Modellpassung und Interpretierbarkeit?
 
-::: 
-
 ## Zusammenfassung
-
-:::{.small}
 
 - Warum überhaupt Messmodelle?
   - Die zu messenden Merkmale sind latent, nicht direkt zu beobachten
@@ -296,5 +248,3 @@ $$
   - Eigenschaft der parallelen Item-Response-Kurven günstig für die Interpretation in und die Konstruktion von Kompetenzstufenmodellen
   - Itemparameter können als Itemschwierigkeit interpretiert und direkt in erwartete Lösungswahrscheinlichkeiten “übersetzt” werden
   - → Einfache/intuitive Interpretierbarkeit der Ergebnisse
-
-:::

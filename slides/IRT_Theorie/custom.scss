@@ -1,0 +1,33 @@
+/*-- scss:defaults --*/
+
+// Einheitliche Textgröße für diesen Foliensatz: klein genug, dass auch die
+// inhaltsreichste Folie ("Raschmodell: einfachstes Modell der IRT") ohne
+// .small-/.medium-Divs komplett auf eine Folie passt.
+$presentation-font-size-root: 20px;
+
+// Überschriften sind in em definiert und würden sonst mitskalieren -> auf die
+// bisherigen Größen des Projekt-Themes festsetzen.
+$presentation-h1-font-size: 80px;
+$presentation-h2-font-size: 64px;
+$presentation-h3-font-size: 52px;
+
+/*-- scss:rules --*/
+
+// Quarto vergibt für die automatisch erzeugte Literaturfolie die Klasse
+// .smaller (Text 0.7em, Überschriften entsprechend größer). Damit auch dort
+// dieselbe Textgröße gilt, wird das zurückgesetzt.
+.reveal .slides section.slide.smaller {
+  font-size: 1em;
+
+  h1 {
+    font-size: $presentation-h1-font-size;
+  }
+
+  h2 {
+    font-size: $presentation-h2-font-size;
+  }
+
+  h3 {
+    font-size: $presentation-h3-font-size;
+  }
+}
